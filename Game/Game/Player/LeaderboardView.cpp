@@ -9,7 +9,7 @@
 namespace CloudberryKingdom
 {
 
-    std::wstring LeaderboardType_ToString( LeaderboardType type )
+    std::wstring LeaderboardGUI::LeaderboardType_ToString( LeaderboardType type )
     {
         switch ( type )
         {

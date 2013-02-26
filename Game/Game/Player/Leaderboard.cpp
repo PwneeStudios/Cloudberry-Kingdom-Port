@@ -3,9 +3,11 @@
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
 #include "Leaderboard.h"
+#include <Utility/Log.h>
 
 #ifdef PS3
 #include <np.h>
+#include <Utility/NetworkPS3.h>
 #endif
 
 namespace CloudberryKingdom
@@ -21,19 +23,41 @@ namespace CloudberryKingdom
 
 	bool Leaderboard::WritingInProgress = false;
 
-
-
-
-
 	void Leaderboard::WriteToLeaderboard( boost::shared_ptr<ScoreEntry> score )
 	{
 		if ( !CloudberryKingdomGame::OnlineFunctionalityAvailable() ) return;
 
-        if ( WritingInProgress) return;
+        if ( WritingInProgress ) return;
 
 		// Modify the score entry's id
 		boost::shared_ptr<ScoreEntry> copy = boost::make_shared<ScoreEntry>( score->GamerTag_Renamed, score->GameId, score->Value, score->Score, score->Level_Renamed, score->Attempts, score->Time, score->Date );
 		copy->GameId += Challenge::LevelMask;
+
+#if PS3
+		int contextId;
+		if( !GetNPId( contextId ) )
+			return;
+
+		WritingInProgress = true;
+
+		int ret = sceNpScoreCreateTransactionCtx( contextId );
+		if( ret < 0 )
+		{
+			LOG.Write( "Failed to create score transaction: 0x%x\n", ret );
+			WritingInProgress = false;
+			return;
+		}
+		int transactionId = ret;
+
+		SceNpScoreRankNumber rank;
+		ret = sceNpScoreRecordScore( transactionId, 0, copy->Value, NULL, NULL, &rank, NULL );
+		if( ret < 0 )
+		{
+			LOG.Write( "Failed to record score: 0x%x\n", ret );
+		}
+
+		WritingInProgress = false;
+#endif
 	}
 
     int Leaderboard::GetLeaderboardId(int game_id)

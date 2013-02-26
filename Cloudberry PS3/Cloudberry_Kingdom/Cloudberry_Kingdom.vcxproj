@@ -815,6 +815,7 @@
     <ClInclude Include="Core\include\Utility\Log.h" />
     <ClInclude Include="Core\include\Utility\Mutex.h" />
     <ClInclude Include="Core\include\Audio\PS3\mscommon.h" />
+    <ClInclude Include="Core\include\Utility\NetworkPS3.h" />
     <ClInclude Include="core\include\utility\save.h" />
     <ClInclude Include="Core\src\Audio\SongInternalPS3.h" />
     <ClInclude Include="core\src\content\ps3\gcmutil_error.h" />

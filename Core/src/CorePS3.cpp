@@ -374,6 +374,51 @@ void RegisterTrophyContextThread( uint64_t context )
 	sys_ppu_thread_exit( 0 );
 }
 
+static int NPId = 0;
+static bool NPIdObtained = false;
+
+bool GetNPId( int &id )
+{
+	if( !NPIdObtained )
+		return false;
+
+	id = NPId;
+
+	return true;
+}
+
+void CreateScoreContext( uint64_t context )
+{
+	NPIdObtained = false;
+
+	/*int ret = sceNpScoreCreateTitleCtx( s_npCommunicationId, s_npCommunicationPassphrase, userNpId );
+	if( ret > 0 )
+	{
+		NPId = ret; 
+		NPIdObtained = true;
+		return;
+	}
+
+	switch( ret )
+	{
+	}*/
+
+	sys_ppu_thread_exit( 0 );
+}
+
+void NPManagerCallback( int event, int result, void *arg )
+{
+	LOG.Write( "NP EVENT: %d\tRESULT: %d\n", event, result );
+}
+
+void ConnectToNP( uint64_t context )
+{
+	sceNpManagerRegisterCallback( NPManagerCallback, NULL );
+
+
+	sys_ppu_thread_exit( 0 );
+}
+
 static bool ErrorDialogOpen = false;
 
 void ErrorDialogCallback( int buttonType, void *userData )
@@ -381,16 +426,31 @@ void ErrorDialogCallback( int buttonType, void *userData )
 	ErrorDialogOpen = false;
 }
 
+#define NP_POOL_SIZE (128 * 1024)
+static uint8_t NPPool[ NP_POOL_SIZE ];
+
 int CorePS3::Run()
 {
 	running_ = true;
 
 	game_.Initialize();
 
-	// Initialize NP score system.
-	int ret = sceNpScoreInit();
+	// Initialize NP.
+	int ret = sceNpInit( NP_POOL_SIZE, NPPool );
 	if( ret < 0 )
-		LOG.Write( "Failed to initialize score system: 0x%x\n", ret );
+		LOG.Write( "Failed to initialize NP: 0x%x\n", ret );
+
+	// Kick off trophy synchronization.
+	sys_ppu_thread_t tid;
+	ret = sys_ppu_thread_create( &tid, ConnectToNP, 0,
+		1001, 16 * 1024, 0, "ConnectToNP" );
+	if( ret != 0 )
+		LOG.Write( "Failed to start RegisterTrophyContextThread: 0x%x\n", ret );
+
+	// Initialize NP score system.
+	/*ret = sceNpScoreInit();
+	if( ret < 0 )
+		LOG.Write( "Failed to initialize score system: 0x%x\n", ret );*/
 
 	// Initialize trophy system.
 	ret = sceNpTrophyInit( NULL, 0, SYS_MEMORY_CONTAINER_ID_INVALID, 0 );
@@ -409,21 +469,19 @@ int CorePS3::Run()
 		LOG.Write( "Couldn't create trophy handle: 0x%x\n", ret );
 
 	// Kick off trophy synchronization.
-	sys_ppu_thread_t tid;
 	ret = sys_ppu_thread_create( &tid, RegisterTrophyContextThread, 0,
 		1001, 16 * 1024, 0, "RegisterTrophyContextThread" );
 	if( ret != 0 )
 		LOG.Write( "Failed to start RegisterTrophyContextThread: 0x%x\n", ret );
 
-	DisplayError( ErrorType( 0x8002a1a4 ) );
+	//DisplayError( ErrorType( 0x8002a1a4 ) );
 
 	while( running_ )
 	{
-		GamePad::Update();
-		Keyboard::Update();
-
 		if( ErrorDialogOpen )
 		{
+			glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+
 			int ret = cellSysutilCheckCallback();
 			if( ret )
 				LOG.Write( "cellSysutilChecCallback() = 0x%x\n", ret );
@@ -454,6 +512,9 @@ int CorePS3::Run()
 				continue;
 			}
 		}
+		
+		GamePad::Update();
+		Keyboard::Update();
 
 		glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
