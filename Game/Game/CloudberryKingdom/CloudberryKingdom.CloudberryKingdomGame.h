@@ -19,8 +19,12 @@
 #include "Hacks/NET/Stopwatch.h"
 #include "Hacks/NET/StringBuilder.h"
 
+struct SmallErrorMenu;
+
 namespace CloudberryKingdom
 {
+
+	enum Presence { Presence_TitleScreen, Presence_Escalation, Presence_TimeCrisis, Presence_HeroRush, Presence_HeroRush2, Presence_Freeplay, Presence_Campaign, Presence_Arcade };
 
 	struct CloudberryKingdomGame : public boost::enable_shared_from_this<CloudberryKingdomGame>
 	{
@@ -31,6 +35,63 @@ namespace CloudberryKingdom
 	
 		static void StaticIntializer_NoDependence();
 		static void StaticIntializer_AfterResourcesLoad();
+
+
+
+
+		static bool ChoseNotToSave;
+		static bool PastPressStart;
+		static bool CanSave();
+
+		static bool CanSave( PlayerIndex index );
+
+		static void ShowError_CanNotSaveNoDevice();
+
+		static bool ProfilesAvailable();
+
+		static bool OnlineFunctionalityAvailable();
+
+		static void BeginShowMarketplace();
+
+		static Presence CurrentPresence;
+		static void SetPresence(Presence presence);
+
+		static int Freeplay_Count;
+		static int Freeplay_Max;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	
 		struct ExitProxy : public Lambda
@@ -105,7 +166,7 @@ namespace CloudberryKingdom
 
         static bool getIsDemo();
 
-        static void OfferToBuy(SignedInGamer gamer);
+        static void OfferToBuy();
 
 
 
@@ -294,6 +355,69 @@ namespace CloudberryKingdom
 		double DeltaT;
 
 		void Update();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		static bool ShowMarketplace;
+        static bool ShowErrorMessage;
+
+
+		static void ShowError_LoadError();
+
+		static void ShowError_MustBeSignedIn(Localization::Words word);
+
+        static void ShowError_MustBeSignedInToLive(Localization::Words word);
+
+        static void ShowError_MustBeSignedInToLiveForLeaderboard();
+
+        static bool IsNetworkCableUnplugged();
+
+        static void ShowError(Localization::Words Header, Localization::Words Text, Localization::Words Option1/*, AsyncCallback callback*/);
+
+        static Localization::Words Err_Header, Err_Text;
+        static std::vector<std::wstring> Err_Options;
+        //AsyncCallback Err_Callback;
+
+        static void _ShowError();
+
+		bool DisconnectedController();
+
+		static bool getSuperPause();
+
+        static boost::shared_ptr<SmallErrorMenu> SmallErrorMessage;
+        static void ShowSmallError();
+
+        static bool CustomMusicPlaying;
+        void UpdateCustomMusic();
+
+        /// <summary>
+        /// If a gamer has no save device selected, ask them to select one.
+        /// </summary>
+        static void PromptForDeviceIfNoneSelected();
+
+
+
+
+
+
+
+
+
+
+
+
 
 		/// <summary>
 		/// The main draw loop.

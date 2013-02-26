@@ -231,6 +231,90 @@ namespace CloudberryKingdom
 		LeaderboardItem::StaticIntialize();
 	}
 
+
+
+
+
+
+		bool CloudberryKingdomGame::ChoseNotToSave = false;
+		bool CloudberryKingdomGame::PastPressStart = false;
+		bool CloudberryKingdomGame::CanSave()
+		{
+			if ( getIsDemo() ) return false;
+
+			if ( ChoseNotToSave ) return false;
+
+			if ( !PastPressStart ) return false;
+
+			return true;
+		}
+
+		bool CloudberryKingdomGame::CanSave( PlayerIndex index )
+		{
+			if ( !CanSave() ) return false;
+
+			// Check if saving is ready
+
+			return true;
+		}
+
+		void CloudberryKingdomGame::ShowError_CanNotSaveNoDevice()
+		{
+			//ShowError(Localization::Words_Err_StorageDeviceRequired, Localization::Words_Err_NoSaveDevice, Localization::Words_Err_Ok, null);
+		}
+
+		bool CloudberryKingdomGame::ProfilesAvailable()
+		{
+			// Check if the main player is signed in
+			
+			return true;
+		}
+
+		bool CloudberryKingdomGame::OnlineFunctionalityAvailable()
+        {
+			// Check that online network is available
+
+			return true;
+		}
+
+		void CloudberryKingdomGame::BeginShowMarketplace()
+		{
+            if ( CloudberryKingdomGame::OnlineFunctionalityAvailable() )
+            {
+				// Show the marketplace
+            }
+            else
+            {
+                CloudberryKingdomGame::ShowError_MustBeSignedIn( Localization::Words_Err_MustBeSignedIn );
+            }
+		}
+
+		Presence CloudberryKingdomGame::CurrentPresence = Presence_TitleScreen;
+		void CloudberryKingdomGame::SetPresence(Presence presence)
+		{
+			CurrentPresence = presence;
+
+			// Set the presence for the gamer
+		}
+
+		int CloudberryKingdomGame::Freeplay_Count = 0;
+		int CloudberryKingdomGame::Freeplay_Max = 3;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	CloudberryKingdomGame::ExitProxy::ExitProxy( const boost::shared_ptr<CloudberryKingdomGame> &ckg )
 	{
 		this->ckg = ckg;
@@ -324,13 +408,12 @@ Version CloudberryKingdomGame::GameVersion = Version( 0, 2, 4 );
         bool FakeDemo = false;
         bool CloudberryKingdomGame::getIsDemo()
         {
-//#ifdef XBOX
-//                return Guide.IsTrialMode;
-//#endif
-                return false;
-        }
+			if (FakeDemo) return true;
 
-        static void OfferToBuy(SignedInGamer gamer)
+			return false;
+		}
+
+        static void OfferToBuy()
         {
 //#ifdef XBOX
 //            if (gamer.Privileges.AllowPurchaseContent)
@@ -463,12 +546,15 @@ float CloudberryKingdomGame::fps = 0;
 		// Try to load these now.
 		RezData rez;
 
-		//PlayerManager::SavePlayerData = new _SavePlayerData();
-		//PlayerManager::SavePlayerData.ContainerName = "PlayerData";
-		//PlayerManager::SavePlayerData.FileName = "PlayerData.hsc";
-		//PlayerManager::SaveRezAndKeys();
-		//rez = PlayerManager::LoadRezAndKeys();
-		//Tools::Warning();
+		//PlayerManager::Players[0] = boost::make_shared<PlayerData>();
+		//PlayerManager::Players[0]->Init();
+
+		//PlayerManager::getPlayer()->ContainerName = L"SaveData";
+		//PlayerManager::getPlayer()->FileName = L"SaveData->bam";
+		//PlayerManager::getPlayer()->Load( /*PlayerManager::getPlayer()->MyPlayerIndex*/ );
+
+		//SaveGroup::LoadAll();
+		//PlayerManager::getPlayer()->Load( /*PlayerIndex_One*/ );
 
 		rez = PlayerManager::LoadRezAndKeys();
 
@@ -732,6 +818,18 @@ float CloudberryKingdomGame::fps = 0;
 
     void CloudberryKingdomGame::GodModePhxs()
     {
+        // Write to leaderboard
+        Tools::Warning();
+#ifdef PC_VERSION
+        if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_J ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_J ) )
+#else
+		if ( ButtonCheck::State( ControllerButtons_RJ, -2 ).Down && ButtonCheck::State( ControllerButtons_LS, -2).Pressed )
+#endif
+        {
+            boost::shared_ptr<ScoreEntry> se = boost::make_shared<ScoreEntry>( std::wstring( L"FakeName Nahnah!" ), 0, 100, 200, 300, 400, 500, 600 );
+            Leaderboard::WriteToLeaderboard( se );
+        }
+
         // Give 100,000 points to each player
 #ifdef PC_VERSION
         if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_I ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_I ) )
@@ -949,6 +1047,200 @@ float CloudberryKingdomGame::fps = 0;
 		//Tools::GameClass.IsFixedTimeStep = true;
 	}
 
+
+
+
+
+
+
+		bool CloudberryKingdomGame::ShowMarketplace = false;
+
+#if XBOX
+        bool CloudberryKingdomGame::ShowKeyboard = false;
+        bool CloudberryKingdomGame::KeyboardIsDone = false;
+		bool CloudberryKingdomGame::ShowAchievements = false;
+        PlayerIndex CloudberryKingdomGame::ShowFor = PlayerIndex.One;
+
+		void CloudberryKingdomGame::BeginShowAchievements()
+		{
+			ShowAchievements = false;
+#if XDK
+            try
+            {
+                GuideExtensions.ShowAchievements(ShowFor);
+            }
+            catch
+            {
+            }
+#endif
+		}
+#endif
+
+        bool CloudberryKingdomGame::ShowErrorMessage;
+
+		void CloudberryKingdomGame::ShowError_LoadError()
+		{
+#if PC_VERSION
+#else
+			ShowError(Localization::Words_Err_CorruptLoadHeader, Localization::Words_Err_CorruptLoad, Localization::Words_Err_Ok, null);
+#endif
+		}
+
+		void CloudberryKingdomGame::ShowError_MustBeSignedIn(Localization::Words word)
+		{
+#if PC_VERSION
+#else
+			ShowError(Localization::Words_Err_MustBeSignedIn_Header, word, Localization::Words_Err_Ok, null);
+#endif
+		}
+
+        void CloudberryKingdomGame::ShowError_MustBeSignedInToLive(Localization::Words word)
+        {
+#if PC_VERSION
+#else
+            ShowError(Localization::Words_Err_MustBeSignedInToLive_Header, word, Localization::Words_Err_Ok, null);
+#endif
+        }
+
+        void CloudberryKingdomGame::ShowError_MustBeSignedInToLiveForLeaderboard()
+        {
+#if PC_VERSION
+#else
+            ShowError(Localization::Words_Err_MustBeSignedInToLive_Header, Localization::Words_Err_MustBeSignedInToLiveForLeaderboards, Localization::Words_Err_Ok, null);
+#endif
+        }
+
+        bool CloudberryKingdomGame::IsNetworkCableUnplugged()
+        {
+#if XDK
+            return GuideExtensions.IsNetworkCableUnplugged;
+#else
+            return true;
+#endif
+        }
+
+        void CloudberryKingdomGame::ShowError(Localization::Words Header, Localization::Words Text, Localization::Words Option1/*, AsyncCallback callback*/)
+        {
+            ShowErrorMessage = true;
+
+            Err_Header = Header;
+            Err_Text = Text;
+            //Err_Callback = callback;
+            Err_Options.clear();
+			Err_Options.push_back( Localization::WordString(Option1) );
+        }
+
+        Localization::Words CloudberryKingdomGame::Err_Header, CloudberryKingdomGame::Err_Text;
+        std::vector<std::wstring> CloudberryKingdomGame::Err_Options;
+        //AsyncCallback Err_Callback;
+
+        void CloudberryKingdomGame::_ShowError()
+        {
+            ShowErrorMessage = false;
+
+#if XDK || XBOX
+            try
+            {
+                Guide.BeginShowMessageBox(Localization::WordString(Err_Header), Localization::WordString(Err_Text), Err_Options,
+                    0, MessageBoxIcon.None, Err_Callback, null);
+            }
+            catch (Exception e)
+            {
+            }
+#endif
+        }
+
+		bool CloudberryKingdomGame::DisconnectedController()
+		{
+#if PC_VERSION
+			return false;
+#endif
+			for (int i = 0; i < 4; i++)
+			{
+				if ( PlayerManager::Players[i] != 0 && PlayerManager::Players[i]->Exists && !Tools::GamepadState[i].IsConnected )
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+#if XBOX
+        bool ShowGamer;
+        PlayerIndex ShowGamer_Index;
+        Gamer ShowGamer_Gamer;
+        void CloudberryKingdomGame::ShowGamerCard(PlayerIndex player, Gamer gamer)
+        {
+            ShowGamer = true;
+            ShowGamer_Index = player;
+            ShowGamer_Gamer = gamer;
+        }
+
+        void CloudberryKingdomGame::BeginShowGamer()
+        {
+            ShowGamer = false;
+            if (ShowGamer_Gamer == null) return;
+
+            Guide.ShowGamerCard(ShowGamer_Index, ShowGamer_Gamer);
+        }
+#endif
+
+		bool CloudberryKingdomGame::getSuperPause()
+		{
+			return SmallErrorMessage != 0;
+		}
+        boost::shared_ptr<SmallErrorMenu> CloudberryKingdomGame::SmallErrorMessage;
+        void CloudberryKingdomGame::ShowSmallError()
+        {
+            if ( SmallErrorMessage != 0 ) return;
+			if ( Tools::CurGameData == 0 ) return;
+
+            //SmallErrorMessage = MakeMagic( SmallErrorMenu, ( Localization::Words_KnightHelmet ) );
+			//Tools::CurGameData->AddGameObject( SmallErrorMessage );
+        }
+
+        bool CloudberryKingdomGame::CustomMusicPlaying = false;
+        void CloudberryKingdomGame::UpdateCustomMusic()
+        {
+//#if XDK
+//            if (!MediaPlayer.GameHasControl)
+//            {
+//                CustomMusicPlaying = true;
+//            }
+//            else
+//            {
+//                if (CustomMusicPlaying)
+//                {
+//                    if (Tools::SongWad != null)
+//                        Tools::SongWad.Restart(true, false);
+//
+//                    CustomMusicPlaying = false;
+//                }
+//            }
+//#endif
+        }
+
+        /// <summary>
+        /// If a gamer has no save device selected, ask them to select one.
+        /// </summary>
+        void CloudberryKingdomGame::PromptForDeviceIfNoneSelected()
+        {
+            if ( CloudberryKingdomGame::getIsDemo() ) return;
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
 	void CloudberryKingdomGame::Draw( const boost::shared_ptr<GameTime> &gameTime )
 	{
 	#if defined(DEBUG_OBJDATA)
@@ -983,10 +1275,43 @@ float CloudberryKingdomGame::fps = 0;
 		UpdateFps( gameTime );
 
 		// Draw nothing if Xbox guide is up
-	#if defined(XBOX) || defined(XBOX_SIGNIN)
-		if ( Guide::IsVisible )
-			return;
-	#endif
+#if defined(XBOX) || defined(XBOX_SIGNIN)
+			if (Guide.IsVisible) { DrawNothing(); return; }
+            if (ShowKeyboard)
+            {
+                SaveLoadSeedMenu.BeginShowKeyboard();
+            }
+			else if (ShowAchievements)
+			{
+				BeginShowAchievements();
+			}
+            else if (ShowMarketplace)
+            {
+                BeginShowMarketplace();
+            }
+            else if (ShowErrorMessage)
+            {
+                _ShowError();
+            }
+            else if (ShowGamer)
+            {
+                BeginShowGamer();
+            }
+            else if (DisconnectedController())
+            {
+                ShowSmallError();
+                //ButtonCheck.UpdateControllerAndKeyboard_StartOfStep();
+                //return;
+            }
+            else
+            {
+                if (SmallErrorMessage != null)
+                {
+                    SmallErrorMessage.ReturnToCaller(true);
+                    SmallErrorMessage = null;
+                }
+            }
+#endif
 
 		// What to do
 		if ( LogoScreenUp )

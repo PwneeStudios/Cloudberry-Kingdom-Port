@@ -125,7 +125,7 @@ namespace CloudberryKingdom
 
 	void StartMenu::MenuGo_Campaign( const boost::shared_ptr<MenuItem> &item )
 	{
-		if (CloudberryKingdomGame::getIsDemo()) return;
+		//if (CloudberryKingdomGame::getIsDemo()) return;
 
 		MyNextMenu = Next_CAMPAIGN;
 		BringCharacterSelect();
@@ -147,6 +147,9 @@ namespace CloudberryKingdom
 
 	void StartMenu::BringCharacterSelect()
 	{
+		UseBounce = false;
+		ReturnToCallerDelay = 0;
+
 		NoBack = true;
 		MyGame->SlideOut_FadeIn( 20, boost::make_shared<CharacterSelectProxy>( boost::static_pointer_cast<StartMenu>( shared_from_this() ) ) );
 	}
@@ -271,18 +274,37 @@ namespace CloudberryKingdom
 		SetText_Green( item->MySelectedText, outline );
 	}
 
-	void StartMenu::SetItemProperties_Red( const boost::shared_ptr<MenuItem> &item )
-	{
-		if ( item->MyText == 0 )
-			return;
-		item->MyText->OutlineColor = ( bColor( 191, 191, 191 ) ).ToVector4();
-		item->MyText->MyFloatColor = ( bColor( 175, 8, 64 ) ).ToVector4();
-		item->MySelectedText->OutlineColor = ( bColor( 205, 205, 205 ) ).ToVector4();
-		item->MySelectedText->MyFloatColor = ( bColor( 242, 12, 85 ) ).ToVector4();
-	}
+        void StartMenu::SetItemProperties_Red( const boost::shared_ptr<MenuItem> &item )
+        {
+            if (item->MyText == 0) return;
+			//item.MyText.OutlineColor = bColor(191, 191, 191).ToVector4();
+			//item.MyText.MyFloatColor = bColor(175, 8, 64).ToVector4();
+			//item.MySelectedText.OutlineColor = bColor(205, 205, 205).ToVector4();
+			//item.MySelectedText.MyFloatColor = bColor(242, 12, 85).ToVector4(); 
+
+			SetTextUnselected_Red(item->MyText);
+			SetTextSelected_Red(item->MySelectedText);
+        }
+
+		void StartMenu::SetTextSelected_Red( const boost::shared_ptr<EzText> &text )
+		{
+			text->OutlineColor = bColor(205, 205, 205).ToVector4() * .95f;
+			text->OutlineColor.W = 1.0f;
+			text->MyFloatColor = bColor(242, 12, 85).ToVector4() * .96f;
+			text->MyFloatColor.W = 1.0f;
+		}
+
+		void StartMenu::SetTextUnselected_Red( const boost::shared_ptr<EzText> &text )
+		{
+			text->OutlineColor = bColor(191, 191, 191).ToVector4() * .97f;
+			text->OutlineColor.W = 1.0f;
+			text->MyFloatColor = bColor(175, 8, 64).ToVector4();
+		}
 
 	void StartMenu::OnAdd()
 	{
+		CloudberryKingdomGame::SetPresence( Presence_TitleScreen );
+
 		CkBaseMenu::OnAdd();
 	}
 
