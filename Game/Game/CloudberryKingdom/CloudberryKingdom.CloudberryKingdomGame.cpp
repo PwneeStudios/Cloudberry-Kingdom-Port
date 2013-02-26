@@ -1,3 +1,7 @@
+// Use this to test non-PC verion
+//#undef PC_VERSION
+//#define NOT_PC
+
 #include <global_header.h>
 
 #include <Core.h>
@@ -1079,7 +1083,7 @@ float CloudberryKingdomGame::fps = 0;
 		{
 #if PC_VERSION
 #else
-			ShowError(Localization::Words_Err_CorruptLoadHeader, Localization::Words_Err_CorruptLoad, Localization::Words_Err_Ok, null);
+			ShowError(Localization::Words_Err_CorruptLoadHeader, Localization::Words_Err_CorruptLoad, Localization::Words_Err_Ok);
 #endif
 		}
 
@@ -1087,7 +1091,7 @@ float CloudberryKingdomGame::fps = 0;
 		{
 #if PC_VERSION
 #else
-			ShowError(Localization::Words_Err_MustBeSignedIn_Header, word, Localization::Words_Err_Ok, null);
+			ShowError(Localization::Words_Err_MustBeSignedIn_Header, word, Localization::Words_Err_Ok);
 #endif
 		}
 
@@ -1095,7 +1099,7 @@ float CloudberryKingdomGame::fps = 0;
         {
 #if PC_VERSION
 #else
-            ShowError(Localization::Words_Err_MustBeSignedInToLive_Header, word, Localization::Words_Err_Ok, null);
+            ShowError(Localization::Words_Err_MustBeSignedInToLive_Header, word, Localization::Words_Err_Ok);
 #endif
         }
 
@@ -1103,7 +1107,7 @@ float CloudberryKingdomGame::fps = 0;
         {
 #if PC_VERSION
 #else
-            ShowError(Localization::Words_Err_MustBeSignedInToLive_Header, Localization::Words_Err_MustBeSignedInToLiveForLeaderboards, Localization::Words_Err_Ok, null);
+            ShowError(Localization::Words_Err_MustBeSignedInToLive_Header, Localization::Words_Err_MustBeSignedInToLiveForLeaderboards, Localization::Words_Err_Ok);
 #endif
         }
 
