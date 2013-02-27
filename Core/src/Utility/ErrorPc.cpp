@@ -1,5 +1,5 @@
 #include <Utility/Error.h>
 
-void DisplayError( ErrorType errorCode )
+void DisplayError( const ErrorType &errorCode )
 {
 }

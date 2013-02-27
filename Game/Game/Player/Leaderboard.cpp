@@ -3,6 +3,13 @@
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
 #include "Leaderboard.h"
+#include <Utility/Log.h>
+
+#ifdef PS3
+#include <np.h>
+#include <sys/ppu_thread.h>
+#include <Utility/NetworkPS3.h>
+#endif
 
 namespace CloudberryKingdom
 {
@@ -17,19 +24,77 @@ namespace CloudberryKingdom
 
 	bool Leaderboard::WritingInProgress = false;
 
+	inline uint64_t PackBoardAndScore( int board, int score )
+	{
+		return ( static_cast< uint64_t >( board ) << 32 ) | score;
+	}
 
+	inline void UnpackBoardAndScore( uint64_t packed, int &board, int &score )
+	{
+		score = packed & 0xffffffff;
+		board = packed >> 32; 
+	}
 
+	static void WriteToLeaderboardThread( uint64_t context )
+	{
+		int contextId;
+		if( !GetNPScoreContext( contextId ) )
+		{
+			Leaderboard::WritingInProgress = false;
+			sys_ppu_thread_exit( 0 );
+			return;
+		}
 
+		int ret = sceNpScoreCreateTransactionCtx( contextId );
+		if( ret < 0 )
+		{
+			LOG.Write( "Failed to create score transaction: 0x%x\n", ret );
+			Leaderboard::WritingInProgress = false;
+			sys_ppu_thread_exit( 0 );
+			return;
+		}
+		int transactionId = ret;
+
+		SceNpScoreRankNumber rank;
+		
+		int board;
+		int score;
+		UnpackBoardAndScore( context, board, score );
+		ret = sceNpScoreRecordScore( transactionId, board, score, NULL, NULL, &rank, NULL );
+		if( ret < 0 )
+			LOG.Write( "Failed to record score: 0x%x\n", ret );
+
+		sceNpScoreDestroyTransactionCtx( transactionId );
+
+		Leaderboard::WritingInProgress = false;
+
+		sys_ppu_thread_exit( 0 );
+	}
 
 	void Leaderboard::WriteToLeaderboard( boost::shared_ptr<ScoreEntry> score )
 	{
 		if ( !CloudberryKingdomGame::OnlineFunctionalityAvailable() ) return;
 
-        if ( WritingInProgress) return;
+        if ( WritingInProgress ) return;
 
 		// Modify the score entry's id
 		boost::shared_ptr<ScoreEntry> copy = boost::make_shared<ScoreEntry>( score->GamerTag_Renamed, score->GameId, score->Value, score->Score, score->Level_Renamed, score->Attempts, score->Time, score->Date );
 		copy->GameId += Challenge::LevelMask;
+
+#if PS3
+		int contextId;
+		if( !GetNPScoreContext( contextId ) )
+			return;
+
+		WritingInProgress = true;
+
+		sys_ppu_thread_t tid;
+		int ret = sys_ppu_thread_create( &tid, WriteToLeaderboardThread,
+			PackBoardAndScore( GetLeaderboardId( copy->GameId ), copy->Value ),
+			1001, 16 * 1024, 0, "WriteToLeaderboardThread" );
+		if( ret != 0 )
+			LOG.Write( "Failed to start WriteToLeaderboardThread: 0x%x\n", ret );
+#endif
 	}
 
     int Leaderboard::GetLeaderboardId(int game_id)
@@ -95,6 +160,9 @@ namespace CloudberryKingdom
     {
         MySortType = type;
 
+		if( MoreRequested )
+			return;
+
 		// FIXME: if in process of getting something, don't do anything
         //if (result != null) return;
 
@@ -102,13 +170,16 @@ namespace CloudberryKingdom
         {
 		case LeaderboardType_TopScores:
             //result = LeaderboardReader.BeginRead(Identity, 0, EntriesPerPage, OnInfo_TopScores, null);
+			RequestMore( 1 );
             break;
 
         case LeaderboardType_MyScores:
             //result = LeaderboardReader.BeginRead(Identity, LeaderboardGamer, EntriesPerPage, OnInfo_MyScores, null);
+			RequestMore( 1 );
             break;
 
         case LeaderboardType_FriendsScores:
+			RequestMore( 1 );
             if ( FriendItems.size() == 0)
             {
                 //result = LeaderboardReader.BeginRead(Identity, LeaderboardFriends, LeaderboardGamer, 100, OnInfo_FriendScores, null);
@@ -119,27 +190,129 @@ namespace CloudberryKingdom
 
     void Leaderboard::OnInfo_TopScores(/*IAsyncResult ar*/)
     {
-        //Update(LeaderboardType.TopScores, ar);
+        Update( LeaderboardType_TopScores );
     }
 
     void Leaderboard::OnInfo_MyScores(/*IAsyncResult ar*/)
     {
-        //Update(LeaderboardType.MyScores, ar);
+        Update( LeaderboardType_MyScores );
     }
 
     void Leaderboard::OnInfo_FriendScores(/*IAsyncResult ar*/)
     {
-        //Update(LeaderboardType.FriendsScores, ar);
+        Update( LeaderboardType_FriendsScores );
     }
+
+	void Leaderboard::OnInfo_Fail()
+	{
+		MoreRequested = false;
+	}
+
+#ifdef PS3
+	// Parameters passed to the thread.
+	static boost::shared_ptr< Leaderboard > CurrentLeaderboard;
+	static int StartingRank;
+	static LeaderboardType CurrentLeaderboardType;
+	static SceNpScoreRankData Ranks[ Leaderboard::EntriesPerPage ];
+	static int NumRanks;
+
+	static void RequestLeaderboardThread( uint64_t context )
+	{
+		int contextId;
+		if( !GetNPScoreContext( contextId ) )
+		{
+			CurrentLeaderboard->OnInfo_Fail();
+			CurrentLeaderboard = NULL;
+			sys_ppu_thread_exit( 0 );
+			return;
+		}
+
+		int ret = sceNpScoreCreateTransactionCtx( contextId );
+		if( ret < 0 )
+		{
+			LOG.Write( "Failed to create score transaction: 0x%x\n", ret );
+			CurrentLeaderboard->OnInfo_Fail();
+			CurrentLeaderboard = NULL;
+			sys_ppu_thread_exit( 0 );
+			return;
+		}
+		int transactionId = ret;
+
+		CellRtcTick lastSortDate;
+		SceNpScoreRankNumber totalRecord;
+
+		ret = sceNpScoreGetRankingByRange( transactionId,
+			CurrentLeaderboard->MyId, StartingRank, Ranks,
+			sizeof( Ranks ), NULL, 0, NULL, 0, Leaderboard::EntriesPerPage,
+			&lastSortDate, &totalRecord, NULL );
+		
+		if( ret == SCE_NP_COMMUNITY_SERVER_ERROR_GAME_RANKING_NOT_FOUND )
+		{
+			NumRanks = 0;
+			LOG.Write( "No more scores!\n" );
+		}
+		else
+		{
+			if( ret < 0 )
+			{
+				LOG.Write( "Failed to request scores: 0x%x\n", ret );
+				CurrentLeaderboard->OnInfo_Fail();
+			}
+			else
+			{
+				// Update current leaderboard.
+				LOG.Write( "Got %d scores!\n", ret );
+				NumRanks = ret;
+
+				switch( CurrentLeaderboardType )
+				{
+				case LeaderboardType_FriendsScores:
+					CurrentLeaderboard->OnInfo_FriendScores();
+					break;
+				case LeaderboardType_TopScores:
+					CurrentLeaderboard->OnInfo_TopScores();
+					break;
+				case LeaderboardType_MyScores:
+					CurrentLeaderboard->OnInfo_MyScores();
+					break;
+				}
+			}
+		}
+
+		sceNpScoreDestroyTransactionCtx( transactionId );
+		CurrentLeaderboard = NULL;
+
+		sys_ppu_thread_exit( 0 );
+	}
+#endif
 
     void Leaderboard::RequestMore( int RequestPage )
     {
 		// Should return early if already trying to get info (if an async request is in progress)
         //if (MoreRequested || result != null) return;
-		if ( MoreRequested ) return;
+		if ( MoreRequested || CurrentLeaderboard != NULL ) return;
 
         this->MoreRequested = true;
         this->RequestPage = RequestPage;
+
+#if PS3
+		int contextId;
+		if( !GetNPScoreContext( contextId ) )
+		{
+			this->MoreRequested = false;
+			return;
+		}
+
+		CurrentLeaderboard = shared_from_this();
+		StartingRank = RequestPage;
+		CurrentLeaderboardType = MySortType;
+
+		sys_ppu_thread_t tid;
+		int ret = sys_ppu_thread_create( &tid, RequestLeaderboardThread,
+			0, 1001, 16 * 1024, 0, "RequestLeaderboardThread" );
+		if( ret != 0 )
+			LOG.Write( "Failed to start RequestLeaderboardThread: 0x%x\n", ret );
+#endif
 
 		//result = LeaderboardReader.BeginRead(Identity, RequestPage, EntriesPerPage, OnInfo_TopScores, null);
     }
@@ -155,8 +328,34 @@ namespace CloudberryKingdom
 
 		// FIXME put a lock on the dictionary of items
         //lock (Items)
+		ItemMutex.Lock();
         {
             int gamer_rank = -1;
+#ifdef PS3
+			if( NumRanks == 0 )
+				TotalSize = Items.size();
+
+			for( int i = 0; i < NumRanks; ++i )
+			{
+				int rank = Ranks[ i ].rank;
+				int value = Ranks[ i ].scoreValue;
+				std::wstring name = Utf8ToWstring( Ranks[ i ].onlineName.data );
+
+				OnlineGamer gamer;
+				gamer.Id = rank;
+				gamer.GamerTag = name;
+
+				LeaderboardItem item( gamer, value, rank );
+
+				if( Type == LeaderboardType_FriendsScores )
+				{
+					if( rank > 0 && value > 0 )
+						FriendItems.push_back( item );
+				}
+				else
+					Items[ rank ] = item;
+			}
+#endif
             // Loop over all items returned by the async call and add them to the dictionary
 			//foreach (LeaderboardEntry entry in reader.Entries)
             //{
@@ -202,9 +401,8 @@ namespace CloudberryKingdom
 				default: break;
             }
         }
+		ItemMutex.Unlock();
     }
-
-
 
 	void LeaderboardItem::StaticIntialize()
 	{
@@ -222,7 +420,7 @@ namespace CloudberryKingdom
         this->Player = Player;
         this->Rank = ToString( Rank );
 
-        if ( Player.Id > 0 )
+        if ( Player.Id < 0 )
         {
             this->GamerTag = Localization::WordString( Localization::Words_Loading ) + L"...";
             this->Val = L"...";
@@ -231,7 +429,7 @@ namespace CloudberryKingdom
         }
         else
         {
-            this->GamerTag = Player.GamerTag();
+            this->GamerTag = Player.GamerTag;
             this->Val = ToString( Val );
 
             float width = Tools::QDrawer->MeasureString( Resources::Font_Grobold42->HFont, GamerTag ).X;
@@ -273,6 +471,4 @@ namespace CloudberryKingdom
         Tools::QDrawer->DrawString( Resources::Font_Grobold42->HFont, GamerTag, Pos + GamerTag_Offset, color, scale * Size );
         Tools::QDrawer->DrawString( Resources::Font_Grobold42->HFont, Val, Pos + Val_Offset, color, Size );
     }
-
-
 }

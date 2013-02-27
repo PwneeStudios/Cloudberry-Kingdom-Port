@@ -27,7 +27,7 @@
 #include <sysutil/sysutil_msgdialog.h>
 #include <sysutil/sysutil_savedata.h>
 
-SYS_PROCESS_PARAM ( 1001, 0x80000 )
+SYS_PROCESS_PARAM ( 1000, 0x80000 )
 
 // Passphrase and signature from PSN Server Management Tools.
 static const SceNpCommunicationId s_npCommunicationId = {
@@ -174,6 +174,7 @@ CorePS3::CorePS3( GameLoop &game ) :
 	CELL_ERR_CHECK( cellSysmoduleLoadModule( CELL_SYSMODULE_IO ), "Failed to load IO\n" );
 	CELL_ERR_CHECK( cellSysmoduleLoadModule( CELL_SYSMODULE_SYSUTIL_GAME ), "Failed to load IO\n" );
 	CELL_ERR_CHECK( cellSysmoduleLoadModule( CELL_SYSMODULE_SYSUTIL_NP ), "Failed to load NP\n" );
+	CELL_ERR_CHECK( cellSysmoduleLoadModule( CELL_SYSMODULE_SYSUTIL_LICENSEAREA ), "Failed to load License Area\n" );
 
 	LoadModules();
 
@@ -190,7 +191,7 @@ CorePS3::CorePS3( GameLoop &game ) :
 	PS3_PATH_PREFIX = std::string( usrdirPath ) + "/";
 	// To test an hdd game in release mode with the debugger we need to tell it about the
 	// game code.  Also the files should be pre-installed on the disk.
-	PS3_PATH_PREFIX = "/dev_hdd0/game/NPEB01312/USRDIR/";
+	//PS3_PATH_PREFIX = "/dev_hdd0/game/NPEB01312/USRDIR/";
 	LOG.Write( "Running in %s\nContent dir %s\n", dirName, usrdirPath );
 #ifdef DEBUG
 	PS3_PATH_PREFIX = "/app_home/";
@@ -302,13 +303,14 @@ CorePS3::~CorePS3()
 
 	UnloadModules();
 
+	cellSysmoduleUnloadModule( CELL_SYSMODULE_SYSUTIL_LICENSEAREA );
 	cellSysmoduleUnloadModule( CELL_SYSMODULE_SYSUTIL_NP );
 }
 
 static SceNpTrophyContext TrophyContext;
 static SceNpTrophyHandle TrophyHandle;
 static bool ContextRegistered;
-extern std::list< int > GLOBAL_ERROR_QUEUE;
+extern std::list< ErrorType > GLOBAL_ERROR_QUEUE;
 
 bool GetTrophyContext( SceNpTrophyContext &context, SceNpTrophyHandle &handle )
 {
@@ -372,9 +374,131 @@ void RegisterTrophyContextThread( uint64_t context )
 	sys_ppu_thread_exit( 0 );
 }
 
+static SceNpId NPId;
+static int ScoreTitleContext = 0;
+static bool NPIdObtained = false;
+
+bool GetNPScoreContext( int &id )
+{
+	if( !NPIdObtained )
+		return false;
+
+	id = ScoreTitleContext;
+
+	return true;
+}
+
+/*void CreateScoreContext( uint64_t context )
+{
+	//NPIdObtained = false;
+
+	int ret = sceNpScoreCreateTitleCtx( s_npCommunicationId, s_npCommunicationPassphrase, userNpId );
+	if( ret > 0 )
+	{
+		NPId = ret; 
+		NPIdObtained = true;
+		return;
+	}
+
+	switch( ret )
+	{
+	}
+
+	sys_ppu_thread_exit( 0 );
+}*/
+
+void ConnectToNPThread( uint64_t context )
+{
+	int ret = sceNpManagerGetNpId( &NPId );
+	switch( ret )
+	{
+	case SCE_NP_ERROR_NOT_INITIALIZED:
+	case SCE_NP_ERROR_INVALID_ARGUMENT:
+	case SCE_NP_ERROR_INVALID_STATE:
+	case SCE_NP_ERROR_OFFLINE:
+		sys_ppu_thread_exit( 0 );
+		return;
+		break;
+
+	case 0:
+		break;
+	}
+
+	ret = sceNpScoreCreateTitleCtx( &s_npCommunicationId, &s_npCommunicationPassphrase, &NPId );
+	if( ret > 0 )
+	{
+		ScoreTitleContext = ret;
+		NPIdObtained = true;
+	}
+	else
+		LOG.Write( "Coldn't get score title context: 0x%x\n", ret );
+
+	sys_ppu_thread_exit( 0 );
+}
+
+void ConnectToNP()
+{
+	if( NPIdObtained )
+	{
+		LOG.Write( "Tried to connect to NP multiple times!\n" );
+		return;
+	}
+
+	LOG.Write( "Connecting to NP!\n" );
+
+	// Kick off NP connection.
+	sys_ppu_thread_t tid;
+	int ret = sys_ppu_thread_create( &tid, ConnectToNPThread, 0,
+		1001, 16 * 1024, 0, "ConnectToNP" );
+	if( ret != 0 )
+		LOG.Write( "Failed to start RegisterTrophyContextThread: 0x%x\n", ret );
+}
+
+void DisconnectFromNP()
+{
+	LOG.Write( "Disconnecting from NP\n" );
+
+	if( NPIdObtained )
+	{
+		sceNpScoreDestroyTitleCtx( ScoreTitleContext );
+	}
+
+	NPIdObtained = false;
+}
+
+void NPManagerCallback( int event, int result, void *arg )
+{
+	LOG.Write( "NP EVENT: %d\tRESULT: %d\n", event, result );
+	switch( event )
+	{
+	case SCE_NP_MANAGER_STATUS_OFFLINE:
+		DisconnectFromNP();
+		break;
+	case SCE_NP_MANAGER_STATUS_GETTING_TICKET:
+		break;
+	case SCE_NP_MANAGER_STATUS_GETTING_PROFILE:
+		break;
+	case SCE_NP_MANAGER_STATUS_LOGGING_IN:
+		break;
+	case SCE_NP_MANAGER_STATUS_ONLINE:
+		{
+			int id;
+			if( !GetNPScoreContext( id ) )
+				ConnectToNP();
+		}
+		break;
+	}
+}
+
+static bool ErrorDialogOpen = false;
+
 void ErrorDialogCallback( int buttonType, void *userData )
 {
+	ErrorDialogOpen = false;
 }
+
+#define NP_POOL_SIZE (128 * 1024)
+static uint8_t NPPool[ NP_POOL_SIZE ];
 
 int CorePS3::Run()
 {
@@ -382,8 +506,27 @@ int CorePS3::Run()
 
 	game_.Initialize();
 
+	// Initialize NP.
+	int ret = sceNpInit( NP_POOL_SIZE, NPPool );
+	if( ret < 0 )
+		LOG.Write( "Failed to initialize NP: 0x%x\n", ret );
+
+	sceNpManagerRegisterCallback( NPManagerCallback, NULL );
+
+	int npState;
+	sceNpManagerGetStatus( &npState );
+
+	// Initialize our own connection to NP if the console is already connected.
+	if( npState == SCE_NP_MANAGER_STATUS_ONLINE )
+		ConnectToNP();
+	
+	// Initialize NP score system.
+	ret = sceNpScoreInit();
+	if( ret < 0 )
+		LOG.Write( "Failed to initialize score system: 0x%x\n", ret );
+
 	// Initialize trophy system.
-	int ret = sceNpTrophyInit( NULL, 0, SYS_MEMORY_CONTAINER_ID_INVALID, 0 );
+	ret = sceNpTrophyInit( NULL, 0, SYS_MEMORY_CONTAINER_ID_INVALID, 0 );
 	if( ret < 0 )
 		LOG.Write( "Failed to initialize trophy system: 0x%x\n", ret );
 
@@ -405,20 +548,47 @@ int CorePS3::Run()
 	if( ret != 0 )
 		LOG.Write( "Failed to start RegisterTrophyContextThread: 0x%x\n", ret );
 
-	DisplayError( 0x1234abcd );
+	//DisplayError( ErrorType( 0x8002a1a4 ) );
 
 	while( running_ )
 	{
-		GamePad::Update();
-		Keyboard::Update();
+		if( ErrorDialogOpen )
+		{
+			glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+
+			int ret = cellSysutilCheckCallback();
+			if( ret )
+				LOG.Write( "cellSysutilChecCallback() = 0x%x\n", ret );
+
+			psglSwap();
+			continue;
+		}
 
 		if( GLOBAL_ERROR_QUEUE.size() > 0 )
 		{
-			int error = GLOBAL_ERROR_QUEUE.front();
+			ErrorType error( GLOBAL_ERROR_QUEUE.front() );
 			GLOBAL_ERROR_QUEUE.pop_front();
 
-			int ret = cellMsgDialogOpenErrorCode( error, ErrorDialogCallback, NULL, NULL );
+			int ret = 0;
+			switch( error.GetMessageType() )
+			{
+			case ErrorType::CODE:
+				ret = cellMsgDialogOpenErrorCode( error.GetCode(), ErrorDialogCallback, NULL, NULL );
+				break;
+			case ErrorType::STRING:
+				ret = cellMsgDialogOpen2( error.IsFatal() ? CELL_MSGDIALOG_TYPE_SE_TYPE_ERROR : CELL_MSGDIALOG_TYPE_SE_TYPE_NORMAL,
+					error.GetMessage().c_str(), ErrorDialogCallback, NULL, NULL );
+				break;
+			}
+			if( ret == 0 )
+			{
+				ErrorDialogOpen = true;
+				continue;
+			}
 		}
+		
+		GamePad::Update();
+		Keyboard::Update();
 
 		glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
