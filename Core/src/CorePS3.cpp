@@ -27,7 +27,7 @@
 #include <sysutil/sysutil_msgdialog.h>
 #include <sysutil/sysutil_savedata.h>
 
-SYS_PROCESS_PARAM ( 1001, 0x80000 )
+SYS_PROCESS_PARAM ( 1000, 0x80000 )
 
 // Passphrase and signature from PSN Server Management Tools.
 static const SceNpCommunicationId s_npCommunicationId = {
@@ -191,7 +191,7 @@ CorePS3::CorePS3( GameLoop &game ) :
 	PS3_PATH_PREFIX = std::string( usrdirPath ) + "/";
 	// To test an hdd game in release mode with the debugger we need to tell it about the
 	// game code.  Also the files should be pre-installed on the disk.
-	PS3_PATH_PREFIX = "/dev_hdd0/game/NPEB01312/USRDIR/";
+	//PS3_PATH_PREFIX = "/dev_hdd0/game/NPEB01312/USRDIR/";
 	LOG.Write( "Running in %s\nContent dir %s\n", dirName, usrdirPath );
 #ifdef DEBUG
 	PS3_PATH_PREFIX = "/app_home/";
@@ -310,7 +310,7 @@ CorePS3::~CorePS3()
 static SceNpTrophyContext TrophyContext;
 static SceNpTrophyHandle TrophyHandle;
 static bool ContextRegistered;
-extern std::list< int > GLOBAL_ERROR_QUEUE;
+extern std::list< ErrorType > GLOBAL_ERROR_QUEUE;
 
 bool GetTrophyContext( SceNpTrophyContext &context, SceNpTrophyHandle &handle )
 {
@@ -374,24 +374,25 @@ void RegisterTrophyContextThread( uint64_t context )
 	sys_ppu_thread_exit( 0 );
 }
 
-static int NPId = 0;
+static SceNpId NPId;
+static int ScoreTitleContext = 0;
 static bool NPIdObtained = false;
 
-bool GetNPId( int &id )
+bool GetNPScoreContext( int &id )
 {
 	if( !NPIdObtained )
 		return false;
 
-	id = NPId;
+	id = ScoreTitleContext;
 
 	return true;
 }
 
-void CreateScoreContext( uint64_t context )
+/*void CreateScoreContext( uint64_t context )
 {
-	NPIdObtained = false;
+	//NPIdObtained = false;
 
-	/*int ret = sceNpScoreCreateTitleCtx( s_npCommunicationId, s_npCommunicationPassphrase, userNpId );
+	int ret = sceNpScoreCreateTitleCtx( s_npCommunicationId, s_npCommunicationPassphrase, userNpId );
 	if( ret > 0 )
 	{
 		NPId = ret; 
@@ -401,22 +402,92 @@ void CreateScoreContext( uint64_t context )
 
 	switch( ret )
 	{
-	}*/
+	}
 
 	sys_ppu_thread_exit( 0 );
+}*/
+
+void ConnectToNPThread( uint64_t context )
+{
+	int ret = sceNpManagerGetNpId( &NPId );
+	switch( ret )
+	{
+	case SCE_NP_ERROR_NOT_INITIALIZED:
+	case SCE_NP_ERROR_INVALID_ARGUMENT:
+	case SCE_NP_ERROR_INVALID_STATE:
+	case SCE_NP_ERROR_OFFLINE:
+		sys_ppu_thread_exit( 0 );
+		return;
+		break;
+
+	case 0:
+		break;
+	}
+
+	ret = sceNpScoreCreateTitleCtx( &s_npCommunicationId, &s_npCommunicationPassphrase, &NPId );
+	if( ret > 0 )
+	{
+		ScoreTitleContext = ret;
+		NPIdObtained = true;
+	}
+	else
+		LOG.Write( "Coldn't get score title context: 0x%x\n", ret );
+
+	sys_ppu_thread_exit( 0 );
+}
+
+void ConnectToNP()
+{
+	if( NPIdObtained )
+	{
+		LOG.Write( "Tried to connect to NP multiple times!\n" );
+		return;
+	}
+
+	LOG.Write( "Connecting to NP!\n" );
+
+	// Kick off NP connection.
+	sys_ppu_thread_t tid;
+	int ret = sys_ppu_thread_create( &tid, ConnectToNPThread, 0,
+		1001, 16 * 1024, 0, "ConnectToNP" );
+	if( ret != 0 )
+		LOG.Write( "Failed to start RegisterTrophyContextThread: 0x%x\n", ret );
+}
+
+void DisconnectFromNP()
+{
+	LOG.Write( "Disconnecting from NP\n" );
+
+	if( NPIdObtained )
+	{
+		sceNpScoreDestroyTitleCtx( ScoreTitleContext );
+	}
+
+	NPIdObtained = false;
 }
 
 void NPManagerCallback( int event, int result, void *arg )
 {
 	LOG.Write( "NP EVENT: %d\tRESULT: %d\n", event, result );
-}
-
-void ConnectToNP( uint64_t context )
-{
-	sceNpManagerRegisterCallback( NPManagerCallback, NULL );
-
-
-	sys_ppu_thread_exit( 0 );
+	switch( event )
+	{
+	case SCE_NP_MANAGER_STATUS_OFFLINE:
+		DisconnectFromNP();
+		break;
+	case SCE_NP_MANAGER_STATUS_GETTING_TICKET:
+		break;
+	case SCE_NP_MANAGER_STATUS_GETTING_PROFILE:
+		break;
+	case SCE_NP_MANAGER_STATUS_LOGGING_IN:
+		break;
+	case SCE_NP_MANAGER_STATUS_ONLINE:
+		{
+			int id;
+			if( !GetNPScoreContext( id ) )
+				ConnectToNP();
+		}
+		break;
+	}
 }
 
 static bool ErrorDialogOpen = false;
@@ -440,17 +511,19 @@ int CorePS3::Run()
 	if( ret < 0 )
 		LOG.Write( "Failed to initialize NP: 0x%x\n", ret );
 
-	// Kick off trophy synchronization.
-	sys_ppu_thread_t tid;
-	ret = sys_ppu_thread_create( &tid, ConnectToNP, 0,
-		1001, 16 * 1024, 0, "ConnectToNP" );
-	if( ret != 0 )
-		LOG.Write( "Failed to start RegisterTrophyContextThread: 0x%x\n", ret );
+	sceNpManagerRegisterCallback( NPManagerCallback, NULL );
 
+	int npState;
+	sceNpManagerGetStatus( &npState );
+
+	// Initialize our own connection to NP if the console is already connected.
+	if( npState == SCE_NP_MANAGER_STATUS_ONLINE )
+		ConnectToNP();
+	
 	// Initialize NP score system.
-	/*ret = sceNpScoreInit();
+	ret = sceNpScoreInit();
 	if( ret < 0 )
-		LOG.Write( "Failed to initialize score system: 0x%x\n", ret );*/
+		LOG.Write( "Failed to initialize score system: 0x%x\n", ret );
 
 	// Initialize trophy system.
 	ret = sceNpTrophyInit( NULL, 0, SYS_MEMORY_CONTAINER_ID_INVALID, 0 );
@@ -469,6 +542,7 @@ int CorePS3::Run()
 		LOG.Write( "Couldn't create trophy handle: 0x%x\n", ret );
 
 	// Kick off trophy synchronization.
+	sys_ppu_thread_t tid;
 	ret = sys_ppu_thread_create( &tid, RegisterTrophyContextThread, 0,
 		1001, 16 * 1024, 0, "RegisterTrophyContextThread" );
 	if( ret != 0 )
@@ -492,7 +566,7 @@ int CorePS3::Run()
 
 		if( GLOBAL_ERROR_QUEUE.size() > 0 )
 		{
-			ErrorType error = GLOBAL_ERROR_QUEUE.front();
+			ErrorType error( GLOBAL_ERROR_QUEUE.front() );
 			GLOBAL_ERROR_QUEUE.pop_front();
 
 			int ret = 0;

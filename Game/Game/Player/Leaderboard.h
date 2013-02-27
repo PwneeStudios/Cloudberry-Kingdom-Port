@@ -4,16 +4,15 @@
 #include <global_header.h>
 //#include <Game/Player/LeaderboardView.h>
 
+#include <Utility/Mutex.h>
+
 namespace CloudberryKingdom
 {
 
 	struct OnlineGamer
 	{
 		int Id;
-		std::wstring GamerTag()
-		{
-			return L"Dummy gamer tag! Fix me!";
-		}
+		std::wstring GamerTag;
 
 		OnlineGamer()
 		{
@@ -44,7 +43,7 @@ namespace CloudberryKingdom
 
     };
 
-	struct Leaderboard
+	struct Leaderboard : boost::enable_shared_from_this<Leaderboard>
 	{
 
         static OnlineGamer LeaderboardGamer;
@@ -70,11 +69,13 @@ namespace CloudberryKingdom
         std::map<int, LeaderboardItem> Items;
         std::vector<LeaderboardItem> FriendItems;
 
+		Mutex ItemMutex;
+
 
 
 		static void WriteToLeaderboard(boost::shared_ptr<ScoreEntry> score);
 
-		int GetLeaderboardId(int game_id);
+		static int GetLeaderboardId(int game_id);
 
 		Leaderboard(int game_id);
 
@@ -82,6 +83,7 @@ namespace CloudberryKingdom
 		void OnInfo_TopScores(/*IAsyncResult ar*/);
 		void OnInfo_MyScores(/*IAsyncResult ar*/);
 		void OnInfo_FriendScores(/*IAsyncResult ar*/);
+		void OnInfo_Fail();
 		void RequestMore(int RequestPage);
 		void Update(LeaderboardType Type /*, IAsyncResult ar*/);
 

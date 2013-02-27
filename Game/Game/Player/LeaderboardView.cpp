@@ -64,13 +64,13 @@ namespace CloudberryKingdom
 
         EnableBounce();
 
-        SetIndex( 0 );
-
         CurrentType = LeaderboardType_TopScores;
         CurrentSort = LeaderboardSortType_Score;
         CurrentMessage = Message_None;
 
         DelayCount_LeftRight = MotionCount_LeftRight = 0;
+
+		SetIndex( 0 );
 
         this->Title = Title;
         if ( Title != 0 )
@@ -778,18 +778,21 @@ else
         {
 			// FIXME put a lock here
             //lock (Items)
+			MyLeaderboard->ItemMutex.Lock();
             {
                 if (Loading)
                 {
                     Index = MyLeaderboard->StartIndex;
                     Start = Index - EntriesPerPage / 2 + 1;
-                    TotalEntries = MyLeaderboard->TotalSize;
+                    //TotalEntries = MyLeaderboard->TotalSize;
                     UpdateBounds();
                 }
 
+				TotalEntries = MyLeaderboard->TotalSize;
                 MyLeaderboard->Updated = false;
                 Loading = false;
             }
+			MyLeaderboard->ItemMutex.Unlock();
         }
 
         // Get direction input
@@ -855,6 +858,7 @@ else
         {
 			// FIXME
             //lock (Items)
+			MyLeaderboard->ItemMutex.Lock();
             {
                 if ( getItems().size() > 0)
                 {
@@ -871,6 +875,7 @@ else
                     }
                 }
             }
+			MyLeaderboard->ItemMutex.Unlock();
         }
 
         void LeaderboardView::SetType( LeaderboardType type )
@@ -894,6 +899,7 @@ else
     {
 		// FIXME
         //lock (Items)
+		MyLeaderboard->ItemMutex.Lock();
         {
             Vector2 CurPos = Pos;
             float Shift = .1f * LeaderboardGUI::ItemShift->getX();
@@ -909,6 +915,7 @@ else
                 DrawDict( alpha, CurPos, Shift );
             }
         }
+		MyLeaderboard->ItemMutex.Unlock();
     }
 
 	void LeaderboardView::DrawList( float alpha, Vector2 CurPos, float Shift )
@@ -992,11 +999,11 @@ else
 
             if ( MinMissing >= MaxExisting )
             {
-                PageToRequest = CoreMath::RestrictVal( 0, TotalEntries, MinMissing - 1 );
+                PageToRequest = CoreMath::RestrictVal( 1, TotalEntries, MinMissing );
             }
             else
             {
-                PageToRequest = CoreMath::RestrictVal( 0, TotalEntries, MaxMissing - 1 );
+                PageToRequest = CoreMath::RestrictVal( 1, TotalEntries, MaxMissing );
             }
 
             MyLeaderboard->RequestMore( PageToRequest );
