@@ -401,6 +401,8 @@ namespace CloudberryKingdom
 
 	void StartMenu::OnReturnTo()
 	{
+		CloudberryKingdomGame::SetPresence( Presence_TitleScreen );
+
 		CkBaseMenu::OnReturnTo();
 		NoBack = false;
 	}

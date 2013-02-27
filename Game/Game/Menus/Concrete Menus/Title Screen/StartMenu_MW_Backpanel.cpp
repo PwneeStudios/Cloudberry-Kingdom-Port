@@ -34,7 +34,7 @@ namespace CloudberryKingdom
 
 	void StartMenu_MW_Backpanel::Init()
 	{
-		 CkBaseMenu::Init();
+		CkBaseMenu::Init();
 
 		MyPile = boost::make_shared<DrawPile>();
 
@@ -43,8 +43,10 @@ namespace CloudberryKingdom
 		Scene = boost::make_shared<QuadClass>( std::wstring( L"Title_Screen" ), 1778.f );
 		MyPile->Add( Scene, std::wstring( L"Scene" ) );
 
+		TM = boost::make_shared<QuadClass>( std::wstring( L"TradeMarkSymbol" ) );
+		MyPile->Add(TM, std::wstring( L"TM" ) );
+
 		Title = boost::make_shared<QuadClass>( std::wstring( L"Title" ), 1778.f );
-		//MyPile.Add(Title, "Title");
 
 		Title_Trim = boost::make_shared<QuadClass>( std::wstring( L"Title_Trim" ), 1778 * 783.f / 1280.f );
 		MyPile->Add( Title_Trim, std::wstring( L"Title_Trim" ) );
@@ -81,11 +83,11 @@ namespace CloudberryKingdom
 		switch ( state )
 		{
 			case State_NONE:
-				Title->Show = Scene->Show = Scene_Princess->Show = Scene_Kobbler->Show = false;
+				TM->Show = Title->Show = Scene->Show = Scene_Princess->Show = Scene_Kobbler->Show = false;
 				break;
 
 			case State_SCENE_TITLE:
-				Title->Show = Scene->Show = true;
+				TM->Show = Title->Show = Scene->Show = true;
 				break;
 
 			case State_SCENE:
@@ -158,69 +160,23 @@ namespace CloudberryKingdom
 		}
 		MyState = state;
 
-		Title_Trim->Show = Title->Show;
+		TM->Show = Title_Trim->Show = Title->Show;
 	}
 
 	void StartMenu_MW_Backpanel::BlackBox()
 	{
 		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( std::wstring( L"Scene" ) );
-		if ( _q != 0 )
-		{
-			_q->setPos( Vector2( 0, 0 ) );
-			_q->setSize( Vector2( 1778, 1000.125f ) );
-		}
-		_q = MyPile->FindQuad( std::wstring( L"Title" ) );
-		if ( _q != 0 )
-		{
-			_q->setPos( Vector2( 0, 0 ) );
-			_q->setSize( Vector2( 1778, 1000.125f ) );
-		}
-		_q = MyPile->FindQuad( std::wstring( L"Title_Trim" ) );
-		if ( _q != 0 )
-		{
-			_q->setPos( Vector2( -155.5557f, 536.1109f ) );
-			_q->setSize( Vector2( 1087.636f, 373.6578f ) );
-		}
-		_q = MyPile->FindQuad( std::wstring( L"Scene_NoBob_Blur" ) );
-		if ( _q != 0 )
-		{
-			_q->setPos( Vector2( 0, 0 ) );
-			_q->setSize( Vector2( 1778, 1778 ) );
-		}
-		_q = MyPile->FindQuad( std::wstring( L"Scene_NoBob_Brighten" ) );
-		if ( _q != 0 )
-		{
-			_q->setPos( Vector2( 0, 0 ) );
-			_q->setSize( Vector2( 1778, 1778 ) );
-		}
-		_q = MyPile->FindQuad( std::wstring( L"Scene_Blur" ) );
-		if ( _q != 0 )
-		{
-			_q->setPos( Vector2( 0, 0 ) );
-			_q->setSize( Vector2( 1778, 1000.125f ) );
-		}
-		_q = MyPile->FindQuad( std::wstring( L"Scene_Princess" ) );
-		if ( _q != 0 )
-		{
-			_q->setPos( Vector2( 0, 0 ) );
-			_q->setSize( Vector2( 1778, 1000.125f ) );
-		}
-		_q = MyPile->FindQuad( std::wstring( L"Scene_Kobbler" ) );
-		if ( _q != 0 )
-		{
-			_q->setPos( Vector2( 0, 0 ) );
-			_q->setSize( Vector2( 1778, 1000.125f ) );
-		}
-		_q = MyPile->FindQuad( std::wstring( L"Scene_Kobbler_Blur" ) );
-		if ( _q != 0 )
-		{
-			_q->setPos( Vector2( 0, 0 ) );
-			_q->setSize( Vector2( 1778, 1000.125f ) );
-		}
+		_q = MyPile->FindQuad( L"Scene" ); if (_q != 0 ) { _q->setPos( Vector2( 0.f, 0.f ) ); _q->setSize( Vector2( 1778.f, 1000.125f ) ); }
+		_q = MyPile->FindQuad( L"TM" ); if (_q != 0 ) { _q->setPos( Vector2( 574.9999f, 469.4444f ) ); _q->setSize( Vector2( 42.55546f, 31.9166f ) ); }
+		_q = MyPile->FindQuad( L"Title_Trim" ); if (_q != 0 ) { _q->setPos( Vector2(-155.5557f, 536.1109f ) ); _q->setSize( Vector2( 1087.636f, 373.6578f ) ); }
+		_q = MyPile->FindQuad( L"Scene_NoBob_Blur" ); if (_q != 0 ) { _q->setPos( Vector2( 0.f, 0.f ) ); _q->setSize( Vector2( 1778.f, 1778.f ) ); }
+		_q = MyPile->FindQuad( L"Scene_NoBob_Brighten" ); if (_q != 0 ) { _q->setPos( Vector2( 0.f, 0.f ) ); _q->setSize( Vector2( 1778.f, 1778.f ) ); }
+		_q = MyPile->FindQuad( L"Scene_Blur" ); if (_q != 0 ) { _q->setPos( Vector2( 0.f, 0.f ) ); _q->setSize( Vector2( 1778.f, 1000.125f ) ); }
+		_q = MyPile->FindQuad( L"Scene_Princess" ); if (_q != 0 ) { _q->setPos( Vector2( 0.f, 0.f ) ); _q->setSize( Vector2( 1778.f, 1000.125f ) ); }
+		_q = MyPile->FindQuad( L"Scene_Kobbler" ); if (_q != 0 ) { _q->setPos( Vector2( 0.f, 0.f ) ); _q->setSize( Vector2( 1778.f, 1000.125f ) ); }
+		_q = MyPile->FindQuad( L"Scene_Kobbler_Blur" ); if (_q != 0 ) { _q->setPos( Vector2( 0.f, 0.f ) ); _q->setSize( Vector2( 1778.f, 1000.125f ) ); }
 
-		MyPile->setPos( Vector2( 0, 0 ) );
-
+		MyPile->setPos( Vector2( 0.f, 0.f ) );
 	}
 
 	void StartMenu_MW_Backpanel::MyPhsxStep()

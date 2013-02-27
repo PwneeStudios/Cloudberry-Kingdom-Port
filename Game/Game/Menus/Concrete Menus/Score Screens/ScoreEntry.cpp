@@ -45,6 +45,23 @@ namespace CloudberryKingdom
 		boost::shared_ptr<Chunk> chunk = boost::make_shared<Chunk>();
 		chunk->Type = 1000;
 
+		WriteMeat( chunk );
+
+		chunk->Finish( writer );
+	}
+
+	void ScoreEntry::WriteChunk_2000( const boost::shared_ptr<BinaryWriter> &writer )
+	{
+		boost::shared_ptr<Chunk> chunk = boost::make_shared<Chunk>();
+		chunk->Type = 2000;
+
+		WriteMeat( chunk );
+
+		chunk->Finish( writer );
+	}
+
+	void ScoreEntry::WriteMeat( boost::shared_ptr<Chunk> chunk )
+	{
 		chunk->Write( Fake );
 		chunk->Write( GamerTag_Renamed );
 		chunk->Write( GameId );
@@ -54,8 +71,6 @@ namespace CloudberryKingdom
 		chunk->Write( Attempts );
 		chunk->Write( Time );
 		chunk->Write( Date );
-
-		chunk->Finish( writer );
 	}
 
 	void ScoreEntry::ReadChunk_1000( const boost::shared_ptr<Chunk> &chunk )

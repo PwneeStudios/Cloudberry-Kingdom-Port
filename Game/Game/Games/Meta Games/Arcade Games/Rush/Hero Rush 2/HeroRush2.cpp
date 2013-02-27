@@ -150,6 +150,8 @@ namespace CloudberryKingdom
 		ShuffleHeros();
 
 		Challenge_HeroRush::Start( StartLevel );
+
+		CloudberryKingdomGame::SetPresence( CloudberryKingdomGame::Presence_HeroRush2 );
 	}
 
 	boost::shared_ptr<BobPhsx> Challenge_HeroRush2::GetHero( int i )

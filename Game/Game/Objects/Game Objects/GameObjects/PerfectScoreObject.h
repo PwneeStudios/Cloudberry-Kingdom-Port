@@ -137,13 +137,13 @@ namespace CloudberryKingdom
 	
 		void ResetMultiplier();
 
-	
+		bool Campaign;
 		static bool GlobalObtained;
 		static int GlobalBonus;
 		bool Global;
 		bool ShowMultiplier;
-		PerfectScoreObject( bool Global, bool ShowMultiplier );
-		boost::shared_ptr<PerfectScoreObject> PerfectScoreObject_Construct( bool Global, bool ShowMultiplier );
+		PerfectScoreObject( bool Global, bool ShowMultiplier, bool Campaign );
+		boost::shared_ptr<PerfectScoreObject> PerfectScoreObject_Construct( bool Global, bool ShowMultiplier, bool Campaign );
 
 		const float getMultiplier() const;
 

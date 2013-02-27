@@ -104,9 +104,9 @@ namespace CloudberryKingdom
 		
 			float Difficulty;
 			boost::shared_ptr<LevelSeedData> LevelSeed;
-
+			bool ScreenSaver;
 		
-			FixedPieceModHelper( float Difficulty, const boost::shared_ptr<LevelSeedData> &LevelSeed );
+			FixedPieceModHelper( float Difficulty, const boost::shared_ptr<LevelSeedData> &LevelSeed, bool ScreenSaver );
 
 			void Apply( const boost::shared_ptr<PieceSeedData> &piece );
 		};
@@ -115,7 +115,7 @@ namespace CloudberryKingdom
 		/// Returns a function that modifies a PieceSeed's difficulty
 		/// </summary>
 	
-		static boost::shared_ptr<Lambda_1<boost::shared_ptr<PieceSeedData> > > FixedPieceMod( float Difficulty, const boost::shared_ptr<LevelSeedData> &LevelSeed );
+		static boost::shared_ptr<Lambda_1<boost::shared_ptr<PieceSeedData> > > FixedPieceMod( float Difficulty, const boost::shared_ptr<LevelSeedData> &LevelSeed, bool ScreenSaver );
 
 		static float HeroDifficultyMod( float Difficulty, const boost::shared_ptr<BobPhsx> &hero );
 
@@ -123,7 +123,7 @@ namespace CloudberryKingdom
 		/// Modify the upgrades for a PieceSeed.
 		/// Difficulty should range from 0 (Easy) to 4 (Masochistic)
 		/// </summary>
-		static void FixedPieceSeed( const boost::shared_ptr<PieceSeedData> &piece, float Difficulty, const boost::shared_ptr<BobPhsx> &hero );
+		static void FixedPieceSeed( const boost::shared_ptr<PieceSeedData> &piece, float Difficulty, const boost::shared_ptr<BobPhsx> &hero, bool ScreenSaver );
 
 	
 		static void InitFixedUpgrades();

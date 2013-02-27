@@ -22,6 +22,7 @@ namespace CloudberryKingdom
 		static void CoinDie_Perfect( boost::shared_ptr<Level> level, Vector2 pos );
 		static void CoinDie_Spritely( boost::shared_ptr<Level> level, Vector2 pos );
 		static void CoinDie_ExtraLife( boost::shared_ptr<Level> level, Vector2 pos );
+		static void CoinDie_Campaign( boost::shared_ptr<Level> level, Vector2 pos )
 		static void CoinDie_New( boost::shared_ptr<Level> level, Vector2 pos );
 
 

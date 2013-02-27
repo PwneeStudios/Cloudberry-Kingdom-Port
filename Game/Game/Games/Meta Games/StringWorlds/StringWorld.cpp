@@ -204,6 +204,7 @@ namespace CloudberryKingdom
 	void StringWorldGameData::DefaultStartLevelMusic( const boost::shared_ptr<StringWorldGameData> &stringworld )
 	{
 		Tools::SongWad->SetPlayList( Tools::SongList_Standard );
+		Tools::SongWad->Shuffle();
 
 		if ( !stringworld->FirstLevelHasLoaded )
 			Tools::SongWad->Next();

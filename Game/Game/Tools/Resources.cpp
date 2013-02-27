@@ -21,6 +21,9 @@
 namespace CloudberryKingdom
 {
 
+	// FIXME: should be false and set to true once loading is done.
+	bool Resources::FinalLoadDone = true;
+
 	boost::shared_ptr<WrappedBool> Resources::LoadingResources = 0;
 	boost::shared_ptr<WrappedFloat> Resources::ResourceLoadedCountRef = 0;
 	boost::shared_ptr<EzFont> Resources::Font_Grobold42, Resources::Font_Grobold42_2 = 0;
@@ -129,10 +132,10 @@ namespace CloudberryKingdom
 
 
 		Tools::Song_Happy = Tools::SongWad->FindByName( std::wstring( L"Happy^James_Stant" ) );
-		Tools::Song_Happy->DisplayInfo = false;
+		Tools::Song_Happy->Volume = .9f;
 
 		Tools::Song_140mph = Tools::SongWad->FindByName( std::wstring( L"140_Mph_in_the_Fog^Blind_Digital" ) );
-		Tools::Song_140mph->Volume = .7f;
+		Tools::Song_140mph->Volume = .6f;
 
 		Tools::Song_BlueChair = Tools::SongWad->FindByName( std::wstring( L"Blue_Chair^Blind_Digital" ) );
 		Tools::Song_BlueChair->Volume = .7f;
@@ -157,6 +160,7 @@ namespace CloudberryKingdom
 
 		Tools::Song_Heavens = Tools::SongWad->FindByName( std::wstring( L"The_Heavens_Opened^Peacemaker" ) );
 		Tools::Song_Heavens->Volume = 1;
+		Tools::Song_Heavens->DisplayInfo = false;
 
 		Tools::Song_TidyUp = Tools::SongWad->FindByName( std::wstring( L"Tidy_Up^Peacemaker" ) );
 		Tools::Song_TidyUp->Volume = 1;
@@ -359,20 +363,6 @@ boost::shared_ptr<Thread> Resources::LoadThread = 0;
 
 		// Fireball texture
 		Fireball::PreInit();
-
-		// Load art
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Environments" ) );
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Bob" ) );
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Buttons" ) );
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Characters" ) );
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Coins" ) );
-		//Tools::TextureWad.LoadFolder(Tools::GameClass.Content, "Effects");
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"HeroItems" ) );
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"LoadScreen_Initial" ) );
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"LoadScreen_Level" ) );
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Menu" ) );
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Old_Art_Holdover" ) );
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Title" ) );
 
 		//for ( std::vector<boost::shared_ptr<EzTexture> >::const_iterator Tex = Tools::TextureWad->TextureList.begin(); Tex != Tools::TextureWad->TextureList.end(); ++Tex )
 		//{

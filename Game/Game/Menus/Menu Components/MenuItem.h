@@ -205,6 +205,7 @@ namespace CloudberryKingdom
 #endif
 
 		static int ActivatingPlayer;
+		static PlayerIndex ActivatingPlayerIndex();
 		static boost::shared_ptr<PlayerData> GetActivatingPlayerData();
 
 

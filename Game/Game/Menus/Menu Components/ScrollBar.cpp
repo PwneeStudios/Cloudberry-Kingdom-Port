@@ -54,6 +54,13 @@ namespace CloudberryKingdom
 		this->Parent = Parent;
 		this->Parent->OnRelease->Add( boost::make_shared<ScrollBarReleaseLambda>( boost::static_pointer_cast<ScrollBar>( shared_from_this() ) ) );
 
+		boost::shared_ptr<CkBaseMenu> ck = boost::dynamic_pointer_cast<CkBaseMenu>( Parent );
+		if ( 0 != ck && ck->UseBounce )
+		{
+			EnableBounce();
+			zoom = ck->zoom;
+		}
+
 		Constructor();
 
 		return boost::static_pointer_cast<ScrollBar>( shared_from_this() );

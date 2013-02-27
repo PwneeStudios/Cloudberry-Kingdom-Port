@@ -229,7 +229,7 @@ namespace CloudberryKingdom
 	boost::shared_ptr<GameObject> HelpMenu::MakeListener()
 	{
 		boost::shared_ptr<Listener> listener = MakeMagic( Listener, () );
-		//listener.MyType = Listener.Type.OnDown;
+		listener->setControl( -1 );
 		listener->MyButton = ControllerButtons_Y;
 		listener->MyButton2 = ButtonCheck::Help_KeyboardKey;
 		listener->MyAction = boost::make_shared<MakeListenerHelper>( listener );
@@ -259,7 +259,7 @@ namespace CloudberryKingdom
 
 	bool HelpMenu::Allowed_WatchComputer()
 	{
-		return MyGame->MyLevel->WatchComputerEnabled() && Bank() >= Cost_Watch;
+		return MyGame->MyLevel->WatchComputerEnabled() && Bank() >= Cost_Watch * CostMultiplier;
 	}
 
 	void HelpMenu::WatchComputer()
@@ -267,7 +267,7 @@ namespace CloudberryKingdom
 		if ( !Allowed_WatchComputer() )
 			return;
 
-		Buy( Cost_Watch );
+		Buy( Cost_Watch * CostMultiplier );
 
 		ReturnToCaller();
 		MyGame->WaitThenDo( DelayExit - 10, boost::make_shared<WatchComputerHelper>( boost::static_pointer_cast<HelpMenu>( shared_from_this() ) ) );
@@ -283,7 +283,7 @@ namespace CloudberryKingdom
 	#if defined(DEBUG)
 		return MyGame->MyLevel->WatchComputerEnabled();
 	#else
-		return MyGame->MyLevel->CanWatchComputer && Bank() >= Cost_Path;
+		return MyGame->MyLevel->CanWatchComputer && Bank() >= Cost_Path * CostMultiplier;
 	#endif
 	}
 
@@ -309,7 +309,7 @@ namespace CloudberryKingdom
 		if ( !Allowed_ShowPath() )
 			return;
 
-		Buy( Cost_Path );
+		Buy( Cost_Path * CostMultiplier );
 
 		ReturnToCaller();
 		MyGame->WaitThenDo( DelayExit - 10, boost::make_shared<Toggle_ShowPathSetter>( boost::static_pointer_cast<HelpMenu>( shared_from_this() ), true ) );
@@ -322,7 +322,7 @@ namespace CloudberryKingdom
 
 	bool HelpMenu::Allowed_SlowMo()
 	{
-		return true && Bank() >= Cost_Slow;
+		return true && Bank() >= Cost_Slow * CostMultiplier;
 	}
 
 	void HelpMenu::Toggle_SlowMo( bool state )
@@ -345,7 +345,7 @@ namespace CloudberryKingdom
 		if ( !Allowed_SlowMo() )
 			return;
 
-		Buy( Cost_Slow );
+		Buy( Cost_Slow * CostMultiplier );
 
 		Toggle_SlowMo( true );
 		ReturnToCaller();
@@ -439,7 +439,7 @@ namespace CloudberryKingdom
 		std::wstring CoinPrefix = std::wstring( L"{pCoin_Blue,68,?}" );
 
 		// Watch the computer
-		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( CoinPrefix + std::wstring( L"x" ) + StringConverterHelper::toString( Cost_Watch ), ItemFont ) ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( CoinPrefix + std::wstring( L"x" ) + StringConverterHelper::toString( Cost_Watch * CostMultiplier ), ItemFont ) ) );
 		item->Name = std::wstring( L"WatchComputer" );
 		Item_WatchComputer = item;
 		item->SetIcon( ObjectIcon::RobotIcon->Clone() );
@@ -460,8 +460,8 @@ namespace CloudberryKingdom
 		}
 		else
 		{
-            PathItem = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( CoinPrefix + std::wstring( L"x" ) + StringConverterHelper::toString( Cost_Path ), ItemFont ) ) );
-            if (Bank() >= Cost_Path)
+            PathItem = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( CoinPrefix + std::wstring( L"x" ) + StringConverterHelper::toString( Cost_Path * CostMultiplier ), ItemFont ) ) );
+            if (Bank() >= Cost_Path * CostMultiplier)
                 item->setGo( Cast::ToItem( boost::make_shared<ShowPathProxy>( boost::static_pointer_cast<HelpMenu>( shared_from_this() ) ) ) );
             else
                 item->setGo( 0 );
@@ -483,8 +483,8 @@ namespace CloudberryKingdom
 		}
 		else
 		{
-            SlowItem = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( CoinPrefix + std::wstring( L"x" ) + StringConverterHelper::toString( Cost_Slow ), ItemFont ) ) );
-            if (Bank() >= Cost_Slow)
+            SlowItem = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( CoinPrefix + std::wstring( L"x" ) + StringConverterHelper::toString( Cost_Slow * CostMultiplier ), ItemFont ) ) );
+            if (Bank() >= Cost_Slow * CostMultiplier)
                 item->setGo( Cast::ToItem( boost::make_shared<SlowMoProxy>( boost::static_pointer_cast<HelpMenu>( shared_from_this() ) ) ) );
             else
                 item->setGo( 0 );
@@ -517,6 +517,8 @@ namespace CloudberryKingdom
 
 		EnsureFancy();
 		SetPos();
+
+		EpilepsySafe( .75f );
 	}
 
 	void HelpMenu::SetPos()
@@ -607,8 +609,8 @@ namespace CloudberryKingdom
 	void HelpMenu::InitializeInstanceFields()
 	{
 		DelayExit = 29;
-		Cost_Watch = 0;
-		Cost_Path = 30;
-		Cost_Slow = 10;
+		Cost_Watch = 5;
+		Cost_Path = 40;
+		Cost_Slow = 20;
 	}
 }

@@ -25,8 +25,7 @@ namespace CloudberryKingdom
 
 
 		// FIXME:
-		//std::map<std::wstring, boost::shared_ptr<EzTexture>, IgnoreCaseComparator> PathDict, NameDict, BigNameDict;
-		std::map<std::wstring, boost::shared_ptr<EzTexture> > PathDict, NameDict, BigNameDict;
+		std::map<std::wstring, boost::shared_ptr<EzTexture> > NameDict;
 		void Add( const boost::shared_ptr<PackedTexture> &packed );
 
 
@@ -36,7 +35,7 @@ namespace CloudberryKingdom
 
 		void LoadFolder( const boost::shared_ptr<ContentManager> &Content, const std::wstring &Folder );
 
-		boost::shared_ptr<EzTexture> FindOrLoad( const boost::shared_ptr<ContentManager> &Content, const std::wstring &name );
+		boost::shared_ptr<EzTexture> FindOrLoad( const boost::shared_ptr<ContentManager> &Content, const std::wstring &name, const std::wstring &path )
 
 		/// <summary>
 		/// Accepts a path. If the path does not exist, the name is used instead.

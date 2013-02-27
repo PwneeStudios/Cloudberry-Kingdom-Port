@@ -3,6 +3,21 @@
 namespace CloudberryKingdom
 {
 
+	void StartMenu::MenuGo_Campaign( const boost::shared_ptr<MenuItem> &item )
+	{
+		// Upsell
+		if ( CloudberryKingdomGame::getIsDemo() )
+		{
+			Title->BackPanel->SetState( StartMenu_MW_Backpanel::State_Scene_Blur_Dark );
+			CallingOptionsMenu = true;
+			Call( MakeMagic( UpSellMenu, ( Localization::Words_UpSell_Campaign, MenuItem::ActivatingPlayer ) ) );
+
+			return;
+		}
+
+		StartMenu::MenuGo_Campaign( item );
+	}
+
 	void StartMenu_MW::MenuGo_Options( const boost::shared_ptr<MenuItem> &item )
 	{
 		Title->BackPanel->SetState( StartMenu_MW_Backpanel::State_SCENE_BLUR_DARK );
@@ -29,6 +44,9 @@ namespace CloudberryKingdom
 	{
 		StartMenu::StartMenu_Construct();
 
+		EnableBounce();
+		ReturnToCallerDelay = 0;
+
 		this->Title = Title;
 		CallingOptionsMenu = false;
 
@@ -44,6 +62,8 @@ namespace CloudberryKingdom
 	void StartMenu_MW::SlideOut( PresetPos Preset, int Frames )
 	{
 		StartMenu::SlideOut( Preset, 0 );
+
+		StartMenu::SlideOut( Preset, Frames );
 	}
 
 	void StartMenu_MW::BringCampaign()
@@ -77,11 +97,26 @@ namespace CloudberryKingdom
 
 	void StartMenu_MW::OnAdd()
 	{
+		CloudberryKingdomGame::SetPresence( Presence_TitleScreen );
+
 		StartMenu::OnAdd();
+	}
+
+	void StartMenu_MW::Call( boost::shared_ptr<GUI_Panel> child, int Delay )
+	{
+		UseBounce = false;
+		ReturnToCallerDelay = 0;
+
+		StartMenu::Call( child, Delay );
 	}
 
     void StartMenu_MW::OnReturnTo()
     {
+		UseBounce = false;
+		ReturnToCallerDelay = 0;
+
+		CloudberryKingdomGame::SetPresence( Presence_TitleScreen );
+
         if (CallingOptionsMenu)
         {
             MyMenu->SelectItem(3);
@@ -95,6 +130,9 @@ namespace CloudberryKingdom
 	{
 		if ( NoBack )
 			return false;
+
+		UseBounce = false;
+		ReturnToCallerDelay = 0;
 
 		return StartMenu::MenuReturnToCaller( menu );
 	}

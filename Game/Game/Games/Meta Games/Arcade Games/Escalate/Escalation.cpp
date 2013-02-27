@@ -127,6 +127,8 @@ namespace CloudberryKingdom
 
 	void Challenge_Escalation::Start( int StartLevel )
 	{
+		CloudberryKingdomGame::SetPresence( CloudberryKingdomGame::Presence_Escalation );
+
 		Challenge::Start( StartLevel );
 
 		PlayerManager::setCoinsSpent( -100 );
@@ -224,6 +226,8 @@ namespace CloudberryKingdom
 		lerp_vec.push_back(3.5f);
 		lerp_vec.push_back(4);
 		lerp_vec.push_back(4.5f);
+		lerp_vec.push_back(5.0f);
+		lerp_vec.push_back(6.0f);
 
 		float difficulty = CoreMath::MultiLerpRestrict( Index / static_cast<float>( LevelsPerDifficulty ), lerp_vec );
 		boost::shared_ptr<CloudberryKingdom::LevelSeedData> seed = Make( Index, difficulty );
@@ -254,7 +258,7 @@ namespace CloudberryKingdom
 			Length += 2000;
 
 		// Create the LevelSeedData
-		boost::shared_ptr<LevelSeedData> data = RegularLevel::HeroLevel( Difficulty, hero, Length );
+		boost::shared_ptr<LevelSeedData> data = RegularLevel::HeroLevel( Difficulty, hero, Length, false );
 		data->SetTileSet( GetTileSet( Index - StartIndex ) );
 
 		// Adjust the piece seed data

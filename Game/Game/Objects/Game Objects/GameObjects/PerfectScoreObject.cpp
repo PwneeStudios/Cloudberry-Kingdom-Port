@@ -121,7 +121,17 @@ namespace CloudberryKingdom
 			boost::shared_ptr<PlayerData> player = obj->getCore()->InteractingPlayer;
 
 			if ( player != 0 )
-				player->LevelStats->Score += BonusValue();
+			{
+				if ( Campaign )
+				{
+					player->CampaignCoins += BonusValue();
+				}
+				else
+				{
+					player->LevelStats->Score += BonusValue();
+				}
+			}
+				
 
 			// Remove last coin score text
 			MyGame->RemoveLastCoinText();
@@ -154,7 +164,10 @@ namespace CloudberryKingdom
 
 		// Text float
 		boost::shared_ptr<TextFloat> text = boost::make_shared<TextFloat>( Localization::Words_Perfect, pos + Vector2( 21, 76.5f ) );
-		boost::shared_ptr<TextFloat> text2 = boost::make_shared<TextFloat>( StringConverterHelper::toString( BonusValue() ), pos + Vector2( 21, -93.5f ) );
+
+		std::wstring s = StringConverterHelper::toString( BonusValue() );
+		if ( Campaign ) s = L"+" + s;
+		boost::shared_ptr<TextFloat> text2 = boost::make_shared<TextFloat>( s, pos + Vector2( 21, -93.5f ) );
 
 		text->MyText->setScale( text->MyText->getScale() * 1.5f );
 		MyGame->AddGameObject( text );
@@ -236,7 +249,8 @@ namespace CloudberryKingdom
 bool PerfectScoreObject::GlobalObtained = false;
 int PerfectScoreObject::GlobalBonus = 0;
 
-	PerfectScoreObject::PerfectScoreObject( bool Global, bool ShowMultiplier ) :
+	PerfectScoreObject::PerfectScoreObject( bool Global, bool ShowMultiplier, bool Campaign ) :
+		Campaign( Campaign ),
 		Eligible( false ),
 		_Obtained( false ),
 		_BaseBonus( 0 ),
@@ -252,19 +266,30 @@ int PerfectScoreObject::GlobalBonus = 0;
 	{
 	}
 
-	boost::shared_ptr<PerfectScoreObject> PerfectScoreObject::PerfectScoreObject_Construct( bool Global, bool ShowMultiplier )
+	boost::shared_ptr<PerfectScoreObject> PerfectScoreObject::PerfectScoreObject_Construct( bool Global, bool ShowMultiplier, bool Campaign )
 	{
 		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
+
+		this->Campaign = Campaign;
 
 		// Object is carried over through multiple levels, so prevent it from being released.
 		PreventRelease = true;
 
 		PauseOnPause = true;
 
-		setBaseBonus( 1000 );
-		BonusIncrement = 1000;
-		MaxBonus = 8000;
+			if (Campaign)
+			{
+				setBaseBonus( 10 );
+				BonusIncrement = 10;
+				MaxBonus = 10;
+			}
+			else
+			{
+				setBaseBonus( 1000 );
+				BonusIncrement = 1000;
+				MaxBonus = 8000;
+			}
 
 		// Global modifer, keep track of multiplier across levels/games
 		if ( Global )
@@ -414,6 +439,8 @@ int PerfectScoreObject::GlobalBonus = 0;
 
 	void PerfectScoreObject::MyDraw()
 	{
+		if ( Campaign ) return;
+
         Text->MyFloatColor += .05f * ( bColor(228, 0, 69).ToVector4() - Text->MyFloatColor );
         Text->setScale( Text->getScale() + .05f * ( .8f - Text->getScale() ) );
         Text->Angle += .2f * ( 0 - Text->Angle );

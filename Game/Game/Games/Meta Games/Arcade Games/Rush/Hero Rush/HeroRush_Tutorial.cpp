@@ -22,7 +22,7 @@ namespace CloudberryKingdom
 	{
 		Tools::SongWad->SuppressNextInfoDisplay = true;
 		Tools::SongWad->SetPlayList( Tools::SongList_Standard );
-		//Tools::SongWad->SetPlayList( Tools::Song_140mph );
+		Tools::SongWad->Shuffle();
 		Tools::SongWad->Restart( true );
 	}
 
@@ -131,7 +131,6 @@ namespace CloudberryKingdom
 		hrt->PointAtCoins();
 		arrow->Release();
 		text->Kill( hrt->SoundOnKill );
-		text2->Kill( false );
 	}
 
 	HeroRush_Tutorial::PointAtCoinsNextTutorialHelper::PointAtCoinsNextTutorialHelper( const boost::shared_ptr<HeroRush_Tutorial> &hrt, const boost::shared_ptr<GUI_Text> &text, const std::vector<boost::shared_ptr<Arrow> > &arrows )
@@ -306,15 +305,12 @@ namespace CloudberryKingdom
 		MyGame->AddGameObject( arrow );
 
 
-		boost::shared_ptr<GUI_Text> text = MakeMagic( GUI_Text, ( Localization::Words_SecondsOnTheClock, arrow->getCore()->Data.Position + Vector2(830, -130) ) );
-
-		boost::shared_ptr<GUI_Text> text2 = MakeMagic( GUI_Text, ( StringConverterHelper::toString( HeroRush->Timer->getSeconds() ), arrow->getCore()->Data.Position + Vector2(830, -130) + Vector2(-150, 0) ) );
+		boost::shared_ptr<GUI_Text> text = MakeMagic( GUI_Text, ( Format( Localization::WordString( Localization::Words_SecondsOnTheClock ), HeroRush::Timer->Seconds ), arrow->getCore()->Data.Position + Vector2(0, -530) ) );
 
 		MyGame->AddGameObject( text );
-		MyGame->AddGameObject( text2 );
 
 		// On (A) go to next part of the tutorial
-		MyGame->AddGameObject( MakeMagic( Listener, ( ControllerButtons_A, boost::make_shared<PointAtTimerNextTutorialHelper>( boost::static_pointer_cast<HeroRush_Tutorial>( shared_from_this() ), arrow, text, text2 ) ) ) );
+		MyGame->AddGameObject( MakeMagic( Listener, ( ControllerButtons_A, boost::make_shared<PointAtTimerNextTutorialHelper>( boost::static_pointer_cast<HeroRush_Tutorial>( shared_from_this() ), arrow, text, 0 ) ) ) );
 	}
 
 	void HeroRush_Tutorial::PointAtCoins()

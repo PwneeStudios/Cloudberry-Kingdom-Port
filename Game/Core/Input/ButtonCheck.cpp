@@ -482,6 +482,8 @@ boost::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 
 	ButtonData ButtonCheck::State( const boost::shared_ptr<ButtonClass> &Button, int iPlayerIndex )
 	{
+		if ( CloudberryKingdomGame::getSuperPause() ) return ButtonData();
+
 		if ( Button == 0 )
 			return State( ControllerButtons_NONE, iPlayerIndex );
 
@@ -552,6 +554,8 @@ boost::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 
 	ButtonData ButtonCheck::GetState( ControllerButtons Button, int iPlayerIndex, bool Prev, bool UseKeyboardMapping )
 	{
+		if ( CloudberryKingdomGame::getSuperPause() ) return ButtonData();
+
 		// Debug tool: Use this to set the keyboard for use by player 1/2/3/4
 		bool SingleOutPlayer = false;
 		int ThisPlayerOnly = 1;

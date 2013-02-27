@@ -379,6 +379,8 @@ namespace CloudberryKingdom
                 ButtonCheck::PreventTimeStamp += 20;
             }
 
+			SaveGroup::SaveAll();
+
             VerifyBaseMenu::Release();
         }
 

@@ -205,6 +205,7 @@ namespace CloudberryKingdom
 		virtual bool MenuReturnToCaller( const boost::shared_ptr<Menu> &menu );
 
 	
+		static int CostMultiplier = 1;
 		int Cost_Watch, Cost_Path, Cost_Slow;
 		bool Allowed_WatchComputer();
 

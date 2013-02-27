@@ -70,6 +70,11 @@ namespace CloudberryKingdom
 		Backdrop->Name = std::wstring( L"Backdrop" );
 		MyPile->Add( Backdrop );
 		Backdrop->setPos( Vector2( 1181.251f, 241.6668f ) );
+
+		if ( !UseSimpleBackdrop )
+		{
+			EpilepsySafe( .9f );
+		}
 	}
 
 	void VerifyBaseMenu::Init()

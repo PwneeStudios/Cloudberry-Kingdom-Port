@@ -34,12 +34,14 @@ namespace CloudberryKingdom
 		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
 
-		if ( button == ControllerButtons_A )
+#if PC_VERSION
+		if ( button == ControllerButtons_A || button == ControllerButtons_Any )
 		{
 			if ( MyButton2 == 0 )
 				MyButton2 = boost::make_shared<ButtonClass>();
 			MyButton2->Set( ControllerButtons_ENTER );
 		}
+#endif
 
 		Active = true;
 		PauseOnPause = false;
@@ -62,6 +64,13 @@ namespace CloudberryKingdom
 			Release();
 	}
 
+	void Listener::ReleaseBody()
+	{
+		GUI_Panel::ReleaseBody();
+
+		MyAction.reset();
+	}
+
 	void Listener::MyPhsxStep()
 	{
 		GUI_Panel::MyPhsxStep();
@@ -72,7 +81,13 @@ namespace CloudberryKingdom
 		boost::shared_ptr<Level> level = getCore()->MyLevel;
 
 		// Listen
-		if ( MyType == Type_ON_DOWN && ( ButtonCheck::State( MyButton, getControl() ).Down || ButtonCheck::State(MyButton2, getControl()).Down ) || (MyType == Type_ON_PRESSED && (ButtonCheck::State(MyButton, getControl()).Pressed || ButtonCheck::State(MyButton2, getControl()).Pressed)) )
+        if ( MyButton == ControllerButtons_Any && MyType == Type_ON_PRESSED && ButtonCheck::AnyKey()
+			||
+			MyType == Type_ON_DOWN &&
+                (ButtonCheck::State( MyButton, getControl() ).Down || ButtonCheck::State( MyButton2, getControl() ).Down )
+            ||
+            (MyType == Type_ON_PRESSED &&
+                ( ButtonCheck::State( MyButton, getControl() ).Pressed || ButtonCheck::State( MyButton2, getControl() ).Pressed ) ) )
 		{
 			// If any player could trigger the event, check to see which did
 			TriggeringPlayerIndex = getControl();

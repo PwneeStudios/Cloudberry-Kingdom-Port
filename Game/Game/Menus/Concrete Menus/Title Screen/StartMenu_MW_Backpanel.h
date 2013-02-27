@@ -39,7 +39,7 @@ namespace CloudberryKingdom
 		void InitialZoomIn();
 
 	
-		boost::shared_ptr<QuadClass> Scene, Title, Title_Trim, Scene_NoBob_Blur, Scene_Blur, Scene_Princess, Scene_NoBob_Brighten, Scene_Kobbler, Scene_Kobbler_Blur;
+		boost::shared_ptr<QuadClass> Scene, Title, TM, Title_Trim, Scene_NoBob_Blur, Scene_Blur, Scene_Princess, Scene_NoBob_Brighten, Scene_Kobbler, Scene_Kobbler_Blur;
 	
 		virtual void Init();
 

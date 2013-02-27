@@ -13,6 +13,8 @@ namespace CloudberryKingdom
 	struct CkBaseMenu : public GUI_Panel
 	{
 
+		void EpilepsySafe( float SafetyLevel );
+
 		struct ReleaseProxy : public Lambda
 		{
 			boost::shared_ptr<CkBaseMenu> bm;

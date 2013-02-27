@@ -88,7 +88,7 @@ namespace CloudberryKingdom
 			return;
 		}
 
-		if ( ButtonCheck::AnyKey() )
+		if ( ButtonCheck::AnyKey() && !ButtonCheck::State( ControllerButtons_B, -2 ).Down )
 		{
 			DelayToAllowInput = 10;
 

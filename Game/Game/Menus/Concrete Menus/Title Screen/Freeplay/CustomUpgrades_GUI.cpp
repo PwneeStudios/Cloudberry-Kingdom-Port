@@ -21,6 +21,17 @@ namespace CloudberryKingdom
 
 	void AggressiveUpgrades_GUI::Go()
 	{
+		CloudberryKingdomGame::Freeplay_Count++;
+		if ( CloudberryKingdomGame::getIsDemo() && CloudberryKingdomGame::Freeplay_Count >= CloudberryKingdomGame::Freeplay_Max )
+		{
+			int HoldDelay = CallDelay;
+			CallDelay = 0;
+			Call( MakeMagic( UpSellMenu, ( Localization::Words_UpSell_FreePlay, MenuItem::ActivatingPlayer ) ) );
+			Hide( PresetPos_RIGHT, 0 );
+			CallDelay = HoldDelay;
+			return;
+		}
+
 		StartGame();
 	}
 
@@ -313,6 +324,7 @@ namespace CloudberryKingdom
 		backdrop = boost::make_shared<QuadClass>( std::wstring( L"Backplate_1500x900" ), 1500.f, true );
 		backdrop->Name = std::wstring( L"Backdrop" );
 		MyPile->Add( backdrop, std::wstring( L"Backdrop" ) );
+		EpilepsySafe( .5f );
 		backdrop->setSize( Vector2( 1682.54f, 1107.681f ) );
 		backdrop->setPos( Vector2( 347.2231f, 51.58749f ) );
 

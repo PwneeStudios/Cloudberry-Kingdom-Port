@@ -98,15 +98,15 @@ namespace CloudberryKingdom
 	{
 		SaveLoad::Serialize( writer );
 
-		Chunk::WriteSingle( writer, 0, UserPowers::CanSkipScreensaver );
-		Chunk::WriteSingle( writer, 1, HeroRush_Tutorial::HasWatchedOnce );
-		Chunk::WriteSingle( writer, 2, Hints::QuickSpawnNum );
-		Chunk::WriteSingle( writer, 3, Hints::YForHelpNum );
+		Chunk::WriteSingle( writer, 23000, UserPowers::CanSkipScreensaver );
+		Chunk::WriteSingle( writer, 23001, HeroRush_Tutorial::HasWatchedOnce );
+		Chunk::WriteSingle( writer, 23002, Hints::QuickSpawnNum );
+		Chunk::WriteSingle( writer, 23003, Hints::YForHelpNum );
 
 		// Save the names of videos the user has already watched.
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 		for ( std::map<std::wstring, bool>::const_iterator video = UserPowers::WatchedVideo.dict.begin(); video != UserPowers::WatchedVideo.dict.end(); ++video )
-			Chunk::WriteSingle( writer, 5, video->first );
+			Chunk::WriteSingle( writer, 23005, video->first );
 		// FIXME: Make sure we need to save the names rather than boolean values.
 	}
 
@@ -119,28 +119,33 @@ namespace CloudberryKingdom
 		{
 			boost::shared_ptr<Chunk> chunk = chunks->GetChunk();
 
-			switch ( chunk->Type )
-			{
-				case 0:
-					chunk->ReadSingle( UserPowers::CanSkipScreensaver );
-					break;
-				case 1:
-					chunk->ReadSingle( HeroRush_Tutorial::HasWatchedOnce );
-					break;
-				case 2:
-					chunk->ReadSingle( Hints::QuickSpawnNum );
-					break;
-				case 3:
-					chunk->ReadSingle( Hints::YForHelpNum );
-					break;
+			ProcessChunk( chunk );
+		}
+	}
 
-				// Load the names of videos the user has already watched.
-				case 5:
-					std::wstring VideoName = std::wstring( L"" );
-					chunk->ReadSingle( VideoName );
-					UserPowers::WatchedVideo.Add( VideoName );
-					break;
-			}
+	void _SavePlayerData::ProcessChunk( boost::shared_ptr<Chunk> chunk )
+	{
+		switch ( chunk->Type )
+		{
+			case 23000:
+				chunk->ReadSingle( UserPowers::CanSkipScreensaver );
+				break;
+			case 23001:
+				chunk->ReadSingle( HeroRush_Tutorial::HasWatchedOnce );
+				break;
+			case 23002:
+				chunk->ReadSingle( Hints::QuickSpawnNum );
+				break;
+			case 23003:
+				chunk->ReadSingle( Hints::YForHelpNum );
+				break;
+
+			// Load the names of videos the user has already watched.
+			case 23005:
+				std::wstring VideoName = std::wstring( L"" );
+				chunk->ReadSingle( VideoName );
+				UserPowers::WatchedVideo.Add( VideoName );
+				break;
 		}
 	}
 
@@ -412,6 +417,33 @@ namespace CloudberryKingdom
 	}
 #endif
 
+        void PlayerManager::UploadCampaignLevels()
+        {
+            int level = Players[0]->GetTotalCampaignLevel();
+            boost::shared_ptr<ScoreEntry> score = boost::make_shared<ScoreEntry>( 0, 7777, level, level, level, 0, 0, 0 );
+
+            Leaderboard::WriteToLeaderboard( score );
+        }
+
+        void PlayerManager::UploadPlayerLevels()
+        {
+            bool ShouldUpdate = false;
+            boost::shared_ptr<ScoreEntry> score;
+
+            int level = Players[ 0 ]->GetTotalLevel();
+            if ( level != Players[ 0 ]->LastPlayerLevelUpload )
+            {
+                score = boost::make_shared<ScoreEntry>( 0, 9999, level, level, level, 0, 0, 0 );
+                Players[i]->LastPlayerLevelUpload = level;
+                ShouldUpdate = true;
+            }
+
+            if ( ShouldUpdate )
+            {
+                Leaderboard::WriteToLeaderboard( score );
+            }
+        }
+
 	void PlayerManager::CleanTempStats()
 	{
 		for ( int i = 0; i < 4; i++ )
@@ -432,6 +464,7 @@ namespace CloudberryKingdom
 		for ( int i = 0; i < 4; i++ )
 		{
 			Get( i )->GameStats->Absorb( Get( i )->LevelStats );
+			Get( i )->CampaignStats->Absorb( Get( i )->LevelStats );
 			Get( i )->LevelStats->Clean();
 		}
 	}
@@ -441,7 +474,6 @@ namespace CloudberryKingdom
 		for ( int i = 0; i < 4; i++ )
 		{
 			Get( i )->LifetimeStats->Absorb( Get( i )->GameStats );
-			Get( i )->CampaignStats->Absorb( Get( i )->GameStats );
 			Get( i )->GameStats->Clean();
 		}
 	}
@@ -542,24 +574,30 @@ namespace CloudberryKingdom
             return max;
         }
 
-        int PlayerManager::MaxPlayerTotalCampaignLevel()
+        int PlayerManager::MinPlayerTotalCampaignLevel()
         {
-            int max = 0;
+            int min = 0;
 			std::vector<boost::shared_ptr<PlayerData> > vec = getExistingPlayers();
 			for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
-                max = __max( max, ( *player )->GetTotalCampaignLevel( ) );
+            {
+                int level = ( *player )->GetTotalCampaignLevel();
+                min = min == 0 ? level : __min( min, level );
+            }
 
-            return max;
+            return min;
         }
 
         int PlayerManager::MaxPlayerTotalCampaignIndex()
         {
-            int max = 0;
+            int min = 0;
 			std::vector<boost::shared_ptr<PlayerData> > vec = getExistingPlayers();
 			for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
-                max = __max( max, ( *player )->GetTotalCampaignIndex( ) );
+            {
+                int level = ( *player )->GetTotalCampaignIndex();
+                min = min == 0 ? level : __min( min, level );
+            }
 
-            return max;
+            return min;
         }
 
         int PlayerManager::MaxPlayerTotalLevel()
@@ -710,14 +748,16 @@ namespace CloudberryKingdom
 	#endif
 	}
 
-	const std::vector<boost::shared_ptr<PlayerData> > &PlayerManager::getExistingPlayers()
+	const std::vector<boost::shared_ptr<PlayerData> > PlayerManager::getExistingPlayers()
 	{
-		_ExistingPlayers.clear();
+		std::vector<boost::shared_ptr<PlayerData> > existing;
+		
+		//existing.clear();
 		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator data = Players.begin(); data != Players.end(); ++data )
 			if ( *data != 0 && ( *data )->Exists )
-				_ExistingPlayers.push_back( *data );
+				existing.push_back( *data );
 
-		return _ExistingPlayers;
+		return existing;
 	}
 
 	std::vector<boost::shared_ptr<PlayerData> > PlayerManager::_ExistingPlayers = std::vector<boost::shared_ptr<PlayerData> >();

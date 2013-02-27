@@ -44,7 +44,7 @@ namespace CloudberryKingdom
 	{
 		for ( std::map<int, std::vector<boost::shared_ptr<ScoreEntry> > >::const_iterator list = Games.begin(); list != Games.end(); ++list )
 			for ( std::vector<boost::shared_ptr<ScoreEntry> >::const_iterator score = list->second.begin(); score != list->second.end(); ++score )
-				( *score )->WriteChunk_1000( writer );
+				( *score )->WriteChunk_2000( writer );
 	}
 
 	void ScoreDatabase::FailLoad()
@@ -60,15 +60,20 @@ namespace CloudberryKingdom
 		while( chunks->HasChunk() )
 		{
 			boost::shared_ptr<Chunk> chunk = chunks->GetChunk();
-			//switch ( ( *chunk )->Type )
-			switch ( chunk->Type )
-			{
-				case 1000:
-					boost::shared_ptr<ScoreEntry> score = boost::make_shared<ScoreEntry>();
-					score->ReadChunk_1000( chunk );
-					Add( score );
-					break;
-			}
+			ProcessChunk( chunk );
+		}
+	}
+
+	void ScoreDatabase::ProcessChunk( boost::shared_ptr<Chunk> chunk )
+	{
+		
+		switch ( chunk->Type )
+		{
+			case 2000:
+				boost::shared_ptr<ScoreEntry> score = boost::make_shared<ScoreEntry>();
+				score->ReadChunk_2000( chunk );
+				Add( score );
+				break;
 		}
 	}
 

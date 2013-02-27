@@ -91,7 +91,8 @@ namespace CloudberryKingdom
 		static std::vector<boost::shared_ptr<BobPhsx> > _HeroTypes, HeroTypes;
 
 		void ShuffleHeros();
-		void Start(int StartLevel);
+
+		virtual void Start(int StartLevel);
 	
 		virtual boost::shared_ptr<BobPhsx> GetHero( int i );
 
@@ -107,6 +108,7 @@ namespace CloudberryKingdom
 		int LevelLength_Short;
 		int LevelLength_Long;
 	
+		virtual int GetLength( int Index, float Difficulty );
 		virtual boost::shared_ptr<LevelSeedData> Make( int Index, float Difficulty );
 
 	

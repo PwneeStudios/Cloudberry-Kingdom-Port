@@ -946,6 +946,8 @@ namespace CloudberryKingdom
 			MyLevel->Bobs = NewBobList;
 		}
 
+		SetAdditionalBobParameters( MyLevel->Bobs );
+
 		if ( PlayerManager::AllDead() && !MyLevel->getPreventReset() )
 			MyLevel->ResetAll( false );
 	}
@@ -1400,6 +1402,7 @@ namespace CloudberryKingdom
 #if defined(XBOX) || defined(XBOX_SIGNIN)
 	void GameData::OnSignOut( const boost::shared_ptr<SignedOutEventArgs> &e )
 	{
+		Tools::CurGameData->RemovePlayer( (int)e->Gamer->PlayerIndex );
 	}
 #endif
 

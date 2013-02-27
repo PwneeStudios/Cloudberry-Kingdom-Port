@@ -175,6 +175,7 @@ namespace CloudberryKingdom
 		Challenge_TimeCrisis::InitializeStatics();
 		Challenge_HeroRush::InitializeStatics();
 		Challenge_HeroRush2::InitializeStatics();
+		Challenge_StoryMode::InitializeStatics();
 		MainVideo::InitializeStatics();
 		ActionGameData::InitializeStatics();
 
@@ -1536,6 +1537,7 @@ float CloudberryKingdomGame::fps = 0;
 
 	void CloudberryKingdomGame::BenchmarkAll()
 	{
+		/*
 		// Load art
 		Start2();
 
@@ -1623,6 +1625,7 @@ float CloudberryKingdomGame::fps = 0;
 		std::cout << std::endl;
 		std::cout << _T( "Total          " ) << Total << std::endl;
 		std::cout << _T( "" ) << std::endl;
+		*/
 	}
 
 	boost::shared_ptr<Stopwatch> CloudberryKingdomGame::stopwatch = 0;

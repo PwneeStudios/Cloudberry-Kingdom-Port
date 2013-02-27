@@ -8,6 +8,22 @@
 namespace CloudberryKingdom
 {
 
+    struct Challenge_StoryMode : public Challenge
+    {
+
+		virtual ~Challenge_StoryMode() { }
+
+		static void InitializeStatics();
+
+		static boost::shared_ptr<Challenge_StoryMode> instance;
+		const static boost::shared_ptr<Challenge_StoryMode> &getInstance();
+
+        Challenge_StoryMode();
+
+        virtual boost::shared_ptr<LevelSeedData> GetSeed( int Index );
+
+    };
+
 	struct CampaignSequence : public LevelSequence
 	{
 		virtual ~CampaignSequence() { }

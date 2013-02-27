@@ -121,6 +121,10 @@ namespace CloudberryKingdom
 
 	void Challenge::Start( int Difficulty )
 	{
+        CloudberryKingdomGame::PromptForDeviceIfNoneSelected();
+
+		HelpMenu::CostMultiplier = 1;
+
         CurrentId = GameId_Level;
         CurrentScore = 0;
 

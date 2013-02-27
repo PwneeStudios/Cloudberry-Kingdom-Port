@@ -191,6 +191,9 @@ namespace CloudberryKingdom
 		static void setDefaultName( const std::wstring &value );
 #endif
 
+		static void UploadCampaignLevels();
+		static void UploadPlayerLevels();
+
 		static void CleanTempStats();
 
 		static void AbsorbTempStats();
@@ -285,7 +288,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// A list of all players currently existing.
 		/// </summary>
-		const static std::vector<boost::shared_ptr<PlayerData> > &getExistingPlayers();
+		const static std::vector<boost::shared_ptr<PlayerData> > getExistingPlayers();
 		static std::vector<boost::shared_ptr<PlayerData> > _ExistingPlayers;
 
 		/// <summary>

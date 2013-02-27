@@ -156,6 +156,9 @@ namespace CloudberryKingdom
     boost::shared_ptr<BobPhsx> ArcadeMenu::BigBouncy;
     boost::shared_ptr<BobPhsx> ArcadeMenu::Ultimate;
 
+	const int HighestLevelNeeded = 80;
+	boost::shared_ptr<BobPhsx> HighestHero;
+
 	void ArcadeMenu::StaticInit()
 	{
         // Heroes
@@ -171,6 +174,7 @@ namespace CloudberryKingdom
         BobPhsxSmall::getInstance()->Id = 9;
         BobPhsxSpaceship::getInstance()->Id = 10;
         BobPhsxWheel::getInstance()->Id = 11;
+		BobPhsxRocketbox::getInstance()->Id = 15;
 
         ArcadeMenu::JetpackWheelie = BobPhsx::MakeCustom(Hero_BaseType_WHEEL, Hero_Shape_CLASSIC, Hero_MoveMod_JETPACK);
         ArcadeMenu::JetpackWheelie->Name = Localization::Words_JetpackWheelie;
@@ -198,6 +202,9 @@ namespace CloudberryKingdom
         ArcadeMenu::Ultimate->SetCustomPhsx( UltimatePhsx );
         ArcadeMenu::Ultimate->Id = 14;
 
+		boost::shared_ptr<BobPhsx> HighestHero = BobPhsxWheel::getInstance();
+
+
         HeroArcadeList = std::vector<std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> > >();
 
 			HeroArcadeList.push_back( std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> >( BobPhsxNormal::getInstance(),		 std::pair<boost::shared_ptr<BobPhsx>, int>( boost::shared_ptr<BobPhsx>(), 0 ) ) );
@@ -209,7 +216,7 @@ namespace CloudberryKingdom
 			HeroArcadeList.push_back( std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> >( BobPhsxSpaceship::getInstance(),   std::pair<boost::shared_ptr<BobPhsx>, int>( boost::static_pointer_cast<BobPhsx>( BobPhsxBouncy::getInstance() ), 60 ) ) );
 			HeroArcadeList.push_back( std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> >( BobPhsxDouble::getInstance(),      std::pair<boost::shared_ptr<BobPhsx>, int>( boost::static_pointer_cast<BobPhsx>( BobPhsxSpaceship::getInstance() ), 70 ) ) );
 			HeroArcadeList.push_back( std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> >( BobPhsxWheel::getInstance(),       std::pair<boost::shared_ptr<BobPhsx>, int>( boost::static_pointer_cast<BobPhsx>( BobPhsxDouble::getInstance() ), 70 ) ) );
-			HeroArcadeList.push_back( std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> >( BobPhsxSmall::getInstance(),       std::pair<boost::shared_ptr<BobPhsx>, int>( boost::static_pointer_cast<BobPhsx>( BobPhsxWheel::getInstance() ), 80 ) ) );
+			HeroArcadeList.push_back( std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> >( BobPhsxSmall::getInstance(),       std::pair<boost::shared_ptr<BobPhsx>, int>( boost::static_pointer_cast<BobPhsx>( HighestHero ), HighestLevelNeeded ) ) );
                 																																		     
 			HeroArcadeList.push_back( std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> >( JetpackWheelie ,                   std::pair<boost::shared_ptr<BobPhsx>, int>( boost::static_pointer_cast<BobPhsx>( BobPhsxSmall::getInstance() ), 100 ) ) );
 			HeroArcadeList.push_back( std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> >( BigBouncy ,                        std::pair<boost::shared_ptr<BobPhsx>, int>( boost::static_pointer_cast<BobPhsx>( JetpackWheelie ), 100 ) ) );
@@ -217,8 +224,8 @@ namespace CloudberryKingdom
 
             // Compile a list of all leaderboards
             LeaderboardList = std::vector<std::pair<boost::shared_ptr<Challenge>, boost::shared_ptr<BobPhsx> > >();
-            LeaderboardList.push_back(std::pair<boost::shared_ptr<Challenge>, boost::shared_ptr<BobPhsx> >(0, 0));
-            
+            LeaderboardList.push_back( std::pair<boost::shared_ptr<Challenge>, boost::shared_ptr<BobPhsx> >(0, 0) );
+			LeaderboardList.push_back( std::pair<boost::shared_ptr<Challenge>, boost::shared_ptr<BobPhsx> >( Challenge_StoryMode::getInstance(), 0 ) );
 		
 			for ( std::vector<std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> > >::const_iterator
 				hero = HeroArcadeList.begin(); hero != HeroArcadeList.end(); ++hero )
@@ -468,7 +475,7 @@ namespace CloudberryKingdom
 
 		void ArcadeMenu::UpdateAfterPlaying()
         {
-            int Level = PlayerManager::MaxPlayerTotalArcadeLevel();
+            int Level = PlayerManager::MaxPlayerTotalLevel();
             bool ShowLevel = Level > 0;
 
             if (ShowLevel)

@@ -65,8 +65,8 @@ namespace CloudberryKingdom
             case 11201: key = 25; break;
             case 11301: key = 26; break;
             case 11401: key = 27; break;
-            case 10002: key = 29; break;
-            case 10003: key = 30; break;
+            case 10002: key = 28; break;
+            case 10003: key = 29; break;
                 
 			default: key = 1; break;
         }
