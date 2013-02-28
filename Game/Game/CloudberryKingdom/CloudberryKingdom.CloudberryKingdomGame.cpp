@@ -403,7 +403,7 @@ Version CloudberryKingdomGame::GameVersion = Version( 0, 2, 4 );
 #if defined(DEBUG)
         bool CloudberryKingdomGame::AlwaysGiveTutorials = true;
         bool CloudberryKingdomGame::Unlock_Customization = true;
-        bool CloudberryKingdomGame::Unlock_Levels = false;
+        bool CloudberryKingdomGame::Unlock_Levels = true;
 #else
         bool CloudberryKingdomGame::AlwaysGiveTutorials = false;
         bool CloudberryKingdomGame::Unlock_Customization = true;

@@ -27,8 +27,10 @@ template<class T>
 void Remove( std::vector<T> &v, const T &o )
 {
 	using namespace std;
-	typename vector<T>::iterator i = remove( v.begin(), v.end(), o );
-	v.erase( i, v.end() );
+	typename vector<T>::iterator i = find( v.begin(), v.end(), o );
+
+	if ( i != v.end() )
+		v.erase( i );
 }
 
 template<class T>

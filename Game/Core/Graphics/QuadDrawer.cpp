@@ -864,6 +864,7 @@ namespace CloudberryKingdom
 
             CurrentTexture = texture;
             CurrentEffect = Tools::BasicEffect;
+			QUAD_DRAWER->SetEffect( CurrentEffect->effect );
 
 			::SimpleQuad sq;
 			sq.V[0] = Vector2( pos.X, pos.Y );
