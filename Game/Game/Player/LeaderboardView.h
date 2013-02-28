@@ -92,8 +92,8 @@ namespace CloudberryKingdom
         static const int SelectDelay = 18;
 
         boost::shared_ptr<TitleGameData_MW> Title;
-        LeaderboardGUI( boost::shared_ptr<TitleGameData_MW> Title, int StartIndex );
-		boost::shared_ptr<LeaderboardGUI> LeaderboardGUI_Construct( boost::shared_ptr<TitleGameData_MW> Title, int StartIndex );
+        LeaderboardGUI( boost::shared_ptr<TitleGameData_MW> Title, int Control );
+		boost::shared_ptr<LeaderboardGUI> LeaderboardGUI_Construct( boost::shared_ptr<TitleGameData_MW> Title, int Control );
 
         void Init();
 

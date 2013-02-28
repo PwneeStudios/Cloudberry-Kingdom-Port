@@ -500,6 +500,14 @@ namespace CloudberryKingdom
 	}
 #endif
 
+    PlayerIndex MenuItem::ActivatingPlayerIndex()
+    {
+        int p = MenuItem::ActivatingPlayer;
+        if (p < 0) return PlayerIndex_One;
+
+        return (PlayerIndex)p;
+    }
+
 	boost::shared_ptr<PlayerData> MenuItem::GetActivatingPlayerData()
 	{
 		int p = MenuItem::ActivatingPlayer;

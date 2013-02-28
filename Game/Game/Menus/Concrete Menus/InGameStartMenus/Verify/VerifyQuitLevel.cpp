@@ -44,7 +44,9 @@ namespace CloudberryKingdom
 		boost::shared_ptr<MenuItem> item;
 
 		// Header
-		boost::shared_ptr<EzText> HeaderText = boost::make_shared<EzText>( Localization::Words_ExitLevelQuestion, ItemFont, true );
+		//boost::shared_ptr<EzText> HeaderText = boost::make_shared<EzText>( Localization::Words_ExitLevelQuestion, ItemFont, true );
+		boost::shared_ptr<EzText> HeaderText = boost::make_shared<EzText>( Localization::Words_Err_QuitForSure, ItemFont, 1600.0f, true, false, .7f );
+
 		SetHeaderProperties( HeaderText );
 		HeaderText->Name = std::wstring( L"Header" );
 		MyPile->Add( HeaderText );
@@ -70,19 +72,19 @@ namespace CloudberryKingdom
 	}
 
 	void VerifyQuitLevelMenu::SetPos()
-	{
-        boost::shared_ptr<MenuItem> _item;
-        _item = MyMenu->FindItemByName( L"Yes" ); if (_item != 0 ) { _item->setSetPos( Vector2( 0.f, 380.4445f ) ); _item->MyText->setScale( 0.8f ); _item->MySelectedText->setScale( 0.8f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
-        _item = MyMenu->FindItemByName( L"No" ); if (_item != 0 ) { _item->setSetPos( Vector2( 0.f, 94.33334f ) ); _item->MyText->setScale( 0.8f ); _item->MySelectedText->setScale( 0.8f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+    {
+		boost::shared_ptr<MenuItem> _item;
+		_item = MyMenu->FindItemByName( L"Yes" ); if (_item != 0 ) { _item->setSetPos( Vector2( 0.f, 349.8889f ) ); _item->MyText->setScale( 0.5410002f ); _item->MySelectedText->setScale( 0.5410002f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+		_item = MyMenu->FindItemByName( L"No" ); if (_item != 0 ) { _item->setSetPos( Vector2( 0.f, 127.6667f ) ); _item->MyText->setScale( 0.5438334f ); _item->MySelectedText->setScale( 0.5438334f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 
-        MyMenu->setPos( Vector2( 0.f, -302.7777f ) );
+		MyMenu->setPos( Vector2(-2.777588f, -330.5555f ) );
 
-        boost::shared_ptr<EzText> _t;
-        _t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->setPos( Vector2( 0.f, 777.4443f ) ); _t->setScale( 0.96f ); }
+		boost::shared_ptr<EzText> _t;
+		_t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->setPos( Vector2( 0.f, 777.4443f ) ); _t->setScale( 0.5221667f ); }
 
-        boost::shared_ptr<QuadClass> _q;
-        _q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2( 0.f, 316.6668f ) ); _q->setSize( Vector2( 1281.083f, 729.4391f ) ); }
+		boost::shared_ptr<QuadClass> _q;
+		_q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2( 0.f, 316.6668f ) ); _q->setSize( Vector2( 1281.083f, 729.4391f ) ); }
 
-        MyPile->setPos( Vector2( 0.f, -319.4444f ) );
+		MyPile->setPos( Vector2( 0.f, -319.4444f ) );
 	}
 }

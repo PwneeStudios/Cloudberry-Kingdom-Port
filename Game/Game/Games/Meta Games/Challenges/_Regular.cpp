@@ -16,7 +16,7 @@ namespace CloudberryKingdom
 		data->DefaultHeroType = BobPhsxNormal::getInstance();
 	}
 
-	boost::shared_ptr<LevelSeedData> RegularLevel::HeroLevel( float Difficulty, const boost::shared_ptr<BobPhsx> &Hero, int Length )
+	boost::shared_ptr<LevelSeedData> RegularLevel::HeroLevel( float Difficulty, const boost::shared_ptr<BobPhsx> &Hero, int Length, bool ScreenSaver)
 	{
 		if (Hero == ArcadeMenu::Ultimate)
 		{
@@ -31,7 +31,7 @@ namespace CloudberryKingdom
 		data->DefaultHeroType = Hero;
 
 		//LevelSeedData.CustomDifficulty custom = DifficultyGroups.FixedPieceMod(Difficulty, data);
-		boost::shared_ptr<Lambda_1<boost::shared_ptr<PieceSeedData> > > custom = DifficultyGroups::FixedPieceMod( Difficulty, data );
+		boost::shared_ptr<Lambda_1<boost::shared_ptr<PieceSeedData> > > custom = DifficultyGroups::FixedPieceMod( Difficulty, data, ScreenSaver );
 		data->Initialize( NormalGameData::Factory, LevelGeometry_RIGHT, 1, Length, custom );
 
 		return data;

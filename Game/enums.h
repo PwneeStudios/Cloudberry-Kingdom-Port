@@ -47,6 +47,7 @@ enum ControllerButtons
 	ControllerButtons_DOWN,
 	ControllerButtons_ENTER,
 	ControllerButtons_NONE,
+	ControllerButtons_ANY,
 	ControllerButtons_LENGTH
 };
 

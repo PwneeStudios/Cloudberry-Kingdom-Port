@@ -40,14 +40,30 @@ namespace CloudberryKingdom
 		EnsureFancy();
 
 		// Press A to join
+		int ButtonSize = 89;
+		if  (Localization::CurrentLanguage->MyLanguage == Localization::Language_JAPANESE )
+		{
+			ButtonSize = 75;
+		}
+
 #ifdef PC_VERSION
-		std::wstring pressa = Format( Localization::WordString( Localization::Words_PressToJoin ).c_str(), ButtonString::Go_Controller( 89 ).c_str() );
+		std::wstring pressa = Format( Localization::WordString( Localization::Words_PressToJoin ).c_str(), ButtonString::Go_Controller( ButtonSize ).c_str() );
 #else
-        std::wstring pressa = Format( Localization::WordString( Localization::Words_PressToJoin ).c_str(), ButtonString::Go( 89 ).c_str() );
+        std::wstring pressa = Format( Localization::WordString( Localization::Words_PressToJoin ).c_str(), ButtonString::Go( ButtonSize ).c_str() );
 #endif
-        Text = boost::make_shared<EzText>( pressa, Resources::Font_Grobold42, true, true);
-			
-		Text->setScale( .7765f );
+
+		if  (Localization::CurrentLanguage->MyLanguage == Localization::Language_JAPANESE )
+		{
+			Text = boost::make_shared<EzText>( pressa, Resources::Font_Grobold42, 1000, true, true, .5f );
+
+			Text->setPos( Vector2( 11.11133f, 63.88889f ) ); Text->setScale( 0.9542501f );
+		}
+		else
+		{
+			Text = boost::make_shared<EzText>( pressa, Resources::Font_Grobold42, true, true);
+
+			Text->setScale( .7765f );
+		}
 
 		Text->ShadowOffset = Vector2( 7.5f, 7.5f );
 		Text->ShadowColor = bColor( 30, 30, 30 );

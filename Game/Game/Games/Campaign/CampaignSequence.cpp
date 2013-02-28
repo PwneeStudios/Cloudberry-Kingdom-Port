@@ -1,6 +1,7 @@
 #include <global_header.h>
 
 #include "Game/Tilesets/Backgrounds/_Code/CloudberryKingdom.Background.h"
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
 #include <Hacks/Parse.h>
 #include <Hacks/FileReader.h>
@@ -12,6 +13,32 @@
 
 namespace CloudberryKingdom
 {
+
+		boost::shared_ptr<Challenge_StoryMode> Challenge_StoryMode::instance;
+
+		void Challenge_StoryMode::InitializeStatics()
+		{
+			Challenge_StoryMode::instance = boost::make_shared<Challenge_StoryMode>();
+		}
+
+		const boost::shared_ptr<Challenge_StoryMode> &Challenge_StoryMode::getInstance()
+		{
+			return instance;
+		}
+
+        Challenge_StoryMode::Challenge_StoryMode()
+        {
+            GameId_Level = GameTypeId = 7777;
+            MenuName = Name = Localization::Words_StoryMode;
+        }
+
+        boost::shared_ptr<LevelSeedData> Challenge_StoryMode::GetSeed( int Index )
+        {
+            return 0;
+        }
+
+
+
 
 	void CampaignSequence::PostMakeCampaignProxy::Apply( const boost::shared_ptr<Level> &level )
 	{
@@ -61,10 +88,7 @@ namespace CloudberryKingdom
 
         void CampaignSequence::OnChapterFinished(int chapter)
         {
-            // Clean campaign stats
-			std::vector<boost::shared_ptr<PlayerData> > vec = PlayerManager::getExistingPlayers();
-			for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
-				( *player )->CampaignStats->Clean();
+			std::vector<boost::shared_ptr<PlayerData> > vec;
 
             // Didn't die during the chapter?
 			vec = PlayerManager::getAlivePlayers();
@@ -83,25 +107,35 @@ namespace CloudberryKingdom
 				default: break;
             }
             Awardments::GiveAward(award);
+
+            // Clean campaign stats
+			vec = PlayerManager::getExistingPlayers();
+			for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
+				( *player )->CampaignStats->Clean();
         }
 
 		bool CampaignSequence::MusicStarted = false;
 	void CampaignSequence::Start( int Chapter )
 	{
+        CloudberryKingdomGame::PromptForDeviceIfNoneSelected();
+		CloudberryKingdomGame::SetPresence( Presence_Campaign );
+
 		MusicStarted = false;
 
-		MyPerfectScoreObject = MakeMagic( PerfectScoreObject, ( false, true ) );
+		MyPerfectScoreObject = MakeMagic( PerfectScoreObject, ( false, true, true ) );
 
 		// Continue at last level reached.
 		if ( Chapter < 0 )
 		{
-			StartLevel = ChapterStart[ Chapter ];
+			//StartLevel = ChapterStart[ Chapter ];
 
-			int NextChapterStart = Contains( ChapterStart, Chapter + 1 ) ? ChapterStart[Chapter + 1] : StartLevel + 100000;
-			int MaxLevelAttained = PlayerManager::MaxPlayerTotalCampaignIndex() + 1;
+			//int NextChapterStart = Contains( ChapterStart, Chapter + 1 ) ? ChapterStart[Chapter + 1] : StartLevel + 100000;
+			//int MaxLevelAttained = PlayerManager::MaxPlayerTotalCampaignIndex() + 1;
 
-			if ( MaxLevelAttained > StartLevel && MaxLevelAttained < NextChapterStart )
-				StartLevel = MaxLevelAttained;
+			//if ( MaxLevelAttained > StartLevel && MaxLevelAttained < NextChapterStart )
+			//	StartLevel = MaxLevelAttained;
+
+			StartLevel = PlayerManager::MinPlayerTotalCampaignIndex() + 1;
 		}
 		else
 		{
@@ -124,6 +158,23 @@ namespace CloudberryKingdom
 
     bool CampaignSequence::OnLevelBegin( boost::shared_ptr<Level> level )
     {
+		HelpMenu::CostMultiplier = 1;
+
+		if ( level->MyLevelSeed != 0 )
+		{
+			int Num = level->MyLevelSeed->LevelNum;
+			if ( Num >= 0 )
+			{
+				for ( std::map<int, int>::const_iterator kv = ChapterStart.begin(); kv != ChapterStart.end(); ++kv )
+				{
+					if ( kv->second < Num )
+					{
+						HelpMenu::CostMultiplier = __max( kv->first + 1, HelpMenu::CostMultiplier );
+					}
+				}
+			}
+		}
+
         if ( LevelSequence::OnLevelBegin( level ) ) return true;
 
 		CheckForFinishedChapter();

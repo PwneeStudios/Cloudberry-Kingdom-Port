@@ -175,6 +175,7 @@ namespace CloudberryKingdom
 		Challenge_TimeCrisis::InitializeStatics();
 		Challenge_HeroRush::InitializeStatics();
 		Challenge_HeroRush2::InitializeStatics();
+		Challenge_StoryMode::InitializeStatics();
 		MainVideo::InitializeStatics();
 		ActionGameData::InitializeStatics();
 
@@ -402,7 +403,7 @@ Version CloudberryKingdomGame::GameVersion = Version( 0, 2, 4 );
 #if defined(DEBUG)
         bool CloudberryKingdomGame::AlwaysGiveTutorials = true;
         bool CloudberryKingdomGame::Unlock_Customization = true;
-        bool CloudberryKingdomGame::Unlock_Levels = false;
+        bool CloudberryKingdomGame::Unlock_Levels = true;
 #else
         bool CloudberryKingdomGame::AlwaysGiveTutorials = false;
         bool CloudberryKingdomGame::Unlock_Customization = true;
@@ -755,7 +756,11 @@ float CloudberryKingdomGame::fps = 0;
 		
 		ConsoleRegion region = GetConsoleRegion();
 
+#if PS3
 		CloudberryKingdomGame::AsianButtonSwitch = IsAsianButtonConfiguration();
+#else
+		CloudberryKingdomGame::AsianButtonSwitch = false;
+#endif
 
 		// FIXME: Start videos later.
 		if (!HideLogos)
@@ -764,7 +769,7 @@ float CloudberryKingdomGame::fps = 0;
 			if( region == ConsoleRegion_USA )
 				MainVideo::StartVideo_CanSkipIfWatched( std::wstring( L"LogoSalad" ) );
 			else
-				MainVideo::StartVideo_CanSkipIfWatched( std::wstring( L"LogoSalad" ) );
+				MainVideo::StartVideo_CanSkipIfWatched( std::wstring( L"LogoSalad_ESRB" ) );
 		}
 	}
 
@@ -1455,11 +1460,7 @@ float CloudberryKingdomGame::fps = 0;
 
 		Tools::QDrawer->SetInitialState();
 
-		// FIXME
-#if PC_VERSION
-#else
 		ComputeFire();
-#endif
 
 		Tools::EffectWad->SetCameraPosition( cameraPos );
 
@@ -1478,12 +1479,17 @@ float CloudberryKingdomGame::fps = 0;
 		{
 			if ( !Tools::CurGameData->Loading && Tools::CurLevel->PlayMode == 0 && Tools::CurGameData != 0 && !Tools::CurGameData->Loading && ( !Tools::CurGameData->PauseGame || CharacterSelectManager::IsShowing ) )
 			{
+#if PC_VERSION
+				Fireball::FlameTexture->_Tex = Tools::TextureWad->TextureList[0]->_Tex;
+				Fireball::EmitterTexture->_Tex = Tools::TextureWad->TextureList[0]->_Tex;
+#else
 				// Compute fireballs textures
 				MyGraphicsDevice->BlendState = GfxBlendState_Additive;
 				Fireball::DrawFireballTexture( MyGraphicsDevice, Tools::EffectWad );
 				Fireball::DrawEmitterTexture( MyGraphicsDevice, Tools::EffectWad );
 
 				MyGraphicsDevice->BlendState = GfxBlendState_AlphaBlend;
+#endif
 			}
 		}
 	}
@@ -1539,6 +1545,7 @@ float CloudberryKingdomGame::fps = 0;
 
 	void CloudberryKingdomGame::BenchmarkAll()
 	{
+		/*
 		// Load art
 		Start2();
 
@@ -1626,6 +1633,7 @@ float CloudberryKingdomGame::fps = 0;
 		std::cout << std::endl;
 		std::cout << _T( "Total          " ) << Total << std::endl;
 		std::cout << _T( "" ) << std::endl;
+		*/
 	}
 
 	boost::shared_ptr<Stopwatch> CloudberryKingdomGame::stopwatch = 0;

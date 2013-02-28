@@ -137,16 +137,16 @@ namespace CloudberryKingdom
 
 		BigPaused = boost::make_shared<QuadClass>();
 		BigPaused->SetToDefault();
-		BigPaused->Quad_Renamed.setMyTexture( Tools::TextureWad->FindByName( std::wstring( L"Replay_GUI/Paused" ) ) );
+		BigPaused->Quad_Renamed.setMyTexture( Tools::TextureWad->FindByName( std::wstring( L"Paused" ) ) );
 		BigPaused->ScaleYToMatchRatio( 355 );
 		MyPile->Add( BigPaused );
 		BigPaused->setPos( Vector2( 1210.557f, 791.1111f ) );
 
 		BigEnd = boost::make_shared<QuadClass>();
 		BigEnd->SetToDefault();
-		BigEnd->Quad_Renamed.setMyTexture( Tools::TextureWad->FindByName( std::wstring( L"Replay_GUI/End" ) ) );
+		BigEnd->Quad_Renamed.setMyTexture( Tools::TextureWad->FindByName( std::wstring( L"End" ) ) );
 		BigEnd->ScaleYToMatchRatio( 255 );
-		BigPaused->ScaleYToMatchRatio( 300 );
+		//BigPaused->ScaleYToMatchRatio( 300 );
 		MyPile->Add( BigEnd );
 		BigEnd->setPos( Vector2( 1277.222f, 774.4444f ) );
 
@@ -532,7 +532,10 @@ else
 		else
 		{
 			if ( PauseSelected )
+			{
+				BigPaused->ScaleYToMatchRatio( 300 );
 				BigPaused->Show = true;
+			}
 		}
 	}
 

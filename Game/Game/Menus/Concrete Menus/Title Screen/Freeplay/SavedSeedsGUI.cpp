@@ -333,6 +333,11 @@ namespace CloudberryKingdom
 		backdrop->Name = L"Backdrop";
 		MyPile->Add( backdrop );
 
+		if ( !UseSimpleBackdrop )
+		{
+			EpilepsySafe(.9f);
+		}
+
 		// Header
 		boost::shared_ptr<MenuItem> item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_SavedSeeds, ItemFont ) ) );
 		item->Name = std::wstring( L"Header" );
@@ -506,6 +511,12 @@ else
 	#endif
 		}
 	#endif
+
+		if ( boost::dynamic_pointer_cast<CustomLevel_GUI>( Caller ) != 0 )
+		{
+			RegularSlideOut( PresetPos_RIGHT, 0 );
+			SlideIn( 30 );
+		}
 	}
 
 	void SavedSeedsGUI::MakeOptions()

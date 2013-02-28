@@ -177,5 +177,7 @@ namespace CloudberryKingdom
 	void ListSelectPanel::MyPhsxStep()
 	{
 		 CkBaseMenu::MyPhsxStep();
+
+		 //if (Active && !MyCharacterSelect.Player.Exists) { ReturnToCaller(false); return; }
 	}
 }

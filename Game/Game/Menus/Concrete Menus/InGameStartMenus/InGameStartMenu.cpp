@@ -2,6 +2,10 @@
 
 #include <Core\Tools\Set.h>
 
+#include "Game/Menus/Concrete Menus/ShopMenu.h"
+
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
 
@@ -183,13 +187,24 @@ bool InGameStartMenu::PreventMenu = false;
 		// Make the backdrop
         boost::shared_ptr<QuadClass> backdrop;
         if (UseSimpleBackdrop)
+		{
             backdrop = boost::make_shared<QuadClass>( L"Arcade_BoxLeft", 1500.0f, true );
+			backdrop->Name = L"Backdrop";
+		}
         else
+		{
             backdrop = boost::make_shared<QuadClass>( L"Backplate_1080x840", 1500.0f, true );		
+			backdrop->Name = L"Backdrop";
+		}
 		
 		backdrop->Name = L"Backdrop";
 
 		MyPile->Add( backdrop );
+
+		if ( !UseSimpleBackdrop )
+		{
+			EpilepsySafe( .9f );
+		}
 		backdrop->setPos( Vector2( -975.6945f, 54.86111f ) );
 
 		// Make the menu
@@ -281,10 +296,10 @@ bool InGameStartMenu::PreventMenu = false;
 
         bool InGameStartMenu::MenuReturnToCaller( boost::shared_ptr<Menu> menu )
         {
-			getMyLevel()->ReplayPaused = true;
+			//getMyLevel()->ReplayPaused = true;
 
-            HoldLevel = getMyLevel();
-            MyGame->WaitThenDo( 7, boost::make_shared<UnpauseLambda>( boost::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) );
+   //         HoldLevel = getMyLevel();
+   //         MyGame->WaitThenDo( 7, boost::make_shared<UnpauseLambda>( boost::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) );
 
             return CkBaseMenu::MenuReturnToCaller( menu );
         }
@@ -292,9 +307,16 @@ bool InGameStartMenu::PreventMenu = false;
         boost::shared_ptr<Level> HoldLevel;
         void InGameStartMenu::Unpause()
         {
-            HoldLevel->ReplayPaused = false;
+            if ( HoldLevel != 0 ) HoldLevel->ReplayPaused = false;
             HoldLevel.reset();
         }
+
+		//protected override void ReleaseBody()
+		//{
+		//	base.ReleaseBody();
+
+		//	HoldLevel = null;
+		//}
 
 	void InGameStartMenu::GoRemove()
 	{
@@ -349,20 +371,44 @@ bool InGameStartMenu::PreventMenu = false;
 
 	void InGameStartMenu::GoSaveLoad()
 	{
-		// If this isn't a PC, and we can't load seeds right now, then go directly to the SaveAs menu.
-	#if !defined(PC_VERSION)
-		if ( !getMyLevel()->CanLoadLevels )
-		{
-			Call( MakeMagic( SaveSeedAs, ( getControl(), MenuItem::GetActivatingPlayerData() ) ), 0 );
-		}
-		else
-	#endif
-		{
-	#if defined(PC_VERSION)
-			Call( MakeMagic( SaveLoadSeedMenu, ( getControl(), getMyLevel()->CanLoadLevels, getMyLevel()->CanSaveLevel ) ), 0 );
-	#else
-			Call( MakeMagic( SaveLoadSeedMenu, ( getControl(), getMyLevel()->CanLoadLevels, getMyLevel()->CanSaveLevel ) ), 0 );
-	#endif
+        if ( CloudberryKingdomGame::getIsDemo() )
+        {
+            Call( MakeMagic( UpSellMenu, ( Localization::Words_UpSell_SaveLoad, MenuItem::ActivatingPlayer ) ), 0);
+        }
+        else
+        {
+#if XBOX
+			PlayerData player = MenuItem.GetActivatingPlayerData();
+
+            //if (CloudberryKingdomGame.CanSave() && EzStorage.Device[(int)player.MyIndex] != null &&
+            //    !EzStorage.Device[(int)player.MyIndex].IsReady)
+            //{
+            //    EzStorage.Device[(int)player.MyIndex].state = EasyStorage.SaveDevicePromptState.PromptForCanceled;
+            //    return;
+            //}
+
+            if (!CloudberryKingdomGame.CanSave(player.MyPlayerIndex))
+            {
+                CloudberryKingdomGame.ShowError_CanNotSaveNoDevice();
+                return;
+            }
+#endif
+
+			// If this isn't a PC, and we can't load seeds right now, then go directly to the SaveAs menu.
+		#if !defined(PC_VERSION)
+			if ( !getMyLevel()->CanLoadLevels )
+			{
+				Call( MakeMagic( SaveSeedAs, ( getControl(), MenuItem::GetActivatingPlayerData() ) ), 0 );
+			}
+			else
+		#endif
+			{
+		#if defined(PC_VERSION)
+				Call( MakeMagic( SaveLoadSeedMenu, ( getControl(), getMyLevel()->CanLoadLevels, getMyLevel()->CanSaveLevel ) ), 0 );
+		#else
+				Call( MakeMagic( SaveLoadSeedMenu, ( getControl(), getMyLevel()->CanLoadLevels, getMyLevel()->CanSaveLevel ) ), 0 );
+		#endif
+			}
 		}
 
         if ( UseBounce )
@@ -376,7 +422,6 @@ bool InGameStartMenu::PreventMenu = false;
 		}
 
 		setPauseGame( true );
-
 	}
 
 	void InGameStartMenu::GoStats()

@@ -63,6 +63,20 @@ namespace CloudberryKingdom
 		Chunk::WriteSingle( writer, 100, CampaignCoins );
 		Chunk::WriteSingle( writer, 101, CampaignLevel );
 		Chunk::WriteSingle( writer, 102, CampaignIndex );
+
+        // Player Level
+        Chunk::WriteSingle( writer, 23023, LastPlayerLevelUpload );
+
+        // Sound settings
+        Chunk::WriteSingle( writer, 84001, Tools::MusicVolume->getVal() );
+        Chunk::WriteSingle( writer, 84002, Tools::SoundVolume->getVal() );
+        Chunk::WriteSingle( writer, 84003, (int)Localization::CurrentLanguage->MyLanguage );
+
+#if CAFE
+#else
+		ScoreDatabase::Instance->Serialize(writer);
+		PlayerManager::SavePlayerData->Serialize(writer);
+#endif
 	}
 
 	void PlayerData::FailLoad()
@@ -81,64 +95,87 @@ namespace CloudberryKingdom
 		{
 			boost::shared_ptr<Chunk> chunk = chunks->GetChunk();
 
-			switch ( chunk->Type )
-			{
-				// Color scheme
-				case 0:
-					CustomColorScheme.ReadChunk_0( chunk );
-					ColorScheme_Renamed = CustomColorScheme;
-					break;
+			ProcessChunk(chunk);
 
-				case 1:
-					chunk->ReadSingle( ColorSchemeIndex );
+#if CAFE
+#else
+			ScoreDatabase::ProcessChunk( chunk );
+			_SavePlayerData::ProcessChunk( chunk );
+#endif
+		}
+	}
 
-					if ( ColorSchemeIndex == Unset::Int )
-						ColorSchemeIndex = 0;
-					if ( ColorSchemeIndex >= 0 )
-						ColorScheme_Renamed = ColorSchemeManager::ColorSchemes[ ColorSchemeIndex ];
+	void PlayerData::ProcessChunk( boost::shared_ptr<Chunk> chunk )
+	{
+		switch ( chunk->Type )
+		{
+			// Color scheme
+			case 0:
+				CustomColorScheme.ReadChunk_0( chunk );
+				ColorScheme_Renamed = CustomColorScheme;
+				break;
 
-					break;
+			case 1:
+				chunk->ReadSingle( ColorSchemeIndex );
 
-				// High Scores
-				case 1000:
-					{
-						boost::shared_ptr<ScoreEntry> score = boost::make_shared<ScoreEntry>();
-						score->ReadChunk_1000( chunk );
-						AddHighScore( score );
-					}
-					break;
+				if ( ColorSchemeIndex == Unset::Int )
+					ColorSchemeIndex = 0;
+				if ( ColorSchemeIndex >= 0 )
+					ColorScheme_Renamed = ColorSchemeManager::ColorSchemes[ ColorSchemeIndex ];
 
-				// Awardments
-				case 2:
-					Awardments_Renamed->Add( chunk->ReadInt() );
-					break;
+				break;
 
-				// Purchases
-				case 3:
-					Purchases->Add( chunk->ReadInt() );
-					break;
+			// High Scores
+			case 1000:
+				{
+					boost::shared_ptr<ScoreEntry> score = boost::make_shared<ScoreEntry>();
+					score->ReadChunk_1000( chunk );
+					AddHighScore( score );
+				}
+				break;
 
-				// Stats
-				case 4:
-					LifetimeStats->ReadChunk_4( chunk );
-					break;
+			// Awardments
+			case 2:
+				Awardments_Renamed->Add( chunk->ReadInt() );
+				break;
 
-				// Saved Seeds
-				case 5:
-					MySavedSeeds->ReadChunk_5( chunk );
-					break;
+			// Purchases
+			case 3:
+				Purchases->Add( chunk->ReadInt() );
+				break;
 
-				// Campaign (Chunks 100 and up)
-				case 100:
-					CampaignCoins = chunk->ReadInt();
-					break;
-				case 101:
-					CampaignLevel = chunk->ReadInt();
-					break;
-				case 102:
-					CampaignIndex = chunk->ReadInt();
-					break;
-			}
+			// Stats
+			case 4:
+				LifetimeStats->ReadChunk_4( chunk );
+				break;
+
+			// Saved Seeds
+			case 5:
+				MySavedSeeds->ReadChunk_5( chunk );
+				break;
+
+			// Campaign (Chunks 100 and up)
+			case 100:
+				CampaignCoins = chunk->ReadInt();
+				break;
+			case 101:
+				CampaignLevel = chunk->ReadInt();
+				break;
+			case 102:
+				CampaignIndex = chunk->ReadInt();
+				break;
+
+                // Player Level
+            case 23023: LastPlayerLevelUpload = chunk->ReadInt(); break;
+
+            // Sound settings
+			case 84001: Tools::MusicVolume->setVal( chunk->ReadFloat() ); break;
+			case 84002: Tools::SoundVolume->setVal( chunk->ReadFloat() ); break;
+            case 84003:
+                int _language = chunk->ReadInt();
+                Localization::Language language = ( Localization::Language )_language;
+                Localization::SetLanguage( language );
+                break;
 		}
 	}
 
@@ -378,6 +415,7 @@ namespace CloudberryKingdom
 
 	void PlayerData::InitializeInstanceFields()
 	{
+		LastPlayerLevelUpload = -1;
 		CampaignLevel = 0;
 		CampaignCoins = 0;
 		StoredName = std::wstring( L"" );

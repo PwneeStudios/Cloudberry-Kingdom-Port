@@ -11,6 +11,8 @@ namespace CloudberryKingdom
 
 		virtual ~Listener() { }
 
+		void ReleaseBody();
+
 		enum Type
 		{
 			Type_ON_DOWN,

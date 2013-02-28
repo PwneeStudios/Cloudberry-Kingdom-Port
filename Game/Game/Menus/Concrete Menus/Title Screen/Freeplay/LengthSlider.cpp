@@ -53,7 +53,8 @@ namespace CloudberryKingdom
 		LengthBar->MyType = ProgressBar::BarType_REVEAL;
 
 		LengthBar->Outline->Shadow = false;
-		LengthBar->MyPile->MyOscillateParams.Set( 2,.99f,.05f );
+		//LengthBar->MyPile->MyOscillateParams.Set( 2,.99f,.05f );
+		LengthBar->MyPile->MyOscillateParams.Set( 1.85f, .99f, .0205f );
 
 		setMyFloat( boost::make_shared<WrappedFloat>( 8000.f, 3000.f, 15000.f ) );
 		PerceivedMin = 500;

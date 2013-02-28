@@ -4,6 +4,8 @@
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
+#include "Game/Menus/Concrete Menus/ShopMenu.h"
+
 namespace CloudberryKingdom
 {
 
@@ -335,6 +337,9 @@ namespace CloudberryKingdom
 	{
 		ArcadeBaseMenu::OnReturnTo();
 
+		if ( MyHeroDoll != 0 )
+			MyHeroDoll->AutoDraw = true;
+
 		UpdateScore();
 		Update();
 	}
@@ -378,6 +383,7 @@ namespace CloudberryKingdom
                 }
                 else
                 {
+					item->Selectable = true;
                     item->MyText->Alpha = 1.f;
                     item->MySelectedText->Alpha = 1.f;
 					NumSelectableItems++;
@@ -418,6 +424,19 @@ namespace CloudberryKingdom
 
 		boost::shared_ptr<HeroItem> _item = boost::dynamic_pointer_cast<HeroItem>( MyMenu->getCurItem() );
 		if ( 0 == _item ) return;
+
+		// Upsell
+		if ( CloudberryKingdomGame::getIsDemo() && _item->Hero != BobPhsxNormal::getInstance() )
+		{
+			Call( MakeMagic( UpSellMenu, ( Localization::Words_UpSell_Hero, MenuItem::ActivatingPlayer ) ) );
+			Hide();
+				
+			if ( MyHeroDoll != 0 )
+				MyHeroDoll->AutoDraw = false;
+				
+			return;
+		}
+
 		int TopLevelForHero = MyArcadeItem->MyChallenge->CalcTopGameLevel( _item->Hero );
 
 		//int TopLevelForHero = MyArcadeItem.MyChallenge.TopLevel();

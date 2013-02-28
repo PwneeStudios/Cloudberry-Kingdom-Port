@@ -116,7 +116,6 @@ inline std::wstring Format( const wchar_t *format, ... )
 
 std::wstring FormatWithSeparators( int i );
 
-
 // FIXME: Do not understand why format doesn't take a wstring like this method (Used in VerifyDeleteSeed.cpp, other Format wouldn't compile)
 //inline std::wstring Format( std::wstring s, ... )
 //{

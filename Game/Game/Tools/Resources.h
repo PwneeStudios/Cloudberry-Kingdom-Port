@@ -16,6 +16,9 @@ namespace CloudberryKingdom
 		/// </summary>
 		static boost::shared_ptr<WrappedBool> LoadingResources;
 
+		/// The final flag to determine if loading resources is finished or not.
+		static bool FinalLoadDone;
+
 		/// <summary>
 		/// Tracks how many resources have been loaded.
 		/// This is wrapped in a struct so that it can be used as a lock.

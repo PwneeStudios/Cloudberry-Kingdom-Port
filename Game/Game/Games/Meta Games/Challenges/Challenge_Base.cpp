@@ -2,6 +2,8 @@
 
 #include <Hacks\List.h>
 
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
 
@@ -121,6 +123,10 @@ namespace CloudberryKingdom
 
 	void Challenge::Start( int Difficulty )
 	{
+        CloudberryKingdomGame::PromptForDeviceIfNoneSelected();
+
+		HelpMenu::CostMultiplier = 1;
+
         CurrentId = GameId_Level;
         CurrentScore = 0;
 

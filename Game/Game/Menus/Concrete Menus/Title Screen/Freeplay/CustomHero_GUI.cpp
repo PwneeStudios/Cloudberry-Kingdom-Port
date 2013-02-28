@@ -2,6 +2,10 @@
 
 #include <MasterHack.h>
 
+#include "Game/Menus/Concrete Menus/ShopMenu.h"
+
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
 
@@ -322,7 +326,7 @@ namespace CloudberryKingdom
 		text->ShadowColor = Color( .2f,.2f,.2f,.6f );
 		text->Shadow = true;
 
-		//text.Angle = CoreMath.Radians(23);
+		//text.Angle = CoreMath::Radians(23);
 	}
 
 	void CustomHero_GUI::SetSuperHeader( const boost::shared_ptr<EzText> &text )
@@ -405,6 +409,8 @@ namespace CloudberryKingdom
 		boost::shared_ptr<QuadClass> backdrop = boost::make_shared<QuadClass>( std::wstring( L"Backplate_1500x900" ), 1500.f, true );
 		backdrop->Name = std::wstring( L"Backdrop" );
 		MyPile->Add( backdrop );
+
+		EpilepsySafe( .5f );
 
 		boost::shared_ptr<MenuItem> item;
 
@@ -658,11 +664,11 @@ else
 }
 
             // Start
-            A = Start = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Test, ItemFont ) ) );
+            A = Start = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Play, ItemFont ) ) );
             item->Name = L"test";
             item->JiggleOnGo = false;
             AddItem( item );
-            item->setGo( Cast::ToItem( boost::make_shared<StartTestProxy>( boost::static_pointer_cast<CustomHero_GUI>( shared_from_this() ) ) ) );
+			item->setGo( Cast::ToItem( boost::make_shared<NextProxy>( boost::static_pointer_cast<CustomHero_GUI>( shared_from_this() ) ) ) );
 if ( ButtonCheck::ControllerInUse )
 {
 #if XBOX || PC_VERSION
@@ -692,11 +698,11 @@ if ( ButtonCheck::ControllerInUse )
 }
 
             // Continue
-            X = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Play, ItemFont ) ) );
+            X = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Test, ItemFont ) ) );
             item->Name = L"continue";
             AddItem( item );
             item->SelectSound = 0;
-			item->setGo( Cast::ToItem( boost::make_shared<NextProxy>( boost::static_pointer_cast<CustomHero_GUI>( shared_from_this() ) ) ) );
+			item->setGo( Cast::ToItem( boost::make_shared<StartTestProxy>( boost::static_pointer_cast<CustomHero_GUI>( shared_from_this() ) ) ) );
 if ( ButtonCheck::ControllerInUse )
 {
 #if XBOX || PC_VERSION
@@ -758,6 +764,15 @@ if ( ButtonCheck::ControllerInUse )
 		}
 		else
 		{
+			CloudberryKingdomGame::Freeplay_Count++;
+			if ( CloudberryKingdomGame::getIsDemo() && CloudberryKingdomGame::Freeplay_Count >= CloudberryKingdomGame::Freeplay_Max )
+			{
+				Call( MakeMagic( UpSellMenu, ( Localization::Words_UpSell_FreePlay, MenuItem::ActivatingPlayer ) ) );
+				Hide( PresetPos_RIGHT, 0 );
+
+				return;
+			}
+
 			MyGame->PlayGame( boost::make_shared<StartLevelProxy>( boost::static_pointer_cast<CustomHero_GUI>( shared_from_this() ) ) );
 		}
 	}

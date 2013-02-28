@@ -864,6 +864,7 @@ namespace CloudberryKingdom
 
             CurrentTexture = texture;
             CurrentEffect = Tools::BasicEffect;
+			QUAD_DRAWER->SetEffect( CurrentEffect->effect );
 
 			::SimpleQuad sq;
 			sq.V[0] = Vector2( pos.X, pos.Y );
@@ -933,6 +934,8 @@ namespace CloudberryKingdom
             Vector2 p = position + Vector2(35, -25) * scale / 2.0533333f;
 	        for (int j = 0; j < static_cast<int>( s.length() ); ++j)
 	        {
+				if ( i + 10 > N ) Flush();
+
                 GlyphData data = font->GetData( s[j] );
 
                 Vector4 tq = data.TextureCoordinates;

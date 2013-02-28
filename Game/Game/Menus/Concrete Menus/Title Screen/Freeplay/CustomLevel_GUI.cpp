@@ -3,8 +3,31 @@
 #include "Hacks/List.h"
 #include <MasterHack.h>
 
+#include "Game/Menus/Concrete Menus/ShopMenu.h"
+
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
+
+		struct CLG_PlayGameProxy : public Lambda
+		{
+		
+			boost::shared_ptr<CustomLevel_GUI> clg;
+		
+			CLG_PlayGameProxy( const boost::shared_ptr<CustomLevel_GUI> &clg )
+			{
+				this->clg = clg;
+			}
+
+			void Apply()
+			{
+				clg->StartLevel();
+			}
+
+		};
+
+
 
 	void CustomLevel_GUI::InitializeStatics()
 	{
@@ -337,7 +360,7 @@ namespace CloudberryKingdom
 		{
 			boost::shared_ptr<Lambda_1<boost::shared_ptr<PieceSeedData> > > custom;
 
-			custom = DifficultyGroups::FixedPieceMod( static_cast<float>( DiffList->ListIndex - 1 ), data );
+			custom = DifficultyGroups::FixedPieceMod( static_cast<float>( DiffList->ListIndex - 1 ), data, false );
 
 			data->Initialize( custom );
 		}
@@ -359,6 +382,8 @@ namespace CloudberryKingdom
 
 	void CustomLevel_GUI::StartLevel( const boost::shared_ptr<LevelSeedData> &data )
 	{
+		HelpMenu::CostMultiplier = 1;
+
 		Tools::PlayHappyMusic( MyGame );
 
 		data->PostMake->Add( boost::make_shared<StartLevelEnableLoadProxy>( data ) );
@@ -375,6 +400,8 @@ namespace CloudberryKingdom
 
 	void CustomLevel_GUI::OnAdd()
 	{
+		CloudberryKingdomGame::SetPresence( Presence_Freeplay );
+
 		CkBaseMenu::OnAdd();
 
 		MyGame->ClearPreviousLoadFunction();
@@ -558,6 +585,7 @@ namespace CloudberryKingdom
 		backdrop = boost::make_shared<QuadClass>( std::wstring( L"Backplate_1500x900" ), 1500.f, true );
 		backdrop->Name = std::wstring( L"Backdrop" );
 		MyPile->Add( backdrop );
+		EpilepsySafe( .5f );
 		backdrop->setSize( Vector2( 1690.477f, 1115.617f ) );
 		backdrop->setPos( Vector2( 287.6977f, 51.58758f ) );
 
@@ -1028,7 +1056,19 @@ else
 		else if ( IsCustomDifficulty() )
 			BringUpgrades();
 		else
-			StartLevel();
+		{
+			CloudberryKingdomGame::Freeplay_Count++;
+			if ( CloudberryKingdomGame::getIsDemo() && CloudberryKingdomGame::Freeplay_Count >= CloudberryKingdomGame::Freeplay_Max )
+			{
+				Call( MakeMagic( UpSellMenu, ( Localization::Words_UpSell_FreePlay, MenuItem::ActivatingPlayer ) ) );
+				Hide( PresetPos_RIGHT, 0 );
+
+				return;
+			}
+
+            CloudberryKingdomGame::PromptForDeviceIfNoneSelected();
+			MyGame->PlayGame( boost::make_shared<CLG_PlayGameProxy>( boost::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ) ) );
+		}
 	}
 
 	void CustomLevel_GUI::Show()
@@ -1054,11 +1094,21 @@ else
 
 	void CustomLevel_GUI::BringLoad()
 	{
+        if ( CloudberryKingdomGame::getIsDemo() )
+        {
+            Call( MakeMagic( UpSellMenu, ( Localization::Words_UpSell_SaveLoad, MenuItem::ActivatingPlayer ) ) );
+            Hide( PresetPos_LEFT, 0 );
+
+            return;
+        }
+
 		// Create the load menu
-		//SavedSeedsGUI LoadMenu = new SavedSeedsGUI();
-		//Call(LoadMenu, 0);
+#ifdef PC_VERSION
 		boost::shared_ptr<SaveLoadSeedMenu> menu = MakeMagic( SaveLoadSeedMenu, ( MenuItem::ActivatingPlayer, true, false ) );
 		Call( menu, 0 );
+#else
+            Call( MakeMagic( SavedSeedsGUI, () ), 11 );
+#endif
 
 		Hide( PresetPos_LEFT );
 		this->SlideInFrom = PresetPos_LEFT;
@@ -1088,6 +1138,8 @@ else
 			length->PosOffset = MyMenu->PosOffset;
 			length->Draw();
 		}
+
+		if ( CloudberryKingdomGame::getIsDemo() && Hid && !Pos->Playing ) return;
 
 		if ( HeroIcon != 0 )
 			HeroIcon->Draw( false );

@@ -3,6 +3,9 @@
 #include <Hacks/String.h>
 
 #include <Game\Player\Leaderboard.h>
+#include <Game\Player\LeaderboardView.h>
+
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
 namespace CloudberryKingdom
 {
@@ -183,7 +186,7 @@ namespace CloudberryKingdom
 		MyPile = boost::make_shared<DrawPile>();
 
 		// Make the backdrop
-		boost::shared_ptr<QuadClass> backdrop = boost::make_shared<QuadClass>( std::wstring( L"Score/Score_Screen" ), 1440.f );
+		boost::shared_ptr<QuadClass> backdrop = boost::make_shared<QuadClass>( std::wstring( L"Score_Screen" ), 1440.f );
 		backdrop->Quad_Renamed.SetColor( bColor( 220, 220, 220 ) );
 		MyPile->Add( backdrop );
 		backdrop->setPos( Vector2( 22.2233f, 10.55567f ) );
@@ -304,10 +307,25 @@ namespace CloudberryKingdom
 		MyHighLevelList->Add( HighLevelEntry );
 		ScoreDatabase::Add( HighScoreEntry );
 		ScoreDatabase::Add( HighLevelEntry );
-        Leaderboard::WriteToLeaderboard(HighScoreEntry);
-        Leaderboard::WriteToLeaderboard(HighLevelEntry);
+
+            boost::shared_ptr<ScoreEntry> score = HighScoreEntry;
+
+			int highscore = __max( score->Score, PlayerManager::MaxPlayerHighScore( score->GameId ) );
+            boost::shared_ptr<ScoreEntry> copy = boost::make_shared<ScoreEntry>( score->GamerTag_Renamed, score->GameId, highscore, highscore, score->Level_Renamed, score->Attempts, score->Time, score->Date );
+            copy->GameId += Challenge::LevelMask;
+
+			Leaderboard::WriteToLeaderboard( copy );
+
+
+        //Leaderboard::WriteToLeaderboard(HighScoreEntry);
+        //Leaderboard::WriteToLeaderboard(HighLevelEntry);
 
         ArcadeMenu::CheckForArcadeUnlocks(HighScoreEntry);
+
+        if ( !CloudberryKingdomGame::OnlineFunctionalityAvailable() )
+        {
+            CloudberryKingdomGame::ShowError_MustBeSignedInToLiveForLeaderboard();
+        }
 	}
 
 	void GameOverPanel::SetHeaderProperties( const boost::shared_ptr<EzText> &text )
@@ -378,8 +396,24 @@ namespace CloudberryKingdom
 
 	void GameOverPanel::Action_ShowHighScores()
 	{
-		Hide( PresetPos_BOTTOM );
-		Call( MakeMagic( HighScorePanel, ( MyHighScoreList, MyHighLevelList ) ) );
+		if ( CloudberryKingdomGame::SimpleLeaderboards )
+		{
+			Hide( PresetPos_BOTTOM );
+			Call( MakeMagic( HighScorePanel, ( MyHighScoreList, MyHighLevelList ) ) );
+		}
+		else
+		{
+            if ( CloudberryKingdomGame::OnlineFunctionalityAvailable() )
+            {
+				Hide( PresetPos_BOTTOM );
+				Call( MakeMagic( LeaderboardGUI, ( 0, MenuItem::ActivatingPlayer ) ), 0 );
+				Hide();
+			}
+            else
+            {
+                CloudberryKingdomGame::ShowError_MustBeSignedInToLive( Localization::Words_Err_MustBeSignedInToLive );
+            }
+		}
 	}
 
 	GameOverPanel::GameOverPanel() :

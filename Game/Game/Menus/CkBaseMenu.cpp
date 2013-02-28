@@ -30,7 +30,7 @@ namespace CloudberryKingdom
                 MasterAlpha = 1.0f;
             }
 
-            MyPile->setAlpha( MasterAlpha );
+            if ( MyPile != 0 ) MyPile->setAlpha( MasterAlpha );
         }
 
         void CkBaseMenu::MyDraw()
@@ -39,11 +39,26 @@ namespace CloudberryKingdom
                 BouncDraw();
 
 			GUI_Panel::MyDraw();
+
+			if ( UseBounce)
+			{
+				MyGame->getCam()->setZoom( Vector2(.001f) );
+				MyGame->getCam()->SetVertexCamera();
+				EzText::ZoomWithCamera_Override = false;
+			}
         }
 
 
 
+		void CkBaseMenu::EpilepsySafe( float SafetyLevel )
+		{
+			float gray_color = CoreMath::Lerp( 1.0f, .8735f, SafetyLevel );
+			float dark_color = CoreMath::Lerp( 0.1f, .1f,	 SafetyLevel );
 
+			boost::shared_ptr<QuadClass> _q;
+			_q = MyPile->FindQuad( L"Backdrop" );	if (_q != 0 ) { _q->setAlpha( .7f ); _q->Quad_Renamed.SetColor( ColorHelper::GrayColor( gray_color )); }
+			_q = DarkBack;						if (_q != 0 ) { _q->Quad_Renamed.SetColor( ColorHelper::GrayColor( dark_color )); }
+		}
 
 
 
@@ -86,10 +101,10 @@ namespace CloudberryKingdom
 	{
 		// Make the dark back
 		DarkBack = boost::make_shared<QuadClass>( std::wstring( L"White" ) );
-		DarkBack->Quad_Renamed.SetColor( ColorHelper::GrayColor( .25f ) );
+		DarkBack->Quad_Renamed.SetColor( ColorHelper::GrayColor( .2f ) );
 		DarkBack->setAlpha( 0 );
-		DarkBack->Fade( .1f );
-		DarkBack->MaxAlpha = .5f;
+		DarkBack->Fade( .135f );
+		DarkBack->MaxAlpha = .7125f;
 		DarkBack->FullScreen( Tools::getCurCamera() );
 		DarkBack->setPos( Vector2() );
 		DarkBack->Scale( 5 );
@@ -130,8 +145,9 @@ namespace CloudberryKingdom
 
 	void CkBaseMenu::SetSelectedTextProperties( const boost::shared_ptr<EzText> &text )
 	{
-		text->MyFloatColor = ( bColor( 246, 214, 33 ) ).ToVector4();
-		//text.MyFloatColor = new Color(50, 220, 50).ToVector4();
+		//text->MyFloatColor = bColor(246, 214, 33).ToVector4();
+		text->MyFloatColor = bColor(246, 214, 33).ToVector4() * .9735f;
+		text->MyFloatColor.W = 1.0f;
 
 		text->setScale( FontScale );
 
@@ -335,6 +351,8 @@ namespace CloudberryKingdom
 
     void CkBaseMenu::BubbleDown()
     {
+		BubblingOut = true;
+
 		Vector2 vals[] = { Vector2(1.0f), Vector2(1.01f), Vector2(.9f), Vector2(.4f), Vector2(0.0f) };
         zoom->MultiLerp( 5, VecFromArray( vals ) );
     }
@@ -406,7 +424,10 @@ namespace CloudberryKingdom
         }
 
         BubbleDown();
-        MyGame->WaitThenDo( 15, boost::make_shared<ReleaseProxy>( boost::static_pointer_cast<CkBaseMenu>( shared_from_this() ) ) );
+		if ( MyGame != 0 )
+		{
+			MyGame->WaitThenDo( 15, boost::make_shared<ReleaseProxy>( boost::static_pointer_cast<CkBaseMenu>( shared_from_this() ) ) );
+		}
 
         Active = true;
 

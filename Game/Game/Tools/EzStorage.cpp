@@ -1,4 +1,16 @@
-﻿#include <global_header.h>
+﻿// Checksum code!
+//public static int Checksum(byte[] buffer, int length)
+//{
+//	int val = 0;
+//	for (int i = 0; i < length; i++)
+//	{
+//		val += ((int)buffer[i] + 13) * (i + 10);
+//	}
+
+//	return val;
+//}
+
+#include <global_header.h>
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
@@ -118,7 +130,7 @@ namespace CloudberryKingdom
 		return;
 #endif
 
-		if (CloudberryKingdomGame::getIsDemo()) return;
+		if ( !CloudberryKingdomGame::CanSave()) return;
 
 		for ( std::vector<boost::shared_ptr<SaveLoad> >::const_iterator ThingToSave = ThingsToSave.begin(); ThingToSave != ThingsToSave.end(); ++ThingToSave )
 		{
@@ -162,10 +174,10 @@ namespace CloudberryKingdom
 #if PC_VERSION
 		// FIXME: save/load on PC version
 		return;
-#endif
-
+#else
 		if( !InitializeSave() )
 			return;
+#endif
 
 		for ( std::vector<boost::shared_ptr<SaveLoad> >::const_iterator ThingToLoad = ThingsToSave.begin(); ThingToLoad != ThingsToSave.end(); ++ThingToLoad )
 		{

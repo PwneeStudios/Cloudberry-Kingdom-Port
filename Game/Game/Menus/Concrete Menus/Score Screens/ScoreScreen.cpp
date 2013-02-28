@@ -2,32 +2,31 @@
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
+#include "Game/Menus/Concrete Menus/ShopMenu.h"
+
 namespace CloudberryKingdom
 {
 		
-			ScoreScreen::EOL_WaitThenDoEndActionWaitProxy::EOL_WaitThenDoEndActionWaitProxy( const boost::shared_ptr<StringWorldGameData> &sw, const boost::shared_ptr<Door> &door )
-			{
-				this->sw = sw;
-				this->door = door;
-			}
+	ScoreScreen::EOL_WaitThenDoEndActionWaitProxy::EOL_WaitThenDoEndActionWaitProxy( const boost::shared_ptr<StringWorldGameData> &sw, const boost::shared_ptr<Door> &door )
+	{
+		this->sw = sw;
+		this->door = door;
+	}
 
-			void ScoreScreen::EOL_WaitThenDoEndActionWaitProxy::Apply()
-			{
-				sw->EOL_StringWorldDoorEndAction( door );
-			}
+	void ScoreScreen::EOL_WaitThenDoEndActionWaitProxy::Apply()
+	{
+		sw->EOL_StringWorldDoorEndAction( door );
+	}
 
+	ScoreScreen::EOL_WaitThenDoEndActionProxy::EOL_WaitThenDoEndActionProxy( boost::shared_ptr<ScoreScreen> ss )
+	{
+		this->ss = ss;
+	}
 
-
-			ScoreScreen::EOL_WaitThenDoEndActionProxy::EOL_WaitThenDoEndActionProxy( boost::shared_ptr<ScoreScreen> ss )
-			{
-				this->ss = ss;
-			}
-
-			void ScoreScreen::EOL_WaitThenDoEndActionProxy::Apply( const boost::shared_ptr<Door> &door )
-			{
-				ss->EOL_WaitThenDoEndAction( door );
-			}
-
+	void ScoreScreen::EOL_WaitThenDoEndActionProxy::Apply( const boost::shared_ptr<Door> &door )
+	{
+		ss->EOL_WaitThenDoEndAction( door );
+	}
 
 	ScoreScreen::OnAddHelper::OnAddHelper( const boost::shared_ptr<ScoreScreen> &ss )
 	{
@@ -161,7 +160,6 @@ namespace CloudberryKingdom
 		ss->MenuGo_ExitFreeplay( item );
 	}
 
-
 	void ScoreScreen::MakeMenu()
 	{
 		if ( AsMenu )
@@ -208,23 +206,28 @@ namespace CloudberryKingdom
 				item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_SaveSeed, ItemFont ) ) );
 				item->Name = std::wstring( L"Save" );
 				item->setGo( boost::make_shared<MenuGo_SaveProxy>( boost::static_pointer_cast<ScoreScreen>( shared_from_this() ) ) );
+				item->Selectable = CloudberryKingdomGame::CanSave();
 				AddItem( item );
 			}
 
 			boost::shared_ptr<MenuItem> back;
 			if (InCampaign)
 			{
-				back = MakeBackButton( Localization::Words_Exit, true );
+				//back = MakeBackButton( Localization::Words_Exit, true );
+				back = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::WordString( Localization::Words_Exit), ItemFont ) ) );
+				AddItem(back);
 				item->setGo( boost::make_shared<MenuGo_ExitCampaignProxy>( boost::static_pointer_cast<ScoreScreen>( shared_from_this() ) ) );
 			}
 			else
 			{
-				back = MakeBackButton( Localization::Words_BackToFreeplay, true );
+				//back = MakeBackButton( Localization::Words_BackToFreeplay, true );
+				back = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::WordString( Localization::Words_BackToFreeplay ), ItemFont ) ) );
+				AddItem(back);
 				item->setGo( boost::make_shared<MenuGo_ExitFreeplayProxy>( boost::static_pointer_cast<ScoreScreen>( shared_from_this() ) ) );
 			}
 
-
-			MyMenu->OnB = Cast::ToMenu( go->getGo() );
+			MyMenu->OnB.reset();;
+			//MyMenu->OnB = Cast::ToMenu( go->getGo() );
 
 			EnsureFancy();
 			MyMenu->FancyPos->RelVal = Vector2( 869.0476f, -241.6667f );
@@ -298,7 +301,8 @@ namespace CloudberryKingdom
 	{
 		CkBaseMenu::SetItemProperties( item );
 
-		CkColorHelper::GreenItem( item );
+		StartMenu::SetItemProperties_Red( item );
+		//CkColorHelper::GreenItem( item );
 	}
 
 	void ScoreScreen::SetHeaderProperties( const boost::shared_ptr<EzText> &text )
@@ -306,6 +310,17 @@ namespace CloudberryKingdom
 		CkBaseMenu::SetHeaderProperties( text );
 
 		text->Shadow = false;
+
+		//text.MyFloatColor = ColorHelper::Gray(.85f);
+		//text->OutlineColor = ColorHelper::Gray(.05f);
+		text->MyFloatColor = ColorHelper::Gray(.925f);
+		text->OutlineColor = ColorHelper::Gray(.05f);
+
+		text->Shadow = true;
+		text->ShadowColor = Color(.2f, .2f, .2f, .5f);
+		text->ShadowOffset = Vector2(12, 12);
+
+		text->setScale( FontScale * .9f );
 	}
 
 #if defined(PC_VERSION)
@@ -322,16 +337,21 @@ bool ScoreScreen::AsMenu = true;
 
 		MyPile = boost::make_shared<DrawPile>();
 
-		//MakeDarkBack();
+		MakeDarkBack();
 
 		boost::shared_ptr<QuadClass> Backdrop = boost::make_shared<QuadClass>( std::wstring( L"Backplate_1230x740" ), std::wstring( L"Backdrop" ) );
 		MyPile->Add( Backdrop );
-		MyPile->Add( Backdrop );
+		//MyPile->Add( Backdrop );
 
-		LevelCleared = boost::make_shared<QuadClass>( std::wstring( L"Score/LevelCleared" ), std::wstring( L"Header" ) );
-		LevelCleared->Scale( .9f );
-		MyPile->Add( LevelCleared );
-		LevelCleared->setPos( Vector2( 10, 655 ) + ShiftAll );
+		EpilepsySafe( .5f );
+
+		boost::shared_ptr<EzText> lc = boost::make_shared<EzText>( Localization::Words_LevelCleared, Resources::Font_Grobold42_2, std::wstring( L"LevelCleared" ) );
+		SetHeaderProperties( lc );
+		lc->Shadow = true;
+		lc->ShadowOffset = Vector2(20, 20);
+		lc->ShadowColor = Color(.36f, .36f, .36f, .86f);
+		MyPile->Add( lc );
+
 
 		MyPile->Add( boost::make_shared<QuadClass>( std::wstring( L"Coin_Blue" ), std::wstring( L"Coin" ) ) );
 		MyPile->Add( boost::make_shared<QuadClass>( std::wstring( L"Stopwatch_Black" ), std::wstring( L"Stopwatch" ) ) );
@@ -348,101 +368,29 @@ bool ScoreScreen::AsMenu = true;
 
 	void ScoreScreen::SetPos()
 	{
-		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( std::wstring( L"Continue" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( -871.7776f, 516.6667f ) );
-			_item->MyText->setScale( 0.78f );
-			_item->MySelectedText->setScale( 0.78f );
-			_item->SelectIconOffset = Vector2( 0, 0 );
-		}
-		_item = MyMenu->FindItemByName( std::wstring( L"Save" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( -646.8889f, 266.6737f ) );
-			_item->MyText->setScale( 0.6f );
-			_item->MySelectedText->setScale( 0.6f );
-			_item->SelectIconOffset = Vector2( 0, 0 );
-		}
-		_item = MyMenu->FindItemByName( std::wstring( L"Replay" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( -641.3332f, 91.67379f ) );
-			_item->MyText->setScale( 0.6f );
-			_item->MySelectedText->setScale( 0.6f );
-			_item->SelectIconOffset = Vector2( 0, 0 );
-		}
-		_item = MyMenu->FindItemByName( std::wstring( L"Back" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( -755.2222f, -75.5462f ) );
-			_item->MyText->setScale( 0.6f );
-			_item->MySelectedText->setScale( 0.6f );
-			_item->SelectIconOffset = Vector2( 0, 0 );
-		}
+        boost::shared_ptr<MenuItem> _item;
+        _item = MyMenu->FindItemByName( L"Continue" ); if (_item != 0 ) { _item->setSetPos( Vector2(-871.7776f, 516.6667f ) ); _item->MyText->setScale( 0.78f ); _item->MySelectedText->setScale( 0.78f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+        _item = MyMenu->FindItemByName( L"Save" ); if (_item != 0 ) { _item->setSetPos( Vector2(-646.8889f, 266.6737f ) ); _item->MyText->setScale( 0.6f ); _item->MySelectedText->setScale( 0.6f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+        _item = MyMenu->FindItemByName( L"Replay" ); if (_item != 0 ) { _item->setSetPos( Vector2(-641.3332f, 91.67379f ) ); _item->MyText->setScale( 0.6f ); _item->MySelectedText->setScale( 0.6f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+        _item = MyMenu->FindItemByName( L"Back" ); if (_item != 0 ) { _item->setSetPos( Vector2(-755.2222f, -75.5462f ) ); _item->MyText->setScale( 0.6f ); _item->MySelectedText->setScale( 0.6f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 
-		MyMenu->setPos( Vector2( 902.3811f, -136.1111f ) );
+        MyMenu->setPos( Vector2( 902.3811f, -136.1111f ) );
 
-		boost::shared_ptr<EzText> _t;
-		_t = MyPile->FindEzText( std::wstring( L"Coins" ) );
-		if ( _t != 0 )
-		{
-			_t->setPos( Vector2( -719.4445f, 22.22227f ) );
-			_t->setScale( 1 );
-		}
-		_t = MyPile->FindEzText( std::wstring( L"Blobs" ) );
-		if ( _t != 0 )
-		{
-			_t->setPos( Vector2( -661.1107f, -402.7777f ) );
-			_t->setScale( 1 );
-		}
-		_t = MyPile->FindEzText( std::wstring( L"Deaths" ) );
-		if ( _t != 0 )
-		{
-			_t->setPos( Vector2( -655.5553f, 411.1111f ) );
-			_t->setScale( 1 );
-		}
+        boost::shared_ptr<EzText> _t;
+		_t = MyPile->FindEzText( L"LevelCleared" ); if (_t != 0 ) { _t->setPos( Vector2(-930.5547f, 797.2222f ) ); _t->setScale( 1.195833f ); }
+        _t = MyPile->FindEzText( L"Coins" ); if (_t != 0 ) { _t->setPos( Vector2(-719.4445f, 22.22227f ) ); _t->setScale( 1.f ); }
+        _t = MyPile->FindEzText( L"Blobs" ); if (_t != 0 ) { _t->setPos( Vector2(-661.1107f, -402.7777f ) ); _t->setScale( 1.f ); }
+        _t = MyPile->FindEzText( L"Deaths" ); if (_t != 0 ) { _t->setPos( Vector2(-655.5553f, 411.1111f ) ); _t->setScale( 1.f ); }
 
-		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( std::wstring( L"Backdrop" ) );
-		if ( _q != 0 )
-		{
-			_q->setPos( Vector2( 27.77808f, -6.666618f ) );
-			_q->setSize( Vector2( 1509.489f, 943.4307f ) );
-		}
-		_q = MyPile->FindQuad( std::wstring( L"Backdrop" ) );
-		if ( _q != 0 )
-		{
-			_q->setPos( Vector2( 27.77808f, -6.666618f ) );
-			_q->setSize( Vector2( 1509.489f, 943.4307f ) );
-		}
-		_q = MyPile->FindQuad( std::wstring( L"Header" ) );
-		if ( _q != 0 )
-		{
-			_q->setPos( Vector2( 16.66687f, 615.5555f ) );
-			_q->setSize( Vector2( 937.8f, 147.6f ) );
-		}
-		_q = MyPile->FindQuad( std::wstring( L"Coin" ) );
-		if ( _q != 0 )
-		{
-			_q->setPos( Vector2( -955.5555f, -141.6665f ) );
-			_q->setSize( Vector2( 168.1188f, 168.1188f ) );
-		}
-		_q = MyPile->FindQuad( std::wstring( L"Stopwatch" ) );
-		if ( _q != 0 )
-		{
-			_q->setPos( Vector2( -886.1108f, -513.8888f ) );
-			_q->setSize( Vector2( 180.9532f, 211.6065f ) );
-		}
-		_q = MyPile->FindQuad( std::wstring( L"Death" ) );
-		if ( _q != 0 )
-		{
-			_q->setPos( Vector2( -983.3334f, 230.5556f ) );
-			_q->setSize( Vector2( 321.4366f, 235.7202f ) );
-		}
+        boost::shared_ptr<QuadClass> _q;
+        _q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2( 27.77808f, -6.666618f ) ); _q->setSize( Vector2( 1509.489f, 943.4307f ) ); }
+        _q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2( 27.77808f, -6.666618f ) ); _q->setSize( Vector2( 1509.489f, 943.4307f ) ); }
+        _q = MyPile->FindQuad( L"Header" ); if (_q != 0 ) { _q->setPos( Vector2( 16.66687f, 615.5555f ) ); _q->setSize( Vector2( 937.8f, 147.6f ) ); }
+        _q = MyPile->FindQuad( L"Coin" ); if (_q != 0 ) { _q->setPos( Vector2(-955.5555f, -141.6665f ) ); _q->setSize( Vector2( 168.1188f, 168.1188f ) ); }
+        _q = MyPile->FindQuad( L"Stopwatch" ); if (_q != 0 ) { _q->setPos( Vector2(-886.1108f, -513.8888f ) ); _q->setSize( Vector2( 180.9532f, 211.6065f ) ); }
+        _q = MyPile->FindQuad( L"Death" ); if (_q != 0 ) { _q->setPos( Vector2(-983.3334f, 230.5556f ) ); _q->setSize( Vector2( 321.4366f, 235.7202f ) ); }
 
-		MyPile->setPos( Vector2( 0, 0 ) );
+        MyPile->setPos( Vector2( 0.f, 0.f ) );
 	}
 
 bool ScoreScreen::UseZoomIn = true;
@@ -470,9 +418,20 @@ bool ScoreScreen::UseZoomIn = true;
 		int Blobs = PlayerManager::PlayerSum( boost::make_shared<VariableBlobsLambda>( MyStatGroup ) );
 		int BlobTotal = PlayerManager::PlayerMax( boost::make_shared<VariableTotalBlobsLambda>( MyStatGroup ) );
 
-		MyPile->Add( boost::make_shared<EzText>( Tools::ScoreString( Coins, CoinTotal ), ItemFont, std::wstring( std::wstring( L"Coins" ) ) ) );
-		MyPile->Add( boost::make_shared<EzText>( CoreMath::ShortTime( PlayerManager::Score_Time ), ItemFont, std::wstring( std::wstring( L"Blobs" ) ) ) );
-		MyPile->Add( boost::make_shared<EzText>( Tools::ScoreString( PlayerManager::Score_Attempts ), ItemFont, std::wstring( std::wstring( L"Deaths" ) ) ) );
+		boost::shared_ptr<EzText> text;
+
+		text = boost::make_shared<EzText>( Tools::ScoreString( Coins, CoinTotal ), ItemFont, std::wstring( std::wstring( L"Coins" ) ) );
+		MyPile->Add( text );
+		SetHeaderProperties( text);
+
+		text = boost::make_shared<EzText>( CoreMath::ShortTime( PlayerManager::Score_Time ), ItemFont, std::wstring( std::wstring( L"Blobs" ) ) );
+		MyPile->Add( text );
+		SetHeaderProperties( text);
+
+		text = boost::make_shared<EzText>( Tools::ScoreString( PlayerManager::Score_Attempts ), ItemFont, std::wstring( std::wstring( L"Deaths" ) ) );
+		MyPile->Add( text );
+		SetHeaderProperties( text);
+
 
 		// Prevent menu interactions for a second
 		MyMenu->Active = false;
@@ -553,6 +512,8 @@ bool ScoreScreen::UseZoomIn = true;
 
 	void ScoreScreen::MenuGo_Continue( const boost::shared_ptr<MenuItem> &item )
 	{
+		SaveGroup::SaveAll();
+
 		GUI_Panel::SlideOut( PresetPos_LEFT );
 
 		if (InCampaign)
@@ -631,9 +592,21 @@ bool ScoreScreen::UseZoomIn = true;
 
 	void ScoreScreen::MenuGo_Save( const boost::shared_ptr<MenuItem> &item )
 	{
-		boost::shared_ptr<PlayerData> player = MenuItem::GetActivatingPlayerData();
-		SaveLoadSeedMenu::MakeSave( boost::static_pointer_cast<SaveLoadSeedMenu>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) ), player )->Apply( item );
-		Hide( PresetPos_LEFT );
+        if ( CloudberryKingdomGame::getIsDemo() )
+        {
+            Call( MakeMagic( UpSellMenu, ( Localization::Words_UpSell_SaveLoad, MenuItem::ActivatingPlayer ) ), 0);
+            Hide( PresetPos_LEFT, 0 );
+        }
+        else if ( CloudberryKingdomGame::CanSave() )
+        {
+			boost::shared_ptr<PlayerData> player = MenuItem::GetActivatingPlayerData();
+			SaveLoadSeedMenu::MakeSave( boost::static_pointer_cast<SaveLoadSeedMenu>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) ), player )->Apply( item );
+			Hide( PresetPos_LEFT );
+		}
+		else
+		{
+			CloudberryKingdomGame::ShowError_CanNotSaveNoDevice();
+		}
 	}
 
 	bool ScoreScreen::ShouldSkip()

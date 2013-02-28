@@ -417,6 +417,8 @@ namespace CloudberryKingdom
 		if ( !Active || !Show )
 			return;
 
+		if ( CloudberryKingdomGame::getSuperPause() ) return;
+
 		if ( SkipPhsx )
 		{
 			SkipPhsx = false;
@@ -474,17 +476,29 @@ namespace CloudberryKingdom
 		}
 
 		// X button action
-		if ( OnX != 0 && ButtonCheck::State( ControllerButtons_X, getControl() ).Pressed )
+		if ( OnX != 0 )
 		{
-			ButtonCheck::PreventInput();
-			OnX->Apply( shared_from_this() );
+            ButtonData data = ButtonCheck::State( ControllerButtons_X, getControl() );
+            if ( data.Pressed )
+            {
+                MenuItem::ActivatingPlayer = data.PressingPlayer;
+
+				ButtonCheck::PreventInput();
+				OnX->Apply( shared_from_this() );
+			}
 		}
 
 		// Y button action
-		if ( OnY != 0 && ButtonCheck::State( ControllerButtons_Y, getControl() ).Pressed )
+		if ( OnY != 0 )
 		{
-			ButtonCheck::PreventInput();
-			OnY->Apply();
+            ButtonData data = ButtonCheck::State( ControllerButtons_Y, getControl() );
+            if (data.Pressed)
+            {
+				MenuItem::ActivatingPlayer = data.PressingPlayer;
+
+				ButtonCheck::PreventInput();
+				OnY->Apply();
+			}
 		}
 
 		// Allow for a new item to be selected if the user has stopped holding down A (or LeftMouseButton)
@@ -501,8 +515,12 @@ namespace CloudberryKingdom
 		}
 
 		bool ActivateOnA = false;
-		if ( ButtonCheck::State( ControllerButtons_A, getControl() ).Pressed )
+		ButtonData _data = ButtonCheck::State( ControllerButtons_A, getControl() );
+		if ( _data.Pressed )
+		{
+			MenuItem::ActivatingPlayer = _data.PressingPlayer;
 			ActivateOnA = true;
+		}
 
 		// Don't activate the item if it isn't being drawn as selected
 		//if (NoneSelected)

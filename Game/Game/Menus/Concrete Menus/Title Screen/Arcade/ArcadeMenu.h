@@ -114,6 +114,9 @@ namespace CloudberryKingdom
         static std::vector<std::pair<boost::shared_ptr<Challenge>, boost::shared_ptr<BobPhsx> > > LeaderboardList;
         static std::map<int, int> ChallengeGoal;
 
+		static const int HighestLevelNeeded;
+		static boost::shared_ptr<BobPhsx> HighestHero;
+
 		ArcadeMenu();
 		boost::shared_ptr<ArcadeMenu> ArcadeMenu_Construct();
 

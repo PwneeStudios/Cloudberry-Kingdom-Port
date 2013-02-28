@@ -91,6 +91,42 @@ namespace CloudberryKingdom
             }
         }
 
+		void ParticleEffects::CoinDie_Campaign( boost::shared_ptr<Level> level, Vector2 pos )
+		{
+			bool LighterBackground = false;
+			if ( level->MyTileSet->NameInGame == Localization::Words_Sea ||
+				 level->MyTileSet->NameInGame == Localization::Words_Cloud )
+				 LighterBackground = true;
+
+			// Spritely
+			for ( int j = 0; j < 10; j++ )
+			{
+				boost::shared_ptr<Particle> p = level->ParticleEmitters[ 5 ]->GetNewParticle( ParticleEffects::DieTemplate );
+
+				p->Data.Position = pos;
+				p->MyQuad.setMyTexture( Tools::TextureWad->FindByName( L"CoinCollect" ) );
+				p->Data.Velocity = Tools::GlobalRnd->RndDir() * (Tools::GlobalRnd->RndFloat(7, 10));
+				p->Size *= 5.0f;
+				p->SizeSpeed = Vector2(0);
+				p->Life = (int)(p->Life * 1.25f);
+				p->ColorVel.W /= 1.25f;
+
+				p->Size /= 2.95f;
+				p->Data.Velocity *= .435f;
+				p->MyColor.W *= .9f;
+
+				if (LighterBackground)
+				{
+					p->MyColor.X *= .75f;
+					p->MyColor.Y *= .75f;
+					p->MyColor.Z *= .75f;
+					p->MyColor.W *= .75f;
+					p->Size *= 1.235f;
+					p->Data.Velocity *= 1.1f;
+				}
+			}
+		}
+
         void ParticleEffects::CoinDie_New( boost::shared_ptr<Level> level, Vector2 pos )
         {
             pos += Vector2( 22, 0 );

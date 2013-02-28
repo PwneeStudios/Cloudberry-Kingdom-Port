@@ -338,7 +338,8 @@ namespace CloudberryKingdom
 	struct EzSound;
 	struct BobPhsxTime;
 	struct VerifyPurchaseMenu;
-	struct ShopMenu;
+	struct UpSellMenu;
+	struct SmallErrorMenu;
 	struct NewHero;
 	struct ActionGameData;
 	struct CapeNode;

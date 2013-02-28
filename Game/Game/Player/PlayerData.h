@@ -63,8 +63,10 @@ namespace CloudberryKingdom
 		virtual void FailLoad();
 
 		virtual void Deserialize( std::vector<unsigned char> Data );
+		void ProcessChunk( boost::shared_ptr<Chunk> chunk );
 		#pragma endregion
 
+		int LastPlayerLevelUpload;
 	
 		int GetTotalLevel();
         int GetTotalCampaignLevel();

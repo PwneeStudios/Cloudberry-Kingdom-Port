@@ -87,6 +87,11 @@ namespace CloudberryKingdom
 
 		Backdrop->Name = std::wstring( L"Backdrop" );
 		MyPile->Add( Backdrop );
+
+		if ( !UseSimpleBackdrop )
+		{
+			EpilepsySafe( .9f );
+		}
 	}
 
 	void AlertBaseMenu::Init()

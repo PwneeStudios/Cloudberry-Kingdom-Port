@@ -163,7 +163,7 @@ namespace CloudberryKingdom
 		MyPile->Add( BlackQuad );
 
         Legal = boost::make_shared<EzText>( 
-L"{pCopyRightSymbol,78,?} 2012 by Pwnee Studios, Corp. All Rights Reserved.\n"
+L"{pCopyRightSymbol,78,?} 2013 by Pwnee Studios, Corp. All Rights Reserved.\n"
 L"Distributed by Ubisoft Entertainment under license from Pwnee Studios, Corp.\n"
 L"Cloudberry Kingdom, Pwnee, and Pwnee Studios are trademarks of Pwnee Studios, Corp. and is used under license.\n"
 L"Ubisoft and the Ubisoft logo are trademarks of Ubisoft Entertainment in the US and/or other countries.",
@@ -195,7 +195,8 @@ L"Ubisoft and the Ubisoft logo are trademarks of Ubisoft Entertainment in the US
 		}
 
 		// Fade
-		if ( LoadingPercent > 97.6f && Accelerate || !Resources::LoadingResources->MyBool )
+		//if ( LoadingPercent > 97.6f && Accelerate || !Resources::LoadingResources->MyBool )
+		if ( Resources::FinalLoadDone || LogoCount > LogoCount_Max )
 		{
             if ( ReadyToFade )
             {
@@ -238,6 +239,7 @@ L"Ubisoft and the Ubisoft logo are trademarks of Ubisoft Entertainment in the US
 
 		IsDone = false;
 		LogoCount = 0;
+		LogoCount_Max = 60 * 5 - 50; // 5 seconds, minus 50 frames to fade out
 		Accelerate = false;
 		DoneCount = 0;
 	}

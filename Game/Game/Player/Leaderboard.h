@@ -9,6 +9,12 @@
 namespace CloudberryKingdom
 {
 
+#if PS3
+	typedef uint64_t INT64;
+#elif PC_VERSION
+	typedef long long INT64;
+#endif
+
 	struct OnlineGamer
 	{
 		int Id;

@@ -869,7 +869,7 @@ else
                         {
 							// Show the gamer card!
 #if XBOX
-                            CloudberryKingdomGame.ShowGamerCard((PlayerIndex)MenuItem.ActivatingPlayer, gamer);
+                            CloudberryKingdomGame.ShowGamerCard((PlayerIndex)MenuItem::ActivatingPlayer, gamer);
 #endif
                         }
                     }

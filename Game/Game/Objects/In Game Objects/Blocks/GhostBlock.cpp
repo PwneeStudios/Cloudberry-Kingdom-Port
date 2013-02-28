@@ -143,7 +143,7 @@ float TallInvertScale = 1.635f;
 
 	float GhostBlock::GetStep()
 	{
-		//return CoreMath.Modulo(Core.MyLevel.GetPhsxStep() + Offset, Period);
+		//return CoreMath::Modulo(Core.MyLevel.GetPhsxStep() + Offset, Period);
 		return CoreMath::Modulo( getCore()->MyLevel->GetIndependentPhsxStep() + Offset, static_cast<float>(getPeriod()) );
 	}
 
