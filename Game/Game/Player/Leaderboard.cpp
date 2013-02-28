@@ -151,7 +151,7 @@ namespace CloudberryKingdom
         MyId = GetLeaderboardId(game_id);
 
 		MoreRequested = false;
-		Updated = true;
+		Updated = false;
 		TotalSize = 10000;
 		StartIndex = 1;
     }
@@ -179,9 +179,9 @@ namespace CloudberryKingdom
             break;
 
         case LeaderboardType_FriendsScores:
-			RequestMore( 1 );
             if ( FriendItems.size() == 0)
             {
+				RequestMore( 1 );
                 //result = LeaderboardReader.BeginRead(Identity, LeaderboardFriends, LeaderboardGamer, 100, OnInfo_FriendScores, null);
             }
             break;
@@ -206,6 +206,8 @@ namespace CloudberryKingdom
 	void Leaderboard::OnInfo_Fail()
 	{
 		MoreRequested = false;
+		TotalSize = 0;
+		Updated = true;
 	}
 
 #ifdef PS3
@@ -213,8 +215,23 @@ namespace CloudberryKingdom
 	static boost::shared_ptr< Leaderboard > CurrentLeaderboard;
 	static int StartingRank;
 	static LeaderboardType CurrentLeaderboardType;
-	static SceNpScoreRankData Ranks[ Leaderboard::EntriesPerPage ];
+	// We could potentially get up to 100 scores when requesting friend scores.
+	// Add one more to get your own score as well.
+	static SceNpScoreRankData Ranks[ 101/*Leaderboard::EntriesPerPage*/ ];
 	static int NumRanks;
+	static int MaxRanks;
+
+	// Sony says there is a maximum of 100 friends.
+	static SceNpId FriendIds[ 100 ];
+	static SceNpScorePlayerRankData FriendRanks[ 100 ];
+
+	// Get our own NP id.  Implemented in CorePS3.cpp
+	extern void GetMyNpId( SceNpId &id );
+
+	inline bool RankComparer( const SceNpScoreRankData &a, const SceNpScoreRankData &b )
+	{
+		return a.rank < b.rank;
+	}
 
 	static void RequestLeaderboardThread( uint64_t context )
 	{
@@ -241,29 +258,83 @@ namespace CloudberryKingdom
 		CellRtcTick lastSortDate;
 		SceNpScoreRankNumber totalRecord;
 
-		ret = sceNpScoreGetRankingByRange( transactionId,
-			CurrentLeaderboard->MyId, StartingRank, Ranks,
-			sizeof( Ranks ), NULL, 0, NULL, 0, Leaderboard::EntriesPerPage,
-			&lastSortDate, &totalRecord, NULL );
-		
+		// If this is a friend request, get all the friends.
+		if( CurrentLeaderboardType == LeaderboardType_FriendsScores )
+		{
+			uint32_t friendCount = 0;
+			ret = sceNpBasicGetFriendListEntryCount( &friendCount );
+			if( ret < 0 )
+				LOG.Write( "Couldn't get friend list count: 0x%x\n", ret );
+
+			// Just in case limits change later.
+			if( friendCount > 100 )
+				friendCount = 100;
+
+			for( uint32_t i = 0; i < friendCount; ++i )
+			{
+				ret = sceNpBasicGetFriendListEntry( i, &FriendIds[ i ] );
+				if( ret < 0 )
+					LOG.Write( "Couldn't get friend %d: 0x%x\n", i, ret );
+			}
+
+			// Add us to the list.
+			ret = sceNpManagerGetNpId( &FriendIds[ friendCount ] );
+			if( ret == 0 )
+				++friendCount;
+			else
+				LOG.Write( "Failed to get our own NpId: 0x%x\n", ret );
+
+			if( friendCount > 0 )
+			{
+				ret = sceNpScoreGetRankingByNpId( transactionId, CurrentLeaderboard->MyId,
+					FriendIds, friendCount * sizeof( SceNpId ), FriendRanks, friendCount * sizeof( SceNpScorePlayerRankData ),
+					NULL, 0, NULL, 0, friendCount, &lastSortDate, &totalRecord, NULL );
+				MaxRanks = totalRecord;
+
+				if( ret >= 0 )
+				{
+					int j = 0;
+
+					for( int i = 0; i < friendCount; ++i )
+					{
+						if( FriendRanks[ i ].hasData )
+							Ranks[ j++ ] = FriendRanks[ i ].rankData;
+					}
+
+					NumRanks = j;
+
+					// Sort the ranks.
+					std::sort( Ranks, Ranks + NumRanks, RankComparer );
+				}
+			}
+		}
+		else
+		{
+			ret = sceNpScoreGetRankingByRange( transactionId,
+				CurrentLeaderboard->MyId, StartingRank, Ranks,
+				Leaderboard::EntriesPerPage * sizeof( SceNpScoreRankData ), NULL, 0, NULL, 0, Leaderboard::EntriesPerPage,
+				&lastSortDate, &totalRecord, NULL );
+			MaxRanks = totalRecord;
+			NumRanks = ret;
+		}
+
 		if( ret == SCE_NP_COMMUNITY_SERVER_ERROR_GAME_RANKING_NOT_FOUND )
 		{
 			NumRanks = 0;
 			LOG.Write( "No more scores!\n" );
+			CurrentLeaderboard->OnInfo_Fail();
 		}
 		else
 		{
 			if( ret < 0 )
 			{
 				LOG.Write( "Failed to request scores: 0x%x\n", ret );
+				NumRanks = 0;
 				CurrentLeaderboard->OnInfo_Fail();
 			}
 			else
 			{
 				// Update current leaderboard.
-				LOG.Write( "Got %d scores!\n", ret );
-				NumRanks = ret;
-
 				switch( CurrentLeaderboardType )
 				{
 				case LeaderboardType_FriendsScores:
@@ -332,8 +403,9 @@ namespace CloudberryKingdom
         {
             int gamer_rank = -1;
 #ifdef PS3
-			if( NumRanks == 0 )
-				TotalSize = Items.size();
+			TotalSize = MaxRanks;
+			/*if( NumRanks == 0 )
+				TotalSize = Items.size();*/
 
 			for( int i = 0; i < NumRanks; ++i )
 			{
