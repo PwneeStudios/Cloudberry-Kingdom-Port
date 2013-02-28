@@ -3,8 +3,31 @@
 #include "Hacks/List.h"
 #include <MasterHack.h>
 
+#include "Game/Menus/Concrete Menus/ShopMenu.h"
+
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
+
+		struct CLG_PlayGameProxy : public Lambda
+		{
+		
+			boost::shared_ptr<CustomLevel_GUI> clg;
+		
+			CLG_PlayGameProxy( const boost::shared_ptr<CustomLevel_GUI> &clg )
+			{
+				this->clg = clg;
+			}
+
+			void Apply()
+			{
+				clg->StartLevel();
+			}
+
+		};
+
+
 
 	void CustomLevel_GUI::InitializeStatics()
 	{
@@ -337,7 +360,7 @@ namespace CloudberryKingdom
 		{
 			boost::shared_ptr<Lambda_1<boost::shared_ptr<PieceSeedData> > > custom;
 
-			custom = DifficultyGroups::FixedPieceMod( static_cast<float>( DiffList->ListIndex - 1 ), data );
+			custom = DifficultyGroups::FixedPieceMod( static_cast<float>( DiffList->ListIndex - 1 ), data, false );
 
 			data->Initialize( custom );
 		}
@@ -377,7 +400,7 @@ namespace CloudberryKingdom
 
 	void CustomLevel_GUI::OnAdd()
 	{
-		CloudberryKingdomGame::SetPresence( CloudberryKingdomGame::Presence_Freeplay );
+		CloudberryKingdomGame::SetPresence( Presence_Freeplay );
 
 		CkBaseMenu::OnAdd();
 
@@ -1044,8 +1067,7 @@ else
 			}
 
             CloudberryKingdomGame::PromptForDeviceIfNoneSelected();
-			MyGame->PlayGame( StartLevel );
-			//StartLevel();
+			MyGame->PlayGame( boost::make_shared<CLG_PlayGameProxy>( boost::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ) ) );
 		}
 	}
 

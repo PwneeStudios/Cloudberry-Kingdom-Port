@@ -366,7 +366,7 @@ int PerfectScoreObject::GlobalBonus = 0;
 		for (int i = 0; i < 8; i++)
 		{
 			Dots[i]->Quad_Renamed.setMyTexture( i < NumDots ? Full : Empty );
-			Dots[i]->setPos( Dots[0]->getPos() + i * Vector2(34, 0) );
+			Dots[i]->setPos( Dots[0]->getPos() + static_cast<float>( i ) * Vector2(34.0f, 0.0) );
 			Dots[i]->setSize( Dots[0]->getSize() );
 		}
 	}

@@ -3,6 +3,9 @@
 #include <Hacks/String.h>
 
 #include <Game\Player\Leaderboard.h>
+#include <Game\Player\LeaderboardView.h>
+
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
 namespace CloudberryKingdom
 {
@@ -308,10 +311,10 @@ namespace CloudberryKingdom
             boost::shared_ptr<ScoreEntry> score = HighScoreEntry;
 
 			int highscore = __max( score->Score, PlayerManager::MaxPlayerHighScore( score->GameId ) );
-            boost::shared_ptr<ScoreEntry> copy = boost::make_shared<ScoreEntry>( score->GamerTag_Renamed, score->GameId, highscore, highscore, score->Level, score->Attempts, score->Time, score->Date );
+            boost::shared_ptr<ScoreEntry> copy = boost::make_shared<ScoreEntry>( score->GamerTag_Renamed, score->GameId, highscore, highscore, score->Level_Renamed, score->Attempts, score->Time, score->Date );
             copy->GameId += Challenge::LevelMask;
 
-			Leaderboard.WriteToLeaderboard( copy );
+			Leaderboard::WriteToLeaderboard( copy );
 
 
         //Leaderboard::WriteToLeaderboard(HighScoreEntry);
@@ -403,7 +406,7 @@ namespace CloudberryKingdom
             if ( CloudberryKingdomGame::OnlineFunctionalityAvailable() )
             {
 				Hide( PresetPos_BOTTOM );
-				Call( MakeMagic( LeaderboardGUI, ( 0, 0, MenuItem::ActivatingPlayer ) ), 0 );
+				Call( MakeMagic( LeaderboardGUI, ( 0, MenuItem::ActivatingPlayer ) ), 0 );
 				Hide();
 			}
             else

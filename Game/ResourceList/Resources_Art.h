@@ -9,13 +9,9 @@
 
 
 const wchar_t *TEXTURE_PATHS[] = {
-L"Circle",
 L"Fonts/Grobold_Chinese",
 L"Art/Title/CopyRightSymbol",
-L"Transparent",
 L"Fonts/Grobold_Japanese",
-L"Smooth",
-L"White",
 L"Fonts/Grobold_Korean",
 L"Fonts/Grobold_Western",
 L"Art/Bob/Bob_Trimmed/Bob_Stand_0041",
@@ -723,13 +719,9 @@ L"Art/Bob/Bob_Trimmed/Bob_Box_Stand_0047",
 };
 
 const int TEXTURE_WIDTHS[] = {
-114,
 2048,
 19,
-1,
 2048,
-128,
-8,
 2048,
 1024,
 140,
@@ -1437,13 +1429,9 @@ const int TEXTURE_WIDTHS[] = {
 };
 
 const int TEXTURE_HEIGHTS[] = {
-114,
 1550,
 21,
-1,
 1300,
-128,
-8,
 1300,
 1024,
 181,
@@ -2153,11 +2141,7 @@ const int TEXTURE_HEIGHTS[] = {
 
 const bool VIDEO_MEMORY[] = {
 true,
-true,
 false,
-true,
-true,
-true,
 true,
 true,
 true,
@@ -2869,13 +2853,9 @@ true,
 
 
 const wchar_t *TEXTURE_PATHS[] = {
-L"Circle",
 L"Fonts/Grobold_Chinese",
 L"Art/Title/CopyRightSymbol",
-L"Transparent",
 L"Fonts/Grobold_Japanese",
-L"Smooth",
-L"White",
 L"Fonts/Grobold_Korean",
 L"Fonts/Grobold_Western",
 L"Art/Bob/Bob_Trimmed/Bob_Stand_0041",
@@ -3590,13 +3570,9 @@ L"Art/Bob/Bob_Trimmed/Bob_Box_Stand_0047",
 };
 
 const int TEXTURE_WIDTHS[] = {
-114,
 2048,
 19,
-1,
 2048,
-128,
-8,
 2048,
 1024,
 140,
@@ -4311,13 +4287,9 @@ const int TEXTURE_WIDTHS[] = {
 };
 
 const int TEXTURE_HEIGHTS[] = {
-114,
 1550,
 21,
-1,
 1300,
-128,
-8,
 1300,
 1024,
 181,
@@ -5035,13 +5007,9 @@ const int TEXTURE_HEIGHTS[] = {
 
 
 const wchar_t *TEXTURE_PATHS[] = {
-L"Circle",
 L"Fonts/Grobold_Chinese",
 L"Art/Title/CopyRightSymbol",
-L"Transparent",
 L"Fonts/Grobold_Japanese",
-L"Smooth",
-L"White",
 L"Fonts/Grobold_Korean",
 L"Fonts/Grobold_Western",
 L"Art/Bob/Bob_Trimmed/Bob_Stand_0041",
@@ -5061,6 +5029,7 @@ L"Art/Effects/Fire",
 L"Art/Effects/Fireball",
 L"Art/Coins/CoinShimmer/Coin_00048",
 L"Art/Coins/CoinShimmer/Coin_00049",
+L"Art/default",
 L"Art/Bob/Bob_Trimmed/Bob_Stand_0047",
 L"Art/Bob/Bob_Trimmed/Bob_Stand_0046",
 L"Art/Bob/Bob_Trimmed/Bob_Stand_0045",
@@ -5784,13 +5753,9 @@ L"Art/Bob/Bob_Trimmed/Bob_Box_Stand_0047",
 };
 
 const int TEXTURE_WIDTHS[] = {
-114,
 2048,
 19,
-1,
 2048,
-128,
-8,
 2048,
 1024,
 140,
@@ -5810,6 +5775,7 @@ const int TEXTURE_WIDTHS[] = {
 220,
 100,
 100,
+16,
 140,
 140,
 140,
@@ -6533,13 +6499,9 @@ const int TEXTURE_WIDTHS[] = {
 };
 
 const int TEXTURE_HEIGHTS[] = {
-114,
 1550,
 21,
-1,
 1300,
-128,
-8,
 1300,
 1024,
 181,
@@ -6559,6 +6521,7 @@ const int TEXTURE_HEIGHTS[] = {
 165,
 100,
 100,
+16,
 181,
 181,
 181,

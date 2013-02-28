@@ -2,6 +2,8 @@
 
 #include "Hacks/List.h"
 
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
 
@@ -151,7 +153,7 @@ namespace CloudberryKingdom
 
 		Challenge_HeroRush::Start( StartLevel );
 
-		CloudberryKingdomGame::SetPresence( CloudberryKingdomGame::Presence_HeroRush2 );
+		CloudberryKingdomGame::SetPresence( Presence_HeroRush2 );
 	}
 
 	boost::shared_ptr<BobPhsx> Challenge_HeroRush2::GetHero( int i )

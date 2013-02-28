@@ -3,6 +3,8 @@
 namespace CloudberryKingdom
 {
 
+	int HelpMenu::CostMultiplier = 1;
+
 	HelpMenu::MakeListenerHelper::MakeListenerHelper( const boost::shared_ptr<Listener> &listener )
 	{
 		this->listener = listener;

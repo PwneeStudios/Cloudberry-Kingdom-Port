@@ -756,7 +756,11 @@ float CloudberryKingdomGame::fps = 0;
 		
 		ConsoleRegion region = GetConsoleRegion();
 
+#if PS3
 		CloudberryKingdomGame::AsianButtonSwitch = IsAsianButtonConfiguration();
+#else
+		CloudberryKingdomGame::AsianButtonSwitch = false;
+#endif
 
 		// FIXME: Start videos later.
 		if (!HideLogos)
@@ -765,7 +769,7 @@ float CloudberryKingdomGame::fps = 0;
 			if( region == ConsoleRegion_USA )
 				MainVideo::StartVideo_CanSkipIfWatched( std::wstring( L"LogoSalad" ) );
 			else
-				MainVideo::StartVideo_CanSkipIfWatched( std::wstring( L"LogoSalad" ) );
+				MainVideo::StartVideo_CanSkipIfWatched( std::wstring( L"LogoSalad_ESRB" ) );
 		}
 	}
 

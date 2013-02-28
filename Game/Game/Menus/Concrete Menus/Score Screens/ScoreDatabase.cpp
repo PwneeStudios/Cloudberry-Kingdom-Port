@@ -66,12 +66,11 @@ namespace CloudberryKingdom
 
 	void ScoreDatabase::ProcessChunk( boost::shared_ptr<Chunk> chunk )
 	{
-		
 		switch ( chunk->Type )
 		{
 			case 2000:
 				boost::shared_ptr<ScoreEntry> score = boost::make_shared<ScoreEntry>();
-				score->ReadChunk_2000( chunk );
+				score->ReadChunk_1000( chunk );
 				Add( score );
 				break;
 		}

@@ -2,6 +2,10 @@
 
 #include <Hacks\List.h>
 
+#include "Game/Menus/Concrete Menus/ShopMenu.h"
+
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
 

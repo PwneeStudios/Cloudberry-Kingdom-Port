@@ -2,6 +2,8 @@
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
+#include "Game/Menus/Concrete Menus/ShopMenu.h"
+
 namespace CloudberryKingdom
 {
 		
@@ -347,7 +349,7 @@ bool ScoreScreen::AsMenu = true;
 
 		EpilepsySafe( .5f );
 
-		boost::shared_ptr<EzText> lc = boost::make_shared<EzText>( Localization::Words_LevelCleared, Resources::Font_Grobold42_2, L"LevelCleared" );
+		boost::shared_ptr<EzText> lc = boost::make_shared<EzText>( Localization::Words_LevelCleared, Resources::Font_Grobold42_2, std::wstring( L"LevelCleared" ) );
 		SetHeaderProperties( lc );
 		lc->Shadow = true;
 		lc->ShadowOffset = Vector2(20, 20);

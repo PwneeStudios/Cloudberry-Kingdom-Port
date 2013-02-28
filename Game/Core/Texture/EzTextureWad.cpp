@@ -114,7 +114,7 @@ namespace CloudberryKingdom
 		std::wstring lowercaseName = ToLower( name );
 
 		if ( NameDict.find( lowercaseName ) != NameDict.end() )
-            return NameDict[name];
+            return NameDict[ lowercaseName ];
             
         return DefaultTexture;
 
@@ -149,11 +149,10 @@ namespace CloudberryKingdom
 	{
 		boost::shared_ptr<EzTexture> NewTex = 0;
 
+		/*
 		bool OneFound = false;
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 		for ( std::vector<boost::shared_ptr<EzTexture> >::const_iterator texture = TextureList.begin(); texture != TextureList.end(); ++texture )
 		{
-//C# TO C++ CONVERTER TODO TASK: The following .NET 'String.Compare' reference is not converted:
 			if ( CompareIgnoreCase( ( *texture )->Path, Name ) == 0 )
 			{
 				OneFound = true;
@@ -174,7 +173,7 @@ namespace CloudberryKingdom
 			}
 		}
 
-		if ( !OneFound )
+		if ( !OneFound )*/
 		{
 			NewTex = boost::make_shared<EzTexture>();
 			NewTex->Path = Name;
@@ -189,10 +188,10 @@ namespace CloudberryKingdom
 				NameDict[ name ] = NewTex;
 
 			// Add to folder
-			std::wstring folder = Tools::FirstFolder( Name, std::wstring( L"Art/" ) );
-			if ( TextureListByFolder.find( folder ) == TextureListByFolder.end() )
-				TextureListByFolder.insert( make_pair( folder, std::vector<boost::shared_ptr<EzTexture> >() ) );
-			TextureListByFolder[ folder ].push_back( NewTex );
+			//std::wstring folder = Tools::FirstFolder( Name, std::wstring( L"Art/" ) );
+			//if ( TextureListByFolder.find( folder ) == TextureListByFolder.end() )
+			//	TextureListByFolder.insert( make_pair( folder, std::vector<boost::shared_ptr<EzTexture> >() ) );
+			//TextureListByFolder[  folder ].push_back( NewTex );
 		}
 
 		NewTex->Width = Width;
@@ -206,7 +205,7 @@ namespace CloudberryKingdom
 		return 0;
 	}
 
-	boost::shared_ptr<EzTexture> EzTextureWad::AddTexture_Fast( const boost::shared_ptr<Texture2D> &Tex, const std::wstring &Name, int Width, int Height, const std::wstring &StrippedName, const std::wstring &LowerName, , const std::wstring &Folder )
+	boost::shared_ptr<EzTexture> EzTextureWad::AddTexture_Fast( const boost::shared_ptr<Texture2D> &Tex, const std::wstring &Name, int Width, int Height, const std::wstring &StrippedName, const std::wstring &LowerName, const std::wstring &Folder )
 	{
 		boost::shared_ptr<EzTexture> NewTex = 0;
 

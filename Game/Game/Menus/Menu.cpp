@@ -417,7 +417,7 @@ namespace CloudberryKingdom
 		if ( !Active || !Show )
 			return;
 
-		if ( CloudberryKingdomGame::SuperPause ) return;
+		if ( CloudberryKingdomGame::getSuperPause() ) return;
 
 		if ( SkipPhsx )
 		{
@@ -479,9 +479,9 @@ namespace CloudberryKingdom
 		if ( OnX != 0 )
 		{
             ButtonData data = ButtonCheck::State( ControllerButtons_X, getControl() );
-            if (data.Pressed)
+            if ( data.Pressed )
             {
-                MenuItem.ActivatingPlayer = data.PressingPlayer;
+                MenuItem::ActivatingPlayer = data.PressingPlayer;
 
 				ButtonCheck::PreventInput();
 				OnX->Apply( shared_from_this() );
@@ -494,7 +494,7 @@ namespace CloudberryKingdom
             ButtonData data = ButtonCheck::State( ControllerButtons_Y, getControl() );
             if (data.Pressed)
             {
-				MenuItem.ActivatingPlayer = data.PressingPlayer;
+				MenuItem::ActivatingPlayer = data.PressingPlayer;
 
 				ButtonCheck::PreventInput();
 				OnY->Apply();

@@ -1,14 +1,20 @@
 #include <global_header.h>
 
+#include "Game/Menus/Concrete Menus/ShopMenu.h"
+
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
+#include "StartMenu_MW.h"
+
 namespace CloudberryKingdom
 {
 
-	void StartMenu::MenuGo_Campaign( const boost::shared_ptr<MenuItem> &item )
+	void StartMenu_MW::MenuGo_Campaign( const boost::shared_ptr<MenuItem> &item )
 	{
 		// Upsell
 		if ( CloudberryKingdomGame::getIsDemo() )
 		{
-			Title->BackPanel->SetState( StartMenu_MW_Backpanel::State_Scene_Blur_Dark );
+			Title->BackPanel->SetState( StartMenu_MW_Backpanel::State_SCENE_BLUR_DARK );
 			CallingOptionsMenu = true;
 			Call( MakeMagic( UpSellMenu, ( Localization::Words_UpSell_Campaign, MenuItem::ActivatingPlayer ) ) );
 
@@ -102,7 +108,7 @@ namespace CloudberryKingdom
 		StartMenu::OnAdd();
 	}
 
-	void StartMenu_MW::Call( boost::shared_ptr<GUI_Panel> child, int Delay )
+	void StartMenu_MW::Call( const boost::shared_ptr<GUI_Panel> &child, int Delay )
 	{
 		UseBounce = false;
 		ReturnToCallerDelay = 0;

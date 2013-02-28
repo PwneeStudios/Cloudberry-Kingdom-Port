@@ -115,7 +115,7 @@ namespace CloudberryKingdom
         static std::map<int, int> ChallengeGoal;
 
 		static const int HighestLevelNeeded;
-		static boost::shared_ptr<BobPhsx> HighestHero = BobPhsxWheel.Instance;
+		static boost::shared_ptr<BobPhsx> HighestHero;
 
 		ArcadeMenu();
 		boost::shared_ptr<ArcadeMenu> ArcadeMenu_Construct();

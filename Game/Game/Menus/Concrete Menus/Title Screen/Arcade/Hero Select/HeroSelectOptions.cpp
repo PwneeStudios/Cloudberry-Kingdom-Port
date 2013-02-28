@@ -90,7 +90,7 @@ namespace CloudberryKingdom
 		{
             if ( CloudberryKingdomGame::OnlineFunctionalityAvailable() )
             {
-				HeroSelect->Call( MakeMagic( LeaderboardGUI, ( 0, MenuItem::ActivatingPlayer() ) ), 0);
+				HeroSelect->Call( MakeMagic( LeaderboardGUI, ( 0, MenuItem::ActivatingPlayer ) ), 0 );
 				HeroSelect->Hide();
 				HeroSelect->MyHeroDoll->Hide();
 			}
@@ -144,10 +144,10 @@ namespace CloudberryKingdom
 		EnsureFancy();
 
 		std::wstring Space = std::wstring( L"{s34,0}" );
-		boost::shared_ptr<EzText> StartText = boost::make_shared<EzText>( ButtonString::Go( 80 ) + Space + std::wstring( L"{c122,209,39,255} Start" ), ItemFont, true, true );
+		boost::shared_ptr<EzText> StartText = boost::make_shared<EzText>( ButtonString::Go( 80 ) + Space + std::wstring( L" Start" ), ItemFont, true, true );
 		MyPile->Add( StartText, std::wstring( L"Go" ) );
 
-		boost::shared_ptr<EzText> LeaderText = boost::make_shared<EzText>( ButtonString::X( 80 ) + Space + std::wstring( L"{c150,189,244,255} Leaderboard" ), ItemFont, true, true );
+		boost::shared_ptr<EzText> LeaderText = boost::make_shared<EzText>( ButtonString::X( 80 ) + Space + std::wstring( L" Leaderboard" ), ItemFont, true, true );
 		MyPile->Add( LeaderText, std::wstring( L"Leaderboard" ) );
 	#endif
 

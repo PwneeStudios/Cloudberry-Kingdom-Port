@@ -9,6 +9,8 @@
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
+#include <Game\Player\Leaderboard.h>
+
 namespace CloudberryKingdom
 {
 
@@ -420,7 +422,7 @@ namespace CloudberryKingdom
         void PlayerManager::UploadCampaignLevels()
         {
             int level = Players[0]->GetTotalCampaignLevel();
-            boost::shared_ptr<ScoreEntry> score = boost::make_shared<ScoreEntry>( 0, 7777, level, level, level, 0, 0, 0 );
+            boost::shared_ptr<ScoreEntry> score = boost::make_shared<ScoreEntry>( Players[0]->GetName(), 7777, level, level, level, 0, 0, 0 );
 
             Leaderboard::WriteToLeaderboard( score );
         }
@@ -433,8 +435,8 @@ namespace CloudberryKingdom
             int level = Players[ 0 ]->GetTotalLevel();
             if ( level != Players[ 0 ]->LastPlayerLevelUpload )
             {
-                score = boost::make_shared<ScoreEntry>( 0, 9999, level, level, level, 0, 0, 0 );
-                Players[i]->LastPlayerLevelUpload = level;
+                score = boost::make_shared<ScoreEntry>( Players[ 0 ]->GetName(), 9999, level, level, level, 0, 0, 0 );
+                Players[ 0 ]->LastPlayerLevelUpload = level;
                 ShouldUpdate = true;
             }
 
@@ -587,7 +589,7 @@ namespace CloudberryKingdom
             return min;
         }
 
-        int PlayerManager::MaxPlayerTotalCampaignIndex()
+        int PlayerManager::MinPlayerTotalCampaignIndex()
         {
             int min = 0;
 			std::vector<boost::shared_ptr<PlayerData> > vec = getExistingPlayers();
@@ -737,7 +739,7 @@ namespace CloudberryKingdom
 		return coins;
 	}
 
-	const std::vector<boost::shared_ptr<PlayerData> > &PlayerManager::getLoggedInPlayers()
+	const std::vector<boost::shared_ptr<PlayerData> > PlayerManager::getLoggedInPlayers()
 	{
 	#if defined(PC_VERSION)
 		return getExistingPlayers();

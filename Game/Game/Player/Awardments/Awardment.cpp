@@ -189,7 +189,7 @@ namespace CloudberryKingdom
 				// Check we've gotten all Escalation heroes
 				id = Challenge_Escalation::getInstance()->CalcGameId_Level( ArcadeMenu::HighestHero );
 				level = PlayerManager::MaxPlayerHighScore(id);
-				bool escalation_complete = level >= ArcadeMenu.HighestLevelNeeded;
+				bool escalation_complete = level >= ArcadeMenu::HighestLevelNeeded;
 
 				// Check we've gotten all Time Crisis heroes
 				id = Challenge_TimeCrisis::getInstance()->CalcGameId_Level( ArcadeMenu::HighestHero );

@@ -131,7 +131,7 @@ boost::shared_ptr<Set<boost::shared_ptr<Hat> > > CharacterSelectManager::Availab
 	{
 		if ( !QuickJoin )
 		{
-			CloudberryKingdomGame::SetPresence( CloudberryKingdomGame::Presence_TitleScreen );
+			CloudberryKingdomGame::SetPresence( Presence_TitleScreen );
 		}
 
         FakeHide = false;

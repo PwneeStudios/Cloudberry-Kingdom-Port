@@ -15,7 +15,7 @@ namespace CloudberryKingdom
 		using StartMenu::SlideIn;
 		using StartMenu::Call;
 
-		void Call( const boost::shared_ptr<GUI_Panel> &child );
+		virtual void Call( const boost::shared_ptr<GUI_Panel> &child, int Delay );
 		void MenuGo_Campaign( const boost::shared_ptr<MenuItem> &item );
 
 		bool CallingOptionsMenu;

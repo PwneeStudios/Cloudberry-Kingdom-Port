@@ -1,6 +1,7 @@
 #include <global_header.h>
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+#include "Game/Menus/Concrete Menus/ShopMenu.h"
 #include <Hacks\String.h>
 
 namespace CloudberryKingdom

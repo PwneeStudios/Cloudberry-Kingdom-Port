@@ -318,7 +318,6 @@ namespace CloudberryKingdom
 		//	}
 		//}
 
-
 		for( int i = 0; i < sizeof( TEXTURE_PATHS ) / sizeof( TEXTURE_PATHS[ 0 ] ); ++i )
 			Tools::TextureWad->AddTexture( 0, TEXTURE_PATHS[ i ], TEXTURE_WIDTHS[ i ], TEXTURE_HEIGHTS[ i ] );
 
@@ -363,6 +362,15 @@ boost::shared_ptr<Thread> Resources::LoadThread = 0;
 
 		// Fireball texture
 		Fireball::PreInit();
+
+        // Set textures to be transparent until loaded.
+		for (int i = 0; i < Tools::TextureWad->TextureList.size(); i++)
+		{
+			var tex = Tools.TextureWad.TextureList[i];
+			tex.Tex = Tools.Transparent.Tex;
+
+            Resources.ResourceLoadedCountRef.Val++;
+		}
 
 		//for ( std::vector<boost::shared_ptr<EzTexture> >::const_iterator Tex = Tools::TextureWad->TextureList.begin(); Tex != Tools::TextureWad->TextureList.end(); ++Tex )
 		//{

@@ -35,7 +35,7 @@ namespace CloudberryKingdom
 		GUI_Panel::GUI_Panel_Construct();
 
 #if PC_VERSION
-		if ( button == ControllerButtons_A || button == ControllerButtons_Any )
+		if ( button == ControllerButtons_A || button == ControllerButtons_ANY )
 		{
 			if ( MyButton2 == 0 )
 				MyButton2 = boost::make_shared<ButtonClass>();
@@ -81,7 +81,7 @@ namespace CloudberryKingdom
 		boost::shared_ptr<Level> level = getCore()->MyLevel;
 
 		// Listen
-        if ( MyButton == ControllerButtons_Any && MyType == Type_ON_PRESSED && ButtonCheck::AnyKey()
+        if ( MyButton == ControllerButtons_ANY && MyType == Type_ON_PRESSED && ButtonCheck::AnyKey()
 			||
 			MyType == Type_ON_DOWN &&
                 (ButtonCheck::State( MyButton, getControl() ).Down || ButtonCheck::State( MyButton2, getControl() ).Down )

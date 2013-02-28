@@ -1,5 +1,7 @@
 #include <global_header.h>
 
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
 
@@ -49,7 +51,7 @@ namespace CloudberryKingdom
 
 		if ( Challenge::ChosenHero == BobPhsxRocketbox::getInstance() )
 		{
-			Length = (int)( Length * CoreMath.LerpRestrict(1.0f, 10.0f, Index / 1000.0f ) );
+			Length = (int)( Length * CoreMath::LerpRestrict(1.0f, 10.0f, Index / 1000.0f ) );
 		}
 
 		return Length;
@@ -79,6 +81,6 @@ namespace CloudberryKingdom
 	{
 		Challenge_HeroRush::Start( StartLevel );
 
-        CloudberryKingdomGame::SetPresence( CloudberryKingdomGame::Presence_TimeCrisis );
+        CloudberryKingdomGame::SetPresence( Presence_TimeCrisis );
 	}
 }

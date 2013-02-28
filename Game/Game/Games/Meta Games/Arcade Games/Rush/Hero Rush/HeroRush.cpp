@@ -2,6 +2,8 @@
 
 #include "Hacks/List.h"
 
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
 
@@ -214,7 +216,7 @@ namespace CloudberryKingdom
 
         void Challenge_HeroRush::Start(int StartLevel)
         {
-			CloudberryKingdomGame::SetPresence( CloudberryKingdomGame::Presence_HeroRush );
+			CloudberryKingdomGame::SetPresence( Presence_HeroRush );
 
             ShuffleHeros();
 

@@ -1,5 +1,7 @@
 #include <global_header.h>
 
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
 
@@ -69,7 +71,7 @@ namespace CloudberryKingdom
 
 	void StartMenu_MW_Arcade::OnAdd()
 	{
-		CloudberryKingdomGame::SetPresence( CloudberryKingdomGame::Presence_Arcade );
+		CloudberryKingdomGame::SetPresence( Presence_Arcade );
 
 		ArcadeMenu::OnAdd();
 	}

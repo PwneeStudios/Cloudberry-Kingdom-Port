@@ -21,9 +21,9 @@ namespace CloudberryKingdom
 		Tools::CurGameData->WaitThenDo( 55, boost::make_shared<ConstructorPressAListenerHelperHelper>( ss ) );
 
 		ss->PressA_Listener->Release();
-		ss->PressA_Listener->MyAction.reset();
 		if ( ss->PressA != 0 )
 			ss->PressA->Kill( true );
+		ss->PressA_Listener->MyAction.reset();
 	}
 
 	ScreenSaver::ScreenSaverReleaseHelper::ScreenSaverReleaseHelper( const boost::shared_ptr<ScreenSaver> &ss )
@@ -155,8 +155,8 @@ namespace CloudberryKingdom
 		if ( !ForTrailer )
 			Tools::CurGameData->AddGameObject( ss->PressA );
 
-        ss->PressA->MyText->FixedToCamera = true;
-        ss->PressA->FixedToCamera = true;
+        ss->PressA->MyText->FixedToCamera = false;
+        ss->PressA->FixedToCamera = false;
 	}
 
 	ScreenSaver::AddListenerLambda::AddListenerLambda( const boost::shared_ptr<ScreenSaver> &ss )
@@ -166,7 +166,7 @@ namespace CloudberryKingdom
 
 	void ScreenSaver::AddListenerLambda::Apply()
 	{
-		ss->PressA_Listener = MakeMagic( Listener, ( ControllerButtons_Any, boost::make_shared<ConstructorPressAListenerHelper>( ss ) ) );
+		ss->PressA_Listener = MakeMagic( Listener, ( ControllerButtons_ANY, boost::make_shared<ConstructorPressAListenerHelper>( ss ) ) );
 		ss->PressA_Listener->PreventRelease = true;
 		ss->PressA_Listener->setControl( -2 );
 		Tools::CurGameData->AddGameObject( ss->PressA_Listener );

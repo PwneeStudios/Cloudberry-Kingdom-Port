@@ -4,6 +4,8 @@
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
+#include "Game/Menus/Concrete Menus/ShopMenu.h"
+
 namespace CloudberryKingdom
 {
 

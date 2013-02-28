@@ -2,6 +2,10 @@
 
 #include <MasterHack.h>
 
+#include "Game/Menus/Concrete Menus/ShopMenu.h"
+
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
 
@@ -322,7 +326,7 @@ namespace CloudberryKingdom
 		text->ShadowColor = Color( .2f,.2f,.2f,.6f );
 		text->Shadow = true;
 
-		//text.Angle = CoreMath.Radians(23);
+		//text.Angle = CoreMath::Radians(23);
 	}
 
 	void CustomHero_GUI::SetSuperHeader( const boost::shared_ptr<EzText> &text )
@@ -763,7 +767,7 @@ if ( ButtonCheck::ControllerInUse )
 			CloudberryKingdomGame::Freeplay_Count++;
 			if ( CloudberryKingdomGame::getIsDemo() && CloudberryKingdomGame::Freeplay_Count >= CloudberryKingdomGame::Freeplay_Max )
 			{
-				Call( MakeMagic( UpSellMenu, ( Localization::Words_UpSell_FreePlay, MenuItem.::ActivatingPlayer ) );
+				Call( MakeMagic( UpSellMenu, ( Localization::Words_UpSell_FreePlay, MenuItem::ActivatingPlayer ) ) );
 				Hide( PresetPos_RIGHT, 0 );
 
 				return;

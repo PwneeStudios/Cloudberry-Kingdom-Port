@@ -24,19 +24,20 @@ namespace CloudberryKingdom
 
 	bool Leaderboard::WritingInProgress = false;
 
-	inline uint64_t PackBoardAndScore( int board, int score )
+	inline INT64 PackBoardAndScore( int board, int score )
 	{
-		return ( static_cast< uint64_t >( board ) << 32 ) | score;
+		return ( static_cast< INT64 >( board ) << 32 ) | score;
 	}
 
-	inline void UnpackBoardAndScore( uint64_t packed, int &board, int &score )
+	inline void UnpackBoardAndScore( INT64 packed, int &board, int &score )
 	{
 		score = packed & 0xffffffff;
 		board = packed >> 32; 
 	}
 
-	static void WriteToLeaderboardThread( uint64_t context )
+	static void WriteToLeaderboardThread( INT64 context )
 	{
+#if PS3
 		int contextId;
 		if( !GetNPScoreContext( contextId ) )
 		{
@@ -69,6 +70,7 @@ namespace CloudberryKingdom
 		Leaderboard::WritingInProgress = false;
 
 		sys_ppu_thread_exit( 0 );
+#endif
 	}
 
 	void Leaderboard::WriteToLeaderboard( boost::shared_ptr<ScoreEntry> score )
@@ -216,7 +218,7 @@ namespace CloudberryKingdom
 	static SceNpScoreRankData Ranks[ Leaderboard::EntriesPerPage ];
 	static int NumRanks;
 
-	static void RequestLeaderboardThread( uint64_t context )
+	static void RequestLeaderboardThread( INT64 context )
 	{
 		int contextId;
 		if( !GetNPScoreContext( contextId ) )
@@ -288,14 +290,13 @@ namespace CloudberryKingdom
 
     void Leaderboard::RequestMore( int RequestPage )
     {
+#if PS3
 		// Should return early if already trying to get info (if an async request is in progress)
-        //if (MoreRequested || result != null) return;
 		if ( MoreRequested || CurrentLeaderboard != NULL ) return;
 
         this->MoreRequested = true;
         this->RequestPage = RequestPage;
 
-#if PS3
 		int contextId;
 		if( !GetNPScoreContext( contextId ) )
 		{

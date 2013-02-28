@@ -305,7 +305,8 @@ namespace CloudberryKingdom
 		MyGame->AddGameObject( arrow );
 
 
-		boost::shared_ptr<GUI_Text> text = MakeMagic( GUI_Text, ( Format( Localization::WordString( Localization::Words_SecondsOnTheClock ), HeroRush::Timer->Seconds ), arrow->getCore()->Data.Position + Vector2(0, -530) ) );
+		std::wstring s = Format( Localization::WordString( Localization::Words_SecondsOnTheClock ).c_str(), HeroRush->Timer->getSeconds() );
+		boost::shared_ptr<GUI_Text> text = MakeMagic( GUI_Text, ( s, arrow->getCore()->Data.Position + Vector2(0, -530) ) );
 
 		MyGame->AddGameObject( text );
 

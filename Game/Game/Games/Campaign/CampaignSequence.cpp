@@ -1,6 +1,7 @@
 #include <global_header.h>
 
 #include "Game/Tilesets/Backgrounds/_Code/CloudberryKingdom.Background.h"
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
 #include <Hacks/Parse.h>
 #include <Hacks/FileReader.h>
@@ -12,6 +13,8 @@
 
 namespace CloudberryKingdom
 {
+
+		boost::shared_ptr<Challenge_StoryMode> Challenge_StoryMode::instance;
 
 		void Challenge_StoryMode::InitializeStatics()
 		{
@@ -115,7 +118,7 @@ namespace CloudberryKingdom
 	void CampaignSequence::Start( int Chapter )
 	{
         CloudberryKingdomGame::PromptForDeviceIfNoneSelected();
-		CloudberryKingdomGame::SetPresence( CloudberryKingdomGame::Presence_Campaign );
+		CloudberryKingdomGame::SetPresence( Presence_Campaign );
 
 		MusicStarted = false;
 

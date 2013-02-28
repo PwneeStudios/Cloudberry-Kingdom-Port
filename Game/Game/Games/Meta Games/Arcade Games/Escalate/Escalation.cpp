@@ -5,6 +5,8 @@
 
 #include <MasterHack.h>
 
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
 
@@ -127,7 +129,7 @@ namespace CloudberryKingdom
 
 	void Challenge_Escalation::Start( int StartLevel )
 	{
-		CloudberryKingdomGame::SetPresence( CloudberryKingdomGame::Presence_Escalation );
+		CloudberryKingdomGame::SetPresence( Presence_Escalation );
 
 		Challenge::Start( StartLevel );
 

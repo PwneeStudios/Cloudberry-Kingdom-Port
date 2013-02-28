@@ -332,22 +332,22 @@ namespace CloudberryKingdom
 
 			float rnd = Tools::GlobalRnd->RndFloat(0, 100);
 			if (rnd > 80)
-				piece->MyUpgrades1->Get( Upgrade_SERPENT ) = CoreMath.Lerp(piece->MyUpgrades1->Get( Upgrade_SERPENT ), 10.0f, s);
+				piece->MyUpgrades1->Get( Upgrade_SERPENT ) = CoreMath::Lerp(piece->MyUpgrades1->Get( Upgrade_SERPENT ), 10.0f, s);
 			else if (rnd > 60)
-				piece->MyUpgrades1->Get( Upgrade_LAVA_DRIP ) = CoreMath.Lerp(piece->MyUpgrades1->Get( Upgrade_LAVA_DRIP ), 10.0f, s);
+				piece->MyUpgrades1->Get( Upgrade_LAVA_DRIP ) = CoreMath::Lerp(piece->MyUpgrades1->Get( Upgrade_LAVA_DRIP ), 10.0f, s);
 			else if (rnd > 40)
-				piece->MyUpgrades1->Get( Upgrade_FIREBALL ) = CoreMath.Lerp(piece->MyUpgrades1->Get( Upgrade_FIREBALL ), 10.0f, s);
+				piece->MyUpgrades1->Get( Upgrade_FIREBALL ) = CoreMath::Lerp(piece->MyUpgrades1->Get( Upgrade_FIREBALL ), 10.0f, s);
 
 			rnd = Tools::GlobalRnd->RndFloat(0, 100);
 			if (rnd > 50)
-				piece->MyUpgrades1->Get( Upgrade_CEILING ) = CoreMath.Lerp(piece->MyUpgrades1->Get( Upgrade_CEILING ), 10.0f, s);
+				piece->MyUpgrades1->Get( Upgrade_CEILING ) = CoreMath::Lerp(piece->MyUpgrades1->Get( Upgrade_CEILING ), 10.0f, s);
 
-			piece->MyUpgrades1->Get( Upgrade_SPIKEY_GUY ) = CoreMath.Lerp(piece->MyUpgrades1->Get( Upgrade_SPIKEY_GUY ), 10.0f, s);
-			piece->MyUpgrades1->Get( Upgrade_PINKY ) = CoreMath.Lerp(piece->MyUpgrades1->Get( Upgrade_PINKY ), 10.0f, s);
-			piece->MyUpgrades1->Get( Upgrade_SPIKEY_LINE ) = CoreMath.Lerp(piece->MyUpgrades1->Get( Upgrade_SPIKEY_LINE ), 10.0f, s);
-			piece->MyUpgrades1->Get( Upgrade_SPIKE ) = CoreMath.Lerp(piece->MyUpgrades1->Get( Upgrade_SPIKE ), 10.0f, s);
+			piece->MyUpgrades1->Get( Upgrade_SPIKEY_GUY ) = CoreMath::Lerp(piece->MyUpgrades1->Get( Upgrade_SPIKEY_GUY ), 10.0f, s);
+			piece->MyUpgrades1->Get( Upgrade_PINKY ) = CoreMath::Lerp(piece->MyUpgrades1->Get( Upgrade_PINKY ), 10.0f, s);
+			piece->MyUpgrades1->Get( Upgrade_SPIKEY_LINE ) = CoreMath::Lerp(piece->MyUpgrades1->Get( Upgrade_SPIKEY_LINE ), 10.0f, s);
+			piece->MyUpgrades1->Get( Upgrade_SPIKE ) = CoreMath::Lerp(piece->MyUpgrades1->Get( Upgrade_SPIKE ), 10.0f, s);
 				
-			piece->MyUpgrades1->Get( Upgrade_SPEED ) = CoreMath.Lerp(piece->MyUpgrades1->Get( Upgrade_SPEED ), 10.0f, s);
+			piece->MyUpgrades1->Get( Upgrade_SPEED ) = CoreMath::Lerp(piece->MyUpgrades1->Get( Upgrade_SPEED ), 10.0f, s);
 		}
 
 		piece->StandardClose();
@@ -359,7 +359,7 @@ namespace CloudberryKingdom
 			return;
 
 		EasyUpgrades = std::vector<UpgradeSequence>();
-		EasyUpgrades_SS = std::vector<UpgradeSequence>();
+		//EasyUpgrades_SS = std::vector<UpgradeSequence>();
 
 		// Difficulties
 		MakeEasyUpgrades();
@@ -367,10 +367,10 @@ namespace CloudberryKingdom
 		MakeAbusiveUpgrades();
 		MakeHardcoreUpgrades();
 
-		MakeEasyUpgrades_SS();
-		MakeNormalUpgrades_SS();
-		MakeAbusiveUpgrades_SS();
-		MakeHardcoreUpgrades_SS();
+		//MakeEasyUpgrades_SS();
+		//MakeNormalUpgrades_SS();
+		//MakeAbusiveUpgrades_SS();
+		//MakeHardcoreUpgrades_SS();
 
 		// Special hero overrides
 		MakeCartUpgrades();

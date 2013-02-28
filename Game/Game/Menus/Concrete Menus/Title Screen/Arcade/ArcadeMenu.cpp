@@ -156,8 +156,8 @@ namespace CloudberryKingdom
     boost::shared_ptr<BobPhsx> ArcadeMenu::BigBouncy;
     boost::shared_ptr<BobPhsx> ArcadeMenu::Ultimate;
 
-	const int HighestLevelNeeded = 80;
-	boost::shared_ptr<BobPhsx> HighestHero;
+	const int ArcadeMenu::HighestLevelNeeded = 80;
+	boost::shared_ptr<BobPhsx> ArcadeMenu::HighestHero = boost::static_pointer_cast<BobPhsx>( BobPhsxWheel::getInstance() );
 
 	void ArcadeMenu::StaticInit()
 	{

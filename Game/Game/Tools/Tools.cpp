@@ -632,9 +632,16 @@ namespace CloudberryKingdom
 	void Tools::LoadBasicArt( const boost::shared_ptr<ContentManager> &Content )
 	{
 		TextureWad = boost::make_shared<EzTextureWad>();
-		TextureWad->AddTexture( Content->Load<Texture2D>( std::wstring( L"White" ) ), std::wstring( L"White" ) );
-		TextureWad->AddTexture( Content->Load<Texture2D>( std::wstring( L"Circle" ) ), std::wstring( L"Circle" ) );
-		TextureWad->AddTexture( Content->Load<Texture2D>( std::wstring( L"Smooth" ) ), std::wstring( L"Smooth" ) );
+		boost::shared_ptr<Texture2D> t;
+		
+		t = Content->Load<Texture2D>( std::wstring( L"White" ) );
+		TextureWad->AddTexture( t, std::wstring( L"White" ), 8, 8 );
+
+		t = Content->Load<Texture2D>( std::wstring( L"Circle" ) );
+		TextureWad->AddTexture( t, std::wstring( L"Circle" ), 114, 114 );
+		
+		t = Content->Load<Texture2D>( std::wstring( L"Smooth" ) );
+		TextureWad->AddTexture( t, std::wstring( L"Smooth" ), 128, 128 );
 
 		TextureWad->DefaultTexture = TextureWad->TextureList[ 0 ];
 	}

@@ -33,7 +33,7 @@ namespace CloudberryKingdom
 		virtual void Serialize( const boost::shared_ptr<BinaryWriter> &writer );
 		virtual void FailLoad();
 		virtual void Deserialize( std::vector<unsigned char> Data );
-		virtual void ProcessChunk( boost::shared_ptr<Chunk> chunk );
+		static void ProcessChunk( boost::shared_ptr<Chunk> chunk );
 		#pragma endregion
 
 	

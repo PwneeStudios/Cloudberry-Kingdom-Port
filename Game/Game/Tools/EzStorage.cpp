@@ -174,10 +174,10 @@ namespace CloudberryKingdom
 #if PC_VERSION
 		// FIXME: save/load on PC version
 		return;
-#endif
-
+#else
 		if( !InitializeSave() )
 			return;
+#endif
 
 		for ( std::vector<boost::shared_ptr<SaveLoad> >::const_iterator ThingToLoad = ThingsToSave.begin(); ThingToLoad != ThingsToSave.end(); ++ThingToLoad )
 		{

@@ -2,6 +2,10 @@
 
 #include <Core\Tools\Set.h>
 
+#include "Game/Menus/Concrete Menus/ShopMenu.h"
+
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
 
@@ -369,7 +373,7 @@ bool InGameStartMenu::PreventMenu = false;
 	{
         if ( CloudberryKingdomGame::getIsDemo() )
         {
-            Call( MakeMagic( UpSellMenu ( Localization::Words_UpSell_SaveLoad, MenuItem::ActivatingPlayer ) ), 0);
+            Call( MakeMagic( UpSellMenu, ( Localization::Words_UpSell_SaveLoad, MenuItem::ActivatingPlayer ) ), 0);
         }
         else
         {
@@ -390,21 +394,21 @@ bool InGameStartMenu::PreventMenu = false;
             }
 #endif
 
-
-		// If this isn't a PC, and we can't load seeds right now, then go directly to the SaveAs menu.
-	#if !defined(PC_VERSION)
-		if ( !getMyLevel()->CanLoadLevels )
-		{
-			Call( MakeMagic( SaveSeedAs, ( getControl(), MenuItem::GetActivatingPlayerData() ) ), 0 );
-		}
-		else
-	#endif
-		{
-	#if defined(PC_VERSION)
-			Call( MakeMagic( SaveLoadSeedMenu, ( getControl(), getMyLevel()->CanLoadLevels, getMyLevel()->CanSaveLevel ) ), 0 );
-	#else
-			Call( MakeMagic( SaveLoadSeedMenu, ( getControl(), getMyLevel()->CanLoadLevels, getMyLevel()->CanSaveLevel ) ), 0 );
-	#endif
+			// If this isn't a PC, and we can't load seeds right now, then go directly to the SaveAs menu.
+		#if !defined(PC_VERSION)
+			if ( !getMyLevel()->CanLoadLevels )
+			{
+				Call( MakeMagic( SaveSeedAs, ( getControl(), MenuItem::GetActivatingPlayerData() ) ), 0 );
+			}
+			else
+		#endif
+			{
+		#if defined(PC_VERSION)
+				Call( MakeMagic( SaveLoadSeedMenu, ( getControl(), getMyLevel()->CanLoadLevels, getMyLevel()->CanSaveLevel ) ), 0 );
+		#else
+				Call( MakeMagic( SaveLoadSeedMenu, ( getControl(), getMyLevel()->CanLoadLevels, getMyLevel()->CanSaveLevel ) ), 0 );
+		#endif
+			}
 		}
 
         if ( UseBounce )
@@ -418,7 +422,6 @@ bool InGameStartMenu::PreventMenu = false;
 		}
 
 		setPauseGame( true );
-
 	}
 
 	void InGameStartMenu::GoStats()
