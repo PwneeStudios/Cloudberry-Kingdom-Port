@@ -363,13 +363,15 @@ boost::shared_ptr<Thread> Resources::LoadThread = 0;
 		// Fireball texture
 		Fireball::PreInit();
 
-        // Set textures to be transparent until loaded.
-		for (int i = 0; i < Tools::TextureWad->TextureList.size(); i++)
+        // Set off load calls
+		for ( std::vector<boost::shared_ptr<EzTexture> >::const_iterator Tex = Tools::TextureWad->TextureList.begin();
+			  Tex != Tools::TextureWad->TextureList.end(); ++Tex )
 		{
-			var tex = Tools.TextureWad.TextureList[i];
-			tex.Tex = Tools.Transparent.Tex;
-
-            Resources.ResourceLoadedCountRef.Val++;
+			// If texture hasn't been loaded yet, load it
+			if ( ( *Tex )->getTex() == 0 && !(*Tex)->FromCode )
+			{
+				( *Tex )->setTex( Tools::GameClass->Content->Load< Texture2D >( ( *Tex )->Path ) );
+			}
 		}
 
 		//for ( std::vector<boost::shared_ptr<EzTexture> >::const_iterator Tex = Tools::TextureWad->TextureList.begin(); Tex != Tools::TextureWad->TextureList.end(); ++Tex )
