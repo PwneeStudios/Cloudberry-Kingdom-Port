@@ -1021,7 +1021,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 			ZoomMod = getMyCameraZoom().X / .001f;
 
 		Vector2 Position = _Pos + JustificationShift;
-		if ( FixedToCamera ) Position += cam->Data.Position;
+		//if ( FixedToCamera ) Position += cam->Data.Position;
 		if ( FixedToCamera ) Position += Vector2(Tools::EffectWad->getCameraPosition().X, Tools::EffectWad->getCameraPosition().Y);
 		Vector2 Loc = Tools::ToScreenCoordinates( Position, cam, Tools::EffectWad->ModZoom );
 
@@ -1058,6 +1058,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 				pos2 = Tools::ToWorldCoordinates( pos2, cam, getMyCameraZoom() * Tools::EffectWad->ModZoom.X );
 				//scale *= 1000.f / 320.f;
 
+				/*
 				::SimpleQuad sq;
 				sq.V[0] = Vector2( pos.X, pos2.Y );
 				sq.V[1] = Vector2( pos.X, pos.Y );
@@ -1073,6 +1074,9 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 				sq.Color = Vector4(1);
 
 				QUAD_DRAWER->Draw( sq );
+				*/
+
+				Tools::QDrawer->DrawPic( pos, pos2, ( *pic )->tex, Color::White );
 			}
 	}
 

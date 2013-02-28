@@ -92,6 +92,8 @@ namespace CloudberryKingdom
 		{
 			DelayToAllowInput = 10;
 
+			CloudberryKingdomGame::PastPressStart = true;
+
             if ( CloudberryKingdomGame::SimpleMainMenu )
                 Call( MakeMagic( StartMenu_MW_Simple, ( Title ) ) );
             else

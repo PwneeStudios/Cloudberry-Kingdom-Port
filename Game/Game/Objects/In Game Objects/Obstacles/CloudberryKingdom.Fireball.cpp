@@ -155,7 +155,6 @@ namespace CloudberryKingdom
 	{
 #if defined( PC )
 		// FIXME
-		FireballTexture->_Tex = Tools::TextureWad->TextureList[0]->_Tex;
 		return;
 #endif
 
@@ -212,10 +211,8 @@ namespace CloudberryKingdom
 
 	void Fireball::DrawEmitterTexture( const boost::shared_ptr<GraphicsDevice> &, const boost::shared_ptr<EzEffectWad> &EffectWad )
 	{
-#if defined( PC )
+#if defined( PC_VERSION )
 		// FIXME
-		FlameTexture->_Tex = Tools::TextureWad->TextureList[0]->_Tex;
-		EmitterTexture->_Tex = Tools::TextureWad->TextureList[0]->_Tex;
 		return;
 #endif
 

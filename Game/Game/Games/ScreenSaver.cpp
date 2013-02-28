@@ -155,8 +155,8 @@ namespace CloudberryKingdom
 		if ( !ForTrailer )
 			Tools::CurGameData->AddGameObject( ss->PressA );
 
-        ss->PressA->MyText->FixedToCamera = false;
-        ss->PressA->FixedToCamera = false;
+        ss->PressA->MyText->FixedToCamera = true;
+        ss->PressA->FixedToCamera = true;
 	}
 
 	ScreenSaver::AddListenerLambda::AddListenerLambda( const boost::shared_ptr<ScreenSaver> &ss )

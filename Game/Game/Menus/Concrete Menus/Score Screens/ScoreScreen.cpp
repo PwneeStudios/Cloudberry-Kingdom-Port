@@ -7,29 +7,26 @@
 namespace CloudberryKingdom
 {
 		
-			ScoreScreen::EOL_WaitThenDoEndActionWaitProxy::EOL_WaitThenDoEndActionWaitProxy( const boost::shared_ptr<StringWorldGameData> &sw, const boost::shared_ptr<Door> &door )
-			{
-				this->sw = sw;
-				this->door = door;
-			}
+	ScoreScreen::EOL_WaitThenDoEndActionWaitProxy::EOL_WaitThenDoEndActionWaitProxy( const boost::shared_ptr<StringWorldGameData> &sw, const boost::shared_ptr<Door> &door )
+	{
+		this->sw = sw;
+		this->door = door;
+	}
 
-			void ScoreScreen::EOL_WaitThenDoEndActionWaitProxy::Apply()
-			{
-				sw->EOL_StringWorldDoorEndAction( door );
-			}
+	void ScoreScreen::EOL_WaitThenDoEndActionWaitProxy::Apply()
+	{
+		sw->EOL_StringWorldDoorEndAction( door );
+	}
 
+	ScoreScreen::EOL_WaitThenDoEndActionProxy::EOL_WaitThenDoEndActionProxy( boost::shared_ptr<ScoreScreen> ss )
+	{
+		this->ss = ss;
+	}
 
-
-			ScoreScreen::EOL_WaitThenDoEndActionProxy::EOL_WaitThenDoEndActionProxy( boost::shared_ptr<ScoreScreen> ss )
-			{
-				this->ss = ss;
-			}
-
-			void ScoreScreen::EOL_WaitThenDoEndActionProxy::Apply( const boost::shared_ptr<Door> &door )
-			{
-				ss->EOL_WaitThenDoEndAction( door );
-			}
-
+	void ScoreScreen::EOL_WaitThenDoEndActionProxy::Apply( const boost::shared_ptr<Door> &door )
+	{
+		ss->EOL_WaitThenDoEndAction( door );
+	}
 
 	ScoreScreen::OnAddHelper::OnAddHelper( const boost::shared_ptr<ScoreScreen> &ss )
 	{
@@ -162,7 +159,6 @@ namespace CloudberryKingdom
 	{
 		ss->MenuGo_ExitFreeplay( item );
 	}
-
 
 	void ScoreScreen::MakeMenu()
 	{
