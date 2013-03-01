@@ -30,14 +30,17 @@ void TexturePS3::Load()
 	path[ length - 2 ] = 't';
 	path[ length - 1 ] = 'f';
 
-	static int counter = 0;
-	int result = psglCreateTextureReferenceFromGTFFile( path.c_str(), &internal_->Ref, counter < 650, false );
+	uint32_t gpuMemorySize = 0;
+	uint32_t ppuMemorySize = 0;
+
+	//static int counter = 0;
+	int result = psglCreateTextureReferenceFromGTFFile( path.c_str(), &internal_->Ref, true/*counter < 650*/, false, &gpuMemorySize, &ppuMemorySize );
 	if( result != 0 )
 		setLoaded( false );
 	else
 	{
 		setLoaded( true );
-		counter++;
+		//counter++;
 	}
 }
 

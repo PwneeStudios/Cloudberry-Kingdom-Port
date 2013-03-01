@@ -17,6 +17,7 @@
 #include <Utility/Log.h>
 
 #include <cell/sysmodule.h>
+#include <netex/libnetctl.h>
 #include <np.h>
 #include <PSGL/psgl.h>
 #include <PSGL/psglu.h>
@@ -147,6 +148,19 @@ static void SystemCallback( const uint64_t status, const uint64_t param, void *u
 	case CELL_SYSUTIL_SYSTEM_MENU_OPEN:
 	case CELL_SYSUTIL_SYSTEM_MENU_CLOSE:
 		break;
+	case CELL_SYSUTIL_NET_CTL_NETSTART_FINISHED:
+		{
+			CellNetCtlNetStartDialogResult result;
+			result.size = sizeof( result );
+			result.result = 0;
+
+			int ret = cellNetCtlNetStartDialogUnloadAsync( &result );
+			if( ret < 0 )
+				LOG.Write( "Failed to cellNetCtlNetStartDialogUnloadAsync: 0x%x\n", ret );
+			else
+				LOG.Write( "cellNetCtlNetStartDialogUnloadAsync result = 0x%x\n", ret );
+		}
+		break;
 	default:
 		LOG.Write( "Unknown callback status: 0x%llx\n", status );
 	}
@@ -175,6 +189,7 @@ CorePS3::CorePS3( GameLoop &game ) :
 	CELL_ERR_CHECK( cellSysmoduleLoadModule( CELL_SYSMODULE_SYSUTIL_GAME ), "Failed to load IO\n" );
 	CELL_ERR_CHECK( cellSysmoduleLoadModule( CELL_SYSMODULE_SYSUTIL_NP ), "Failed to load NP\n" );
 	CELL_ERR_CHECK( cellSysmoduleLoadModule( CELL_SYSMODULE_SYSUTIL_LICENSEAREA ), "Failed to load License Area\n" );
+	CELL_ERR_CHECK( cellSysmoduleLoadModule( CELL_SYSMODULE_NETCTL ), "Failed to load NETCTL\n" );
 
 	LoadModules();
 
@@ -388,6 +403,11 @@ bool GetNPScoreContext( int &id )
 	return true;
 }
 
+bool IsNPAvailable()
+{
+	return NPIdObtained;
+}
+
 /*void CreateScoreContext( uint64_t context )
 {
 	//NPIdObtained = false;
@@ -491,9 +511,24 @@ void NPManagerCallback( int event, int result, void *arg )
 }
 
 static bool ErrorDialogOpen = false;
+static ErrorType CurrentError( 0 );
 
 void ErrorDialogCallback( int buttonType, void *userData )
 {
+	ErrorType::CompleteCallback complete = CurrentError.GetComplete();
+
+	switch( buttonType )
+	{
+	case CELL_MSGDIALOG_BUTTON_YES:
+		if( complete )
+			complete( true );
+		break;
+	case CELL_MSGDIALOG_BUTTON_NO:
+		if( complete )
+			complete( false );
+		break;
+	}
+
 	ErrorDialogOpen = false;
 }
 
@@ -548,12 +583,22 @@ int CorePS3::Run()
 	if( ret != 0 )
 		LOG.Write( "Failed to start RegisterTrophyContextThread: 0x%x\n", ret );
 
+	ret = cellNetCtlInit();
+	if( ret < 0 )
+		LOG.Write( "Failed to cellNetCtlInit: 0x%x\n", ret );
+
 	//DisplayError( ErrorType( 0x8002a1a4 ) );
 
 	while( running_ )
 	{
 		if( ErrorDialogOpen )
 		{
+			if( CurrentError.GetAutoClose() )
+			{
+				if( CurrentError.GetAutoClose()() )
+					cellMsgDialogClose( 0.f );
+			}
+
 			glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
 			int ret = cellSysutilCheckCallback();
@@ -566,18 +611,32 @@ int CorePS3::Run()
 
 		if( GLOBAL_ERROR_QUEUE.size() > 0 )
 		{
-			ErrorType error( GLOBAL_ERROR_QUEUE.front() );
+			CurrentError = GLOBAL_ERROR_QUEUE.front();
 			GLOBAL_ERROR_QUEUE.pop_front();
 
 			int ret = 0;
-			switch( error.GetMessageType() )
+			switch( CurrentError.GetMessageType() )
 			{
 			case ErrorType::CODE:
-				ret = cellMsgDialogOpenErrorCode( error.GetCode(), ErrorDialogCallback, NULL, NULL );
+				ret = cellMsgDialogOpenErrorCode( CurrentError.GetCode(), ErrorDialogCallback, NULL, NULL );
 				break;
 			case ErrorType::STRING:
-				ret = cellMsgDialogOpen2( error.IsFatal() ? CELL_MSGDIALOG_TYPE_SE_TYPE_ERROR : CELL_MSGDIALOG_TYPE_SE_TYPE_NORMAL,
-					error.GetMessage().c_str(), ErrorDialogCallback, NULL, NULL );
+				{
+					unsigned int type = CurrentError.IsFatal() ? CELL_MSGDIALOG_TYPE_SE_TYPE_ERROR : CELL_MSGDIALOG_TYPE_SE_TYPE_NORMAL;
+					switch( CurrentError.GetInputType() )
+					{
+					case ErrorType::DEFAULT:
+						break;
+					case ErrorType::YESNO:
+						type |= CELL_MSGDIALOG_TYPE_BUTTON_TYPE_YESNO;
+						break;
+					case ErrorType::OK:
+						type |= CELL_MSGDIALOG_TYPE_BUTTON_TYPE_OK;
+						break;
+					}
+
+					ret = cellMsgDialogOpen2( type, CurrentError.GetMessage().c_str(), ErrorDialogCallback, NULL, NULL );
+				}
 				break;
 			}
 			if( ret == 0 )

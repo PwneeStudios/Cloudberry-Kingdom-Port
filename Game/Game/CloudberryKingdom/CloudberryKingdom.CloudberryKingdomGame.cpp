@@ -21,6 +21,7 @@
 #include <MasterHack.h>
 #include <Utility/Log.h>
 #include <Utility/ConsoleInformation.h>
+#include <Utility/Error.h>
 #include <Core\Tools\Set.h>
 
 #include "Game/Tilesets/Backgrounds/_Code/CloudberryKingdom.Background.h"
@@ -38,6 +39,11 @@
 	#include <malloc.h>
 	#include <crtdbg.h>
 	//#include <dbgint.h>
+#endif
+
+#ifdef PS3
+	#include <Utility/NetworkPS3.h>
+	#include <netex/libnetctl.h>
 #endif
 
 namespace CloudberryKingdom
@@ -279,7 +285,11 @@ namespace CloudberryKingdom
         {
 			// Check that online network is available
 
-			return true;
+#ifdef PS3
+			return IsNPAvailable();
+#else
+			return false;
+#endif
 		}
 
 		void CloudberryKingdomGame::BeginShowMarketplace()
@@ -1103,9 +1113,28 @@ float CloudberryKingdomGame::fps = 0;
 #endif
 		}
 
+#ifdef PS3
+		void DecideToSignInCallback( bool yes )
+		{
+			if( yes )
+			{
+				CellNetCtlNetStartDialogParam param;
+				param.size = sizeof( param );
+				param.type = CELL_NET_CTL_NETSTART_TYPE_NP;
+				param.cid = 0; // Unused.
+				int ret = cellNetCtlNetStartDialogLoadAsync( &param );
+				if( ret < 0 )
+					LOG.Write( "Failed to start network connection dialog: 0x%x\n", ret );
+			}
+		}
+#endif
+
         void CloudberryKingdomGame::ShowError_MustBeSignedInToLive(Localization::Words word)
         {
 #if PC_VERSION
+#elif PS3
+			DisplayError( ErrorType( "This feature requires an active connection to PSN.\nWould you like to sign in?",
+				DecideToSignInCallback, ErrorType::YESNO ) );
 #else
             ShowError(Localization::Words_Err_MustBeSignedInToLive_Header, word, Localization::Words_Err_Ok);
 #endif
@@ -1114,6 +1143,8 @@ float CloudberryKingdomGame::fps = 0;
         void CloudberryKingdomGame::ShowError_MustBeSignedInToLiveForLeaderboard()
         {
 #if PC_VERSION
+#elif PS3
+			DisplayError( ErrorType( "An active connection to PSN is required to upload a high score.\nDo not worry, it will be uploaded the next time you play." ) );
 #else
             ShowError(Localization::Words_Err_MustBeSignedInToLive_Header, Localization::Words_Err_MustBeSignedInToLiveForLeaderboards, Localization::Words_Err_Ok);
 #endif

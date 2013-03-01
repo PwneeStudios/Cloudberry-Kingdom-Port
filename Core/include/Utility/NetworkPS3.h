@@ -8,4 +8,10 @@
  */
 bool GetNPScoreContext( int &id );
 
+/// Are the networking features available?
+/**
+ * @return True if networking features are available, false otherwise.
+ */
+bool IsNPAvailable();
+
 #endif
