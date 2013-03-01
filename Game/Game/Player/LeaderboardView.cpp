@@ -923,7 +923,7 @@ else
         bool RequestMore = false;
         int MinExisting = Start, MaxExisting = Start, MinMissing = -1, MaxMissing = -1;
 
-        for ( int i = Start; i < End(); i++)
+        for ( int i = Start; i <= End(); i++)
         {
             bool Selected = i == Index;
 

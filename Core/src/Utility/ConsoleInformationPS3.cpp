@@ -3,6 +3,7 @@
 #include <sysutil/sysutil_common.h>
 #include <sysutil/sysutil_licensearea.h>
 #include <sysutil/sysutil_sysparam.h>
+#include <sysutil/sysutil_bgmplayback.h>
 
 ConsoleRegion GetConsoleRegion()
 {
@@ -92,6 +93,20 @@ bool IsAsianButtonConfiguration()
 	case CELL_SYSUTIL_ENTER_BUTTON_ASSIGN_CROSS:
 		break;
 	}
+
+	return false;
+}
+
+bool IsCustomMusicPlaying()
+{
+	CellSysutilBgmPlaybackStatus status;
+	int ret = cellSysutilGetBgmPlaybackStatus( &status );
+	if( ret < 0 )
+		return false;
+
+	if( status.enableState == CELL_SYSUTIL_BGMPLAYBACK_STATUS_ENABLE
+		&& status.playerState == CELL_SYSUTIL_BGMPLAYBACK_STATUS_PLAY )
+		return true;
 
 	return false;
 }

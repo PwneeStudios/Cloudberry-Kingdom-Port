@@ -46,7 +46,6 @@ namespace CloudberryKingdom
         LeaderboardItem( OnlineGamer Gamer, int Val, int Rank );
 
 		void Draw( Vector2 Pos, bool Selected, float alpha, float Offset_GamerTag, float Offset_Val, float ItemShift );
-
     };
 
 	struct Leaderboard : boost::enable_shared_from_this<Leaderboard>

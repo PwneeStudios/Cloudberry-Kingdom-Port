@@ -8,6 +8,21 @@ void GamePad::Initialize()
 	gfxInitPad();
 }
 
+bool AutoCloseWhenConnected()
+{
+	gfxPadRead();
+
+	int numConnected = 0;
+	
+	for( int i = 0; i < 4; ++i )
+	{
+		if( gfxPadConnected( i ) )
+			++numConnected;
+	}
+
+	return numConnected != 0;
+}
+
 void GamePad::Update()
 {
 	gfxPadRead();
@@ -22,7 +37,10 @@ void GamePad::Update()
 	if( numConnected == 0 )
 	{
 		DisplayError( ErrorType(
-			"Error:\nNo Gamepad detected\nPlease press the PS button if the gamepad is connected"
+			"Error:\nNo Gamepad detected\nPlease press the PS button if the gamepad is connected",
+			NULL,
+			ErrorType::DEFAULT,
+			AutoCloseWhenConnected
 		) );
 	}
 }

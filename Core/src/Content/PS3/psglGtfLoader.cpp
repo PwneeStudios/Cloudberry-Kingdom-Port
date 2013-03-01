@@ -65,7 +65,7 @@ static void swizzleTexture(unsigned int _width,  unsigned int _height, unsigned 
 static unsigned int texCoordToSwizzledIndex( unsigned int x,  unsigned int y, unsigned int z, unsigned int width, unsigned int height, unsigned int depth );
 static int calculateMemorySize(unsigned int width, unsigned int height, unsigned int mipmaps, bool swizzled, unsigned int *size);
 
-int psglCreateTextureReferenceFromGTFFile(const char *filename, psglTextureReference *textureReference, bool bLoadInPlace, bool bForceSwizzling)
+int psglCreateTextureReferenceFromGTFFile(const char *filename, psglTextureReference *textureReference, bool bLoadInPlace, bool bForceSwizzling, uint32_t *gpuMemorySize, uint32_t *ppuMemorySize)
 {
     //// Get texture file info from GTF attribute and convert it to PSGL texture format
 
@@ -159,6 +159,17 @@ int psglCreateTextureReferenceFromGTFFile(const char *filename, psglTextureRefer
     glGenBuffers(1,&textureReference->bufferID);
     glBindBuffer(GL_TEXTURE_REFERENCE_BUFFER_SCE,textureReference->bufferID);
 
+	static uint32_t gpuUsedMemory = 0;
+	static uint32_t ppuUsedMemory = 0;
+	const uint32_t GPU_MEMORY_LIMIT = 200 * 1024 * 1024;
+
+	// Check to see if there is space for the texture on the gpu.
+	if( bLoadInPlace )
+	{
+		if( gpuUsedMemory + gtfSize > GPU_MEMORY_LIMIT )
+			bLoadInPlace = false;
+	}
+
     if (bLoadInPlace)
     {
         //load the data directly from disc to local memory
@@ -172,6 +183,8 @@ int psglCreateTextureReferenceFromGTFFile(const char *filename, psglTextureRefer
         cellGtfLoad( (char*)filename, attrib.id,&attrib.tex, CELL_GCM_LOCATION_LOCAL, mTextureAddress );
         //unmap the buffer
         glUnmapBuffer(GL_TEXTURE_REFERENCE_BUFFER_SCE);
+
+		gpuUsedMemory += gtfSize;
     }
     else
     {
@@ -194,6 +207,8 @@ int psglCreateTextureReferenceFromGTFFile(const char *filename, psglTextureRefer
 
         //unmap the buffer
         glUnmapBuffer(GL_TEXTURE_REFERENCE_BUFFER_SCE);
+
+		ppuUsedMemory += gtfSize;
     }
 
     glEnable( target );

@@ -203,7 +203,7 @@ namespace CloudberryKingdom
 
 	void UpSellMenu::SetPos()
 	{
-		if ( Word == Localization::Words::Words_UpSell_FreePlay )
+		if ( Word == Localization::Words_UpSell_FreePlay )
 		{
 			boost::shared_ptr<MenuItem> _item;
 			_item = MyMenu->FindItemByName( L"Yes" ); if (_item != 0 ) { _item->setSetPos( Vector2( 1091.667f, 230.4445f ) ); _item->MyText->setScale( 0.8f ); _item->MySelectedText->setScale( 0.8f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
@@ -221,7 +221,7 @@ namespace CloudberryKingdom
 
 			MyPile->setPos( Vector2(-1125.001f, -319.4444f ) );
 		}
-		else if ( Word == Localization::Words::Words_UpSell_Exit )
+		else if ( Word == Localization::Words_UpSell_Exit )
 		{
 			boost::shared_ptr<MenuItem> _item;
 			_item = MyMenu->FindItemByName( L"Yes" ); if (_item != 0 ) { _item->setSetPos( Vector2( 1091.667f, 230.4445f ) ); _item->MyText->setScale( 0.8f ); _item->MySelectedText->setScale( 0.8f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }

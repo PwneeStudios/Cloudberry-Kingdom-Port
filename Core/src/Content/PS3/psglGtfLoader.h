@@ -17,7 +17,7 @@ typedef struct
 
 int psglCreateTextureReferenceFromFile(const char *filename, psglTextureReference *textureReference, bool bLoadInPlace, bool bForceSwizzling);
 
-int psglCreateTextureReferenceFromGTFFile(const char *filename, psglTextureReference *textureReference, bool bLoadInPlace, bool bForceSwizzling);
+int psglCreateTextureReferenceFromGTFFile(const char *filename, psglTextureReference *textureReference, bool bLoadInPlace, bool bForceSwizzling, uint32_t *gpuMemorySize = NULL, uint32_t *ppuMemorySize = NULL);
 
 /*
 int psglCreateTextureReferenceFromDDSFile(const char *filename, psglTextureReference *textureReference, bool bLoadInPlace, bool bForceSwizzling);
