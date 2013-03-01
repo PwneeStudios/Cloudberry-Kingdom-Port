@@ -1243,6 +1243,20 @@ float CloudberryKingdomGame::fps = 0;
         bool CloudberryKingdomGame::CustomMusicPlaying = false;
         void CloudberryKingdomGame::UpdateCustomMusic()
         {
+			if( IsCustomMusicPlaying() )
+			{
+				CustomMusicPlaying = true;
+			}
+			else
+			{
+				if( CustomMusicPlaying )
+				{
+					if( Tools::SongWad )
+						Tools::SongWad->Restart( true, false );
+
+					CustomMusicPlaying = false;
+				}
+			}
 //#if XDK
 //            if (!MediaPlayer.GameHasControl)
 //            {
@@ -1353,6 +1367,8 @@ float CloudberryKingdomGame::fps = 0;
             }
 #endif
 
+		UpdateCustomMusic();
+
 		// What to do
 		if ( LogoScreenUp )
 			LogoPhsx();
@@ -1455,6 +1471,9 @@ float CloudberryKingdomGame::fps = 0;
 
 	void CloudberryKingdomGame::UpdateFps( const boost::shared_ptr<GameTime> &gameTime )
 	{
+		if( IsCustomMusicPlaying() )
+			CustomMusicPlaying = true;
+
 		// Track time, changes in time, and FPS
 		Tools::gameTime = gameTime;
 		DrawCount++;

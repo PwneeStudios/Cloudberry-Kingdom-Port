@@ -5,6 +5,7 @@
 #include <Audio/PS3/mscommon.h>
 #include <Audio/Song.h>
 #include "SongInternalPS3.h"
+#include <Utility/ConsoleInformation.h>
 
 #include <sys/ppu_thread.h>
 
@@ -218,6 +219,9 @@ float vol;
 
 void MediaPlayer::Play( const boost::shared_ptr<Song> &song )
 {
+	if( IsCustomMusicPlaying() )
+		return;
+
 	/*sys_ppu_thread_t tid;
 	int ret = sys_ppu_thread_create( &tid, SaveToContainerThread, reinterpret_cast< uint64_t >( args ), 1001, 16 * 1024, 0, "SaveToContainerThread" );
 	*/
@@ -270,14 +274,25 @@ MediaState MediaPlayer::GetState()
 
 bool MediaPlayer::IsRepeating = false;
 
+void SetBGMOverride( bool override )
+{
+	( void )override;
+
+	MediaPlayer::SetVolume( musicVolume );
+}
+
 void MediaPlayer::SetVolume( float volume )
 {
 	musicVolume = volume;
 
 	if( stream >= 0 )
 	{
-		cellMSCoreSetVolume1(stream, CELL_MS_DRY, CELL_MS_SPEAKER_FL, CELL_MS_CHANNEL_0, musicVolume);
-		cellMSCoreSetVolume1(stream, CELL_MS_DRY, CELL_MS_SPEAKER_FR, CELL_MS_CHANNEL_0, musicVolume);
+		float volume = 0;
+		if( !IsCustomMusicPlaying() )
+			volume = musicVolume;
+
+		cellMSCoreSetVolume1(stream, CELL_MS_DRY, CELL_MS_SPEAKER_FL, CELL_MS_CHANNEL_0, volume);
+		cellMSCoreSetVolume1(stream, CELL_MS_DRY, CELL_MS_SPEAKER_FR, CELL_MS_CHANNEL_0, volume);
 	}
 }
 

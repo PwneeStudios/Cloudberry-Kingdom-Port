@@ -24,6 +24,7 @@
 #include <sys/ppu_thread.h>
 #include <sys/process.h>
 #include <sys/spu_initialize.h>
+#include <sysutil/sysutil_bgmplayback.h>
 #include <sysutil/sysutil_gamecontent.h>
 #include <sysutil/sysutil_msgdialog.h>
 #include <sysutil/sysutil_savedata.h>
@@ -131,6 +132,9 @@ CorePS3 &CorePS3::operator = ( const CorePS3 &rhs )
 	}												   \
 }
 
+// Override music volume when BGM is playing. Defined in MediaPlayerPS3.cpp.
+extern void SetBGMOverride( bool override );
+
 static void SystemCallback( const uint64_t status, const uint64_t param, void *userdata )
 {
 	( void )param;
@@ -160,6 +164,12 @@ static void SystemCallback( const uint64_t status, const uint64_t param, void *u
 			else
 				LOG.Write( "cellNetCtlNetStartDialogUnloadAsync result = 0x%x\n", ret );
 		}
+		break;
+	case CELL_SYSUTIL_BGMPLAYBACK_PLAY:
+		SetBGMOverride( true );
+		break;
+	case CELL_SYSUTIL_BGMPLAYBACK_STOP:
+		SetBGMOverride( false );
 		break;
 	default:
 		LOG.Write( "Unknown callback status: 0x%llx\n", status );
@@ -586,6 +596,11 @@ int CorePS3::Run()
 	ret = cellNetCtlInit();
 	if( ret < 0 )
 		LOG.Write( "Failed to cellNetCtlInit: 0x%x\n", ret );
+
+	// Enable BGM playback.
+	ret = cellSysutilEnableBgmPlayback();
+	if( ret < 0 )
+		LOG.Write( "Failed to allow BGM playback: 0x%x\n", ret );
 
 	//DisplayError( ErrorType( 0x8002a1a4 ) );
 

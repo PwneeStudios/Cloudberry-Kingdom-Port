@@ -60,4 +60,10 @@ int GetParentalControlLevel();
  */
 bool IsAsianButtonConfiguration();
 
+/// Is custom user music playing?
+/**
+ * @return True if the user is playing custom music.
+ */
+bool IsCustomMusicPlaying();
+
 #endif
