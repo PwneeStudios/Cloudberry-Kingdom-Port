@@ -42,6 +42,19 @@ const char secureFileId[ CELL_SAVEDATA_SECUREFILEID_SIZE ] = {
 
 #if defined( CAFE ) || defined( PS3 )
 #include <Utility/Save.h>
+
+static unsigned int Checksum(const unsigned char *buffer, int length)
+{
+	int val = 0;
+	for( int i = 0; i < length; i++ )
+	{
+		val += ( ( int )buffer[ i ] + 13 ) * ( i + 10 );
+	}
+
+	return val;
+}
+
+
 #endif
 
 namespace CloudberryKingdom
@@ -532,7 +545,9 @@ namespace CloudberryKingdom
 		memcpy( _file_buffer, &bufferLength, sizeof( unsigned int ) );
 
 		// FIXME: Write checksum here.
-		
+		unsigned int checksum = Checksum( &saveData[ 0 ], bufferLength );
+		memcpy( reinterpret_cast< char * >( _file_buffer ) + sizeof( unsigned int ), &checksum, sizeof( unsigned int ) );
+
 		// Write the rest of the save data.
 		memcpy( reinterpret_cast< char * >( _file_buffer ) + 2 * sizeof( unsigned int ), &saveData[ 0 ], saveData.size() );
 
@@ -865,7 +880,10 @@ namespace CloudberryKingdom
 			unsigned int bufferSize = *intPtr++;
 			unsigned int checksum = *intPtr++;
 
-			if( bufferSize > 0 && bufferSize < ( AUTOSAVE_SIZE - 2 * sizeof( unsigned int ) ) )
+			unsigned int ourChecksum = Checksum( reinterpret_cast< unsigned char * >( intPtr ), bufferSize );
+
+			if( bufferSize > 0 && bufferSize < ( AUTOSAVE_SIZE - 2 * sizeof( unsigned int ) )
+				&& ourChecksum == checksum )
 			{
 				std::vector< unsigned char > data;
 				data.reserve( AUTOSAVE_SIZE );
