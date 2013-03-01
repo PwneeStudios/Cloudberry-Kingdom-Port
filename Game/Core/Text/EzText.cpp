@@ -937,6 +937,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 		Draw( cam, true );
 	}
 
+	static bool DrawingShadow = false;
 	void EzText::Draw( const boost::shared_ptr<Camera> &cam, bool EndBatch )
 	{
 		Alpha += AlphaVel;
@@ -965,8 +966,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 		PicColor = Color::Black;
 		if ( Shadow )
 		{
-			// Note: never end the SpriteBatch for drawing a shadow,
-			// since we will always be drawing the non-shadow part afterward
+			DrawingShadow = true;
 
 			float _HoldScale = getScale();
 			setScale( getScale() * ShadowScale );
@@ -978,6 +978,8 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 			_Pos += ShadowOffset;
 
 			setScale( _HoldScale );
+
+			DrawingShadow = false;
 		}
 		PicColor = Color::White;
 
@@ -1042,8 +1044,17 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 		if ( DrawPics )
 			for ( std::vector<boost::shared_ptr<EzTextPic> >::const_iterator pic = Pics.begin(); pic != Pics.end(); ++pic )
 			{
-				Color piccolor = PicColor;
-				piccolor.A = Tools::FloatToByte( Alpha * piccolor.A / 255 );
+				Color piccolor;
+
+				if ( DrawingShadow )
+				{
+					piccolor = Color( Vector4( color.X ) );
+				}
+				else
+				{
+					piccolor = PicColor;
+					piccolor.A = Tools::FloatToByte( Alpha * piccolor.A / 255 );
+				}
 
 				piccolor = ColorHelper::PremultiplyAlpha( piccolor );
 
@@ -1076,7 +1087,11 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 				QUAD_DRAWER->Draw( sq );
 				*/
 
-				Tools::QDrawer->DrawPic( pos, pos2, ( *pic )->tex, Color::White );
+				// This conditional is a hack to avoid drawing any picture shadows =o
+				//if ( static_cast<int>( piccolor.R ) > 100 )
+				{
+					Tools::QDrawer->DrawPic( pos, pos2, ( *pic )->tex, piccolor );
+				}
 			}
 	}
 

@@ -9,6 +9,9 @@
 #include <Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Pre.h>
 #include <Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Simple.h>
 
+#define XBOX
+#undef PC_VERSION
+
 namespace CloudberryKingdom
 {
 

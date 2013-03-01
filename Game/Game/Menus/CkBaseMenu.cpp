@@ -496,7 +496,8 @@ namespace CloudberryKingdom
 	{
 		boost::shared_ptr<MenuItem> item;
 
-        if (ButtonCheck::ControllerInUse && AddButtonTexture )
+		if (true)
+        //if (ButtonCheck::ControllerInUse && AddButtonTexture )
 		{
             item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( ButtonString::Back(86) + L" " + Localization::WordString( Word ) ) ) );
 		}

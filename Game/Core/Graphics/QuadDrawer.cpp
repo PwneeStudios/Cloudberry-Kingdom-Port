@@ -863,7 +863,12 @@ namespace CloudberryKingdom
                 Flush();
 
             CurrentTexture = texture;
-            CurrentEffect = Tools::BasicEffect;
+
+			if ( static_cast<int>( color.R ) > 100 )
+				CurrentEffect = Tools::BasicEffect;
+			else
+				CurrentEffect = Tools::NoTexture;
+
 			QUAD_DRAWER->SetEffect( CurrentEffect->effect );
 
 			::SimpleQuad sq;
