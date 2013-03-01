@@ -1,18 +1,8 @@
-﻿// Checksum code!
-//public static int Checksum(byte[] buffer, int length)
-//{
-//	int val = 0;
-//	for (int i = 0; i < length; i++)
-//	{
-//		val += ((int)buffer[i] + 13) * (i + 10);
-//	}
-
-//	return val;
-//}
-
-#include <global_header.h>
+﻿#include <global_header.h>
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+#include <Utility/Error.h>
+#include <Hacks/String.h>
 
 #ifdef PS3
 #include <stdio.h>
@@ -455,6 +445,9 @@ namespace CloudberryKingdom
 			{
 				printf( "Not enough space to save! Need %d more KB.\n", neededKb );
 
+				std::wstring error = Format( L"There is not enough space to create a save file. Please free %d KB", neededKb );
+				DisplayError( ErrorType( WstringToUtf8( error ).c_str() ) );
+
 				result->errNeedSizeKB = neededKb;
 				result->result = CELL_SAVEDATA_CBRESULT_ERR_NOSPACE;
 				return;
@@ -893,6 +886,8 @@ namespace CloudberryKingdom
 			}
 			else
 			{
+				CloudberryKingdomGame::ShowError_LoadError();
+
 				FailLogic->Apply();
 			}
 		}

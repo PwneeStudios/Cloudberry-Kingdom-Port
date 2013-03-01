@@ -1161,6 +1161,7 @@ float CloudberryKingdomGame::fps = 0;
 
         void CloudberryKingdomGame::ShowError(Localization::Words Header, Localization::Words Text, Localization::Words Option1/*, AsyncCallback callback*/)
         {
+#if XBOX
             ShowErrorMessage = true;
 
             Err_Header = Header;
@@ -1168,6 +1169,9 @@ float CloudberryKingdomGame::fps = 0;
             //Err_Callback = callback;
             Err_Options.clear();
 			Err_Options.push_back( Localization::WordString(Option1) );
+#elif PS3
+			DisplayError( ErrorType( WstringToUtf8( Localization::WordString(Text) ) ) );
+#endif
         }
 
         Localization::Words CloudberryKingdomGame::Err_Header, CloudberryKingdomGame::Err_Text;

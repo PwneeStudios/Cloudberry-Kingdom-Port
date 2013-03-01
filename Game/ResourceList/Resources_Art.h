@@ -1429,7 +1429,7 @@ const int TEXTURE_WIDTHS[] = {
 };
 
 const int TEXTURE_HEIGHTS[] = {
-1550,
+1650,
 21,
 1300,
 1300,
