@@ -276,8 +276,11 @@ CorePS3::CorePS3( GameLoop &game ) :
 	
 	psglResetCurrentContext();
 
-	// FIXME: Remove debugging!
+#ifdef DEBUG
 	cgGLSetDebugMode( GL_TRUE );
+#else
+	cgGLSetDebugMode( GL_FALSE );
+#endif
 
 	glViewport( 0, 0, width, height );
 	glScissor( 0, 0, width, height );
@@ -544,6 +547,42 @@ void ErrorDialogCallback( int buttonType, void *userData )
 
 #define NP_POOL_SIZE (128 * 1024)
 static uint8_t NPPool[ NP_POOL_SIZE ];
+
+void DebugFrame(float r, float g, float b)
+{
+	static int count = 0;
+	
+	glEnable(GL_SCISSOR_TEST);
+	glViewport(0, 0, GLOBAL_WIDTH, GLOBAL_HEIGHT);
+
+	for( int i = 0; i < 2; ++i )
+	{
+		glScissor(0, 0, GLOBAL_WIDTH, GLOBAL_HEIGHT);
+		glClearColor( r, g, b, 1 );
+		glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+
+		int j = 0;
+		for( int i = 31; i >= 0; --i)
+		{
+			glScissor(j, 0, 32, 128);
+
+			if( count & (1 << i) )
+				glClearColor( 1, 1, 1, 1 );
+			else
+				glClearColor( 0, 0, 0, 1 );
+
+			glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+
+			j += 33;
+		}
+
+		psglSwap();
+	}
+	
+	++count;
+	glDisable(GL_SCISSOR_TEST);
+}
+
 
 int CorePS3::Run()
 {
