@@ -84,8 +84,8 @@ namespace CloudberryKingdom
 		
 		// Using Oleg's threading
 		Job *job = new MakeNormalGameJob( boost::static_pointer_cast<NormalGameData>( shared_from_this() ) );
-		SCHEDULER->RunJob( job );
-		//SCHEDULER->RunJobASAP( job );
+		//SCHEDULER->RunJob( job );
+		SCHEDULER->RunJobASAP( job );
 
 		// FIXME: Add threading.
 		//_MakeThreadFunc(); // WARNING: This is just to test the level construction without a thread.

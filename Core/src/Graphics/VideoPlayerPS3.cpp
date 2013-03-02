@@ -16,6 +16,8 @@
 #include "../Content/PS3/psglGtfLoader.h"
 #include <Content/TexturePS3Internal.h>
 
+#include <sysutil/sysutil_bgmplayback.h>
+
 struct VideoPlayerInternal
 {
 	cell::Sail::hlPlayer *Player;
@@ -86,7 +88,8 @@ VideoPlayer::VideoPlayer()
 	ret = cellSpursInitializeWithAttribute( internal_->mpSpurs, &attr );
 	assert( ret == CELL_OK );*/
 
-	VideoPlayerInit videoPlayerInit;
+	// A pointer to this is kept by the hlPlayer.  Probably a bad idea to have it leave the stack.
+	static VideoPlayerInit videoPlayerInit;
 	videoPlayerInit.pSharedSpurs = &spurs;//internal_->mpSpurs;
 	videoPlayerInit.width = 0;
 	videoPlayerInit.height = 0;
@@ -163,6 +166,11 @@ VideoPlayer::VideoPlayer()
 	/*int playerMemory = 0;
 	int textureMemory = 0;
 	internal_->Player->Memstats( &playerMemory, &textureMemory );*/
+
+	// Disable BGM playback.
+	int ret = cellSysutilDisableBgmPlayback();
+	if( ret < 0 )
+		LOG.Write( "Failed to stop BGM playback: 0x%x\n", ret );
 }
 
 VideoPlayer::~VideoPlayer()
@@ -200,6 +208,11 @@ VideoPlayer::~VideoPlayer()
 	glBindBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE, 0 );*/
 	glDeleteBuffers( 1, &PBO );
 	PBO = 0;
+
+	// Enable BGM playback.
+	int ret = cellSysutilEnableBgmPlayback();
+	if( ret < 0 )
+		LOG.Write( "Failed to start BGM playback: 0x%x\n", ret );
 
 	/*int ret = cellSpursFinalize( internal_->mpSpurs );
 	if( ret != CELL_OK )
@@ -263,8 +276,8 @@ void VideoPlayer::DrawFrame()
 			displayFrame.buffer );
 		glBindBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE, 0 );
 
-		glFlush();
-		glFinish();
+		/*glFlush();
+		glFinish();*/
 	}
 }
 

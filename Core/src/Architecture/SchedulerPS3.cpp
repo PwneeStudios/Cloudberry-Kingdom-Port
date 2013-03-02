@@ -8,11 +8,13 @@
 #include <Datastructures/Freelist.h>
 #include <Utility/Log.h>
 
-#define NUM_THREADS 1
-
 #include <iostream>
 #include <pthread.h>
 #include <semaphore.h>
+#include <sys/ppu_thread.h>
+
+#define NUM_THREADS 1
+#define MAIN_QUEUE_SIZE 10
 
 /**
  * Load a resource.
@@ -95,6 +97,10 @@ struct SchedulerInternal
 	std::list< Job * > JobQueue;
 	pthread_mutex_t JobQueueMutex;
 	sem_t JobQueueSemaphore;
+
+	std::list< Job * > MainThreadJobQueue;
+	pthread_mutex_t MainThreadJobQueueMutex;
+	sem_t MainThreadSemaphore;
 };
 
 static void *ThreadProc( void *context )
@@ -114,6 +120,12 @@ SchedulerPS3::SchedulerPS3() :
 	assert( !ret );
 
 	ret = sem_init( &internal_->JobQueueSemaphore, 0, 0 );
+	assert( !ret );
+
+	ret = pthread_mutex_init( &internal_->MainThreadJobQueueMutex, NULL );
+	assert( !ret );
+
+	ret = sem_init( &internal_->MainThreadSemaphore, 0, MAIN_QUEUE_SIZE );
 	assert( !ret );
 
 	for( int i = 0; i < NUM_THREADS; ++i )
@@ -137,6 +149,7 @@ SchedulerPS3::~SchedulerPS3()
 	}
 
 	pthread_mutex_destroy( &internal_->JobQueueMutex );
+	pthread_mutex_destroy( &internal_->MainThreadJobQueueMutex );
 
 	std::list< Job * >::iterator i;
 	for( i = internal_->JobQueue.begin(); i != internal_->JobQueue.end(); ++i )
@@ -147,6 +160,18 @@ SchedulerPS3::~SchedulerPS3()
 
 void SchedulerPS3::MainThread()
 {
+	pthread_mutex_lock( &internal_->MainThreadJobQueueMutex );
+	while( internal_->MainThreadJobQueue.size() != 0 )
+	{
+		Job *job = internal_->MainThreadJobQueue.front();
+		internal_->MainThreadJobQueue.pop_front();
+
+		job->Do();
+		delete job;
+
+		sem_post( &internal_->MainThreadSemaphore );
+	}
+	pthread_mutex_unlock( &internal_->MainThreadJobQueueMutex );
 }
 
 void SchedulerPS3::RunJob( Job *job )
@@ -157,21 +182,54 @@ void SchedulerPS3::RunJob( Job *job )
 	sem_post( &internal_->JobQueueSemaphore );
 }
 
+static void RunJobASAPThread( uint64_t context )
+{
+	Job *job = reinterpret_cast< Job * >( context );
+
+	job->Do();
+	delete job;
+}
+
 void SchedulerPS3::RunJobASAP( Job *job )
 {
-	assert( !"No way to run job ASAP" );
+	pthread_mutex_lock( &internal_->JobQueueMutex );
+	internal_->JobQueue.push_front( job );
+	pthread_mutex_unlock( &internal_->JobQueueMutex );
+	sem_post( &internal_->JobQueueSemaphore );
+	/*sys_ppu_thread_t tid;
+	int ret = sys_ppu_thread_create( &tid, RunJobASAPThread,
+		reinterpret_cast< uint64_t >( job ), 1001, 16 * 1024, 0, "RunJobASAPThread" );
+
+	if( ret != 0 )
+		LOG.Write( "Load thread failed!" );*/
 }
 
 void SchedulerPS3::CreateResource( ResourceHolder *holder, Resource *resource )
 {
-	ResourceLoaderJob job( holder, resource, true );
+	ResourceLoaderJob *job = new ResourceLoaderJob( holder, resource, true );
+
+	pthread_mutex_lock( &internal_->JobQueueMutex );
+	internal_->JobQueue.push_back( job );
+	pthread_mutex_unlock( &internal_->JobQueueMutex );
+	sem_post( &internal_->JobQueueSemaphore );
+	/*ResourceLoaderJob job( holder, resource, false );
 	job.Do();
+
+	CreateGpuResource( holder, resource );*/
 }
 
 void SchedulerPS3::CreateGpuResource( ResourceHolder *holder, Resource *resource )
 {
-	ResourceCreatorJob job( holder, resource );
-	job.Do();
+	ResourceCreatorJob *job = new ResourceCreatorJob( holder, resource );
+
+	sem_wait( &internal_->MainThreadSemaphore );
+
+	pthread_mutex_lock( &internal_->MainThreadJobQueueMutex );
+	internal_->MainThreadJobQueue.push_back( job );
+	pthread_mutex_unlock( &internal_->MainThreadJobQueueMutex );
+
+	/*ResourceCreatorJob job( holder, resource );
+	job.Do();*/
 }
 
 void SchedulerPS3::WorkerThread()

@@ -216,7 +216,8 @@ CorePS3::CorePS3( GameLoop &game ) :
 	PS3_PATH_PREFIX = std::string( usrdirPath ) + "/";
 	// To test an hdd game in release mode with the debugger we need to tell it about the
 	// game code.  Also the files should be pre-installed on the disk.
-	//PS3_PATH_PREFIX = "/dev_hdd0/game/NPEB01312/USRDIR/";
+	// PS3_PATH_PREFIX = "/dev_hdd0/game/NPEB01312/USRDIR/"; // SCEE
+	PS3_PATH_PREFIX = "/dev_hdd0/game/NPUB31177/USRDIR/"; // SCEA
 	LOG.Write( "Running in %s\nContent dir %s\n", dirName, usrdirPath );
 #ifdef DEBUG
 	PS3_PATH_PREFIX = "/app_home/";
@@ -552,7 +553,7 @@ void DebugFrame(float r, float g, float b)
 {
 	static int count = 0;
 	
-	glEnable(GL_SCISSOR_TEST);
+	/*glEnable(GL_SCISSOR_TEST);
 	glViewport(0, 0, GLOBAL_WIDTH, GLOBAL_HEIGHT);
 
 	for( int i = 0; i < 2; ++i )
@@ -577,18 +578,16 @@ void DebugFrame(float r, float g, float b)
 		}
 
 		psglSwap();
-	}
+	}*/
 	
 	++count;
-	glDisable(GL_SCISSOR_TEST);
+	//glDisable(GL_SCISSOR_TEST);
 }
 
 
 int CorePS3::Run()
 {
 	running_ = true;
-
-	game_.Initialize();
 
 	// Initialize NP.
 	int ret = sceNpInit( NP_POOL_SIZE, NPPool );
@@ -642,6 +641,7 @@ int CorePS3::Run()
 		LOG.Write( "Failed to allow BGM playback: 0x%x\n", ret );
 
 	//DisplayError( ErrorType( 0x8002a1a4 ) );
+	game_.Initialize();
 
 	while( running_ )
 	{

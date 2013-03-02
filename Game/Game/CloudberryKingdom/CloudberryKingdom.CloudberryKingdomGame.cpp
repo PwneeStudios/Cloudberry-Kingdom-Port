@@ -110,6 +110,7 @@ namespace CloudberryKingdom
 		CampaignHelper::InitializeStatics();
 
 		Awardments::InitializeStatics();
+		MainVideo::InitializeStatics();
 	}
 
 	void CloudberryKingdomGame::StaticIntializer_AfterResourcesLoad()
@@ -182,7 +183,6 @@ namespace CloudberryKingdom
 		Challenge_HeroRush::InitializeStatics();
 		Challenge_HeroRush2::InitializeStatics();
 		Challenge_StoryMode::InitializeStatics();
-		MainVideo::InitializeStatics();
 		ActionGameData::InitializeStatics();
 
 		// Menu::DefaultMenuInfo
