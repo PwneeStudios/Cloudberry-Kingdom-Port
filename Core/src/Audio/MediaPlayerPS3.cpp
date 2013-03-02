@@ -9,6 +9,10 @@
 
 #include <sys/ppu_thread.h>
 
+#include <Core.h>
+#include <Architecture/Scheduler.h>
+#include <Architecture/Job.h>
+
 static int SUBNUM = 1;
 static int PLAYSUB = SUBNUM | CELL_MS_BUS_FLAG;
 static bool multiStreamUpdateThreadRunning = false;
@@ -202,6 +206,8 @@ float vol;
 
 	cellMSCoreSetVolume1(nCh, CELL_MS_DRY, CELL_MS_SPEAKER_FL, CELL_MS_CHANNEL_0, musicVolume);
 	cellMSCoreSetVolume1(nCh, CELL_MS_DRY, CELL_MS_SPEAKER_FR, CELL_MS_CHANNEL_0, musicVolume);
+	cellMSCoreSetVolume1(nCh, CELL_MS_WET, CELL_MS_SPEAKER_FL, CELL_MS_CHANNEL_0, musicVolume);
+	cellMSCoreSetVolume1(nCh, CELL_MS_WET, CELL_MS_SPEAKER_FR, CELL_MS_CHANNEL_0, musicVolume);
     return nCh;
 }
 
@@ -217,26 +223,61 @@ float vol;
 	sys_ppu_thread_exit( 0 );
 }*/
 
+static bool PlayJobInProgress = false;
+
+class PlaySongJob : public Job
+{
+	std::string path_;
+
+public:
+	PlaySongJob( const std::string &path )
+		: path_( path )
+	{
+	}
+
+	// From Job.
+	void Do()
+	{
+		long addr, size;
+		LoadMP3( path_.c_str(), &addr, &size );
+
+		stream = cellMSStreamOpen();
+		//sys_timer_usleep( fps60 * 60 * 2 );
+		stream = TriggerStream( stream, addr, addr, size, size, 44100, 2 );
+
+		PlayJobInProgress = false;
+	}
+};
+
 void MediaPlayer::Play( const boost::shared_ptr<Song> &song )
 {
 	if( IsCustomMusicPlaying() )
 		return;
 
+	if( PlayJobInProgress )
+		return;
+
+	PlayJobInProgress = true;
 	/*sys_ppu_thread_t tid;
 	int ret = sys_ppu_thread_create( &tid, SaveToContainerThread, reinterpret_cast< uint64_t >( args ), 1001, 16 * 1024, 0, "SaveToContainerThread" );
 	*/
 	if( stream >= 0 )
 	{
+		cellMSCoreSetVolume1(stream, CELL_MS_DRY, CELL_MS_SPEAKER_FL, CELL_MS_CHANNEL_0, 0);
+		cellMSCoreSetVolume1(stream, CELL_MS_DRY, CELL_MS_SPEAKER_FR, CELL_MS_CHANNEL_0, 0);
+		cellMSCoreSetVolume1(stream, CELL_MS_WET, CELL_MS_SPEAKER_FL, CELL_MS_CHANNEL_0, 0);
+		cellMSCoreSetVolume1(stream, CELL_MS_WET, CELL_MS_SPEAKER_FR, CELL_MS_CHANNEL_0, 0);
 		cellMSStreamClose( stream );
 		stream = -1;
 	}
 
-	long addr, size;
+	SCHEDULER->RunJobASAP( new PlaySongJob( song->internal_->Path.c_str() ) );
+	/*long addr, size;
 	LoadMP3( song->internal_->Path.c_str(), &addr, &size );
 
 	stream = cellMSStreamOpen();
 	//sys_timer_usleep( fps60 * 60 * 2 );
-	stream = TriggerStream( stream, addr, addr, size, size, 44100, 2 );
+	stream = TriggerStream( stream, addr, addr, size, size, 44100, 2 );*/
 }
 
 void MediaPlayer::Pause()
