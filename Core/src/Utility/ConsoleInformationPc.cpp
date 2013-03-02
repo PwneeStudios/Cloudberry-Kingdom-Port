@@ -9,3 +9,18 @@ ConsoleLanguage GetConsoleLanguage()
 {
 	return ConsoleLanguage_ENGLISH;
 }
+
+bool IsAsianButtonConfiguration()
+{
+	return false;
+}
+
+bool IsCustomMusicPlaying()
+{
+	return false;
+}
+
+bool IsSystemMenuVisible()
+{
+	return false
+}

@@ -66,4 +66,10 @@ bool IsAsianButtonConfiguration();
  */
 bool IsCustomMusicPlaying();
 
+/// Is the system menu up?
+/**
+ * @return True if the system menu is up.
+ */
+bool IsSystemMenuVisible();
+
 #endif
