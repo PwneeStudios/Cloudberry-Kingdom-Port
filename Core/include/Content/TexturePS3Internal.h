@@ -4,6 +4,8 @@
 struct TexturePS3Internal
 {
 	psglTextureReference Ref;
+	unsigned char *FileData;
+	unsigned int FileLength;
 };
 
 #endif

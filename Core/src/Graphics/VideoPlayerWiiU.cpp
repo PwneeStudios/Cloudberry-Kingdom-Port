@@ -1907,6 +1907,10 @@ struct VideoPlayerInternal
 {
 };
 
+bool threadsAlive = false;
+bool shadersInitialized = false;
+bool attributesInitialized = false;
+
 VideoPlayer::VideoPlayer( void (*UpdateElapsedTime)(float, bool), void (*DrawSubtitles)() )
 	: internal_( new VideoPlayerInternal )
 	, IsLooped( false )
@@ -1915,24 +1919,41 @@ VideoPlayer::VideoPlayer( void (*UpdateElapsedTime)(float, bool), void (*DrawSub
 	::DrawSubtitles = DrawSubtitles;
 
 	InitShader();
+	shadersInitialized = true;
     InitAttribData();
+	attributesInitialized = true;
+}
+
+void ForceKillVideoPlayer()
+{
+	EXIT_PLAYBACK = true;
+
+	if( threadsAlive )
+	{
+		OSJoinThread(&Thread[2], NULL);
+		//OSJoinThread(&Thread[3], NULL);
+
+		OSJoinThread(&Thread[0], NULL);
+		OSJoinThread(&Thread[1], NULL);
+	}
+	threadsAlive = false;
+
+	if( shadersInitialized )
+		FreeShader();
+	shadersInitialized = false;
+	
+	if( attributesInitialized )
+		FreeAttribData();
+	attributesInitialized = false;
+
+	ReEnableHomeButton = true;
+	if( nn::erreula::IsAppearHomeNixSign() )
+		nn::erreula::DisappearHomeNixSign();
 }
 
 VideoPlayer::~VideoPlayer()
 {
-	EXIT_PLAYBACK = true;
-
-	OSJoinThread(&Thread[2], NULL);
-    //OSJoinThread(&Thread[3], NULL);
-
-    OSJoinThread(&Thread[0], NULL);
-    OSJoinThread(&Thread[1], NULL);
-
-	FreeShader();
-	FreeAttribData();
-
-	ReEnableHomeButton = true;
-	nn::erreula::DisappearHomeNixSign();
+	ForceKillVideoPlayer();
 
 	delete internal_;
 }
@@ -1965,8 +1986,9 @@ void VideoPlayer::Play( const boost::shared_ptr< Video > &video )
     LoopCounter[0] = 0;
     LoopCounter[1] = 0;
 
+	BOOL ret;
 	// Create the video thread.
-    OSCreateThread( &Thread[0],   // ptr to the thread to init
+	ret = OSCreateThread( &Thread[0],   // ptr to the thread to init
                     VideoOutputThread,              // ptr to the start routine
                     0,                              // params passed to start routine
                     NULL,
@@ -1976,7 +1998,7 @@ void VideoPlayer::Play( const boost::shared_ptr< Video > &video )
                     0);         // detached
 
     // Create the audio thread.
-    OSCreateThread( &Thread[1],   // ptr to the thread to init
+    ret = OSCreateThread( &Thread[1],   // ptr to the thread to init
                     AudioOutputThread,              // ptr to the start routine
                     0,                              // params passed to start routine
                     NULL,
@@ -1998,8 +2020,8 @@ void VideoPlayer::Play( const boost::shared_ptr< Video > &video )
                     NULL,
                     ThreadStack[2] + STACK_SIZE,    // initial stack address
                     STACK_SIZE,                     // stack size
-                    16,                             // scheduling priority
-                    0);         // detached
+                    14,                             // scheduling priority
+                    OS_THREAD_ATTR_AFFINITY_CORE0 | OS_THREAD_ATTR_DETACH);         // detached
     // Create the play thread.
     /*OSCreateThread( &Thread[3],   // ptr to the thread to init
                     MP4PlayTVorDRC,                 // ptr to the start routine
@@ -2011,6 +2033,8 @@ void VideoPlayer::Play( const boost::shared_ptr< Video > &video )
                     0);*/         // detached
 
     OSResumeThread(&Thread[2]);
+
+	threadsAlive = true;
     //OSResumeThread(&Thread[3]);
 }
 

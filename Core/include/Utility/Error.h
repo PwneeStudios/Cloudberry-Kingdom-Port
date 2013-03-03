@@ -1,11 +1,12 @@
 #ifndef _ERROR_H_
 #define _ERROR_H_
 
+#if defined( CAFE ) || defined( PS3 )
+
 #ifdef CAFE
 	#include <cafe.h>
+#endif
 
-	typedef s32 ErrorType;
-#else
 	#include <string>
 
 	class ErrorType
@@ -69,6 +70,8 @@
 		AutoCloseCallback GetAutoClose() const { return autoClose_; }
 		CompleteCallback GetComplete() const { return complete_; }
 	};
+#else
+typedef unsigned int ErrorType;
 #endif
 
 /// Display a system error.

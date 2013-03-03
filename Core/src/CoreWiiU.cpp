@@ -16,6 +16,7 @@
 #include <nn/act.h>
 #include <nn/save.h>
 #include <nn/erreula.h>
+#include <Utility/Error.h>
 #include <Utility/Limits.h>
 #include <Utility/Log.h>
 
@@ -68,6 +69,21 @@ u32 HomeButtonDeniedCallback( void *context )
 	return 0;
 }*/
 
+// Kill the video player if it's still alive, we don't want stuff running in the background in case we are exiting.
+extern void ForceKillVideoPlayer();
+
+void ForegroundReleaseCallback()
+{
+	LOG.Write( "Releasing while video is playing.  Kill the player\n" );
+	ForceKillVideoPlayer();
+}
+
+u32 ReleaseForegroundCallback( void *context )
+{
+	LOG.Write( "Kill video player in case we are releasing while it's playing.\n" );
+	ForceKillVideoPlayer();
+}
+
 CoreWiiU::CoreWiiU( GameLoop &game ) :
 	running_( false ),
 	game_( game ),
@@ -82,6 +98,8 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 	char *gfxArgs[] = { "DEMO_CB_FORMAT 8_8_8_8", "DEMO_SCAN_FORMAT 8_8_8_8" };
 	DEMOGfxInit( 2, gfxArgs );
 	DEMODRCInit( 0, NULL );
+
+	//DEMOSetReleaseCallback( ForegroundReleaseCallback );
 
 	// Allocate space for MEM1 for process switching.
 	u32 mem1Size;
@@ -142,6 +160,7 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 	// End error viewer.
 
 	ProcUIRegisterCallback( PROCUI_MESSAGE_HBDENIED, HomeButtonDeniedCallback, NULL, 200 );
+	ProcUIRegisterCallback( PROCUI_MESSAGE_RELEASE, ReleaseForegroundCallback, NULL, 200 );
 	//ProcUISetSaveCallback( SaveOnExitCallback, NULL );
 
 	scheduler_ = new Scheduler;
@@ -218,10 +237,14 @@ CoreWiiU::~CoreWiiU()
 }
 
 extern bool GLOBAL_VIDEO_OVERRIDE;
-extern std::list< int > GLOBAL_ERROR_QUEUE;
+extern std::list< ErrorType > GLOBAL_ERROR_QUEUE;
 extern VPADStatus vpadStatus;
 extern s32 readLength;
 extern bool vpadConnected;
+
+void DebugFrame( float r, float g, float b )
+{
+}
 
 int CoreWiiU::Run()
 {
@@ -243,14 +266,14 @@ int CoreWiiU::Run()
 			{
 				FMOD_WiiU_SetMute( TRUE );
 
-				s32 errorCode = GLOBAL_ERROR_QUEUE.front();
-				currentErrorCode = errorCode;
+				ErrorType error = GLOBAL_ERROR_QUEUE.front();
+				currentErrorCode = error.GetCode();
 				GLOBAL_ERROR_QUEUE.pop_front();
 
 				nn::erreula::AppearArg appearArg;
 				appearArg.setControllerType( nn::erreula::cControllerType_Remo0 );
 				appearArg.setScreenType( nn::erreula::cScreenType_Dual );
-				appearArg.setErrorCode( errorCode );
+				appearArg.setErrorCode( currentErrorCode );
 				nn::erreula::AppearErrorViewer( appearArg );
 				//viewerVisible = true;
 			}

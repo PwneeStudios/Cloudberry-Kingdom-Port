@@ -2,6 +2,7 @@
 
 #include "PS3/gfxPad.h"
 #include <Utility/Error.h>
+#include <Utility/Log.h>
 
 void GamePad::Initialize()
 {
@@ -79,7 +80,7 @@ GamePadState GamePad::GetState( PlayerIndex index )
 
 	gs.Buttons.LeftStick = gfxL3Down( i ) ? ButtonState_Pressed : ButtonState_Released;
 	gs.Buttons.RightStick = gfxR3Down( i ) ? ButtonState_Pressed : ButtonState_Released;
-
+	
 	gs.Triggers.Left = gfxL2Pressure( i );
 	gs.Triggers.Right = gfxR2Pressure( i );
 

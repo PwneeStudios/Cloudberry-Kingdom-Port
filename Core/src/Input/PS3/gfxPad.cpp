@@ -66,8 +66,8 @@ void gfxPadRead(void)
 		{
 			if(old_status[i]==0) 
 			{
-            printf ("New gamepad %d is connected\n",i);
-
+				printf ("New gamepad %d is connected\n",i);
+				cellPadSetPortSetting( i, CELL_PAD_SETTING_PRESS_ON );
 			}
 		}
 

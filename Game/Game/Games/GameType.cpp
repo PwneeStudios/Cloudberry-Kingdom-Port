@@ -1079,6 +1079,7 @@ namespace CloudberryKingdom
 				PauseGame = true;
 
 		PauseGame |= CharacterSelectManager::IsShowing;
+		PauseGame |= CloudberryKingdomGame::getSuperPause();
 	}
 
 	void GameData::UpdateLevelPause()

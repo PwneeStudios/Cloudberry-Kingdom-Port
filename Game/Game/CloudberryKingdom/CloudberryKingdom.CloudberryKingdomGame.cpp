@@ -110,6 +110,7 @@ namespace CloudberryKingdom
 		CampaignHelper::InitializeStatics();
 
 		Awardments::InitializeStatics();
+		MainVideo::InitializeStatics();
 	}
 
 	void CloudberryKingdomGame::StaticIntializer_AfterResourcesLoad()
@@ -182,7 +183,6 @@ namespace CloudberryKingdom
 		Challenge_HeroRush::InitializeStatics();
 		Challenge_HeroRush2::InitializeStatics();
 		Challenge_StoryMode::InitializeStatics();
-		MainVideo::InitializeStatics();
 		ActionGameData::InitializeStatics();
 
 		// Menu::DefaultMenuInfo
@@ -1238,7 +1238,7 @@ float CloudberryKingdomGame::fps = 0;
 
 		bool CloudberryKingdomGame::getSuperPause()
 		{
-			return SmallErrorMessage != 0;
+			return SmallErrorMessage != 0 || IsSystemMenuVisible();
 		}
         boost::shared_ptr<SmallErrorMenu> CloudberryKingdomGame::SmallErrorMessage;
         void CloudberryKingdomGame::ShowSmallError()

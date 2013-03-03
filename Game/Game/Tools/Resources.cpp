@@ -18,6 +18,10 @@
 
 #include "Game/Tilesets/Tilesets/CloudberryKingdom.TileSets.h"
 
+#ifdef PS3
+#include <sys/ppu_thread.h>
+#endif
+
 namespace CloudberryKingdom
 {
 
@@ -333,11 +337,31 @@ namespace CloudberryKingdom
 			Tools::TextureWad->AddTexture( 0, *file );*/
 	}
 
+#ifdef PS3
+	static void TheLoadThread( uint64_t context )
+	{
+		( void )context;
+
+		Resources::_LoadThread();
+
+		sys_ppu_thread_exit( 0 );
+	}
+#endif
+
 	void Resources::LoadResources()
 	{
 		// FIXME: Load resources in other thread.
 		//LoadThread = ThreadHelper::EasyThread( 5, std::wstring( L"LoadThread" ), boost::make_shared<Action>( &_LoadThread ) );
+#ifdef PS3
+		sys_ppu_thread_t tid;
+		int ret = sys_ppu_thread_create( &tid, TheLoadThread,
+			0, 1001, 64 * 1024, 0, "TheLoadThread" );
+
+		if( ret != 0 )
+			LOG.Write( "Load thread failed!" );
+#else
 		_LoadThread();
+#endif
 	}
 
 boost::shared_ptr<Thread> Resources::LoadThread = 0;

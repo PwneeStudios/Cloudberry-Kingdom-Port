@@ -110,3 +110,10 @@ bool IsCustomMusicPlaying()
 
 	return false;
 }
+
+bool GLOBAL_SYSTEM_MENU_OPEN = false;
+
+bool IsSystemMenuVisible()
+{
+	return GLOBAL_SYSTEM_MENU_OPEN;
+}

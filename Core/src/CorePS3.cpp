@@ -135,6 +135,9 @@ CorePS3 &CorePS3::operator = ( const CorePS3 &rhs )
 // Override music volume when BGM is playing. Defined in MediaPlayerPS3.cpp.
 extern void SetBGMOverride( bool override );
 
+// Is the system menu open? Defined in ConsoleInformationPS3.cpp.
+extern bool GLOBAL_SYSTEM_MENU_OPEN;
+
 static void SystemCallback( const uint64_t status, const uint64_t param, void *userdata )
 {
 	( void )param;
@@ -150,7 +153,10 @@ static void SystemCallback( const uint64_t status, const uint64_t param, void *u
 	case CELL_SYSUTIL_DRAWING_END:
 		break;
 	case CELL_SYSUTIL_SYSTEM_MENU_OPEN:
+		GLOBAL_SYSTEM_MENU_OPEN = true;
+		break;
 	case CELL_SYSUTIL_SYSTEM_MENU_CLOSE:
+		GLOBAL_SYSTEM_MENU_OPEN = false;
 		break;
 	case CELL_SYSUTIL_NET_CTL_NETSTART_FINISHED:
 		{
@@ -216,7 +222,8 @@ CorePS3::CorePS3( GameLoop &game ) :
 	PS3_PATH_PREFIX = std::string( usrdirPath ) + "/";
 	// To test an hdd game in release mode with the debugger we need to tell it about the
 	// game code.  Also the files should be pre-installed on the disk.
-	//PS3_PATH_PREFIX = "/dev_hdd0/game/NPEB01312/USRDIR/";
+	// PS3_PATH_PREFIX = "/dev_hdd0/game/NPEB01312/USRDIR/"; // SCEE
+	PS3_PATH_PREFIX = "/dev_hdd0/game/NPUB31177/USRDIR/"; // SCEA
 	LOG.Write( "Running in %s\nContent dir %s\n", dirName, usrdirPath );
 #ifdef DEBUG
 	PS3_PATH_PREFIX = "/app_home/";
@@ -276,8 +283,11 @@ CorePS3::CorePS3( GameLoop &game ) :
 	
 	psglResetCurrentContext();
 
-	// FIXME: Remove debugging!
+#ifdef DEBUG
 	cgGLSetDebugMode( GL_TRUE );
+#else
+	cgGLSetDebugMode( GL_FALSE );
+#endif
 
 	glViewport( 0, 0, width, height );
 	glScissor( 0, 0, width, height );
@@ -545,11 +555,45 @@ void ErrorDialogCallback( int buttonType, void *userData )
 #define NP_POOL_SIZE (128 * 1024)
 static uint8_t NPPool[ NP_POOL_SIZE ];
 
+void DebugFrame(float r, float g, float b)
+{
+	static int count = 0;
+	
+	/*glEnable(GL_SCISSOR_TEST);
+	glViewport(0, 0, GLOBAL_WIDTH, GLOBAL_HEIGHT);
+
+	for( int i = 0; i < 2; ++i )
+	{
+		glScissor(0, 0, GLOBAL_WIDTH, GLOBAL_HEIGHT);
+		glClearColor( r, g, b, 1 );
+		glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+
+		int j = 0;
+		for( int i = 31; i >= 0; --i)
+		{
+			glScissor(j, 0, 32, 128);
+
+			if( count & (1 << i) )
+				glClearColor( 1, 1, 1, 1 );
+			else
+				glClearColor( 0, 0, 0, 1 );
+
+			glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+
+			j += 33;
+		}
+
+		psglSwap();
+	}*/
+	
+	++count;
+	//glDisable(GL_SCISSOR_TEST);
+}
+
+
 int CorePS3::Run()
 {
 	running_ = true;
-
-	game_.Initialize();
 
 	// Initialize NP.
 	int ret = sceNpInit( NP_POOL_SIZE, NPPool );
@@ -603,6 +647,7 @@ int CorePS3::Run()
 		LOG.Write( "Failed to allow BGM playback: 0x%x\n", ret );
 
 	//DisplayError( ErrorType( 0x8002a1a4 ) );
+	game_.Initialize();
 
 	while( running_ )
 	{

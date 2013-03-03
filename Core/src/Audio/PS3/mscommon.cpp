@@ -19,7 +19,9 @@ PlayStation(R)3 Programmer Tool Runtime Library 430.001
 
 // Commenting this will remove all Sulpha setup/shutdown.
 // Leave this uncommented to be able to connect the Sulpha PC tool audio debugger to the application
+#ifdef DEBUG
 #define USE_SULPHA
+#endif
 
 //Amount of memory to supply to Sulpha as a buffer
 #define SULPHA_MEMORYBUFFER_SIZE (1024 * 1024)
@@ -406,7 +408,6 @@ long InitialiseAudio( const long nStreams, const long nmaxSubs, int &_nPortNumbe
 	//Init Sulpha
 	if(!InitSulpha(SULPHA_MEMORYBUFFER_SIZE , SULPHA_NUM_NAMED_OBJECTS))
 		return -1;
-
 
 #ifndef MS_THREADED_SAMPLE
 	InitSPURS();
