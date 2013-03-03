@@ -69,6 +69,15 @@ u32 HomeButtonDeniedCallback( void *context )
 	return 0;
 }*/
 
+// Kill the video player if it's still alive, we don't want stuff running in the background in case we are exiting.
+extern void ForceKillVideoPlayer();
+
+void ForegroundReleaseCallback()
+{
+	LOG.Write( "Releasing while video is playing.  Kill the player\n" );
+	ForceKillVideoPlayer();
+}
+
 CoreWiiU::CoreWiiU( GameLoop &game ) :
 	running_( false ),
 	game_( game ),
@@ -83,6 +92,8 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 	char *gfxArgs[] = { "DEMO_CB_FORMAT 8_8_8_8", "DEMO_SCAN_FORMAT 8_8_8_8" };
 	DEMOGfxInit( 2, gfxArgs );
 	DEMODRCInit( 0, NULL );
+
+	DEMOSetReleaseCallback( ForegroundReleaseCallback );
 
 	// Allocate space for MEM1 for process switching.
 	u32 mem1Size;
