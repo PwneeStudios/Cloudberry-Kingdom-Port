@@ -24,6 +24,7 @@ namespace CloudberryKingdom
 
 	bool Leaderboard::WritingInProgress = false;
 
+#ifdef PS3
 	inline INT64 PackBoardAndScore( int board, int score )
 	{
 		return ( static_cast< INT64 >( board ) << 32 ) | score;
@@ -37,7 +38,6 @@ namespace CloudberryKingdom
 
 	static void WriteToLeaderboardThread( INT64 context )
 	{
-#if PS3
 		int contextId;
 		if( !GetNPScoreContext( contextId ) )
 		{
@@ -70,8 +70,8 @@ namespace CloudberryKingdom
 		Leaderboard::WritingInProgress = false;
 
 		sys_ppu_thread_exit( 0 );
-#endif
 	}
+#endif
 
 	void Leaderboard::WriteToLeaderboard( boost::shared_ptr<ScoreEntry> score )
 	{

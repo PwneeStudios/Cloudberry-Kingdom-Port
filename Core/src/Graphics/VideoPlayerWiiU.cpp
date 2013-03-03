@@ -1965,8 +1965,9 @@ void VideoPlayer::Play( const boost::shared_ptr< Video > &video )
     LoopCounter[0] = 0;
     LoopCounter[1] = 0;
 
+	BOOL ret;
 	// Create the video thread.
-    OSCreateThread( &Thread[0],   // ptr to the thread to init
+	ret = OSCreateThread( &Thread[0],   // ptr to the thread to init
                     VideoOutputThread,              // ptr to the start routine
                     0,                              // params passed to start routine
                     NULL,
@@ -1976,7 +1977,7 @@ void VideoPlayer::Play( const boost::shared_ptr< Video > &video )
                     0);         // detached
 
     // Create the audio thread.
-    OSCreateThread( &Thread[1],   // ptr to the thread to init
+    ret = OSCreateThread( &Thread[1],   // ptr to the thread to init
                     AudioOutputThread,              // ptr to the start routine
                     0,                              // params passed to start routine
                     NULL,
@@ -1998,8 +1999,8 @@ void VideoPlayer::Play( const boost::shared_ptr< Video > &video )
                     NULL,
                     ThreadStack[2] + STACK_SIZE,    // initial stack address
                     STACK_SIZE,                     // stack size
-                    16,                             // scheduling priority
-                    0);         // detached
+                    14,                             // scheduling priority
+                    OS_THREAD_ATTR_AFFINITY_CORE0 | OS_THREAD_ATTR_DETACH);         // detached
     // Create the play thread.
     /*OSCreateThread( &Thread[3],   // ptr to the thread to init
                     MP4PlayTVorDRC,                 // ptr to the start routine

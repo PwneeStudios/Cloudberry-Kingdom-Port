@@ -16,6 +16,7 @@
 #include <nn/act.h>
 #include <nn/save.h>
 #include <nn/erreula.h>
+#include <Utility/Error.h>
 #include <Utility/Limits.h>
 #include <Utility/Log.h>
 
@@ -218,10 +219,14 @@ CoreWiiU::~CoreWiiU()
 }
 
 extern bool GLOBAL_VIDEO_OVERRIDE;
-extern std::list< int > GLOBAL_ERROR_QUEUE;
+extern std::list< ErrorType > GLOBAL_ERROR_QUEUE;
 extern VPADStatus vpadStatus;
 extern s32 readLength;
 extern bool vpadConnected;
+
+void DebugFrame( float r, float g, float b )
+{
+}
 
 int CoreWiiU::Run()
 {
@@ -243,14 +248,14 @@ int CoreWiiU::Run()
 			{
 				FMOD_WiiU_SetMute( TRUE );
 
-				s32 errorCode = GLOBAL_ERROR_QUEUE.front();
-				currentErrorCode = errorCode;
+				ErrorType error = GLOBAL_ERROR_QUEUE.front();
+				currentErrorCode = error.GetCode();
 				GLOBAL_ERROR_QUEUE.pop_front();
 
 				nn::erreula::AppearArg appearArg;
 				appearArg.setControllerType( nn::erreula::cControllerType_Remo0 );
 				appearArg.setScreenType( nn::erreula::cScreenType_Dual );
-				appearArg.setErrorCode( errorCode );
+				appearArg.setErrorCode( currentErrorCode );
 				nn::erreula::AppearErrorViewer( appearArg );
 				//viewerVisible = true;
 			}

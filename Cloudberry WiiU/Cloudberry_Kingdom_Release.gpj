@@ -7,7 +7,7 @@
 	-o Cloudberry_Kingdom.elf
 	-I.
 	-laacdec.a
-	-lC:\Pwnee\Port\Cloudberry_Kingdom\fmodex\api\lib\libfmodex.a
+	-lC:\Pwnee\Port\Cloudberry_Kingdom\fmodex\lib\libfmodex.a
 	-lh264.a
 	-lmp4dmx.a
 	-lnn_ipc.a

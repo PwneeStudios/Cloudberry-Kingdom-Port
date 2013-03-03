@@ -22,5 +22,5 @@ bool IsCustomMusicPlaying()
 
 bool IsSystemMenuVisible()
 {
-	return false
+	return false;
 }

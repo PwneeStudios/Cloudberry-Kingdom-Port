@@ -379,8 +379,8 @@ else
 
 			std::wstring GoString;
 			if ( n == 0 )      GoString = Localization::WordString( Localization::Words_LoadSeed );
-			else if ( n == 1 ) GoString = Format( Localization::WordString( Localization::Words_DeleteSeeds ).c_str(), n );
-			else		       GoString = Format( Localization::WordString( Localization::Words_DeleteSeedsPlural ).c_str(), n );
+			else if ( n == 1 ) GoString = Format( Localization::WordString( Localization::Words_DeleteSeeds ).c_str(), ToString( n ).c_str() );
+			else		       GoString = Format( Localization::WordString( Localization::Words_DeleteSeedsPlural ).c_str(), ToString( n ).c_str() );
 
 			boost::shared_ptr<MenuItem> _item = MyMenu->FindItemByName( L"Load" );
 			if ( _item != 0 )

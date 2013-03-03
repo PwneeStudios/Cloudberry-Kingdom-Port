@@ -74,6 +74,7 @@ SchedulerWiiU::SchedulerWiiU() :
 	OSInitSemaphore( &internal_->JobQueueSemaphore, 0 );
 
 	internal_->Threads[ 0 ] = OSGetDefaultThread( 2 );
+	OSSetThreadPriority( internal_->Threads[ 0 ], 20 );
 	OSRunThread( internal_->Threads[ 0 ], ThreadProc, 1, this );
 	/*internal_->Stack = new char[ 1024 * 1024 ];
 	BOOL ret = OSCreateThread( &internal_->Threads[ 0 ], ThreadProc, 1, this,
@@ -123,8 +124,8 @@ void SchedulerWiiU::RunJobASAP( Job *job )
 
 void SchedulerWiiU::CreateResource( ResourceHolder *holder, Resource *resource )
 {
-	//RunJob( new ResourceLoaderJob( holder, resource ) );
-	resource->Load();
+	RunJob( new ResourceLoaderJob( holder, resource ) );
+	/*resource->Load();
 	resource->GpuCreate();
 
 	if( !resource->IsLoaded() )
@@ -136,7 +137,7 @@ void SchedulerWiiU::CreateResource( ResourceHolder *holder, Resource *resource )
 	LOG.Write( "Loaded: %s\n", resource->GetPath().c_str() );
 	holder->SetResource( resource );
 
-	CreateGpuResource( holder, resource );
+	CreateGpuResource( holder, resource );*/
 }
 
 void SchedulerWiiU::CreateGpuResource( ResourceHolder *holder, Resource *resource )
