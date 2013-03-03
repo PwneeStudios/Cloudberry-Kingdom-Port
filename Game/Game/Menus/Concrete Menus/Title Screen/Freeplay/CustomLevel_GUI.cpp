@@ -794,10 +794,12 @@ namespace CloudberryKingdom
 		item->JiggleOnGo = false;
 		AddItem( item );
 		item->Pos = item->SelectedPos = Vector2( 682.1445f, -238.8095f );
-		Menu::DefaultMenuInfo::SetNext( item );
-
+		
 if (ButtonCheck::ControllerInUse)
 {
+#ifdef PC_VERSION
+		Menu::DefaultMenuInfo::SetNext( item );
+#endif
         MyPile->Add(boost::make_shared<QuadClass>( ButtonTexture::getGo(), 90.f, std::wstring( L"Button_A" ) ) );
         item->Selectable = false;
 }
@@ -815,11 +817,9 @@ if (ButtonCheck::ControllerInUse)
 		item->JiggleOnGo = false;
 		AddItem( item );
 		item->Pos = item->SelectedPos = Vector2( 682.1445f, -238.8095f );
-		//item.MyText.MyFloatColor = Menu::DefaultMenuInfo::UnselectedNextColor;
-		//item.MySelectedText.MyFloatColor = Menu::DefaultMenuInfo::SelectedNextColor;
 if (ButtonCheck::ControllerInUse)
 {
-#if XBOX || PC_VERSION
+#ifdef PC_VERSION
 		Menu::DefaultMenuInfo::SetX( item );
 #endif
 
@@ -835,9 +835,12 @@ if (ButtonCheck::ControllerInUse)
 		item->SelectSound.reset();
 		item->setGo( boost::make_shared<ReturnToCallerProxy1>( boost::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ) ) );
 		item->Pos = item->SelectedPos = Vector2( 922.9375f, -523.8096f );
-		Menu::DefaultMenuInfo::SetBack( item );
+		
 if (ButtonCheck::ControllerInUse)
 {
+#ifdef PC_VERSION
+		Menu::DefaultMenuInfo::SetBack( item );
+#endif
 		MyPile->Add(boost::make_shared<QuadClass>( ButtonTexture::getBack(), 90.f, std::wstring( L"Button_B" ) ) );
 		item->Selectable = false;
 }

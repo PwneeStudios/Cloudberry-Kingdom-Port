@@ -220,7 +220,15 @@ L"Ubisoft and the Ubisoft logo are trademarks of Ubisoft Entertainment in the US
         DrawCount++;
         if ( !ReadyToFade && DrawCount > 2 )
             BlackQuad->setAlpha( BlackQuad->getAlpha() - .0633f );
-        if ( DrawCount > 68 )
+        
+#ifdef PS3
+		if ( DrawCount > 180 )
+#elif CAFE
+		if ( DrawCount > 235 )
+#else
+		//if ( DrawCount > 68 )
+		if ( DrawCount > 90 )
+#endif
             ReadyToFade = true;
 
 		MyProgressBar->setPos( Vector2( 1100, -800 ) );

@@ -671,7 +671,7 @@ else
 			item->setGo( Cast::ToItem( boost::make_shared<NextProxy>( boost::static_pointer_cast<CustomHero_GUI>( shared_from_this() ) ) ) );
 if ( ButtonCheck::ControllerInUse )
 {
-#if XBOX || PC_VERSION
+#if PC_VERSION
 			Menu::DefaultMenuInfo::SetNext( item );
 #endif
 			MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getGo(), 90.0f, std::wstring( L"Button_A" ) ) );
@@ -690,7 +690,7 @@ if ( ButtonCheck::ControllerInUse )
             item->setGo( Cast::ToItem( boost::make_shared<ReturnToCallerProxy>( boost::static_pointer_cast<CkBaseMenu>( shared_from_this() ) ) ) );
 if ( ButtonCheck::ControllerInUse )
 {
-#if XBOX || PC_VERSION
+#if PC_VERSION
 			Menu::DefaultMenuInfo::SetBack( item );
 #endif
 			MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getBack(), 90.0f, std::wstring( L"Button_B" ) ) );
@@ -705,7 +705,7 @@ if ( ButtonCheck::ControllerInUse )
 			item->setGo( Cast::ToItem( boost::make_shared<StartTestProxy>( boost::static_pointer_cast<CustomHero_GUI>( shared_from_this() ) ) ) );
 if ( ButtonCheck::ControllerInUse )
 {
-#if XBOX || PC_VERSION
+#if PC_VERSION
 			Menu::DefaultMenuInfo::SetX( item );
 #endif
 			MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getX(), 90.f, std::wstring( L"Button_X" ) ) );
@@ -720,7 +720,7 @@ if ( ButtonCheck::ControllerInUse )
 			item->setGo( Cast::ToItem( boost::make_shared<ResetSlidersProxy>( boost::static_pointer_cast<CustomHero_GUI>( shared_from_this() ) ) ));
 if ( ButtonCheck::ControllerInUse )
 {
-#if XBOX || PC_VERSION
+#if PC_VERSION
 			Menu::DefaultMenuInfo::SetY( item );
 #endif
 			MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getY(), 90.0f, std::wstring( L"Button_Y" ) ) );

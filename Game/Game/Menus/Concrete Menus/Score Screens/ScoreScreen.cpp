@@ -216,14 +216,14 @@ namespace CloudberryKingdom
 				//back = MakeBackButton( Localization::Words_Exit, true );
 				back = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::WordString( Localization::Words_Exit), ItemFont ) ) );
 				AddItem(back);
-				item->setGo( boost::make_shared<MenuGo_ExitCampaignProxy>( boost::static_pointer_cast<ScoreScreen>( shared_from_this() ) ) );
+				back->setGo( boost::make_shared<MenuGo_ExitCampaignProxy>( boost::static_pointer_cast<ScoreScreen>( shared_from_this() ) ) );
 			}
 			else
 			{
 				//back = MakeBackButton( Localization::Words_BackToFreeplay, true );
 				back = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::WordString( Localization::Words_BackToFreeplay ), ItemFont ) ) );
 				AddItem(back);
-				item->setGo( boost::make_shared<MenuGo_ExitFreeplayProxy>( boost::static_pointer_cast<ScoreScreen>( shared_from_this() ) ) );
+				back->setGo( boost::make_shared<MenuGo_ExitFreeplayProxy>( boost::static_pointer_cast<ScoreScreen>( shared_from_this() ) ) );
 			}
 
 			MyMenu->OnB.reset();;
@@ -301,7 +301,7 @@ namespace CloudberryKingdom
 	{
 		CkBaseMenu::SetItemProperties( item );
 
-		StartMenu::SetItemProperties_Red( item );
+		//StartMenu::SetItemProperties_Red( item );
 		//CkColorHelper::GreenItem( item );
 	}
 
@@ -317,7 +317,7 @@ namespace CloudberryKingdom
 		text->OutlineColor = ColorHelper::Gray(.05f);
 
 		text->Shadow = true;
-		text->ShadowColor = Color(.2f, .2f, .2f, .5f);
+		text->ShadowColor = Color(.2f, .2f, .2f, .25f);
 		text->ShadowOffset = Vector2(12, 12);
 
 		text->setScale( FontScale * .9f );

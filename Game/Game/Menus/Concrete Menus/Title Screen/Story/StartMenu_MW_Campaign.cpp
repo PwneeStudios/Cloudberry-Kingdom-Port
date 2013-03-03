@@ -229,6 +229,8 @@ namespace CloudberryKingdom
 
 		CreateMenu();
 
+		MyMenu->setControl(-1 );
+
 		Update();
 
 		int Level = PlayerManager::MinPlayerTotalCampaignLevel() + 1;
@@ -332,7 +334,7 @@ namespace CloudberryKingdom
     void StartMenu_MW_Campaign::OnReturnFromGame()
     {
         Update();
-        SaveGroup::SaveAll();
+        //SaveGroup::SaveAll();
 
 		PlayerManager::UploadCampaignLevels();
 

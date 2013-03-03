@@ -187,6 +187,8 @@ namespace CloudberryKingdom
 		/// </summary>
 		bool LevelIsLoaded( const boost::shared_ptr<LevelSeedData> &data );
 
+		virtual void AdditionalSetLevel();
+
 		/// <summary>
 		/// Assuming a level is loaded, set that level as current.
 		/// Begin loading next level.

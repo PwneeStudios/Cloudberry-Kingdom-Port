@@ -112,7 +112,7 @@ namespace CloudberryKingdom
 
         static std::vector<std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> > > HeroArcadeList;
         static std::vector<std::pair<boost::shared_ptr<Challenge>, boost::shared_ptr<BobPhsx> > > LeaderboardList;
-        static std::map<int, int> ChallengeGoal;
+        static std::vector<std::pair<int, int> > ChallengeGoal;
 
 		static const int HighestLevelNeeded;
 		static boost::shared_ptr<BobPhsx> HighestHero;
@@ -138,6 +138,8 @@ namespace CloudberryKingdom
 		boost::shared_ptr<MenuItem> AddChallenge( const boost::shared_ptr<Challenge> &challenge, const boost::shared_ptr<Awardment> &prereq, const std::wstring &itemname );
 
 		void UpdateAfterPlaying();
+
+		static boost::shared_ptr<Challenge> SelectedChallenge;
         bool Lock;
         void OnSelect();
 	

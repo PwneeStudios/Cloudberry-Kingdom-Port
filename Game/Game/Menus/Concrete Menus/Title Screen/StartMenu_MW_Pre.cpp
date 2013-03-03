@@ -3,6 +3,7 @@
 #include "StartMenu_MW_Pre.h"
 
 #include <Game/Player/LeaderboardView.h>
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
 namespace CloudberryKingdom
 {
@@ -107,7 +108,17 @@ namespace CloudberryKingdom
 
     void StartMenu_MW_Pre::MenuGo_Leaderboards( boost::shared_ptr<MenuItem> item )
     {
-        Call( MakeMagic( LeaderboardGUI, ( Title, 0 ) ), 0 );
+		if ( CloudberryKingdomGame::OnlineFunctionalityAvailable() )
+		{
+			Challenge::LeaderboardIndex = ArcadeMenu::LeaderboardIndex( 0, 0 );
+			Call( MakeMagic( LeaderboardGUI, ( Title, MenuItem::ActivatingPlayer ) ), 0 );
+			
+			//Call(new LeaderboardGUI(Title, null, MenuItem.ActivatingPlayer), 0);
+		}
+		else
+		{
+			CloudberryKingdomGame::ShowError_MustBeSignedInToLiveForLeaderboard();
+		}
     }
 
     void StartMenu_MW_Pre::MenuGo_Achievements( boost::shared_ptr<MenuItem> item )

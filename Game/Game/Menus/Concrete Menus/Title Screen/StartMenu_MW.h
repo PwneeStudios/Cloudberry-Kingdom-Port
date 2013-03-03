@@ -48,7 +48,7 @@ namespace CloudberryKingdom
 
 		virtual void OnAdd();
 
-		virtual bool MenuReturnToCaller( const boost::shared_ptr<Menu> &menu );
+		virtual void ReturnToCaller();
 
 		virtual void Init();
 

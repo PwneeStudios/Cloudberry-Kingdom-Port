@@ -2301,6 +2301,32 @@ bool Level::dodebug = false;
 		}
 	}
 
+	void SetSinglePathType_Arcade( const boost::shared_ptr<MakeData> &makeData, const boost::shared_ptr<Level> &level, const boost::shared_ptr<PieceSeedData> &Piece )
+	{
+		switch ( Piece->Style->SinglePathType )
+		{
+			case StyleData::_SinglePathType_NORMAL:
+				makeData->MoveData[ 0 ].MaxTargetY = 625;
+				makeData->MoveData[ 0 ].MinTargetY = -625;
+				break;
+
+			case StyleData::_SinglePathType_HIGH:
+				makeData->MoveData[ 0 ].MaxTargetY = 750;
+				makeData->MoveData[ 0 ].MinTargetY = 100;
+				break;
+
+			case StyleData::_SinglePathType_MID:
+				makeData->MoveData[ 0 ].MaxTargetY = 450;
+				makeData->MoveData[ 0 ].MinTargetY = -250;
+				break;
+
+			case StyleData::_SinglePathType_LOW:
+				makeData->MoveData[ 0 ].MaxTargetY = 300;
+				makeData->MoveData[ 0 ].MinTargetY = -500;
+				break;
+		}
+	}
+
 	void Level::InitMakeData( const boost::shared_ptr<MakeData> &makeData )
 	{
 		boost::shared_ptr<PieceSeedData> Piece = makeData->PieceSeed;
@@ -2311,6 +2337,12 @@ bool Level::dodebug = false;
 		{
 			case 1:
 				makeData->PieceSeed->Style->SetSinglePathType( makeData, shared_from_this(), Piece );
+
+                Tools::Warning(); // This is for making the levels fit on screen better. Do we want it?
+                if ( Piece->MyMetaGameType == MetaGameType_ESCALATION || Piece->MyMetaGameType == MetaGameType_TIME_CRISIS )
+                {
+                    SetSinglePathType_Arcade( makeData, boost::static_pointer_cast<Level>( shared_from_this() ), Piece );
+                }
 
 				break;
 

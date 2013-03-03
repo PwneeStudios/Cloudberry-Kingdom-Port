@@ -396,7 +396,6 @@ namespace CloudberryKingdom
 				lvl->MyGame->WaitThenDo( zoomout_start - 3 - 3, boost::make_shared<RecordScratchLambda>() );
 				
 				Tools::SongWad->PlayList = Tools::SongList_Standard;
-                //Tools::SongWad->SetPlayList("Ripcurl^Blind_Digital");
 				Tools::SongWad->Next( Tools::Song_Ripcurl );
 				Tools::SongWad->PlayNext = true;
 

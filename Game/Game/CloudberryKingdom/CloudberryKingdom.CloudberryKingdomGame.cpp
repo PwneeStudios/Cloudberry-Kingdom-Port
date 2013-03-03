@@ -376,6 +376,8 @@ Version CloudberryKingdomGame::GameVersion = Version( 0, 2, 4 );
 		//bool CloudberryKingdomGame::HideLogos = true;
 		//bool CloudberryKingdomGame::LockCampaign = true;
 		//bool CloudberryKingdomGame::SimpleMainMenu = true;
+		//bool CloudberryKingdomGame::PS3MainMenu = false;
+		//MainMenuTypes CloudberryKingdomGame::MainMenuType = MainMenuTypes_PC;
 		//bool CloudberryKingdomGame::SimpleLeaderboards = true;
 		//bool CloudberryKingdomGame::FakeAwardments = false;
 
@@ -383,24 +385,28 @@ Version CloudberryKingdomGame::GameVersion = Version( 0, 2, 4 );
 		bool CloudberryKingdomGame::HideLogos = false;
 		bool CloudberryKingdomGame::LockCampaign = false;
 		bool CloudberryKingdomGame::SimpleMainMenu = true;
+		MainMenuTypes CloudberryKingdomGame::MainMenuType = MainMenuTypes_PC;
 		bool CloudberryKingdomGame::SimpleLeaderboards = false;
 		bool CloudberryKingdomGame::FakeAwardments = false;
 #elif XBOX
 		bool CloudberryKingdomGame::HideLogos = false;
 		bool CloudberryKingdomGame::LockCampaign = false;
 		bool CloudberryKingdomGame::SimpleMainMenu = false;
+		MainMenuTypes CloudberryKingdomGame::MainMenuType = MainMenuTypes_Xbox;
 		bool CloudberryKingdomGame::SimpleLeaderboards = false;
 		bool CloudberryKingdomGame::FakeAwardments = false;
 #elif CAFE
 		bool CloudberryKingdomGame::HideLogos = false;
 		bool CloudberryKingdomGame::LockCampaign = false;
 		bool CloudberryKingdomGame::SimpleMainMenu = true;
+		MainMenuTypes CloudberryKingdomGame::MainMenuType = MainMenuTypes_WiiU;
 		bool CloudberryKingdomGame::SimpleLeaderboards = true;
 		bool CloudberryKingdomGame::FakeAwardments = false;
 #elif PS3
 		bool CloudberryKingdomGame::HideLogos = false;
 		bool CloudberryKingdomGame::LockCampaign = false;
 		bool CloudberryKingdomGame::SimpleMainMenu = true;
+		MainMenuTypes CloudberryKingdomGame::MainMenuType = MainMenuTypes_PS3;
 		bool CloudberryKingdomGame::SimpleLeaderboards = false;
 		bool CloudberryKingdomGame::FakeAwardments = false;
 #endif
@@ -1240,7 +1246,7 @@ float CloudberryKingdomGame::fps = 0;
             if ( SmallErrorMessage != 0 ) return;
 			if ( Tools::CurGameData == 0 ) return;
 
-            //SmallErrorMessage = MakeMagic( SmallErrorMenu, ( Localization::Words_KnightHelmet ) );
+            //SmallErrorMessage = MakeMagic( SmallErrorMenu, ( Localization::Err_ControllerNotConnected ) );
 			//Tools::CurGameData->AddGameObject( SmallErrorMessage );
         }
 

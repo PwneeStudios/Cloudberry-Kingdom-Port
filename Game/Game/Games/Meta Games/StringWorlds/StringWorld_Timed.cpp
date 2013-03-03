@@ -52,6 +52,13 @@ namespace CloudberryKingdom
 		OnSwapToFirstLevel->Add( boost::make_shared<OnSwapLambda>( boost::static_pointer_cast<StringWorldTimed>( shared_from_this() ) ) );*/
 	}
 
+	void StringWorldTimed::AdditionalSetLevel()
+	{
+		StringWorldGameData::AdditionalSetLevel();
+
+		NextLevelSeed->MyGame->MyLevel->SetBack( 3 );
+	}
+
 	void StringWorldTimed::Release()
 	{
 		StringWorldGameData::Release();

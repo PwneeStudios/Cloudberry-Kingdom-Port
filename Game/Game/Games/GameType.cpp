@@ -511,6 +511,15 @@ namespace CloudberryKingdom
 		ScoreMultiplier = 1;
 		if ( OnCalculateScoreMultiplier != 0 )
 			OnCalculateScoreMultiplier->Apply( shared_from_this() );
+
+		for ( GameObjVec::const_iterator obj = MyGameObjects.begin(); obj != MyGameObjects.end(); ++obj )
+		{
+			boost::shared_ptr<PerfectScoreObject> pso = boost::dynamic_pointer_cast<PerfectScoreObject>( *obj );
+			if ( 0 != pso )
+			{
+				pso->UpdateScoreText();
+			}
+		}
 	}
 
 	void GameData::CheckpointGrabEvent( const boost::shared_ptr<ObjectBase> &Checkpoint_Renamed )

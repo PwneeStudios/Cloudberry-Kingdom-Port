@@ -111,6 +111,8 @@ namespace CloudberryKingdom
 			boost::shared_ptr<AlertBaseMenu> ok = MakeMagic( AlertBaseMenu, ( getControl(), Localization::Words_SeedSavedSuccessfully, Localization::Words_Hooray ) );
 			ok->OnOk = boost::make_shared<OnOkProxy>( boost::static_pointer_cast<SaveSeedAs>( shared_from_this() ) );
 			GUI_Panel::Call( ok );
+
+			SavedSeedsGUI::RefreshList = true;
 		}
 		else
 		{

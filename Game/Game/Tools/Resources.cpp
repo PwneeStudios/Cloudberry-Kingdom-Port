@@ -290,7 +290,7 @@ namespace CloudberryKingdom
 			selectedLanguage = Localization::Language_PORTUGUESE;
 			break;
 		case ConsoleLanguage_RUSSIAN:
-			selectedLanguage = Localization::Language_KOREAN;
+			selectedLanguage = Localization::Language_RUSSIAN;
 			break;
 		}
         // Localization

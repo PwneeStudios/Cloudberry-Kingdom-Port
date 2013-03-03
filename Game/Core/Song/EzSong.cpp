@@ -3,6 +3,8 @@
 #include <Audio/MediaPlayer.h>
 #include <Audio/Song.h>
 
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
 
@@ -23,7 +25,7 @@ namespace CloudberryKingdom
 		if ( Tools::SongWad->SuppressNextInfoDisplay )
 			Tools::SongWad->SuppressNextInfoDisplay = DisplayInfo = false;
 
-		if ( DisplayInfo )
+		if ( DisplayInfo && !CloudberryKingdomGame::CustomMusicPlaying )
 			Tools::SongWad->DisplaySongInfo( shared_from_this() );
 
 		return song->Duration.TotalSeconds;

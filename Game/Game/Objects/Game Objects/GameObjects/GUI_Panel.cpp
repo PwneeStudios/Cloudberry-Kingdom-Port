@@ -98,6 +98,8 @@ namespace CloudberryKingdom
 
 	void GUI_Panel::ReturnToCaller()
 	{
+		ButtonCheck::PreventInput();
+
 		if ( NoBackIfNoCaller && Caller == 0 )
 			return;
 

@@ -512,7 +512,9 @@ namespace CloudberryKingdom
 	{
 		if ( song == 0 )
 		{
-			Tools::SongWad->Start( true );
+			//Tools::SongWad->Start( true );
+			Tools::SongWad->Shuffle();
+			Tools::SongWad->PlayNext = true;
 			Tools::SongWad->Next();
 		}
 		else

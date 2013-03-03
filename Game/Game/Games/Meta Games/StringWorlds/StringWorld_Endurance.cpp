@@ -40,6 +40,13 @@ namespace CloudberryKingdom
 		OnSwapToFirstLevel->Add( boost::make_shared<OnSwapLambda>( boost::static_pointer_cast<StringWorldEndurance>( shared_from_this() ) ) );*/
 	}
 
+	void StringWorldEndurance::AdditionalSetLevel()
+	{
+		StringWorldGameData::AdditionalSetLevel();
+
+		NextLevelSeed->MyGame->MyLevel->SetBack( 3 );
+	}
+
 	void StringWorldEndurance::Release()
 	{
 		StringWorldGameData::Release();

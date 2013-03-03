@@ -68,9 +68,9 @@ namespace CloudberryKingdom
         CurrentSort = LeaderboardSortType_Score;
         CurrentMessage = Message_None;
 
-        DelayCount_LeftRight = MotionCount_LeftRight = 0;
+		SetIndex( Challenge::LeaderboardIndex );
 
-		SetIndex( 0 );
+        DelayCount_LeftRight = MotionCount_LeftRight = 0;
 
         this->Title = Title;
         if ( Title != 0 )
@@ -136,7 +136,7 @@ namespace CloudberryKingdom
         MyPile->Add( LoadingText, L"Loading" );
 
 
-        MyMenu = boost::make_shared<Menu>();
+        MyMenu = boost::make_shared<Menu>( false );
         MyMenu->OnB = boost::make_shared<MenuReturnToCallerLambdaFunc>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
         // Buttons

@@ -213,6 +213,12 @@ boost::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 
 	void ButtonCheck::UpdateControllerAndKeyboard_EndOfStep( ResolutionGroup Resolution )
 	{
+#if CAFE
+		// Determine if the gamepad is in use
+		UseGamepad = false;
+
+#endif
+
 #if defined( PC_VERSION )
 		// Determine if the mouse is in the window or not.
 		Tools::MouseInWindow = Tools::Mouse.X > 0 && Tools::Mouse.X < Resolution.Backbuffer.X && Tools::Mouse.Y > 0 && Tools::Mouse.Y < Resolution.Backbuffer.Y;
@@ -386,6 +392,11 @@ boost::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 
 		PreventNextInput = true;
 		PreventTimeStamp = Tools::TheGame->DrawCount;
+
+		if ( Tools::CurLevel == 0 ) return;
+
+		for ( BobVec::const_iterator bob = Tools::CurLevel->Bobs.begin(); bob != Tools::CurLevel->Bobs.end(); ++bob )
+			( *bob )->Prevent_A_Button = true;
 	}
 
 	bool ButtonCheck::Back( int Control )

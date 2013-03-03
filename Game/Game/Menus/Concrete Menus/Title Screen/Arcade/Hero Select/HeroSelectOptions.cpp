@@ -137,25 +137,31 @@ namespace CloudberryKingdom
 		item->setGo( Cast::ToItem( boost::make_shared<BringLeaderboardProxy>( boost::static_pointer_cast<HeroSelectOptions>( shared_from_this() ) ) ) );
 		AddItem( item );
 		StartMenu_MW_HeroSelect::SetItemProperties_FadedOnUnselect( item );
-
+		
 		MyMenu->MouseOnly = true;
 		MyMenu->NoneSelected = true;
-	#else
+#else
 		EnsureFancy();
 
 		std::wstring Space = std::wstring( L"{s34,0}" );
-		boost::shared_ptr<EzText> StartText = boost::make_shared<EzText>( ButtonString::Go( 80 ) + Space + std::wstring( L" Start" ), ItemFont, true, true );
+		boost::shared_ptr<EzText> StartText = boost::make_shared<EzText>( ButtonString::Go( 80 ) + Space + std::wstring( L" " ) + Localization::WordString( Localization::Words_Start ), ItemFont, true, true );
 		MyPile->Add( StartText, std::wstring( L"Go" ) );
 
-		boost::shared_ptr<EzText> LeaderText = boost::make_shared<EzText>( ButtonString::X( 80 ) + Space + std::wstring( L" Leaderboard" ), ItemFont, true, true );
+		boost::shared_ptr<EzText> LeaderText = boost::make_shared<EzText>( ButtonString::X( 80 ) + Space + std::wstring( L" " ) + Localization::WordString( Localization::Words_Leaderboard ), ItemFont, true, true );
 		MyPile->Add( LeaderText, std::wstring( L"Leaderboard" ) );
+
+	#if PS3
+		StartText.MyFloatColor = ColorHelper.Gray(.9f);
+		LeaderText.MyFloatColor = ColorHelper.Gray(.9f);			
 	#endif
 
-	#if defined(PC_VERSION)
+#endif
+
+#if defined(PC_VERSION)
 		SetPos_PC();
-	#else
+#else
 		SetPos_Console();
-	#endif
+#endif
 	}
 
 	void HeroSelectOptions::SetPos_Console()

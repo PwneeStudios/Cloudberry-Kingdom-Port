@@ -59,7 +59,10 @@ namespace CloudberryKingdom
 	{
 		VerifyBaseMenu::VerifyBaseMenu_Construct( false );
 
+		if ( boost::dynamic_pointer_cast<NormalGameData>( Tools::CurGameData ) != 0 )
+		{
             EnableBounce();
+		}
 
         if (UseBounce)
             CallToLeft = false;

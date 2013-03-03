@@ -10,6 +10,7 @@ namespace CloudberryKingdom
 	int Challenge::Coins = 0;
 	int Challenge::CurrentScore = 0;
 	int Challenge::CurrentId = 0;
+	int Challenge::LeaderboardIndex = 0;
 
 	void Challenge::OnCoinGrabProxy::Apply( const boost::shared_ptr<ObjectBase> &obj )
 	{

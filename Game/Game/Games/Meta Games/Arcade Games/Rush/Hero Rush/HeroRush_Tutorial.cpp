@@ -377,7 +377,7 @@ namespace CloudberryKingdom
 			Wait = 28 + 12;
 
 		HeroRush->Timer->Show();
-		HeroRush->Timer->PauseOnPause = false; // Start the timer
+		//HeroRush->Timer->PauseOnPause = false; // Start the timer
 
 		MyGame->WaitThenDo( Wait, boost::make_shared<ReadyTutorialHelper>( boost::static_pointer_cast<HeroRush_Tutorial>( shared_from_this() ) ) );
 	}

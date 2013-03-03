@@ -132,15 +132,15 @@ namespace CloudberryKingdom
         StartMenu::OnReturnTo();
     }
 
-	bool StartMenu_MW::MenuReturnToCaller( const boost::shared_ptr<Menu> &menu )
+	void StartMenu_MW::ReturnToCaller()
 	{
 		if ( NoBack )
-			return false;
+			return;
 
 		UseBounce = false;
 		ReturnToCallerDelay = 0;
 
-		return StartMenu::MenuReturnToCaller( menu );
+		return StartMenu::ReturnToCaller();
 	}
 
 	void StartMenu_MW::Init()

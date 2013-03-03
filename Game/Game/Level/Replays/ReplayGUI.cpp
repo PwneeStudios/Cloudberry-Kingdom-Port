@@ -158,7 +158,7 @@ namespace CloudberryKingdom
 			{
 if ( ButtonCheck::ControllerInUse )
 {
-#if XBOX || PC_VERSION
+#if PC_VERSION
 				boost::shared_ptr<EzText> _t;
 				_t = MyPile->FindEzText( L"Play" ); if (_t != 0 ) { _t->setPos( Vector2(-721.1783f, -832.2222f ) ); _t->setScale( 0.44f ); }
 				_t = MyPile->FindEzText( L"Back" ); if (_t != 0 ) { _t->setPos( Vector2(-120.0003f, -832.2223f ) ); _t->setScale( 0.44f ); }

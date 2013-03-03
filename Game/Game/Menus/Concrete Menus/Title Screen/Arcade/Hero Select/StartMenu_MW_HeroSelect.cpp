@@ -150,6 +150,7 @@ namespace CloudberryKingdom
             }
 
 		Challenge::ChosenHero = item->Hero;
+		Challenge::LeaderboardIndex = ArcadeMenu::LeaderboardIndex( ArcadeMenu::SelectedChallenge, Challenge::ChosenHero );
 		MyHeroDoll->MakeHeroDoll( item->Hero );
 
 		UpdateScore();
@@ -223,6 +224,11 @@ namespace CloudberryKingdom
 		Level_Renamed = boost::make_shared<EzText>( std::wstring( L"0" ), Resources::Font_Grobold42_2 );
 
 
+#if PS3
+			float Brightness = .945f;
+			Score->MyFloatColor = ColorHelper::Gray( Brightness );
+			Level_Renamed->MyFloatColor = ColorHelper::Gray( Brightness );
+#endif
 
 		// Menu
 		boost::shared_ptr<MiniMenu> mini = boost::make_shared<MiniMenu>();

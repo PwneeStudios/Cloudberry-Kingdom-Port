@@ -355,6 +355,8 @@ namespace CloudberryKingdom
 
         void SoundMenu::Release()
         {
+			if ( CoreData == 0 || CoreData->Released ) return;
+
 			if (Black != 0) Black->Release();
 
             if ( ChosenLanguage != Localization::CurrentLanguage->MyLanguage )

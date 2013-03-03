@@ -47,10 +47,8 @@ namespace CloudberryKingdom
 	{
 		VerifyBaseMenu::Init();
 
-		// Make the menu
-		MenuItem item;
-
-		boost::shared_ptr<EzText> Description = boost::make_shared<EzText>( std::wstring( L"Reconnect controller to continue!" ), Resources::Font_Grobold42_2, 1800.0f, true, true, 0.575f );
+		// Make the message
+		boost::shared_ptr<EzText> Description = boost::make_shared<EzText>( Word, Resources::Font_Grobold42_2, 1800.0f, true, true, 0.575f );
 		Description->setPos( Vector2(0, 100));
 		Description->setScale( Description->getScale() * .6f );
 		MyPile->Add( Description, L"Description" );
@@ -144,7 +142,7 @@ namespace CloudberryKingdom
         boost::shared_ptr<MenuItem> item;
 
         // Header
-        boost::shared_ptr<EzText> HeaderText = boost::make_shared<EzText>( Word, ItemFont, 1500.0, true, false, .7f );
+        boost::shared_ptr<EzText> HeaderText = boost::make_shared<EzText>( Word, ItemFont, 1500.0f, true, false, .7f );
         HeaderText->setScale( HeaderText->getScale() * .85f );
         SetHeaderProperties( HeaderText );
         MyPile->Add( HeaderText, L"Header" );
