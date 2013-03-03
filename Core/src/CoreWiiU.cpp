@@ -78,6 +78,12 @@ void ForegroundReleaseCallback()
 	ForceKillVideoPlayer();
 }
 
+u32 ReleaseForegroundCallback( void *context )
+{
+	LOG.Write( "Kill video player in case we are releasing while it's playing.\n" );
+	ForceKillVideoPlayer();
+}
+
 CoreWiiU::CoreWiiU( GameLoop &game ) :
 	running_( false ),
 	game_( game ),
@@ -93,7 +99,7 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 	DEMOGfxInit( 2, gfxArgs );
 	DEMODRCInit( 0, NULL );
 
-	DEMOSetReleaseCallback( ForegroundReleaseCallback );
+	//DEMOSetReleaseCallback( ForegroundReleaseCallback );
 
 	// Allocate space for MEM1 for process switching.
 	u32 mem1Size;
@@ -154,6 +160,7 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 	// End error viewer.
 
 	ProcUIRegisterCallback( PROCUI_MESSAGE_HBDENIED, HomeButtonDeniedCallback, NULL, 200 );
+	ProcUIRegisterCallback( PROCUI_MESSAGE_RELEASE, ReleaseForegroundCallback, NULL, 200 );
 	//ProcUISetSaveCallback( SaveOnExitCallback, NULL );
 
 	scheduler_ = new Scheduler;
