@@ -5,6 +5,7 @@
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
 #include "StartMenu_MW.h"
+#include "StartMenu_MW_Simple.h"
 
 namespace CloudberryKingdom
 {
@@ -198,6 +199,15 @@ namespace CloudberryKingdom
 
 	void StartMenu_MW::SetPos()
 	{
+		// This should be called in StartMenu_MW::SetPos(). Bad! Mark StartMenu_MW::SetPos() as virtual.
+		boost::shared_ptr<StartMenu_MW_Simple> simple = boost::dynamic_pointer_cast<StartMenu_MW_Simple>( shared_from_this() );
+		if ( simple != 0 )
+		{
+			simple->SetPos();
+			return;
+		}
+
+
         BackBox->setTextureName( L"White" );
         BackBox->Quad_Renamed.SetColor( ColorHelper::Gray(.1f ));
         BackBox->setAlpha( .73f );

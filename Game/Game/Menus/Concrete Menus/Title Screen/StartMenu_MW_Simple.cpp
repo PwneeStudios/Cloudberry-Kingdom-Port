@@ -87,6 +87,7 @@ if ( CloudberryKingdomGame::MainMenuType == MainMenuTypes_PC )
 
 	void StartMenu_MW_Simple::SetPos()
     {
+		// This is now called in StartMenu_MW::SetPos(). Bad! Move it back here and mark StartMenu_MW::SetPos() as virtual.
 		BackBox->setTextureName( L"White" );
 		BackBox->Quad_Renamed.SetColor( ColorHelper::Gray(.1f ));
 		BackBox->setAlpha( .73f );

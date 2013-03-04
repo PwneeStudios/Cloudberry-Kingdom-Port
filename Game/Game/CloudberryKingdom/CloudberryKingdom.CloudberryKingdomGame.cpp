@@ -385,7 +385,8 @@ Version CloudberryKingdomGame::GameVersion = Version( 0, 2, 4 );
 		bool CloudberryKingdomGame::HideLogos = false;
 		bool CloudberryKingdomGame::LockCampaign = false;
 		bool CloudberryKingdomGame::SimpleMainMenu = true;
-		MainMenuTypes CloudberryKingdomGame::MainMenuType = MainMenuTypes_PC;
+		//MainMenuTypes CloudberryKingdomGame::MainMenuType = MainMenuTypes_PC;
+		MainMenuTypes CloudberryKingdomGame::MainMenuType = MainMenuTypes_PS3;
 		bool CloudberryKingdomGame::SimpleLeaderboards = false;
 		bool CloudberryKingdomGame::FakeAwardments = false;
 #elif XBOX
