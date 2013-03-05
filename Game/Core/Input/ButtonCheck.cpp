@@ -215,8 +215,7 @@ boost::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 	{
 #if CAFE
 		// Determine if the gamepad is in use
-		UseGamepad = false;
-
+		ButtonTexture::UseGamepad = false;
 #endif
 
 #if defined( PC_VERSION )

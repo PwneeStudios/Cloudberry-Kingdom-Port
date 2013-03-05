@@ -416,6 +416,12 @@ Words_Leaderboards,
 Words_ResumeGame,
 Words_PlayGame,
 
+Words_Err_PS3_CorruptLoad,
+Words_Err_PS3_NoGamePadDetected,
+Words_Err_PS3_PsnRequired_AskToSignIn,
+Words_Err_PS3_PsnRequired_WillUploadLater,
+Words_Err_PS3_NotEnoughSpace,
+
 Words_EnumLength
 		};
 
