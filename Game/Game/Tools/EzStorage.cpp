@@ -446,7 +446,7 @@ namespace CloudberryKingdom
 				printf( "Not enough space to save! Need %d more KB.\n", neededKb );
 
 				std::wstring error = Format( Localization::WordString( Localization::Words_Err_PS3_NotEnoughSpace ).c_str(), neededKb );
-				DisplayError( ErrorType( WstringToUtf8( error ).c_str() ) );
+				DisplayError( ErrorType( WstringToUtf8( error ) ) );
 
 				result->errNeedSizeKB = neededKb;
 				result->result = CELL_SAVEDATA_CBRESULT_ERR_NOSPACE;
