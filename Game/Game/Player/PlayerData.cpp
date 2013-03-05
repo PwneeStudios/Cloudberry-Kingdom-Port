@@ -1,7 +1,8 @@
 #include <global_header.h>
 
 #include "Hacks/List.h"
-#include <Core\Tools\Set.h>
+#include <Core/Tools/Set.h>
+#include <Core/Lambdas/Lambda.h>
 
 #if ! defined(PC_VERSION) && (defined(XBOX) || defined(XBOX_SIGNIN))
 
@@ -105,6 +106,24 @@ namespace CloudberryKingdom
 		}
 	}
 
+#ifdef PS3
+	// Set language on the main thread.
+	struct SetLanguageLater : public Lambda
+	{
+		Localization::Language NewLanguage;
+
+		SetLanguageLater( Localization::Language language )
+			: NewLanguage( language )
+		{
+		}
+
+		void Apply()
+		{
+			Localization::SetLanguage( NewLanguage );
+		}
+	};
+#endif
+
 	void PlayerData::ProcessChunk( boost::shared_ptr<Chunk> chunk )
 	{
 		switch ( chunk->Type )
@@ -174,8 +193,12 @@ namespace CloudberryKingdom
             case 84003:
                 int _language = chunk->ReadInt();
                 Localization::Language language = ( Localization::Language )_language;
+#ifdef PS3
+				Tools::AddToDo( boost::make_shared< SetLanguageLater >( language ) );
+#else
                 Localization::SetLanguage( language );
-                break;
+#endif
+				break;
 		}
 	}
 

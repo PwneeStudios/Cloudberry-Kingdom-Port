@@ -17,6 +17,7 @@
 
 
 extern std::string PS3_PATH_PREFIX;
+extern std::string GLOBAL_DISCONNECT_MESSAGE;
 
 #endif
 
@@ -166,10 +167,6 @@ namespace CloudberryKingdom
 
 	// FIXME: preinitialize the map with a fixed size?
 	//std::map<Localization::Language, boost::shared_ptr<LanguageInfo> > Localization::Languages = std::map<Localization::Language, boost::shared_ptr<LanguageInfo> >( NumLanguages );
-
-#ifdef PS3
-	extern std::string GLOBAL_DISCONNECT_MESSAGE;
-#endif
 
 	bool IsWestern( Localization::Language language )
 	{

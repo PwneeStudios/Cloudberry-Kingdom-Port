@@ -50,8 +50,6 @@ namespace CloudberryKingdom
 			Tools::CurrentLoadingScreen->MakeFake();
 		}
 
-		SaveGroup::LoadAll();
-
 #ifdef _CRTDBG_MAP_ALLOC
 		CloudberryKingdomGame::memdebug_DumpEnd();
 #endif
@@ -331,6 +329,8 @@ namespace CloudberryKingdom
 
 	void ScreenSaver::Constructor()
 	{
+		SaveGroup::LoadAll();
+
 		WaitLengthToOpenDoor_FirstLevel = 10 + InitialDarkness - 3;
 
 		Tools::TheGame->LogoScreenPropUp = true;

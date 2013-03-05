@@ -13,42 +13,16 @@
 
 #include "Parse.h"
 
+#ifdef PS3
+#include <cell/l10n.h>
+#endif
+
 // FIXME: Portability issues.
-inline std::wstring Utf8ToWstring( const std::string& str )
-{
-	std::wstring result;
-	result.reserve( str.length() );
-	for( std::string::const_iterator i = str.begin(); i != str.end(); ++i )
-		result.push_back( static_cast<wchar_t>( *i ) );
+std::wstring Utf8ToWstring( const std::string& str );
 
-	return result;
-	/*std::wstring_convert<std::codecvt_utf8<wchar_t> > myconv;
-	return myconv.from_bytes( str );*/
-}
+inline std::wstring BytesToWstring( const char *start, const char *end );
 
-inline std::wstring BytesToWstring( const char *start, const char *end )
-{
-	std::wstring result;
-	result.reserve( end - start );
-	for( const char *c = start; c != end; ++c )
-		result.push_back( static_cast<char>( *c ) );
-
-	return result;
-	/*std::wstring_convert<std::codecvt_utf8<wchar_t> > myconv;
-	return myconv.from_bytes( start, end );*/
-}
-
-inline std::string WstringToUtf8( const std::wstring& str )
-{
-	std::string result;
-	result.reserve( str.length() );
-	for( std::wstring::const_iterator i = str.begin(); i != str.end(); ++i )
-		result.push_back( static_cast<char>( *i ) );
-
-	return result;
-	/*std::wstring_convert<std::codecvt_utf8<wchar_t> > myconv;
-	return myconv.to_bytes( str );*/
-}
+std::string WstringToUtf8( const std::wstring& str );
 
 inline int GetHashCode( const std::wstring &s )
 {
