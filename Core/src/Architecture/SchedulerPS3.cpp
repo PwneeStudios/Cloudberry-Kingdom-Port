@@ -14,7 +14,7 @@
 #include <sys/ppu_thread.h>
 
 #define NUM_THREADS 1
-#define MAIN_QUEUE_SIZE 10
+#define MAIN_QUEUE_SIZE 6
 
 /**
  * Load a resource.

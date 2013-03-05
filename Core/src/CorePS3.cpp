@@ -245,7 +245,7 @@ CorePS3::CorePS3( GameLoop &game ) :
 		transientMemorySize: 0,
 		errorConsole: 0,
 		fifoSize: 0,
-		hostMemorySize: 128 * 1024 * 1024
+		hostMemorySize: 64 * 1024 * 1024
 	};
 
 	psglInit( &initOpts );

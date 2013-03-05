@@ -30,7 +30,8 @@ namespace CloudberryKingdom
 		}
 		else
 		{
-			CloudberryKingdomGame::ShowError_MustBeSignedInToLiveForLeaderboard();
+			//CloudberryKingdomGame::ShowError_MustBeSignedInToLiveForLeaderboard();
+			CloudberryKingdomGame::ShowError_MustBeSignedInToLive(Localization::Words_None);
 		}
 	}
 

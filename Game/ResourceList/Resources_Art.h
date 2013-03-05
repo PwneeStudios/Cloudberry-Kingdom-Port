@@ -9,11 +9,11 @@
 
 
 const wchar_t *TEXTURE_PATHS[] = {
-L"Fonts/Grobold_Chinese",
+//L"Fonts/Grobold_Chinese",
 L"Art/Title/CopyRightSymbol",
-L"Fonts/Grobold_Japanese",
-L"Fonts/Grobold_Korean",
-L"Fonts/Grobold_Western",
+//L"Fonts/Grobold_Japanese",
+//L"Fonts/Grobold_Korean",
+//L"Fonts/Grobold_Western",
 L"Art/Bob/Bob_Trimmed/Bob_Stand_0041",
 L"Art/Bob/Bob_Trimmed/Bob_Stand_0040",
 L"Art/Bob/Bob_Trimmed/Bob_Stand_0039",
@@ -719,11 +719,11 @@ L"Art/Bob/Bob_Trimmed/Bob_Box_Stand_0047",
 };
 
 const int TEXTURE_WIDTHS[] = {
-2048,
+//2048,
 19,
-2048,
-2048,
-1024,
+//2048,
+//2048,
+//1024,
 140,
 140,
 140,
@@ -1429,11 +1429,11 @@ const int TEXTURE_WIDTHS[] = {
 };
 
 const int TEXTURE_HEIGHTS[] = {
-1650,
+//1650,
 21,
-1300,
-1300,
-1024,
+//1300,
+//1300,
+//1024,
 181,
 181,
 181,

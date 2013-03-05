@@ -760,7 +760,7 @@ namespace CloudberryKingdom
 		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/BasicEffect" ) ), std::wstring( L"Basic" ) );
 		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/NoTexture" ) ), std::wstring( L"NoTexture" ) );
 		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Circle" ) ), std::wstring( L"Circle" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/BasicEffect" ) ), std::wstring( L"Shell" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Shell" ) ), std::wstring( L"Shell" ) );
 		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/FireballEffect" ) ), std::wstring( L"Fireball" ) );
 		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/BasicEffect" ) ), std::wstring( L"Paint" ) );
 		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/BasicEffect" ) ), std::wstring( L"Lava" ) );
