@@ -31,6 +31,7 @@
     <ClInclude Include="include\Content\TextureWiiUInternal.h" />
     <ClInclude Include="include\Graphics\RenderTarget2D.h" />
     <ClInclude Include="include\Graphics\Texture2D.h" />
+    <ClInclude Include="include\PwneeAssert.h" />
     <ClInclude Include="include\Utility\ConsoleInformation.h" />
     <ClInclude Include="include\Utility\Error.h" />
     <ClInclude Include="include\Utility\Save.h" />
@@ -235,6 +236,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="src\Audio\SoundEffectPc.cpp" />
+    <ClCompile Include="src\PwneeAssert.cpp" />
     <ClCompile Include="src\Utility\ConsoleInformationPc.cpp" />
     <ClCompile Include="src\Utility\ConsoleInformationPS3.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -264,6 +266,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{EC9842FF-099E-4DFC-917B-98BD9B4486FD}</ProjectGuid>

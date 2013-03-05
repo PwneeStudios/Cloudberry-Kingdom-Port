@@ -1,6 +1,6 @@
 #include <Graphics/QuadDrawerWiiU.h>
 
-#include <cassert>
+#include <PwneeAssert.h>
 #include <cafe/demo.h>
 #include <cafe/gx2.h>
 #include <cafe/demo/demoGfxTypes.h>

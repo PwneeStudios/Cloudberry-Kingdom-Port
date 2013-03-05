@@ -1,7 +1,11 @@
 #ifndef PWNEE_ASSERT
 #define PWNEE_ASSERT
 
-#if PC_VERSION
+#if defined( CAFE ) || defined( PS3 )
+
+	#include <cassert>
+
+#else
 
 	#if !defined( DEBUG ) && !defined( _DEBUG )
 
@@ -10,21 +14,16 @@
 	#else
 
 		#include <intrin.h>
+
+		#undef assert
 		#define assert(x)                                                       \
 			if (!(x)) {                                                         \
-				LOG.Write( "Assertion failed in \"%s\", line %d\n"				\
-						  "\tProbable bug in software.\n",                      \
-						  __FILE__, __LINE__ );                                 \
 				__debugbreak();													\
 			}                                                                   \
 			else   // This 'else' exists to catch the user's following semicolon
 
 	#endif
-
-#else
-
-	#include <cassert>
-
+	
 #endif
 
 #endif

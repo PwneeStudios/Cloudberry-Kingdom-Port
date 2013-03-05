@@ -1542,8 +1542,9 @@ float CloudberryKingdomGame::fps = 0;
 			if ( !Tools::CurGameData->Loading && Tools::CurLevel->PlayMode == 0 && Tools::CurGameData != 0 && !Tools::CurGameData->Loading && ( !Tools::CurGameData->PauseGame || CharacterSelectManager::IsShowing ) )
 			{
 #if PC_VERSION
-				Fireball::FlameTexture->_Tex = Tools::TextureWad->TextureList[0]->_Tex;
+				Fireball::FireballTexture->_Tex = Tools::TextureWad->TextureList[0]->_Tex;
 				Fireball::EmitterTexture->_Tex = Tools::TextureWad->TextureList[0]->_Tex;
+				Fireball::FlameTexture->_Tex = Tools::TextureWad->TextureList[0]->_Tex;
 #else
 				// Compute fireballs textures
 				MyGraphicsDevice->BlendState = GfxBlendState_Additive;

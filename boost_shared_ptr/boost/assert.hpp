@@ -47,7 +47,8 @@ namespace boost
   : ::boost::assertion_failed(#expr, BOOST_CURRENT_FUNCTION, __FILE__, __LINE__))
 
 #else
-# include <assert.h> // .h to support old libraries w/o <cassert> - effect is the same
+//# include <assert.h> // .h to support old libraries w/o <cassert> - effect is the same
+# include <PwneeAssert.h>
 # define BOOST_ASSERT(expr) assert(expr)
 #endif
 

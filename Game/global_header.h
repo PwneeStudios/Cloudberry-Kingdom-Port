@@ -7,7 +7,7 @@
 
 // System includes.
 #include <algorithm>
-#include <cassert>
+#include <PwneeAssert.h>
 #include <list>
 #include <map>
 #define _USE_MATH_DEFINES

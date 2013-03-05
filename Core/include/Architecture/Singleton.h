@@ -1,7 +1,7 @@
 #ifndef _SINGLETON_H_
 #define _SINGLETON_H_
 
-#include <cassert>
+#include <PwneeAssert.h>
 
 /**
  * Base class for things there should only be one of.

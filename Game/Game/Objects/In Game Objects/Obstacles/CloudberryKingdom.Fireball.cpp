@@ -155,6 +155,7 @@ namespace CloudberryKingdom
 	{
 #if defined( PC )
 		// FIXME
+		FireballTexture->_Tex = Tools::TextureWad->TextureList[ 0 ]->_Tex;
 		return;
 #endif
 
@@ -213,6 +214,8 @@ namespace CloudberryKingdom
 	{
 #if defined( PC_VERSION )
 		// FIXME
+		EmitterTexture->_Tex = Tools::TextureWad->TextureList[ 0 ]->_Tex;
+		FlameTexture->_Tex = Tools::TextureWad->TextureList[ 0 ]->_Tex;
 		return;
 #endif
 
