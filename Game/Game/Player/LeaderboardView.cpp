@@ -288,10 +288,10 @@ if ( ButtonCheck::ControllerInUse )
     {
         LeaderboardType lt = ( LeaderboardType )(((( int )type + 1 ) + ( int )LeaderboardType_Length ) % ( int )LeaderboardType_Length );
 
-#if PS3
+//#if PS3
 		if ( lt == LeaderboardType_MyScores )
 			lt = Incr( lt );
-#endif
+//#endif
 
 		return lt;
     }
@@ -303,7 +303,8 @@ if ( ButtonCheck::ControllerInUse )
 
     void LeaderboardGUI::SwitchView()
     {
-		if ( CurrentView != 0 && CurrentView->Loading ) return;
+		Tools::Warning(); // FIXME this should not be commented out, was just testing.
+		//if ( CurrentView != 0 && CurrentView->Loading ) return;
 
         CurrentType = Incr( CurrentType );
         UpdateView();
@@ -370,18 +371,18 @@ if ( ButtonCheck::ControllerInUse )
         SetIndex( index );
     }
 
-    void LeaderboardGUI::SetItemProperties( boost::shared_ptr<MenuItem> item )
+    void LeaderboardGUI::SetItemProperties( const boost::shared_ptr<MenuItem> &item )
     {
         StartMenu::SetItemProperties_Red( item );
         //CkBaseMenu::SetItemProperties( item );
     }
 
-    void LeaderboardGUI::SetTextProperties( boost::shared_ptr<EzText> text )
+    void LeaderboardGUI::SetTextProperties( const boost::shared_ptr<EzText> &text )
     {
         CkBaseMenu::SetTextProperties( text );
     }
 
-    void LeaderboardGUI::SetSelectedTextProperties( boost::shared_ptr<EzText> text )
+    void LeaderboardGUI::SetSelectedTextProperties( const boost::shared_ptr<EzText> &text )
     {
         CkBaseMenu::SetSelectedTextProperties( text );
     }
