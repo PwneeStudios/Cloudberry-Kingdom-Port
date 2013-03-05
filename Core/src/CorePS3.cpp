@@ -189,6 +189,9 @@ std::string PS3_PATH_PREFIX;
 int GLOBAL_WIDTH;
 int GLOBAL_HEIGHT;
 
+// Preallocate all memory used by video player.  Defined in VideoPlayerPS3.cpp.
+extern void ReserveVideoPlayerMemory();
+
 CorePS3::CorePS3( GameLoop &game ) :
 	running_( false ),
 	game_( game ),
@@ -313,6 +316,8 @@ CorePS3::CorePS3( GameLoop &game ) :
 
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT );
 	psglSwap();
+
+	ReserveVideoPlayerMemory();
 
 	scheduler_ = new Scheduler;
 

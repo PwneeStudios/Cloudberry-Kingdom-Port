@@ -44,16 +44,19 @@ class MemAllocator : public cell::Sail::memallocator
 {
 	void* Allocate(uint32_t size, uint32_t alignment=0) 
 	{	
+		LOG.Write( "Allocate %d align = %d\n", size, alignment );
 		return memalign(alignment, size);	
 	};
 
 	void Deallocate(void* pMemory) 
 	{	
+		LOG.Write( "Free!\n" );
 		free(pMemory);	
 	};
 
 	void* AllocateTexture(uint32_t size, uint32_t alignment=0) 
-	{	
+	{
+		LOG.Write( "Frame %d align = %d\n", size, alignment );
 		/*E
          * IMPORTANT: Your textures need to reside in main memory. Bandwidth
          * limitations make using the RSX local memory for output textures
@@ -62,12 +65,13 @@ class MemAllocator : public cell::Sail::memallocator
          * internally this area will be mapped so that GCM accepts it
          * as texture memory.
          */
-		return memalign(alignment, size);	
+		return PBOBuffer;//memalign(alignment, size);	
 	};
 
 	void DeallocateTexture(void* pMemory) 
-	{		
-		free(pMemory);	
+	{
+		LOG.Write( "Frame free!\n" );
+		//free(pMemory);	
 	};
 };
 
@@ -94,6 +98,38 @@ class MemAllocator : public cell::Sail::memallocator
 
 	sys_ppu_thread_exit( 0 );
 }*/
+
+void ReserveVideoPlayerMemory()
+{
+	// Create a texture for us to draw video into.
+	MovieTexture = new Texture();
+	MovieTextureHolder = new ResourceHolder( MovieTexture );
+
+	glGenBuffers( 1, &PBO );
+	glBindBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE, PBO );
+	glBufferData( GL_TEXTURE_REFERENCE_BUFFER_SCE, 3 * 1280 * 720 * sizeof( uint32_t ), NULL, GL_SYSTEM_DRAW_SCE );
+	
+	PBOBuffer = reinterpret_cast< uint8_t * >( 
+		glMapBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE, GL_READ_WRITE )
+	);
+
+	GLuint texture;
+	glGenTextures( 1, &texture );
+	MovieTexture->impl_.internal_->Ref.textureID = texture;
+
+	glBindTexture( GL_TEXTURE_2D, texture );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+	glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
+	glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
+	glTextureReferenceSCE( GL_TEXTURE_2D, 1, 1280, 720, 1, GL_RGBA, 1280 * sizeof( uint32_t ), 0 );
+	glBindTexture( GL_TEXTURE_2D, 0 );
+	
+	glBindBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE, 0 );
+
+	ExternalTexture = boost::make_shared< Texture2D >( NULL, 1280, 720 );
+	ExternalTexture->texture_ = MovieTextureHolder;
+}
 
 // Share the SPURS instance from the media player in mscommon.cpp.
 extern CellSpurs spurs;
@@ -134,19 +170,19 @@ VideoPlayer::VideoPlayer()
 	internal_->Player = new cell::Sail::hlPlayer( &videoPlayerInit, &ReplacementAllocators );
 
 	// Create a texture for us to draw video into.
-	MovieTexture = new Texture();
+	/*MovieTexture = new Texture();
 	MovieTextureHolder = new ResourceHolder( MovieTexture );
 
 	// Create underlying buffer.
 	glGenBuffers( 1, &PBO );
 	glBindBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE, PBO );
-	glBufferData( GL_TEXTURE_REFERENCE_BUFFER_SCE, 1280 * 720 * sizeof( uint32_t ), NULL, GL_SYSTEM_DRAW_SCE );
+	glBufferData( GL_TEXTURE_REFERENCE_BUFFER_SCE, 1280 * 720 * sizeof( uint32_t ), NULL, GL_SYSTEM_DRAW_SCE );*/
 	/*PBOBuffer = reinterpret_cast< uint8_t * >( 
 		glMapBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE, GL_READ_WRITE )
 	);*/
 
 	// Create actual texture.
-	GLuint texture;
+	/*GLuint texture;
 	glGenTextures( 1, &texture );
 	MovieTexture->impl_.internal_->Ref.textureID = texture;
 
@@ -165,7 +201,7 @@ VideoPlayer::VideoPlayer()
 	size_t appStackSize = 32768;
 
 	ExternalTexture = boost::make_shared< Texture2D >( NULL, 1280, 720 );
-	ExternalTexture->texture_ = MovieTextureHolder;
+	ExternalTexture->texture_ = MovieTextureHolder;*/
 
 	/*if( CELL_OK != sys_ppu_thread_create( &internal_->displayThread, DrawThread, NULL,
 										dispThrPriority, appStackSize, SYS_PPU_THREAD_CREATE_JOINABLE,
@@ -224,7 +260,7 @@ VideoPlayer::~VideoPlayer()
 	g_Player = NULL;
 	delete internal_->Player;
 
-	delete MovieTextureHolder;
+	/*delete MovieTextureHolder;
 	MovieTextureHolder = NULL;
 
 	if( MovieTexture )
@@ -234,7 +270,7 @@ VideoPlayer::~VideoPlayer()
 		MovieTexture = NULL;
 	}
 
-	ExternalTexture = NULL;
+	ExternalTexture = NULL;*/
 
 	// Empty pbo used by the video player.
 	//memset( PBOBuffer, 0, 1280 * 720 * sizeof( uint32_t ) );
@@ -242,8 +278,8 @@ VideoPlayer::~VideoPlayer()
 	/*glBindBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE, PBO );
 	glUnmapBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE );
 	glBindBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE, 0 );*/
-	glDeleteBuffers( 1, &PBO );
-	PBO = 0;
+	/*glDeleteBuffers( 1, &PBO );
+	PBO = 0;*/
 
 	// Enable BGM playback.
 	int ret = cellSysutilEnableBgmPlayback();
@@ -281,14 +317,14 @@ void VideoPlayer::Play( const boost::shared_ptr< Video > &video )
 		internal_->Player = NULL;
 		g_Player = NULL;
 
-		delete MovieTextureHolder;
+		/*delete MovieTextureHolder;
 		MovieTextureHolder = NULL;
 
 		glDeleteTextures( 1, &MovieTexture->impl_.internal_->Ref.textureID );
 		delete MovieTexture;
 		MovieTexture = NULL;
 
-		ExternalTexture = NULL;
+		ExternalTexture = NULL;*/
 	}
 }
 
@@ -299,6 +335,12 @@ void VideoPlayer::DrawFrame()
 	if( g_Player && g_Player->vsyncGetFrame( &displayFrame ) )
 	{
 		glBindBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE, PBO );
+
+		glBindTexture( GL_TEXTURE_2D, MovieTexture->impl_.internal_->Ref.textureID );
+		glTextureReferenceSCE( GL_TEXTURE_2D, 1, 1280, 720, 1, GL_RGBA, 1280 * sizeof( uint32_t ),
+			reinterpret_cast< GLintptr >( displayFrame.buffer - PBOBuffer ) );
+		glBindTexture( GL_TEXTURE_2D, 0 );
+	
 		/*PBOBuffer = reinterpret_cast< uint8_t * >( 
 			glMapBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE, GL_READ_WRITE )
 		);
@@ -308,8 +350,8 @@ void VideoPlayer::DrawFrame()
 			memcpy( PBOBuffer, displayFrame.buffer, 1280 * 720 * sizeof( uint32_t ) );
 		}
 		glUnmapBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE );*/
-		glBufferSubData( GL_TEXTURE_REFERENCE_BUFFER_SCE, 0, displayFrame.width * displayFrame.height * sizeof( uint32_t ),
-			displayFrame.buffer );
+		/*glBufferSubData( GL_TEXTURE_REFERENCE_BUFFER_SCE, 0, displayFrame.width * displayFrame.height * sizeof( uint32_t ),
+			displayFrame.buffer );*/
 		glBindBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE, 0 );
 
 		/*glFlush();
