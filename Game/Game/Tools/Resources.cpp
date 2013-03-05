@@ -175,7 +175,7 @@ namespace CloudberryKingdom
 		// Create the standard playlist
 		AddRange( Tools::SongList_Standard, Tools::SongWad->SongList );
 		Remove( Tools::SongList_Standard, Tools::Song_Happy );
-		Remove( Tools::SongList_Standard, Tools::Song_140mph );
+		//Remove( Tools::SongList_Standard, Tools::Song_140mph );
 		Remove( Tools::SongList_Standard, Tools::Song_Heavens );
 	}
 

@@ -10,6 +10,7 @@
 #include "psglGtfLoader.h"
 #include <string.h>
 #include <sdk_version.h>
+#include <cell/cell_fs.h>
 
 #ifdef __SNC__
 #define JS_BREAK __builtin_snpause()
@@ -242,14 +243,12 @@ int psglCreateTextureReferenceFromGTFFile(const char *filename, psglTextureRefer
 int psglCreateTextureReferenceFromGTFFileToPreallocatedPBO(const char *filename, bool bLoadInPlace, bool bForceSwizzling, GLuint tex, GLuint pbo, int &width, int &height )
 {
     //// Get texture file info from GTF attribute and convert it to PSGL texture format
-
     CellGtfTextureAttribute attrib;
     if( cellGtfReadTextureAttribute(filename,0,&attrib) )
     {
         JS_TRACE("Error loading %s.\n", filename );
         return -1;
     }
-
     uint8_t format = attrib.tex.format;
     bool bSwizzled = !(format & CELL_GCM_TEXTURE_LN);
 
@@ -326,7 +325,6 @@ int psglCreateTextureReferenceFromGTFFileToPreallocatedPBO(const char *filename,
         printf("GL does not have corresponding format for GCM format %d", format );
         return -1;
     }
-
 
     //// Create and initialize a PSGL texture with the buffer object bound as source
     //glGenBuffers(1,&textureReference->bufferID);
