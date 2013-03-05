@@ -4,15 +4,21 @@
 #if PC_VERSION
 
 	#if !defined( DEBUG ) && !defined( _DEBUG )
+
 		#define assert(x)
+
 	#else
+
+		#include <intrin.h>
 		#define assert(x)                                                       \
 			if (!(x)) {                                                         \
 				LOG.Write( "Assertion failed in \"%s\", line %d\n"				\
 						  "\tProbable bug in software.\n",                      \
 						  __FILE__, __LINE__ );                                 \
+				__debugbreak();													\
 			}                                                                   \
 			else   // This 'else' exists to catch the user's following semicolon
+
 	#endif
 
 #else
