@@ -7,6 +7,20 @@
 #include "Hacks/NET/Path.h"
 #include "Hacks/FileReader.h"
 
+#ifdef PS3
+#include <Content/Texture.h>
+#include <PSGL/psgl.h>
+#include <PSGL/psglu.h>
+
+#include "../../Core/src/Content/PS3/psglGtfLoader.h"
+#include <Content/TexturePS3Internal.h>
+
+
+extern std::string PS3_PATH_PREFIX;
+extern std::string GLOBAL_DISCONNECT_MESSAGE;
+
+#endif
+
 namespace CloudberryKingdom
 {
 
@@ -17,10 +31,33 @@ namespace CloudberryKingdom
 		this->FontSuffix = FontSuffix;
 	}
 
+#ifdef PS3
+	// Global font texture.
+	static ::Texture GlobalFontTexture;
+
+	// Holder for font texture.
+	static ResourceHolder GlobalFontHolder;
+
+	static boost::shared_ptr< Texture2D > GlobalIntermediateTextureContainer;
+	static boost::shared_ptr< EzTexture > GlobalFontEzTexture;
+#endif
     void Localization::LoadFont()
     {
-        std::wstring name = L"Grobold_" + CurrentLanguage->FontSuffix;
-		boost::shared_ptr<EzTexture> ez_t = Tools::Texture(name);
+		std::wstring name = L"Grobold_" + CurrentLanguage->FontSuffix;
+		
+#ifdef PS3
+		std::string path = PS3_PATH_PREFIX + "ContentPS3/Fonts/" + WstringToUtf8( name ) + ".gtf";
+
+		// FIXME: This makes sure that the font textures are always loaded in the same block of memory.
+		psglCreateTextureReferenceFromGTFFileToPreallocatedPBO( path.c_str(),
+			true, false, GlobalFontTexture.impl_.internal_->Ref.textureID,
+			GlobalFontTexture.impl_.internal_->Ref.bufferID, GlobalFontEzTexture->Width,
+			GlobalFontEzTexture->Height );
+
+		boost::shared_ptr< EzTexture > ez_t = GlobalFontEzTexture;
+#else
+        boost::shared_ptr<EzTexture> ez_t = Tools::Texture(name);
+#endif
         FontTexture = ez_t->getTex(); //Content->Load<Texture2D>( Path::Combine( L"Fonts", name ) );
 		FontTexture->Width = ez_t->Width;
 		FontTexture->Height = ez_t->Height;
@@ -131,10 +168,6 @@ namespace CloudberryKingdom
 	// FIXME: preinitialize the map with a fixed size?
 	//std::map<Localization::Language, boost::shared_ptr<LanguageInfo> > Localization::Languages = std::map<Localization::Language, boost::shared_ptr<LanguageInfo> >( NumLanguages );
 
-#ifdef PS3
-	extern std::string GLOBAL_DISCONNECT_MESSAGE;
-#endif
-
 	bool IsWestern( Localization::Language language )
 	{
 		return
@@ -206,6 +239,29 @@ namespace CloudberryKingdom
 
 		std::wstring path = Path::Combine( Content->RootDirectory, Path::Combine( std::wstring( L"Localization" ), std::wstring( L"LocalizationCpp.tsv" ) ) );
 		ReadTranslationGrid( path );
+
+#ifdef PS3
+		GlobalFontHolder = ResourceHolder( &GlobalFontTexture );
+
+		GLuint pbo, tex;
+		glGenBuffers( 1, &pbo );
+		glBindBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE, pbo );
+		glBufferData( GL_TEXTURE_REFERENCE_BUFFER_SCE, 27 * 1024 * 1024, NULL, GL_STATIC_DRAW );
+		glBindBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE, 0 );
+
+		glGenTextures( 1, &tex );
+		glBindTexture( GL_TEXTURE_2D, tex );
+		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_ALLOCATION_HINT_SCE, GL_TEXTURE_TILED_GPU_SCE );
+		glBindTexture( GL_TEXTURE_2D, 0 );
+
+		GlobalFontTexture.impl_.internal_->Ref.bufferID = pbo;
+		GlobalFontTexture.impl_.internal_->Ref.textureID = tex;
+
+		GlobalIntermediateTextureContainer = boost::make_shared< Texture2D >( NULL, 0, 0 );
+		GlobalIntermediateTextureContainer->texture_ = ResourcePtr< Texture >( &GlobalFontHolder );
+		GlobalFontEzTexture = boost::make_shared< EzTexture >();
+		GlobalFontEzTexture->setTex( GlobalIntermediateTextureContainer );
+#endif
 	}
 
         float Localization::ParseTime( const std::wstring &s )

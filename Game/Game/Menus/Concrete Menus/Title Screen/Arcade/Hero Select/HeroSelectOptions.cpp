@@ -151,8 +151,8 @@ namespace CloudberryKingdom
 		MyPile->Add( LeaderText, std::wstring( L"Leaderboard" ) );
 
 	#if PS3
-		StartText.MyFloatColor = ColorHelper.Gray(.9f);
-		LeaderText.MyFloatColor = ColorHelper.Gray(.9f);			
+		StartText->MyFloatColor = ColorHelper::Gray(.9f);
+		LeaderText->MyFloatColor = ColorHelper::Gray(.9f);			
 	#endif
 
 #endif

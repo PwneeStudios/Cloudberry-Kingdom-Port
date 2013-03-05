@@ -22,6 +22,19 @@
 #define NTOHLL( x ) ( x )
 #endif
 
+// FIXME: Delete this.
+std::wstring BytesToWstring( const char *start, const char *end )
+{
+	std::wstring result;
+	result.reserve( end - start );
+	for( const char *c = start; c != end; ++c )
+		result.push_back( static_cast<char>( *c ) );
+
+	return result;
+	/*std::wstring_convert<std::codecvt_utf8<wchar_t> > myconv;
+	return myconv.from_bytes( start, end );*/
+}
+
 FileBinaryReader::FileBinaryReader( const std::wstring &path ) :
 	file_( FILESYSTEM.Open( WstringToUtf8( path ) ) )
 {

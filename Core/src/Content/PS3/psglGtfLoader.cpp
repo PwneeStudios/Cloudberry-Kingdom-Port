@@ -10,6 +10,7 @@
 #include "psglGtfLoader.h"
 #include <string.h>
 #include <sdk_version.h>
+#include <cell/cell_fs.h>
 
 #ifdef __SNC__
 #define JS_BREAK __builtin_snpause()
@@ -236,6 +237,238 @@ int psglCreateTextureReferenceFromGTFFile(const char *filename, psglTextureRefer
     glDisable( target );
 
     return 0;
+}
+
+// PWNEE version of loading staright into a preallocated PBO.
+int psglCreateTextureReferenceFromGTFFileToPreallocatedPBO(const char *filename, bool bLoadInPlace, bool bForceSwizzling, GLuint tex, GLuint pbo, int &width, int &height )
+{
+	glBindBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE, pbo );
+    char *mTextureAddress = (char *)glMapBuffer(GL_TEXTURE_REFERENCE_BUFFER_SCE,GL_READ_WRITE);
+
+	CellFsStat fstat;
+	cellFsStat( filename, &fstat );
+
+	int fd;
+	cellFsOpen( filename, CELL_FS_O_RDONLY, &fd, NULL, 0 );
+
+	CellGtfFileHeader header;
+	uint64_t nread;
+	cellFsRead( fd, &header, sizeof( CellGtfFileHeader ), &nread );
+
+	CellGtfTextureAttribute attribute;
+	cellFsRead( fd, &attribute, sizeof( CellGtfTextureAttribute ), &nread );
+
+	cellFsLseek( fd, attribute.offsetToTex, CELL_FS_SEEK_SET, &nread );
+	cellFsRead( fd, mTextureAddress, attribute.textureSize, &nread );
+	cellFsClose( fd );
+	glUnmapBuffer(GL_TEXTURE_REFERENCE_BUFFER_SCE);
+	
+	// Format conversion
+    GLenum glInternalFormat = 0;
+    switch( attribute.tex.format & 0x9F ) // Ignore SZ LN NR UN bits
+    {
+    case CELL_GCM_TEXTURE_B8					: glInternalFormat = GL_INTENSITY8; break;
+    case CELL_GCM_TEXTURE_A1R5G5B5				: glInternalFormat = 0; break;
+    case CELL_GCM_TEXTURE_A4R4G4B4				: glInternalFormat = 0; break;
+    case CELL_GCM_TEXTURE_R5G6B5				: glInternalFormat = GL_RGB5; break;
+    case CELL_GCM_TEXTURE_A8R8G8B8				: glInternalFormat = GL_ARGB_SCE; break;
+    case CELL_GCM_TEXTURE_COMPRESSED_DXT1		: glInternalFormat = GL_COMPRESSED_RGB_S3TC_DXT1_EXT; break;
+    case CELL_GCM_TEXTURE_COMPRESSED_DXT23		: glInternalFormat = GL_COMPRESSED_RGBA_S3TC_DXT3_EXT; break;
+    case CELL_GCM_TEXTURE_COMPRESSED_DXT45		: glInternalFormat = GL_COMPRESSED_RGBA_S3TC_DXT5_EXT; break;
+    case CELL_GCM_TEXTURE_G8B8					: glInternalFormat = GL_LUMINANCE8_ALPHA8; break;
+    case CELL_GCM_TEXTURE_R6G5B5				: glInternalFormat = 0; break;
+    case CELL_GCM_TEXTURE_DEPTH24_D8			: glInternalFormat = GL_DEPTH_COMPONENT24; break;
+    case CELL_GCM_TEXTURE_DEPTH24_D8_FLOAT		: glInternalFormat = 0; break;
+    case CELL_GCM_TEXTURE_DEPTH16				: glInternalFormat = 0; break;
+    case CELL_GCM_TEXTURE_DEPTH16_FLOAT			: glInternalFormat = 0; break;
+    case CELL_GCM_TEXTURE_X16					: glInternalFormat = GL_LUMINANCE16; break;
+    case CELL_GCM_TEXTURE_Y16_X16				: glInternalFormat = GL_LUMINANCE16_ALPHA16; break;
+    case CELL_GCM_TEXTURE_R5G5B5A1				: glInternalFormat = GL_RGB5_A1; break;
+    case CELL_GCM_TEXTURE_COMPRESSED_HILO8		: glInternalFormat = 0; break;
+    case CELL_GCM_TEXTURE_COMPRESSED_HILO_S8	: glInternalFormat = 0; break;
+    case CELL_GCM_TEXTURE_W16_Z16_Y16_X16_FLOAT	: glInternalFormat = GL_RGBA16F_ARB; break;
+    case CELL_GCM_TEXTURE_W32_Z32_Y32_X32_FLOAT	: glInternalFormat = GL_RGBA32F_ARB; break;
+    case CELL_GCM_TEXTURE_X32_FLOAT				: glInternalFormat = GL_LUMINANCE32F_ARB; break;
+    case CELL_GCM_TEXTURE_D1R5G5B5				: glInternalFormat = 0; break;
+    case CELL_GCM_TEXTURE_D8R8G8B8				: glInternalFormat = 0; break;
+    case CELL_GCM_TEXTURE_Y16_X16_FLOAT			: glInternalFormat = GL_LUMINANCE_ALPHA16F_ARB; break;
+        //case CELL_GCM_TEXTURE_COMPRESSED_B8R8_G8R8	: glInternalFormat = 0; break;
+        //case CELL_GCM_TEXTURE_COMPRESSED_R8B8_R8G8	: glInternalFormat = 0; break;
+    }
+
+
+	GLenum target = GL_TEXTURE_2D;
+	glEnable( target );
+    glBindTexture( target, tex/*textureReference->textureID*/ );
+    glTexParameterf(target,GL_TEXTURE_MAX_ANISOTROPY_EXT, 4.0f );
+    glTexParameteri( target, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR );
+    glTexParameteri( target, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+	glTexParameteri( target, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT );
+    glTexParameteri( target, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT );
+    glTexParameteri( target, GL_TEXTURE_MAX_LOD, attribute.tex.mipmap-1 );
+	
+	width = attribute.tex.width;
+	height = attribute.tex.height;
+	glTextureReferenceSCE(target, attribute.tex.mipmap, attribute.tex.width,  attribute.tex.height, 1 , glInternalFormat, attribute.tex.pitch, 0);
+    glDisable( target );
+	glBindBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE, 0 );
+
+	return 0;
+
+    //// Get texture file info from GTF attribute and convert it to PSGL texture format
+/*    CellGtfTextureAttribute attrib;
+    if( cellGtfReadTextureAttribute(filename,0,&attrib) )
+    {
+        JS_TRACE("Error loading %s.\n", filename );
+        return -1;
+    }
+    uint8_t format = attrib.tex.format;
+    bool bSwizzled = !(format & CELL_GCM_TEXTURE_LN);
+
+	if( bSwizzled )
+		JS_TRACE( "Swizzled!\n" );
+
+    if (bLoadInPlace && !bSwizzled && bForceSwizzling)
+    {	
+        //if the texture has no mipmaps we could theoratically configure the HW to swizzle while uploading
+        //we would need to expose a lot of things to do that and it's probably not that useful.
+        JS_TRACE(("the texture needs to be swizzled, cannot load in place\n"));
+        bLoadInPlace = false;
+    }
+
+    uint32_t gtfSize = 0;
+    cellGtfCalculateMemorySize(&attrib,&gtfSize);
+
+    GLenum target = 0;
+    if (attrib.tex.cubemap == CELL_GCM_TRUE)
+    {
+        target = GL_TEXTURE_CUBE_MAP;
+    }
+    else
+    {
+        switch (attrib.tex.dimension)
+        {
+        case CELL_GCM_TEXTURE_DIMENSION_1: printf("1D texture is not supported"); return -1;
+        case CELL_GCM_TEXTURE_DIMENSION_2: target = GL_TEXTURE_2D; break;
+        case CELL_GCM_TEXTURE_DIMENSION_3: target = GL_TEXTURE_3D; break;
+        default: ;
+        }
+    }
+    if (target == 0) {
+        printf("Invalid target %d", attrib.tex.dimension);
+        return -1;
+    }
+
+    // Format conversion
+    GLenum glInternalFormat = 0;
+    switch( format & 0x9F ) // Ignore SZ LN NR UN bits
+    {
+    case CELL_GCM_TEXTURE_B8					: glInternalFormat = GL_INTENSITY8; break;
+    case CELL_GCM_TEXTURE_A1R5G5B5				: glInternalFormat = 0; break;
+    case CELL_GCM_TEXTURE_A4R4G4B4				: glInternalFormat = 0; break;
+    case CELL_GCM_TEXTURE_R5G6B5				: glInternalFormat = GL_RGB5; break;
+    case CELL_GCM_TEXTURE_A8R8G8B8				: glInternalFormat = GL_ARGB_SCE; break;
+    case CELL_GCM_TEXTURE_COMPRESSED_DXT1		: glInternalFormat = GL_COMPRESSED_RGB_S3TC_DXT1_EXT; break;
+    case CELL_GCM_TEXTURE_COMPRESSED_DXT23		: glInternalFormat = GL_COMPRESSED_RGBA_S3TC_DXT3_EXT; break;
+    case CELL_GCM_TEXTURE_COMPRESSED_DXT45		: glInternalFormat = GL_COMPRESSED_RGBA_S3TC_DXT5_EXT; break;
+    case CELL_GCM_TEXTURE_G8B8					: glInternalFormat = GL_LUMINANCE8_ALPHA8; break;
+    case CELL_GCM_TEXTURE_R6G5B5				: glInternalFormat = 0; break;
+    case CELL_GCM_TEXTURE_DEPTH24_D8			: glInternalFormat = GL_DEPTH_COMPONENT24; break;
+    case CELL_GCM_TEXTURE_DEPTH24_D8_FLOAT		: glInternalFormat = 0; break;
+    case CELL_GCM_TEXTURE_DEPTH16				: glInternalFormat = 0; break;
+    case CELL_GCM_TEXTURE_DEPTH16_FLOAT			: glInternalFormat = 0; break;
+    case CELL_GCM_TEXTURE_X16					: glInternalFormat = GL_LUMINANCE16; break;
+    case CELL_GCM_TEXTURE_Y16_X16				: glInternalFormat = GL_LUMINANCE16_ALPHA16; break;
+    case CELL_GCM_TEXTURE_R5G5B5A1				: glInternalFormat = GL_RGB5_A1; break;
+    case CELL_GCM_TEXTURE_COMPRESSED_HILO8		: glInternalFormat = 0; break;
+    case CELL_GCM_TEXTURE_COMPRESSED_HILO_S8	: glInternalFormat = 0; break;
+    case CELL_GCM_TEXTURE_W16_Z16_Y16_X16_FLOAT	: glInternalFormat = GL_RGBA16F_ARB; break;
+    case CELL_GCM_TEXTURE_W32_Z32_Y32_X32_FLOAT	: glInternalFormat = GL_RGBA32F_ARB; break;
+    case CELL_GCM_TEXTURE_X32_FLOAT				: glInternalFormat = GL_LUMINANCE32F_ARB; break;
+    case CELL_GCM_TEXTURE_D1R5G5B5				: glInternalFormat = 0; break;
+    case CELL_GCM_TEXTURE_D8R8G8B8				: glInternalFormat = 0; break;
+    case CELL_GCM_TEXTURE_Y16_X16_FLOAT			: glInternalFormat = GL_LUMINANCE_ALPHA16F_ARB; break;
+        //case CELL_GCM_TEXTURE_COMPRESSED_B8R8_G8R8	: glInternalFormat = 0; break;
+        //case CELL_GCM_TEXTURE_COMPRESSED_R8B8_R8G8	: glInternalFormat = 0; break;
+    default                                     : printf("Invalid GCM format: %d", format ); return -1;
+    }
+
+    if (glInternalFormat == 0)
+    {
+        printf("GL does not have corresponding format for GCM format %d", format );
+        return -1;
+    }*/
+
+    //// Create and initialize a PSGL texture with the buffer object bound as source
+    //glGenBuffers(1,&textureReference->bufferID);
+    glBindBuffer(GL_TEXTURE_REFERENCE_BUFFER_SCE, pbo);
+
+    /*if (bLoadInPlace)
+    {*/
+        //load the data directly from disc to local memory
+
+        //allocate a local memory buffer to store the texture
+        //glBufferData(GL_TEXTURE_REFERENCE_BUFFER_SCE, gtfSize, NULL, GL_STATIC_DRAW );
+
+        //get the pointer on the buffer
+ /*       char *mTextureAddress = (char *)glMapBuffer(GL_TEXTURE_REFERENCE_BUFFER_SCE,GL_READ_WRITE);
+        //load the texture in place
+        cellGtfLoad( (char*)filename, attrib.id,&attrib.tex, CELL_GCM_LOCATION_LOCAL, mTextureAddress );
+        //unmap the buffer
+        glUnmapBuffer(GL_TEXTURE_REFERENCE_BUFFER_SCE);*/
+    /*}
+    else
+    {
+        //load the data to main memory texture
+		
+		// allocate a main memory buffer
+        glBufferData(GL_TEXTURE_REFERENCE_BUFFER_SCE, gtfSize, NULL, GL_SYSTEM_DRAW_SCE);
+        //get the pointer on the buffer
+        char *mTextureAddress = (char *)glMapBuffer(GL_TEXTURE_REFERENCE_BUFFER_SCE, GL_READ_WRITE);
+		// load the gtf texture to main memory buffer
+		cellGtfLoad( (char*)filename, attrib.id,&attrib.tex, CELL_GCM_LOCATION_MAIN, mTextureAddress );
+
+        //swizzle here if needed
+        uint32_t textureSize = gtfSize;
+        if (!bSwizzled && bForceSwizzling)
+        {
+            swizzleTexture(attrib.tex.width, attrib.tex.height, attrib.tex.mipmap, mTextureAddress, &textureSize);
+            bSwizzled = true;
+        }
+
+        //unmap the buffer
+        glUnmapBuffer(GL_TEXTURE_REFERENCE_BUFFER_SCE);
+    }*/
+
+/*    glEnable( target );
+    //glGenTextures(1,&textureReference->textureID);
+    glBindTexture( target, tex);
+    glTexParameterf(target,GL_TEXTURE_MAX_ANISOTROPY_EXT, 4.0f );
+    glTexParameteri( target, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR );
+    glTexParameteri( target, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+	glTexParameteri( target, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT );
+    glTexParameteri( target, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT );
+    glTexParameteri( target, GL_TEXTURE_MAX_LOD, attrib.tex.mipmap-1 );*/
+	//glTexParameteri( target, GL_TEXTURE_ALLOCATION_HINT_SCE, GL_TEXTURE_TILED_GPU_SCE );
+
+//	width = attrib.tex.width;
+//	height = attrib.tex.height;
+
+    /*if (!bSwizzled)
+    {*/
+        //linear texture
+//        glTextureReferenceSCE(target, attrib.tex.mipmap, attrib.tex.width,  attrib.tex.height, 1 , glInternalFormat, attrib.tex.pitch, 0);
+	
+   /* }
+    else
+    {
+        //swizzled texture: 0 is passed as pitch to the glTextureReferenceSCE function	
+        glTextureReferenceSCE(target, attrib.tex.mipmap, attrib.tex.width,  attrib.tex.height, 1 , glInternalFormat,0,0);
+    }*/
+
+//    glDisable( target );
+
+//    return 0;
 }
 
 //hardcoded for 4 components

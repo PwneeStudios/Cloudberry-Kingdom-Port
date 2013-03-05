@@ -116,7 +116,8 @@ sailAdapter::~sailAdapter(void)
 bool sailAdapter::startup(CellSpurs* pSpurs)
 {
     int ret;
-    ret = cellSysmoduleLoadModule(CELL_SYSMODULE_PAMF);
+	// FIXME: These are initialized in CorePS3.cpp and never unloaded.
+    /*ret = cellSysmoduleLoadModule(CELL_SYSMODULE_PAMF);
     if (ret < 0) {
         EMSG("cellSysmoduleLoadModule(CELL_SYSMODULE_PAMF)", ret);
         return false;
@@ -126,7 +127,7 @@ bool sailAdapter::startup(CellSpurs* pSpurs)
     if (ret < 0) {
         EMSG("cellSysmoduleLoadModule(CELL_SYSMODULE_SAIL)", ret);
         return false;
-    }
+    }*/
  
     // lwmutex for pause
     {
@@ -454,7 +455,8 @@ bool sailAdapter::shutdown(void)
         bRet=false;
     }
 
-    ret = cellSysmoduleUnloadModule(CELL_SYSMODULE_PAMF);
+	// FIXME: These are owned by CorePS3.cpp.
+    /*ret = cellSysmoduleUnloadModule(CELL_SYSMODULE_PAMF);
     DASSERT (ret>=0);
     if (ret < 0) {
         EMSG("cellSysmoduleUnloadModule(CELL_SYSMODULE_PAMF)\n", ret);
@@ -466,7 +468,7 @@ bool sailAdapter::shutdown(void)
     if (ret < 0) {
         EMSG("cellSysmoduleUnloadModule(CELL_SYSMODULE_SAIL)\n", ret);
         bRet=false;
-    }
+    }*/
     
     if (mpInternalSpurs) {
         ret = cellSpursFinalize(mpInternalSpurs);
@@ -1309,7 +1311,7 @@ void* sailAdapter::onMemAlloc(size_t boundary, size_t size)
     return mpMemoryAllocator->Allocate(size,boundary);
 }
 
-void sailAdapter::onMemFree(size_t  boundary, void   *pMemory)
+void sailAdapter::onMemFree(size_t  boundary, void *pMemory)
 {
     (void)boundary;
     DASSERT(pMemory!=NULL);

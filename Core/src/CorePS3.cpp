@@ -189,6 +189,9 @@ std::string PS3_PATH_PREFIX;
 int GLOBAL_WIDTH;
 int GLOBAL_HEIGHT;
 
+// Preallocate all memory used by video player.  Defined in VideoPlayerPS3.cpp.
+extern void ReserveVideoPlayerMemory();
+
 CorePS3::CorePS3( GameLoop &game ) :
 	running_( false ),
 	game_( game ),
@@ -206,6 +209,9 @@ CorePS3::CorePS3( GameLoop &game ) :
 	CELL_ERR_CHECK( cellSysmoduleLoadModule( CELL_SYSMODULE_SYSUTIL_NP ), "Failed to load NP\n" );
 	CELL_ERR_CHECK( cellSysmoduleLoadModule( CELL_SYSMODULE_SYSUTIL_LICENSEAREA ), "Failed to load License Area\n" );
 	CELL_ERR_CHECK( cellSysmoduleLoadModule( CELL_SYSMODULE_NETCTL ), "Failed to load NETCTL\n" );
+	CELL_ERR_CHECK( cellSysmoduleLoadModule( CELL_SYSMODULE_L10N ), "Failed to load L10N\n" );
+	CELL_ERR_CHECK( cellSysmoduleLoadModule( CELL_SYSMODULE_PAMF ), "Failed to load PAMF\n" );
+	CELL_ERR_CHECK( cellSysmoduleLoadModule( CELL_SYSMODULE_SAIL ), "Failed to load SAIL\n" );
 
 	LoadModules();
 
@@ -223,7 +229,7 @@ CorePS3::CorePS3( GameLoop &game ) :
 	// To test an hdd game in release mode with the debugger we need to tell it about the
 	// game code.  Also the files should be pre-installed on the disk.
 	// PS3_PATH_PREFIX = "/dev_hdd0/game/NPEB01312/USRDIR/"; // SCEE
-	PS3_PATH_PREFIX = "/dev_hdd0/game/NPUB31177/USRDIR/"; // SCEA
+	// PS3_PATH_PREFIX = "/dev_hdd0/game/NPUB31177/USRDIR/"; // SCEA
 	LOG.Write( "Running in %s\nContent dir %s\n", dirName, usrdirPath );
 #ifdef DEBUG
 	PS3_PATH_PREFIX = "/app_home/";
@@ -245,7 +251,7 @@ CorePS3::CorePS3( GameLoop &game ) :
 		transientMemorySize: 0,
 		errorConsole: 0,
 		fifoSize: 0,
-		hostMemorySize: 128 * 1024 * 1024
+		hostMemorySize: 64 * 1024 * 1024
 	};
 
 	psglInit( &initOpts );
@@ -310,6 +316,8 @@ CorePS3::CorePS3( GameLoop &game ) :
 
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT );
 	psglSwap();
+
+	ReserveVideoPlayerMemory();
 
 	scheduler_ = new Scheduler;
 

@@ -206,8 +206,8 @@ float vol;
 
 	cellMSCoreSetVolume1(nCh, CELL_MS_DRY, CELL_MS_SPEAKER_FL, CELL_MS_CHANNEL_0, musicVolume);
 	cellMSCoreSetVolume1(nCh, CELL_MS_DRY, CELL_MS_SPEAKER_FR, CELL_MS_CHANNEL_0, musicVolume);
-	cellMSCoreSetVolume1(nCh, CELL_MS_WET, CELL_MS_SPEAKER_FL, CELL_MS_CHANNEL_0, musicVolume);
-	cellMSCoreSetVolume1(nCh, CELL_MS_WET, CELL_MS_SPEAKER_FR, CELL_MS_CHANNEL_0, musicVolume);
+	/*cellMSCoreSetVolume1(nCh, CELL_MS_WET, CELL_MS_SPEAKER_FL, CELL_MS_CHANNEL_0, musicVolume);
+	cellMSCoreSetVolume1(nCh, CELL_MS_WET, CELL_MS_SPEAKER_FR, CELL_MS_CHANNEL_0, musicVolume);*/
     return nCh;
 }
 
@@ -265,8 +265,8 @@ void MediaPlayer::Play( const boost::shared_ptr<Song> &song )
 	{
 		cellMSCoreSetVolume1(stream, CELL_MS_DRY, CELL_MS_SPEAKER_FL, CELL_MS_CHANNEL_0, 0);
 		cellMSCoreSetVolume1(stream, CELL_MS_DRY, CELL_MS_SPEAKER_FR, CELL_MS_CHANNEL_0, 0);
-		cellMSCoreSetVolume1(stream, CELL_MS_WET, CELL_MS_SPEAKER_FL, CELL_MS_CHANNEL_0, 0);
-		cellMSCoreSetVolume1(stream, CELL_MS_WET, CELL_MS_SPEAKER_FR, CELL_MS_CHANNEL_0, 0);
+		/*cellMSCoreSetVolume1(stream, CELL_MS_WET, CELL_MS_SPEAKER_FL, CELL_MS_CHANNEL_0, 0);
+		cellMSCoreSetVolume1(stream, CELL_MS_WET, CELL_MS_SPEAKER_FR, CELL_MS_CHANNEL_0, 0);*/
 		cellMSStreamClose( stream );
 		stream = -1;
 	}
@@ -334,6 +334,8 @@ void MediaPlayer::SetVolume( float volume )
 
 		cellMSCoreSetVolume1(stream, CELL_MS_DRY, CELL_MS_SPEAKER_FL, CELL_MS_CHANNEL_0, volume);
 		cellMSCoreSetVolume1(stream, CELL_MS_DRY, CELL_MS_SPEAKER_FR, CELL_MS_CHANNEL_0, volume);
+		/*cellMSCoreSetVolume1(stream, CELL_MS_WET, CELL_MS_SPEAKER_FL, CELL_MS_CHANNEL_0, volume);
+		cellMSCoreSetVolume1(stream, CELL_MS_WET, CELL_MS_SPEAKER_FR, CELL_MS_CHANNEL_0, volume);*/
 	}
 }
 
