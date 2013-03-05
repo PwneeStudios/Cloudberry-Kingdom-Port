@@ -34,70 +34,51 @@ extern std::string PS3_PATH_PREFIX;
 bool g_runDrawThread;
 
 static cell::Sail::hlPlayer *g_Player = NULL;
+static uint8_t *PlayerMemoryBase;
+static uint8_t *PlayerMemory;
 static GLuint PBO = 0;
 static uint8_t *PBOBuffer = NULL;
 static Texture *MovieTexture = NULL;
 static ResourceHolder *MovieTextureHolder = NULL;
 static boost::shared_ptr< Texture2D > ExternalTexture = NULL;
 
+inline uint32_t RoundTo( uint32_t size, uint32_t alignment )
+{
+	if( alignment == 0 )
+		return size;
+
+	return alignment * ( ( size + ( alignment - 1 ) ) / alignment );
+}
+
 class MemAllocator : public cell::Sail::memallocator
 {
 	void* Allocate(uint32_t size, uint32_t alignment=0) 
 	{	
-		LOG.Write( "Allocate %d align = %d\n", size, alignment );
-		return memalign(alignment, size);	
-	};
+		void *base = PlayerMemory;
+		size_t addr = reinterpret_cast< size_t >( base ) + alignment;
+
+		void *aligned = reinterpret_cast< void * >( addr );
+		if( alignment != 0 )
+			aligned = reinterpret_cast< void * >( addr - ( addr % alignment ) );
+
+		PlayerMemory = reinterpret_cast< uint8_t * >( aligned ) + size;
+		return aligned;
+	}
 
 	void Deallocate(void* pMemory) 
-	{	
-		LOG.Write( "Free!\n" );
-		free(pMemory);	
-	};
+	{
+	}
 
 	void* AllocateTexture(uint32_t size, uint32_t alignment=0) 
 	{
-		LOG.Write( "Frame %d align = %d\n", size, alignment );
-		/*E
-         * IMPORTANT: Your textures need to reside in main memory. Bandwidth
-         * limitations make using the RSX local memory for output textures
-         * inefficient.
-         * NOTE: The requested size is already rounded up to 1MB and
-         * internally this area will be mapped so that GCM accepts it
-         * as texture memory.
-         */
-		return PBOBuffer;//memalign(alignment, size);	
-	};
-
-	void DeallocateTexture(void* pMemory) 
-	{
-		LOG.Write( "Frame free!\n" );
-		//free(pMemory);	
-	};
-};
-
-/*static void DrawThread( uint64_t arg )
-{
-	( void )arg;
-
-	VideoFrameInfo displayFrame;
-
-	g_runDrawThread = true;
-	while( g_runDrawThread  )
-	{
-		if( g_Player && g_Player->vsyncGetFrame( &displayFrame ) )
-		{
-			if( !PBOBuffer )
-				continue;
-
-			// Queue up new frame.
-			memcpy( PBOBuffer, displayFrame.buffer, 1280 * 720 * sizeof( uint32_t ) );
-		}
-
-		// Draw stuff.
+		// Just need one preallocated PBO now.
+		return PBOBuffer;	
 	}
 
-	sys_ppu_thread_exit( 0 );
-}*/
+	void DeallocateTexture(void* pMemory) 
+	{	
+	}
+};
 
 void ReserveVideoPlayerMemory()
 {
@@ -107,7 +88,11 @@ void ReserveVideoPlayerMemory()
 
 	glGenBuffers( 1, &PBO );
 	glBindBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE, PBO );
-	glBufferData( GL_TEXTURE_REFERENCE_BUFFER_SCE, 3 * 1280 * 720 * sizeof( uint32_t ), NULL, GL_SYSTEM_DRAW_SCE );
+	// Round the space to the nearest megabyte.
+	size_t sizeRequired = 3 * 1280 * 720 * sizeof( uint32_t );
+	const size_t roundTo = 1024 * 1024;
+	sizeRequired = roundTo * ( ( sizeRequired + ( roundTo - 1 ) ) / roundTo );
+	glBufferData( GL_TEXTURE_REFERENCE_BUFFER_SCE, sizeRequired, NULL, GL_SYSTEM_DRAW_SCE );
 	
 	PBOBuffer = reinterpret_cast< uint8_t * >( 
 		glMapBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE, GL_READ_WRITE )
@@ -129,6 +114,9 @@ void ReserveVideoPlayerMemory()
 
 	ExternalTexture = boost::make_shared< Texture2D >( NULL, 1280, 720 );
 	ExternalTexture->texture_ = MovieTextureHolder;
+
+	// Allocate memory for the player. (Actually should require at most 39159200 bytes.)
+	PlayerMemoryBase = reinterpret_cast< uint8_t * >( memalign( 8, 40000000 ) );
 }
 
 // Share the SPURS instance from the media player in mscommon.cpp.
@@ -139,21 +127,6 @@ VideoPlayer::VideoPlayer()
 	, IsLooped( false )
 {
 	memset( internal_, 0, sizeof( VideoPlayerInternal ) );
-
-	/*std::string moviePath = PS3_PATH_PREFIX + "ContentPS3/" +
-		"Movies/LogoSalad.mp4";*/
-
-	//internal_->mpSpurs = reinterpret_cast< CellSpurs * >( memalign( CELL_SPURS_ALIGN, sizeof( CellSpurs ) ) );
-
-	/*CellSpursAttribute attr;
-	int ret = cellSpursAttributeInitialize( &attr, NUM_SPU, SPURS_SPU_PRIORITY, SPURS_PPU_PRIORITY, false );
-	assert( ret == CELL_OK );
-	ret = cellSpursAttributeEnableSpuPrintfIfAvailable( &attr );
-	assert( ret == CELL_OK );
-	ret = cellSpursAttributeSetNamePrefix( &attr, "hlpSpurs", strlen( "hlpSpurs" ) );
-	assert( ret == CELL_OK );
-	ret = cellSpursInitializeWithAttribute( internal_->mpSpurs, &attr );
-	assert( ret == CELL_OK );*/
 
 	// A pointer to this is kept by the hlPlayer.  Probably a bad idea to have it leave the stack.
 	static VideoPlayerInit videoPlayerInit;
@@ -167,77 +140,13 @@ VideoPlayer::VideoPlayer()
 	ReplacementAllocators.FileReplacement = NULL;
 	ReplacementAllocators.MemoryReplacement = &ReplacementMem;
 
+	// Reset player memory allocator.
+	PlayerMemory = PlayerMemoryBase;
+
 	internal_->Player = new cell::Sail::hlPlayer( &videoPlayerInit, &ReplacementAllocators );
-
-	// Create a texture for us to draw video into.
-	/*MovieTexture = new Texture();
-	MovieTextureHolder = new ResourceHolder( MovieTexture );
-
-	// Create underlying buffer.
-	glGenBuffers( 1, &PBO );
-	glBindBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE, PBO );
-	glBufferData( GL_TEXTURE_REFERENCE_BUFFER_SCE, 1280 * 720 * sizeof( uint32_t ), NULL, GL_SYSTEM_DRAW_SCE );*/
-	/*PBOBuffer = reinterpret_cast< uint8_t * >( 
-		glMapBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE, GL_READ_WRITE )
-	);*/
-
-	// Create actual texture.
-	/*GLuint texture;
-	glGenTextures( 1, &texture );
-	MovieTexture->impl_.internal_->Ref.textureID = texture;
-
-	glBindTexture( GL_TEXTURE_2D, texture );
-	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-	glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
-	glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
-	glTextureReferenceSCE( GL_TEXTURE_2D, 1, 1280, 720, 1, GL_RGBA, 1280 * sizeof( uint32_t ), 0 );
-	glBindTexture( GL_TEXTURE_2D, 0 );
-	
-	glBindBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE, 0 );
-
-	// Start thread that pulls frames from the video player and sticks them into our texture buffer.
-	int32_t dispThrPriority = 1500;
-	size_t appStackSize = 32768;
-
-	ExternalTexture = boost::make_shared< Texture2D >( NULL, 1280, 720 );
-	ExternalTexture->texture_ = MovieTextureHolder;*/
-
-	/*if( CELL_OK != sys_ppu_thread_create( &internal_->displayThread, DrawThread, NULL,
-										dispThrPriority, appStackSize, SYS_PPU_THREAD_CREATE_JOINABLE,
-										"Video draw vsync thread" ) )
-		LOG.Write( "VideoPlayer(): failed to create draw thread\n" );
-	else
-		LOG.Write( "VideoPlayer(): created draw thread, id = %d\n", static_cast< int >( internal_->displayThread ) );
-	*/
-	/*char buffer[ 512 ];
-	snprintf( buffer, sizeof( buffer ), "%s", moviePath.c_str() );*/
 
 	// Global player reference so it can be used from another thread.
 	g_Player = internal_->Player;
-
-
-	/*bool check = internal_->Player->Play( buffer, false );
-	if( !check )
-	{
-		LOG.Write( "Couldn't play file: %s\n", buffer );
-		delete internal_->Player;
-		internal_->Player = NULL;
-		g_Player = NULL;
-
-		delete MovieTextureHolder;
-		MovieTextureHolder = NULL;
-
-		glDeleteTextures( 1, &MovieTexture->impl_.internal_->Ref.textureID );
-		delete MovieTexture;
-		MovieTexture = NULL;
-
-		ExternalTexture = NULL;
-	}*/
-
-	/*int playerMemory = 0;
-	int textureMemory = 0;
-	internal_->Player->Memstats( &playerMemory, &textureMemory );*/
 
 	// Disable BGM playback.
 	int ret = cellSysutilDisableBgmPlayback();
@@ -249,48 +158,14 @@ VideoPlayer::~VideoPlayer()
 {
 	g_runDrawThread = false;
 
-	/*if( g_Player )
-	{
-		uint64_t stat;
-		int rc = sys_ppu_thread_join( internal_->displayThread, &stat );
-		if( rc != CELL_OK )
-			LOG.Write( "Failed to join thread with error 0x%x\n", rc );
-	}*/
-
 	g_Player = NULL;
 	delete internal_->Player;
-
-	/*delete MovieTextureHolder;
-	MovieTextureHolder = NULL;
-
-	if( MovieTexture )
-	{
-		glDeleteTextures( 1, &MovieTexture->impl_.internal_->Ref.textureID );
-		delete MovieTexture;
-		MovieTexture = NULL;
-	}
-
-	ExternalTexture = NULL;*/
-
-	// Empty pbo used by the video player.
-	//memset( PBOBuffer, 0, 1280 * 720 * sizeof( uint32_t ) );
-
-	/*glBindBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE, PBO );
-	glUnmapBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE );
-	glBindBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE, 0 );*/
-	/*glDeleteBuffers( 1, &PBO );
-	PBO = 0;*/
 
 	// Enable BGM playback.
 	int ret = cellSysutilEnableBgmPlayback();
 	if( ret < 0 )
 		LOG.Write( "Failed to start BGM playback: 0x%x\n", ret );
 
-	/*int ret = cellSpursFinalize( internal_->mpSpurs );
-	if( ret != CELL_OK )
-		LOG.Write( "cellSpursFinalize() failed 0x%x\n", ret );*/
-
-	//free( internal_->mpSpurs );
 
 	delete internal_;
 }
@@ -302,8 +177,6 @@ void VideoPlayer::SetVolume( float volume )
 
 void VideoPlayer::Play( const boost::shared_ptr< Video > &video )
 {
-	/*std::string moviePath = PS3_PATH_PREFIX + "ContentPS3/" +
-		"Movies/LogoSalad.mp4";*/
 	std::string moviePath = PS3_PATH_PREFIX + video->Path;
 
 	char buffer[ 512 ];
@@ -316,15 +189,6 @@ void VideoPlayer::Play( const boost::shared_ptr< Video > &video )
 		delete internal_->Player;
 		internal_->Player = NULL;
 		g_Player = NULL;
-
-		/*delete MovieTextureHolder;
-		MovieTextureHolder = NULL;
-
-		glDeleteTextures( 1, &MovieTexture->impl_.internal_->Ref.textureID );
-		delete MovieTexture;
-		MovieTexture = NULL;
-
-		ExternalTexture = NULL;*/
 	}
 }
 
@@ -341,21 +205,7 @@ void VideoPlayer::DrawFrame()
 			reinterpret_cast< GLintptr >( displayFrame.buffer - PBOBuffer ) );
 		glBindTexture( GL_TEXTURE_2D, 0 );
 	
-		/*PBOBuffer = reinterpret_cast< uint8_t * >( 
-			glMapBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE, GL_READ_WRITE )
-		);
-		if( PBOBuffer )
-		{
-			// Queue up new frame.
-			memcpy( PBOBuffer, displayFrame.buffer, 1280 * 720 * sizeof( uint32_t ) );
-		}
-		glUnmapBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE );*/
-		/*glBufferSubData( GL_TEXTURE_REFERENCE_BUFFER_SCE, 0, displayFrame.width * displayFrame.height * sizeof( uint32_t ),
-			displayFrame.buffer );*/
 		glBindBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE, 0 );
-
-		/*glFlush();
-		glFinish();*/
 	}
 }
 

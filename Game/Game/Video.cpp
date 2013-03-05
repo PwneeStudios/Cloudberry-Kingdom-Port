@@ -174,7 +174,7 @@ namespace CloudberryKingdom
 		else if( MovieName == L"Credits" )
 		{
 			CurrentVideo->Path = "/vol/content/0010/Movies/Credits.mp4";
-			CurrentVideo->Duration.TotalSeconds = 142.0833333f;
+			CurrentVideo->Duration.TotalSeconds = 150.0f;
 		}
 		else if( MovieName == L"LogoSalad" )
 		{
@@ -215,7 +215,7 @@ namespace CloudberryKingdom
 		else if( MovieName == L"Credits" )
 		{
 			CurrentVideo->Path = "ContentPS3/Movies/Credits.mp4";
-			CurrentVideo->Duration.TotalSeconds = 142.0833333f;
+			CurrentVideo->Duration.TotalSeconds = 150.0f;
 		}
 		else if( MovieName == L"LogoSalad" )
 		{
