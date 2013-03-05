@@ -1311,7 +1311,7 @@ void* sailAdapter::onMemAlloc(size_t boundary, size_t size)
     return mpMemoryAllocator->Allocate(size,boundary);
 }
 
-void sailAdapter::onMemFree(size_t  boundary, void   *pMemory)
+void sailAdapter::onMemFree(size_t  boundary, void *pMemory)
 {
     (void)boundary;
     DASSERT(pMemory!=NULL);

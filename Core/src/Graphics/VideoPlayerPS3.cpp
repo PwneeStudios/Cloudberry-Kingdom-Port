@@ -40,6 +40,37 @@ static Texture *MovieTexture = NULL;
 static ResourceHolder *MovieTextureHolder = NULL;
 static boost::shared_ptr< Texture2D > ExternalTexture = NULL;
 
+class MemAllocator : public cell::Sail::memallocator
+{
+	void* Allocate(uint32_t size, uint32_t alignment=0) 
+	{	
+		return memalign(alignment, size);	
+	};
+
+	void Deallocate(void* pMemory) 
+	{	
+		free(pMemory);	
+	};
+
+	void* AllocateTexture(uint32_t size, uint32_t alignment=0) 
+	{	
+		/*E
+         * IMPORTANT: Your textures need to reside in main memory. Bandwidth
+         * limitations make using the RSX local memory for output textures
+         * inefficient.
+         * NOTE: The requested size is already rounded up to 1MB and
+         * internally this area will be mapped so that GCM accepts it
+         * as texture memory.
+         */
+		return memalign(alignment, size);	
+	};
+
+	void DeallocateTexture(void* pMemory) 
+	{		
+		free(pMemory);	
+	};
+};
+
 /*static void DrawThread( uint64_t arg )
 {
 	( void )arg;
@@ -95,7 +126,12 @@ VideoPlayer::VideoPlayer()
 	videoPlayerInit.height = 0;
 	videoPlayerInit.RGBAOutput = true;
 
-	internal_->Player = new cell::Sail::hlPlayer( &videoPlayerInit, NULL );
+	static MemAllocator ReplacementMem;
+	CustomAllocators ReplacementAllocators;
+	ReplacementAllocators.FileReplacement = NULL;
+	ReplacementAllocators.MemoryReplacement = &ReplacementMem;
+
+	internal_->Player = new cell::Sail::hlPlayer( &videoPlayerInit, &ReplacementAllocators );
 
 	// Create a texture for us to draw video into.
 	MovieTexture = new Texture();

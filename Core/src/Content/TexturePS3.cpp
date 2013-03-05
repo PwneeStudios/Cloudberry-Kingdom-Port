@@ -161,10 +161,10 @@ void TexturePS3::GpuCreate()
 	glGenBuffers( 1, &internal_->Ref.bufferID );
 	glBindBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE, internal_->Ref.bufferID );
 
-	static uint32_t gpuUsedMemory = 0;
+	static uint32_t gpuUsedMemory = 27 * 1024 * 1024;
 	static uint32_t ppuUsedMemory = 0;
-	const uint32_t GPU_MEMORY_LIMIT = 200 * 1024 * 1024;
-
+	const uint32_t GPU_MEMORY_LIMIT = 220 * 1024 * 1024;
+	LOG.Write( "gpu = %d\tppu = %d\n", gpuUsedMemory, ppuUsedMemory );
 	bool bLoadInPlace = true;
 
 	// Check to see if there is space for the texture on the gpu.
