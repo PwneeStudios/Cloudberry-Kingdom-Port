@@ -126,7 +126,15 @@ namespace CloudberryKingdom
 
         if (CallingOptionsMenu)
         {
-            MyMenu->SelectItem(3);
+			if ( CloudberryKingdomGame::MainMenuType == MainMenuTypes_WiiU )
+			{
+				MyMenu->SelectItem( 3 );
+			}
+			else
+			{
+				MyMenu->SelectItem( 4 );
+			}
+
             CallingOptionsMenu = false;
         }
 

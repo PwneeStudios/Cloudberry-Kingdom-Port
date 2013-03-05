@@ -1140,7 +1140,7 @@ float CloudberryKingdomGame::fps = 0;
         {
 #if PC_VERSION
 #elif PS3
-			DisplayError( ErrorType( "This feature requires an active connection to PSN.\nWould you like to sign in?",
+			DisplayError( ErrorType( WstringToUtf8( Localization::WordString( Localization::Words_Err_PS3_PsnRequired_AskToSignIn ) ),
 				DecideToSignInCallback, ErrorType::YESNO ) );
 #else
             ShowError(Localization::Words_Err_MustBeSignedInToLive_Header, word, Localization::Words_Err_Ok);
@@ -1151,7 +1151,7 @@ float CloudberryKingdomGame::fps = 0;
         {
 #if PC_VERSION
 #elif PS3
-			DisplayError( ErrorType( "An active connection to PSN is required to upload a high score.\nDo not worry, it will be uploaded the next time you play." ) );
+			DisplayError( ErrorType( WstringToUtf8( Localization::WordString( Localization::Words_Err_PS3_PsnRequired_WillUploadLater ) ) ) );
 #else
             ShowError(Localization::Words_Err_MustBeSignedInToLive_Header, Localization::Words_Err_MustBeSignedInToLiveForLeaderboards, Localization::Words_Err_Ok);
 #endif

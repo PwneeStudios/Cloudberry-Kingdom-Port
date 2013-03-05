@@ -286,7 +286,14 @@ if ( ButtonCheck::ControllerInUse )
 
     LeaderboardType LeaderboardGUI::Incr( LeaderboardType type )
     {
-        return ( LeaderboardType )(((( int )type + 1 ) + ( int )LeaderboardType_Length ) % ( int )LeaderboardType_Length );
+        LeaderboardType lt = ( LeaderboardType )(((( int )type + 1 ) + ( int )LeaderboardType_Length ) % ( int )LeaderboardType_Length );
+
+#if PS3
+		if ( lt == LeaderboardType_MyScores )
+			lt = Incr( lt );
+#endif
+
+		return lt;
     }
 
     LeaderboardSortType LeaderboardGUI::Incr( LeaderboardSortType type )

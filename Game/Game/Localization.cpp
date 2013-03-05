@@ -167,6 +167,19 @@ namespace CloudberryKingdom
 	// FIXME: preinitialize the map with a fixed size?
 	//std::map<Localization::Language, boost::shared_ptr<LanguageInfo> > Localization::Languages = std::map<Localization::Language, boost::shared_ptr<LanguageInfo> >( NumLanguages );
 
+#ifdef PS3
+	extern std::string GLOBAL_DISCONNECT_MESSAGE;
+#endif
+
+	bool IsWestern( Localization::Language language )
+	{
+		return
+			language == Localization::Language_ENGLISH || language == Localization::Language_GERMAN ||
+			language == Localization::Language_FRENCH  || language == Localization::Language_SPANISH ||
+			language == Localization::Language_ITALIAN || language == Localization::Language_PORTUGUESE ||
+			language == Localization::Language_RUSSIAN;
+	}
+
 	void Localization::SetLanguage( Language SelectedLanguage )
 	{
 		if ( Content == 0 )
@@ -178,6 +191,11 @@ namespace CloudberryKingdom
 			Content->Unload();
 		}
 
+		bool NeedToReloadFont = 
+					CurrentLanguage == 0 ||
+					IsWestern( SelectedLanguage ) && !IsWestern( CurrentLanguage->MyLanguage ) ||
+					!IsWestern( SelectedLanguage ) && SelectedLanguage != CurrentLanguage->MyLanguage;
+
 		CurrentLanguage = Languages[ SelectedLanguage ];
 
         // Load font. Lock first if it alread exists.
@@ -187,12 +205,19 @@ namespace CloudberryKingdom
         }
         else
         {
-            Resources::hf_Mutex->Lock();
-            {
-                LoadFont();
-            }
-			Resources::hf_Mutex->Unlock();
+			if ( NeedToReloadFont )
+			{
+				Resources::hf_Mutex->Lock();
+				{
+					LoadFont();
+				}
+				Resources::hf_Mutex->Unlock();
+			}
         }
+
+#ifdef PS3
+		GLOBAL_DISCONNECT_MESSAGE = WstringToUtf8( WordString( Words_Err_PS3_NoGamePadDetected ) );
+#endif
 	}
 
 	void Localization::Initialize()

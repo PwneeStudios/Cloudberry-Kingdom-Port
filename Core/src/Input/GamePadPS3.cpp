@@ -24,6 +24,9 @@ bool AutoCloseWhenConnected()
 	return numConnected != 0;
 }
 
+// FIXME: Fuck you Oleg. Fuck you.
+std::string GLOBAL_DISCONNECT_MESSAGE = "Error:\nNo Gamepad detected\nPlease press the PS button if the gamepad is connected.";
+
 void GamePad::Update()
 {
 	gfxPadRead();
@@ -38,7 +41,7 @@ void GamePad::Update()
 	if( numConnected == 0 )
 	{
 		DisplayError( ErrorType(
-			"Error:\nNo Gamepad detected\nPlease press the PS button if the gamepad is connected",
+			GLOBAL_DISCONNECT_MESSAGE,
 			NULL,
 			ErrorType::DEFAULT,
 			AutoCloseWhenConnected
