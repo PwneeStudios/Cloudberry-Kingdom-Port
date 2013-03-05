@@ -46,8 +46,9 @@ std::string WstringToUtf8( const std::wstring& str )
 {
 #ifdef PS3
 	char utf8[ 512 ];
+	size_t inSize = str.size();
 	size_t outSize = sizeof( utf8 );
-	if( l10n_convert( l10n_get_converter( L10N_UTF16, L10N_UTF8 ), str.c_str(), utf8, &outSize ) <= 0 )
+	if( l10n_convert_str( l10n_get_converter( L10N_UTF16, L10N_UTF8 ), str.c_str(), &inSize, utf8, &outSize ) != ConversionOK )
 		return "";
 
 	return std::string( utf8, utf8 + outSize );

@@ -206,6 +206,9 @@ CorePS3::CorePS3( GameLoop &game ) :
 	CELL_ERR_CHECK( cellSysmoduleLoadModule( CELL_SYSMODULE_SYSUTIL_NP ), "Failed to load NP\n" );
 	CELL_ERR_CHECK( cellSysmoduleLoadModule( CELL_SYSMODULE_SYSUTIL_LICENSEAREA ), "Failed to load License Area\n" );
 	CELL_ERR_CHECK( cellSysmoduleLoadModule( CELL_SYSMODULE_NETCTL ), "Failed to load NETCTL\n" );
+	CELL_ERR_CHECK( cellSysmoduleLoadModule( CELL_SYSMODULE_L10N ), "Failed to load L10N\n" );
+	CELL_ERR_CHECK( cellSysmoduleLoadModule( CELL_SYSMODULE_PAMF ), "Failed to load PAMF\n" );
+	CELL_ERR_CHECK( cellSysmoduleLoadModule( CELL_SYSMODULE_SAIL ), "Failed to load SAIL\n" );
 
 	LoadModules();
 
