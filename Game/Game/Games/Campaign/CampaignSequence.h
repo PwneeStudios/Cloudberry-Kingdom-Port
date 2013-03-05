@@ -89,7 +89,7 @@ namespace CloudberryKingdom
         static int ChapterFinishing;
         static void CheckForFinishedChapter();
 	
-		bool OnLevelBegin( const boost::shared_ptr<Level> level );
+		bool OnLevelBegin( const boost::shared_ptr<Level> &level );
 		void AdditionalPreStart();
 		void MyStringWorld_OnSwapToFirstLevel( boost::shared_ptr<LevelSeedData> data );
 

@@ -288,7 +288,8 @@ namespace CloudberryKingdom
 #ifdef PS3
 			return IsNPAvailable();
 #else
-			return false;
+			return true;
+			//return false;
 #endif
 		}
 

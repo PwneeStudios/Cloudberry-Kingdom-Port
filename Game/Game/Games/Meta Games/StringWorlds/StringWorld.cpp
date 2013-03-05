@@ -140,7 +140,10 @@ namespace CloudberryKingdom
 		{
             if ( LevelIsLoaded( NextLevelSeed ) )
             {
-                NextLevelSeed->MyGame->Release();
+				if ( NextLevelSeed->MyGame != 0 )
+				{
+					NextLevelSeed->MyGame->Release();
+				}
                 NextLevelSeed->Release();
             }
             else

@@ -121,11 +121,11 @@ namespace CloudberryKingdom
 
 		void ChangeLeaderboard( int Direction );
 
-		void SetItemProperties( boost::shared_ptr<MenuItem> item );
+		void SetItemProperties( const boost::shared_ptr<MenuItem> &item );
 
-        void SetTextProperties( boost::shared_ptr<EzText> text );
+        void SetTextProperties( const boost::shared_ptr<EzText> &text );
 
-        void SetSelectedTextProperties( boost::shared_ptr<EzText> text );
+        void SetSelectedTextProperties( const boost::shared_ptr<EzText> &text );
 
         void OnAdd();
 

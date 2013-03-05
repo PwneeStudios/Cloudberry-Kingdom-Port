@@ -156,7 +156,7 @@ namespace CloudberryKingdom
         }
     }
 
-    bool CampaignSequence::OnLevelBegin( boost::shared_ptr<Level> level )
+    bool CampaignSequence::OnLevelBegin( const boost::shared_ptr<Level> &level )
     {
 		HelpMenu::CostMultiplier = 1;
 
