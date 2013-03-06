@@ -77,8 +77,12 @@ ConsoleLanguage GetConsoleLanguage()
 
 void SetErrorLanguage( ConsoleLanguage language )
 {
-	SCICafeLanguage internalLanguage = SCI_CAFE_LANGUAGE_ENGLISH;
+	SCIPlatformRegion region;
+	SCIStatus status = SCIGetPlatformRegion( &region );
+	if( status != SCI_STATUS_SUCCESS )
+		region = SCI_PLATFORM_REGION_USA;
 
+	SCICafeLanguage internalLanguage = SCI_CAFE_LANGUAGE_ENGLISH;
 	switch( language )
 	{
 	case ConsoleLanguage_JAPANESE:
@@ -116,6 +120,41 @@ void SetErrorLanguage( ConsoleLanguage language )
 	case ConsoleLanguage_TAIWANESE:
 		internalLanguage = SCI_CAFE_LANGUAGE_TAIWANESE;
 		break;
+	}
+
+	if( region == SCI_PLATFORM_REGION_JPN
+		&& ( internalLanguage != SCI_CAFE_LANGUAGE_JAPANESE ) )
+		internalLanguage = SCI_CAFE_LANGUAGE_JAPANESE;
+	else if( region == SCI_PLATFORM_REGION_USA )
+	{
+		switch( internalLanguage )
+		{
+		case SCI_CAFE_LANGUAGE_ENGLISH:
+		case SCI_CAFE_LANGUAGE_FRENCH:
+		case SCI_CAFE_LANGUAGE_SPANISH:
+		case SCI_CAFE_LANGUAGE_PORTUGUESE:
+			break;
+		default:
+			internalLanguage = SCI_CAFE_LANGUAGE_ENGLISH;
+		}
+	}
+	else if( region == SCI_PLATFORM_REGION_EUR
+		|| ( region == SCI_PLATFORM_REGION_AUS ) )
+	{
+		switch( internalLanguage )
+		{
+		case SCI_CAFE_LANGUAGE_ENGLISH:
+		case SCI_CAFE_LANGUAGE_FRENCH:
+		case SCI_CAFE_LANGUAGE_SPANISH:
+		case SCI_CAFE_LANGUAGE_PORTUGUESE:
+		case SCI_CAFE_LANGUAGE_GERMAN:
+		case SCI_CAFE_LANGUAGE_ITALIAN:
+		case SCI_CAFE_LANGUAGE_DUTCH:
+		case SCI_CAFE_LANGUAGE_RUSSIAN:
+			break;
+		default:
+			internalLanguage = SCI_CAFE_LANGUAGE_ENGLISH;
+		}
 	}
 
 	nn::erreula::ChangeLangError( static_cast< nn::erreula::LangType >( internalLanguage ) );
