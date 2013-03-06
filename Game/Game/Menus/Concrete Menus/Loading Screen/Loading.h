@@ -68,6 +68,7 @@ namespace CloudberryKingdom
 		boost::shared_ptr<ProgressBar> MyProgressBar;
 
 		int LogoCount;
+		int LogoCount_Max;
 		boost::shared_ptr<WrappedFloat> ResourceCount;
 
 		boost::shared_ptr<QuadClass> BlackQuad, Splash;

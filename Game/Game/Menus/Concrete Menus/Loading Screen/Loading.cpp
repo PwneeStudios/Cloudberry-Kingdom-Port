@@ -142,10 +142,10 @@ namespace CloudberryKingdom
 		InitializeInstanceFields();
 		this->ResourceCount = ResourceCount;
 
-		Whinney = Content->Load<SoundEffect>( std::wstring( L"Whinney" ) );
+		//Whinney = Content->Load<SoundEffect>( std::wstring( L"Whinney" ) );
 
-		Tools::TextureWad->FindOrLoad( Content, std::wstring( L"Art/LoadScreen_Initial/LoadOutline" ) );
-		Tools::TextureWad->FindOrLoad( Content, std::wstring( L"Art/LoadScreen_Initial/LoadFill" ) );
+		//Tools::TextureWad->FindOrLoad( Content, std::wstring( L"Art/LoadScreen_Initial/LoadOutline" ) );
+		//Tools::TextureWad->FindOrLoad( Content, std::wstring( L"Art/LoadScreen_Initial/LoadFill" ) );
 
 		MyPile = boost::make_shared<DrawPile>();
 
@@ -163,7 +163,7 @@ namespace CloudberryKingdom
 		MyPile->Add( BlackQuad );
 
         Legal = boost::make_shared<EzText>( 
-L"{pCopyRightSymbol,78,?} 2012 by Pwnee Studios, Corp. All Rights Reserved.\n"
+L"{pCopyRightSymbol,78,?} 2013 by Pwnee Studios, Corp. All Rights Reserved.\n"
 L"Distributed by Ubisoft Entertainment under license from Pwnee Studios, Corp.\n"
 L"Cloudberry Kingdom, Pwnee, and Pwnee Studios are trademarks of Pwnee Studios, Corp. and is used under license.\n"
 L"Ubisoft and the Ubisoft logo are trademarks of Ubisoft Entertainment in the US and/or other countries.",
@@ -195,7 +195,8 @@ L"Ubisoft and the Ubisoft logo are trademarks of Ubisoft Entertainment in the US
 		}
 
 		// Fade
-		if ( LoadingPercent > 97.6f && Accelerate || !Resources::LoadingResources->MyBool )
+		//if ( LoadingPercent > 97.6f && Accelerate || !Resources::LoadingResources->MyBool )
+		if ( Resources::FinalLoadDone || LogoCount > LogoCount_Max )
 		{
             if ( ReadyToFade )
             {
@@ -219,7 +220,15 @@ L"Ubisoft and the Ubisoft logo are trademarks of Ubisoft Entertainment in the US
         DrawCount++;
         if ( !ReadyToFade && DrawCount > 2 )
             BlackQuad->setAlpha( BlackQuad->getAlpha() - .0633f );
-        if ( DrawCount > 68 )
+        
+#ifdef PS3
+		if ( DrawCount > 180 )
+#elif CAFE
+		if ( DrawCount > 235 )
+#else
+		//if ( DrawCount > 68 )
+		if ( DrawCount > 90 )
+#endif
             ReadyToFade = true;
 
 		MyProgressBar->setPos( Vector2( 1100, -800 ) );
@@ -238,6 +247,7 @@ L"Ubisoft and the Ubisoft logo are trademarks of Ubisoft Entertainment in the US
 
 		IsDone = false;
 		LogoCount = 0;
+		LogoCount_Max = 60 * 5 - 50; // 5 seconds, minus 50 frames to fade out
 		Accelerate = false;
 		DoneCount = 0;
 	}

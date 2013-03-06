@@ -2,12 +2,15 @@
 
 #include <Hacks\List.h>
 
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
 
 	int Challenge::Coins = 0;
 	int Challenge::CurrentScore = 0;
 	int Challenge::CurrentId = 0;
+	int Challenge::LeaderboardIndex = 0;
 
 	void Challenge::OnCoinGrabProxy::Apply( const boost::shared_ptr<ObjectBase> &obj )
 	{
@@ -121,6 +124,10 @@ namespace CloudberryKingdom
 
 	void Challenge::Start( int Difficulty )
 	{
+        CloudberryKingdomGame::PromptForDeviceIfNoneSelected();
+
+		HelpMenu::CostMultiplier = 1;
+
         CurrentId = GameId_Level;
         CurrentScore = 0;
 

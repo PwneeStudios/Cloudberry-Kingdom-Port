@@ -632,9 +632,16 @@ namespace CloudberryKingdom
 	void Tools::LoadBasicArt( const boost::shared_ptr<ContentManager> &Content )
 	{
 		TextureWad = boost::make_shared<EzTextureWad>();
-		TextureWad->AddTexture( Content->Load<Texture2D>( std::wstring( L"White" ) ), std::wstring( L"White" ) );
-		TextureWad->AddTexture( Content->Load<Texture2D>( std::wstring( L"Circle" ) ), std::wstring( L"Circle" ) );
-		TextureWad->AddTexture( Content->Load<Texture2D>( std::wstring( L"Smooth" ) ), std::wstring( L"Smooth" ) );
+		boost::shared_ptr<Texture2D> t;
+		
+		t = Content->Load<Texture2D>( std::wstring( L"White" ) );
+		TextureWad->AddTexture( t, std::wstring( L"White" ), 8, 8 );
+
+		t = Content->Load<Texture2D>( std::wstring( L"Circle" ) );
+		TextureWad->AddTexture( t, std::wstring( L"Circle" ), 114, 114 );
+		
+		t = Content->Load<Texture2D>( std::wstring( L"Smooth" ) );
+		TextureWad->AddTexture( t, std::wstring( L"Smooth" ), 128, 128 );
 
 		TextureWad->DefaultTexture = TextureWad->TextureList[ 0 ];
 	}
@@ -736,29 +743,29 @@ namespace CloudberryKingdom
 		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Hsl" ) ), std::wstring( L"Hsl" ) );
 		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Window" ) ), std::wstring( L"Window" ) );*/
 #if defined( CAFE )
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"0010/Shaders/BasicEffect" ) ), std::wstring( L"Basic" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"0010/Shaders/NoTexture" ) ), std::wstring( L"NoTexture" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"0010/Shaders/Circle" ) ), std::wstring( L"Circle" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"0010/Shaders/Shell" ) ), std::wstring( L"Shell" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"0010/Shaders/FireballEffect" ) ), std::wstring( L"Fireball" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"0010/Shaders/Paint" ) ), std::wstring( L"Paint" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"0010/Shaders/Lava" ) ), std::wstring( L"Lava" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"0010/Shaders/LightMap" ) ), std::wstring( L"LightMap" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"0010/Shaders/LightSource" ) ), std::wstring( L"LightSource" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"0010/Shaders/BwEffect" ) ), std::wstring( L"BW" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"0010/Shaders/Hsl_Green" ) ), std::wstring( L"Hsl_Green" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"0010/Shaders/Hsl" ) ), std::wstring( L"Hsl" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"0010/Shaders/Window" ) ), std::wstring( L"Window" ) );
+#elif defined( PS3 )
 		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/BasicEffect" ) ), std::wstring( L"Basic" ) );
 		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/NoTexture" ) ), std::wstring( L"NoTexture" ) );
 		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Circle" ) ), std::wstring( L"Circle" ) );
 		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Shell" ) ), std::wstring( L"Shell" ) );
 		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/FireballEffect" ) ), std::wstring( L"Fireball" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Paint" ) ), std::wstring( L"Paint" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Lava" ) ), std::wstring( L"Lava" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/LightMap" ) ), std::wstring( L"LightMap" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/LightSource" ) ), std::wstring( L"LightSource" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/BwEffect" ) ), std::wstring( L"BW" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Hsl_Green" ) ), std::wstring( L"Hsl_Green" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Hsl" ) ), std::wstring( L"Hsl" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Window" ) ), std::wstring( L"Window" ) );
-#elif defined( PS3 )
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/BasicEffect" ) ), std::wstring( L"Basic" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/NoTexture" ) ), std::wstring( L"NoTexture" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/BasicEffect" ) ), std::wstring( L"Circle" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/BasicEffect" ) ), std::wstring( L"Shell" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/BasicEffect" ) ), std::wstring( L"Fireball" ) );
 		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/BasicEffect" ) ), std::wstring( L"Paint" ) );
 		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/BasicEffect" ) ), std::wstring( L"Lava" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/BasicEffect" ) ), std::wstring( L"LightMap" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/BasicEffect" ) ), std::wstring( L"LightSource" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/LightMap" ) ), std::wstring( L"LightMap" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/LightSource" ) ), std::wstring( L"LightSource" ) );
 		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/BasicEffect" ) ), std::wstring( L"BW" ) );
 		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Hsl_Green" ) ), std::wstring( L"Hsl_Green" ) );
 		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Hsl" ) ), std::wstring( L"Hsl" ) );
@@ -779,6 +786,16 @@ namespace CloudberryKingdom
 		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/BasicEffect" ) ), std::wstring( L"Window" ) );
 #endif
 
+#ifdef CAFE
+		EffectWad->AddEffect( Content->Load<Effect>( L"0010/Shaders/Text_NoOutline" ), L"Text_NoOutline" );
+        Text_NoOutline = EffectWad->FindByName( L"Text_NoOutline" );
+
+        EffectWad->AddEffect( Content->Load<Effect>( L"0010/Shaders/Text_ThinOutline" ), L"Text_ThinOutline" );
+        Text_ThinOutline = EffectWad->FindByName( L"Text_ThinOutline" );
+
+        EffectWad->AddEffect( Content->Load<Effect>( L"0010/Shaders/Text_ThickOutline" ), L"Text_ThickOutline" );
+        Text_ThickOutline = EffectWad->FindByName( L"Text_ThickOutline" );
+#else
         EffectWad->AddEffect( Content->Load<Effect>( L"Shaders/Text_NoOutline" ), L"Text_NoOutline" );
         Text_NoOutline = EffectWad->FindByName( L"Text_NoOutline" );
 
@@ -787,6 +804,7 @@ namespace CloudberryKingdom
 
         EffectWad->AddEffect( Content->Load<Effect>( L"Shaders/Text_ThickOutline" ), L"Text_ThickOutline" );
         Text_ThickOutline = EffectWad->FindByName( L"Text_ThickOutline" );
+#endif
 
 		BasicEffect = EffectWad->EffectList[ 0 ];
 		NoTexture = EffectWad->EffectList[ 1 ];
@@ -797,7 +815,11 @@ namespace CloudberryKingdom
 		WindowEffect = EffectWad->FindByName( std::wstring( L"Window" ) );
 
 		//PaintEffect_SpriteBatch = Content->Load<Effect>( std::wstring( L"Shaders/Paint_SpriteBatch" ) );
+#ifdef CAFE
+		PaintEffect_SpriteBatch = Content->Load<Effect>( std::wstring( L"0010/Shaders/BasicEffect" ) );
+#else
 		PaintEffect_SpriteBatch = Content->Load<Effect>( std::wstring( L"Shaders/BasicEffect" ) );
+#endif
 	}
 
 	float Tools::BoxSize( Vector2 TR, Vector2 BL )

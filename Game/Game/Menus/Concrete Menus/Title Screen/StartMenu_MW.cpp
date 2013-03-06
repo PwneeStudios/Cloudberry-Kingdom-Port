@@ -1,7 +1,29 @@
 #include <global_header.h>
 
+#include "Game/Menus/Concrete Menus/ShopMenu.h"
+
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
+#include "StartMenu_MW.h"
+#include "StartMenu_MW_Simple.h"
+
 namespace CloudberryKingdom
 {
+
+	void StartMenu_MW::MenuGo_Campaign( const boost::shared_ptr<MenuItem> &item )
+	{
+		// Upsell
+		if ( CloudberryKingdomGame::getIsDemo() )
+		{
+			Title->BackPanel->SetState( StartMenu_MW_Backpanel::State_SCENE_BLUR_DARK );
+			CallingOptionsMenu = true;
+			Call( MakeMagic( UpSellMenu, ( Localization::Words_UpSell_Campaign, MenuItem::ActivatingPlayer ) ) );
+
+			return;
+		}
+
+		StartMenu::MenuGo_Campaign( item );
+	}
 
 	void StartMenu_MW::MenuGo_Options( const boost::shared_ptr<MenuItem> &item )
 	{
@@ -29,6 +51,9 @@ namespace CloudberryKingdom
 	{
 		StartMenu::StartMenu_Construct();
 
+		EnableBounce();
+		ReturnToCallerDelay = 0;
+
 		this->Title = Title;
 		CallingOptionsMenu = false;
 
@@ -44,6 +69,8 @@ namespace CloudberryKingdom
 	void StartMenu_MW::SlideOut( PresetPos Preset, int Frames )
 	{
 		StartMenu::SlideOut( Preset, 0 );
+
+		StartMenu::SlideOut( Preset, Frames );
 	}
 
 	void StartMenu_MW::BringCampaign()
@@ -77,26 +104,52 @@ namespace CloudberryKingdom
 
 	void StartMenu_MW::OnAdd()
 	{
+		CloudberryKingdomGame::SetPresence( Presence_TitleScreen );
+
 		StartMenu::OnAdd();
+	}
+
+	void StartMenu_MW::Call( const boost::shared_ptr<GUI_Panel> &child, int Delay )
+	{
+		UseBounce = false;
+		ReturnToCallerDelay = 0;
+
+		StartMenu::Call( child, Delay );
 	}
 
     void StartMenu_MW::OnReturnTo()
     {
+		UseBounce = false;
+		ReturnToCallerDelay = 0;
+
+		CloudberryKingdomGame::SetPresence( Presence_TitleScreen );
+
         if (CallingOptionsMenu)
         {
-            MyMenu->SelectItem(3);
+			if ( CloudberryKingdomGame::MainMenuType == MainMenuTypes_WiiU )
+			{
+				MyMenu->SelectItem( 3 );
+			}
+			else
+			{
+				MyMenu->SelectItem( 4 );
+			}
+
             CallingOptionsMenu = false;
         }
 
         StartMenu::OnReturnTo();
     }
 
-	bool StartMenu_MW::MenuReturnToCaller( const boost::shared_ptr<Menu> &menu )
+	void StartMenu_MW::ReturnToCaller()
 	{
 		if ( NoBack )
-			return false;
+			return;
 
-		return StartMenu::MenuReturnToCaller( menu );
+		UseBounce = false;
+		ReturnToCallerDelay = 0;
+
+		return StartMenu::ReturnToCaller();
 	}
 
 	void StartMenu_MW::Init()
@@ -154,6 +207,15 @@ namespace CloudberryKingdom
 
 	void StartMenu_MW::SetPos()
 	{
+		// This should be called in StartMenu_MW::SetPos(). Bad! Mark StartMenu_MW::SetPos() as virtual.
+		boost::shared_ptr<StartMenu_MW_Simple> simple = boost::dynamic_pointer_cast<StartMenu_MW_Simple>( shared_from_this() );
+		if ( simple != 0 )
+		{
+			simple->SetPos();
+			return;
+		}
+
+
         BackBox->setTextureName( L"White" );
         BackBox->Quad_Renamed.SetColor( ColorHelper::Gray(.1f ));
         BackBox->setAlpha( .73f );

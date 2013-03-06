@@ -2,6 +2,10 @@
 
 #include <Hacks\List.h>
 
+#include "Game/Menus/Concrete Menus/ShopMenu.h"
+
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
 
@@ -21,6 +25,17 @@ namespace CloudberryKingdom
 
 	void AggressiveUpgrades_GUI::Go()
 	{
+		CloudberryKingdomGame::Freeplay_Count++;
+		if ( CloudberryKingdomGame::getIsDemo() && CloudberryKingdomGame::Freeplay_Count >= CloudberryKingdomGame::Freeplay_Max )
+		{
+			int HoldDelay = CallDelay;
+			CallDelay = 0;
+			Call( MakeMagic( UpSellMenu, ( Localization::Words_UpSell_FreePlay, MenuItem::ActivatingPlayer ) ) );
+			Hide( PresetPos_RIGHT, 0 );
+			CallDelay = HoldDelay;
+			return;
+		}
+
 		StartGame();
 	}
 
@@ -201,7 +216,8 @@ namespace CloudberryKingdom
 	{
 		CkBaseMenu::SetItemProperties( item );
 
-		item->MySelectedText->Shadow = item->MyText->Shadow = false;
+		//item->MySelectedText->Shadow = item->MyText->Shadow = false;
+		StartMenu::SetItemProperties_Red( item );
 	}
 
 	void CustomUpgrades_GUI::AddUpgrade( Upgrade upgrade )
@@ -313,6 +329,7 @@ namespace CloudberryKingdom
 		backdrop = boost::make_shared<QuadClass>( std::wstring( L"Backplate_1500x900" ), 1500.f, true );
 		backdrop->Name = std::wstring( L"Backdrop" );
 		MyPile->Add( backdrop, std::wstring( L"Backdrop" ) );
+		EpilepsySafe( .5f );
 		backdrop->setSize( Vector2( 1682.54f, 1107.681f ) );
 		backdrop->setPos( Vector2( 347.2231f, 51.58749f ) );
 
@@ -416,11 +433,11 @@ else
 		item->JiggleOnGo = false;
 		AddItem( item );
 		item->Pos = item->SelectedPos = Vector2( 425.3959f, -99.92095f );
-		item->MyText->MyFloatColor = Menu::DefaultMenuInfo::UnselectedNextColor;
-		item->MySelectedText->MyFloatColor = Menu::DefaultMenuInfo::SelectedNextColor;
-		Menu::DefaultMenuInfo::SetNext( item );
 if (ButtonCheck::ControllerInUse)
 {
+#ifdef PC_VERSION
+		Menu::DefaultMenuInfo::SetNext( item );
+#endif
         MyPile->Add( boost::make_shared<QuadClass>(ButtonTexture::getGo(), 90.f, std::wstring( L"Button_A" ) ) );
         item->Selectable = false;
 }
@@ -437,7 +454,7 @@ if (ButtonCheck::ControllerInUse)
 		item->Pos = item->SelectedPos = Vector2( 511.8408f, -302.6506f );
 if (ButtonCheck::ControllerInUse)
 {
-#if XBOX || PC_VERSION
+#if PC_VERSION
 			Menu::DefaultMenuInfo::SetX( item );
 #endif
 		MyPile->Add(boost::make_shared<QuadClass>(ButtonTexture::getX(), 90.f, std::wstring( L"Button_X" ) ) );
@@ -451,11 +468,11 @@ if (ButtonCheck::ControllerInUse)
 		AddItem( item );
 		item->SelectSound.reset();
 		item->Pos = item->SelectedPos = Vector2( 599.1416f, -501.0634f );
-		item->MyText->MyFloatColor = ( bColor( 235, 255, 80 ) ).ToVector4() *.93f;
-		item->MySelectedText->MyFloatColor = ( bColor( 235, 255, 80 ) ).ToVector4();
+		//item->MyText->MyFloatColor = ( bColor( 235, 255, 80 ) ).ToVector4() *.93f;
+		//item->MySelectedText->MyFloatColor = ( bColor( 235, 255, 80 ) ).ToVector4();
 if (ButtonCheck::ControllerInUse)
 {
-#if XBOX || PC_VERSION
+#if PC_VERSION
 		Menu::DefaultMenuInfo::SetY( item );
 #endif
         MyPile->Add(boost::make_shared<QuadClass>(ButtonTexture::getY(), 90.f, std::wstring( L"Button_Y" ) ) );
@@ -470,9 +487,11 @@ if (ButtonCheck::ControllerInUse)
 		item->SelectSound.reset();
 		item->setGo( boost::make_shared<ItemReturnToCallerProxy>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) ) );
 		item->Pos = item->SelectedPos = Vector2( 702.3179f, -689.9683f );
-		Menu::DefaultMenuInfo::SetBack( item );
 if (ButtonCheck::ControllerInUse)
 {       
+#if PC_VERSION
+		Menu::DefaultMenuInfo::SetBack( item );
+#endif
 		MyPile->Add(boost::make_shared<QuadClass>(ButtonTexture::getBack(), 90.f, std::wstring( L"Button_B" ) ) );
         item->Selectable = false;
 }

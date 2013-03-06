@@ -27,7 +27,7 @@ class Texture : public Resource
 	friend struct RenderTarget2D;
 	TextureWiiU impl_;
 #elif PS3
-	friend struct RenderTarget2D;
+public:
 	TexturePS3 impl_;
 #else
 	TexturePc impl_;

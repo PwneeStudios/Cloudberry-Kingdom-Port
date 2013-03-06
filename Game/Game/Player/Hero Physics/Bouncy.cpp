@@ -121,7 +121,7 @@ namespace CloudberryKingdom
 			{
 				if ( MyBob->CurInput.A_Button && SuperBounceGraceCount > 0 )
 				{
-					if ( getMyLevel()->PlayMode == 0 && !MyBob->CharacterSelect2 ) MyBob->JumpSound->Play();
+					//if ( getMyLevel()->PlayMode == 0 && !MyBob->CharacterSelect2 ) MyBob->JumpSound->Play();
 					setyVel( getyVel() + SuperBounce );
 					SuperBounceGraceCount = 0;
 				}

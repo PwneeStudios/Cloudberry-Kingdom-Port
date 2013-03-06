@@ -1,6 +1,7 @@
 #include <global_header.h>
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+#include "Game/Menus/Concrete Menus/ShopMenu.h"
 #include <Hacks\String.h>
 
 namespace CloudberryKingdom
@@ -35,7 +36,7 @@ namespace CloudberryKingdom
         Locked = false;
         if (!CloudberryKingdomGame::Unlock_Levels)
         {
-			int level = PlayerManager::MaxPlayerTotalCampaignLevel();
+			int level = PlayerManager::MinPlayerTotalCampaignLevel();
 			if ( Contains( CampaignSequence::getInstance()->ChapterEnd, (Chapter - 1) ) )
 				Locked = level < CampaignSequence::getInstance()->ChapterEnd[ Chapter - 1 ];
         }
@@ -60,8 +61,8 @@ namespace CloudberryKingdom
 			boost::shared_ptr<EzText> _t;
 
             // Update level text
-            int Level = PlayerManager::MaxPlayerTotalCampaignIndex();
-            bool ShowLevel = Level > 0;
+            int Level = PlayerManager::MinPlayerTotalCampaignLevel() + 1;
+            bool ShowLevel = Level > 1;
 
 			//bool ShowLevel = false;
 
@@ -72,17 +73,17 @@ namespace CloudberryKingdom
 			boost::shared_ptr<MenuItem> __item = MyMenu->FindItemByName( L"Continue" );
 			if ( __item != 0 )
 			{
-				if (Level < 1)
+				if ( ShowLevel )
+				{
+					__item->Selectable = true;
+					__item->Show = true;
+				}
+				else
 				{
 					Level = 1;
 					__item->Selectable = false;
 					__item->Show = false;
 					MyMenu->SelectItem(1);
-				}
-				else
-				{
-					__item->Selectable = true;
-					__item->Show = true;
 				}
 
 				__item->MyText->SubstituteText( Format( template_level.c_str(), Level ) );
@@ -228,7 +229,16 @@ namespace CloudberryKingdom
 
 		CreateMenu();
 
+		MyMenu->setControl(-1 );
+
 		Update();
+
+		int Level = PlayerManager::MinPlayerTotalCampaignLevel() + 1;
+		bool ShowLevel = Level > 1;
+		if (ShowLevel)
+			MyMenu->SelectItem( 0 );
+		else
+			MyMenu->SelectItem( 1 );
 	}
 
 	void StartMenu_MW_Campaign::CreateMenu()
@@ -236,7 +246,7 @@ namespace CloudberryKingdom
 		boost::shared_ptr<MenuItem> item;
 
 			// Continue
-			int level = PlayerManager::MaxPlayerTotalCampaignIndex();
+			int level = PlayerManager::MinPlayerTotalCampaignIndex();
 			item = MakeMagic( CampaignChapterItem, (boost::make_shared<EzText>( L"xxx", ItemFont), -1) );
 			item->Name = L"Continue";
 			item->setGo( boost::make_shared<CampaignGoLambda>( boost::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() ) ) );
@@ -251,7 +261,7 @@ namespace CloudberryKingdom
 				AddItem(item);
 			}
 			
-		MyMenu->SelectItem( 0 );
+		//MyMenu->SelectItem( 0 );
 
         // Level
         boost::shared_ptr<QuadClass> TextBack = boost::make_shared<QuadClass>( L"Arcade_BoxLeft", 100.f, true);
@@ -291,6 +301,14 @@ namespace CloudberryKingdom
 	{
 		if ( CloudberryKingdomGame::LockCampaign ) return;
 
+		// Upsell
+		if ( CloudberryKingdomGame::getIsDemo() )
+		{
+			Call( MakeMagic( UpSellMenu, ( Localization::Words_UpSell_Campaign, MenuItem::ActivatingPlayer ) ) );
+
+			return;
+		}
+
 		boost::shared_ptr<CampaignChapterItem> c_item = boost::dynamic_pointer_cast<CampaignChapterItem>( item );
 		if ( 0 == c_item )
 			return;
@@ -316,7 +334,9 @@ namespace CloudberryKingdom
     void StartMenu_MW_Campaign::OnReturnFromGame()
     {
         Update();
-        SaveGroup::SaveAll();
+        //SaveGroup::SaveAll();
+
+		PlayerManager::UploadCampaignLevels();
 
 		Tools::PlayHappyMusic( MyGame );
     }

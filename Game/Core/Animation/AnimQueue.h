@@ -17,6 +17,7 @@ namespace CloudberryKingdom
 
 		AnimQueueEntry();
 		AnimQueueEntry( const boost::shared_ptr<AnimQueueEntry> &entry );
+
 	};
 }
 

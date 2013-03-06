@@ -935,6 +935,14 @@ namespace CloudberryKingdom
                 InputFromKeyboard = false;
             }
 #endif
+
+			if ( Prevent_A_Button )
+			{
+				if ( CurInput.A_Button )
+					CurInput.A_Button = false;
+				else
+					Prevent_A_Button = false;
+			}
         }
 
 #if defined(WINDOWS)
@@ -2010,6 +2018,8 @@ namespace CloudberryKingdom
 
 	void Bob::InitializeInstanceFields()
 	{
+		Prevent_A_Button = false;
+
 		InputFromKeyboard = false;
 
 		MyCapeType = static_cast<CapeType> ( 0 );

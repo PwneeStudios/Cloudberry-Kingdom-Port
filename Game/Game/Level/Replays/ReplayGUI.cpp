@@ -137,16 +137,16 @@ namespace CloudberryKingdom
 
 		BigPaused = boost::make_shared<QuadClass>();
 		BigPaused->SetToDefault();
-		BigPaused->Quad_Renamed.setMyTexture( Tools::TextureWad->FindByName( std::wstring( L"Replay_GUI/Paused" ) ) );
+		BigPaused->Quad_Renamed.setMyTexture( Tools::TextureWad->FindByName( std::wstring( L"Paused" ) ) );
 		BigPaused->ScaleYToMatchRatio( 355 );
 		MyPile->Add( BigPaused );
 		BigPaused->setPos( Vector2( 1210.557f, 791.1111f ) );
 
 		BigEnd = boost::make_shared<QuadClass>();
 		BigEnd->SetToDefault();
-		BigEnd->Quad_Renamed.setMyTexture( Tools::TextureWad->FindByName( std::wstring( L"Replay_GUI/End" ) ) );
+		BigEnd->Quad_Renamed.setMyTexture( Tools::TextureWad->FindByName( std::wstring( L"End" ) ) );
 		BigEnd->ScaleYToMatchRatio( 255 );
-		BigPaused->ScaleYToMatchRatio( 300 );
+		//BigPaused->ScaleYToMatchRatio( 300 );
 		MyPile->Add( BigEnd );
 		BigEnd->setPos( Vector2( 1277.222f, 774.4444f ) );
 
@@ -158,7 +158,7 @@ namespace CloudberryKingdom
 			{
 if ( ButtonCheck::ControllerInUse )
 {
-#if XBOX || PC_VERSION
+#if PC_VERSION
 				boost::shared_ptr<EzText> _t;
 				_t = MyPile->FindEzText( L"Play" ); if (_t != 0 ) { _t->setPos( Vector2(-721.1783f, -832.2222f ) ); _t->setScale( 0.44f ); }
 				_t = MyPile->FindEzText( L"Back" ); if (_t != 0 ) { _t->setPos( Vector2(-120.0003f, -832.2223f ) ); _t->setScale( 0.44f ); }
@@ -532,7 +532,10 @@ else
 		else
 		{
 			if ( PauseSelected )
+			{
+				BigPaused->ScaleYToMatchRatio( 300 );
 				BigPaused->Show = true;
+			}
 		}
 	}
 

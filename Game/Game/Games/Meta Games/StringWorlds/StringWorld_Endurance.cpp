@@ -14,7 +14,7 @@ namespace CloudberryKingdom
 		data->MyGame->AddGameObject( ch->Gui_NextLife );
 		data->MyGame->AddGameObject( ch->Gui_Lives );
 		data->MyGame->AddGameObject( ch->MyCoinScoreMultiplier );
-		data->MyGame->AddGameObject( MakeMagic( PerfectScoreObject, ( false, true ) ) );
+		data->MyGame->AddGameObject( MakeMagic( PerfectScoreObject, ( false, true, false ) ) );
 		data->MyGame->AddGameObject( ch->MyGUI_Score );
 			//, MyGUI_Level
 	}
@@ -38,6 +38,13 @@ namespace CloudberryKingdom
 
 		// Add game objects, including 'Perfect' watcher
 		OnSwapToFirstLevel->Add( boost::make_shared<OnSwapLambda>( boost::static_pointer_cast<StringWorldEndurance>( shared_from_this() ) ) );*/
+	}
+
+	void StringWorldEndurance::AdditionalSetLevel()
+	{
+		StringWorldGameData::AdditionalSetLevel();
+
+		NextLevelSeed->MyGame->MyLevel->SetBack( 3 );
 	}
 
 	void StringWorldEndurance::Release()

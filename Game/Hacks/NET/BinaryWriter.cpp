@@ -71,6 +71,64 @@ void FileBinaryWriter::Write( unsigned char c )
 	file_->Write( reinterpret_cast<const char *>( &c ), 1 );
 }
 
+
+MemoryBinaryWriter::MemoryBinaryWriter( size_t size )
+{
+	buffer_.reserve( size );
+}
+
+MemoryBinaryWriter::~MemoryBinaryWriter()
+{
+}
+
+void MemoryBinaryWriter::Write( const unsigned char *buffer, int offset, int length )
+{
+	buffer_.insert( buffer_.end(), buffer + offset, buffer + offset + length );
+}
+
+void MemoryBinaryWriter::Write( int i )
+{
+	Write( reinterpret_cast< const unsigned char * >( &i ), 0, sizeof( int ) );
+}
+
+void MemoryBinaryWriter::Write( unsigned int i )
+{
+	Write( reinterpret_cast< const unsigned char * >( &i ), 0, sizeof( unsigned int ) );
+}
+
+void MemoryBinaryWriter::Write( unsigned long long i )
+{
+	Write( reinterpret_cast< const unsigned char * >( &i ), 0, sizeof( unsigned long long ) );
+}
+
+void MemoryBinaryWriter::Write( const Vector2 &v )
+{
+	Write( v.X );
+	Write( v.Y );
+}
+
+void MemoryBinaryWriter::Write( const std::wstring &s )
+{
+	std::string bytes( WstringToUtf8( s ) );
+
+	size_t length = bytes.length();
+	for( length; length >= 128u; length >>= 7 )
+		Write( static_cast<unsigned char>( length | 128u ) );
+	Write( static_cast<unsigned char>( length ) );
+
+	Write( reinterpret_cast< const unsigned char * >( bytes.c_str() ), 0, bytes.length() );
+}
+
+void MemoryBinaryWriter::Write( float v )
+{
+	Write( reinterpret_cast< const unsigned char * >( &v ), 0, sizeof( float ) );
+}
+
+void MemoryBinaryWriter::Write( unsigned char c )
+{
+	buffer_.push_back( c );
+}
+
 #ifdef CAFE
 
 struct SaveWriterWiiUInternal

@@ -5,11 +5,23 @@
 #include <cafe/wenc.h>
 #include <cafe/pads/wpad/wpad.h>
 
+#include <Utility/Error.h>
+
 GamePadState PAD_STATE[ PAD_MAX_CONTROLLERS ];
+
+VPADStatus vpadStatus;
+s32 readLength;
+bool vpadConnected;
+bool anythingElseConnected;
+
 static void ConnectCallback( s32 chan, s32 reason )
 {
 	if( reason >= 0 )
+	{
 		WPADSetDataFormat( chan, WPAD_FMT_CORE );
+		WPADControlSpeaker( chan, WPAD_SPEAKER_OFF, NULL );
+		WPADControlDpd( chan, WPAD_DPD_OFF, NULL );
+	}
 }
 
 void GamePad::Initialize()
@@ -19,6 +31,9 @@ void GamePad::Initialize()
 
 	for( int i = 0; i < WPAD_MAX_CONTROLLERS; i++ )
 		WPADSetConnectCallback( i, ConnectCallback );
+
+	memset( &vpadStatus, 0, sizeof( VPADStatus ) );
+	vpadConnected = true;
 }
 
 void GamePad::Update()
@@ -27,6 +42,9 @@ void GamePad::Update()
 
 	for( int i = 0; i < PAD_MAX_CONTROLLERS; ++i )
 		PAD_STATE[ i ].Type = GamePadState::ControllerType_Standard;
+
+	// Is anything else other than the vpad connected?
+	bool anythingElseConnected = false;
 
 	// Update Wiimotes.
 	for( int i = 0; i < __min( WPAD_MAX_CONTROLLERS, WPAD_MAX_CONTROLLERS ); i++ )
@@ -42,6 +60,8 @@ void GamePad::Update()
 
 			u16 button;
 			WPADRead( i, &cr );
+
+			anythingElseConnected = true;
 
 			if( /*cr.err == WPAD_ERR_NONE
 				|| */cr.err == WPAD_ERR_CORRUPTED )
@@ -83,11 +103,12 @@ void GamePad::Update()
 			continue;
 		}
 
+		anythingElseConnected = true;
 		PAD_STATE[ i ].IsConnected |= true;
 
 		// Mapping is inverse of XBox.
-		PAD_STATE[ i ].Buttons.B = __max( PAD_STATE[ i ].Buttons.B, ( status[ i ].button & PAD_BUTTON_A ) ? ButtonState_Pressed : ButtonState_Released );
-		PAD_STATE[ i ].Buttons.A = __max( PAD_STATE[ i ].Buttons.A, ( status[ i ].button & PAD_BUTTON_B ) ? ButtonState_Pressed : ButtonState_Released );
+		PAD_STATE[ i ].Buttons.A = __max( PAD_STATE[ i ].Buttons.A, ( status[ i ].button & PAD_BUTTON_A ) ? ButtonState_Pressed : ButtonState_Released );
+		PAD_STATE[ i ].Buttons.B = __max( PAD_STATE[ i ].Buttons.B, ( status[ i ].button & PAD_BUTTON_B ) ? ButtonState_Pressed : ButtonState_Released );
 		PAD_STATE[ i ].Buttons.Y = __max( PAD_STATE[ i ].Buttons.Y, ( status[ i ].button & PAD_BUTTON_X ) ? ButtonState_Pressed : ButtonState_Released );
 		PAD_STATE[ i ].Buttons.X = __max( PAD_STATE[ i ].Buttons.X, ( status[ i ].button & PAD_BUTTON_Y ) ? ButtonState_Pressed : ButtonState_Released );
 
@@ -113,43 +134,52 @@ void GamePad::Update()
 
 	// Update DRC.
 	s32 error;
-	/*for( int i = 0; i < PAD_MAX_CONTROLLERS; ++i )
-	{*/
-		VPADStatus vpadStatus;
-		VPADRead( VPADBASE_CHAN0, &vpadStatus, 1, &error );
+	for( int i = 0; i < 1/*VPAD_MAX_CONTROLLERS*/; ++i )
+	{
+		readLength = VPADRead( VPADBASE_CHAN0 + i, &vpadStatus, 1, &error );
 
 		if( error == VPAD_READ_ERR_NONE )
 		{
+			vpadConnected = true;
+
 			// Mapping is inverse of XBox.
-			PAD_STATE[ 0 ].Buttons.B = __max( PAD_STATE[ 0 ].Buttons.B, vpadStatus.hold & VPAD_BUTTON_A ? ButtonState_Pressed : ButtonState_Released );
-			PAD_STATE[ 0 ].Buttons.A = __max( PAD_STATE[ 0 ].Buttons.A, vpadStatus.hold & VPAD_BUTTON_B ? ButtonState_Pressed : ButtonState_Released );
-			PAD_STATE[ 0 ].Buttons.Y = __max( PAD_STATE[ 0 ].Buttons.Y, vpadStatus.hold & VPAD_BUTTON_X ? ButtonState_Pressed : ButtonState_Released );
-			PAD_STATE[ 0 ].Buttons.X = __max( PAD_STATE[ 0 ].Buttons.X, vpadStatus.hold & VPAD_BUTTON_Y ? ButtonState_Pressed : ButtonState_Released );
+			PAD_STATE[ i ].Buttons.A = __max( PAD_STATE[ i ].Buttons.A, vpadStatus.hold & VPAD_BUTTON_A ? ButtonState_Pressed : ButtonState_Released );
+			PAD_STATE[ i ].Buttons.B = __max( PAD_STATE[ i ].Buttons.B, vpadStatus.hold & VPAD_BUTTON_B ? ButtonState_Pressed : ButtonState_Released );
+			PAD_STATE[ i ].Buttons.Y = __max( PAD_STATE[ i ].Buttons.Y, vpadStatus.hold & VPAD_BUTTON_X ? ButtonState_Pressed : ButtonState_Released );
+			PAD_STATE[ i ].Buttons.X = __max( PAD_STATE[ i ].Buttons.X, vpadStatus.hold & VPAD_BUTTON_Y ? ButtonState_Pressed : ButtonState_Released );
 
-			PAD_STATE[ 0 ].Buttons.LeftShoulder = __max( PAD_STATE[ 0 ].Buttons.LeftShoulder, vpadStatus.hold & VPAD_BUTTON_L ? ButtonState_Pressed : ButtonState_Released );
-			PAD_STATE[ 0 ].Buttons.RightShoulder = __max( PAD_STATE[ 0 ].Buttons.RightShoulder, vpadStatus.hold & VPAD_BUTTON_R ? ButtonState_Pressed : ButtonState_Released );
-			PAD_STATE[ 0 ].Buttons.Start = __max( PAD_STATE[ 0 ].Buttons.Start, vpadStatus.hold & VPAD_BUTTON_PLUS ? ButtonState_Pressed : ButtonState_Released );
+			PAD_STATE[ i ].Buttons.LeftShoulder = __max( PAD_STATE[ i ].Buttons.LeftShoulder, vpadStatus.hold & VPAD_BUTTON_L ? ButtonState_Pressed : ButtonState_Released );
+			PAD_STATE[ i ].Buttons.RightShoulder = __max( PAD_STATE[ i ].Buttons.RightShoulder, vpadStatus.hold & VPAD_BUTTON_R ? ButtonState_Pressed : ButtonState_Released );
+			PAD_STATE[ i ].Buttons.Start = __max( PAD_STATE[ i ].Buttons.Start, vpadStatus.hold & VPAD_BUTTON_PLUS ? ButtonState_Pressed : ButtonState_Released );
 
-			PAD_STATE[ 0 ].DPad.Down = __max( PAD_STATE[ 0 ].DPad.Down, vpadStatus.hold & VPAD_BUTTON_DOWN ? ButtonState_Pressed : ButtonState_Released );
-			PAD_STATE[ 0 ].DPad.Left = __max( PAD_STATE[ 0 ].DPad.Left, vpadStatus.hold & VPAD_BUTTON_LEFT ? ButtonState_Pressed : ButtonState_Released );
-			PAD_STATE[ 0 ].DPad.Right = __max( PAD_STATE[ 0 ].DPad.Right, vpadStatus.hold & VPAD_BUTTON_RIGHT ? ButtonState_Pressed : ButtonState_Released );
-			PAD_STATE[ 0 ].DPad.Up = __max( PAD_STATE[ 0 ].DPad.Up, vpadStatus.hold & VPAD_BUTTON_UP ? ButtonState_Pressed : ButtonState_Released );
+			PAD_STATE[ i ].DPad.Down = __max( PAD_STATE[ i ].DPad.Down, vpadStatus.hold & VPAD_BUTTON_DOWN ? ButtonState_Pressed : ButtonState_Released );
+			PAD_STATE[ i ].DPad.Left = __max( PAD_STATE[ i ].DPad.Left, vpadStatus.hold & VPAD_BUTTON_LEFT ? ButtonState_Pressed : ButtonState_Released );
+			PAD_STATE[ i ].DPad.Right = __max( PAD_STATE[ i ].DPad.Right, vpadStatus.hold & VPAD_BUTTON_RIGHT ? ButtonState_Pressed : ButtonState_Released );
+			PAD_STATE[ i ].DPad.Up = __max( PAD_STATE[ i ].DPad.Up, vpadStatus.hold & VPAD_BUTTON_UP ? ButtonState_Pressed : ButtonState_Released );
 			
-			PAD_STATE[ 0 ].Buttons.LeftStick = vpadStatus.hold & VPAD_BUTTON_STICK_L ? ButtonState_Pressed : ButtonState_Released;
-			PAD_STATE[ 0 ].Buttons.RightStick = vpadStatus.hold & VPAD_BUTTON_STICK_R ? ButtonState_Pressed : ButtonState_Released;
-			/*PAD_STATE[ 0 ].Buttons.LeftStick = ( status[ 0 ].button & PAD_BUTTON_START ) ? ButtonState_Pressed : ButtonState_Released;
-			PAD_STATE[ 0 ].Buttons.RightStick = ( status[ 0 ].button & PAD_BUTTON_START ) ? ButtonState_Pressed : ButtonState_Released;
-			PAD_STATE[ 0 ].Buttons.Back = ( status[ 0 ].button & PAD_BUTTON_START ) ? ButtonState_Pressed : ButtonState_Released;
-			PAD_STATE[ 0 ].Buttons.BigButton = ( status[ 0 ].button & PAD_BUTTON_MENU ) ? ButtonState_Pressed : ButtonState_Released;*/
+			PAD_STATE[ i ].Buttons.LeftStick = vpadStatus.hold & VPAD_BUTTON_STICK_L ? ButtonState_Pressed : ButtonState_Released;
+			PAD_STATE[ i ].Buttons.RightStick = vpadStatus.hold & VPAD_BUTTON_STICK_R ? ButtonState_Pressed : ButtonState_Released;
+			/*PAD_STATE[ i ].Buttons.LeftStick = ( status[ i ].button & PAD_BUTTON_START ) ? ButtonState_Pressed : ButtonState_Released;
+			PAD_STATE[ i ].Buttons.RightStick = ( status[ i ].button & PAD_BUTTON_START ) ? ButtonState_Pressed : ButtonState_Released;
+			PAD_STATE[ i ].Buttons.Back = ( status[ i ].button & PAD_BUTTON_START ) ? ButtonState_Pressed : ButtonState_Released;
+			PAD_STATE[ i ].Buttons.BigButton = ( status[ i ].button & PAD_BUTTON_MENU ) ? ButtonState_Pressed : ButtonState_Released;*/
 
-			PAD_STATE[ 0 ].Triggers.Left =  ( vpadStatus.hold & VPAD_TRIGGER_ZL ) / VPAD_TRIGGER_ZL ? ButtonState_Pressed : ButtonState_Released;
-			PAD_STATE[ 0 ].Triggers.Right = ( vpadStatus.hold & VPAD_TRIGGER_ZR ) / VPAD_TRIGGER_ZR ? ButtonState_Pressed : ButtonState_Released;
+			PAD_STATE[ i ].Triggers.Left =  ( vpadStatus.hold & VPAD_TRIGGER_ZL ) / VPAD_TRIGGER_ZL ? ButtonState_Pressed : ButtonState_Released;
+			PAD_STATE[ i ].Triggers.Right = ( vpadStatus.hold & VPAD_TRIGGER_ZR ) / VPAD_TRIGGER_ZR ? ButtonState_Pressed : ButtonState_Released;
 
-			PAD_STATE[ 0 ].ThumbSticks.Left = Vector2( vpadStatus.lStick.x, vpadStatus.lStick.y );
-			PAD_STATE[ 0 ].ThumbSticks.Right = Vector2( vpadStatus.lStick.x, vpadStatus.lStick.y );
-		
+			PAD_STATE[ i ].ThumbSticks.Left = Vector2( vpadStatus.lStick.x, vpadStatus.lStick.y );
+			PAD_STATE[ i ].ThumbSticks.Right = Vector2( vpadStatus.lStick.x, vpadStatus.lStick.y );
 		}
-	//}
+		else if( error == VPAD_READ_ERR_NO_CONTROLLER && vpadConnected == true /*&& !anythingElseConnected*/ )
+		{
+			// Only show error if nothing is connected to the WiiU.
+
+			vpadConnected = false;
+
+			// Unable to communicate with the WiiU gamepad.
+			DisplayError( ErrorType( 1650101 ) );
+		}
+	}
 }
 
 GamePadState GamePad::GetState( PlayerIndex index )
@@ -163,4 +193,9 @@ void GamePad::SetVibration( PlayerIndex index, float left, float right )
 
 void GamePad::Shutdown()
 {
+}
+
+void GamePad::DisableController( PlayerIndex index )
+{
+	WPADDisconnect( static_cast< s32 >( index ) );
 }

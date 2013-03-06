@@ -217,20 +217,21 @@ namespace CloudberryKingdom
 		UpgradeList.push_back( s1 );
 	}
 
-	DifficultyGroups::FixedPieceModHelper::FixedPieceModHelper( float Difficulty, const boost::shared_ptr<LevelSeedData> &LevelSeed )
+	DifficultyGroups::FixedPieceModHelper::FixedPieceModHelper( float Difficulty, const boost::shared_ptr<LevelSeedData> &LevelSeed, bool ScreenSaver )
 	{
 		this->Difficulty = Difficulty;
 		this->LevelSeed = LevelSeed;
+		this->ScreenSaver = ScreenSaver;
 	}
 
 	void DifficultyGroups::FixedPieceModHelper::Apply( const boost::shared_ptr<PieceSeedData> &piece )
 	{
-		DifficultyGroups::FixedPieceSeed( piece, Difficulty, LevelSeed->DefaultHeroType );
+		DifficultyGroups::FixedPieceSeed( piece, Difficulty, LevelSeed->DefaultHeroType, ScreenSaver );
 	}
 
-	boost::shared_ptr<Lambda_1<boost::shared_ptr<PieceSeedData> > > DifficultyGroups::FixedPieceMod( float Difficulty, const boost::shared_ptr<LevelSeedData> &LevelSeed )
+	boost::shared_ptr<Lambda_1<boost::shared_ptr<PieceSeedData> > > DifficultyGroups::FixedPieceMod( float Difficulty, const boost::shared_ptr<LevelSeedData> &LevelSeed, bool ScreenSaver )
 	{
-		return boost::make_shared<FixedPieceModHelper>( Difficulty, LevelSeed );
+		return boost::make_shared<FixedPieceModHelper>( Difficulty, LevelSeed, ScreenSaver );
 	}
 
 	float DifficultyGroups::HeroDifficultyMod( float Difficulty, const boost::shared_ptr<BobPhsx> &hero )
@@ -253,7 +254,7 @@ namespace CloudberryKingdom
 		return 0;
 	}
 
-	void DifficultyGroups::FixedPieceSeed( const boost::shared_ptr<PieceSeedData> &piece, float Difficulty, const boost::shared_ptr<BobPhsx> &hero )
+	void DifficultyGroups::FixedPieceSeed( const boost::shared_ptr<PieceSeedData> &piece, float Difficulty, const boost::shared_ptr<BobPhsx> &hero, bool ScreenSaver )
 	{
 		InitFixedUpgrades();
 
@@ -278,33 +279,42 @@ namespace CloudberryKingdom
 		{
 			Difficulty += HeroDifficultyMod( Difficulty, hero );
 
-			switch ( static_cast<int>( Difficulty ) )
+			// FIXME: port the new difficulty levels and then uncomment this
+			//if ( ScreenSaver )
+			//{
+			//	switch ( static_cast<int>( Difficulty ) )
+			//	{
+			//		case 0:
+			//			Tools::GlobalRnd->Choose(EasyUpgrades_SS).Apply(piece, Difficulty);
+			//			break;
+			//		case 1:
+			//			Tools::GlobalRnd->Choose(NormalUpgrades_SS).Apply(piece, Difficulty);
+			//			break;
+			//		case 2:
+			//			Tools::GlobalRnd->Choose(AbusiveUpgrades_SS).Apply(piece, Difficulty);
+			//			break;
+			//		default:
+			//			Tools::GlobalRnd->Choose(HardcoreUpgrades_SS).Apply(piece, Difficulty);
+			//			break;
+			//	}
+			//}
+			//else
 			{
-				case 0:
-					Tools::GlobalRnd->Choose(EasyUpgrades).Apply(piece, Difficulty);
-					break;
-				case 1:
-					Tools::GlobalRnd->Choose(NormalUpgrades).Apply(piece, Difficulty);
-					break;
-				case 2:
-					Tools::GlobalRnd->Choose(AbusiveUpgrades).Apply(piece, Difficulty);
-					break;
-				default:
-					Tools::GlobalRnd->Choose(HardcoreUpgrades).Apply(piece, Difficulty);
-					break;
-
-				//case 0:
-				//	piece->getRnd()->Choose(EasyUpgrades).Apply(piece, Difficulty);
-				//	break;
-				//case 1:
-				//	piece->getRnd()->Choose(NormalUpgrades).Apply(piece, Difficulty);
-				//	break;
-				//case 2:
-				//	piece->getRnd()->Choose(AbusiveUpgrades).Apply(piece, Difficulty);
-				//	break;
-				//default:
-				//	piece->getRnd()->Choose(HardcoreUpgrades).Apply(piece, Difficulty);
-				//	break;
+				switch ( static_cast<int>( Difficulty ) )
+				{
+					case 0:
+						Tools::GlobalRnd->Choose(EasyUpgrades).Apply(piece, Difficulty);
+						break;
+					case 1:
+						Tools::GlobalRnd->Choose(NormalUpgrades).Apply(piece, Difficulty);
+						break;
+					case 2:
+						Tools::GlobalRnd->Choose(AbusiveUpgrades).Apply(piece, Difficulty);
+						break;
+					default:
+						Tools::GlobalRnd->Choose(HardcoreUpgrades).Apply(piece, Difficulty);
+						break;
+				}
 			}
 		}
 
@@ -313,6 +323,32 @@ namespace CloudberryKingdom
 		//piece.MyUpgrades1.CalcGenData(piece.MyGenData.gen1, piece.Style);
 		//piece.MyUpgrades2->Get( Upgrade.Elevator ) = 5;
 		//piece.MyUpgrades2.CalcGenData(piece.MyGenData.gen1, piece.Style);
+
+
+		// Extra masochistic
+		if (Difficulty > 4.5f)
+		{
+			float s = CoreMath::RestrictVal( 0.0f, 1.0f, (Difficulty - 4.5f) / 1.5f );
+
+			float rnd = Tools::GlobalRnd->RndFloat(0, 100);
+			if (rnd > 80)
+				piece->MyUpgrades1->Get( Upgrade_SERPENT ) = CoreMath::Lerp(piece->MyUpgrades1->Get( Upgrade_SERPENT ), 10.0f, s);
+			else if (rnd > 60)
+				piece->MyUpgrades1->Get( Upgrade_LAVA_DRIP ) = CoreMath::Lerp(piece->MyUpgrades1->Get( Upgrade_LAVA_DRIP ), 10.0f, s);
+			else if (rnd > 40)
+				piece->MyUpgrades1->Get( Upgrade_FIREBALL ) = CoreMath::Lerp(piece->MyUpgrades1->Get( Upgrade_FIREBALL ), 10.0f, s);
+
+			rnd = Tools::GlobalRnd->RndFloat(0, 100);
+			if (rnd > 50)
+				piece->MyUpgrades1->Get( Upgrade_CEILING ) = CoreMath::Lerp(piece->MyUpgrades1->Get( Upgrade_CEILING ), 10.0f, s);
+
+			piece->MyUpgrades1->Get( Upgrade_SPIKEY_GUY ) = CoreMath::Lerp(piece->MyUpgrades1->Get( Upgrade_SPIKEY_GUY ), 10.0f, s);
+			piece->MyUpgrades1->Get( Upgrade_PINKY ) = CoreMath::Lerp(piece->MyUpgrades1->Get( Upgrade_PINKY ), 10.0f, s);
+			piece->MyUpgrades1->Get( Upgrade_SPIKEY_LINE ) = CoreMath::Lerp(piece->MyUpgrades1->Get( Upgrade_SPIKEY_LINE ), 10.0f, s);
+			piece->MyUpgrades1->Get( Upgrade_SPIKE ) = CoreMath::Lerp(piece->MyUpgrades1->Get( Upgrade_SPIKE ), 10.0f, s);
+				
+			piece->MyUpgrades1->Get( Upgrade_SPEED ) = CoreMath::Lerp(piece->MyUpgrades1->Get( Upgrade_SPEED ), 10.0f, s);
+		}
 
 		piece->StandardClose();
 	}
@@ -323,12 +359,18 @@ namespace CloudberryKingdom
 			return;
 
 		EasyUpgrades = std::vector<UpgradeSequence>();
+		//EasyUpgrades_SS = std::vector<UpgradeSequence>();
 
 		// Difficulties
 		MakeEasyUpgrades();
 		MakeNormalUpgrades();
 		MakeAbusiveUpgrades();
 		MakeHardcoreUpgrades();
+
+		//MakeEasyUpgrades_SS();
+		//MakeNormalUpgrades_SS();
+		//MakeAbusiveUpgrades_SS();
+		//MakeHardcoreUpgrades_SS();
 
 		// Special hero overrides
 		MakeCartUpgrades();

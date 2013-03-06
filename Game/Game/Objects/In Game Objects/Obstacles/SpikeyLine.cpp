@@ -78,7 +78,7 @@ namespace CloudberryKingdom
 		Vector2 v = GetPos( t );
 
 		getCore()->Data.Position = v;
-		//CoreMath.PointxAxisToAngle(ref MyObject.Base, Core.MyLevel.CurPhsxStep / 20f);
+		//CoreMath::PointxAxisToAngle(ref MyObject.Base, Core.MyLevel.CurPhsxStep / 20f);
 
 		Radius = getInfo()->SpikeyLines->Radius;
 

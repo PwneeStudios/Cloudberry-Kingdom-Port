@@ -8,6 +8,22 @@
 namespace CloudberryKingdom
 {
 
+    struct Challenge_StoryMode : public Challenge
+    {
+
+		virtual ~Challenge_StoryMode() { }
+
+		static void InitializeStatics();
+
+		static boost::shared_ptr<Challenge_StoryMode> instance;
+		const static boost::shared_ptr<Challenge_StoryMode> &getInstance();
+
+        Challenge_StoryMode();
+
+        virtual boost::shared_ptr<LevelSeedData> GetSeed( int Index );
+
+    };
+
 	struct CampaignSequence : public LevelSequence
 	{
 		virtual ~CampaignSequence() { }
@@ -73,7 +89,7 @@ namespace CloudberryKingdom
         static int ChapterFinishing;
         static void CheckForFinishedChapter();
 	
-		bool OnLevelBegin( boost::shared_ptr<Level> level );
+		bool OnLevelBegin( const boost::shared_ptr<Level> &level );
 		void AdditionalPreStart();
 		void MyStringWorld_OnSwapToFirstLevel( boost::shared_ptr<LevelSeedData> data );
 

@@ -813,11 +813,11 @@ namespace CloudberryKingdom
 		// Stay left of lowest bob
 		//if (MyBob != MyLevel.LowestBob && MyLevel.LowestBob != null)
 		//    if (MyBob.Pos.X > MyLevel.LowestBob.Pos.X - 30)
-		//        CoreMath.Restrict(-1, 0, ref MyBob.CurInput.xVec.X);
+		//        CoreMath::Restrict(-1, 0, ref MyBob.CurInput.xVec.X);
 
 		//if (MyBob != MyLevel.LowestBob && MyLevel.LowestBob != null)
 		//    if (MyBob.Pos.X > MyLevel.LowestBob.Pos.X - 240)
-		//        CoreMath.Restrict(-1, 0, ref MyBob.CurInput.xVec.X);
+		//        CoreMath::Restrict(-1, 0, ref MyBob.CurInput.xVec.X);
 
 		FirstPhsxStep = false;
 	}

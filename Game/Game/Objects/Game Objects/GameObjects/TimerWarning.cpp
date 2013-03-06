@@ -76,8 +76,8 @@ namespace CloudberryKingdom
 
 			// Flash the screen
 			float h = static_cast<float>( cos( 2 * M_PI * static_cast<float>( SubThreshholdCount - 15 ) / Period ) );
-			//h = CoreMath.Restrict(.5f, 1f, h) - .5f;
-			//h = (CoreMath.Restrict(.35f, 1f, h) - .35f) * .4f;
+			//h = CoreMath::Restrict(.5f, 1f, h) - .5f;
+			//h = (CoreMath::Restrict(.35f, 1f, h) - .35f) * .4f;
 			h = ( CoreMath::RestrictVal( .65f, 1.f, h ) - .65f ) * 1.5f;
 
 			SetAlpha( h );

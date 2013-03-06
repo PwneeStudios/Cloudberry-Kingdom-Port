@@ -13,12 +13,20 @@
 #include <ResourceList\Resources_Art.h>
 #include <ResourceList\Resources_Music.h>
 #include <ResourceList\Resources_Sound.h>
+#include <Utility/ConsoleInformation.h>
 #include <Utility/Log.h>
 
 #include "Game/Tilesets/Tilesets/CloudberryKingdom.TileSets.h"
 
+#ifdef PS3
+#include <sys/ppu_thread.h>
+#endif
+
 namespace CloudberryKingdom
 {
+
+	// FIXME: should be false and set to true once loading is done.
+	bool Resources::FinalLoadDone = true;
 
 	boost::shared_ptr<WrappedBool> Resources::LoadingResources = 0;
 	boost::shared_ptr<WrappedFloat> Resources::ResourceLoadedCountRef = 0;
@@ -128,10 +136,10 @@ namespace CloudberryKingdom
 
 
 		Tools::Song_Happy = Tools::SongWad->FindByName( std::wstring( L"Happy^James_Stant" ) );
-		Tools::Song_Happy->DisplayInfo = false;
+		Tools::Song_Happy->Volume = .9f;
 
 		Tools::Song_140mph = Tools::SongWad->FindByName( std::wstring( L"140_Mph_in_the_Fog^Blind_Digital" ) );
-		Tools::Song_140mph->Volume = .7f;
+		Tools::Song_140mph->Volume = .6f;
 
 		Tools::Song_BlueChair = Tools::SongWad->FindByName( std::wstring( L"Blue_Chair^Blind_Digital" ) );
 		Tools::Song_BlueChair->Volume = .7f;
@@ -156,6 +164,7 @@ namespace CloudberryKingdom
 
 		Tools::Song_Heavens = Tools::SongWad->FindByName( std::wstring( L"The_Heavens_Opened^Peacemaker" ) );
 		Tools::Song_Heavens->Volume = 1;
+		Tools::Song_Heavens->DisplayInfo = false;
 
 		Tools::Song_TidyUp = Tools::SongWad->FindByName( std::wstring( L"Tidy_Up^Peacemaker" ) );
 		Tools::Song_TidyUp->Volume = 1;
@@ -166,7 +175,7 @@ namespace CloudberryKingdom
 		// Create the standard playlist
 		AddRange( Tools::SongList_Standard, Tools::SongWad->SongList );
 		Remove( Tools::SongList_Standard, Tools::Song_Happy );
-		Remove( Tools::SongList_Standard, Tools::Song_140mph );
+		//Remove( Tools::SongList_Standard, Tools::Song_140mph );
 		Remove( Tools::SongList_Standard, Tools::Song_Heavens );
 	}
 
@@ -252,8 +261,44 @@ namespace CloudberryKingdom
 		// Load the art!
 		PreloadArt();
 
+		ConsoleLanguage language = GetConsoleLanguage();
+		Localization::Language selectedLanguage = Localization::Language_ENGLISH;
+
+		switch( language )
+		{
+		case ConsoleLanguage_JAPANESE:
+			selectedLanguage = Localization::Language_JAPANESE;
+			break;
+		case ConsoleLanguage_ENGLISH:
+			// English is the default language.
+			break;
+		case ConsoleLanguage_FRENCH:
+			selectedLanguage = Localization::Language_FRENCH;
+			break;
+		case ConsoleLanguage_GERMAN:
+			selectedLanguage = Localization::Language_GERMAN;
+			break;
+		case ConsoleLanguage_ITALIAN:
+			selectedLanguage = Localization::Language_ITALIAN;
+			break;
+		case ConsoleLanguage_SPANISH:
+			selectedLanguage = Localization::Language_SPANISH;
+			break;
+		case ConsoleLanguage_CHINESE:
+			selectedLanguage = Localization::Language_CHINESE;
+			break;
+		case ConsoleLanguage_KOREAN:
+			selectedLanguage = Localization::Language_KOREAN;
+			break;
+		case ConsoleLanguage_PORTUGUESE:
+			selectedLanguage = Localization::Language_PORTUGUESE;
+			break;
+		case ConsoleLanguage_RUSSIAN:
+			selectedLanguage = Localization::Language_RUSSIAN;
+			break;
+		}
         // Localization
-        Localization::SetLanguage(Localization::Language_ENGLISH);
+        Localization::SetLanguage( selectedLanguage );
 
 		// Fonts
 		FontLoad();
@@ -277,7 +322,6 @@ namespace CloudberryKingdom
 		//	}
 		//}
 
-
 		for( int i = 0; i < sizeof( TEXTURE_PATHS ) / sizeof( TEXTURE_PATHS[ 0 ] ); ++i )
 			Tools::TextureWad->AddTexture( 0, TEXTURE_PATHS[ i ], TEXTURE_WIDTHS[ i ], TEXTURE_HEIGHTS[ i ] );
 
@@ -293,11 +337,31 @@ namespace CloudberryKingdom
 			Tools::TextureWad->AddTexture( 0, *file );*/
 	}
 
+#ifdef PS3
+	static void TheLoadThread( uint64_t context )
+	{
+		( void )context;
+
+		Resources::_LoadThread();
+
+		sys_ppu_thread_exit( 0 );
+	}
+#endif
+
 	void Resources::LoadResources()
 	{
 		// FIXME: Load resources in other thread.
 		//LoadThread = ThreadHelper::EasyThread( 5, std::wstring( L"LoadThread" ), boost::make_shared<Action>( &_LoadThread ) );
+#ifdef PS3
+		sys_ppu_thread_t tid;
+		int ret = sys_ppu_thread_create( &tid, TheLoadThread,
+			0, 1001, 64 * 1024, 0, "TheLoadThread" );
+
+		if( ret != 0 )
+			LOG.Write( "Load thread failed!" );
+#else
 		_LoadThread();
+#endif
 	}
 
 boost::shared_ptr<Thread> Resources::LoadThread = 0;
@@ -323,19 +387,16 @@ boost::shared_ptr<Thread> Resources::LoadThread = 0;
 		// Fireball texture
 		Fireball::PreInit();
 
-		// Load art
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Environments" ) );
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Bob" ) );
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Buttons" ) );
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Characters" ) );
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Coins" ) );
-		//Tools::TextureWad.LoadFolder(Tools::GameClass.Content, "Effects");
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"HeroItems" ) );
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"LoadScreen_Initial" ) );
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"LoadScreen_Level" ) );
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Menu" ) );
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Old_Art_Holdover" ) );
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Title" ) );
+        // Set off load calls
+		for ( std::vector<boost::shared_ptr<EzTexture> >::const_iterator Tex = Tools::TextureWad->TextureList.begin();
+			  Tex != Tools::TextureWad->TextureList.end(); ++Tex )
+		{
+			// If texture hasn't been loaded yet, load it
+			if ( ( *Tex )->getTex() == 0 && !(*Tex)->FromCode )
+			{
+				( *Tex )->setTex( Tools::GameClass->Content->Load< Texture2D >( ( *Tex )->Path ) );
+			}
+		}
 
 		//for ( std::vector<boost::shared_ptr<EzTexture> >::const_iterator Tex = Tools::TextureWad->TextureList.begin(); Tex != Tools::TextureWad->TextureList.end(); ++Tex )
 		//{

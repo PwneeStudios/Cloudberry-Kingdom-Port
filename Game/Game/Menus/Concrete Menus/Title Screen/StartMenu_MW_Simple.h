@@ -15,6 +15,24 @@ namespace CloudberryKingdom
 		using StartMenu::SlideIn;
 		using StartMenu::Call;
 
+		void MenuGo_Leaderboards( boost::shared_ptr<MenuItem> item );
+
+		struct MenuGo_LeaderboardsProxy : public Lambda_1<boost::shared_ptr<MenuItem> >
+		{
+			boost::shared_ptr<StartMenu_MW_Simple> sm;
+
+			MenuGo_LeaderboardsProxy( boost::shared_ptr<StartMenu_MW_Simple> sm )
+			{
+				this->sm = sm;
+			}
+
+			void Apply( const boost::shared_ptr<MenuItem> &item )
+			{
+				sm->MenuGo_Leaderboards( item );
+			}
+		};
+		
+
 		StartMenu_MW_Simple( boost::shared_ptr<TitleGameData_MW> Title );
 		boost::shared_ptr<StartMenu_MW_Simple> StartMenu_MW_Simple_Construct( boost::shared_ptr<TitleGameData_MW> Title );
 		void MakeMenu();

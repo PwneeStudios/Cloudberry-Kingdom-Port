@@ -2,6 +2,8 @@
 
 #include "Hacks/List.h"
 
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
 
@@ -180,6 +182,8 @@ namespace CloudberryKingdom
 		lerp_vec.push_back(3.5f);
 		lerp_vec.push_back(4);
 		lerp_vec.push_back(4.5f);
+		lerp_vec.push_back(5.0f);
+		lerp_vec.push_back(6.0f);
 
 		float difficulty = CoreMath::MultiLerpRestrict( Index / static_cast<float>( LevelsPerDifficulty ), lerp_vec );
 		boost::shared_ptr<CloudberryKingdom::LevelSeedData> seed = Make( Index, difficulty );
@@ -212,6 +216,8 @@ namespace CloudberryKingdom
 
         void Challenge_HeroRush::Start(int StartLevel)
         {
+			CloudberryKingdomGame::SetPresence( Presence_HeroRush );
+
             ShuffleHeros();
 
             Rush::Start(StartLevel);
@@ -227,11 +233,8 @@ namespace CloudberryKingdom
 		return TileSet::Get( tilesets[ ( i / LevelsPerTileset ) % tilesets.size() ] );
 	}
 
-	boost::shared_ptr<LevelSeedData> Challenge_HeroRush::Make( int Index, float Difficulty )
+	int Challenge_HeroRush::GetLength( int Index, float Difficulty )
 	{
-		boost::shared_ptr<BobPhsx> hero = GetHero( Index - StartIndex );
-
-		// Adjust the length. Longer for higher levels.
 		int Length;
 		if ( Index == 0 || ( Index + 1 ) % LevelsPerDifficulty == 0 )
 			Length = LevelLength_Short;
@@ -241,8 +244,17 @@ namespace CloudberryKingdom
 			Length = CoreMath::LerpRestrict( LevelLength_Short, LevelLength_Long, t );
 		}
 
+		return Length;
+	}
+	boost::shared_ptr<LevelSeedData> Challenge_HeroRush::Make( int Index, float Difficulty )
+	{
+		boost::shared_ptr<BobPhsx> hero = GetHero( Index - StartIndex );
+
+		// Adjust the length. Longer for higher levels.
+		int Length = GetLength(Index, Difficulty);
+
 		// Create the LevelSeedData
-		boost::shared_ptr<LevelSeedData> data = RegularLevel::HeroLevel( Difficulty, hero, Length );
+		boost::shared_ptr<LevelSeedData> data = RegularLevel::HeroLevel( Difficulty, hero, Length, false );
 		data->SetTileSet( GetTileSet( Index - StartIndex ) );
 
 		// Adjust the piece seed data

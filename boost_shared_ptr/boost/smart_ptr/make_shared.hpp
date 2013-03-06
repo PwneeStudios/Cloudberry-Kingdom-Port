@@ -19,28 +19,24 @@
 #include <cstddef>
 #include <new>
 
+// BoostBin stuff here
 #ifdef BOOST_BIN
 
 #include <vector>
 #include <string>
 #include <Utility/mutex.h>
 
-// BoostBin stuff here
-#ifdef BOOST_BIN
+extern void _OnAssignment( std::string class_name, int origin_code );
+extern void OnDestructor( std::string class_name );
+
+template <typename T> void OnAssignment( const boost::shared_ptr<T> * p, int origin_code )
+{
+	_OnAssignment( typeid(T).name(), origin_code );
+}
 
 struct GenericBoostBin;
 
 extern std::vector< GenericBoostBin * > MetaBoostBin;
-
-template <typename T> void OnAssignment( const boost::shared_ptr<T> * p ) { }
-
-struct Level; struct Coin_Parameters; struct FireSpinner_Parameters; struct Spike_Parameters; struct NormalGameData; struct MakeData;
-template <> void OnAssignment<Level>( const boost::shared_ptr<Level> * p )
-{
-
-}
-
-
 
 struct GenericBoostBin
 {
@@ -63,8 +59,6 @@ struct GenericBoostBin
 
 };
 
-#define CLASS_NAME( t ) #t
-
 template <typename T>
 struct BoostBin : GenericBoostBin
 {
@@ -80,7 +74,6 @@ struct BoostBin : GenericBoostBin
 #endif
 
 
-#endif
 
 
 

@@ -114,3 +114,7 @@ void CorePc::Exit()
 {
 	running_ = false;
 }
+
+void DebugFrame(float,float,float)
+{
+}

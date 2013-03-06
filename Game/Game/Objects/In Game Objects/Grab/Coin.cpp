@@ -82,12 +82,16 @@ namespace CloudberryKingdom
 		}
 
 		// Text float
-		if ( getInfo()->Coins->ShowText )
+		if ( getInfo()->Coins->ShowText && getCore()->MyLevel->MyGame->MyBankType != GameData::BankType_CAMPAIGN )
 		{
 			int val = CalcScoreValue();
 			boost::shared_ptr<TextFloat> text = boost::make_shared<TextFloat>( std::wstring( L"+" ) + StringConverterHelper::toString( val ), getCore()->Data.Position + Vector2(21, 22.5f) );
 			text->getCore()->DrawLayer = 8;
 			getCore()->MyLevel->MyGame->AddGameObject(text);
+		}
+		else if ( getCore()->MyLevel->MyGame->MyBankType == GameData::BankType_CAMPAIGN )
+		{
+			ParticleEffects::CoinDie_Campaign( getMyGame()->MyLevel, Coin::PosOfLastCoinGrabbed );
 		}
 	}
 

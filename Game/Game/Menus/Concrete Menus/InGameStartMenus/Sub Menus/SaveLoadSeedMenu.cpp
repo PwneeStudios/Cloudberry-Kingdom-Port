@@ -59,7 +59,10 @@ namespace CloudberryKingdom
 	{
 		VerifyBaseMenu::VerifyBaseMenu_Construct( false );
 
+		if ( boost::dynamic_pointer_cast<NormalGameData>( Tools::CurGameData ) != 0 )
+		{
             EnableBounce();
+		}
 
         if (UseBounce)
             CallToLeft = false;
@@ -317,6 +320,7 @@ namespace CloudberryKingdom
 		MyPile->setPos( Vector2( -1125.001f, -319.4444f ) );
 	#endif
 	}
+
 
 	boost::shared_ptr<Lambda_1<boost::shared_ptr<MenuItem> > > SaveLoadSeedMenu::MakeSave( const boost::shared_ptr<GUI_Panel> &panel, const boost::shared_ptr<PlayerData> &player )
 	{

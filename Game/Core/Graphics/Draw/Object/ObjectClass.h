@@ -12,12 +12,13 @@
 
 namespace CloudberryKingdom
 {
+
 	struct ObjectClass : public boost::enable_shared_from_this<ObjectClass>
 	{
 
-	
-		static void InitializeStatics();
+		virtual ~ObjectClass() { }
 
+		static void InitializeStatics();
 	
 		float LoadingRunSpeed;
 

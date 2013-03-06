@@ -23,6 +23,7 @@ namespace CloudberryKingdom
 		ss->PressA_Listener->Release();
 		if ( ss->PressA != 0 )
 			ss->PressA->Kill( true );
+		ss->PressA_Listener->MyAction.reset();
 	}
 
 	ScreenSaver::ScreenSaverReleaseHelper::ScreenSaverReleaseHelper( const boost::shared_ptr<ScreenSaver> &ss )
@@ -42,6 +43,13 @@ namespace CloudberryKingdom
 
 	void ScreenSaver::ConstructorPressAListenerHelperHelper::Apply()
 	{
+		// Bring up a loading screen if we aren't done loading assets
+		if ( !Resources::FinalLoadDone )
+		{
+			Tools::BeginLoadingScreen( false );
+			Tools::CurrentLoadingScreen->MakeFake();
+		}
+
 #ifdef _CRTDBG_MAP_ALLOC
 		CloudberryKingdomGame::memdebug_DumpEnd();
 #endif
@@ -136,7 +144,7 @@ namespace CloudberryKingdom
 	#if defined(PC_VERSION)
 		ss->PressA = MakeMagic( GUI_Text, ( Localization::Words_PressAnyKey, Vector2( 0, -865 ), true ) );
 	#else
-		ss->PressA = MakeMagic( GUI_Text, ( Localization::Words_PressAnyKey, Vector2( 0, -865 ), true ) );
+		ss->PressA = MakeMagic( GUI_Text, ( Localization::Words_PressStart, Vector2( 0, -865 ), true ) );
 	#endif
 		ss->PressA->MyText->setScale( ss->PressA->MyText->getScale() * .68f );
 		ss->PressA->PreventRelease = true;
@@ -156,7 +164,7 @@ namespace CloudberryKingdom
 
 	void ScreenSaver::AddListenerLambda::Apply()
 	{
-		ss->PressA_Listener = MakeMagic( Listener, ( ControllerButtons_A, boost::make_shared<ConstructorPressAListenerHelper>( ss ) ) );
+		ss->PressA_Listener = MakeMagic( Listener, ( ControllerButtons_ANY, boost::make_shared<ConstructorPressAListenerHelper>( ss ) ) );
 		ss->PressA_Listener->PreventRelease = true;
 		ss->PressA_Listener->setControl( -2 );
 		Tools::CurGameData->AddGameObject( ss->PressA_Listener );
@@ -321,6 +329,8 @@ namespace CloudberryKingdom
 
 	void ScreenSaver::Constructor()
 	{
+		SaveGroup::LoadAll();
+
 		WaitLengthToOpenDoor_FirstLevel = 10 + InitialDarkness - 3;
 
 		Tools::TheGame->LogoScreenPropUp = true;
@@ -386,7 +396,6 @@ namespace CloudberryKingdom
 				lvl->MyGame->WaitThenDo( zoomout_start - 3 - 3, boost::make_shared<RecordScratchLambda>() );
 				
 				Tools::SongWad->PlayList = Tools::SongList_Standard;
-                //Tools::SongWad->SetPlayList("Ripcurl^Blind_Digital");
 				Tools::SongWad->Next( Tools::Song_Ripcurl );
 				Tools::SongWad->PlayNext = true;
 
@@ -444,29 +453,40 @@ namespace CloudberryKingdom
 		// Create the LevelSeedData
 		boost::shared_ptr<LevelSeedData> data;
 		if ( Difficulty >= 0 )
-			data = RegularLevel::HeroLevel( static_cast<float>( Difficulty ), hero, Length );
+			data = RegularLevel::HeroLevel( static_cast<float>( Difficulty ), hero, Length, true );
 		else
-			data = RegularLevel::HeroLevel( static_cast<float>( index % 5 ), hero, Length );
+			data = RegularLevel::HeroLevel( static_cast<float>( index % 5 ), hero, Length, true );
 
 		if ( Bungee )
 		{
 			data->MyGameFlags.IsTethered = true;
 		}
 
-		if ( FixedTileSet == 0 )
+		switch ( index )
 		{
-			std::vector<std::wstring> tileset_choices;
-			tileset_choices.push_back( std::wstring( L"forest" ) );
-			tileset_choices.push_back( std::wstring( L"cave" ) );
-			tileset_choices.push_back( std::wstring( L"castle" ) );
-			tileset_choices.push_back( std::wstring( L"cloud" ) );
-			tileset_choices.push_back( std::wstring( L"hills" ) );
-			tileset_choices.push_back( std::wstring( L"sea" ) );
+			case 0: data->SetTileSet( L"cave" ); break;
+			case 1: data->SetTileSet( L"castle" ); break;
+			case 2: data->SetTileSet( L"forest" ); break;
+			case 3: data->SetTileSet( L"hills" ); break;
+			case 4: data->SetTileSet( L"cloud" ); break;
+				
+			default:
+				if ( FixedTileSet == 0 )
+				{
+					std::vector<std::wstring> tileset_choices;
+					tileset_choices.push_back( std::wstring( L"forest" ) );
+					tileset_choices.push_back( std::wstring( L"cave" ) );
+					tileset_choices.push_back( std::wstring( L"castle" ) );
+					tileset_choices.push_back( std::wstring( L"cloud" ) );
+					tileset_choices.push_back( std::wstring( L"hills" ) );
+					tileset_choices.push_back( std::wstring( L"sea" ) );
 
-			data->SetTileSet( Tools::GlobalRnd->ChooseOne( tileset_choices ) );
+					data->SetTileSet( Tools::GlobalRnd->ChooseOne( tileset_choices ) );
+				}
+				else
+					data->SetTileSet( FixedTileSet );
+				break;
 		}
-		else
-			data->SetTileSet( FixedTileSet );
 
 		//data.SetTileSet(Tools::GlobalRnd.ChooseOne("sea", "forest", "cave", "castle", "cloud", "hills",
 		//                                          "sea_rain", "forest_snow", "hills_rain"));

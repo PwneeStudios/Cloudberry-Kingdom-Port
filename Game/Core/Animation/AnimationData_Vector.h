@@ -8,10 +8,12 @@
 
 namespace CloudberryKingdom
 {
+
 	struct OneAnim
 	{
 	
 		std::vector<Vector2> Data;
+
 	};
 
 	struct AnimationData

@@ -46,6 +46,8 @@ namespace CloudberryKingdom
 	
 		StringWorldTimed( const boost::shared_ptr<LambdaFunc_1<int, boost::shared_ptr<LevelSeedData> > > &GetSeed, const boost::shared_ptr<GUI_Timer> &Timer );
 
+		virtual void AdditionalSetLevel();
+
 		virtual void Release();
 
 		virtual void AdditionalSwapToLevelProcessing( const boost::shared_ptr<GameData> &game );

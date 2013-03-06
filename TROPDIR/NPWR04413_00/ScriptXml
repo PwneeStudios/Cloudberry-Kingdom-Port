@@ -1,0 +1,748 @@
+
+   <trophy id="000">
+    <name>AwardTitle_Campaign1</name>
+    <detail>AwardText_Campaign1</detail>
+   </trophy>
+   <trophy id="001">
+    <name>AwardTitle_Campaign2</name>
+    <detail>AwardText_Campaign2</detail>
+   </trophy>
+   <trophy id="002">
+    <name>AwardTitle_Campaign3</name>
+    <detail>AwardText_Campaign3</detail>
+   </trophy>
+   <trophy id="003">
+    <name>AwardText_Campaign4</name>
+    <detail>AwardTitle_Campaign4</detail>
+   </trophy>
+   <trophy id="004">
+    <name>AwardTitle_Bungee</name>
+    <detail>AwardText_Bungee</detail>
+   </trophy>
+   <trophy id="005">
+    <name>AwardTitle_ArcadeHighScore</name>
+    <detail>AwardText_ArcadeHighScore</detail>
+   </trophy>
+   <trophy id="006">
+    <name>AwardTitle_ArcadeHighScore2</name>
+    <detail>AwardText_ArcadeHighScore2</detail>
+   </trophy>
+   <trophy id="007">
+    <name>AwardTitle_Die</name>
+    <detail>AwardText_Die</detail>
+   </trophy>
+   <trophy id="008">
+    <name>AwardTitle_Invisible</name>
+    <detail>AwardText_Invisible</detail>
+   </trophy>
+   <trophy id="009">
+    <name>AwardTitle_UnlockAllArcade</name>
+    <detail>AwardText_UnlockAllArcade</detail>
+   </trophy>
+   <trophy id="010">
+    <name>AwardTitle_NoDeath</name>
+    <detail>AwardText_NoDeath</detail>
+   </trophy>
+   <trophy id="011">
+    <name>AwardTitle_Save</name>
+    <detail>AwardText_Save</detail>
+   </trophy>
+   <trophy id="012">
+    <name>AwardTitle_Obstacles</name>
+    <detail>AwardText_Obstacles</detail>
+   </trophy>
+   <trophy id="013">
+    <name>AwardTitle_Buy</name>
+    <detail>AwardText_Buy</detail>
+   </trophy>
+   <trophy id="014">
+    <name>AwardTitle_HeroRush2Level</name>
+    <detail>AwardText_HeroRush2Level</detail>
+   </trophy>
+   <trophy id="015">
+    <name>AwardTitle_Replay</name>
+    <detail>AwardText_Replay</detail>
+   </trophy>
+
+
+
+
+   <trophy id="000">
+    <name>Hero in the Making</name>
+    <detail>Complete Chapter 2</detail>
+   </trophy>
+   <trophy id="001">
+    <name>Danger Ahead</name>
+    <detail>Complete Chapter 4</detail>
+   </trophy>
+   <trophy id="002">
+    <name>The End?</name>
+    <detail>Finish the Story</detail>
+   </trophy>
+   <trophy id="003">
+    <name>Complete Chapter 7</name>
+    <detail>Shenanigans!</detail>
+   </trophy>
+   <trophy id="004">
+    <name>Cut the Cord</name>
+    <detail>Finish a bungee level with 3 dead allies</detail>
+   </trophy>
+   <trophy id="005">
+    <name>Clutch</name>
+    <detail>Score 500k in an arcade game</detail>
+   </trophy>
+   <trophy id="006">
+    <name>Double-Clutch</name>
+    <detail>Score 1.5 million in an arcade game</detail>
+   </trophy>
+   <trophy id="007">
+    <name>Noob</name>
+    <detail>Die 1337 Times</detail>
+   </trophy>
+   <trophy id="008">
+    <name>Did You See That!?</name>
+    <detail>Get to level 20 while invisible in Escalation</detail>
+   </trophy>
+   <trophy id="009">
+    <name>The End of Infinity</name>
+    <detail>Unlock every arcade game</detail>
+   </trophy>
+   <trophy id="010">
+    <name>My Beard is Impenetrable</name>
+    <detail>Complete a chapter without dying</detail>
+   </trophy>
+   <trophy id="011">
+    <name>That Level Was Nuts!</name>
+    <detail>Save a level code</detail>
+   </trophy>
+   <trophy id="012">
+    <name>I Bet You Lost Count</name>
+    <detail>This is how many obstacles you have already seen</detail>
+   </trophy>
+   <trophy id="013">
+    <name>I've Bought the Power!</name>
+    <detail>Buy your first powerup</detail>
+   </trophy>
+   <trophy id="014">
+    <name>Jack of all Heroes</name>
+    <detail>Reach Hybrid Rush level 50</detail>
+   </trophy>
+   <trophy id="015">
+    <name>Look What You Have Done!</name>
+    <detail>Watch a replay with 50+ attempts</detail>
+   </trophy>
+
+
+
+
+   <trophy id="000">
+    <name>ヒーローへの道</name>
+    <detail>チャプター2クリア</detail>
+   </trophy>
+   <trophy id="001">
+    <name>前に危険が！</name>
+    <detail>チャプター4をクリア</detail>
+   </trophy>
+   <trophy id="002">
+    <name>終わり？</name>
+    <detail>ストーリを完了する</detail>
+   </trophy>
+   <trophy id="003">
+    <name>チャプター7をクリア</name>
+    <detail>悪ふざけ！</detail>
+   </trophy>
+   <trophy id="004">
+    <name>ロープを切れ</name>
+    <detail>失敗した仲間を３人連れてレベルをクリア</detail>
+   </trophy>
+   <trophy id="005">
+    <name>クラッチ</name>
+    <detail>アーケードゲームでスコア５０万以上達成</detail>
+   </trophy>
+   <trophy id="006">
+    <name>ダブルクラッチ</name>
+    <detail>アーケードゲームでスコア150万達成</detail>
+   </trophy>
+   <trophy id="007">
+    <name>初心者</name>
+    <detail>１３３７回失敗する</detail>
+   </trophy>
+   <trophy id="008">
+    <name>あれ見た?</name>
+    <detail>透明のままエスカレーションでレベル２０達成</detail>
+   </trophy>
+   <trophy id="009">
+    <name>無限の果て</name>
+    <detail>すべてのアーケードゲームを解除</detail>
+   </trophy>
+   <trophy id="010">
+    <name>無敵のひげ</name>
+    <detail>一度も失敗しないでチャプターをクリア</detail>
+   </trophy>
+   <trophy id="011">
+    <name>このレベルはすご過ぎる！</name>
+    <detail>レベルのシードを保存</detail>
+   </trophy>
+   <trophy id="012">
+    <name>もう数え切れてないでしょ?</name>
+    <detail>これだけの障害をくぐってきたんだ。</detail>
+   </trophy>
+   <trophy id="013">
+    <name>パワーを買った！</name>
+    <detail>最初のパワーを購入</detail>
+   </trophy>
+   <trophy id="014">
+    <name>英雄の中の英雄、ジャック</name>
+    <detail>ハイブリッド ラッシュ　レベル５０達成</detail>
+   </trophy>
+   <trophy id="015">
+    <name>こんなことも達成しました</name>
+    <detail>５０回以上失敗し、リプレイをみる</detail>
+   </trophy>
+
+
+
+
+   <trophy id="000">
+    <name>Der Werdende Held</name>
+    <detail>Beende Kapitel 2</detail>
+   </trophy>
+   <trophy id="001">
+    <name>Gefahr Voraus</name>
+    <detail>Beende Kapitel 4</detail>
+   </trophy>
+   <trophy id="002">
+    <name>Das Ende?</name>
+    <detail>Beende das Abenteuer</detail>
+   </trophy>
+   <trophy id="003">
+    <name>Beende Kapitel 7</name>
+    <detail>Das ist Gelogen! </detail>
+   </trophy>
+   <trophy id="004">
+    <name>Auf Eigenen Füßen</name>
+    <detail>Beende ein Bungeelevel mit drei toten Verbündeten</detail>
+   </trophy>
+   <trophy id="005">
+    <name>Performer</name>
+    <detail>Erreiche mehr als 500k Punkte in einem Minispiel</detail>
+   </trophy>
+   <trophy id="006">
+    <name>Super-Performer</name>
+    <detail>Erreiche mehr als 1.5 Millionen Punkte in einem Minispiel</detail>
+   </trophy>
+   <trophy id="007">
+    <name>Neuling</name>
+    <detail>Stirb 1337 Mal</detail>
+   </trophy>
+   <trophy id="008">
+    <name>Hast du das Gesehen?! </name>
+    <detail>Erreiche Unsichtbar Level 20 in Eskalation</detail>
+   </trophy>
+   <trophy id="009">
+    <name>Das Ende des Unendlichen</name>
+    <detail>Schalte jedes Minispiel frei</detail>
+   </trophy>
+   <trophy id="010">
+    <name>Absolviere ein Kapitel Ohne zu Sterben</name>
+    <detail>Absolviere ein Kapitel ohne zu sterben</detail>
+   </trophy>
+   <trophy id="011">
+    <name>Das Level war Total Irre! </name>
+    <detail>Level Code speichern</detail>
+   </trophy>
+   <trophy id="012">
+    <name>Ich Wette, du Hast den Überblick Verloren</name>
+    <detail>So viele Hindernisse sind dir schon begegnet</detail>
+   </trophy>
+   <trophy id="013">
+    <name>Ich bin Mächtig!</name>
+    <detail>Kauf deinen ersten Hilfsmittel</detail>
+   </trophy>
+   <trophy id="014">
+    <name>Allerweltskerl</name>
+    <detail>Erreiche Level 50 in Hektische Mischung</detail>
+   </trophy>
+   <trophy id="015">
+    <name>Sieh Was du Angerichtet Hast</name>
+    <detail>Sieh dir Eine Wiederholung mit 50+ Versuchen an</detail>
+   </trophy>
+
+
+
+
+   <trophy id="000">
+    <name>Herói em Processo</name>
+    <detail>Complete o Capítulo 2</detail>
+   </trophy>
+   <trophy id="001">
+    <name>Perigo Adiante</name>
+    <detail>Complete o Capítulo 4</detail>
+   </trophy>
+   <trophy id="002">
+    <name>... Fim?</name>
+    <detail>Termine a História</detail>
+   </trophy>
+   <trophy id="003">
+    <name>Complete o Capítulo 7</name>
+    <detail>Mentira!</detail>
+   </trophy>
+   <trophy id="004">
+    <name>Corte a Corda</name>
+    <detail>Termine uma fase de corda elástica com 3 aliados mortos</detail>
+   </trophy>
+   <trophy id="005">
+    <name>Mandando Bem</name>
+    <detail>Marque 500k no Fliperama</detail>
+   </trophy>
+   <trophy id="006">
+    <name>Mandando Melhor</name>
+    <detail>Marque 1.5 milhões de pontos no Fliperama</detail>
+   </trophy>
+   <trophy id="007">
+    <name>Novato</name>
+    <detail>Morra 1337 vezes</detail>
+   </trophy>
+   <trophy id="008">
+    <name>Você Viu Aquilo!?</name>
+    <detail>Chegar na vigésima fase de Escalada, estando invisível.</detail>
+   </trophy>
+   <trophy id="009">
+    <name>O Fim do Infinito</name>
+    <detail>Desbloqueie todos os jogos no Fliperama</detail>
+   </trophy>
+   <trophy id="010">
+    <name>Minha Barba é Impenetrável</name>
+    <detail>Complete um capítulo sem morrer</detail>
+   </trophy>
+   <trophy id="011">
+    <name>Que Fase Louca!</name>
+    <detail>Salve um código</detail>
+   </trophy>
+   <trophy id="012">
+    <name>Aposto como Você Perdeu a Conta</name>
+    <detail>Sim, você viu tantos obstáculos.</detail>
+   </trophy>
+   <trophy id="013">
+    <name>Poder é Comprado</name>
+    <detail>Comprou a Primeira Ajuda</detail>
+   </trophy>
+   <trophy id="014">
+    <name>Herói pra toda orbra</name>
+    <detail>Atinja o nível 50 da Corrida Híbrida</detail>
+   </trophy>
+   <trophy id="015">
+    <name>Olhe só o que você fez...</name>
+    <detail>Assista um replay com mais de 50 tentativas</detail>
+   </trophy>
+
+
+
+
+   <trophy id="000">
+    <name>Eroe in Formazione</name>
+    <detail>Completa Capitolo 2</detail>
+   </trophy>
+   <trophy id="001">
+    <name>Pericolo in Vista</name>
+    <detail>Completa Capitolo 4</detail>
+   </trophy>
+   <trophy id="002">
+    <name>La Fine?</name>
+    <detail>Concludi la storia</detail>
+   </trophy>
+   <trophy id="003">
+    <name>Completa capitolo 7</name>
+    <detail>Shenanigans!</detail>
+   </trophy>
+   <trophy id="004">
+    <name>Taglia lo Spago</name>
+    <detail>Completa un livello bungee con 3 alleati morti</detail>
+   </trophy>
+   <trophy id="005">
+    <name>Artiglio</name>
+    <detail>Ottieni 500k nella modalità arcade</detail>
+   </trophy>
+   <trophy id="006">
+    <name>Doppio Artiglio</name>
+    <detail>Ottieni 1.5 milioni nella modalità arcade</detail>
+   </trophy>
+   <trophy id="007">
+    <name>Noob</name>
+    <detail>Muori 1337 volte</detail>
+   </trophy>
+   <trophy id="008">
+    <name>Ma L'hai Visto!?</name>
+    <detail>Arriva al livello 20 mentre sei invisibile in Escalation</detail>
+   </trophy>
+   <trophy id="009">
+    <name>La fine Dell'Infinitezza</name>
+    <detail>Sblocca tutti i giochi in modalità arcade</detail>
+   </trophy>
+   <trophy id="010">
+    <name>La Mia Barba è Impenetrabile</name>
+    <detail>Completa un capitolo senza morire</detail>
+   </trophy>
+   <trophy id="011">
+    <name>Quel livello era una Follia!</name>
+    <detail>Salva un codice livello</detail>
+   </trophy>
+   <trophy id="012">
+    <name>Scommetto hai Perso il Conto</name>
+    <detail>Questo è il numero degli ostacoli già visti</detail>
+   </trophy>
+   <trophy id="013">
+    <name>Ho Comprato il Potere!</name>
+    <detail>Acquista il tuo primo power-up!</detail>
+   </trophy>
+   <trophy id="014">
+    <name>Jack di Tutti Gli Eroi</name>
+    <detail>Raggiungi il livello 50 Corsa ibrida</detail>
+   </trophy>
+   <trophy id="015">
+    <name>Guarda Che Hai Fatto!</name>
+    <detail>Guarda un replay con 50+ tentativi</detail>
+   </trophy>
+
+
+
+
+   <trophy id="000">
+    <name>Héros en Construction</name>
+    <detail>Complète le niveau 2</detail>
+   </trophy>
+   <trophy id="001">
+    <name>Danger Droit Devant</name>
+    <detail>Complète le niveau 4</detail>
+   </trophy>
+   <trophy id="002">
+    <name>La Fin?</name>
+    <detail>Termine L'histoire</detail>
+   </trophy>
+   <trophy id="003">
+    <name>Complète le niveau 7</name>
+    <detail>Balivernes!</detail>
+   </trophy>
+   <trophy id="004">
+    <name>Coupe la Corde</name>
+    <detail>Termine un niveau en mode lié avec 3 partenaires morts.</detail>
+   </trophy>
+   <trophy id="005">
+    <name>Assure!</name>
+    <detail>Fais 500 000 en mode arcade</detail>
+   </trophy>
+   <trophy id="006">
+    <name>Assure Encore Plus!</name>
+    <detail>Fais 1.5 millions en mode arcade</detail>
+   </trophy>
+   <trophy id="007">
+    <name>Novice</name>
+    <detail>Meurs 1337 fois</detail>
+   </trophy>
+   <trophy id="008">
+    <name>Est-ce Que tu as vu Ҫa !?</name>
+    <detail>Atteint le niveau 20 en restant invisible en escalade.</detail>
+   </trophy>
+   <trophy id="009">
+    <name>La Fin de l'infini</name>
+    <detail>Débloque tous les jeux arcade</detail>
+   </trophy>
+   <trophy id="010">
+    <name>Ma Barbe est Impénétrable</name>
+    <detail>Complète un niveau sans mourir</detail>
+   </trophy>
+   <trophy id="011">
+    <name>Ce Niveau Était Complètement Dingue!</name>
+    <detail>Sauvegarder un code de niveau</detail>
+   </trophy>
+   <trophy id="012">
+    <name>Je Parie que Tu as Perdu le Compte</name>
+    <detail>C'est combien d'obstacles tu as déjà vu</detail>
+   </trophy>
+   <trophy id="013">
+    <name>J'ai Acheté le Pouvoir!</name>
+    <detail>Achète ton premier power-up</detail>
+   </trophy>
+   <trophy id="014">
+    <name>Héros multifonction</name>
+    <detail>Atteindre le Niveau 50 Rush Hybride </detail>
+   </trophy>
+   <trophy id="015">
+    <name>Regarde ce que tu as fait</name>
+    <detail>Regarde un Replay avec au Moins 50 Tentatives</detail>
+   </trophy>
+
+
+
+
+   <trophy id="000">
+    <name>Heroe en Proceso</name>
+    <detail>Capítulo 2 Completo</detail>
+   </trophy>
+   <trophy id="001">
+    <name>Peligro Adelante</name>
+    <detail>Capítulo 4 Completado</detail>
+   </trophy>
+   <trophy id="002">
+    <name>El Fin?</name>
+    <detail>Termina la Historia</detail>
+   </trophy>
+   <trophy id="003">
+    <name>Capítulo 7 Completo</name>
+    <detail>Shenanigans!</detail>
+   </trophy>
+   <trophy id="004">
+    <name>Cut the Cord</name>
+    <detail>Termina un nivel bungee level con 3 aliados muertos</detail>
+   </trophy>
+   <trophy id="005">
+    <name>Clutch</name>
+    <detail>Logra 500k en Arcade </detail>
+   </trophy>
+   <trophy id="006">
+    <name>Doble Clutch</name>
+    <detail>Logra 1.5 million en arcade</detail>
+   </trophy>
+   <trophy id="007">
+    <name>Novato</name>
+    <detail>Muere 1337 veces</detail>
+   </trophy>
+   <trophy id="008">
+    <name>Viste Eso!?</name>
+    <detail>Lleva a nivel 20 mientras Escaltion esta invisible</detail>
+   </trophy>
+   <trophy id="009">
+    <name>El Final de la Infinidad</name>
+    <detail>Desbloquea todos los arcade </detail>
+   </trophy>
+   <trophy id="010">
+    <name>Mi Barba es Impenetrable </name>
+    <detail>Termina un capitulo sin morir </detail>
+   </trophy>
+   <trophy id="011">
+    <name>Ese Nivel Estuvo!</name>
+    <detail>Guardar un Código de Nivel</detail>
+   </trophy>
+   <trophy id="012">
+    <name>Apuesto a Que Perdió la Cuenta</name>
+    <detail>Así es Como Muchos Obstáculos Ya ha Visto</detail>
+   </trophy>
+   <trophy id="013">
+    <name>He Comprador el Poder! </name>
+    <detail>Compra tu primer power-up</detail>
+   </trophy>
+   <trophy id="014">
+    <name>Aprendiz de todos los Heroes</name>
+    <detail>Llega a Hybrid Rush Nivel 50</detail>
+   </trophy>
+   <trophy id="015">
+    <name>Mira lo que has hecho</name>
+    <detail>Mira un Replay con Mas de 50 Intentos </detail>
+   </trophy>
+
+
+
+
+   <trophy id="000">
+    <name>Герой почти готов</name>
+    <detail>Глава 2 окончена</detail>
+   </trophy>
+   <trophy id="001">
+    <name>Впереди опасность</name>
+    <detail>Глава 4 завершена</detail>
+   </trophy>
+   <trophy id="002">
+    <name>Конец?</name>
+    <detail>Окончил повесть</detail>
+   </trophy>
+   <trophy id="003">
+    <name>Глава 7 окончена</name>
+    <detail>Лапша!</detail>
+   </trophy>
+   <trophy id="004">
+    <name>Перережь нить</name>
+    <detail>Окончил уровень бандажи, потерявши трёх союзников</detail>
+   </trophy>
+   <trophy id="005">
+    <name>Классно</name>
+    <detail>Набрал 500 тысяч очков в аркадной игре</detail>
+   </trophy>
+   <trophy id="006">
+    <name>В двойне классно</name>
+    <detail>Набрал 1,5 млн. очков в аркадной игре</detail>
+   </trophy>
+   <trophy id="007">
+    <name>Нуб</name>
+    <detail>Помер 1337 раза</detail>
+   </trophy>
+   <trophy id="008">
+    <name>Видал!?</name>
+    <detail>20 уровень достигнуть с применением невидимости в обострение</detail>
+   </trophy>
+   <trophy id="009">
+    <name>Конец бесконечности</name>
+    <detail>Все аркадные игры открыты</detail>
+   </trophy>
+   <trophy id="010">
+    <name>Борода моя непроницаема</name>
+    <detail>Окончить главу не погибнув</detail>
+   </trophy>
+   <trophy id="011">
+    <name>Этот уровень был убойным!</name>
+    <detail>Сохранить код уровня</detail>
+   </trophy>
+   <trophy id="012">
+    <name>Небось просчитался</name>
+    <detail>Вот сколько препятствий ты уже видел</detail>
+   </trophy>
+   <trophy id="013">
+    <name>Со мною сила!</name>
+    <detail>Купил первую подзарядку</detail>
+   </trophy>
+   <trophy id="014">
+    <name>Многосторонний герой</name>
+    <detail>Достигнут 50 уровень смешанного рывка</detail>
+   </trophy>
+   <trophy id="015">
+    <name>Смотри что натворил</name>
+    <detail>Просмотрел запись с 50+ попытками</detail>
+   </trophy>
+
+
+
+
+   <trophy id="000">
+    <name>제작의 영웅</name>
+    <detail>제 2 장 완료</detail>
+   </trophy>
+   <trophy id="001">
+    <name>앞서 위험</name>
+    <detail>제 4 장 완료</detail>
+   </trophy>
+   <trophy id="002">
+    <name>끝?</name>
+    <detail>이야기를 끝내</detail>
+   </trophy>
+   <trophy id="003">
+    <name>제 7 장을 완료</name>
+    <detail>헛소리!</detail>
+   </trophy>
+   <trophy id="004">
+    <name>코드를 잘라</name>
+    <detail>3 죽은 아군과 번지 수준을 마침</detail>
+   </trophy>
+   <trophy id="005">
+    <name>클러치</name>
+    <detail>아케이드 게임의 점수 50 만</detail>
+   </trophy>
+   <trophy id="006">
+    <name>더블 클러치</name>
+    <detail>아케이드 게임의 점수 1,500,000</detail>
+   </trophy>
+   <trophy id="007">
+    <name>멍청한</name>
+    <detail>1337 시간 다이</detail>
+   </trophy>
+   <trophy id="008">
+    <name>당신은 그것을 봤어요!?</name>
+    <detail>20 레벨에받을 강화에 보이지 않는 동안</detail>
+   </trophy>
+   <trophy id="009">
+    <name>무한대의 끝</name>
+    <detail>모든 아케이드 게임을 잠금 해제</detail>
+   </trophy>
+   <trophy id="010">
+    <name>내 수염이 뚫리지입니다</name>
+    <detail>죽지 않고 장을 완료</detail>
+   </trophy>
+   <trophy id="011">
+    <name>그 수준은 제정신이 아니라고!</name>
+    <detail>레벨 코드를 저장</detail>
+   </trophy>
+   <trophy id="012">
+    <name>당신이 잊었 겠지</name>
+    <detail>이렇게하면 이미 본 얼마나 많은 장애물입니다</detail>
+   </trophy>
+   <trophy id="013">
+    <name>난 힘을 구입 한!</name>
+    <detail>첫 번째 powerup 구매</detail>
+   </trophy>
+   <trophy id="014">
+    <name>모든 영웅의 잭</name>
+    <detail>하이브리드 러쉬 레벨 50 달성</detail>
+   </trophy>
+   <trophy id="015">
+    <name>당신이 한 짓을 봐라</name>
+    <detail>50 + 시도와 재생보기</detail>
+   </trophy>
+
+
+
+
+   <trophy id="000">
+    <name>在本作中的英雄</name>
+    <detail>完成第2章</detail>
+   </trophy>
+   <trophy id="001">
+    <name>前面危险</name>
+    <detail>完成第4章</detail>
+   </trophy>
+   <trophy id="002">
+    <name>到底是什么？</name>
+    <detail>不完的故事</detail>
+   </trophy>
+   <trophy id="003">
+    <name>完成第7章</name>
+    <detail>有心计！</detail>
+   </trophy>
+   <trophy id="004">
+    <name>切断电源线</name>
+    <detail>完成一个的蹦极水平与3人死亡盟国</detail>
+   </trophy>
+   <trophy id="005">
+    <name>离合器</name>
+    <detail>分数500K街机游戏</detail>
+   </trophy>
+   <trophy id="006">
+    <name>双离合器</name>
+    <detail>分数150万街机游戏</detail>
+   </trophy>
+   <trophy id="007">
+    <name>新手上路</name>
+    <detail>模具1337次</detail>
+   </trophy>
+   <trophy id="008">
+    <name>你看到了吗？</name>
+    <detail>而无形的升级到20级</detail>
+   </trophy>
+   <trophy id="009">
+    <name>无穷的终结</name>
+    <detail>每街机游戏解锁</detail>
+   </trophy>
+   <trophy id="010">
+    <name>我的胡子是牢不可破的</name>
+    <detail>完成一章，没有死亡</detail>
+   </trophy>
+   <trophy id="011">
+    <name>这个水平是疯了！</name>
+    <detail>保存代码</detail>
+   </trophy>
+   <trophy id="012">
+    <name>我敢打赌，你记不清</name>
+    <detail>这是多少障碍，你已经看到了</detail>
+   </trophy>
+   <trophy id="013">
+    <name>我已经买了的力量！</name>
+    <detail>买你的第一次通电</detail>
+   </trophy>
+   <trophy id="014">
+    <name>杰克的所有英雄</name>
+    <detail>混合拉什水平达到50</detail>
+   </trophy>
+   <trophy id="015">
+    <name>看你做了什么</name>
+    <detail>观看回放录像时，50 +的尝试</detail>
+   </trophy>
+
+
+

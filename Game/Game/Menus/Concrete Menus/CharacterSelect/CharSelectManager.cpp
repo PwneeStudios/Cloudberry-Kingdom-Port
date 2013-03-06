@@ -129,6 +129,11 @@ boost::shared_ptr<Set<boost::shared_ptr<Hat> > > CharacterSelectManager::Availab
 
 	void CharacterSelectManager::Start( const boost::shared_ptr<GUI_Panel> &Parent, bool QuickJoin )
 	{
+		if ( !QuickJoin )
+		{
+			CloudberryKingdomGame::SetPresence( Presence_TitleScreen );
+		}
+
         FakeHide = false;
         CharacterSelectManager::QuickJoin = QuickJoin;
 
@@ -208,8 +213,33 @@ boost::shared_ptr<Set<boost::shared_ptr<Hat> > > CharacterSelectManager::Availab
 		game->KillToDo( std::wstring( L"StartCharSelect" ) );
 
 		game->RemoveGameObjects( GameObject::Tag_CHAR_SELECT );
-		Backdrop->Release();
+		if ( Backdrop != 0 ) Backdrop->Release();
 	}
+
+     /*   public static void SuddenCleanup()
+        {
+            IsShowing = false;
+            FakeHide = false;
+
+            for (int i = 0; i < 4; i++)
+            {
+                if (CharSelect[i] != null)
+                {
+                    CharSelect[i].Release();
+                    CharSelect[i] = null;
+                }
+            }
+
+            var game = Tools.CurGameData;
+
+            game.KillToDo("StartCharSelect");
+
+            game.RemoveGameObjects(GameObject.Tag.CharSelect);
+            if (Backdrop != null) Backdrop.Release();
+
+            OnDone = null;
+            CharacterSelectManager.ParentPanel = null;
+        }*/
 
 	bool CharacterSelectManager::AllExited()
 	{

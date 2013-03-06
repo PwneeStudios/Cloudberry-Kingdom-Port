@@ -17,10 +17,12 @@ namespace CloudberryKingdom
 	int LoadingScreen::DefaultMinLoadLength;
 	int LoadingScreen::MinLoadLength;
 
+	const int LoadingScreen::DrawCount_Max = 60 * 60 - 300; // 60 seconds, minus fade time and safety margin
 
 	void LoadingScreen::MakeFake()
 	{
 		Fake = true;
+		FadeAlpha = 1.2f;
 	}
 
 	void LoadingScreen::AddHint( const std::wstring &hint, int extra_wait )
@@ -66,15 +68,15 @@ namespace CloudberryKingdom
 		else
 			type = Tools::CurGameData->DefaultHeroType;
 
-		if ( boost::dynamic_pointer_cast<BobPhsxSpaceship>( type ) != 0 )
-		{
-			TextObject = boost::make_shared<EzText>( std::wstring( L"?" ), Resources::Font_Grobold42, true, true );
-			CkColorHelper::_x_x_HappyBlueColor( TextObject );
-			TextObject->setScale( TextObject->getScale() * 1.25f );
-			TextObject->FixedToCamera = true;
-			TextObject->_Pos = Vector2( 11, 170 );
-		}
-		else
+		//if ( boost::dynamic_pointer_cast<BobPhsxSpaceship>( type ) != 0 )
+		//{
+		//	TextObject = boost::make_shared<EzText>( std::wstring( L"?" ), Resources::Font_Grobold42, true, true );
+		//	CkColorHelper::_x_x_HappyBlueColor( TextObject );
+		//	TextObject->setScale( TextObject->getScale() * 1.25f );
+		//	TextObject->FixedToCamera = true;
+		//	TextObject->_Pos = Vector2( 11, 170 );
+		//}
+		//else
 		{
 			CenterObject = boost::make_shared<ObjectClass>( type->Prototype->PlayerObject, false, false );
 			ObjectClass_PostConstruct_3params( CenterObject, type->Prototype->PlayerObject, false, false );
@@ -107,7 +109,7 @@ namespace CloudberryKingdom
 
 	void LoadingScreen::Start()
 	{
-		//MinLoadLength = 10000;
+		DrawCount = 0;
 
 		MinLoading = MinLoadLength;
 		MinLoadLength = DefaultMinLoadLength;
@@ -125,13 +127,18 @@ namespace CloudberryKingdom
 	{
 		MinLoading--;
 
-		if ( Fake && MinLoading == 0 )
+		if ( Fake && MinLoading <= 0 && ( Resources::FinalLoadDone || DrawCount > DrawCount_Max ) )
 			End();
+
+		if ( Fake && FadeAlpha > -.1f && !Fade )
+		{
+			FadeAlpha -= .07f;
+		}
 
 		if ( Fade && MinLoading <= 0 )
 		{
 			FadeAlpha += .07f;
-			if ( FadeAlpha > 1.2f )
+            if ( Fake && FadeAlpha > 1.4f || !Fake && FadeAlpha > 1.2f )
 				Tools::ShowLoadingScreen = false;
 		}
 		BlackQuad->Quad_Renamed.SetColor( Color( 0.f, 0.f, 0.f, FadeAlpha ) );
@@ -145,6 +152,8 @@ namespace CloudberryKingdom
 
 	void LoadingScreen::Draw( const boost::shared_ptr<Camera> &cam )
 	{
+		DrawCount++;
+
 		Tools::Device->Clear( Color::Black );
 		BackgroundQuad->FullScreen( cam );
 		BackgroundQuad->Scale( 1.25f );
@@ -175,6 +184,8 @@ namespace CloudberryKingdom
 
 	void LoadingScreen::InitializeInstanceFields()
 	{
+		DrawCount = 0;
+
 		MinLoading = 0;
 		Fade = false;
 		FadeAlpha = 0;

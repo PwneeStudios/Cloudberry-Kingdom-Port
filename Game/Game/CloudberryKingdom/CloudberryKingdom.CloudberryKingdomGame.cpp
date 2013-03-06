@@ -1,3 +1,7 @@
+// Use this to test non-PC verion
+//#undef PC_VERSION
+//#define NOT_PC
+
 #include <global_header.h>
 
 #include <Core.h>
@@ -16,6 +20,8 @@
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 #include <MasterHack.h>
 #include <Utility/Log.h>
+#include <Utility/ConsoleInformation.h>
+#include <Utility/Error.h>
 #include <Core\Tools\Set.h>
 
 #include "Game/Tilesets/Backgrounds/_Code/CloudberryKingdom.Background.h"
@@ -29,6 +35,21 @@
 #ifdef BOOST_BIN
 #include <BoostBin.h>
 #endif
+
+#include <stdio.h>
+#include <string.h>
+
+#ifdef WINDOWS
+	#include <malloc.h>
+	#include <crtdbg.h>
+	//#include <dbgint.h>
+#endif
+
+#ifdef PS3
+	#include <Utility/NetworkPS3.h>
+	#include <netex/libnetctl.h>
+#endif
+
 
 namespace CloudberryKingdom
 {
@@ -94,6 +115,7 @@ namespace CloudberryKingdom
 		CampaignHelper::InitializeStatics();
 
 		Awardments::InitializeStatics();
+		MainVideo::InitializeStatics();
 	}
 
 	void CloudberryKingdomGame::StaticIntializer_AfterResourcesLoad()
@@ -165,7 +187,7 @@ namespace CloudberryKingdom
 		Challenge_TimeCrisis::InitializeStatics();
 		Challenge_HeroRush::InitializeStatics();
 		Challenge_HeroRush2::InitializeStatics();
-		MainVideo::InitializeStatics();
+		Challenge_StoryMode::InitializeStatics();
 		ActionGameData::InitializeStatics();
 
 		// Menu::DefaultMenuInfo
@@ -229,6 +251,95 @@ namespace CloudberryKingdom
 #endif
 	}
 
+
+
+
+
+
+		bool CloudberryKingdomGame::ChoseNotToSave = false;
+		bool CloudberryKingdomGame::PastPressStart = false;
+		bool CloudberryKingdomGame::CanSave()
+		{
+			if ( getIsDemo() ) return false;
+
+			if ( ChoseNotToSave ) return false;
+
+			if ( !PastPressStart ) return false;
+
+			return true;
+		}
+
+		bool CloudberryKingdomGame::CanSave( PlayerIndex index )
+		{
+			if ( !CanSave() ) return false;
+
+			// Check if saving is ready
+
+			return true;
+		}
+
+		void CloudberryKingdomGame::ShowError_CanNotSaveNoDevice()
+		{
+			//ShowError(Localization::Words_Err_StorageDeviceRequired, Localization::Words_Err_NoSaveDevice, Localization::Words_Err_Ok, null);
+		}
+
+		bool CloudberryKingdomGame::ProfilesAvailable()
+		{
+			// Check if the main player is signed in
+			
+			return true;
+		}
+
+		bool CloudberryKingdomGame::OnlineFunctionalityAvailable()
+        {
+			// Check that online network is available
+
+#ifdef PS3
+			return IsNPAvailable();
+#else
+			return true;
+			//return false;
+#endif
+		}
+
+		void CloudberryKingdomGame::BeginShowMarketplace()
+		{
+            if ( CloudberryKingdomGame::OnlineFunctionalityAvailable() )
+            {
+				// Show the marketplace
+            }
+            else
+            {
+                CloudberryKingdomGame::ShowError_MustBeSignedIn( Localization::Words_Err_MustBeSignedIn );
+            }
+		}
+
+		Presence CloudberryKingdomGame::CurrentPresence = Presence_TitleScreen;
+		void CloudberryKingdomGame::SetPresence(Presence presence)
+		{
+			CurrentPresence = presence;
+
+			// Set the presence for the gamer
+		}
+
+		int CloudberryKingdomGame::Freeplay_Count = 0;
+		int CloudberryKingdomGame::Freeplay_Max = 3;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	CloudberryKingdomGame::ExitProxy::ExitProxy( const boost::shared_ptr<CloudberryKingdomGame> &ckg )
 	{
 		this->ckg = ckg;
@@ -275,6 +386,8 @@ Version CloudberryKingdomGame::GameVersion = Version( 0, 2, 4 );
 		//bool CloudberryKingdomGame::HideLogos = true;
 		//bool CloudberryKingdomGame::LockCampaign = true;
 		//bool CloudberryKingdomGame::SimpleMainMenu = true;
+		//bool CloudberryKingdomGame::PS3MainMenu = false;
+		//MainMenuTypes CloudberryKingdomGame::MainMenuType = MainMenuTypes_PC;
 		//bool CloudberryKingdomGame::SimpleLeaderboards = true;
 		//bool CloudberryKingdomGame::FakeAwardments = false;
 
@@ -282,24 +395,29 @@ Version CloudberryKingdomGame::GameVersion = Version( 0, 2, 4 );
 		bool CloudberryKingdomGame::HideLogos = false;
 		bool CloudberryKingdomGame::LockCampaign = false;
 		bool CloudberryKingdomGame::SimpleMainMenu = true;
+		//MainMenuTypes CloudberryKingdomGame::MainMenuType = MainMenuTypes_PC;
+		MainMenuTypes CloudberryKingdomGame::MainMenuType = MainMenuTypes_PS3;
 		bool CloudberryKingdomGame::SimpleLeaderboards = false;
 		bool CloudberryKingdomGame::FakeAwardments = false;
 #elif XBOX
 		bool CloudberryKingdomGame::HideLogos = false;
 		bool CloudberryKingdomGame::LockCampaign = false;
 		bool CloudberryKingdomGame::SimpleMainMenu = false;
+		MainMenuTypes CloudberryKingdomGame::MainMenuType = MainMenuTypes_Xbox;
 		bool CloudberryKingdomGame::SimpleLeaderboards = false;
 		bool CloudberryKingdomGame::FakeAwardments = false;
 #elif CAFE
 		bool CloudberryKingdomGame::HideLogos = false;
 		bool CloudberryKingdomGame::LockCampaign = false;
 		bool CloudberryKingdomGame::SimpleMainMenu = true;
+		MainMenuTypes CloudberryKingdomGame::MainMenuType = MainMenuTypes_WiiU;
 		bool CloudberryKingdomGame::SimpleLeaderboards = true;
 		bool CloudberryKingdomGame::FakeAwardments = false;
 #elif PS3
 		bool CloudberryKingdomGame::HideLogos = false;
 		bool CloudberryKingdomGame::LockCampaign = false;
-		bool CloudberryKingdomGame::SimpleMainMenu = false;
+		bool CloudberryKingdomGame::SimpleMainMenu = true;
+		MainMenuTypes CloudberryKingdomGame::MainMenuType = MainMenuTypes_PS3;
 		bool CloudberryKingdomGame::SimpleLeaderboards = false;
 		bool CloudberryKingdomGame::FakeAwardments = false;
 #endif
@@ -312,7 +430,7 @@ Version CloudberryKingdomGame::GameVersion = Version( 0, 2, 4 );
 #if defined(DEBUG)
         bool CloudberryKingdomGame::AlwaysGiveTutorials = true;
         bool CloudberryKingdomGame::Unlock_Customization = true;
-        bool CloudberryKingdomGame::Unlock_Levels = false;
+        bool CloudberryKingdomGame::Unlock_Levels = true;
 #else
         bool CloudberryKingdomGame::AlwaysGiveTutorials = false;
         bool CloudberryKingdomGame::Unlock_Customization = true;
@@ -322,13 +440,12 @@ Version CloudberryKingdomGame::GameVersion = Version( 0, 2, 4 );
         bool FakeDemo = false;
         bool CloudberryKingdomGame::getIsDemo()
         {
-//#ifdef XBOX
-//                return Guide.IsTrialMode;
-//#endif
-                return false;
-        }
+			if (FakeDemo) return true;
 
-        static void OfferToBuy(SignedInGamer gamer)
+			return false;
+		}
+
+        static void OfferToBuy()
         {
 //#ifdef XBOX
 //            if (gamer.Privileges.AllowPurchaseContent)
@@ -461,12 +578,15 @@ float CloudberryKingdomGame::fps = 0;
 		// Try to load these now.
 		RezData rez;
 
-		//PlayerManager::SavePlayerData = new _SavePlayerData();
-		//PlayerManager::SavePlayerData.ContainerName = "PlayerData";
-		//PlayerManager::SavePlayerData.FileName = "PlayerData.hsc";
-		//PlayerManager::SaveRezAndKeys();
-		//rez = PlayerManager::LoadRezAndKeys();
-		//Tools::Warning();
+		//PlayerManager::Players[0] = boost::make_shared<PlayerData>();
+		//PlayerManager::Players[0]->Init();
+
+		//PlayerManager::getPlayer()->ContainerName = L"SaveData";
+		//PlayerManager::getPlayer()->FileName = L"SaveData->bam";
+		//PlayerManager::getPlayer()->Load( /*PlayerManager::getPlayer()->MyPlayerIndex*/ );
+
+		//SaveGroup::LoadAll();
+		//PlayerManager::getPlayer()->Load( /*PlayerIndex_One*/ );
 
 		rez = PlayerManager::LoadRezAndKeys();
 
@@ -660,10 +780,23 @@ float CloudberryKingdomGame::fps = 0;
 		SignedInGamer::SignedOut += boost::make_shared<EventHandler<SignedOutEventArgs*> >( shared_from_this(), &CloudberryKingdomGame::SignedInGamer_SignedOut );
 	#endif
 
+		
+		ConsoleRegion region = GetConsoleRegion();
+
+#if PS3
+		CloudberryKingdomGame::AsianButtonSwitch = IsAsianButtonConfiguration();
+#else
+		CloudberryKingdomGame::AsianButtonSwitch = false;
+#endif
+
 		// FIXME: Start videos later.
 		if (!HideLogos)
 		{
-			MainVideo::StartVideo_CanSkipIfWatched( std::wstring( L"LogoSalad" ) );
+			// FIXME: Keep playing logo salad.
+			if( region == ConsoleRegion_USA )
+				MainVideo::StartVideo_CanSkipIfWatched( std::wstring( L"LogoSalad" ) );
+			else
+				MainVideo::StartVideo_CanSkipIfWatched( std::wstring( L"LogoSalad_ESRB" ) );
 		}
 	}
 
@@ -727,6 +860,18 @@ float CloudberryKingdomGame::fps = 0;
 			Stats();
 		}
 #endif
+
+        // Write to leaderboard
+        Tools::Warning();
+#ifdef PC_VERSION
+        if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_J ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_J ) )
+#else
+		if ( ButtonCheck::State( ControllerButtons_RJ, -2 ).Down && ButtonCheck::State( ControllerButtons_LS, -2).Pressed )
+#endif
+        {
+            boost::shared_ptr<ScoreEntry> se = boost::make_shared<ScoreEntry>( std::wstring( L"FakeName Nahnah!" ), 0, 100, 200, 300, 400, 500, 600 );
+            Leaderboard::WriteToLeaderboard( se );
+        }
 
         // Give 100,000 points to each player
 #ifdef PC_VERSION
@@ -945,6 +1090,239 @@ float CloudberryKingdomGame::fps = 0;
 		//Tools::GameClass.IsFixedTimeStep = true;
 	}
 
+
+
+
+
+
+
+		bool CloudberryKingdomGame::ShowMarketplace = false;
+
+#if XBOX
+        bool CloudberryKingdomGame::ShowKeyboard = false;
+        bool CloudberryKingdomGame::KeyboardIsDone = false;
+		bool CloudberryKingdomGame::ShowAchievements = false;
+        PlayerIndex CloudberryKingdomGame::ShowFor = PlayerIndex.One;
+
+		void CloudberryKingdomGame::BeginShowAchievements()
+		{
+			ShowAchievements = false;
+#if XDK
+            try
+            {
+                GuideExtensions.ShowAchievements(ShowFor);
+            }
+            catch
+            {
+            }
+#endif
+		}
+#endif
+
+        bool CloudberryKingdomGame::ShowErrorMessage;
+
+		void CloudberryKingdomGame::ShowError_LoadError()
+		{
+#if PC_VERSION
+#else
+			ShowError(Localization::Words_Err_CorruptLoadHeader, Localization::Words_Err_CorruptLoad, Localization::Words_Err_Ok);
+#endif
+		}
+
+		void CloudberryKingdomGame::ShowError_MustBeSignedIn(Localization::Words word)
+		{
+#if PC_VERSION
+#else
+			ShowError(Localization::Words_Err_MustBeSignedIn_Header, word, Localization::Words_Err_Ok);
+#endif
+		}
+
+#ifdef PS3
+		void DecideToSignInCallback( bool yes )
+		{
+			if( yes )
+			{
+				CellNetCtlNetStartDialogParam param;
+				param.size = sizeof( param );
+				param.type = CELL_NET_CTL_NETSTART_TYPE_NP;
+				param.cid = 0; // Unused.
+				int ret = cellNetCtlNetStartDialogLoadAsync( &param );
+				if( ret < 0 )
+					LOG.Write( "Failed to start network connection dialog: 0x%x\n", ret );
+			}
+		}
+#endif
+
+        void CloudberryKingdomGame::ShowError_MustBeSignedInToLive(Localization::Words word)
+        {
+#if PC_VERSION
+#elif PS3
+			DisplayError( ErrorType( WstringToUtf8( Localization::WordString( Localization::Words_Err_PS3_PsnRequired_AskToSignIn ) ),
+				DecideToSignInCallback, ErrorType::YESNO ) );
+#else
+            ShowError(Localization::Words_Err_MustBeSignedInToLive_Header, word, Localization::Words_Err_Ok);
+#endif
+        }
+
+        void CloudberryKingdomGame::ShowError_MustBeSignedInToLiveForLeaderboard()
+        {
+#if PC_VERSION
+#elif PS3
+			DisplayError( ErrorType( WstringToUtf8( Localization::WordString( Localization::Words_Err_PS3_PsnRequired_WillUploadLater ) ) ) );
+#else
+            ShowError(Localization::Words_Err_MustBeSignedInToLive_Header, Localization::Words_Err_MustBeSignedInToLiveForLeaderboards, Localization::Words_Err_Ok);
+#endif
+        }
+
+        bool CloudberryKingdomGame::IsNetworkCableUnplugged()
+        {
+#if XDK
+            return GuideExtensions.IsNetworkCableUnplugged;
+#else
+            return true;
+#endif
+        }
+
+        void CloudberryKingdomGame::ShowError(Localization::Words Header, Localization::Words Text, Localization::Words Option1/*, AsyncCallback callback*/)
+        {
+#if XBOX
+            ShowErrorMessage = true;
+
+            Err_Header = Header;
+            Err_Text = Text;
+            //Err_Callback = callback;
+            Err_Options.clear();
+			Err_Options.push_back( Localization::WordString(Option1) );
+#elif PS3
+			DisplayError( ErrorType( WstringToUtf8( Localization::WordString(Text) ) ) );
+#endif
+        }
+
+        Localization::Words CloudberryKingdomGame::Err_Header, CloudberryKingdomGame::Err_Text;
+        std::vector<std::wstring> CloudberryKingdomGame::Err_Options;
+        //AsyncCallback Err_Callback;
+
+        void CloudberryKingdomGame::_ShowError()
+        {
+            ShowErrorMessage = false;
+
+#if XDK || XBOX
+            try
+            {
+                Guide.BeginShowMessageBox(Localization::WordString(Err_Header), Localization::WordString(Err_Text), Err_Options,
+                    0, MessageBoxIcon.None, Err_Callback, null);
+            }
+            catch (Exception e)
+            {
+            }
+#endif
+        }
+
+		bool CloudberryKingdomGame::DisconnectedController()
+		{
+#if PC_VERSION
+			return false;
+#endif
+			for (int i = 0; i < 4; i++)
+			{
+				if ( PlayerManager::Players[i] != 0 && PlayerManager::Players[i]->Exists && !Tools::GamepadState[i].IsConnected )
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+#if XBOX
+        bool ShowGamer;
+        PlayerIndex ShowGamer_Index;
+        Gamer ShowGamer_Gamer;
+        void CloudberryKingdomGame::ShowGamerCard(PlayerIndex player, Gamer gamer)
+        {
+            ShowGamer = true;
+            ShowGamer_Index = player;
+            ShowGamer_Gamer = gamer;
+        }
+
+        void CloudberryKingdomGame::BeginShowGamer()
+        {
+            ShowGamer = false;
+            if (ShowGamer_Gamer == null) return;
+
+            Guide.ShowGamerCard(ShowGamer_Index, ShowGamer_Gamer);
+        }
+#endif
+
+		bool CloudberryKingdomGame::getSuperPause()
+		{
+			return SmallErrorMessage != 0 || IsSystemMenuVisible();
+		}
+        boost::shared_ptr<SmallErrorMenu> CloudberryKingdomGame::SmallErrorMessage;
+        void CloudberryKingdomGame::ShowSmallError()
+        {
+            if ( SmallErrorMessage != 0 ) return;
+			if ( Tools::CurGameData == 0 ) return;
+
+            //SmallErrorMessage = MakeMagic( SmallErrorMenu, ( Localization::Err_ControllerNotConnected ) );
+			//Tools::CurGameData->AddGameObject( SmallErrorMessage );
+        }
+
+        bool CloudberryKingdomGame::CustomMusicPlaying = false;
+        void CloudberryKingdomGame::UpdateCustomMusic()
+        {
+			if( IsCustomMusicPlaying() )
+			{
+				CustomMusicPlaying = true;
+			}
+			else
+			{
+				if( CustomMusicPlaying )
+				{
+					if( Tools::SongWad )
+						Tools::SongWad->Restart( true, false );
+
+					CustomMusicPlaying = false;
+				}
+			}
+//#if XDK
+//            if (!MediaPlayer.GameHasControl)
+//            {
+//                CustomMusicPlaying = true;
+//            }
+//            else
+//            {
+//                if (CustomMusicPlaying)
+//                {
+//                    if (Tools::SongWad != null)
+//                        Tools::SongWad.Restart(true, false);
+//
+//                    CustomMusicPlaying = false;
+//                }
+//            }
+//#endif
+        }
+
+        /// <summary>
+        /// If a gamer has no save device selected, ask them to select one.
+        /// </summary>
+        void CloudberryKingdomGame::PromptForDeviceIfNoneSelected()
+        {
+            if ( CloudberryKingdomGame::getIsDemo() ) return;
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
 	void CloudberryKingdomGame::Draw( const boost::shared_ptr<GameTime> &gameTime )
 	{
 	#if defined(DEBUG_OBJDATA)
@@ -979,10 +1357,45 @@ float CloudberryKingdomGame::fps = 0;
 		UpdateFps( gameTime );
 
 		// Draw nothing if Xbox guide is up
-	#if defined(XBOX) || defined(XBOX_SIGNIN)
-		if ( Guide::IsVisible )
-			return;
-	#endif
+#if defined(XBOX) || defined(XBOX_SIGNIN)
+			if (Guide.IsVisible) { DrawNothing(); return; }
+            if (ShowKeyboard)
+            {
+                SaveLoadSeedMenu.BeginShowKeyboard();
+            }
+			else if (ShowAchievements)
+			{
+				BeginShowAchievements();
+			}
+            else if (ShowMarketplace)
+            {
+                BeginShowMarketplace();
+            }
+            else if (ShowErrorMessage)
+            {
+                _ShowError();
+            }
+            else if (ShowGamer)
+            {
+                BeginShowGamer();
+            }
+            else if (DisconnectedController())
+            {
+                ShowSmallError();
+                //ButtonCheck.UpdateControllerAndKeyboard_StartOfStep();
+                //return;
+            }
+            else
+            {
+                if (SmallErrorMessage != null)
+                {
+                    SmallErrorMessage.ReturnToCaller(true);
+                    SmallErrorMessage = null;
+                }
+            }
+#endif
+
+		UpdateCustomMusic();
 
 		// What to do
 		if ( LogoScreenUp )
@@ -1086,6 +1499,9 @@ float CloudberryKingdomGame::fps = 0;
 
 	void CloudberryKingdomGame::UpdateFps( const boost::shared_ptr<GameTime> &gameTime )
 	{
+		if( IsCustomMusicPlaying() )
+			CustomMusicPlaying = true;
+
 		// Track time, changes in time, and FPS
 		Tools::gameTime = gameTime;
 		DrawCount++;
@@ -1122,11 +1538,7 @@ float CloudberryKingdomGame::fps = 0;
 
 		Tools::QDrawer->SetInitialState();
 
-		// FIXME
-#if PC_VERSION
-#else
 		ComputeFire();
-#endif
 
 		Tools::EffectWad->SetCameraPosition( cameraPos );
 
@@ -1145,12 +1557,18 @@ float CloudberryKingdomGame::fps = 0;
 		{
 			if ( !Tools::CurGameData->Loading && Tools::CurLevel->PlayMode == 0 && Tools::CurGameData != 0 && !Tools::CurGameData->Loading && ( !Tools::CurGameData->PauseGame || CharacterSelectManager::IsShowing ) )
 			{
+#if PC_VERSION
+				Fireball::FireballTexture->_Tex = Tools::TextureWad->TextureList[0]->_Tex;
+				Fireball::EmitterTexture->_Tex = Tools::TextureWad->TextureList[0]->_Tex;
+				Fireball::FlameTexture->_Tex = Tools::TextureWad->TextureList[0]->_Tex;
+#else
 				// Compute fireballs textures
 				MyGraphicsDevice->BlendState = GfxBlendState_Additive;
 				Fireball::DrawFireballTexture( MyGraphicsDevice, Tools::EffectWad );
 				Fireball::DrawEmitterTexture( MyGraphicsDevice, Tools::EffectWad );
 
 				MyGraphicsDevice->BlendState = GfxBlendState_AlphaBlend;
+#endif
 			}
 		}
 	}
@@ -1206,6 +1624,7 @@ float CloudberryKingdomGame::fps = 0;
 
 	void CloudberryKingdomGame::BenchmarkAll()
 	{
+		/*
 		// Load art
 		Start2();
 
@@ -1293,6 +1712,7 @@ float CloudberryKingdomGame::fps = 0;
 		std::cout << std::endl;
 		std::cout << _T( "Total          " ) << Total << std::endl;
 		std::cout << _T( "" ) << std::endl;
+		*/
 	}
 
 	boost::shared_ptr<Stopwatch> CloudberryKingdomGame::stopwatch = 0;

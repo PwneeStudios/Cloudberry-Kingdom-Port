@@ -8,6 +8,7 @@
 
 namespace CloudberryKingdom
 {
+
 	struct EzEffect
 	{
 	

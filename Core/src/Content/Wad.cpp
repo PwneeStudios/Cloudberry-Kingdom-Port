@@ -15,7 +15,7 @@ Wad::Wad( const std::string &base ) :
 	Texture *pinkX = new Texture;
 	std::string path = base + "Art/default.png";
 	
-	pinkX->SetPath( path );
+	pinkX->SetPath( path ); 
 	pinkX->Load();
 	pinkX->GpuCreate();
 

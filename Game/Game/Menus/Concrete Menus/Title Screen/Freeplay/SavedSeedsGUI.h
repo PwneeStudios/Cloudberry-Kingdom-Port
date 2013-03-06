@@ -10,6 +10,11 @@ namespace CloudberryKingdom
 
 		virtual ~SavedSeedsGUI() { }
 
+		static bool RefreshList;
+
+		void ReInit();
+
+
 		struct PostMakeStandardLoadHelper : public Lambda_1<boost::shared_ptr<Level> >
 		{
 		

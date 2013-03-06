@@ -5,38 +5,14 @@
 
 namespace CloudberryKingdom
 {
-	struct PieceSeedData;
-}
 
-namespace CloudberryKingdom
-{
-	struct Level;
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			struct Vector2;
-		}
-	}
-}
-
-namespace CloudberryKingdom
-{
-	struct AutoGen_Parameters;
-}
-
-namespace CloudberryKingdom
-{
 	struct ParamInfo
 	{
 	
 		float MinValue, MaxValue, DefaultValue;
 
 		ParamInfo( float MinValue, float MaxValue, float DefaultValue );
+
 	};
 
 	struct FireSpinner_Parameters : public AutoGen_Parameters
@@ -86,12 +62,19 @@ namespace CloudberryKingdom
 		struct Cleanup_2Proxy : public LambdaFunc_1<Vector2, Vector2>
 		{
 		
-			boost::shared_ptr<FireSpinner_Parameters> Params;
+			virtual ~Cleanup_2Proxy()
+			{
+#ifdef BOOST_BIN
+				OnDestructor( typeid(this).name() );	
+#endif
+			}
 
+			boost::shared_ptr<FireSpinner_Parameters> Params;
 		
 			Cleanup_2Proxy( const boost::shared_ptr<FireSpinner_Parameters> &Params );
 
 			Vector2 Apply( const Vector2 &pos );
+
 		};
 
 	

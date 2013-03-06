@@ -156,6 +156,9 @@ namespace CloudberryKingdom
     boost::shared_ptr<BobPhsx> ArcadeMenu::BigBouncy;
     boost::shared_ptr<BobPhsx> ArcadeMenu::Ultimate;
 
+	const int ArcadeMenu::HighestLevelNeeded = 75;
+	boost::shared_ptr<BobPhsx> ArcadeMenu::HighestHero = boost::static_pointer_cast<BobPhsx>( BobPhsxWheel::getInstance() );
+
 	void ArcadeMenu::StaticInit()
 	{
         // Heroes
@@ -171,6 +174,7 @@ namespace CloudberryKingdom
         BobPhsxSmall::getInstance()->Id = 9;
         BobPhsxSpaceship::getInstance()->Id = 10;
         BobPhsxWheel::getInstance()->Id = 11;
+		BobPhsxRocketbox::getInstance()->Id = 15;
 
         ArcadeMenu::JetpackWheelie = BobPhsx::MakeCustom(Hero_BaseType_WHEEL, Hero_Shape_CLASSIC, Hero_MoveMod_JETPACK);
         ArcadeMenu::JetpackWheelie->Name = Localization::Words_JetpackWheelie;
@@ -198,27 +202,30 @@ namespace CloudberryKingdom
         ArcadeMenu::Ultimate->SetCustomPhsx( UltimatePhsx );
         ArcadeMenu::Ultimate->Id = 14;
 
+		boost::shared_ptr<BobPhsx> HighestHero = BobPhsxWheel::getInstance();
+
+
         HeroArcadeList = std::vector<std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> > >();
 
-			HeroArcadeList.push_back( std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> >( BobPhsxNormal::getInstance(),		 std::pair<boost::shared_ptr<BobPhsx>, int>( boost::shared_ptr<BobPhsx>(), 0 ) ) );
-			HeroArcadeList.push_back( std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> >( BobPhsxBig::getInstance(),         std::pair<boost::shared_ptr<BobPhsx>, int>( boost::static_pointer_cast<BobPhsx>( BobPhsxNormal::getInstance() ), 25 ) ) );
-			HeroArcadeList.push_back( std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> >( BobPhsxRocketbox::getInstance(),   std::pair<boost::shared_ptr<BobPhsx>, int>( boost::static_pointer_cast<BobPhsx>( BobPhsxBig::getInstance() ), 35 ) ) );
-			HeroArcadeList.push_back( std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> >( BobPhsxInvert::getInstance(),      std::pair<boost::shared_ptr<BobPhsx>, int>( boost::static_pointer_cast<BobPhsx>( BobPhsxRocketbox::getInstance() ), 35 ) ) );
-			HeroArcadeList.push_back( std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> >( BobPhsxJetman::getInstance(),      std::pair<boost::shared_ptr<BobPhsx>, int>( boost::static_pointer_cast<BobPhsx>( BobPhsxInvert::getInstance() ), 45 ) ) );
-			HeroArcadeList.push_back( std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> >( BobPhsxBouncy::getInstance(),      std::pair<boost::shared_ptr<BobPhsx>, int>( boost::static_pointer_cast<BobPhsx>( BobPhsxJetman::getInstance() ), 50 ) ) );
-			HeroArcadeList.push_back( std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> >( BobPhsxSpaceship::getInstance(),   std::pair<boost::shared_ptr<BobPhsx>, int>( boost::static_pointer_cast<BobPhsx>( BobPhsxBouncy::getInstance() ), 60 ) ) );
-			HeroArcadeList.push_back( std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> >( BobPhsxDouble::getInstance(),      std::pair<boost::shared_ptr<BobPhsx>, int>( boost::static_pointer_cast<BobPhsx>( BobPhsxSpaceship::getInstance() ), 70 ) ) );
-			HeroArcadeList.push_back( std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> >( BobPhsxWheel::getInstance(),       std::pair<boost::shared_ptr<BobPhsx>, int>( boost::static_pointer_cast<BobPhsx>( BobPhsxDouble::getInstance() ), 70 ) ) );
-			HeroArcadeList.push_back( std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> >( BobPhsxSmall::getInstance(),       std::pair<boost::shared_ptr<BobPhsx>, int>( boost::static_pointer_cast<BobPhsx>( BobPhsxWheel::getInstance() ), 80 ) ) );
+			HeroArcadeList.push_back( std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> >( BobPhsxNormal::getInstance(),		 std::pair<boost::shared_ptr<BobPhsx>, int>(	boost::shared_ptr<BobPhsx>(), 0 ) ) );
+			HeroArcadeList.push_back( std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> >( BobPhsxJetman::getInstance(),         std::pair<boost::shared_ptr<BobPhsx>, int>( boost::static_pointer_cast<BobPhsx>( BobPhsxNormal::getInstance() ), 25 ) ) );
+			HeroArcadeList.push_back( std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> >( BobPhsxBouncy::getInstance(),   std::pair<boost::shared_ptr<BobPhsx>, int>(		boost::static_pointer_cast<BobPhsx>( BobPhsxJetman::getInstance() ), 25 ) ) );
+			HeroArcadeList.push_back( std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> >( BobPhsxSpaceship::getInstance(),      std::pair<boost::shared_ptr<BobPhsx>, int>( boost::static_pointer_cast<BobPhsx>( BobPhsxBouncy::getInstance() ), 25 ) ) );
+			HeroArcadeList.push_back( std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> >( BobPhsxBig::getInstance(),      std::pair<boost::shared_ptr<BobPhsx>, int>(		boost::static_pointer_cast<BobPhsx>( BobPhsxNormal::getInstance() ), 50 ) ) );
+			HeroArcadeList.push_back( std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> >( BobPhsxSmall::getInstance(),      std::pair<boost::shared_ptr<BobPhsx>, int>(		boost::static_pointer_cast<BobPhsx>( BobPhsxBig::getInstance() ), 50 ) ) );
+			HeroArcadeList.push_back( std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> >( BobPhsxInvert::getInstance(),   std::pair<boost::shared_ptr<BobPhsx>, int>(		boost::static_pointer_cast<BobPhsx>( BobPhsxSmall::getInstance() ), 50 ) ) );
+			HeroArcadeList.push_back( std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> >( BobPhsxDouble::getInstance(),      std::pair<boost::shared_ptr<BobPhsx>, int>(	boost::static_pointer_cast<BobPhsx>( BobPhsxNormal::getInstance() ), 75 ) ) );
+			HeroArcadeList.push_back( std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> >( BobPhsxWheel::getInstance(),       std::pair<boost::shared_ptr<BobPhsx>, int>(	boost::static_pointer_cast<BobPhsx>( BobPhsxDouble::getInstance() ), 75 ) ) );
+			HeroArcadeList.push_back( std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> >( BobPhsxRocketbox::getInstance(),       std::pair<boost::shared_ptr<BobPhsx>, int>(boost::static_pointer_cast<BobPhsx>( HighestHero ), HighestLevelNeeded ) ) );
                 																																		     
-			HeroArcadeList.push_back( std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> >( JetpackWheelie ,                   std::pair<boost::shared_ptr<BobPhsx>, int>( boost::static_pointer_cast<BobPhsx>( BobPhsxSmall::getInstance() ), 100 ) ) );
+			HeroArcadeList.push_back( std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> >( JetpackWheelie ,                   std::pair<boost::shared_ptr<BobPhsx>, int>( boost::static_pointer_cast<BobPhsx>( BobPhsxNormal::getInstance() ), 100 ) ) );
 			HeroArcadeList.push_back( std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> >( BigBouncy ,                        std::pair<boost::shared_ptr<BobPhsx>, int>( boost::static_pointer_cast<BobPhsx>( JetpackWheelie ), 100 ) ) );
 			HeroArcadeList.push_back( std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> >( Ultimate ,                         std::pair<boost::shared_ptr<BobPhsx>, int>( boost::static_pointer_cast<BobPhsx>( BigBouncy ), 100 ) ) );
 
             // Compile a list of all leaderboards
             LeaderboardList = std::vector<std::pair<boost::shared_ptr<Challenge>, boost::shared_ptr<BobPhsx> > >();
-            LeaderboardList.push_back(std::pair<boost::shared_ptr<Challenge>, boost::shared_ptr<BobPhsx> >(0, 0));
-            
+            LeaderboardList.push_back( std::pair<boost::shared_ptr<Challenge>, boost::shared_ptr<BobPhsx> >(0, 0) );
+			LeaderboardList.push_back( std::pair<boost::shared_ptr<Challenge>, boost::shared_ptr<BobPhsx> >( Challenge_StoryMode::getInstance(), 0 ) );
 		
 			for ( std::vector<std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> > >::const_iterator
 				hero = HeroArcadeList.begin(); hero != HeroArcadeList.end(); ++hero )
@@ -240,17 +247,17 @@ namespace CloudberryKingdom
             LeaderboardList.push_back( std::pair<boost::shared_ptr<Challenge>, boost::shared_ptr<BobPhsx> >( Challenge_HeroRush2::getInstance(), 0 ) );
 
             // Goals
-            ChallengeGoal = std::map<int, int>();
+            ChallengeGoal = std::vector< std::pair<int, int> >();
 			for ( std::vector<std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> > >::const_iterator
 				hero = HeroArcadeList.begin(); hero != HeroArcadeList.end(); ++hero )
             {
                 if ( hero->second.first == 0 ) continue;
-                ChallengeGoal[ Challenge_Escalation::getInstance()->CalcGameId_Level( hero->second.first ) ] = hero->second.second;
-                ChallengeGoal[ Challenge_TimeCrisis::getInstance()->CalcGameId_Level( hero->second.first ) ] = hero->second.second;
+                ChallengeGoal.push_back( std::pair<int, int>( Challenge_Escalation::getInstance()->CalcGameId_Level( hero->second.first ), hero->second.second ) );
+                ChallengeGoal.push_back( std::pair<int, int>( Challenge_TimeCrisis::getInstance()->CalcGameId_Level( hero->second.first ), hero->second.second ) );
             }
 	}
 
-	std::map<int, int> ArcadeMenu::ChallengeGoal;
+	std::vector< std::pair<int, int> > ArcadeMenu::ChallengeGoal;
 	std::vector<std::pair<boost::shared_ptr<Challenge>, boost::shared_ptr<BobPhsx> > > ArcadeMenu::LeaderboardList;
 	std::vector<std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> > > ArcadeMenu::HeroArcadeList;
 
@@ -298,9 +305,20 @@ namespace CloudberryKingdom
                         ( *player )->AddHighScore( boost::make_shared<ScoreEntry>( ( *player )->GetName(), Challenge::CurrentId - Challenge::LevelMask, Challenge::CurrentScore, Challenge::CurrentScore, level + 1, 0, 0, 0));
                     }
 
-					if ( Contains( ChallengeGoal, Challenge::CurrentId ) )
+					bool contains = false;
+					int Goal = 0;
+					for ( int i = 0; i < static_cast<int>( ChallengeGoal.size() ); i++ )
 					{
-						int Goal = ChallengeGoal[Challenge::CurrentId];
+						if ( ChallengeGoal[ i ].first == Challenge::CurrentId )
+						{
+							contains = true;
+							Goal = ChallengeGoal[ i ].second;
+						}
+					}
+					//if (ChallengeGoal.ContainsKey(Challenge.CurrentId))
+					if ( contains )					
+					{
+						//int Goal = ChallengeGoal[Challenge::CurrentId];
 
 						if (level + 1 >= Goal && CurHighLevel < Goal)
 						{
@@ -468,7 +486,7 @@ namespace CloudberryKingdom
 
 		void ArcadeMenu::UpdateAfterPlaying()
         {
-            int Level = PlayerManager::MaxPlayerTotalArcadeLevel();
+            int Level = PlayerManager::MaxPlayerTotalLevel();
             bool ShowLevel = Level > 0;
 
             if (ShowLevel)
@@ -503,12 +521,18 @@ namespace CloudberryKingdom
             }
         }
 
+		boost::shared_ptr<Challenge> ArcadeMenu::SelectedChallenge;
+
         void ArcadeMenu::OnSelect()
         {
 			boost::shared_ptr<ArcadeItem> item = boost::dynamic_pointer_cast<ArcadeItem>( MyMenu->getCurItem() );
             if (0 == item) return;
 
             Lock = item->IsLocked();
+
+			// Store the selected challenge
+			ArcadeMenu::SelectedChallenge = item->MyChallenge;
+			Challenge::LeaderboardIndex = ArcadeMenu::LeaderboardIndex( ArcadeMenu::SelectedChallenge, 0 );
 
             if (Lock)
             {

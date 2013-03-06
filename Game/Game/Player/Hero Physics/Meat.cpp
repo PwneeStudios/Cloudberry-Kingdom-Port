@@ -155,7 +155,7 @@ namespace CloudberryKingdom
 
 		//float Factor;
 		//if (yVel < 0)
-		//    Factor = CoreMath.LerpRestrict(.3f, 1f, (float)StepsOnSide / StickyDuration);
+		//    Factor = CoreMath::LerpRestrict(.3f, 1f, (float)StepsOnSide / StickyDuration);
 		//else
 		//    Factor = .765f;
 		//float BlockSpeed = block.Box.Target.TR.Y - block.Box.Current.TR.Y;

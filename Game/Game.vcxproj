@@ -368,6 +368,7 @@
     <ClCompile Include="Hacks\NET\BinaryReader.cpp" />
     <ClCompile Include="Hacks\NET\BinaryWriter.cpp" />
     <ClCompile Include="Hacks\NET\StringBuilder.cpp" />
+    <ClCompile Include="Hacks\String.cpp" />
     <ClCompile Include="Hacks\XNA\ContentManager.cpp" />
     <ClCompile Include="Hacks\XNA\GraphicsDevice.cpp" />
     <ClCompile Include="Hacks\XNA\GraphicsDeviceManager.cpp" />

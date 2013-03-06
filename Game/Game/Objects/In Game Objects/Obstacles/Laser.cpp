@@ -102,7 +102,7 @@ namespace CloudberryKingdom
 		}
 		else
 		{
-			//int Step = CoreMath.Modulo(Core.MyLevel.GetPhsxStep() + Offset, Period);
+			//int Step = CoreMath::Modulo(Core.MyLevel.GetPhsxStep() + Offset, Period);
 			float Step = CoreMath::Modulo( getCore()->MyLevel->GetIndependentPhsxStep() + Offset, static_cast<float>( Period ) );
 			if ( Step < WarnDuration )
 			{

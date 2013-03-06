@@ -5,29 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	struct AABox;
-}
-
-namespace CloudberryKingdom
-{
-	struct Level;
-}
-
-namespace CloudberryKingdom
-{
-	struct Bob;
-}
-
-namespace CloudberryKingdom
-{
-	struct ObjectBase;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	
 	struct _BoxDeath : public _Death
 	{

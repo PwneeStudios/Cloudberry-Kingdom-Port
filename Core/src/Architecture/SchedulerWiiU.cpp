@@ -51,6 +51,8 @@ struct SchedulerInternal
 	OSSemaphore JobQueueSemaphore;
 
 	OSThread *Threads[2];
+	//OSThread Threads[2];
+	void *Stack;
 };
 
 /// Bootstrap for worker thread.
@@ -72,7 +74,17 @@ SchedulerWiiU::SchedulerWiiU() :
 	OSInitSemaphore( &internal_->JobQueueSemaphore, 0 );
 
 	internal_->Threads[ 0 ] = OSGetDefaultThread( 2 );
+	OSSetThreadPriority( internal_->Threads[ 0 ], 20 );
 	OSRunThread( internal_->Threads[ 0 ], ThreadProc, 1, this );
+	/*internal_->Stack = new char[ 1024 * 1024 ];
+	BOOL ret = OSCreateThread( &internal_->Threads[ 0 ], ThreadProc, 1, this,
+		internal_->Stack, 1024 * 1024, 20, OS_THREAD_ATTR_AFFINITY_CORE2 );
+	OSSetThreadName( &internal_->Threads[ 0 ], "SchedulerThread" );
+
+	if( !ret )
+		LOG.Write( "NO JOB SYSTEM!" );
+
+	OSResumeThread( &internal_->Threads[ 0 ] );*/
 }
 
 SchedulerWiiU::~SchedulerWiiU()
@@ -83,6 +95,7 @@ SchedulerWiiU::~SchedulerWiiU()
 		OSSignalSemaphore( &internal_->JobQueueSemaphore );
 
 	OSJoinThread( internal_->Threads[ 0 ], NULL );
+	//OSJoinThread( &internal_->Threads[ 0 ], NULL );
 
 	LOG.Write( "Worker threads shut down.\n" );
 
@@ -101,10 +114,18 @@ void SchedulerWiiU::RunJob( Job *job )
 	OSSignalSemaphore( &internal_->JobQueueSemaphore );
 }
 
+void SchedulerWiiU::RunJobASAP( Job *job )
+{
+	OSLockMutex( &internal_->JobQueueMutex );
+	internal_->JobQueue.push_front( job );
+	OSUnlockMutex( &internal_->JobQueueMutex );
+	OSSignalSemaphore( &internal_->JobQueueSemaphore );
+}
+
 void SchedulerWiiU::CreateResource( ResourceHolder *holder, Resource *resource )
 {
-	//RunJob( new ResourceLoaderJob( holder, resource ) );
-	resource->Load();
+	RunJob( new ResourceLoaderJob( holder, resource ) );
+	/*resource->Load();
 	resource->GpuCreate();
 
 	if( !resource->IsLoaded() )
@@ -116,7 +137,7 @@ void SchedulerWiiU::CreateResource( ResourceHolder *holder, Resource *resource )
 	LOG.Write( "Loaded: %s\n", resource->GetPath().c_str() );
 	holder->SetResource( resource );
 
-	CreateGpuResource( holder, resource );
+	CreateGpuResource( holder, resource );*/
 }
 
 void SchedulerWiiU::CreateGpuResource( ResourceHolder *holder, Resource *resource )

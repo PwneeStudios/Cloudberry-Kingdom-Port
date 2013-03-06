@@ -124,21 +124,23 @@ namespace CloudberryKingdom
 
 	const std::wstring HintGiver::getQuickSpawnHint()
 	{
-		Tools::Warning();
-	#if defined(NOT_PC)
-		return Format( _T( "Hold %ls and %ls to respawn quickly!" ), ButtonString::LeftBumper( 85 ).c_str(), ButtonString::RightBumper( 85 ).c_str() );
+	#if defined(PC_VERSION)
+		return Format( Localization::WordString( Localization::Words_RespawnNoteKeyboard ).c_str(), ButtonString::KeyStr( ButtonCheck::Quickspawn_KeyboardKey->KeyboardKey, 85 ).c_str() );
+		//return Format( _T( "Press %ls or %ls to respawn quickly!" ), ButtonString::KeyStr( ButtonCheck::Quickspawn_KeyboardKey->KeyboardKey, 85 ).c_str(), ButtonString::KeyStr( Keys_Space, 85 ).c_str() );
 	#else
-		return Format( _T( "Press %ls or %ls to respawn quickly!" ), ButtonString::KeyStr( ButtonCheck::Quickspawn_KeyboardKey->KeyboardKey, 85 ).c_str(), ButtonString::KeyStr( Keys_Space, 85 ).c_str() );
+		return Format( Localization::WordString( Localization::Words_RespawnNoteGamepad ).c_str(), ButtonString::LeftBumper( 85 ).c_str(), ButtonString::RightBumper( 85 ).c_str() );
+		//return Format( _T( "Hold %ls and %ls to respawn quickly!" ), ButtonString::LeftBumper( 85 ).c_str(), ButtonString::RightBumper( 85 ).c_str() );
 	#endif
 	}
 
 	const std::wstring HintGiver::getPowerupHint()
 	{
-		Tools::Warning();
-	#if defined(NOT_PC)
-		return Format( _T( "Press %ls for powerups!" ), ButtonString::Y( 85 ).c_str() );
+	#if defined(PC_VERSION)
+		return Format( Localization::WordString( Localization::Words_PowerupNote ).c_str(), ButtonString::Y( 85 ).c_str() );
+		//return Format( _T( "Press %ls or %ls for powerups!" ), ButtonString::Y( 85 ).c_str(), ButtonString::KeyStr( Keys_Enter, 85 ).c_str() );
 	#else
-		return Format( _T( "Press %ls or %ls for powerups!" ), ButtonString::Y( 85 ).c_str(), ButtonString::KeyStr( Keys_Enter, 85 ).c_str() );
+		return Format( Localization::WordString( Localization::Words_PowerupNote ).c_str(), ButtonString::Y( 85 ).c_str() );
+		//return Format( _T( "Press %ls for powerups!" ), ButtonString::Y( 85 ).c_str() );
 	#endif
 	}
 

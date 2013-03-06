@@ -3,7 +3,8 @@
 
 #include <global_header.h>
 
-#include <Hacks\XNA\SignedInGamer.h>
+//#include <Hacks/SignedInGamer.h>
+#include <Game/Player/Leaderboard.h>
 
 namespace CloudberryKingdom
 {
@@ -71,10 +72,6 @@ namespace CloudberryKingdom
 		using CkBaseMenu::SlideIn;
 		using CkBaseMenu::Call;
 
-        enum LeaderboardType { LeaderboardType_FriendsScores, LeaderboardType_TopScores, LeaderboardType_MyScores, LeaderboardType_Length };
-        enum LeaderboardSortType { LeaderboardSortType_Score, LeaderboardSortType_Level, LeaderboardSortType_Length };
-        enum Message { Message_None, Message_Loading, Message_NotRanked, Message_NotRankedFriends, Message_Length };
-
         LeaderboardType CurrentType;
         LeaderboardSortType CurrentSort;
         Message CurrentMessage;
@@ -95,8 +92,8 @@ namespace CloudberryKingdom
         static const int SelectDelay = 18;
 
         boost::shared_ptr<TitleGameData_MW> Title;
-        LeaderboardGUI( boost::shared_ptr<TitleGameData_MW> Title, int StartIndex );
-		boost::shared_ptr<LeaderboardGUI> LeaderboardGUI_Construct( boost::shared_ptr<TitleGameData_MW> Title, int StartIndex );
+        LeaderboardGUI( boost::shared_ptr<TitleGameData_MW> Title, int Control );
+		boost::shared_ptr<LeaderboardGUI> LeaderboardGUI_Construct( boost::shared_ptr<TitleGameData_MW> Title, int Control );
 
         void Init();
 
@@ -124,11 +121,11 @@ namespace CloudberryKingdom
 
 		void ChangeLeaderboard( int Direction );
 
-		void SetItemProperties( boost::shared_ptr<MenuItem> item );
+		void SetItemProperties( const boost::shared_ptr<MenuItem> &item );
 
-        void SetTextProperties( boost::shared_ptr<EzText> text );
+        void SetTextProperties( const boost::shared_ptr<EzText> &text );
 
-        void SetSelectedTextProperties( boost::shared_ptr<EzText> text );
+        void SetSelectedTextProperties( const boost::shared_ptr<EzText> &text );
 
         void OnAdd();
 
@@ -137,6 +134,9 @@ namespace CloudberryKingdom
         static boost::shared_ptr<QuadClass> TL, Offset_GamerTag, Offset_Val, ItemShift;
         static boost::shared_ptr<HsvQuad> Highlight;
 
+        int ToMake_Id;
+        int DelayToMake;
+
         void MyPhsxStep();
 
         void MyDraw();
@@ -144,23 +144,6 @@ namespace CloudberryKingdom
         void SetPos();
 
 	};
-
-    struct LeaderboardItem
-    {
-
-        boost::shared_ptr<Gamer> Player;
-        std::wstring GamerTag;
-        std::wstring Val;
-        std::wstring Rank;
-
-		static void StaticIntialize();
-        static boost::shared_ptr<LeaderboardItem> DefaultItem;
-
-        LeaderboardItem( boost::shared_ptr<Gamer> Player, int Val, int Rank );
-
-		void Draw( Vector2 Pos, bool Selected, float alpha );
-
-    };
 
     struct LeaderboardView
     {
@@ -174,9 +157,11 @@ namespace CloudberryKingdom
         int Start;
         int End() { return CoreMath::RestrictVal( 0, TotalEntries, Start + EntriesPerPage ); }
 
-        std::map<int, boost::shared_ptr<LeaderboardItem> > Items;
+        std::map<int, LeaderboardItem> &getItems();
 
-        LeaderboardView();
+		boost::shared_ptr<Leaderboard> MyLeaderboard;
+
+        LeaderboardView( int Id, LeaderboardType CurrentType );
 
         void IncrIndex( int change );
 
@@ -187,7 +172,12 @@ namespace CloudberryKingdom
 
         void PhsxStep( int Control );
 
+		void LeaderboardView::ViewGamer();
+		void LeaderboardView::SetType( LeaderboardType type );
+
 		void Draw( Vector2 Pos, float alpha );
+		void DrawList( float alpha, Vector2 CurPos, float Shift );
+		void DrawDict( float alpha, Vector2 CurPos, float Shift );
 
 	};
 

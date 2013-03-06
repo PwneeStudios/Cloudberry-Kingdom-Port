@@ -127,11 +127,25 @@ namespace CloudberryKingdom
 
 		GetSeedFunc.reset();
 
+		// Release the current level
+		if ( CurLevelSeed != 0 )
+		{
+			if ( CurLevelSeed->MyGame != 0 )
+			{
+				CurLevelSeed->MyGame->Release();
+				CurLevelSeed->Release();
+			}
+		}
+
+		// Release the next level
 		if ( NextLevelSeed != 0 )
 		{
             if ( LevelIsLoaded( NextLevelSeed ) )
             {
-                NextLevelSeed->MyGame->Release();
+				if ( NextLevelSeed->MyGame != 0 )
+				{
+					NextLevelSeed->MyGame->Release();
+				}
                 NextLevelSeed->Release();
             }
             else
@@ -206,6 +220,7 @@ namespace CloudberryKingdom
 	void StringWorldGameData::DefaultStartLevelMusic( const boost::shared_ptr<StringWorldGameData> &stringworld )
 	{
 		Tools::SongWad->SetPlayList( Tools::SongList_Standard );
+		Tools::SongWad->Shuffle();
 
 		if ( !stringworld->FirstLevelHasLoaded )
 			Tools::SongWad->Next();
@@ -272,6 +287,10 @@ namespace CloudberryKingdom
 		return val;
 	}
 
+	void StringWorldGameData::AdditionalSetLevel()
+	{
+	}
+
 	void StringWorldGameData::SetLevel()
 	{
 		if ( NextLevelSeed->MyGame != 0 )
@@ -287,6 +306,7 @@ namespace CloudberryKingdom
 			}
 
 			// Replace all Bobs with new Bobs (to handle newly joined players)
+			AdditionalSetLevel();
 			NextLevelSeed->MyGame->UpdateBobs();
 			NextLevelSeed->MyGame->Reset();
 		}

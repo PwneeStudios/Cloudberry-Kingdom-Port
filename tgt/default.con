@@ -36,7 +36,7 @@ target_connection {
         args = " -iphost localhost -ipport 6002 -cafe_root C:\\Pwnee\\cafe_sdk"
         command = "cafeserv -iphost localhost -ipport 6002 -cafe_root C:\\Pwnee\\cafe_sdk"
         logfile = ""
-        mode = ""
+        mode = "download"
         setup_script = ""
         run_mode_partner = ""
         run_mode_policy = ""

@@ -213,6 +213,11 @@ boost::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 
 	void ButtonCheck::UpdateControllerAndKeyboard_EndOfStep( ResolutionGroup Resolution )
 	{
+#if CAFE
+		// Determine if the gamepad is in use
+		ButtonTexture::UseGamepad = false;
+#endif
+
 #if defined( PC_VERSION )
 		// Determine if the mouse is in the window or not.
 		Tools::MouseInWindow = Tools::Mouse.X > 0 && Tools::Mouse.X < Resolution.Backbuffer.X && Tools::Mouse.Y > 0 && Tools::Mouse.Y < Resolution.Backbuffer.Y;
@@ -386,6 +391,11 @@ boost::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 
 		PreventNextInput = true;
 		PreventTimeStamp = Tools::TheGame->DrawCount;
+
+		if ( Tools::CurLevel == 0 ) return;
+
+		for ( BobVec::const_iterator bob = Tools::CurLevel->Bobs.begin(); bob != Tools::CurLevel->Bobs.end(); ++bob )
+			( *bob )->Prevent_A_Button = true;
 	}
 
 	bool ButtonCheck::Back( int Control )
@@ -482,6 +492,8 @@ boost::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 
 	ButtonData ButtonCheck::State( const boost::shared_ptr<ButtonClass> &Button, int iPlayerIndex )
 	{
+		if ( CloudberryKingdomGame::getSuperPause() ) return ButtonData();
+
 		if ( Button == 0 )
 			return State( ControllerButtons_NONE, iPlayerIndex );
 
@@ -552,6 +564,8 @@ boost::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 
 	ButtonData ButtonCheck::GetState( ControllerButtons Button, int iPlayerIndex, bool Prev, bool UseKeyboardMapping )
 	{
+		if ( CloudberryKingdomGame::getSuperPause() ) return ButtonData();
+
 		// Debug tool: Use this to set the keyboard for use by player 1/2/3/4
 		bool SingleOutPlayer = false;
 		int ThisPlayerOnly = 1;

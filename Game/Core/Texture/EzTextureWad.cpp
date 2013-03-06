@@ -46,38 +46,17 @@ namespace CloudberryKingdom
 
 		AnimationDict = std::map<std::wstring, boost::shared_ptr<AnimationData_Texture> >();
 
-		PathDict = std::map<std::wstring, boost::shared_ptr<EzTexture> >();
 		NameDict = std::map<std::wstring, boost::shared_ptr<EzTexture> >();
-		BigNameDict = std::map<std::wstring, boost::shared_ptr<EzTexture> >();
 	}
 
-	void EzTextureWad::LoadFolder( const boost::shared_ptr<ContentManager> &Content, const std::wstring &Folder )
-	{
-		for ( std::vector<boost::shared_ptr<EzTexture> >::const_iterator Tex = TextureListByFolder[ Folder ].begin(); Tex != TextureListByFolder[ Folder ].end(); ++Tex )
-		{
-			// If texture hasn't been loaded yet, load it
-			if ( ( *Tex )->getTex() == 0 && !(*Tex)->FromCode )
-			{
-				( *Tex )->setTex( Content->Load<Texture2D>( ( *Tex )->Path ) );
-				/*( *Tex )->Width = ( *Tex )->getTex()->Width;
-				( *Tex )->Height = ( *Tex )->getTex()->Height;*/
-
-	#if defined(EDITOR)
-	#else
-				Resources::ResourceLoadedCountRef->setVal( Resources::ResourceLoadedCountRef->getVal() + 1 );
-	#endif
-			}
-		}
-	}
-
-	boost::shared_ptr<EzTexture> EzTextureWad::FindOrLoad( const boost::shared_ptr<ContentManager> &Content, const std::wstring &name )
+	boost::shared_ptr<EzTexture> EzTextureWad::FindOrLoad( const boost::shared_ptr<ContentManager> &Content, const std::wstring &name, const std::wstring &path )
 	{
 		boost::shared_ptr<EzTexture> texture = FindByName( name );
 
 		if ( texture != Tools::TextureWad->DefaultTexture )
 			return texture;
 
-		return Tools::TextureWad->AddTexture( Content->Load<Texture2D>( name ), name );
+		return Tools::TextureWad->AddTexture( Content->Load<Texture2D>( path ), name );
 	}
 
 	boost::shared_ptr<EzTexture> EzTextureWad::FindByPathOrName( const std::wstring &path )
@@ -134,14 +113,19 @@ namespace CloudberryKingdom
 	{
 		std::wstring lowercaseName = ToLower( name );
 
-		if ( lowercaseName.find( std::wstring( L"/" ) ) != std::string::npos && BigNameDict.find( lowercaseName ) != BigNameDict.end() )
-			return BigNameDict[ lowercaseName ];
-		else if ( PathDict.find( lowercaseName ) != PathDict.end() )
-			return PathDict[ lowercaseName ];
-		else if ( NameDict.find( lowercaseName ) != NameDict.end() )
-			return NameDict[ lowercaseName ];
+		if ( NameDict.find( lowercaseName ) != NameDict.end() )
+            return NameDict[ lowercaseName ];
+            
+        return DefaultTexture;
 
-		return DefaultTexture;
+		//if ( lowercaseName.find( std::wstring( L"/" ) ) != std::string::npos && BigNameDict.find( lowercaseName ) != BigNameDict.end() )
+		//	return BigNameDict[ lowercaseName ];
+		//else if ( PathDict.find( lowercaseName ) != PathDict.end() )
+		//	return PathDict[ lowercaseName ];
+		//else if ( NameDict.find( lowercaseName ) != NameDict.end() )
+		//	return NameDict[ lowercaseName ];
+
+		//return DefaultTexture;
 	}
 
 	void EzTextureWad::AddEzTexture( const boost::shared_ptr<EzTexture> &NewTex )
@@ -150,19 +134,7 @@ namespace CloudberryKingdom
 
 		std::wstring name = ToLower( NewTex->Name );
 		if ( NameDict.find( name ) == NameDict.end() )
-			//NameDict[ name ] = NewTex;
 			::Add( NameDict, name, NewTex );
-		// FIXME: This was AddOrOverwrite.
-
-		if ( NewTex->Path != std::wstring( L"" ) )
-		{
-			// FIXME: This was AddOrOverwrite.
-			//PathDict[ ToLower( NewTex->Path ) ] = NewTex;
-			::Add( PathDict, NewTex->Path, NewTex );
-			// FIXME: This was AddOrOverwrite.
-			//BigNameDict[ ToLower( Tools::GetFileBigName( NewTex->Path ) ) ] = NewTex;
-			::Add( BigNameDict, NewTex->Path, NewTex );
-		}
 	}
 
 	boost::shared_ptr<EzTexture> EzTextureWad::AddTexture( const boost::shared_ptr<Texture2D> &Tex, const std::wstring &Name )
@@ -177,11 +149,10 @@ namespace CloudberryKingdom
 	{
 		boost::shared_ptr<EzTexture> NewTex = 0;
 
+		/*
 		bool OneFound = false;
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 		for ( std::vector<boost::shared_ptr<EzTexture> >::const_iterator texture = TextureList.begin(); texture != TextureList.end(); ++texture )
 		{
-//C# TO C++ CONVERTER TODO TASK: The following .NET 'String.Compare' reference is not converted:
 			if ( CompareIgnoreCase( ( *texture )->Path, Name ) == 0 )
 			{
 				OneFound = true;
@@ -202,7 +173,7 @@ namespace CloudberryKingdom
 			}
 		}
 
-		if ( !OneFound )
+		if ( !OneFound )*/
 		{
 			NewTex = boost::make_shared<EzTexture>();
 			NewTex->Path = Name;
@@ -216,16 +187,11 @@ namespace CloudberryKingdom
 			if ( NameDict.find( name ) == NameDict.end() )
 				NameDict[ name ] = NewTex;
 
-			// FIXME: These were previously AddOrOverwrite.
-			PathDict[ ToLower( NewTex->Path ) ] = NewTex;
-
-			BigNameDict[ToLower( Tools::GetFileBigName( NewTex->Path ) ) ]= NewTex;
-
 			// Add to folder
-			std::wstring folder = Tools::FirstFolder( Name, std::wstring( L"Art/" ) );
-			if ( TextureListByFolder.find( folder ) == TextureListByFolder.end() )
-				TextureListByFolder.insert( make_pair( folder, std::vector<boost::shared_ptr<EzTexture> >() ) );
-			TextureListByFolder[ folder ].push_back( NewTex );
+			//std::wstring folder = Tools::FirstFolder( Name, std::wstring( L"Art/" ) );
+			//if ( TextureListByFolder.find( folder ) == TextureListByFolder.end() )
+			//	TextureListByFolder.insert( make_pair( folder, std::vector<boost::shared_ptr<EzTexture> >() ) );
+			//TextureListByFolder[  folder ].push_back( NewTex );
 		}
 
 		NewTex->Width = Width;
@@ -239,7 +205,7 @@ namespace CloudberryKingdom
 		return 0;
 	}
 
-	boost::shared_ptr<EzTexture> EzTextureWad::AddTexture_Fast( const boost::shared_ptr<Texture2D> &Tex, const std::wstring &Name, int Width, int Height, const std::wstring &StrippedName, const std::wstring &LowerName, const std::wstring &LowerPath, const std::wstring &BigName, const std::wstring &Folder )
+	boost::shared_ptr<EzTexture> EzTextureWad::AddTexture_Fast( const boost::shared_ptr<Texture2D> &Tex, const std::wstring &Name, int Width, int Height, const std::wstring &StrippedName, const std::wstring &LowerName, const std::wstring &Folder )
 	{
 		boost::shared_ptr<EzTexture> NewTex = 0;
 
@@ -252,9 +218,6 @@ namespace CloudberryKingdom
 		TextureList.push_back( NewTex );
 
 		NameDict.insert( make_pair( LowerName, NewTex ) );
-		PathDict.insert( make_pair( LowerPath, NewTex ) );
-
-		BigNameDict.insert( make_pair( BigName, NewTex ) );
 
 		// Add to folder
 		if ( TextureListByFolder.find( Folder ) == TextureListByFolder.end() )

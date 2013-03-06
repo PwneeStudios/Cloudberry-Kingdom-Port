@@ -9,6 +9,9 @@
 #include <Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Pre.h>
 #include <Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Simple.h>
 
+#define XBOX
+#undef PC_VERSION
+
 namespace CloudberryKingdom
 {
 
@@ -352,6 +355,8 @@ namespace CloudberryKingdom
 
         void SoundMenu::Release()
         {
+			if ( CoreData == 0 || CoreData->Released ) return;
+
 			if (Black != 0) Black->Release();
 
             if ( ChosenLanguage != Localization::CurrentLanguage->MyLanguage )
@@ -378,6 +383,8 @@ namespace CloudberryKingdom
                 ButtonCheck::PreventInput();
                 ButtonCheck::PreventTimeStamp += 20;
             }
+
+			SaveGroup::SaveAll();
 
             VerifyBaseMenu::Release();
         }

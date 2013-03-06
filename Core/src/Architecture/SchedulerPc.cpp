@@ -177,6 +177,16 @@ void SchedulerPc::RunJob( Job *job )
 	glfwSignalCond( internal_->JobQueueCV );
 }
 
+void SchedulerPc::RunJobASAP( Job *job )
+{
+	glfwLockMutex( internal_->JobQueueMutex );
+	internal_->JobQueue.push_front( job );
+	glfwUnlockMutex( internal_->JobQueueMutex );
+
+	// Notify worker thread about the new job.
+	glfwSignalCond( internal_->JobQueueCV );
+}
+
 void SchedulerPc::CreateResource( ResourceHolder *holder, Resource *resource )
 {
 	glfwLockMutex( internal_->JobQueueMutex );

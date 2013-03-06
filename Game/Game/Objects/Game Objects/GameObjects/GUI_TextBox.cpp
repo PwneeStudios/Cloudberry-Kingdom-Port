@@ -334,6 +334,9 @@ namespace CloudberryKingdom
 	{
 		InitialText = Tools::SantitizeOneLineString( InitialText, Resources::LilFont );
 
+		if ( InitialText.size() == 0 )
+			InitialText = std::wstring( L"_" );
+
 		FixedToCamera = true;
 		NoPosMod = true;
 

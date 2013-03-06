@@ -166,11 +166,17 @@ namespace CloudberryKingdom
 
 	void GUI_Text::Init( const std::wstring &text, Vector2 pos, bool centered, Style style, const boost::shared_ptr<EzFont> &font )
 	{
+		std::wstring _text;
+		if ( text.size() == 0 )
+			_text = std::wstring( L"_" );
+		else
+			_text = text;
+
 		MyStyle = style;
 		FixedToCamera = false;
 
 		MyPile = boost::make_shared<DrawPile>();
-		MyText = MakeText( text, centered, font );
+		MyText = MakeText( _text, centered, font );
 		MyPile->Add( MyText );
 
 		MyPile->setPos( pos + Vector2( 0, MyText->GetWorldHeight() / 2 ) );

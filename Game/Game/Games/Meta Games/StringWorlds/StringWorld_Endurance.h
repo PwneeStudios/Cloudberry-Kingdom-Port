@@ -32,6 +32,8 @@ namespace CloudberryKingdom
 	
 		StringWorldEndurance( const boost::shared_ptr<LambdaFunc_1<int, boost::shared_ptr<LevelSeedData> > > &GetSeed, const boost::shared_ptr<GUI_LivesLeft> &Gui_LivesLeft, int NextLife );
 
+		virtual void AdditionalSetLevel();
+
 		virtual void Release();
 
 		virtual void AdditionalSwapToLevelProcessing( const boost::shared_ptr<GameData> &game );

@@ -1,6 +1,6 @@
 #include <Content/TexturePc.h>
 
-#include <cassert>
+#include <PwneeAssert.h>
 #include <fstream>
 #include <GL/glew.h>
 #include <Utility/Log.h>
@@ -71,9 +71,11 @@ void TexturePc::GpuCreate()
 		GL_UNSIGNED_BYTE, reinterpret_cast< GLvoid * >( &data_[ 0 ] ) );
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
-	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT );
 	glBindTexture( GL_TEXTURE_2D, 0 );
+	
+	data_ = std::vector<char>();
 }
 
 void TexturePc::GpuDestroy()

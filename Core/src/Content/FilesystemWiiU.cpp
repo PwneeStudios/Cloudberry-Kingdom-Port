@@ -1,6 +1,7 @@
 #include <Content/FilesystemWiiU.h>
 
 #include <Content/File.h>
+#include <Utility/Error.h>
 #include <Utility/Log.h>
 #include <Utility/Mutex.h>
 
@@ -179,6 +180,8 @@ public:
 
 };
 
+FSClient *GLOBAL_FSClient = NULL;
+
 struct FilesystemWiiUInternal
 {
 	FSClient *Client;
@@ -186,6 +189,16 @@ struct FilesystemWiiUInternal
 
 	Mutex FileSystemMutex;
 };
+
+void StateChangeCallback( FSClient *client, FSVolumeState state, void *context )
+{
+	LOG.Write( "StateChangeCallback on 0x%x: 0x%x\n", client, state );
+
+	if( FSGetVolumeState( client ) != FS_VOLSTATE_READY )
+	{
+		DisplayError( FSGetLastErrorCodeForViewer( client ) );
+	}
+}
 
 FilesystemWiiU::FilesystemWiiU() :
 	internal_( new FilesystemWiiUInternal )
@@ -200,19 +213,35 @@ FilesystemWiiU::FilesystemWiiU() :
 	if( !internal_->Cmd )
 		OSHalt( "Error: cannot allocate command queue.\n" );
 
+	FSStateChangeParams changeParams =
+	{
+		.userCallback = StateChangeCallback,
+		.userContext = NULL,
+		.ioMsgQueue = NULL
+	};
+
+	FSSetStateChangeNotification( internal_->Client, &changeParams );
+
 	FSAddClient( internal_->Client, FS_RET_NO_ERROR );
 	LOG.Write( "Client added\n" );
 
 	FSInitCmdBlock( internal_->Cmd );
 	LOG.Write( "Command block ready\n" );
+
+	GLOBAL_FSClient = internal_->Client;
 }
 
 FilesystemWiiU::~FilesystemWiiU()
 {
+	GLOBAL_FSClient = NULL;
+
+	FSDelClient( internal_->Client, 0 );
+
+	FSShutdown();
+
 	MEMFreeToDefaultHeap( internal_->Client );
 	MEMFreeToDefaultHeap( internal_->Cmd );
 
-	FSShutdown();
 	delete internal_;
 }
 
@@ -221,7 +250,7 @@ boost::shared_ptr<File> FilesystemWiiU::Open( const std::string &path, bool writ
 		FSFileHandle fh;
 		FSStat stat;
 
-		std::string localPath = ( path[ 0 ] == '/' ? "/vol/content" : "/vol/content/" ) + path;
+		std::string localPath = ( path[ 0 ] == '/' ? "/vol/content/0010" : "/vol/content/0010/" ) + path;
 		LOG.Write( "Opening %s\n", localPath.c_str() );
 
 		// FIXME: The mutex might not be necessary if the file system supports multithreading.

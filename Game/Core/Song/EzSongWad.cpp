@@ -174,7 +174,7 @@ namespace CloudberryKingdom
 	{
 		bool HoldSuppress = SuppressNextInfoDisplay;
 
-		Start( true );
+		//Start( true );
 
 		SuppressNextInfoDisplay = HoldSuppress;
 

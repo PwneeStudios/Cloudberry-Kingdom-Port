@@ -491,6 +491,14 @@ namespace CloudberryKingdom
 		DrawQuad( LineQuad );
 	}
 
+	void QuadDrawer::DrawLine( Vector2 x1, Vector2 x2, const boost::shared_ptr<LineSpriteInfo> &info, int RepeatWidth )
+	{
+		if ( info->DrawEndPoints )
+			DrawLineAndEndPoints( x1, x2, Color( info->Tint ), info->Width, info->End1->MyTexture, info->Sprite->MyTexture, info->End2->MyTexture, Tools::BasicEffect, static_cast<float>( RepeatWidth ), info->Dir, 0, 0 );
+		else
+			DrawLine( x1, x2, Color( info->Tint ), info->Width, info->Sprite->MyTexture, Tools::BasicEffect, RepeatWidth, info->Dir, 0, 0, info->Wrap );
+	}
+
 	void QuadDrawer::DrawLine( Vector2 x1, Vector2 x2, const boost::shared_ptr<LineSpriteInfo> &info )
 	{
 		if ( info->DrawEndPoints )
@@ -863,7 +871,13 @@ namespace CloudberryKingdom
                 Flush();
 
             CurrentTexture = texture;
-            CurrentEffect = Tools::BasicEffect;
+
+			if ( static_cast<int>( color.R ) > 100 )
+				CurrentEffect = Tools::BasicEffect;
+			else
+				CurrentEffect = Tools::NoTexture;
+
+			QUAD_DRAWER->SetEffect( CurrentEffect->effect );
 
 			::SimpleQuad sq;
 			sq.V[0] = Vector2( pos.X, pos.Y );
@@ -933,6 +947,8 @@ namespace CloudberryKingdom
             Vector2 p = position + Vector2(35, -25) * scale / 2.0533333f;
 	        for (int j = 0; j < static_cast<int>( s.length() ); ++j)
 	        {
+				if ( i + 10 > N ) Flush();
+
                 GlyphData data = font->GetData( s[j] );
 
                 Vector4 tq = data.TextureCoordinates;

@@ -3,9 +3,39 @@
 #include <Game/Level/Level.h>
 
 
+
 std::vector< GenericBoostBin * > MetaBoostBin;
 
 std::map< int, std::vector< int > > PrevMetaBoostBinCount;
+
+/** Codes :
+		10, assignment
+		0, make_shared constructor
+		1, static_pointer_cast
+		3, dynamic_pointer_cast
+**/
+
+void OnDestructor( std::string class_name )
+{
+
+}
+
+void _OnAssignment( std::string class_name, int origin_code )
+{
+
+	if ( origin_code != 10 && origin_code != 0 && origin_code != 1 && origin_code != 3 )
+	{
+		return;
+	}
+
+	if ( std::string::npos != class_name.find( "FireSpinner_Parameters" ) )
+	{
+
+		CloudberryKingdom::Tools::Write( L"" );
+
+	}
+
+}
 
 void MakeLocks()
 {

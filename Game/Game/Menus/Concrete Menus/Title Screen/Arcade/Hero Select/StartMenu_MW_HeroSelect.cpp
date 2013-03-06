@@ -4,6 +4,8 @@
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
+#include "Game/Menus/Concrete Menus/ShopMenu.h"
+
 namespace CloudberryKingdom
 {
 
@@ -148,6 +150,7 @@ namespace CloudberryKingdom
             }
 
 		Challenge::ChosenHero = item->Hero;
+		Challenge::LeaderboardIndex = ArcadeMenu::LeaderboardIndex( ArcadeMenu::SelectedChallenge, Challenge::ChosenHero );
 		MyHeroDoll->MakeHeroDoll( item->Hero );
 
 		UpdateScore();
@@ -221,6 +224,11 @@ namespace CloudberryKingdom
 		Level_Renamed = boost::make_shared<EzText>( std::wstring( L"0" ), Resources::Font_Grobold42_2 );
 
 
+#if PS3
+			float Brightness = .945f;
+			Score->MyFloatColor = ColorHelper::Gray( Brightness );
+			Level_Renamed->MyFloatColor = ColorHelper::Gray( Brightness );
+#endif
 
 		// Menu
 		boost::shared_ptr<MiniMenu> mini = boost::make_shared<MiniMenu>();
@@ -335,6 +343,9 @@ namespace CloudberryKingdom
 	{
 		ArcadeBaseMenu::OnReturnTo();
 
+		if ( MyHeroDoll != 0 )
+			MyHeroDoll->AutoDraw = true;
+
 		UpdateScore();
 		Update();
 	}
@@ -378,6 +389,7 @@ namespace CloudberryKingdom
                 }
                 else
                 {
+					item->Selectable = true;
                     item->MyText->Alpha = 1.f;
                     item->MySelectedText->Alpha = 1.f;
 					NumSelectableItems++;
@@ -418,6 +430,19 @@ namespace CloudberryKingdom
 
 		boost::shared_ptr<HeroItem> _item = boost::dynamic_pointer_cast<HeroItem>( MyMenu->getCurItem() );
 		if ( 0 == _item ) return;
+
+		// Upsell
+		if ( CloudberryKingdomGame::getIsDemo() && _item->Hero != BobPhsxNormal::getInstance() )
+		{
+			Call( MakeMagic( UpSellMenu, ( Localization::Words_UpSell_Hero, MenuItem::ActivatingPlayer ) ) );
+			Hide();
+				
+			if ( MyHeroDoll != 0 )
+				MyHeroDoll->AutoDraw = false;
+				
+			return;
+		}
+
 		int TopLevelForHero = MyArcadeItem->MyChallenge->CalcTopGameLevel( _item->Hero );
 
 		//int TopLevelForHero = MyArcadeItem.MyChallenge.TopLevel();

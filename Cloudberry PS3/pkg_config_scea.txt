@@ -1,0 +1,5 @@
+ContentID = UP0001-NPUB31177_00-CLOUDBERRYKIFULL
+Klicensee = 0x00000000000000000000000000000000
+DRMType = Local
+ContentType = GameExec
+PackageVersion = 01.00

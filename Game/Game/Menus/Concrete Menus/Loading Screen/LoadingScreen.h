@@ -14,6 +14,9 @@ namespace CloudberryKingdom
 		static int DefaultMinLoadLength;
 		static int MinLoadLength;
 
+		int DrawCount;
+		static const int DrawCount_Max;
+
 		bool Fake;
 		void MakeFake();
 

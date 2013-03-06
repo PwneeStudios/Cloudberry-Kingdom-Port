@@ -9,6 +9,12 @@
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
+#ifdef PS3
+#include <sys/ppu_thread.h>
+#include <TrophyPS3.h>
+#include <Utility/Log.h>
+#endif
+
 namespace CloudberryKingdom
 {
 
@@ -177,7 +183,27 @@ namespace CloudberryKingdom
             if (Level >= UnlockHeroRush2->MyInt)
             {
                 GiveAward(UnlockHeroRush2, player);
-                CheckForAward_UnlockAllArcade();
+                
+				int id, level;
+
+				// Check we've gotten all Escalation heroes
+				id = Challenge_Escalation::getInstance()->CalcGameId_Level( ArcadeMenu::HighestHero );
+				level = PlayerManager::MaxPlayerHighScore(id);
+				bool escalation_complete = level >= ArcadeMenu::HighestLevelNeeded;
+
+				// Check we've gotten all Time Crisis heroes
+				id = Challenge_TimeCrisis::getInstance()->CalcGameId_Level( ArcadeMenu::HighestHero );
+				level = PlayerManager::MaxPlayerHighScore( id );
+				bool timecrisis_complete = level >= ArcadeMenu::HighestLevelNeeded;
+
+				// Give award for unlocking everything
+				if (escalation_complete && timecrisis_complete)
+					GiveAward( Award_UnlockAllArcade, player );
+                
+				//CheckForAward_UnlockAllArcade();
+				//Tools.CurGameData.AddGameObject(new HeroUnlockedMessage());				
+				
+				//CheckForAward_UnlockAllArcade();
             }
         }
 
@@ -211,7 +237,7 @@ namespace CloudberryKingdom
         {
             int deaths = bob->getMyStats()->getTotalDeaths() + PlayerManager::Get(bob)->GameStats->getTotalDeaths() + PlayerManager::Get(bob)->LifetimeStats->getTotalDeaths();
             if (deaths >= 1337)
-                GiveAward(Award_Die);
+                GiveAward(Award_Die, bob->getMyPlayerData() );
         }
 
         void Awardments::CheckForAward_NoDeath(boost::shared_ptr<PlayerData> player)
@@ -236,7 +262,7 @@ namespace CloudberryKingdom
             int obstacles = bob->getMyStats()->ObstaclesSeen + PlayerManager::Get(bob)->GameStats->ObstaclesSeen + PlayerManager::Get(bob)->LifetimeStats->ObstaclesSeen;
 
             if (obstacles >= 1000)
-                GiveAward(Award_Obstacles);
+                GiveAward(Award_Obstacles, bob->getMyPlayerData() );
         }
 
         void Awardments::CheckForAward_Buy()
@@ -274,6 +300,43 @@ namespace CloudberryKingdom
             }
         }
 
+#ifdef PS3
+		int TranslateAwardmentGuid( int xboxTrophyId )
+		{
+			const int XBOX_TO_PS3[] = { -1, 0, 5, 4, 6, 7, 2, 8, -1, 1, 9, 10, 11, 12, 13, 3, -1, 14, 15 };
+
+			if( xboxTrophyId < 0 || xboxTrophyId > 18 )
+				return -1;
+
+			return XBOX_TO_PS3[ xboxTrophyId ];
+		}
+
+		void AwardAwardmentThread( uint64_t awardGuid )
+		{
+			SceNpTrophyContext context;
+			SceNpTrophyHandle handle;
+
+			// Try to give awardment on PS3.
+			if( GetTrophyContext( context, handle ) )
+			{
+				int ps3Id = TranslateAwardmentGuid( awardGuid );
+
+				if( ps3Id >= 0 )
+				{
+					SceNpTrophyId platinumId = SCE_NP_TROPHY_INVALID_TROPHY_ID;
+					int ret = sceNpTrophyUnlockTrophy( context, handle, ps3Id, &platinumId );
+
+					if( platinumId != SCE_NP_TROPHY_INVALID_TROPHY_ID )
+						LOG.Write( "Unlocked impossible platinum trophy!\n" );
+				}
+			}
+
+			LOG.Write( "Awardment given!\n" );
+
+			sys_ppu_thread_exit( 0 );
+		}
+#endif
+
         void Awardments::GiveAward( const boost::shared_ptr<Awardment> &award )
         {
             GiveAward(award, 0);
@@ -298,8 +361,7 @@ namespace CloudberryKingdom
                     player->Awardments_Renamed->Add( award->Guid );
 
 #ifdef NOT_PC
-				// FIXME give award here on PS3
-				Tools::Warning();
+				//Tools::Warning();
                 //if (award->Official)
                 //{
                 //    foreach (var gamer in Gamer.SignedInGamers)
@@ -308,6 +370,15 @@ namespace CloudberryKingdom
                 //        gamer.BeginAwardAchievement(award.Key, GiveAchievementCallback, AwardedGamer);
                 //    }
                 //}
+#endif
+
+#ifdef PS3
+				sys_ppu_thread_t tid;
+				int ret = sys_ppu_thread_create( &tid, AwardAwardmentThread,
+					award->Guid, 1001, 16 * 1024, 0, "AwardAwardmentThread" );
+
+				if( ret != 0 )
+					LOG.Write( "Failed to start AwardAwardmentThread" );
 #endif
 
                 // Show a note saying the reward was given

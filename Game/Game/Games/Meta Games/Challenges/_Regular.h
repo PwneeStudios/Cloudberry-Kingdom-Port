@@ -27,7 +27,7 @@ namespace CloudberryKingdom
 		// Fixed upgrade lists
 		// -------------------------
 	
-		static boost::shared_ptr<LevelSeedData> HeroLevel( float Difficulty, const boost::shared_ptr<BobPhsx> &Hero, int Length );
+		static boost::shared_ptr<LevelSeedData> HeroLevel( float Difficulty, const boost::shared_ptr<BobPhsx> &Hero, int Length, bool ScreenSaver);
 	};
 }
 

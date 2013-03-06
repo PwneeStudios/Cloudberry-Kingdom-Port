@@ -42,15 +42,15 @@ namespace CloudberryKingdom
 
 		Tools::setPhsxSpeed( Speed );
 
-		// On (B)
-		if ( ButtonCheck::State( ControllerButtons_X, getControl() ).Pressed )
-		{
-			// Change the speed
-			if ( Speed == 1 )
-				Speed = 0;
-			else
-				Speed = 1;
-		}
+		//// On (B)
+		//if ( ButtonCheck::State( ControllerButtons_X, getControl() ).Pressed )
+		//{
+		//	// Change the speed
+		//	if ( Speed == 1 )
+		//		Speed = 0;
+		//	else
+		//		Speed = 1;
+		//}
 	}
 
 	void SlowMo::InitializeInstanceFields()

@@ -197,7 +197,7 @@ namespace CloudberryKingdom
 	
 		bool Bungee;
 		bool AllHeroes;
-		int Difficulty;
+		float Difficulty;
 		int Paths;
 		boost::shared_ptr<BobPhsx> FixedHero;
 		boost::shared_ptr<TileSet> FixedTileSet;

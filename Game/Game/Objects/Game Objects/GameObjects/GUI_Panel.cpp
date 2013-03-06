@@ -98,6 +98,8 @@ namespace CloudberryKingdom
 
 	void GUI_Panel::ReturnToCaller()
 	{
+		ButtonCheck::PreventInput();
+
 		if ( NoBackIfNoCaller && Caller == 0 )
 			return;
 
@@ -473,7 +475,7 @@ namespace CloudberryKingdom
 			if ( ReleaseWhenDoneScaling && !MyPile->FancyScale->Playing )
 				Release();
 
-		if ( !Active )
+		if ( !Active || BubblingOut )
 			return;
 
 		if ( MyMenu != 0 && !MyMenu->Released )
@@ -541,6 +543,8 @@ namespace CloudberryKingdom
 
 	void GUI_Panel::InitializeInstanceFields()
 	{
+		BubblingOut = false;
+
 		_Control = -2;
 		AmountShifted = Vector2();
 		ReturnToCallerDelay = 0;

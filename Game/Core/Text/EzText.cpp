@@ -48,8 +48,8 @@ namespace CloudberryKingdom
     boost::shared_ptr<EzTexture> ButtonTexture::getRightBumper() { return Tools::Texture( std::wstring( L"PS3_1" ) ); }
 #elif CAFE
     bool ButtonTexture::UseGamepad = true;
-    boost::shared_ptr<EzTexture> ButtonTexture::_Go() { return Tools::Texture( std::wstring( UseGamepad ? L"WiiU_B" : L"WiiU_2" ) ); }
-    boost::shared_ptr<EzTexture> ButtonTexture::_Back() { return Tools::Texture( std::wstring( UseGamepad ? L"WiiU_A" : L"WiiU_1" ) ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::_Go() { return Tools::Texture( std::wstring( UseGamepad ? L"WiiU_A" : L"WiiU_2" ) ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::_Back() { return Tools::Texture( std::wstring( UseGamepad ? L"WiiU_B" : L"WiiU_1" ) ); }
     boost::shared_ptr<EzTexture> ButtonTexture::getX() { return Tools::Texture( std::wstring( UseGamepad ? L"WiiU_Y" : L"WiiU_1" ) ); }
     boost::shared_ptr<EzTexture> ButtonTexture::getY() { return Tools::Texture( std::wstring( UseGamepad ? L"WiiU_X" : L"WiiU_Dash" ) ); }
     boost::shared_ptr<EzTexture> ButtonTexture::getLeftRight() { return Tools::Texture( std::wstring( UseGamepad ? L"WiiU_Dir" : L"WiiU_Dir" ) ); }
@@ -937,6 +937,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 		Draw( cam, true );
 	}
 
+	static bool DrawingShadow = false;
 	void EzText::Draw( const boost::shared_ptr<Camera> &cam, bool EndBatch )
 	{
 		Alpha += AlphaVel;
@@ -965,8 +966,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 		PicColor = Color::Black;
 		if ( Shadow )
 		{
-			// Note: never end the SpriteBatch for drawing a shadow,
-			// since we will always be drawing the non-shadow part afterward
+			DrawingShadow = true;
 
 			float _HoldScale = getScale();
 			setScale( getScale() * ShadowScale );
@@ -978,6 +978,8 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 			_Pos += ShadowOffset;
 
 			setScale( _HoldScale );
+
+			DrawingShadow = false;
 		}
 		PicColor = Color::White;
 
@@ -1021,7 +1023,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 			ZoomMod = getMyCameraZoom().X / .001f;
 
 		Vector2 Position = _Pos + JustificationShift;
-		if ( FixedToCamera ) Position += cam->Data.Position;
+		//if ( FixedToCamera ) Position += cam->Data.Position;
 		if ( FixedToCamera ) Position += Vector2(Tools::EffectWad->getCameraPosition().X, Tools::EffectWad->getCameraPosition().Y);
 		Vector2 Loc = Tools::ToScreenCoordinates( Position, cam, Tools::EffectWad->ModZoom );
 
@@ -1042,8 +1044,17 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 		if ( DrawPics )
 			for ( std::vector<boost::shared_ptr<EzTextPic> >::const_iterator pic = Pics.begin(); pic != Pics.end(); ++pic )
 			{
-				Color piccolor = PicColor;
-				piccolor.A = Tools::FloatToByte( Alpha * piccolor.A / 255 );
+				Color piccolor;
+
+				if ( DrawingShadow )
+				{
+					piccolor = Color( Vector4( color.X ) );
+				}
+				else
+				{
+					piccolor = PicColor;
+					piccolor.A = Tools::FloatToByte( Alpha * piccolor.A / 255 );
+				}
 
 				piccolor = ColorHelper::PremultiplyAlpha( piccolor );
 
@@ -1058,6 +1069,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 				pos2 = Tools::ToWorldCoordinates( pos2, cam, getMyCameraZoom() * Tools::EffectWad->ModZoom.X );
 				//scale *= 1000.f / 320.f;
 
+				/*
 				::SimpleQuad sq;
 				sq.V[0] = Vector2( pos.X, pos2.Y );
 				sq.V[1] = Vector2( pos.X, pos.Y );
@@ -1073,6 +1085,13 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 				sq.Color = Vector4(1);
 
 				QUAD_DRAWER->Draw( sq );
+				*/
+
+				// This conditional is a hack to avoid drawing any picture shadows =o
+				//if ( static_cast<int>( piccolor.R ) > 100 )
+				{
+					Tools::QDrawer->DrawPic( pos, pos2, ( *pic )->tex, piccolor );
+				}
 			}
 	}
 

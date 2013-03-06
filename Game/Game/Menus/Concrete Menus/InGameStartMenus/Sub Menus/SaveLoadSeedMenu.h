@@ -24,7 +24,6 @@ namespace CloudberryKingdom
 
 			void Apply( const boost::shared_ptr<MenuItem> &_item );
 		};
-
 	
 		struct LoadProxy : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{

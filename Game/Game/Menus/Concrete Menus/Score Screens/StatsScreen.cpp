@@ -242,9 +242,9 @@ namespace CloudberryKingdom
     //x = new float[][]{ null, x1, x2, x3, x4 };
 
 
-        PlayerManager::Players[1]->Exists = false;
-        PlayerManager::Players[2]->Exists = false;
-        PlayerManager::Players[3]->Exists = false;
+        //PlayerManager::Players[1]->Exists = false;
+        //PlayerManager::Players[2]->Exists = false;
+        //PlayerManager::Players[3]->Exists = false;
             
 
         ItemPos = Vector2(-1225, 950);
@@ -483,6 +483,8 @@ namespace CloudberryKingdom
 	void StatsMenu::MyDraw()
 	{
 		CkBaseMenu::MyDraw();
+
+		//MyPile->Draw( 1 );
 	}
 
 	void StatsMenu::InitializeInstanceFields()

@@ -27,7 +27,7 @@ namespace CloudberryKingdom
 		data->MyGame->AddGameObject( ch->MyGUI_Score );
 		data->MyGame->AddGameObject( ch->MyGUI_Level );
 		data->MyGame->AddGameObject( ch->MyCoinScoreMultiplier );
-		data->MyGame->AddGameObject( MakeMagic( PerfectScoreObject, ( false, true ) ) );
+		data->MyGame->AddGameObject( MakeMagic( PerfectScoreObject, ( false, true, false ) ) );
 	}
 
 	StringWorldTimed::StringWorldTimed( const boost::shared_ptr<LambdaFunc_1<int, boost::shared_ptr<LevelSeedData> > > &GetSeed, const boost::shared_ptr<GUI_Timer> &Timer ) :
@@ -50,6 +50,13 @@ namespace CloudberryKingdom
 
 		// Add 'Perfect' watcher
 		OnSwapToFirstLevel->Add( boost::make_shared<OnSwapLambda>( boost::static_pointer_cast<StringWorldTimed>( shared_from_this() ) ) );*/
+	}
+
+	void StringWorldTimed::AdditionalSetLevel()
+	{
+		StringWorldGameData::AdditionalSetLevel();
+
+		NextLevelSeed->MyGame->MyLevel->SetBack( 3 );
 	}
 
 	void StringWorldTimed::Release()

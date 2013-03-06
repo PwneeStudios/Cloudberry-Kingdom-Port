@@ -511,6 +511,15 @@ namespace CloudberryKingdom
 		ScoreMultiplier = 1;
 		if ( OnCalculateScoreMultiplier != 0 )
 			OnCalculateScoreMultiplier->Apply( shared_from_this() );
+
+		for ( GameObjVec::const_iterator obj = MyGameObjects.begin(); obj != MyGameObjects.end(); ++obj )
+		{
+			boost::shared_ptr<PerfectScoreObject> pso = boost::dynamic_pointer_cast<PerfectScoreObject>( *obj );
+			if ( 0 != pso )
+			{
+				pso->UpdateScoreText();
+			}
+		}
 	}
 
 	void GameData::CheckpointGrabEvent( const boost::shared_ptr<ObjectBase> &Checkpoint_Renamed )
@@ -946,6 +955,8 @@ namespace CloudberryKingdom
 			MyLevel->Bobs = NewBobList;
 		}
 
+		SetAdditionalBobParameters( MyLevel->Bobs );
+
 		if ( PlayerManager::AllDead() && !MyLevel->getPreventReset() )
 			MyLevel->ResetAll( false );
 	}
@@ -1068,6 +1079,7 @@ namespace CloudberryKingdom
 				PauseGame = true;
 
 		PauseGame |= CharacterSelectManager::IsShowing;
+		PauseGame |= CloudberryKingdomGame::getSuperPause();
 	}
 
 	void GameData::UpdateLevelPause()
@@ -1400,6 +1412,7 @@ namespace CloudberryKingdom
 #if defined(XBOX) || defined(XBOX_SIGNIN)
 	void GameData::OnSignOut( const boost::shared_ptr<SignedOutEventArgs> &e )
 	{
+		Tools::CurGameData->RemovePlayer( (int)e->Gamer->PlayerIndex );
 	}
 #endif
 

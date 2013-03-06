@@ -28,6 +28,7 @@ namespace CloudberryKingdom
 		static int Coins;
 		static int CurrentScore;
 		static int CurrentId;
+		static int LeaderboardIndex;
 
 		struct OnCoinGrabProxy : public Lambda_1<boost::shared_ptr<ObjectBase> >
 		{

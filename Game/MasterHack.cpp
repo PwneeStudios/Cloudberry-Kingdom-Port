@@ -385,8 +385,8 @@ namespace CloudberryKingdom
 		This->Warning = boost::make_shared<TimerWarning>();
 		This->Warning->MyTimer = Timer;
 
-		This->MyGUI_Score = MakeMagic( GUI_Score, ( false ) );
-		This->MyGUI_Level = MakeMagic( GUI_Level, ( false ) );
+		This->MyGUI_Score = MakeMagic( GUI_Score, ( true ) );
+		This->MyGUI_Level = MakeMagic( GUI_Level, ( true ) );
 
 		Timer->OnTimeExpired->Add( boost::make_shared<StringWorldTimed::StringWorldOnTimerExpiredLambda>( This->MyGUI_Score, This->MyGUI_Level ) );
 

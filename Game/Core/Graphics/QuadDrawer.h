@@ -135,6 +135,7 @@ namespace CloudberryKingdom
 
 		void DrawFilledBox( Vector2 BL, Vector2 TR, Color color );
 
+		void DrawLine( Vector2 x1, Vector2 x2, const boost::shared_ptr<LineSpriteInfo> &info, int RepeatWidth );
 		void DrawLine( Vector2 x1, Vector2 x2, const boost::shared_ptr<LineSpriteInfo> &info );
 		void DrawLine( Vector2 x1, Vector2 x2, const boost::shared_ptr<LineSpriteInfo> &info, Vector4 Tint, float Width );
 		void DrawLine( Vector2 x1, Vector2 x2, const boost::shared_ptr<LineSpriteInfo> &info, Vector4 Tint, float Width, float v_shift );

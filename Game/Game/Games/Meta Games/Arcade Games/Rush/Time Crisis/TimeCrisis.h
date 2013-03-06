@@ -35,6 +35,11 @@ namespace CloudberryKingdom
 
 		virtual void PreStart_Tutorial( bool TemporarySkip );
 
+
+		virtual int GetLength( int Index, float Difficulty );
+		virtual boost::shared_ptr<LevelSeedData> Make( int Index, float Difficulty );
+
+		virtual void Start(int StartLevel);
 	};
 }
 

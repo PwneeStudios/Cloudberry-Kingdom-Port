@@ -7,6 +7,7 @@
 #include <boost/make_shared.hpp>
 #include <boost/enable_shared_from_this.hpp>
 #include <string>
+#include <vector>
 
 // Forward declarations.
 class File;
@@ -41,6 +42,28 @@ struct FileBinaryWriter : public BinaryWriter
 	virtual void Write( const std::wstring &s );
 	virtual void Write( float v );
 	virtual void Write( unsigned char c );
+};
+
+struct MemoryBinaryWriter : public BinaryWriter
+{
+private:
+
+	std::vector< unsigned char > buffer_;
+
+public:
+
+	MemoryBinaryWriter( size_t size );
+	~MemoryBinaryWriter();
+	virtual void Write( const unsigned char *buffer, int offset, int length );
+	virtual void Write( int i );
+	virtual void Write( unsigned int i );
+	virtual void Write( unsigned long long i );
+	virtual void Write( const Vector2 &v );
+	virtual void Write( const std::wstring &s );
+	virtual void Write( float v );
+	virtual void Write( unsigned char c );
+
+	const std::vector< unsigned char > &GetBuffer() const { return buffer_; }
 };
 
 #ifdef CAFE

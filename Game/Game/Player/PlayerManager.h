@@ -53,6 +53,7 @@ namespace CloudberryKingdom
 
 		virtual void Deserialize( std::vector<unsigned char> Data );
 
+		static void ProcessChunk( boost::shared_ptr<Chunk> chunk );
 	
 		void InitializeInstanceFields();
 	};
@@ -191,6 +192,9 @@ namespace CloudberryKingdom
 		static void setDefaultName( const std::wstring &value );
 #endif
 
+		static void UploadCampaignLevels();
+		static void UploadPlayerLevels();
+
 		static void CleanTempStats();
 
 		static void AbsorbTempStats();
@@ -223,8 +227,8 @@ namespace CloudberryKingdom
 
 
 		static int MaxPlayerTotalArcadeLevel();
-		static int MaxPlayerTotalCampaignLevel();
-		static int MaxPlayerTotalCampaignIndex();
+		static int MinPlayerTotalCampaignLevel();
+		static int MinPlayerTotalCampaignIndex();
 		static int MaxPlayerTotalLevel();
 
 		/// <summary>
@@ -278,14 +282,14 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// A list of all players that exist and are logged in.
 		/// </summary>
-		const static std::vector<boost::shared_ptr<PlayerData> > &getLoggedInPlayers();
+		const static std::vector<boost::shared_ptr<PlayerData> > getLoggedInPlayers();
 
 #if defined(XBOX) || defined(XBOX_SIGNIN)
 #endif
 		/// <summary>
 		/// A list of all players currently existing.
 		/// </summary>
-		const static std::vector<boost::shared_ptr<PlayerData> > &getExistingPlayers();
+		const static std::vector<boost::shared_ptr<PlayerData> > getExistingPlayers();
 		static std::vector<boost::shared_ptr<PlayerData> > _ExistingPlayers;
 
 		/// <summary>

@@ -132,7 +132,7 @@ namespace CloudberryKingdom
 		MyQuad->Base.Origin = Data.Position;
 		//if (MyQuad.TextureName.Contains("chan"))
 		//{
-		//    MyQuad.PointxAxisTo(CoreMath.Periodic(.005f, -.005f, 300, MyLevel.CurPhsxStep));
+		//    MyQuad.PointxAxisTo(CoreMath::Periodic(.005f, -.005f, 300, MyLevel.CurPhsxStep));
 		//    InitialUpdate();
 		//}
 		//else

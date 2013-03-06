@@ -18,6 +18,7 @@ namespace CloudberryKingdom
 		Vector2 Padding;
 
 		void Release();
+
 	};
 
 	/// <summary>

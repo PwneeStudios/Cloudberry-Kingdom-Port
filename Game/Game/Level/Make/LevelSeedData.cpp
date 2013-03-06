@@ -512,7 +512,9 @@ namespace CloudberryKingdom
 	{
 		if ( song == 0 )
 		{
-			Tools::SongWad->Start( true );
+			//Tools::SongWad->Start( true );
+			Tools::SongWad->Shuffle();
+			Tools::SongWad->PlayNext = true;
 			Tools::SongWad->Next();
 		}
 		else
@@ -533,6 +535,7 @@ namespace CloudberryKingdom
 		else
 		{
 			Tools::SongWad->SetPlayList(Tools::SongList_Standard);
+			Tools::SongWad->Shuffle();
 			WaitThenPlay(level->MyGame, 40, MySong);
 		}
 	}
@@ -1112,7 +1115,7 @@ namespace CloudberryKingdom
 	{
 		level->MyGame->AddGameObject( MakeMagic( HintGiver, () ) );
 		level->MyGame->AddGameObject( HelpMenu::MakeListener() );
-		level->MyGame->AddGameObject( MakeMagic( PerfectScoreObject, (global, ShowMultiplier) ) );
+		level->MyGame->AddGameObject( MakeMagic( PerfectScoreObject, ( global, ShowMultiplier, false ) ) );
 
 		level->MyGame->AddGameObject( InGameStartMenu::MakeListener() );
 	}
@@ -1120,7 +1123,7 @@ namespace CloudberryKingdom
 	void LevelSeedData::AddGameObjects_BareBones( const boost::shared_ptr<Level> &level, bool global )
 	{
 		level->MyGame->AddGameObject( InGameStartMenu::MakeListener() );
-		level->MyGame->AddGameObject( MakeMagic( PerfectScoreObject, (global, true) ) );
+		level->MyGame->AddGameObject( MakeMagic( PerfectScoreObject, ( global, true, false ) ) );
 	}
 
 	void LevelSeedData::BOL_StartMusic()

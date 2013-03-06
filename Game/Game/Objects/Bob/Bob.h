@@ -302,6 +302,8 @@ namespace CloudberryKingdom
 		void CheckForScreenWrap();
 		float CameraWeight, CameraWeightSpeed;
 
+		bool Prevent_A_Button;
+
 		void GetPlayerInput();
 
 		void GetRecordedInput( int Step );

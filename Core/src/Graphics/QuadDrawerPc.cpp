@@ -1,6 +1,6 @@
 #include <Graphics/QuadDrawerPc.h>
 
-#include <cassert>
+#include <PwneeAssert.h>
 #include <Content/ResourcePtr.h>
 #include <Content/Texture.h>
 #include <Content/Wad.h>
@@ -205,7 +205,8 @@ QuadDrawerPc::QuadDrawerPc() :
 	glViewport( 0, 0, 1280, 720 );
 
 	glEnable( GL_BLEND );
-	glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
+	//glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
+	glBlendFunc( GL_ONE, GL_ONE_MINUS_SRC_ALPHA );
 
 	internal_->MiddleFrame = CONTENT->Load< Texture >( "Art/Environments/Castle/Background/v2/Castle_Window_Center_Frame.png" );
 	internal_->LeftFrame = CONTENT->Load< Texture >( "Art/Environments/Castle/Background/v2/Castle_Window_Left_Frame.png" );

@@ -4,6 +4,8 @@
 namespace CloudberryKingdom
 {
 
+	bool SavedSeedsGUI::RefreshList = false;
+
 	SavedSeedsGUI::PostMakeStandardLoadHelper::PostMakeStandardLoadHelper( const boost::shared_ptr<LevelSeedData> &seed )
 	{
 		this->seed = seed;
@@ -147,7 +149,7 @@ namespace CloudberryKingdom
 	{
 		CkBaseMenu::CkBaseMenu_Construct();
 
-		EnableBounce();
+		//EnableBounce();
 
 		return boost::static_pointer_cast<SavedSeedsGUI>( shared_from_this() );
 	}
@@ -257,7 +259,7 @@ namespace CloudberryKingdom
 		// If "No", do not delete any seeds.
 		if ( !choice )
 		{
-			MyGame->WaitThenDo( 10, boost::make_shared<ReturnToCallerProxy>( boost::static_pointer_cast<SavedSeedsGUI>( shared_from_this() ) ) );
+			//MyGame->WaitThenDo( 10, boost::make_shared<ReturnToCallerProxy>( boost::static_pointer_cast<SavedSeedsGUI>( shared_from_this() ) ) );
 			return;
 		}
 
@@ -278,7 +280,27 @@ namespace CloudberryKingdom
 
 		SaveGroup::SaveAll();
 
-		MyGame->WaitThenDo( 10, boost::make_shared<ReturnToCallerProxy>( boost::static_pointer_cast<SavedSeedsGUI>( shared_from_this() ) ) );
+		//MyGame->WaitThenDo( 10, boost::make_shared<ReturnToCallerProxy>( boost::static_pointer_cast<SavedSeedsGUI>( shared_from_this() ) ) );
+		ReInit();
+		SlideOut( PresetPos_LEFT, 0 );
+		SlideInFrom = SlideOutTo = PresetPos_LEFT;
+	}
+
+	void SavedSeedsGUI::ReInit()
+	{
+		Init();
+		if ( bar != 0 )
+		{
+			bar->Release();
+
+			bar = MakeMagic( ScrollBar, ( boost::static_pointer_cast<LongMenu>( MyMenu ), boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) ) );
+			bar->setBarPos( Vector2( -1860, 102.7778f ) );
+			MyGame->AddGameObject( bar );
+
+#if defined(PC_VERSION)
+			MyMenu->AdditionalCheckForOutsideClick = boost::make_shared<OnAddHelper>( bar );
+#endif
+		}
 	}
 
 	void SavedSeedsGUI::Sort()
@@ -289,7 +311,13 @@ namespace CloudberryKingdom
 
 	void SavedSeedsGUI::Init()
 	{
-		EnableBounce();
+		if ( boost::dynamic_pointer_cast<NormalGameData>( Tools::CurGameData ) != 0 )
+		{
+            EnableBounce();
+		}
+
+		RefreshList = false;
+
 		CkBaseMenu::Init();
 
 		setControl( -1 );
@@ -333,6 +361,11 @@ namespace CloudberryKingdom
 		backdrop->Name = L"Backdrop";
 		MyPile->Add( backdrop );
 
+		if ( !UseSimpleBackdrop )
+		{
+			EpilepsySafe(.9f);
+		}
+
 		// Header
 		boost::shared_ptr<MenuItem> item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_SavedSeeds, ItemFont ) ) );
 		item->Name = std::wstring( L"Header" );
@@ -365,6 +398,14 @@ else
 	{
 		CkBaseMenu::MyPhsxStep();
 
+		if ( CoreData->Released || !Active ) return;
+
+		if ( RefreshList )
+		{
+			ReInit();
+			RefreshList = false;
+		}
+
 		// Update "Confirm"
 		//if ( ButtonCheck::State( ControllerButtons_A, -2 )->Pressed )
 		{
@@ -374,8 +415,8 @@ else
 
 			std::wstring GoString;
 			if ( n == 0 )      GoString = Localization::WordString( Localization::Words_LoadSeed );
-			else if ( n == 1 ) GoString = Format( Localization::WordString( Localization::Words_DeleteSeeds ).c_str(), n );
-			else		       GoString = Format( Localization::WordString( Localization::Words_DeleteSeedsPlural ).c_str(), n );
+			else if ( n == 1 ) GoString = Format( Localization::WordString( Localization::Words_DeleteSeeds ).c_str(), ToString( n ).c_str() );
+			else		       GoString = Format( Localization::WordString( Localization::Words_DeleteSeedsPlural ).c_str(), ToString( n ).c_str() );
 
 			boost::shared_ptr<MenuItem> _item = MyMenu->FindItemByName( L"Load" );
 			if ( _item != 0 )
@@ -396,12 +437,16 @@ else
 		if ( !Active )
 			return true;
 
+		SlideOutTo = SlideInFrom = PresetPos_RIGHT;
+
 		int num = NumSeedsToDelete();
 		if ( num > 0 )
 		{
 			boost::shared_ptr<VerifyDeleteSeeds> verify = MakeMagic( VerifyDeleteSeeds, ( getControl(), num ) );
 			verify->OnSelect->Add( boost::make_shared<DoDeletionProxy>( boost::static_pointer_cast<SavedSeedsGUI>( shared_from_this() ) ) );
 
+			SlideOutTo = PresetPos_LEFT;
+			SlideInFrom = PresetPos_LEFT;
 			Call( verify, 0 );
 
 			if (UseBounce)
@@ -422,12 +467,19 @@ else
 
 	void SavedSeedsGUI::OnReturnTo()
 	{
-		Hid = false;
+		// Clear the pre-deleted items
+		for ( std::vector<boost::shared_ptr<MenuItem> >::const_iterator item = MyMenu->Items.begin(); item != MyMenu->Items.end(); ++item )
+		{
+			boost::shared_ptr<SeedItem> sitem = boost::dynamic_pointer_cast<SeedItem>( *item );
+			if ( 0 != sitem && sitem->MarkedForDeletion )
+				sitem->ToggleDeletion();
+		}
 
-		CallToLeft = false;
-		UseBounce = false;
-		SlideOutLength = 0;
-		ReturnToCallerDelay = 0;
+		//Hid = false;
+		//CallToLeft = false;
+		//UseBounce = false;
+		//SlideOutLength = 0;
+		//ReturnToCallerDelay = 0;
 
 		CkBaseMenu::OnReturnTo();
 	}
@@ -506,6 +558,12 @@ else
 	#endif
 		}
 	#endif
+
+		if ( boost::dynamic_pointer_cast<CustomLevel_GUI>( Caller ) != 0 )
+		{
+			RegularSlideOut( PresetPos_RIGHT, 0 );
+			SlideIn( 30 );
+		}
 	}
 
 	void SavedSeedsGUI::MakeOptions()

@@ -227,7 +227,9 @@ namespace CloudberryKingdom
 				//Tools::QDrawer.DrawLine(Core.Data.Position + add, PivotPoint + add, Info.SpikeyGuys.Chain);
 				//Tools::QDrawer.DrawLine(Core.Data.Position - add, PivotPoint - add, Info.SpikeyGuys.Chain);
 
-				Tools::QDrawer->DrawLine( getCore()->Data.Position, PivotPoint, getInfo()->Boulders->Chain );
+				int RepeatWidth = 1900;
+				if ( CoreData->Data.Position.Y < -1200 ) RepeatWidth = 2150;
+				Tools::QDrawer->DrawLine( getCore()->Data.Position, PivotPoint, getInfo()->Boulders->Chain, RepeatWidth );
 
 				MyDraw->Update();
 				MyDraw->Draw();

@@ -7,8 +7,6 @@
 
 #include <Hacks/String.h>
 
-#include <Hacks/String.h>
-
 struct SpriteFontInternal
 {
 };

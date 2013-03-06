@@ -60,6 +60,15 @@ public:
 		impl_.RunJob( job );
 	}
 
+	/// Run a job as soon as possible.
+	/**
+	 * @param job Pointer to job.  Scheduler takes ownership.
+	 */
+	void RunJobASAP( Job *job )
+	{
+		impl_.RunJobASAP( job );
+	}
+
 	/// Create a resource.
 	/**
 	 * This method schedules the creation of a resource.  If the resource is

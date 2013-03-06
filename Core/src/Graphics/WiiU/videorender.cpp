@@ -21,8 +21,9 @@
 #include <stdio.h>    //for sprintf
 #include <cafe/demo.h>
 
-#include    <cafe/h264.h>
-#include    "videorender.h"
+#include <cafe/h264.h>
+#include <nn/erreula.h>
+#include "videorender.h"
 
 // --------- GX2 Data ---------
 
@@ -50,7 +51,7 @@ static DEMO_F32x3F32x2 QUAD_VERTEX_DATA[] = {
 static AttribBuffer g_QuadAttribData;
 static GX2Sampler g_Sampler;
 
-static char *GSHFileName = "/vol/content/Shaders/nv12decode.gsh";
+static char *GSHFileName = "/vol/content/0010/Shaders/nv12decode.gsh";
 // Uniform inputs
 static s32 g_Mode[4] = {0, 0, 0, 0};
 
@@ -235,6 +236,19 @@ void drawTVFrame()
 
     // Restore state that was saved when DEMOGfxInit was called.
     GX2SetContextState(DEMOContextState);
+
+	DEMOGfxSetContextState();
+
+	GX2SurfaceFormat f = DEMOColorBuffer.surface.format;
+	DEMOColorBuffer.surface.format = static_cast< GX2SurfaceFormat >( f | 0x00000400 );
+	GX2InitColorBufferRegs( &DEMOColorBuffer );
+	GX2SetColorBuffer( &DEMOColorBuffer, GX2_RENDER_TARGET_0 );
+
+	nn::erreula::DrawTV();
+
+	DEMOColorBuffer.surface.format = f;
+	GX2InitColorBufferRegs( &DEMOColorBuffer );
+	GX2SetColorBuffer( &DEMOColorBuffer, GX2_RENDER_TARGET_0 );
 
     DEMOGfxDoneRender();
 

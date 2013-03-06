@@ -2,7 +2,8 @@
 #define BOOST_SMART_PTR_SHARED_PTR_HPP_INCLUDED
 
 #ifdef DEBUG
-#define BOOST_BIN
+	#define BOOST_BIN
+	#include <string>
 #endif
 
 
@@ -63,6 +64,30 @@ template<class T> class shared_ptr;
 template<class T> class weak_ptr;
 template<class T> class enable_shared_from_this;
 template<class T> class enable_shared_from_this2;
+
+
+
+
+
+
+//// BoostBin stuff here
+//#ifdef BOOST_BIN
+//
+//extern void _OnAssignment( std::string class_name, int origin_code );
+//
+//template <typename T> void OnAssignment( const boost::shared_ptr<T> * p, int origin_code )
+//{
+//	_OnAssignment( typeid(T).name(), origin_code );
+//}
+//
+//#endif
+//
+
+
+
+
+
+
 
 namespace detail
 {
@@ -259,16 +284,25 @@ public:
     template< class Y >
     shared_ptr( shared_ptr<Y> const & r, T * p ): px( p ), pn( r.pn ) // never throws
     {
+#ifdef BOOST_BIN
+		OnAssignment( this, 0 );	
+#endif
     }
 
     template<class Y>
     shared_ptr(shared_ptr<Y> const & r, boost::detail::static_cast_tag): px(static_cast<element_type *>(r.px)), pn(r.pn)
     {
+#ifdef BOOST_BIN
+		OnAssignment( this, 1 );	
+#endif
     }
 
     template<class Y>
     shared_ptr(shared_ptr<Y> const & r, boost::detail::const_cast_tag): px(const_cast<element_type *>(r.px)), pn(r.pn)
     {
+#ifdef BOOST_BIN
+		OnAssignment( this, 2 );	
+#endif
     }
 
     template<class Y>
@@ -278,6 +312,10 @@ public:
         {
             pn = boost::detail::shared_count();
         }
+
+#ifdef BOOST_BIN
+		OnAssignment( this, 3 );	
+#endif
     }
 
     template<class Y>
@@ -287,6 +325,10 @@ public:
         {
             boost::throw_exception(std::bad_cast());
         }
+
+#ifdef BOOST_BIN
+		OnAssignment( this, 4 );	
+#endif
     }
 
 #ifndef BOOST_NO_AUTO_PTR
@@ -319,7 +361,7 @@ public:
     shared_ptr & operator=( shared_ptr const & r ) // never throws
     {
 #ifdef BOOST_BIN
-		OnAssignment( this );
+		OnAssignment( this, 10 );
 #endif
         this_type(r).swap(*this);
         return *this;

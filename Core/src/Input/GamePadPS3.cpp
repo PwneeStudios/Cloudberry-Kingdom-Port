@@ -1,15 +1,52 @@
 #include <Input/GamePad.h>
 
 #include "PS3/gfxPad.h"
+#include <Utility/Error.h>
+#include <Utility/Log.h>
 
 void GamePad::Initialize()
 {
 	gfxInitPad();
 }
 
+bool AutoCloseWhenConnected()
+{
+	gfxPadRead();
+
+	int numConnected = 0;
+	
+	for( int i = 0; i < 4; ++i )
+	{
+		if( gfxPadConnected( i ) )
+			++numConnected;
+	}
+
+	return numConnected != 0;
+}
+
+// FIXME: Fuck you Oleg. Fuck you.
+std::string GLOBAL_DISCONNECT_MESSAGE = "Error:\nNo Gamepad detected\nPlease press the PS button if the gamepad is connected.";
+
 void GamePad::Update()
 {
 	gfxPadRead();
+
+	int numConnected = 0;
+	for( int i = 0; i < 4; ++i )
+	{
+		if( gfxPadConnected( i ) )
+			++numConnected;
+	}
+
+	if( numConnected == 0 )
+	{
+		DisplayError( ErrorType(
+			GLOBAL_DISCONNECT_MESSAGE,
+			NULL,
+			ErrorType::DEFAULT,
+			AutoCloseWhenConnected
+		) );
+	}
 }
 
 GamePadState GamePad::GetState( PlayerIndex index )
@@ -46,7 +83,7 @@ GamePadState GamePad::GetState( PlayerIndex index )
 
 	gs.Buttons.LeftStick = gfxL3Down( i ) ? ButtonState_Pressed : ButtonState_Released;
 	gs.Buttons.RightStick = gfxR3Down( i ) ? ButtonState_Pressed : ButtonState_Released;
-
+	
 	gs.Triggers.Left = gfxL2Pressure( i );
 	gs.Triggers.Right = gfxR2Pressure( i );
 
@@ -63,4 +100,8 @@ void GamePad::SetVibration( PlayerIndex index, float left, float right )
 void GamePad::Shutdown()
 {
 	gfxPadEnd();
+}
+
+void GamePad::DisableController( PlayerIndex index )
+{
 }

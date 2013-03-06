@@ -1,5 +1,7 @@
 #include <global_header.h>
 
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
 
@@ -15,6 +17,8 @@ namespace CloudberryKingdom
 
 	void StartMenu_MW_Arcade::SlideIn( int Frames )
 	{
+		PlayerManager::UploadPlayerLevels();
+
 		Title->BackPanel->SetState( StartMenu_MW_Backpanel::State_SCENE_KOBBLER );
 		ArcadeMenu::SlideIn( 0 );
 	}
@@ -67,6 +71,8 @@ namespace CloudberryKingdom
 
 	void StartMenu_MW_Arcade::OnAdd()
 	{
+		CloudberryKingdomGame::SetPresence( Presence_Arcade );
+
 		ArcadeMenu::OnAdd();
 	}
 
