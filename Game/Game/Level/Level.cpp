@@ -2642,6 +2642,12 @@ int Level::AfterPostDrawLayer = 12;
 		OnCameraChange.reset();
 
 		MyTileSet.reset();
+
+		if ( FinalCamZone != 0 )
+		{
+			FinalCamZone->Release();
+			FinalCamZone.reset();
+		}
 	}
 
 	const boost::shared_ptr<Door> Level::getFinalDoor() const

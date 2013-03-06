@@ -63,4 +63,12 @@ namespace CloudberryKingdom
 		Box->Initialize( TriggerA->Box->Current->Center, TriggerA->Box->Current->Size );
 		MyContainsEvent = TriggerA->MyContainsEvent;
 	}
+
+	void ZoneTrigger::Release()
+	{
+		Box.reset();
+		MyContainsEvent.reset();
+
+		ObjectBase::Release();
+	}
 }

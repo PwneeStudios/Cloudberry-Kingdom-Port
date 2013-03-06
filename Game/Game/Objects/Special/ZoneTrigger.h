@@ -22,6 +22,7 @@ namespace CloudberryKingdom
 	
 		boost::shared_ptr<AABox> Box;
 
+		virtual void Release();
 	
 		virtual void MakeNew();
 
