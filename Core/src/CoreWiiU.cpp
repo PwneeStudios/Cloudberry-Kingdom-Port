@@ -218,6 +218,8 @@ extern bool GLOBAL_VIDEO_OVERRIDE;
 extern std::list< ErrorType > GLOBAL_ERROR_QUEUE;
 extern VPADStatus vpadStatus;
 extern s32 readLength;
+extern KPADStatus kpadStatus[ WPAD_MAX_CONTROLLERS ];
+extern s32 kpadReadLength[ WPAD_MAX_CONTROLLERS ];
 extern bool vpadConnected;
 extern bool anythingElseConnected;
 
@@ -235,6 +237,7 @@ int CoreWiiU::Run()
 
 	//GLOBAL_ERROR_QUEUE.push_back( 1010102 );
 	s32 currentErrorCode = 0;
+	ErrorType currentError( 0 );
 
 	while( DEMOIsRunning() )
 	{
@@ -247,6 +250,7 @@ int CoreWiiU::Run()
 
 				ErrorType error = GLOBAL_ERROR_QUEUE.front();
 				currentErrorCode = error.GetCode();
+				currentError = error;
 				GLOBAL_ERROR_QUEUE.pop_front();
 
 				nn::erreula::AppearArg appearArg;
@@ -277,15 +281,15 @@ int CoreWiiU::Run()
 
 		/*for ( int i = 0; i < WPAD_MAX_CONTROLLERS; ++i )
 		{
-			s32 kpad_read_length = KPADRead( i, &wpad_status[i], 1 );
-			if( kpad_read_length > 0 )
+			//s32 kpad_read_length = KPADRead( i, &wpad_status[i], 1 );
+			if( kpadReadLength[ i ] > 0 )
 			{
-				info.kpad_status[i] = &wpad_status[i];
+				info.kpad_status[ i ] = &kpadStatus[ i ];
 			}
 			else
 			{
 				// Pass NULL if it could not be read
-				info.kpad_status[i] = NULL;
+				info.kpad_status[ i ] = NULL;
 			}
 		}*/
 
@@ -313,6 +317,17 @@ int CoreWiiU::Run()
 					nn::erreula::DisappearErrorViewer();
 					FMOD_WiiU_SetMute( FALSE );
 					//viewerVisible = false;
+				}
+			}
+			else if( currentErrorCode == 1520100 )
+			{
+				if( nn::erreula::GetStateErrorViewer() == nn::erreula::cState_Display
+					/*&& ( anythingElseConnected || vpadConnected )*/
+					&& currentError.GetAutoClose()() )
+				{
+					nn::erreula::DisappearErrorViewer();
+					FMOD_WiiU_SetMute( FALSE );
+					currentErrorCode = 0;
 				}
 			}
 			/*else if( currentErrorCode == 1650101 )

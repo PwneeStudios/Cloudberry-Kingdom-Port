@@ -1202,14 +1202,53 @@ float CloudberryKingdomGame::fps = 0;
 #endif
         }
 
+		static bool ClearError()
+		{
+			ButtonCheck::UpdateControllerAndKeyboard_StartOfStep();
+
+			int numConnected = 0;
+			for( int i = 0; i < 4; ++i )
+			{
+				if( Tools::GamepadState[i].IsConnected )
+					numConnected++;
+			}
+
+			if( numConnected == 0 )
+				return false;
+
+			for (int i = 0; i < 4; i++)
+			{
+				if ( ( PlayerManager::Players[i] != 0 ) && PlayerManager::Players[i]->Exists && !Tools::GamepadState[i].IsConnected )
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
 		bool CloudberryKingdomGame::DisconnectedController()
 		{
 #if PC_VERSION
 			return false;
 #endif
+
+			if( !PastPressStart )
+				return false;
+
+			int numConnected = 0;
+			for( int i = 0; i < 4; ++i )
+			{
+				if( Tools::GamepadState[i].IsConnected )
+					numConnected++;
+			}
+
+			if( numConnected == 0 )
+				return true;
+
 			for (int i = 0; i < 4; i++)
 			{
-				if ( PlayerManager::Players[i] != 0 && PlayerManager::Players[i]->Exists && !Tools::GamepadState[i].IsConnected )
+				if ( ( PlayerManager::Players[i] != 0 ) && PlayerManager::Players[i]->Exists && !Tools::GamepadState[i].IsConnected )
 				{
 					return true;
 				}
@@ -1381,7 +1420,8 @@ float CloudberryKingdomGame::fps = 0;
 		if( DisconnectedController() )
 		{
 #ifdef CAFE
-			DisplayError( ErrorType( 1520100 ) );
+			DisplayError( ErrorType( 1520100,
+				NULL, ErrorType::DEFAULT, ClearError, false ) );
 #endif
 		}
 #endif
