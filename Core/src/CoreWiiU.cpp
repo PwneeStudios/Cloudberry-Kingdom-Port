@@ -131,18 +131,12 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 			createArg.mRegion = nn::erreula::cRegionType_Us;
 			break;
 		case SCI_PLATFORM_REGION_EUR:
+		case SCI_PLATFORM_REGION_AUS:
 			createArg.mRegion = nn::erreula::cRegionType_Eu;
 			break;
-		//case SCI_PLATFORM_REGION_AUS: // Obsolete.
-		case SCI_PLATFORM_REGION_CHN:
-			createArg.mRegion = nn::erreula::cRegionType_Cn;
-			break;
-		case SCI_PLATFORM_REGION_KOR:
-			createArg.mRegion = nn::erreula::cRegionType_Kr;
-			break;
+		case SCI_PLATFORM_REGION_CHN:  // These are not supported by the error viewer and are thus
+		case SCI_PLATFORM_REGION_KOR:  // defaulted to English.
 		case SCI_PLATFORM_REGION_TWN:
-			createArg.mRegion = nn::erreula::cRegionType_Tw;
-			break;
 		default:
 			// By default the region is US.
 			break;
@@ -173,34 +167,6 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 
 	GamePad::Initialize();
 	MediaPlayer::Initialize();
-
-
-	// FIXME: Docs say to delay this as much as possible.
-	// This was reimplemented in InitializeSave to delay execution.
-	/*SAVEInit();
-	nn::act::Initialize();
-
-	u8 accountSlot = nn::act::GetSlotNo();
-	u32 persistentId = nn::act::GetPersistentIdEx( accountSlot );
-
-	if( nn::act::IsSlotOccupied( accountSlot ) )
-	{
-		LOG.Write( "Creating account for slot %d with id 0x%X\n", accountSlot, persistentId );
-
-		if( SAVEInitSaveDir( accountSlot ) != SAVE_STATUS_OK )
-		{
-			LOG.Write( "Failed to create save directory.\n" );
-		}
-	}
-
-	GLOBAL_ACCOUNT_NAME = LOCAL_ACCOUNT_NAME;
-	memset( LOCAL_ACCOUNT_NAME, 0, sizeof( LOCAL_ACCOUNT_NAME ) );
-	sprintf( LOCAL_ACCOUNT_NAME, "Errorberry" );
-	nn::act::GetAccountId( LOCAL_ACCOUNT_NAME );
-	
-	LOG.Write( "Creating global directory\n" );
-	if( SAVEInitSaveDir( ACT_SLOT_NO_COMMON ) != SAVE_STATUS_OK )
-		LOG.Write( "Failed to create common directory.\n" );*/
 }
 
 CoreWiiU::~CoreWiiU()
@@ -241,6 +207,7 @@ extern std::list< ErrorType > GLOBAL_ERROR_QUEUE;
 extern VPADStatus vpadStatus;
 extern s32 readLength;
 extern bool vpadConnected;
+extern bool anythingElseConnected;
 
 void DebugFrame( float r, float g, float b )
 {
@@ -317,6 +284,12 @@ int CoreWiiU::Run()
 		{
 			if( nn::erreula::IsDecideSelectButtonError() )
 			{
+				// Exit and jump to data management!
+				if( currentErrorCode == 1550100 )
+				{
+					Exit();
+				}
+
 				if( nn::erreula::GetStateErrorViewer() == nn::erreula::cState_Display )
 				{
 					nn::erreula::DisappearErrorViewer();
@@ -324,17 +297,17 @@ int CoreWiiU::Run()
 					//viewerVisible = false;
 				}
 			}
-			else if( currentErrorCode == 1650101 )
+			/*else if( currentErrorCode == 1650101 )
 			{
-				if( vpadConnected )
+				if( vpadConnected || anythingElseConnected )
 				{
 					nn::erreula::DisappearErrorViewer();
 					FMOD_WiiU_SetMute( FALSE );
 					currentErrorCode = 0;
 				}
-			}
+			}*/
 
-			if( !GLOBAL_VIDEO_OVERRIDE /*&& viewerVisible*/ )
+			if( !GLOBAL_VIDEO_OVERRIDE )
 			{
 				if( DEMODRCGetStatus() != GX2_DRC_NONE )
 				{

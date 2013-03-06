@@ -3,6 +3,7 @@
 #include <cafe.h>
 #include <cafe/sci/sciEnum.h>
 #include <cafe/sci/sciPublicApi.h>
+#include <nn/erreula.h>
 
 ConsoleRegion GetConsoleRegion()
 {
@@ -72,6 +73,52 @@ ConsoleLanguage GetConsoleLanguage()
 	}
 
 	return ConsoleLanguage_ENGLISH;
+}
+
+void SetErrorLanguage( ConsoleLanguage language )
+{
+	SCICafeLanguage internalLanguage = SCI_CAFE_LANGUAGE_ENGLISH;
+
+	switch( language )
+	{
+	case ConsoleLanguage_JAPANESE:
+		internalLanguage = SCI_CAFE_LANGUAGE_JAPANESE;
+		break;
+	case ConsoleLanguage_ENGLISH:
+		break;
+	case ConsoleLanguage_FRENCH:
+		internalLanguage = SCI_CAFE_LANGUAGE_FRENCH;
+		break;
+	case ConsoleLanguage_GERMAN:
+		internalLanguage = SCI_CAFE_LANGUAGE_GERMAN;
+		break;
+	case ConsoleLanguage_ITALIAN:
+		internalLanguage = SCI_CAFE_LANGUAGE_GERMAN;
+		break;
+	case ConsoleLanguage_SPANISH:
+		internalLanguage = SCI_CAFE_LANGUAGE_SPANISH;
+		break;
+	case ConsoleLanguage_CHINESE:
+		internalLanguage = SCI_CAFE_LANGUAGE_CHINESE;
+		break;
+	case ConsoleLanguage_KOREAN:
+		internalLanguage = SCI_CAFE_LANGUAGE_KOREAN;
+		break;
+	case ConsoleLanguage_DUTCH:
+		internalLanguage = SCI_CAFE_LANGUAGE_DUTCH;
+		break;
+	case ConsoleLanguage_PORTUGUESE:
+		internalLanguage = SCI_CAFE_LANGUAGE_PORTUGUESE;
+		break;
+	case ConsoleLanguage_RUSSIAN:
+		internalLanguage = SCI_CAFE_LANGUAGE_RUSSIAN;
+		break;
+	case ConsoleLanguage_TAIWANESE:
+		internalLanguage = SCI_CAFE_LANGUAGE_TAIWANESE;
+		break;
+	}
+
+	nn::erreula::ChangeLangError( static_cast< nn::erreula::LangType >( internalLanguage ) );
 }
 
 bool IsAsianButtonConfiguration()

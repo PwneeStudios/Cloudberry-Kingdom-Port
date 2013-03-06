@@ -44,7 +44,7 @@ void GamePad::Update()
 		PAD_STATE[ i ].Type = GamePadState::ControllerType_Standard;
 
 	// Is anything else other than the vpad connected?
-	bool anythingElseConnected = false;
+	anythingElseConnected = false;
 
 	// Update Wiimotes.
 	for( int i = 0; i < __min( WPAD_MAX_CONTROLLERS, WPAD_MAX_CONTROLLERS ); i++ )
@@ -96,10 +96,15 @@ void GamePad::Update()
 
 	for( int i = 0; i < PAD_MAX_CONTROLLERS; ++i )
 	{
-		if( status[ i ].err == PAD_ERR_NO_CONTROLLER
-			&& status[ i ].err == PAD_ERR_NOT_READY )
+		if( status[ i ].err == PAD_ERR_NO_CONTROLLER )
 		{
 			PAD_STATE[ i ].IsConnected = false;
+			continue;
+		}
+
+		if( status[ i ].err == PAD_ERR_NOT_READY
+			|| status[ i ].err == PAD_ERR_TRANSFER )
+		{
 			continue;
 		}
 
@@ -170,14 +175,13 @@ void GamePad::Update()
 			PAD_STATE[ i ].ThumbSticks.Left = Vector2( vpadStatus.lStick.x, vpadStatus.lStick.y );
 			PAD_STATE[ i ].ThumbSticks.Right = Vector2( vpadStatus.lStick.x, vpadStatus.lStick.y );
 		}
-		else if( error == VPAD_READ_ERR_NO_CONTROLLER && vpadConnected == true /*&& !anythingElseConnected*/ )
+		else if( error == VPAD_READ_ERR_NO_CONTROLLER && vpadConnected == true && !anythingElseConnected )
 		{
 			// Only show error if nothing is connected to the WiiU.
-
 			vpadConnected = false;
 
 			// Unable to communicate with the WiiU gamepad.
-			DisplayError( ErrorType( 1650101 ) );
+			//DisplayError( ErrorType( 1650101 ) );
 		}
 	}
 }

@@ -156,6 +156,10 @@ static void stateChangeCallback( FSClient *pClient, FSVolumeState state, void *p
 	LOG.Write( "Last error: %d\n", lastError );
 }
 
+void StartSaveWiiU()
+{
+}
+
 SaveWriterWiiU::SaveWriterWiiU( const std::string &path, bool global )
 	: internal_( new SaveWriterWiiUInternal )
 {
@@ -184,6 +188,10 @@ SaveWriterWiiU::SaveWriterWiiU( const std::string &path, bool global )
 
 		internal_->AlignedBuffer = MEMAllocFromDefaultHeapEx( ALIGNED_BUFFER_SIZE, FS_IO_BUFFER_ALIGN );
 	}
+}
+
+void EndSaveWiiU()
+{
 }
 
 SaveWriterWiiU::~SaveWriterWiiU()
