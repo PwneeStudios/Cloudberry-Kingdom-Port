@@ -8,7 +8,13 @@ namespace CloudberryKingdom
 	struct AutoGen_Parameters : public boost::enable_shared_from_this<AutoGen_Parameters>
 	{
 
-		virtual ~AutoGen_Parameters() { }
+		virtual ~AutoGen_Parameters()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "AutoGen_Parameters" );
+#endif
+		}
+
 
 		/// <summary>
 		/// Whether to intelligently spread out the period offsets of placed obstacles
@@ -77,7 +83,13 @@ namespace CloudberryKingdom
 	struct AutoGen : public boost::enable_shared_from_this<AutoGen>
 	{
 	
-		virtual ~AutoGen() { }
+		virtual ~AutoGen()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "AutoGen" );
+#endif
+		}
+
 
 		AutoGen();
 

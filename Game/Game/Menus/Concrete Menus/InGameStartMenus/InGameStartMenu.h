@@ -11,7 +11,13 @@ namespace CloudberryKingdom
 
 		bool CenterItems;
 
-		virtual ~InGameStartMenu() { }
+		virtual ~InGameStartMenu()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "InGameStartMenu" );
+#endif
+		}
+
 
 		struct UnpauseLambda : public Lambda
 		{

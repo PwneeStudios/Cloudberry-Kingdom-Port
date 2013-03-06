@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct Region : public GUI_Panel
 	{
 	
-		virtual ~Region() { }
+		virtual ~Region()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Region" );
+#endif
+		}
+
 
 		Region( const Vector2 &pos, const Vector2 &size );
 		boost::shared_ptr<Region> Region_Construct( const Vector2 &pos, const Vector2 &size );

@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct PressNote : public GUI_Text
 	{
 
-		virtual ~PressNote() { }
+		virtual ~PressNote()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "PressNote" );
+#endif
+		}
+
 	
 		static const int ButtonScale = 87;
 		static const float TextScale;

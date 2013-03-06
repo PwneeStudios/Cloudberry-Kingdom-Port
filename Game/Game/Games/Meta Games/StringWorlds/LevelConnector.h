@@ -28,7 +28,13 @@ namespace CloudberryKingdom
 	struct ILevelConnector : public ObjectBase
 	{
 	
-		virtual ~ILevelConnector() { }
+		virtual ~ILevelConnector()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "ILevelConnector" );
+#endif
+		}
+
 
 		virtual const boost::shared_ptr<LevelSeedData> &getNextLevelSeedData() const = 0;
 		virtual void setNextLevelSeedData( const boost::shared_ptr<LevelSeedData> &value ) = 0;

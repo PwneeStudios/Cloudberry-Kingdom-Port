@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct NewHero_GUI : public GUI_Panel
 	{
 
-		virtual ~NewHero_GUI() { }
+		virtual ~NewHero_GUI()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "NewHero_GUI" );
+#endif
+		}
+
 
 		virtual void OnAdd();
 

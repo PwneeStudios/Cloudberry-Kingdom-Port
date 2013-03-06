@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct StyleData : public boost::enable_shared_from_this<StyleData>
 	{
 
-		virtual ~StyleData() { }
+		virtual ~StyleData()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "StyleData" );
+#endif
+		}
+
 	
 		enum FinalPlatsType
 		{

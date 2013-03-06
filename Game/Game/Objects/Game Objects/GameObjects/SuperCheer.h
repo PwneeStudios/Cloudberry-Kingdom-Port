@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct SuperCheer : public GameObject
 	{
 	
-		virtual ~SuperCheer() { }
+		virtual ~SuperCheer()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "SuperCheer" );
+#endif
+		}
+
 
 		struct CheerHelper : public Lambda
 		{

@@ -17,7 +17,13 @@ namespace CloudberryKingdom
 	struct _LineDeath : public _Death
 	{
 	
-		virtual ~_LineDeath() { }
+		virtual ~_LineDeath()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "_LineDeath" );
+#endif
+		}
+
 
 		MovingLine MyLine;
 	

@@ -8,7 +8,13 @@ namespace CloudberryKingdom
 	struct NormalFactory : public GameFactory
 	{
 	
-		virtual ~NormalFactory() { }
+		virtual ~NormalFactory()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "NormalFactory" );
+#endif
+		}
+
 		virtual boost::shared_ptr<GameData> Make( const boost::shared_ptr<LevelSeedData> &data, bool MakeInBackground );
 
 	};
@@ -16,7 +22,13 @@ namespace CloudberryKingdom
 	struct NormalGameData : public GameData
 	{
 	
-		virtual ~NormalGameData() { }
+		virtual ~NormalGameData()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "NormalGameData" );
+#endif
+		}
+
 
 		virtual void SetCreatedBobParameters( const boost::shared_ptr<Bob> &bob );
 

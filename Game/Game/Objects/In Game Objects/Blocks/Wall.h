@@ -31,7 +31,13 @@ namespace CloudberryKingdom
 	struct Wall : public BlockBase
 	{
 
-		virtual ~Wall() { }
+		virtual ~Wall()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Wall" );
+#endif
+		}
+
 	
 		enum BufferType
 		{

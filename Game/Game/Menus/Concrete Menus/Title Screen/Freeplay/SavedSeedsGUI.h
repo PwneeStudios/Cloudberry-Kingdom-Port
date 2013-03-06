@@ -8,7 +8,13 @@ namespace CloudberryKingdom
 	struct SavedSeedsGUI : public CkBaseMenu
 	{
 
-		virtual ~SavedSeedsGUI() { }
+		virtual ~SavedSeedsGUI()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "SavedSeedsGUI" );
+#endif
+		}
+
 
 		static bool RefreshList;
 

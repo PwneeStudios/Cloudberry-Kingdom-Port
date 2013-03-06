@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct TextList : public ObjectBase
 	{
 	
-		virtual ~TextList() { }
+		virtual ~TextList()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "TextList" );
+#endif
+		}
+
 
 		virtual void Release();
 

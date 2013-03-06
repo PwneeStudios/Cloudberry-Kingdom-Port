@@ -8,7 +8,13 @@ namespace CloudberryKingdom
 	struct PhsxSlider : public MenuSlider
 	{
 	
-		virtual ~PhsxSlider() { }
+		virtual ~PhsxSlider()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "PhsxSlider" );
+#endif
+		}
+
 
 		struct PhsxDataSetter : public Lambda
 		{

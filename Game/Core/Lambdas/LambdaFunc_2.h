@@ -7,7 +7,13 @@ namespace CloudberryKingdom
 	struct LambdaFunc_2 : boost::enable_shared_from_this<LambdaFunc_2<T1, T2, OutputType> >
 	{
 	
-		virtual ~LambdaFunc_2() { }
+		virtual ~LambdaFunc_2()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "LambdaFunc_2" );
+#endif
+		}
+
 
 		virtual OutputType Apply( const T1 &t1, const T2 &t2 ) = 0;
 

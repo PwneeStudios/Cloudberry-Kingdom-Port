@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct CameraZone : public ZoneTrigger
 	{
 	
-		virtual ~CameraZone() { }
+		virtual ~CameraZone()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "CameraZone" );
+#endif
+		}
+
 
 		struct ZoneTriggerLambda : public Lambda_1<boost::shared_ptr<ZoneTrigger> >
 		{

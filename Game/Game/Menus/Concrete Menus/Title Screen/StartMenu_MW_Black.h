@@ -8,7 +8,13 @@ namespace CloudberryKingdom
 	struct StartMenu_MW_Black : public CkBaseMenu
 	{
 
-		virtual ~StartMenu_MW_Black() { }
+		virtual ~StartMenu_MW_Black()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "StartMenu_MW_Black" );
+#endif
+		}
+
 
 		using CkBaseMenu::SlideOut;
 		using CkBaseMenu::SlideIn;

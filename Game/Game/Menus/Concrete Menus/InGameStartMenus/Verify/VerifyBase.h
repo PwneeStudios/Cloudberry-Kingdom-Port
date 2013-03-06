@@ -11,7 +11,13 @@ namespace CloudberryKingdom
 	struct VerifyBaseMenu : public CkBaseMenu
 	{
 
-		virtual ~VerifyBaseMenu() { }
+		virtual ~VerifyBaseMenu()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "VerifyBaseMenu" );
+#endif
+		}
+
 
 		/// <summary>
 		/// Called when the user chooses yes/no.

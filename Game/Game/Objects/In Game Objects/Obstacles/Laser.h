@@ -32,7 +32,13 @@ namespace CloudberryKingdom
 	struct Laser : public _LineDeath, public IBound
 	{
 
-		virtual ~Laser() { }
+		virtual ~Laser()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Laser" );
+#endif
+		}
+
 	
 		struct LaserTileInfo : public TileInfoBase
 		{

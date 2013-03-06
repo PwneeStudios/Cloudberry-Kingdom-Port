@@ -32,7 +32,13 @@ namespace CloudberryKingdom
 		void BouncDraw();
 		void MyDraw();
 
-		virtual ~CkBaseMenu() { }
+		virtual ~CkBaseMenu()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "CkBaseMenu" );
+#endif
+		}
+
 
 		using GUI_Panel::SlideOut;
 		using GUI_Panel::SlideIn;

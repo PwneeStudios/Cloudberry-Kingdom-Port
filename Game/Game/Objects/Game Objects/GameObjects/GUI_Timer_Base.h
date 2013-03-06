@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct GUI_Timer_Base : public GUI_Panel
 	{
 
-		virtual ~GUI_Timer_Base() { }
+		virtual ~GUI_Timer_Base()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "GUI_Timer_Base" );
+#endif
+		}
+
 	
 		using GUI_Panel::SlideOut;
 		using GUI_Panel::SlideIn;

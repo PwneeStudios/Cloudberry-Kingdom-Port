@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct AwardmentMessage : public CkBaseMenu
 	{
 
-		virtual ~AwardmentMessage() { }
+		virtual ~AwardmentMessage()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "AwardmentMessage" );
+#endif
+		}
+
 
 		using CkBaseMenu::SlideOut;
 		using CkBaseMenu::SlideIn;

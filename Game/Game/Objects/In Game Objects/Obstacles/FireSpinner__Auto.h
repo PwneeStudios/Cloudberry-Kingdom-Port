@@ -18,7 +18,13 @@ namespace CloudberryKingdom
 	struct FireSpinner_Parameters : public AutoGen_Parameters
 	{
 
-		virtual ~FireSpinner_Parameters() { }
+		virtual ~FireSpinner_Parameters()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "FireSpinner_Parameters" );
+#endif
+		}
+
 		/*
 		public enum DirectionStyle { Homogenous, Random, HorizontalSplit, VerticalSplit };
 		public DirectionStyle Direction;
@@ -65,7 +71,7 @@ namespace CloudberryKingdom
 			virtual ~Cleanup_2Proxy()
 			{
 #ifdef BOOST_BIN
-				OnDestructor( typeid(this).name() );	
+				OnDestructor( typeid(this).name() );
 #endif
 			}
 

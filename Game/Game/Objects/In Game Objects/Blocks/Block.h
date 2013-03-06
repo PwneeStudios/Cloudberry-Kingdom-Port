@@ -22,7 +22,13 @@ namespace CloudberryKingdom
 	struct BlockData : public ObjectData
 	{
 
-		virtual ~BlockData() { }
+		virtual ~BlockData()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "BlockData" );
+#endif
+		}
+
 	
 		void Decide_RemoveIfUnused( float ChanceToKeep, const boost::shared_ptr<Rand> &Rnd );
 
@@ -124,7 +130,13 @@ namespace CloudberryKingdom
 	struct BlockBase : public ObjectBase
 	{
 	
-		virtual ~BlockBase() { }
+		virtual ~BlockBase()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "BlockBase" );
+#endif
+		}
+
 
 		boost::shared_ptr<AABox> MyBox;
 		const boost::shared_ptr<AABox> &getBox() const;

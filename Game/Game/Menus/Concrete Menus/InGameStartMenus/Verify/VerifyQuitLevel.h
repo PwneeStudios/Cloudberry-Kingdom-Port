@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct VerifyQuitLevelMenu : public VerifyBaseMenu
 	{
 	
-		virtual ~VerifyQuitLevelMenu() { }
+		virtual ~VerifyQuitLevelMenu()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "VerifyQuitLevelMenu" );
+#endif
+		}
+
 
 		struct VerifyQuitOkLambda : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{

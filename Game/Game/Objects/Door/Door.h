@@ -38,7 +38,13 @@ namespace CloudberryKingdom
 	struct Door : public ILevelConnector
 	{
 
-		virtual ~Door() { }
+		virtual ~Door()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Door" );
+#endif
+		}
+
 	
 		struct ShakeLambda : public Lambda
 		{

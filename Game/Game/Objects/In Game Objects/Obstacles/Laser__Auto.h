@@ -24,7 +24,13 @@ namespace CloudberryKingdom
 	struct Laser_Parameters : public AutoGen_Parameters
 	{
 	
-		virtual ~Laser_Parameters() { }
+		virtual ~Laser_Parameters()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Laser_Parameters" );
+#endif
+		}
+
 
 		float LaserStepCutoff;
 		Param LaserStep, LaserPeriod;

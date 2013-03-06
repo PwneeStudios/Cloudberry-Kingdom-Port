@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct Rumble : public GUI_Panel
 	{
 	
-		virtual ~Rumble() { }
+		virtual ~Rumble()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Rumble" );
+#endif
+		}
+
 
 		Rumble();
 		boost::shared_ptr<Rumble> Rumble_Construct();

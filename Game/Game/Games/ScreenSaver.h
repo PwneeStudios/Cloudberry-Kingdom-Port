@@ -8,7 +8,13 @@ namespace CloudberryKingdom
 	struct ScreenSaver : public StringWorldGameData
 	{
 
-		virtual ~ScreenSaver() { }
+		virtual ~ScreenSaver()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "ScreenSaver" );
+#endif
+		}
+
 	
 		struct ConstructorPressAListenerHelper : public Lambda
 		{

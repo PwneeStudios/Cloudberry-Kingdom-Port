@@ -8,7 +8,13 @@ namespace CloudberryKingdom
 	struct OneScreenData : public StyleData
 	{
 	
-		virtual ~OneScreenData() { }
+		virtual ~OneScreenData()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "OneScreenData" );
+#endif
+		}
+
 
 		Vector2 CamShift;
 

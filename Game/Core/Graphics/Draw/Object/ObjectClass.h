@@ -16,7 +16,13 @@ namespace CloudberryKingdom
 	struct ObjectClass : public boost::enable_shared_from_this<ObjectClass>
 	{
 
-		virtual ~ObjectClass() { }
+		virtual ~ObjectClass()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "ObjectClass" );
+#endif
+		}
+
 
 		static void InitializeStatics();
 	

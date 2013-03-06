@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct ZoneTrigger : public ObjectBase
 	{
 
-		virtual ~ZoneTrigger() { }
+		virtual ~ZoneTrigger()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "ZoneTrigger" );
+#endif
+		}
+
 	
 		boost::shared_ptr<Lambda_1<boost::shared_ptr<ZoneTrigger> > > MyContainsEvent;
 

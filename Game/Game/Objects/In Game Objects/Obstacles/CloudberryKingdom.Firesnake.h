@@ -10,7 +10,13 @@ namespace CloudberryKingdom
 	struct Firesnake : public _CircleDeath
 	{
 
-		virtual ~Firesnake() { }
+		virtual ~Firesnake()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Firesnake" );
+#endif
+		}
+
 	
 		struct FiresnakeTileInfo : public TileInfoBase
 		{

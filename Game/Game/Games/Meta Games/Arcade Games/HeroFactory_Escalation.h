@@ -8,7 +8,13 @@ namespace CloudberryKingdom
 	struct Challenge_HeroFactoryEscalation : public Challenge_Escalation
 	{
 	
-		virtual ~Challenge_HeroFactoryEscalation() { }
+		virtual ~Challenge_HeroFactoryEscalation()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Challenge_HeroFactoryEscalation" );
+#endif
+		}
+
 
 		static boost::shared_ptr<BobPhsx> FactoryHero;
 

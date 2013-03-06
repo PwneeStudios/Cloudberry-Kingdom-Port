@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct ListSelectPanel : public CkBaseMenu
 	{
 
-		virtual ~ListSelectPanel() { }
+		virtual ~ListSelectPanel()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "ListSelectPanel" );
+#endif
+		}
+
 	
 		struct OnSelectProxy : public Lambda
 		{

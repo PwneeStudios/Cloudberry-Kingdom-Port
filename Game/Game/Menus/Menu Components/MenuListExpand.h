@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct MenuListExpand : public CkBaseMenu
 	{
 
-		virtual ~MenuListExpand() { }
+		virtual ~MenuListExpand()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "MenuListExpand" );
+#endif
+		}
+
 	
 		struct OnSelectProxy : public Lambda
 		{

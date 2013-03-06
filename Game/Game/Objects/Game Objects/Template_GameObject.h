@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct Template_GameObject : public GameObject
 	{
 	
-		virtual ~Template_GameObject() { }
+		virtual ~Template_GameObject()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Template_GameObject" );
+#endif
+		}
+
 
 		Template_GameObject();
 

@@ -8,7 +8,13 @@ namespace CloudberryKingdom
 	struct GUI_NextLife : public GameObject
 	{
 	
-		virtual ~GUI_NextLife() { }
+		virtual ~GUI_NextLife()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "GUI_NextLife" );
+#endif
+		}
+
 
 		struct OnCoinGrabProxy : public Lambda_1<boost::shared_ptr<ObjectBase> >
 		{

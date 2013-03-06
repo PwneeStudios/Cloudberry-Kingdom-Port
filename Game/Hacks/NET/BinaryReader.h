@@ -16,7 +16,13 @@ struct BinaryReader
 {
 
 	BinaryReader() { }
-	virtual ~BinaryReader() { }
+	virtual ~BinaryReader()
+	{
+#ifdef BOOST_BIN
+		OnDestructor( "BinaryReader" );
+#endif
+	}
+
 
 	virtual void Close() = 0;
 	virtual int ReadInt32() = 0;

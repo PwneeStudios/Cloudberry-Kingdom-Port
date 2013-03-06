@@ -24,7 +24,13 @@ namespace CloudberryKingdom
 	struct LavaBlock : public BlockBase
 	{
 	
-		virtual ~LavaBlock() { }
+		virtual ~LavaBlock()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "LavaBlock" );
+#endif
+		}
+
 
 		boost::shared_ptr<QuadClass> MyQuad;
 

@@ -8,7 +8,13 @@ namespace CloudberryKingdom
 	struct GUI_Multiplier : public GUI_Panel
 	{
 
-		virtual ~GUI_Multiplier() { }
+		virtual ~GUI_Multiplier()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "GUI_Multiplier" );
+#endif
+		}
+
 
 		/// <summary>
 		/// Return a string representation of the Multiplier

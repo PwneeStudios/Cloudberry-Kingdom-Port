@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct FlyingBlob_Parameters : public AutoGen_Parameters
 	{
 
-		virtual ~FlyingBlob_Parameters() { }
+		virtual ~FlyingBlob_Parameters()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "FlyingBlob_Parameters" );
+#endif
+		}
+
 	
 		enum MotionType
 		{

@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct NormalBlock_Parameters : public AutoGen_Parameters
 	{
 	
-		virtual ~NormalBlock_Parameters() { }
+		virtual ~NormalBlock_Parameters()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "NormalBlock_Parameters" );
+#endif
+		}
+
 
 		Param KeepUnused;
 

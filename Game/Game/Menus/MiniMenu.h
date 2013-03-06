@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct MiniMenu : public Menu
 	{
 
-		virtual ~MiniMenu() { }
+		virtual ~MiniMenu()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "MiniMenu" );
+#endif
+		}
+
 	
 		int ItemsToShow;
 	

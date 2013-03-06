@@ -14,7 +14,13 @@ namespace CloudberryKingdom
 	struct HeroLevel : public CkBaseMenu
 	{
 
-		virtual ~HeroLevel() { }
+		virtual ~HeroLevel()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "HeroLevel" );
+#endif
+		}
+
 	
 		boost::shared_ptr<CharacterSelect> MyCharacterSelect;
 	

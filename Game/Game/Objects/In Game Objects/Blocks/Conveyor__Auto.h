@@ -28,7 +28,13 @@ namespace CloudberryKingdom
 	struct ConveyorBlock_Parameters : public AutoGen_Parameters
 	{
 	
-		virtual ~ConveyorBlock_Parameters() { }
+		virtual ~ConveyorBlock_Parameters()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "ConveyorBlock_Parameters" );
+#endif
+		}
+
 
 		Param Width, KeepUnused, Speed;
 

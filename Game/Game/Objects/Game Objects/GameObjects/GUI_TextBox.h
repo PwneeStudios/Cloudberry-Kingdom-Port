@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct GUI_TextBox : public GUI_Text
 	{
 
-		virtual ~GUI_TextBox() { }
+		virtual ~GUI_TextBox()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "GUI_TextBox" );
+#endif
+		}
+
 
 		/// <summary>
 		/// Event handler. Activated when the the user presses Enter while the textbox has focus.
@@ -126,7 +132,13 @@ namespace CloudberryKingdom
 	struct GUI_EnterName : public GUI_TextBox
 	{
 
-		virtual ~GUI_EnterName() { }
+		virtual ~GUI_EnterName()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "GUI_EnterName" );
+#endif
+		}
+
 
 		GUI_EnterName();
 		boost::shared_ptr<GUI_EnterName> GUI_EnterName_Construct();

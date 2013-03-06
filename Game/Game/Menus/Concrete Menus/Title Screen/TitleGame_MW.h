@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	{
 
 	
-		virtual ~TitleGameData_MW_Factory() { }
+		virtual ~TitleGameData_MW_Factory()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "TitleGameData_MW_Factory" );
+#endif
+		}
+
 
 		virtual boost::shared_ptr<GameData> Make();
 
@@ -18,7 +24,13 @@ namespace CloudberryKingdom
 	struct TitleGameData_MW : public TitleGameData
 	{
 	
-		virtual ~TitleGameData_MW() { }
+		virtual ~TitleGameData_MW()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "TitleGameData_MW" );
+#endif
+		}
+
 	
 		static void InitializeStatics();
 	

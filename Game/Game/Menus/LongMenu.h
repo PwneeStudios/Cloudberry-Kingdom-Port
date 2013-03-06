@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct LongMenu : public Menu
 	{
 
-		virtual ~LongMenu() { }
+		virtual ~LongMenu()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "LongMenu" );
+#endif
+		}
+
 	
 		float Offset;
 		float OffsetStep;

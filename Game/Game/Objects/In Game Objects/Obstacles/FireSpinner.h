@@ -10,7 +10,13 @@ namespace CloudberryKingdom
 	struct FireSpinner : public _LineDeath
 	{
 
-		virtual ~FireSpinner() { }
+		virtual ~FireSpinner()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "FireSpinner" );
+#endif
+		}
+
 	
 		struct FireSpinnerTileInfo : public TileInfoBase
 		{

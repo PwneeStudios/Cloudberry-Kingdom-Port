@@ -7,7 +7,13 @@ namespace CloudberryKingdom
 {
 	struct FadeInObject : public GameObject
 	{
-		virtual ~FadeInObject() { }
+		virtual ~FadeInObject()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "FadeInObject" );
+#endif
+		}
+
 
 		struct ReadyProxy : public Lambda
 		{

@@ -8,7 +8,13 @@ namespace CloudberryKingdom
 	struct GhostBlock_Parameters : public AutoGen_Parameters
 	{
 	
-		virtual ~GhostBlock_Parameters() { }
+		virtual ~GhostBlock_Parameters()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "GhostBlock_Parameters" );
+#endif
+		}
+
 
 		enum BoxTypes
 		{

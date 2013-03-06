@@ -20,7 +20,13 @@ namespace CloudberryKingdom
 	struct ArcadeBaseMenu : public CkBaseMenu
 	{
 
-		virtual ~ArcadeBaseMenu() { }
+		virtual ~ArcadeBaseMenu()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "ArcadeBaseMenu" );
+#endif
+		}
+
 	
 		using CkBaseMenu::SlideOut;
 		using CkBaseMenu::SlideIn;
@@ -70,7 +76,13 @@ namespace CloudberryKingdom
 	struct ArcadeMenu : public ArcadeBaseMenu
 	{
 
-		virtual ~ArcadeMenu() { }
+		virtual ~ArcadeMenu()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "ArcadeMenu" );
+#endif
+		}
+
 
 		struct OnSelectProxy : public Lambda
 		{

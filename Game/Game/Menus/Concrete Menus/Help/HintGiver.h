@@ -22,7 +22,13 @@ namespace CloudberryKingdom
 	struct HintGiver : public GUI_Panel
 	{
 
-		virtual ~HintGiver() { }
+		virtual ~HintGiver()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "HintGiver" );
+#endif
+		}
+
 	
 		struct Check_QuickSpawnHelper : public Lambda
 		{

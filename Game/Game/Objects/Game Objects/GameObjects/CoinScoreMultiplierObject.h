@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct CoinScoreMultiplierObject : public GameObject
 	{
 
-		virtual ~CoinScoreMultiplierObject() { }
+		virtual ~CoinScoreMultiplierObject()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "CoinScoreMultiplierObject" );
+#endif
+		}
+
 	
 		struct OnCoinGrabProxy : public Lambda_1<boost::shared_ptr<ObjectBase> >
 		{

@@ -15,7 +15,13 @@ namespace CloudberryKingdom
 	struct HeroRush2_Tutorial : public HeroRush_Tutorial
 	{
 	
-		virtual ~HeroRush2_Tutorial() { }
+		virtual ~HeroRush2_Tutorial()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "HeroRush2_Tutorial" );
+#endif
+		}
+
 
 		boost::shared_ptr<Challenge_HeroRush2> HeroRush2;
 	

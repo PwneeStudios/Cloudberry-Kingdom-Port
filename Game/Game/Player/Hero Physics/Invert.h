@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct BobPhsxInvert : public BobPhsxNormal
 	{
 
-		virtual ~BobPhsxInvert() { }
+		virtual ~BobPhsxInvert()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "BobPhsxInvert" );
+#endif
+		}
+
 
 		static void InitializeStatics();
 	

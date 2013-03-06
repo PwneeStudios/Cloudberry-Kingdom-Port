@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct BobPhsxRandom : public BobPhsx
 	{
 	
-		virtual ~BobPhsxRandom() { }
+		virtual ~BobPhsxRandom()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "BobPhsxRandom" );
+#endif
+		}
+
 
 		static void InitializeStatics();
 

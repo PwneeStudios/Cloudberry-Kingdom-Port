@@ -8,7 +8,13 @@ namespace CloudberryKingdom
 	struct StringWorldEndurance : public StringWorldGameData
 	{
 	
-		virtual ~StringWorldEndurance() { }
+		virtual ~StringWorldEndurance()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "StringWorldEndurance" );
+#endif
+		}
+
 
 		struct OnSwapLambda : public Lambda_1<boost::shared_ptr<LevelSeedData> >
 		{

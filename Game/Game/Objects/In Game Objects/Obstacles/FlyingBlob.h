@@ -10,7 +10,13 @@ namespace CloudberryKingdom
 	struct FlyingBlob : public _Obstacle, public IBound
 	{
 
-		virtual ~FlyingBlob() { }
+		virtual ~FlyingBlob()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "FlyingBlob" );
+#endif
+		}
+
 
 		static void InitializeStatics();
 

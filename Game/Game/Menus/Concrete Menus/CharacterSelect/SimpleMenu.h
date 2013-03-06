@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct SimpleMenuBase : public CkBaseMenu
 	{
 
-		virtual ~SimpleMenuBase() { }
+		virtual ~SimpleMenuBase()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "SimpleMenuBase" );
+#endif
+		}
+
 	
 		static void InitializeStatics();
 
@@ -121,7 +127,13 @@ namespace CloudberryKingdom
 	struct SimpleMenu : public SimpleMenuBase
 	{
 	
-		virtual ~SimpleMenu() { }
+		virtual ~SimpleMenu()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "SimpleMenu" );
+#endif
+		}
+
 
 		SimpleMenu( int Control, const boost::shared_ptr<CharacterSelect> &Parent );
 		boost::shared_ptr<SimpleMenu> SimpleMenu_Construct( int Control, const boost::shared_ptr<CharacterSelect> &Parent );
@@ -139,7 +151,13 @@ namespace CloudberryKingdom
 	struct SimpleMenu : public SimpleMenuBase
 	{
 
-		virtual ~SimpleMenu() { }
+		virtual ~SimpleMenu()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "SimpleMenu" );
+#endif
+		}
+
 	
 		SimpleMenu( int Control, const boost::shared_ptr<CharacterSelect> &Parent );
 		boost::shared_ptr<SimpleMenu> SimpleMenu_Construct( int Control, const boost::shared_ptr<CharacterSelect> &Parent );

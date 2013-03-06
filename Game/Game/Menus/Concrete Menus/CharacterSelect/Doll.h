@@ -14,7 +14,13 @@ namespace CloudberryKingdom
 	struct Doll : public CkBaseMenu
 	{
 
-		virtual ~Doll() { }
+		virtual ~Doll()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Doll" );
+#endif
+		}
+
 	
 		boost::shared_ptr<CharacterSelect> MyCharacterSelect;
 	

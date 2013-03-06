@@ -8,7 +8,13 @@ namespace CloudberryKingdom
 	struct MovingBlock_Parameters : public AutoGen_Parameters
 	{
 
-		virtual ~MovingBlock_Parameters() { }
+		virtual ~MovingBlock_Parameters()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "MovingBlock_Parameters" );
+#endif
+		}
+
 	
 		enum MotionType
 		{

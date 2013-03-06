@@ -8,7 +8,13 @@ namespace CloudberryKingdom
 	struct StartMenu_MW_Options : public SoundMenu
 	{
 
-		virtual ~StartMenu_MW_Options() { }
+		virtual ~StartMenu_MW_Options()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "StartMenu_MW_Options" );
+#endif
+		}
+
 
 		using SoundMenu::SlideOut;
 		using SoundMenu::SlideIn;

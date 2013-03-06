@@ -10,7 +10,13 @@ namespace CloudberryKingdom
 	struct Spike_Parameters : public AutoGen_Parameters
 	{
 
-		virtual ~Spike_Parameters() { }
+		virtual ~Spike_Parameters()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Spike_Parameters" );
+#endif
+		}
+
 	
 		enum OffsetStyles
 		{

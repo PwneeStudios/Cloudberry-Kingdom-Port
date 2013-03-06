@@ -8,7 +8,13 @@ namespace CloudberryKingdom
 	struct BlockEmitter : public ObjectBase
 	{
 	
-		virtual ~BlockEmitter() { }
+		virtual ~BlockEmitter()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "BlockEmitter" );
+#endif
+		}
+
 
 		MovingPlatform::MoveType MyMoveType;
 		float Amp;

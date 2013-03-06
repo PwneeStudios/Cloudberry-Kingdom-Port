@@ -8,7 +8,13 @@ namespace CloudberryKingdom
 	struct CustomHero_GUI : public CkBaseMenu
 	{
 
-		virtual ~CustomHero_GUI() { }
+		virtual ~CustomHero_GUI()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "CustomHero_GUI" );
+#endif
+		}
+
 	
 		static void InitializeStatics();
 

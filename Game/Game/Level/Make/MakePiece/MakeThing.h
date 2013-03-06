@@ -7,7 +7,13 @@ namespace CloudberryKingdom
 	{
 
 		MakeThing() { }
-		virtual ~MakeThing() { }
+		virtual ~MakeThing()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "MakeThing" );
+#endif
+		}
+
 
 		virtual void Phase1() { }
 		virtual void Phase2() { }

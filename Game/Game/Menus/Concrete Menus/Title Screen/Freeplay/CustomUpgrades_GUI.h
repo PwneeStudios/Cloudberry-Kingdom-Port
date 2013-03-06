@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct CustomUpgrades_GUI : public CkBaseMenu
 	{
 	
-		virtual ~CustomUpgrades_GUI() { }
+		virtual ~CustomUpgrades_GUI()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "CustomUpgrades_GUI" );
+#endif
+		}
+
 
 		struct BlockPieceSeedSetter : public Lambda
 		{
@@ -176,7 +182,13 @@ namespace CloudberryKingdom
 	struct AggressiveUpgrades_GUI : public CustomUpgrades_GUI
 	{
 	
-		virtual ~AggressiveUpgrades_GUI() { }
+		virtual ~AggressiveUpgrades_GUI()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "AggressiveUpgrades_GUI" );
+#endif
+		}
+
 
 		AggressiveUpgrades_GUI( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<CustomLevel_GUI> &CustomLevel );
 		boost::shared_ptr<AggressiveUpgrades_GUI> AggressiveUpgrades_GUI_Construct( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<CustomLevel_GUI> &CustomLevel );
@@ -192,7 +204,13 @@ namespace CloudberryKingdom
 	struct PassiveUpgrades_GUI : public CustomUpgrades_GUI
 	{
 	
-		virtual ~PassiveUpgrades_GUI() { }
+		virtual ~PassiveUpgrades_GUI()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "PassiveUpgrades_GUI" );
+#endif
+		}
+
 
 		PassiveUpgrades_GUI( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<CustomLevel_GUI> &CustomLevel );
 		boost::shared_ptr<PassiveUpgrades_GUI> PassiveUpgrades_GUI_Construct( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<CustomLevel_GUI> &CustomLevel );

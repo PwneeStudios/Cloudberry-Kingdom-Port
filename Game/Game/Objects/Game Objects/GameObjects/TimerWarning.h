@@ -10,7 +10,13 @@ namespace CloudberryKingdom
 	struct TimerWarning : public GameObject
 	{
 
-		virtual ~TimerWarning() { }
+		virtual ~TimerWarning()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "TimerWarning" );
+#endif
+		}
+
 
 		boost::shared_ptr<GUI_Timer> MyTimer;
 	

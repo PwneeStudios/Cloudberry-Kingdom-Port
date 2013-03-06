@@ -8,7 +8,13 @@ namespace CloudberryKingdom
 	struct StartMenu_MW_Arcade : public ArcadeMenu
 	{
 
-		virtual ~StartMenu_MW_Arcade() { }
+		virtual ~StartMenu_MW_Arcade()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "StartMenu_MW_Arcade" );
+#endif
+		}
+
 
 		using ArcadeMenu::SlideOut;
 		using ArcadeMenu::SlideIn;

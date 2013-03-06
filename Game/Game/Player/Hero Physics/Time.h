@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct BobPhsxTime : public BobPhsxNormal
 	{
 
-		virtual ~BobPhsxTime() { }
+		virtual ~BobPhsxTime()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "BobPhsxTime" );
+#endif
+		}
+
 	
 		static void InitializeStatics();
 

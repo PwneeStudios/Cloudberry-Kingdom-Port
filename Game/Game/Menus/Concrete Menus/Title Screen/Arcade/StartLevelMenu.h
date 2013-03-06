@@ -19,7 +19,13 @@ namespace CloudberryKingdom
 	struct StartLevelMenu : public CkBaseMenu
 	{
 		
-		virtual ~StartLevelMenu() { }
+		virtual ~StartLevelMenu()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "StartLevelMenu" );
+#endif
+		}
+
 	
 		struct GameReturnProxy : public LambdaFunc<bool>
 		{

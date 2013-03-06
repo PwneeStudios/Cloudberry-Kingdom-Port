@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct PlayerData : public SaveLoad
 	{
 
-		virtual ~PlayerData() { }
+		virtual ~PlayerData()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "PlayerData" );
+#endif
+		}
+
 
 		boost::shared_ptr<SavedSeeds> MySavedSeeds;
 

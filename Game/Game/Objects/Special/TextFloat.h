@@ -17,7 +17,13 @@ namespace CloudberryKingdom
 	struct TextFloat : public GameObject
 	{
 
-		virtual ~TextFloat() { }
+		virtual ~TextFloat()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "TextFloat" );
+#endif
+		}
+
 	
 		boost::shared_ptr<EzText> MyText;
 

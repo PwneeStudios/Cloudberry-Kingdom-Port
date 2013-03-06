@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct MenuSliderNoSlide : public MenuSliderBase
 	{
 
-		virtual ~MenuSliderNoSlide() { }
+		virtual ~MenuSliderNoSlide()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "MenuSliderNoSlide" );
+#endif
+		}
+
 	
 		MenuSliderNoSlide( const boost::shared_ptr<EzText> &Text );
 		MenuSliderNoSlide( const boost::shared_ptr<EzText> &Text, const boost::shared_ptr<EzText> &SelectedText );

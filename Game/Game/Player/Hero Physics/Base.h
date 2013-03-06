@@ -29,7 +29,13 @@ namespace CloudberryKingdom
 	struct BobPhsx : public Object, public boost::enable_shared_from_this<BobPhsx>
 	{
 
-		virtual ~BobPhsx() { }
+		virtual ~BobPhsx()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "BobPhsx" );
+#endif
+		}
+
 
 		struct DefaultInfo
 		{

@@ -11,7 +11,13 @@ namespace CloudberryKingdom
 	struct SaveLoadSeedMenu : public VerifyBaseMenu
 	{
 
-		virtual ~SaveLoadSeedMenu() { }
+		virtual ~SaveLoadSeedMenu()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "SaveLoadSeedMenu" );
+#endif
+		}
+
 
 		struct MakeSaveHelper : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{

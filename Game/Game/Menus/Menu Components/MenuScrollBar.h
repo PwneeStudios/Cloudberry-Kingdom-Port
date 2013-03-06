@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct MenuScrollBar : public MenuSlider
 	{
 
-		virtual ~MenuScrollBar() { }
+		virtual ~MenuScrollBar()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "MenuScrollBar" );
+#endif
+		}
+
 	
 		MenuScrollBar();
 		boost::shared_ptr<MenuScrollBar> MenuScrollBar_Construct();

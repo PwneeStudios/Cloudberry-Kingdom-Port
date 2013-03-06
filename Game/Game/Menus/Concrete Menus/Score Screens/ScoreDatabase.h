@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct ScoreDatabase : public SaveLoad
 	{
 
-		virtual ~ScoreDatabase() { }
+		virtual ~ScoreDatabase()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "ScoreDatabase" );
+#endif
+		}
+
 	
 		static void InitializeStatics();
 

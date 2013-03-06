@@ -66,7 +66,13 @@ namespace CloudberryKingdom
 	struct SaveLoad : public boost::enable_shared_from_this<SaveLoad>
 	{
 
-		virtual ~SaveLoad() { }
+		virtual ~SaveLoad()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "SaveLoad" );
+#endif
+		}
+
 	
 		struct SaveLambda : public Lambda_1<boost::shared_ptr<BinaryWriter> >
 		{

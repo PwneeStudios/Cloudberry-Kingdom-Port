@@ -8,7 +8,13 @@ namespace CloudberryKingdom
 	struct Challenge_HeroRush2 : public Challenge_HeroRush
 	{
 	
-		virtual ~Challenge_HeroRush2() { }
+		virtual ~Challenge_HeroRush2()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Challenge_HeroRush2" );
+#endif
+		}
+
 
 		struct OnSwapLambda : public Lambda_1<boost::shared_ptr<LevelSeedData> >
 		{

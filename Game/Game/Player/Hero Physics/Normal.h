@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct BobPhsxNormal : public BobPhsx
 	{
 
-		virtual ~BobPhsxNormal() { }
+		virtual ~BobPhsxNormal()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "BobPhsxNormal" );
+#endif
+		}
+
 
 		// Members
 		bool InitializedAnim;

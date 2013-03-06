@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct ScoreScreen : public CkBaseMenu
 	{
 
-		virtual ~ScoreScreen() { }
+		virtual ~ScoreScreen()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "ScoreScreen" );
+#endif
+		}
+
 
 		struct EOL_WaitThenDoEndActionWaitProxy : public Lambda
 		{
@@ -47,7 +53,13 @@ namespace CloudberryKingdom
 		struct VariableCoinsLambda : public PlayerIntLambda
 		{
 		
-			virtual ~VariableCoinsLambda() { }
+			virtual ~VariableCoinsLambda()
+			{
+#ifdef BOOST_BIN
+				OnDestructor( "VariableCoinsLambda" );
+#endif
+			}
+
 
 			StatGroup MyStats;
 		
@@ -59,7 +71,13 @@ namespace CloudberryKingdom
 		struct VariableTotalCoinsLambda : public PlayerIntLambda
 		{
 		
-			virtual ~VariableTotalCoinsLambda() { }
+			virtual ~VariableTotalCoinsLambda()
+			{
+#ifdef BOOST_BIN
+				OnDestructor( "VariableTotalCoinsLambda" );
+#endif
+			}
+
 
 			StatGroup MyStats;
 		
@@ -71,7 +89,13 @@ namespace CloudberryKingdom
 		struct VariableBlobsLambda : public PlayerIntLambda
 		{
 		
-			virtual ~VariableBlobsLambda() { }
+			virtual ~VariableBlobsLambda()
+			{
+#ifdef BOOST_BIN
+				OnDestructor( "VariableBlobsLambda" );
+#endif
+			}
+
 
 			StatGroup MyStats;
 		
@@ -83,7 +107,13 @@ namespace CloudberryKingdom
 		struct VariableTotalBlobsLambda : public PlayerIntLambda
 		{
 		
-			virtual ~VariableTotalBlobsLambda() { }
+			virtual ~VariableTotalBlobsLambda()
+			{
+#ifdef BOOST_BIN
+				OnDestructor( "VariableTotalBlobsLambda" );
+#endif
+			}
+
 
 			StatGroup MyStats;
 		

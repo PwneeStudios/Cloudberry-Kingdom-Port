@@ -16,7 +16,13 @@ namespace CloudberryKingdom
 	struct SingleData : public StyleData
 	{
 	
-		virtual ~SingleData() { }
+		virtual ~SingleData()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "SingleData" );
+#endif
+		}
+
 
 		Vector2 InitialDoorYRange;
 

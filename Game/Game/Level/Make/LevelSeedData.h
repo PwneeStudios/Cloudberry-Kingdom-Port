@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct LevelSeedData : public boost::enable_shared_from_this<LevelSeedData>
 	{
 
-		virtual ~LevelSeedData() { }
+		virtual ~LevelSeedData()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "LevelSeedData" );
+#endif
+		}
+
 
 		struct MakeScoreProxy : public LambdaFunc<boost::shared_ptr<GameObject> >
 		{

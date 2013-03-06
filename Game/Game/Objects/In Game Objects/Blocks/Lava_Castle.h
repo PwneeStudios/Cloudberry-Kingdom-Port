@@ -14,7 +14,13 @@ namespace CloudberryKingdom
 	struct LavaBlock_Castle : public LavaBlock
 	{
 	
-		virtual ~LavaBlock_Castle() { }
+		virtual ~LavaBlock_Castle()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "LavaBlock_Castle" );
+#endif
+		}
+
 
 		LavaBlock_Castle( bool BoxesOnly );
 

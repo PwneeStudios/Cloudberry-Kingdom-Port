@@ -12,7 +12,13 @@ namespace CloudberryKingdom
 	struct MenuSliderBase : public MenuItem
 	{
 
-		virtual ~MenuSliderBase() { }
+		virtual ~MenuSliderBase()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "MenuSliderBase" );
+#endif
+		}
+
 	
 		struct SetCallbackProxy : public Lambda
 		{

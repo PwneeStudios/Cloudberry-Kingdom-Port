@@ -10,7 +10,13 @@ namespace CloudberryKingdom
 	struct SpikeyGuy : public _CircleDeath
 	{
 
-		virtual ~SpikeyGuy() { }
+		virtual ~SpikeyGuy()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "SpikeyGuy" );
+#endif
+		}
+
 	
 		struct SpikeyGuyTileInfo : public TileInfoBase
 		{

@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct BobPhsxRocketbox : public BobPhsxBox
 	{
 
-		virtual ~BobPhsxRocketbox() { }
+		virtual ~BobPhsxRocketbox()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "BobPhsxRocketbox" );
+#endif
+		}
+
 	
 		static void InitializeStatics();
 

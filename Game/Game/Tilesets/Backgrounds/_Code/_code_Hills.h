@@ -8,7 +8,13 @@ namespace CloudberryKingdom
 	struct Background_Hills : public BackgroundTemplate
 	{
 	
-		virtual ~Background_Hills() { }
+		virtual ~Background_Hills()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Background_Hills" );
+#endif
+		}
+
 
 		Background_Hills( const std::wstring &Name );
 
@@ -19,7 +25,13 @@ namespace CloudberryKingdom
 	struct Background_HillsRain : public BackgroundTemplate
 	{
 	
-		virtual ~Background_HillsRain() { }
+		virtual ~Background_HillsRain()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Background_HillsRain" );
+#endif
+		}
+
 
 		Background_HillsRain( const std::wstring &Name );
 

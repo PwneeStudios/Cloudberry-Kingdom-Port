@@ -14,7 +14,13 @@ namespace CloudberryKingdom
 	struct BigData : public StyleData
 	{
 	
-		virtual ~BigData() { }
+		virtual ~BigData()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "BigData" );
+#endif
+		}
+
 
 		BigData( const boost::shared_ptr<Rand> &Rnd );
 

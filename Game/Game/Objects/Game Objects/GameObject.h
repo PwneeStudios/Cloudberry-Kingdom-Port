@@ -12,7 +12,13 @@ namespace CloudberryKingdom
 	struct GameObject : public ObjectBase
 	{
 	
-		virtual ~GameObject() { }
+		virtual ~GameObject()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "GameObject" );
+#endif
+		}
+
 
 		enum Tag
 		{

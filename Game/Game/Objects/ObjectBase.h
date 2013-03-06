@@ -11,7 +11,13 @@ namespace CloudberryKingdom
 	struct ObjectBase : public boost::enable_shared_from_this<ObjectBase>
 	{
 
-		virtual ~ObjectBase() { }
+		virtual ~ObjectBase()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "ObjectBase" );
+#endif
+		}
+
 	
 		const boost::shared_ptr<GameData> &getGame() const;
 		const boost::shared_ptr<Level> &getMyLevel() const;
@@ -142,7 +148,13 @@ namespace CloudberryKingdom
 	struct ObjectData
 	{
 
-		virtual ~ObjectData() { }
+		virtual ~ObjectData()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "ObjectData" );
+#endif
+		}
+
 	
 		static void InitializeStatics();
 

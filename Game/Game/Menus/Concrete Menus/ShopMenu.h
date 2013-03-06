@@ -8,7 +8,13 @@ namespace CloudberryKingdom
 	struct SmallErrorMenu : public VerifyBaseMenu
 	{
 	
-		virtual ~SmallErrorMenu() { }
+		virtual ~SmallErrorMenu()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "SmallErrorMenu" );
+#endif
+		}
+
 
 		Localization::Words Word;
 

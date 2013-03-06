@@ -63,7 +63,7 @@ template <typename T>
 struct BoostBin : GenericBoostBin
 {
 
-	std::vector<boost::shared_ptr<T> > MyVec;
+	std::vector<boost::weak_ptr<T> > MyVec;
 
 	BoostBin();
 
@@ -1116,6 +1116,7 @@ boost::shared_ptr< T > allocate_shared( A const & a, A1 const & a1, A2 const & a
 
 extern std::vector< GenericBoostBin * > MetaBoostBin;
 
+
 inline GenericBoostBin::GenericBoostBin( std::string name )
 	: ClassName( name ), MutexInitalized( false )
 {
@@ -1150,16 +1151,16 @@ BoostBin<T>::BoostBin() :
 		
 }
 
-
+extern int UseCountCutoff;
 template <typename T>
 int BoostBin<T>::Count()
 {
 	Lock();
 
 	int count = 0;
-	for (std::vector<boost::shared_ptr<T> >::const_iterator ptr = MyVec.begin(); ptr != MyVec.end(); ++ptr )
+	for (std::vector<boost::weak_ptr<T> >::const_iterator ptr = MyVec.begin(); ptr != MyVec.end(); ++ptr )
 	{
-		if ( ( *ptr ).pn.use_count() > 1 )
+		if ( ( *ptr ).pn.use_count() > UseCountCutoff )
 		{
 			count++;
 		}

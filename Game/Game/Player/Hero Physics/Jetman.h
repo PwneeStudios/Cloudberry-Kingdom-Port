@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct BobPhsxJetman : public BobPhsxNormal
 	{
 
-		virtual ~BobPhsxJetman() { }
+		virtual ~BobPhsxJetman()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "BobPhsxJetman" );
+#endif
+		}
+
 	
 		static void InitializeStatics();
 

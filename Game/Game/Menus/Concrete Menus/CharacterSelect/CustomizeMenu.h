@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct CustomizeMenu : public CkBaseMenu
 	{
 
-		virtual ~CustomizeMenu() { }
+		virtual ~CustomizeMenu()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "CustomizeMenu" );
+#endif
+		}
+
 	
 		struct GoProxy : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{

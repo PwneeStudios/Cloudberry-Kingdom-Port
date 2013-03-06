@@ -16,7 +16,13 @@ struct BinaryWriter
 {
 
 	BinaryWriter() { }
-	virtual ~BinaryWriter() { }
+	virtual ~BinaryWriter()
+	{
+#ifdef BOOST_BIN
+		OnDestructor( "BinaryWriter" );
+#endif
+	}
+
 	virtual void Write( const unsigned char *buffer, int offset, int length ) = 0;
 	virtual void Write( int i ) = 0;
 	virtual void Write( unsigned int i ) = 0;

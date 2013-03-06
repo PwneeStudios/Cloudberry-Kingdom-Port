@@ -11,7 +11,13 @@ namespace CloudberryKingdom
 	struct Fireball : public _CircleDeath
 	{
 
-		virtual ~Fireball() { }
+		virtual ~Fireball()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Fireball" );
+#endif
+		}
+
 	
 		struct FireballTileInfo : public TileInfoBase
 		{

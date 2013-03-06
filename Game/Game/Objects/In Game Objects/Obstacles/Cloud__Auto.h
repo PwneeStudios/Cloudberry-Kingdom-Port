@@ -8,7 +8,13 @@ namespace CloudberryKingdom
 	struct Cloud_Parameters : public AutoGen_Parameters
 	{
 	
-		virtual ~Cloud_Parameters() { }
+		virtual ~Cloud_Parameters()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Cloud_Parameters" );
+#endif
+		}
+
 
 		Param Size, Shiftiness;
 

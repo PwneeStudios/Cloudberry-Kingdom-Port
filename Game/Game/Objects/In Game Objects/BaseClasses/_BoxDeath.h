@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct _BoxDeath : public _Death
 	{
 	
-		virtual ~_BoxDeath() { }
+		virtual ~_BoxDeath()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "_BoxDeath" );
+#endif
+		}
+
 
 		boost::shared_ptr<AABox> Box;
 	

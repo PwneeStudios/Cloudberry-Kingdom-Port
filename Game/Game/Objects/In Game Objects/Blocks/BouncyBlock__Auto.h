@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct BouncyBlock_Parameters : public AutoGen_Parameters
 	{
 
-		virtual ~BouncyBlock_Parameters() { }
+		virtual ~BouncyBlock_Parameters()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "BouncyBlock_Parameters" );
+#endif
+		}
+
 
 		struct _Special
 		{

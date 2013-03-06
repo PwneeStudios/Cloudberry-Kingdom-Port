@@ -8,7 +8,13 @@ namespace CloudberryKingdom
 	struct SpikeyLine : public _CircleDeath, public IBound
 	{
 
-		virtual ~SpikeyLine() { }
+		virtual ~SpikeyLine()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "SpikeyLine" );
+#endif
+		}
+
 	
 		struct SpikeyLineTileInfo : public TileInfoBase
 		{

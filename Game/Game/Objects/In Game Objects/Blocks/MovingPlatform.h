@@ -10,7 +10,13 @@ namespace CloudberryKingdom
 	struct MovingPlatform : public BlockBase
 	{
 	
-		virtual ~MovingPlatform() { }
+		virtual ~MovingPlatform()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "MovingPlatform" );
+#endif
+		}
+
 
 		struct ElevatorTileInfo : public TileInfoBase
 		{

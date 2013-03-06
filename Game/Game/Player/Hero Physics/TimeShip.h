@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct BobPhsxTimeship : public BobPhsxSpaceship
 	{
 
-		virtual ~BobPhsxTimeship() { }
+		virtual ~BobPhsxTimeship()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "BobPhsxTimeship" );
+#endif
+		}
+
 	
 		static void InitializeStatics();
 	

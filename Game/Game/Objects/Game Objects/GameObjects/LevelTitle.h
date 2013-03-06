@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct LevelTitle : public GUI_Panel
 	{
 	
-		virtual ~LevelTitle() { }
+		virtual ~LevelTitle()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "LevelTitle" );
+#endif
+		}
+
 
 		virtual void OnAdd();
 

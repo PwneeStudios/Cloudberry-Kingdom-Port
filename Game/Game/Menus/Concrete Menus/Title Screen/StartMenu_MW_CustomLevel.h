@@ -8,7 +8,13 @@ namespace CloudberryKingdom
 	struct StartMenu_MW_CustomLevel : public CustomLevel_GUI
 	{
 
-		virtual ~StartMenu_MW_CustomLevel() { }
+		virtual ~StartMenu_MW_CustomLevel()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "StartMenu_MW_CustomLevel" );
+#endif
+		}
+
 
 		using CustomLevel_GUI::SlideOut;
 		using CustomLevel_GUI::SlideIn;

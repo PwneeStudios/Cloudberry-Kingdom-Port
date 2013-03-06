@@ -10,7 +10,13 @@ namespace CloudberryKingdom
 	struct IPrepareToDraw
 	{
 
-		virtual ~IPrepareToDraw() { }
+		virtual ~IPrepareToDraw()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "IPrepareToDraw" );
+#endif
+		}
+
 
 		/// <summary>
 		/// Prepares the object to be drawn

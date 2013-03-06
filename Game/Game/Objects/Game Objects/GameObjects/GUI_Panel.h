@@ -24,7 +24,13 @@ namespace CloudberryKingdom
 	struct GUI_Panel : public GameObject
 	{
 
-		virtual ~GUI_Panel() { }
+		virtual ~GUI_Panel()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "GUI_Panel" );
+#endif
+		}
+
 	
 		struct ReturnToCallerHelper : public Lambda
 		{

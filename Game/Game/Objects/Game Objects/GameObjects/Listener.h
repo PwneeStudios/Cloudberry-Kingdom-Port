@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct Listener : public GUI_Panel
 	{
 
-		virtual ~Listener() { }
+		virtual ~Listener()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Listener" );
+#endif
+		}
+
 
 		void ReleaseBody();
 

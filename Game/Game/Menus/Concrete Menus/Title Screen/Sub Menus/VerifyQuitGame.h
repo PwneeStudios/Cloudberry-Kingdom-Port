@@ -8,7 +8,13 @@ namespace CloudberryKingdom
 	struct VerifyQuitGameMenu2 : public VerifyBaseMenu
 	{
 
-		virtual ~VerifyQuitGameMenu2() { }
+		virtual ~VerifyQuitGameMenu2()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "VerifyQuitGameMenu2" );
+#endif
+		}
+
 	
 		struct InitTextureNameSetter : public Lambda
 		{

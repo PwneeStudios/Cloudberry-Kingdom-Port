@@ -26,7 +26,13 @@ namespace CloudberryKingdom
 	struct CustomControlsMenu : public CkBaseMenu
 	{
 
-		virtual ~CustomControlsMenu() { }
+		virtual ~CustomControlsMenu()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "CustomControlsMenu" );
+#endif
+		}
+
 	
 		struct ResetProxy : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{

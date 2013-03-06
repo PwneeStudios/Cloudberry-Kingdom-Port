@@ -22,7 +22,13 @@ namespace CloudberryKingdom
 	struct UpData : public VerticalData
 	{
 	
-		virtual ~UpData() { }
+		virtual ~UpData()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "UpData" );
+#endif
+		}
+
 
 		virtual void CalculateKeepUnused( float JumpLevel );
 

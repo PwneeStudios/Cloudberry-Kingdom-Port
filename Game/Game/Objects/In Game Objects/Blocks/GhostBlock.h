@@ -8,7 +8,13 @@ namespace CloudberryKingdom
 	struct GhostBlock : public BlockBase
 	{
 
-		virtual ~GhostBlock() { }
+		virtual ~GhostBlock()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "GhostBlock" );
+#endif
+		}
+
 
 	
 		struct GhostBlockTileInfo : public TileInfoBase

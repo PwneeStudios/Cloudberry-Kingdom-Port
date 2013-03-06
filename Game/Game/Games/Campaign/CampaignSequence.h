@@ -11,7 +11,13 @@ namespace CloudberryKingdom
     struct Challenge_StoryMode : public Challenge
     {
 
-		virtual ~Challenge_StoryMode() { }
+		virtual ~Challenge_StoryMode()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Challenge_StoryMode" );
+#endif
+		}
+
 
 		static void InitializeStatics();
 
@@ -26,7 +32,13 @@ namespace CloudberryKingdom
 
 	struct CampaignSequence : public LevelSequence
 	{
-		virtual ~CampaignSequence() { }
+		virtual ~CampaignSequence()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "CampaignSequence" );
+#endif
+		}
+
 
 	
 		struct PostMakeCampaignProxy : public Lambda_1<boost::shared_ptr<Level> >

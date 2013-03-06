@@ -39,7 +39,13 @@ namespace CloudberryKingdom
 	struct _SavePlayerData : public SaveLoad
 	{
 
-		virtual ~_SavePlayerData() { }
+		virtual ~_SavePlayerData()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "_SavePlayerData" );
+#endif
+		}
+
 	
 		_SavePlayerData();
 

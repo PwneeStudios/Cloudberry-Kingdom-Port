@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct BobPhsxSmall : public BobPhsxNormal
 	{
 
-		virtual ~BobPhsxSmall() { }
+		virtual ~BobPhsxSmall()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "BobPhsxSmall" );
+#endif
+		}
+
 	
 		static void InitializeStatics();
 

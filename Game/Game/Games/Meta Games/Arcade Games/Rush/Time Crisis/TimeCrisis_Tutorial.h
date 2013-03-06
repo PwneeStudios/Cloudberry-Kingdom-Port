@@ -15,7 +15,13 @@ namespace CloudberryKingdom
 	struct TimeCrisis_Tutorial : public HeroRush_Tutorial
 	{
 	
-		virtual ~TimeCrisis_Tutorial() { }
+		virtual ~TimeCrisis_Tutorial()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "TimeCrisis_Tutorial" );
+#endif
+		}
+
 
 		boost::shared_ptr<Challenge_TimeCrisis> TimeCrisis;
 	

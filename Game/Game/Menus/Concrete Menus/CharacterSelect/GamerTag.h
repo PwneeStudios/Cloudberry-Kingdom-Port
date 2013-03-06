@@ -14,7 +14,13 @@ namespace CloudberryKingdom
 	struct GamerTag : public CkBaseMenu
 	{
 
-		virtual ~GamerTag() { }
+		virtual ~GamerTag()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "GamerTag" );
+#endif
+		}
+
 	
 		boost::shared_ptr<CharacterSelect> MyCharacterSelect;
 	

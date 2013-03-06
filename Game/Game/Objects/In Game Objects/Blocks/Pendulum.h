@@ -10,7 +10,13 @@ namespace CloudberryKingdom
 	struct Pendulum : public BlockBase, public IBound
 	{
 
-		virtual ~Pendulum() { }
+		virtual ~Pendulum()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Pendulum" );
+#endif
+		}
+
 	
 		struct PendulumTileInfo : public TileInfoBase
 		{

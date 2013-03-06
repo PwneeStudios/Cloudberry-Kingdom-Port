@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct Boulder_Parameters : public AutoGen_Parameters
 	{
 
-		virtual ~Boulder_Parameters() { }
+		virtual ~Boulder_Parameters()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Boulder_Parameters" );
+#endif
+		}
+
 	
 		struct _Special
 		{

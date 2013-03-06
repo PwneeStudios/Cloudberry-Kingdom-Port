@@ -11,7 +11,13 @@ namespace CloudberryKingdom
 	struct IBound
 	{
 
-		virtual ~IBound() { }
+		virtual ~IBound()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "IBound" );
+#endif
+		}
+
 
 		/// <summary>
 		/// Returns the TR bound

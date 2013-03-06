@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct MenuToggle : public MenuItem
 	{
 
-		virtual ~MenuToggle() { }
+		virtual ~MenuToggle()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "MenuToggle" );
+#endif
+		}
+
 	
 		MenuToggle( const boost::shared_ptr<EzFont> &Font );
 		boost::shared_ptr<MenuToggle> MenuToggle_Construct( const boost::shared_ptr<EzFont> &Font );

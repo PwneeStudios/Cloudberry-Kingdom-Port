@@ -23,7 +23,13 @@ namespace CloudberryKingdom
 	struct LavaDrip_Parameters : public AutoGen_Parameters
 	{
 	
-		virtual ~LavaDrip_Parameters() { }
+		virtual ~LavaDrip_Parameters()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "LavaDrip_Parameters" );
+#endif
+		}
+
 
 		float LavaDripStepCutoff;
 		Param LavaDripStep, Speed;

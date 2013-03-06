@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct BobPhsxMeat : public BobPhsxNormal
 	{
 
-		virtual ~BobPhsxMeat() { }
+		virtual ~BobPhsxMeat()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "BobPhsxMeat" );
+#endif
+		}
+
 	
 		static void InitializeStatics();
 

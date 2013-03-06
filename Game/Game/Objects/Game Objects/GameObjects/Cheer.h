@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct Cheer : public GameObject
 	{
 	
-		virtual ~Cheer() { }
+		virtual ~Cheer()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Cheer" );
+#endif
+		}
+
 
 		boost::shared_ptr<DrawPile> MyPile;
 

@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct ChapterTitle : public GUI_Panel
 	{
 	
-		virtual ~ChapterTitle() { }
+		virtual ~ChapterTitle()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "ChapterTitle" );
+#endif
+		}
+
 
 		void OnAdd();
 

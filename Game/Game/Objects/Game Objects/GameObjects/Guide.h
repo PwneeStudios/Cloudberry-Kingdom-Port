@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct ShowGuide : public GUI_Panel
 	{
 	
-		virtual ~ShowGuide() { }
+		virtual ~ShowGuide()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "ShowGuide" );
+#endif
+		}
+
 
 		ShowGuide();
 		boost::shared_ptr<ShowGuide> ShowGuide_Construct();

@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct Checkpoint : public ObjectBase
 	{
 
-		virtual ~Checkpoint() { }
+		virtual ~Checkpoint()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Checkpoint" );
+#endif
+		}
+
 	
 		static void InitializeStatics();
 

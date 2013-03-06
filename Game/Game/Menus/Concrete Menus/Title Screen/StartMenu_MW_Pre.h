@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct StartMenu_MW_Pre : public StartMenu
 	{
 
-		virtual ~StartMenu_MW_Pre() { }
+		virtual ~StartMenu_MW_Pre()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "StartMenu_MW_Pre" );
+#endif
+		}
+
 
 		using StartMenu::SlideOut;
 		using StartMenu::SlideIn;

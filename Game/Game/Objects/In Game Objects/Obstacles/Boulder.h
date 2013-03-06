@@ -10,7 +10,13 @@ namespace CloudberryKingdom
 	struct Boulder : public _CircleDeath, public IBound
 	{
 	
-		virtual ~Boulder() { }
+		virtual ~Boulder()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Boulder" );
+#endif
+		}
+
 
 		enum PivotLocationTypes
 		{

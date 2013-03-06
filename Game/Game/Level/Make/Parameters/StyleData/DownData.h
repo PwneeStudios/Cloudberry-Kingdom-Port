@@ -14,7 +14,13 @@ namespace CloudberryKingdom
 	struct DownData : public VerticalData
 	{
 	
-		virtual ~DownData() { }
+		virtual ~DownData()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "DownData" );
+#endif
+		}
+
 
 		virtual void CalculateKeepUnused( float JumpLevel );
 

@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct Firesnake_Parameters : public AutoGen_Parameters
 	{
 	
-		virtual ~Firesnake_Parameters() { }
+		virtual ~Firesnake_Parameters()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Firesnake_Parameters" );
+#endif
+		}
+
 
 		struct _Special
 		{

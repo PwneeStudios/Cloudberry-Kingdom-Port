@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct Bob : public ObjectBase
 	{
 
-		virtual ~Bob() { }
+		virtual ~Bob()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Bob" );
+#endif
+		}
+
 	
 		static void InitializeStatics();
 

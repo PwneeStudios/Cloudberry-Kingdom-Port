@@ -10,7 +10,13 @@ namespace CloudberryKingdom
 	{
 
 	
-		virtual ~SlowMo() { }
+		virtual ~SlowMo()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "SlowMo" );
+#endif
+		}
+
 		
 		SlowMo();
 		boost::shared_ptr<SlowMo> SlowMo_Construct();

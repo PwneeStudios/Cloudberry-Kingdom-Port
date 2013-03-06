@@ -21,7 +21,13 @@ namespace CloudberryKingdom
 
 	struct LevelSequence : public boost::enable_shared_from_this<LevelSequence>
 	{
-		virtual ~LevelSequence() { }
+		virtual ~LevelSequence()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "LevelSequence" );
+#endif
+		}
+
 
 		struct OnLevelBeginLambda : public LambdaFunc_1<boost::shared_ptr<Level> , bool>
 		{

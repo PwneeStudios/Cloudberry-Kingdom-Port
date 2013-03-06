@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct Pendulum_Parameters : public AutoGen_Parameters
 	{
 	
-		virtual ~Pendulum_Parameters() { }
+		virtual ~Pendulum_Parameters()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Pendulum_Parameters" );
+#endif
+		}
+
 
 		enum MotionType
 		{

@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct ArrowMenu : public CkBaseMenu
 	{
 	
-		virtual ~ArrowMenu() { }
+		virtual ~ArrowMenu()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "ArrowMenu" );
+#endif
+		}
+
 
 		boost::shared_ptr<CharacterSelect> MyCharacterSelect;
 

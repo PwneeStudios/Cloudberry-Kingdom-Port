@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct Background : public boost::enable_shared_from_this<Background>
 	{
 
-		virtual ~Background() { }
+		virtual ~Background()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Background" );
+#endif
+		}
+
 	
 		static void AddDarkLayer( const boost::shared_ptr<Background> &b );
 

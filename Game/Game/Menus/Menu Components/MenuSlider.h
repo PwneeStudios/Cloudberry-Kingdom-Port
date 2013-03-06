@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct MenuSlider : public MenuSliderBase
 	{
 
-		virtual ~MenuSlider() { }
+		virtual ~MenuSlider()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "MenuSlider" );
+#endif
+		}
+
 	
 		Vector2 SliderShift, TabOffset;
 

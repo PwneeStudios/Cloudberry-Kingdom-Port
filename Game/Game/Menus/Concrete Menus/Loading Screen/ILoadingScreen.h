@@ -7,7 +7,13 @@ namespace CloudberryKingdom
 	struct ILoadingScreen
 	{
 	
-		virtual ~ILoadingScreen() { }
+		virtual ~ILoadingScreen()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "ILoadingScreen" );
+#endif
+		}
+
 
 		virtual void AddHint( const std::wstring &hint, int extra_wait ) = 0;
 

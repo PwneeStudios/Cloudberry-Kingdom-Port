@@ -10,7 +10,13 @@ namespace CloudberryKingdom
 {
 	struct IPos
 	{
-		virtual ~IPos() { }
+		virtual ~IPos()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "IPos" );
+#endif
+		}
+
 		virtual Vector2 getPos() = 0;
 	};
 

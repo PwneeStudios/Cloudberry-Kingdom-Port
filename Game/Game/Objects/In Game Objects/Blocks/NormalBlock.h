@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct NormalBlock : public BlockBase
 	{
 
-		virtual ~NormalBlock() { }
+		virtual ~NormalBlock()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "NormalBlock" );
+#endif
+		}
+
 
 		// Members
 		

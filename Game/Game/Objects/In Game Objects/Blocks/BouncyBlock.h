@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct BouncyBlock : public BlockBase
 	{
 
-		virtual ~BouncyBlock() { }
+		virtual ~BouncyBlock()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "BouncyBlock" );
+#endif
+		}
+
 	
 		struct BouncyBlockTileInfo : public TileInfoBase
 		{

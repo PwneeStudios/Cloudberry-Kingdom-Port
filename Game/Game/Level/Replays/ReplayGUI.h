@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct ReplayGUI : public CkBaseMenu
 	{
 	
-		virtual ~ReplayGUI() { }
+		virtual ~ReplayGUI()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "ReplayGUI" );
+#endif
+		}
+
 
 		virtual void ReturnToCaller();
 	

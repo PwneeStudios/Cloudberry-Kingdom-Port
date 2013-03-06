@@ -22,7 +22,13 @@ namespace CloudberryKingdom
 	struct MenuListAll : public MenuList
 	{
 	
-		virtual ~MenuListAll() { }
+		virtual ~MenuListAll()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "MenuListAll" );
+#endif
+		}
+
 
 		boost::shared_ptr<MenuItem> SelectedItem;
 

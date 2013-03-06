@@ -8,7 +8,13 @@ namespace CloudberryKingdom
 	struct GameOverPanel : public CkBaseMenu
 	{
 
-		virtual ~GameOverPanel() { }
+		virtual ~GameOverPanel()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "GameOverPanel" );
+#endif
+		}
+
 		
 		using GUI_Panel::Call;
 	

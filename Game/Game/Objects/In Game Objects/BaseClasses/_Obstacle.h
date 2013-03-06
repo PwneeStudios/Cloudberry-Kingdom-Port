@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct _Obstacle : public ObjectBase
 	{
 
-		virtual ~_Obstacle() { }
+		virtual ~_Obstacle()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "_Obstacle" );
+#endif
+		}
+
 
 		boost::shared_ptr<AutoGen> AutoGenSingleton;
 

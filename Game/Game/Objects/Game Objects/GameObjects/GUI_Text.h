@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct GUI_Text : public GUI_Panel
 	{
 	
-		virtual ~GUI_Text() { }
+		virtual ~GUI_Text()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "GUI_Text" );
+#endif
+		}
+
 
 		enum Style
 		{

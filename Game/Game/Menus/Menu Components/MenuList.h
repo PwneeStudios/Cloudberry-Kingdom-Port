@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct MenuList : public MenuItem
 	{
 		
-		virtual ~MenuList() { }
+		virtual ~MenuList()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "MenuList" );
+#endif
+		}
+
 
 		struct ExpandProxy1 : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{

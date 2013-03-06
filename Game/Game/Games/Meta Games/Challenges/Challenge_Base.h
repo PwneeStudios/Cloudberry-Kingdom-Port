@@ -23,7 +23,13 @@ namespace CloudberryKingdom
 	struct Challenge : public boost::enable_shared_from_this<Challenge>
 	{
 
-		virtual ~Challenge() { }
+		virtual ~Challenge()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Challenge" );
+#endif
+		}
+
 
 		static int Coins;
 		static int CurrentScore;

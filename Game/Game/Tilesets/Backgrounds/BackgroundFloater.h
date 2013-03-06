@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct BackgroundFloater
 	{
 
-		virtual ~BackgroundFloater() { }
+		virtual ~BackgroundFloater()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "BackgroundFloater" );
+#endif
+		}
+
 	
 		float _SpinVelocity;
 	

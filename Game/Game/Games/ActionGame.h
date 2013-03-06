@@ -8,7 +8,13 @@ namespace CloudberryKingdom
 	struct ActionFactory : public GameFactory
 	{
 	
-		virtual ~ActionFactory() { }
+		virtual ~ActionFactory()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "ActionFactory" );
+#endif
+		}
+
 
 		virtual boost::shared_ptr<GameData> Make( const boost::shared_ptr<LevelSeedData> &data, bool MakeInBackground );
 	};
@@ -16,7 +22,13 @@ namespace CloudberryKingdom
 	struct ActionGameData : public GameData
 	{
 
-		virtual ~ActionGameData() { }
+		virtual ~ActionGameData()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "ActionGameData" );
+#endif
+		}
+
 	
 		static void InitializeStatics();
 

@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct ControlScreen : public CkBaseMenu
 	{
 	
-		virtual ~ControlScreen() { }
+		virtual ~ControlScreen()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "ControlScreen" );
+#endif
+		}
+
 
 		boost::shared_ptr<QuadClass> BackgroundQuad;
 

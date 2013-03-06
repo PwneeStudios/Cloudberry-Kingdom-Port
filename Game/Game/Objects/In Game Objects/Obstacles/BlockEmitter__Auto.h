@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct BlockEmitter_Parameters : public AutoGen_Parameters
 	{
 
-		virtual ~BlockEmitter_Parameters() { }
+		virtual ~BlockEmitter_Parameters()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "BlockEmitter_Parameters" );
+#endif
+		}
+
 	
 		enum Style
 		{

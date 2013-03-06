@@ -8,7 +8,13 @@ namespace CloudberryKingdom
 	struct LavaDrip : public _BoxDeath
 	{
 
-		virtual ~LavaDrip() { }
+		virtual ~LavaDrip()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "LavaDrip" );
+#endif
+		}
+
 	
 		struct LavaDripTileInfo : public TileInfoBase
 		{

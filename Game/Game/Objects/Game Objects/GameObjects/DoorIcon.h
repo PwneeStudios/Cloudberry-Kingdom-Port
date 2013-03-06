@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct DoorIcon : public GUI_Panel
 	{
 
-		virtual ~DoorIcon() { }
+		virtual ~DoorIcon()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "DoorIcon" );
+#endif
+		}
+
 	
 		int Level_Renamed;
 	

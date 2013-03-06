@@ -8,7 +8,13 @@ namespace CloudberryKingdom
 	struct Ceiling_Parameters : public AutoGen_Parameters
 	{
 	
-		virtual ~Ceiling_Parameters() { }
+		virtual ~Ceiling_Parameters()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Ceiling_Parameters" );
+#endif
+		}
+
 
 		enum Style
 		{

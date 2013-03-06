@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct Spike : public _BoxDeath
 	{
 
-		virtual ~Spike() { }
+		virtual ~Spike()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Spike" );
+#endif
+		}
+
 
 		static void InitializeStatics();
 

@@ -13,7 +13,13 @@ namespace CloudberryKingdom
 	struct GUI_LivesLeft : public GUI_Panel
 	{
 
-		virtual ~GUI_LivesLeft() { }
+		virtual ~GUI_LivesLeft()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "GUI_LivesLeft" );
+#endif
+		}
+
 	
 		struct BringStartDelayHelper : public Lambda
 		{

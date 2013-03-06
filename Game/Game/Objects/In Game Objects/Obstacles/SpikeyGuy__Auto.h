@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct SpikeyGuy_Parameters : public AutoGen_Parameters
 	{
 
-		virtual ~SpikeyGuy_Parameters() { }
+		virtual ~SpikeyGuy_Parameters()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "SpikeyGuy_Parameters" );
+#endif
+		}
+
 
 		struct _Special
 		{
@@ -37,7 +43,13 @@ namespace CloudberryKingdom
 	struct SpikeyGuy_AutoGen : public AutoGen
 	{
 
-		virtual ~SpikeyGuy_AutoGen() { }
+		virtual ~SpikeyGuy_AutoGen()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "SpikeyGuy_AutoGen" );
+#endif
+		}
+
 	
 		struct MinDistHelper : public LambdaFunc_1<Vector2, Vector2>
 		{

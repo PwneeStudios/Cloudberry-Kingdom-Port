@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct GUI_Timer : public GUI_Timer_Base
 	{
 
-		virtual ~GUI_Timer() { }
+		virtual ~GUI_Timer()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "GUI_Timer" );
+#endif
+		}
+
 
 		struct OnCoinGrabProxy : public Lambda_1<boost::shared_ptr<ObjectBase> >
 		{

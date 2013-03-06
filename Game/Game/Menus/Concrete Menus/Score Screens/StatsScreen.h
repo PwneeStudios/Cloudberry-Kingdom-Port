@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct StatsMenu : public CkBaseMenu
 	{
 
-		virtual ~StatsMenu() { }
+		virtual ~StatsMenu()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "StatsMenu" );
+#endif
+		}
+
 	
 		struct StringificationWrapper : public LambdaFunc_1<int, std::wstring>
 		{

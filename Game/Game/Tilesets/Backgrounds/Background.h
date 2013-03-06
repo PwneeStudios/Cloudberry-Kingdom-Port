@@ -36,7 +36,13 @@ namespace CloudberryKingdom
 	struct BackgroundTemplate : public boost::enable_shared_from_this<BackgroundTemplate>
 	{
 	
-		virtual ~BackgroundTemplate() { }
+		virtual ~BackgroundTemplate()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "BackgroundTemplate" );
+#endif
+		}
+
 
 		std::wstring Name;
 		bool MadeOfCode;
@@ -59,7 +65,13 @@ namespace CloudberryKingdom
 	struct RegularBackground : public Background
 	{
 	
-		virtual ~RegularBackground() { }
+		virtual ~RegularBackground()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "RegularBackground" );
+#endif
+		}
+
 
 		boost::shared_ptr<BackgroundTemplate> MyTemplate;
 

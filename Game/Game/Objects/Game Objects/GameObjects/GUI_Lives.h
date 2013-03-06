@@ -12,7 +12,13 @@ namespace CloudberryKingdom
 	struct GUI_Lives : public GUI_Panel
 	{
 
-		virtual ~GUI_Lives() { }
+		virtual ~GUI_Lives()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "GUI_Lives" );
+#endif
+		}
+
 
 		using GUI_Panel::SlideOut;
 		using GUI_Panel::SlideIn;

@@ -11,7 +11,13 @@ namespace CloudberryKingdom
 		struct CampaignLevelsLambda : public PlayerIntLambda
 		{
 		
-			virtual ~CampaignLevelsLambda() { }
+			virtual ~CampaignLevelsLambda()
+			{
+#ifdef BOOST_BIN
+				OnDestructor( "CampaignLevelsLambda" );
+#endif
+			}
+
 
 			CampaignLevelsLambda();
 
@@ -32,7 +38,13 @@ namespace CloudberryKingdom
 	struct StartMenu_MW_Campaign : public StartMenu
 	{
 
-		virtual ~StartMenu_MW_Campaign() { }
+		virtual ~StartMenu_MW_Campaign()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "StartMenu_MW_Campaign" );
+#endif
+		}
+
 
 		using StartMenu::SlideOut;
 		using StartMenu::SlideIn;

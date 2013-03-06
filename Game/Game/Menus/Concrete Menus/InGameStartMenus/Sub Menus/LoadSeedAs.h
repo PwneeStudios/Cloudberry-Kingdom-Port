@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct LoadSeedAs : public VerifyBaseMenu
 	{
 
-		virtual ~LoadSeedAs() { }
+		virtual ~LoadSeedAs()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "LoadSeedAs" );
+#endif
+		}
+
 	
 		struct LoadSeedAsOnEnterLambda : public Lambda
 		{

@@ -670,6 +670,12 @@ namespace CloudberryKingdom
 		ParentGame.reset();
 		EndGame.reset();
 
+		//if ( MyLevel != 0 && MyLevel->MyLevelSeed != 0 )
+		//{
+		//	MyLevel->MyLevelSeed->Release();
+		//	MyLevel->MyLevelSeed.reset();
+		//}
+
 		if ( MyLevel != 0 ) MyLevel->Release(); MyLevel.reset();
 
 		for ( GameObjVec::const_iterator obj = MyGameObjects.begin(); obj != MyGameObjects.end(); ++obj )

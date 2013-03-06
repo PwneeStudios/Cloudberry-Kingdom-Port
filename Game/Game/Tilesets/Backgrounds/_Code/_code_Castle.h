@@ -8,7 +8,13 @@ namespace CloudberryKingdom
 	struct Background_Castle : public BackgroundTemplate
 	{
 	
-		virtual ~Background_Castle() { }
+		virtual ~Background_Castle()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Background_Castle" );
+#endif
+		}
+
 
 		Background_Castle( const std::wstring &Name );
 

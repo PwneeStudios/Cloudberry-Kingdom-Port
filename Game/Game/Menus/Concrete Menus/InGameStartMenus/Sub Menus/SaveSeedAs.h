@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct SaveSeedAs : public VerifyBaseMenu
 	{
 
-		virtual ~SaveSeedAs() { }
+		virtual ~SaveSeedAs()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "SaveSeedAs" );
+#endif
+		}
+
 	
 		struct SaveProxy : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{

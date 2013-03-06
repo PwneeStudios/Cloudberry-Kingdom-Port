@@ -8,7 +8,13 @@ namespace CloudberryKingdom
 	struct SoundMenu : public VerifyBaseMenu
 	{
 
-		virtual ~SoundMenu() { }
+		virtual ~SoundMenu()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "SoundMenu" );
+#endif
+		}
+
 
 		struct Go_ControlsProxy : public Lambda
 		{

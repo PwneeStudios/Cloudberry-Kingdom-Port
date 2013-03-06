@@ -10,7 +10,13 @@ namespace CloudberryKingdom
 	struct Fireball_Parameters : public AutoGen_Parameters
 	{
 
-		virtual ~Fireball_Parameters() { }
+		virtual ~Fireball_Parameters()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Fireball_Parameters" );
+#endif
+		}
+
 	
 		Param FireballMaxAngle, FireballMinDist, MaxFireballDensity, Period;
 		Param KeepUnused;

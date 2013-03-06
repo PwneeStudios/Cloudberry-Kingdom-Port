@@ -47,7 +47,13 @@ namespace CloudberryKingdom
 	struct StringWorldGameData : public GameData
 	{
 	
-		virtual ~StringWorldGameData() { }
+		virtual ~StringWorldGameData()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "StringWorldGameData" );
+#endif
+		}
+
 
 		struct StartOfLevelLambda : public LambdaFunc<bool>
 		{

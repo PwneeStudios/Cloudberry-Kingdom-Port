@@ -8,7 +8,13 @@ namespace CloudberryKingdom
 	struct Challenge_HeroRush : public Rush
 	{
 
-		virtual ~Challenge_HeroRush() { }
+		virtual ~Challenge_HeroRush()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Challenge_HeroRush" );
+#endif
+		}
+
 	
 		static void InitializeStatics();
 

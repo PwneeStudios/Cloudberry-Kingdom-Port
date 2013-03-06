@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct BackgroundFloater_Stationary : public BackgroundFloater
 	{
 
-		virtual ~BackgroundFloater_Stationary() { }
+		virtual ~BackgroundFloater_Stationary()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "BackgroundFloater_Stationary" );
+#endif
+		}
+
 
 		BackgroundFloater_Stationary( const boost::shared_ptr<Level> &level );
 

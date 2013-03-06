@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct MakeFinalDoorVertical : public MakeThing
 	{
 
-		virtual ~MakeFinalDoorVertical() { }
+		virtual ~MakeFinalDoorVertical()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "MakeFinalDoorVertical" );
+#endif
+		}
+
 	
 		struct ElementPositionProjectY : public LambdaFunc_1<boost::shared_ptr<BlockBase> , float>
 		{

@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct HighScorePanel : public CkBaseMenu
 	{
 
-		virtual ~HighScorePanel() { }
+		virtual ~HighScorePanel()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "HighScorePanel" );
+#endif
+		}
+
 	
 		using GUI_Panel::SlideIn;
 

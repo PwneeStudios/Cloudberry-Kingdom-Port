@@ -14,7 +14,13 @@ namespace CloudberryKingdom
 	struct PerfectScoreObject : public GUI_Panel
 	{
 
-		virtual ~PerfectScoreObject() { }
+		virtual ~PerfectScoreObject()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "PerfectScoreObject" );
+#endif
+		}
+
 
 		struct TextEffectProxy : public Lambda
 		{

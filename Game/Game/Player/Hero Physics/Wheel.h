@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct BobPhsxWheel : public BobPhsxNormal
 	{
 
-		virtual ~BobPhsxWheel() { }
+		virtual ~BobPhsxWheel()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "BobPhsxWheel" );
+#endif
+		}
+
 	
 		static void InitializeStatics();
 

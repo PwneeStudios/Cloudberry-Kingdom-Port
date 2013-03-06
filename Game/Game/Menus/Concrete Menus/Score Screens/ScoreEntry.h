@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct ScoreEntry
 	{
 
-		virtual ~ScoreEntry() { }
+		virtual ~ScoreEntry()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "ScoreEntry" );
+#endif
+		}
+
 
 		enum Format
 		{

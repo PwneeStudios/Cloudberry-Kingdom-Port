@@ -8,7 +8,13 @@ namespace CloudberryKingdom
 	struct BobPhsxCharSelect : public BobPhsxNormal
 	{
 	
-		virtual ~BobPhsxCharSelect() { }
+		virtual ~BobPhsxCharSelect()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "BobPhsxCharSelect" );
+#endif
+		}
+
 
 		bool OverrideAnimBehavior;
 

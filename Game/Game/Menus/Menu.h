@@ -79,7 +79,13 @@ namespace CloudberryKingdom
 	struct Menu : public boost::enable_shared_from_this<Menu>
 	{
 
-		virtual ~Menu() { }
+		virtual ~Menu()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Menu" );
+#endif
+		}
+
 	
 		struct FindItemByNameLambda : public LambdaFunc_1<boost::shared_ptr<MenuItem> , bool>
 		{

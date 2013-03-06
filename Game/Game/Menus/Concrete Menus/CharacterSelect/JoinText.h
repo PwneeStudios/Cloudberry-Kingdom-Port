@@ -13,7 +13,13 @@ namespace CloudberryKingdom
 	struct JoinText : public CkBaseMenu
 	{
 
-		virtual ~JoinText() { }
+		virtual ~JoinText()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "JoinText" );
+#endif
+		}
+
 	
 		boost::shared_ptr<CharacterSelect> MyCharacterSelect;
 	

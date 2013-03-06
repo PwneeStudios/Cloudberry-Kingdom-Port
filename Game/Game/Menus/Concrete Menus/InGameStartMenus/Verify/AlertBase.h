@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct AlertBaseMenu : public CkBaseMenu
 	{
 
-		virtual ~AlertBaseMenu() { }
+		virtual ~AlertBaseMenu()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "AlertBaseMenu" );
+#endif
+		}
+
 	
 		struct OkProxy : public Lambda
 		{

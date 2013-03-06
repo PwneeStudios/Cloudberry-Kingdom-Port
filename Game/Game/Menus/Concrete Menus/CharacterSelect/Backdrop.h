@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct CharSelectBackdrop : public CkBaseMenu
 	{
 
-		virtual ~CharSelectBackdrop() { }
+		virtual ~CharSelectBackdrop()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "CharSelectBackdrop" );
+#endif
+		}
+
 	
 		using CkBaseMenu::SlideOut;
 		using CkBaseMenu::SlideIn;

@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct _CircleDeath : public _Death
 	{
 
-		virtual ~_CircleDeath() { }
+		virtual ~_CircleDeath()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "_CircleDeath" );
+#endif
+		}
+
 
 		boost::shared_ptr<CircleBox> Circle;
 		float Radius;

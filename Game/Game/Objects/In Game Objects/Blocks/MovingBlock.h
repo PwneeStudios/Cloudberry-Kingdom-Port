@@ -28,7 +28,13 @@ namespace CloudberryKingdom
 	struct MovingBlock : public BlockBase, public IBound
 	{
 
-		virtual ~MovingBlock() { }
+		virtual ~MovingBlock()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "MovingBlock" );
+#endif
+		}
+
 	
 		struct MovingBlockTileInfo : public TileInfoBase
 		{

@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct MultiplierUp : public GUI_Panel
 	{
 
-		virtual ~MultiplierUp() { }
+		virtual ~MultiplierUp()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "MultiplierUp" );
+#endif
+		}
+
 	
 		virtual void OnAdd();
 

@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct GUI_Blobs : public GUI_Panel
 	{
 
-		virtual ~GUI_Blobs() { }
+		virtual ~GUI_Blobs()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "GUI_Blobs" );
+#endif
+		}
+
 
 		using GUI_Panel::SlideOut;
 		using GUI_Panel::SlideIn;
@@ -18,7 +24,13 @@ namespace CloudberryKingdom
 		struct TempStatsLambda : public PlayerIntLambda
 		{
 		
-			virtual ~TempStatsLambda() { }
+			virtual ~TempStatsLambda()
+			{
+#ifdef BOOST_BIN
+				OnDestructor( "TempStatsLambda" );
+#endif
+			}
+
 			
 			virtual int Apply( const boost::shared_ptr<PlayerData> &p );
 

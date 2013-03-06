@@ -23,7 +23,13 @@ namespace CloudberryKingdom
 	struct Serpent_Parameters : public AutoGen_Parameters
 	{
 	
-		virtual ~Serpent_Parameters() { }
+		virtual ~Serpent_Parameters()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Serpent_Parameters" );
+#endif
+		}
+
 
 		float SerpentStepCutoff;
 		Param SerpentStep, SerpentPeriod, NumToMake;

@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct MakeFinalDoor : public MakeThing, public boost::enable_shared_from_this<MakeFinalDoor>
 	{
 
-		virtual ~MakeFinalDoor() { }
+		virtual ~MakeFinalDoor()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "MakeFinalDoor" );
+#endif
+		}
+
 	
 		struct VanillaFillEndPieceLambda : public Lambda_1<boost::shared_ptr<BlockBase> >
 		{

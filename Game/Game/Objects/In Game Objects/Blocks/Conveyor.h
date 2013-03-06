@@ -20,7 +20,13 @@ namespace CloudberryKingdom
 	struct ConveyorBlock : public BlockBase
 	{
 	
-		virtual ~ConveyorBlock() { }
+		virtual ~ConveyorBlock()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "ConveyorBlock" );
+#endif
+		}
+
 
 		boost::shared_ptr<QuadClass> MyQuad, LeftEnd, RightEnd;
 

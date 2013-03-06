@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct HelpBlurb : public CkBaseMenu
 	{
 
-		virtual ~HelpBlurb() { }
+		virtual ~HelpBlurb()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "HelpBlurb" );
+#endif
+		}
+
 
 		struct SetText_ActionHelper : public Lambda
 		{

@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct SpikeyLine_Parameters : public AutoGen_Parameters
 	{
 	
-		virtual ~SpikeyLine_Parameters() { }
+		virtual ~SpikeyLine_Parameters()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "SpikeyLine_Parameters" );
+#endif
+		}
+
 
 		struct _Special
 		{

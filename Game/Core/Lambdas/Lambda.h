@@ -6,7 +6,13 @@ namespace CloudberryKingdom
 	struct Lambda : boost::enable_shared_from_this<Lambda>
 	{
 
-		virtual ~Lambda() { }
+		virtual ~Lambda()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Lambda" );
+#endif
+		}
+
 
 		virtual void Apply() = 0;
 

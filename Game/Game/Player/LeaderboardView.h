@@ -66,7 +66,13 @@ namespace CloudberryKingdom
 
 		};
 
-		virtual ~LeaderboardGUI() { }
+		virtual ~LeaderboardGUI()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "LeaderboardGUI" );
+#endif
+		}
+
 
 		using CkBaseMenu::SlideOut;
 		using CkBaseMenu::SlideIn;

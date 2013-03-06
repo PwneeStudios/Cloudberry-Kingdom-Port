@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct GUI_Score : public GUI_Panel
 	{
 
-		virtual ~GUI_Score() { }
+		virtual ~GUI_Score()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "GUI_Score" );
+#endif
+		}
+
 
 		/// <summary>
 		/// Return a string representation of the score
@@ -53,7 +59,13 @@ namespace CloudberryKingdom
 	struct GUI_CampaignScore : public GUI_Score
 	{
 	
-		virtual ~GUI_CampaignScore() { }
+		virtual ~GUI_CampaignScore()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "GUI_CampaignScore" );
+#endif
+		}
+
 
 		struct RunningCampaignScoreLambda : public PlayerIntLambda
 		{

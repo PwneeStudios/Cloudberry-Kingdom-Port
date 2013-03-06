@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct FallingBlock : public BlockBase
 	{
 	
-		virtual ~FallingBlock() { }
+		virtual ~FallingBlock()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "FallingBlock" );
+#endif
+		}
+
 
 		struct FallingBlockTileInfo : public TileInfoBase
 		{

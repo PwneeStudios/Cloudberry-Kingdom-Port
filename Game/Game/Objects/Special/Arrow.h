@@ -16,7 +16,13 @@ namespace CloudberryKingdom
 	struct Arrow : public GameObject
 	{
 
-		virtual ~Arrow() { }
+		virtual ~Arrow()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Arrow" );
+#endif
+		}
+
 	
 		enum Orientation
 		{

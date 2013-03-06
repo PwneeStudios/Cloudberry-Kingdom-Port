@@ -10,7 +10,13 @@ namespace CloudberryKingdom
 	struct Cloud : public _Obstacle
 	{
 
-		virtual ~Cloud() { }
+		virtual ~Cloud()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Cloud" );
+#endif
+		}
+
 	
 		struct CloudTileInfo : public TileInfoBase
 		{

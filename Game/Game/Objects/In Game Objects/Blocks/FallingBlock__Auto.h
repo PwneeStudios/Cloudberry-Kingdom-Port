@@ -28,7 +28,13 @@ namespace CloudberryKingdom
 	struct FallingBlock_Parameters : public AutoGen_Parameters
 	{
 	
-		virtual ~FallingBlock_Parameters() { }
+		virtual ~FallingBlock_Parameters()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "FallingBlock_Parameters" );
+#endif
+		}
+
 
 		Param Delay, Width, AngryRatio, AngrySpeed, AngryAccel, KeepUnused;
 

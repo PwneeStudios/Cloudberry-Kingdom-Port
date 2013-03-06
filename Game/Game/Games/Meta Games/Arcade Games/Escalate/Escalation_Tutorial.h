@@ -20,7 +20,13 @@ namespace CloudberryKingdom
 	struct Escalation_Tutorial : public GameObject
 	{
 	
-		virtual ~Escalation_Tutorial() { }
+		virtual ~Escalation_Tutorial()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Escalation_Tutorial" );
+#endif
+		}
+
 
 		struct ConfigureSongsHelper : public Lambda
 		{

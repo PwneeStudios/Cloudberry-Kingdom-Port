@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct Serpent : public _BoxDeath
 	{
 
-		virtual ~Serpent() { }
+		virtual ~Serpent()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Serpent" );
+#endif
+		}
+
 	
 		struct SerpentTileInfo : public TileInfoBase
 		{

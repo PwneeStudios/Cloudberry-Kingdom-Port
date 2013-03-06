@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct Background_Cave : public BackgroundTemplate
 	{
 	
-		virtual ~Background_Cave() { }
+		virtual ~Background_Cave()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Background_Cave" );
+#endif
+		}
+
 
 		Background_Cave( const std::wstring &Name );
 

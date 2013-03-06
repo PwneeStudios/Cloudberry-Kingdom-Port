@@ -10,7 +10,13 @@ namespace CloudberryKingdom
 	struct Coin : public ObjectBase
 	{
 	
-		virtual ~Coin() { }
+		virtual ~Coin()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Coin" );
+#endif
+		}
+
 
 		enum CoinType
 		{

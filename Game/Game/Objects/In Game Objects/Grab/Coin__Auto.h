@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct Coin_Parameters : public AutoGen_Parameters
 	{
 	
-		virtual ~Coin_Parameters() { }
+		virtual ~Coin_Parameters()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "Coin_Parameters" );
+#endif
+		}
+
 
 		enum FillTypes
 		{

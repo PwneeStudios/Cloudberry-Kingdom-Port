@@ -8,7 +8,13 @@ namespace CloudberryKingdom
 	struct ScrollBar : public CkBaseMenu
 	{
 
-		virtual ~ScrollBar() { }
+		virtual ~ScrollBar()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "ScrollBar" );
+#endif
+		}
+
 
 		struct ScrollBarReleaseLambda : public Lambda
 		{

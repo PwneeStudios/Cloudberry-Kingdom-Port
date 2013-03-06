@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct StringWorldTimed : public StringWorldGameData
 	{
 
-		virtual ~StringWorldTimed() { }
+		virtual ~StringWorldTimed()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "StringWorldTimed" );
+#endif
+		}
+
 	
 		struct StringWorldOnTimerExpiredLambda : public Lambda_1<boost::shared_ptr<GUI_Timer_Base> >
 		{

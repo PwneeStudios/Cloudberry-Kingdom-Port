@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct StartMenu_MW_Backpanel : public CkBaseMenu
 	{
 
-		virtual ~StartMenu_MW_Backpanel() { }
+		virtual ~StartMenu_MW_Backpanel()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "StartMenu_MW_Backpanel" );
+#endif
+		}
+
 
 		using CkBaseMenu::SlideOut;
 		using CkBaseMenu::SlideIn;

@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct ExplodeBobs : public GUI_Panel
 	{
 
-		virtual ~ExplodeBobs() { }
+		virtual ~ExplodeBobs()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "ExplodeBobs" );
+#endif
+		}
+
 	
 		enum Speed
 		{

@@ -9,7 +9,13 @@ namespace CloudberryKingdom
 	struct VerifyDeleteSeeds : public VerifyBaseMenu
 	{
 
-		virtual ~VerifyDeleteSeeds() { }
+		virtual ~VerifyDeleteSeeds()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "VerifyDeleteSeeds" );
+#endif
+		}
+
 	
 		struct VerifyDeleteYesGoLambda : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{

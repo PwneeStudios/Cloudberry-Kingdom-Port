@@ -10,7 +10,13 @@ namespace CloudberryKingdom
 	struct SignInMenu : public CkBaseMenu
 	{
 
-		virtual ~SignInMenu() { }
+		virtual ~SignInMenu()
+		{
+#ifdef BOOST_BIN
+			OnDestructor( "SignInMenu" );
+#endif
+		}
+
 
 		struct SignInNoLambda : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{
