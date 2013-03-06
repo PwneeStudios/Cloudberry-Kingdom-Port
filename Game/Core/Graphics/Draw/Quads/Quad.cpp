@@ -66,14 +66,34 @@ namespace CloudberryKingdom
 	{
 		BaseQuad::Release();
 
-		Center->Release();
-		Center.reset();
-		xAxis->Release();
-		xAxis.reset();
-		yAxis->Release();
-		yAxis.reset();
-		for ( int i = 0; i < 4; i++ )
-			Corner[ i ]->Release();
+		if ( Center != 0 )
+		{
+			Center->Release();
+			Center.reset();
+		}
+
+		if ( xAxis != 0 )
+		{
+			xAxis->Release();
+			xAxis.reset();
+		}
+
+		if ( yAxis != 0 )
+		{
+			yAxis->Release();
+			yAxis.reset();
+		}
+
+		if ( Corner.size() > 0)
+		{
+			for ( int i = 0; i < 4; i++ )
+			{
+				if ( Corner[ i ] != 0 )
+				{
+					Corner[ i ]->Release();
+				}
+			}
+		}
 		Corner.clear();
 	}
 

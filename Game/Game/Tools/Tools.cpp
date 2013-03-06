@@ -889,6 +889,7 @@ namespace CloudberryKingdom
 	void Tools::EndLoadingScreen_Immediate()
 	{
 		Tools::ShowLoadingScreen = false;
+		ReleaseLoadingScreen( Tools::CurrentLoadingScreen );
 	}
 
 	std::vector<std::wstring> Tools::GetBitsFromLine( std::wstring line )

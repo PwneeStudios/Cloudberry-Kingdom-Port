@@ -12,9 +12,12 @@
 
 struct GraphicsDevice;
 struct PresentationParameters;
+struct ILoadingScreen;
 
 namespace CloudberryKingdom
 {
+
+	void ReleaseLoadingScreen( boost::shared_ptr<ILoadingScreen> loadingscreen );
 
 	void InitBobPhsxSingleton( const boost::shared_ptr<BobPhsx> &This );
 

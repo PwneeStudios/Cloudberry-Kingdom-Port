@@ -139,7 +139,10 @@ namespace CloudberryKingdom
 		{
 			FadeAlpha += .07f;
             if ( Fake && FadeAlpha > 1.4f || !Fake && FadeAlpha > 1.2f )
+			{
 				Tools::ShowLoadingScreen = false;
+				//ReleaseLoadingScreen( Tools::CurrentLoadingScreen );
+			}
 		}
 		BlackQuad->Quad_Renamed.SetColor( Color( 0.f, 0.f, 0.f, FadeAlpha ) );
 
@@ -180,6 +183,11 @@ namespace CloudberryKingdom
 		Tools::Render->EndSpriteBatch();
 		BlackQuad->Draw();
 		Tools::QDrawer->Flush();
+
+		if ( Tools::ShowLoadingScreen == false )
+		{
+			ReleaseLoadingScreen( Tools::CurrentLoadingScreen );
+		}
 	}
 
 	void LoadingScreen::InitializeInstanceFields()

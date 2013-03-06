@@ -1,5 +1,6 @@
 #include <global_header.h>
 
+#include <MasterHack.h>
 #include <Hacks/List.h>
 #include <Hacks/String.h>
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
@@ -65,6 +66,7 @@ namespace CloudberryKingdom
 	void ScreenSaver::OnSwapLambda::Apply( const boost::shared_ptr<LevelSeedData> &data )
 	{
 		Tools::ShowLoadingScreen = false;
+		ReleaseLoadingScreen( Tools::CurrentLoadingScreen );
 		Tools::TheGame->LogoScreenPropUp = false;
 		//Tools::Write( _T( "+++++++++++++++++++ Ending screensave load..." ) );
 	}

@@ -852,7 +852,15 @@ namespace CloudberryKingdom
 		setIsSetToReturnTo( false );
 
 		if ( PrevLevel != 0 )
+		{
+			if ( PrevLevel->MyLevelSeed != 0 )
+			{
+				PrevLevel->MyLevelSeed->Release();
+				PrevLevel->MyLevelSeed.reset();
+			}
+
 			PrevLevel->Release();
+		}
 		else
 			Tools::Nothing();
 

@@ -8,8 +8,53 @@
 
 #include <Core\Animation\AnimQueue.h>
 
+#include "Game/Menus/Concrete Menus/Loading Screen/ILoadingScreen.h"
+
 namespace CloudberryKingdom
 {
+
+	void ReleaseLoadingScreen( boost::shared_ptr<ILoadingScreen> loadingscreen )
+	{
+		boost::shared_ptr<LoadingScreen> ls = boost::dynamic_pointer_cast<LoadingScreen>( loadingscreen );
+		
+		if ( 0 == ls ) return;
+
+		if ( ls->BackgroundQuad != 0 )
+		{
+			ls->BackgroundQuad->Release();
+			ls->BackgroundQuad.reset();
+		}
+
+		if ( ls->BlackQuad != 0)
+		{
+			ls->BlackQuad->Release();
+			ls->BlackQuad.reset();
+		}
+
+		if ( ls->CenterObject != 0)
+		{
+			ls->CenterObject->Release();
+			ls->CenterObject.reset();
+		}
+
+		if ( ls->HintText != 0)
+		{
+			ls->HintText->Release();
+			ls->HintText.reset();
+		}
+
+		if ( ls->LoadingText != 0)
+		{
+			ls->LoadingText->Release();
+			ls->LoadingText.reset();
+		}
+
+		if ( ls->TextObject != 0)
+		{
+			ls->TextObject->Release();
+			ls->TextObject.reset();
+		}
+	}
 
 	void InitBobPhsxSingleton( const boost::shared_ptr<BobPhsx> &This )
 	{

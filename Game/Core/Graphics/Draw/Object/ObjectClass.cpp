@@ -30,8 +30,16 @@ namespace CloudberryKingdom
 			ObjectRenderTarget.reset();
 			//delete ObjectRenderTarget;
 
-		ContainedQuad->Release();
-		ParentQuad->Release();
+		if ( ContainedQuad != 0 )
+		{
+			ContainedQuad->Release();
+			ContainedQuad.reset();
+		}
+		if ( ParentQuad != 0 )
+		{
+			ParentQuad->Release();
+			ParentQuad.reset();
+		}
 
 		if ( QuadList.size() > 0 )
 		for ( std::vector<boost::shared_ptr<BaseQuad> >::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
@@ -573,7 +581,7 @@ namespace CloudberryKingdom
 
 	ObjectClass::ObjectClass( const boost::shared_ptr<ObjectClass> &obj, bool _BoxesOnly, bool DeepClone )
 	{
-		InitializeInstanceFields();
+		//InitializeInstanceFields();
 	
 		// Pulled out into ObjectClass_PostConstruct_3params
 		//InitializeInstanceFields();
@@ -1091,6 +1099,13 @@ namespace CloudberryKingdom
 		p1_Right = Vector2( 63, -45 );
 		p2_Right = Vector2( 27, 0 );
 		ContainedQuadAngle = 0;
+
+		if ( ContainedQuad != 0 )
+		{
+			ContainedQuad->Release();
+			ContainedQuad.reset();
+		}
+
 		ContainedQuad = boost::make_shared<Quad>();
 		ContainedQuad->InitVertices();
 		ContainedQuad->SetColor( Color( 1.f, 1.f, 1.f ) );

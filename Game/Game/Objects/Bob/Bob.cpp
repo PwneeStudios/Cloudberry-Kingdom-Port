@@ -107,6 +107,20 @@ namespace CloudberryKingdom
 
 	void Bob::Release()
 	{
+		if ( Head != 0 )
+		{
+			Head->Release();
+			Head.reset();
+		}
+
+		if ( temp != 0 )
+		{
+			temp->Release();
+			temp.reset();
+		}
+
+
+		
 		CeilingParams.reset();
 
 		ObjectBase::Release();

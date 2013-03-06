@@ -68,6 +68,17 @@ void Stats()
 		PrevMetaBoostBinCount[ count ].push_back( n - PrevMetaBoostBinCount[ count ][0] );
 		PrevMetaBoostBinCount[ count ][0] = n;
 
+		if ( name == L"Quad" )
+		{
+			//BoostBin<CloudberryKingdom::Quad>* qbin = static_cast< BoostBin<CloudberryKingdom::Quad>* >( *bin );
+			std::vector< int > vec = PrevMetaBoostBinCount[ count ];
+
+			int m = vec[ vec.size() - 1 ];
+			if ( m > 0 )
+			{
+				CloudberryKingdom::Tools::Write( L"" );
+			}
+		}
 
 		std::wstring Line = name + L"\t";
 		for ( int i = 0; i < PrevMetaBoostBinCount[ count ].size(); ++i)
