@@ -47,7 +47,18 @@ namespace CloudberryKingdom
 	void Camera::Release()
 	{
 		MyLevel.reset();
-		MyZone.reset();
+		
+		if ( MyZone != 0 )
+		{
+			MyZone->Box.reset();
+			MyZone->MyContainsEvent.reset();
+			if ( MyZone->CoreData != 0 )
+			{
+				MyZone->CoreData->Release();
+				MyZone->CoreData.reset();
+			}
+			MyZone.reset();
+		}
 
 		FancyPos = FancyZoom = 0;
 	}

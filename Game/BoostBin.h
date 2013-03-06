@@ -29,7 +29,7 @@ void _OnAssignment( std::string class_name, int origin_code )
 		return;
 	}
 
-	if ( std::string::npos != class_name.find( "FireSpinner_Parameters" ) )
+	if ( std::string::npos != class_name.find( "CameraZone" ) )
 	{
 
 		CloudberryKingdom::Tools::Write( L"" );
