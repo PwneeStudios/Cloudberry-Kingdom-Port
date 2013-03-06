@@ -50,7 +50,7 @@ bool InitializeSave()
 		isInitialized = false;
 
 		// There was not enough free space to create save data.
-		DisplayError( ErrorType( 1550200 ) );
+		DisplayError( ErrorType( 1550100 ) );
 
 		return false;
 	}

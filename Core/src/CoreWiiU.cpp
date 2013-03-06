@@ -7,6 +7,7 @@
 #include <cafe/procui.h>
 #include <cafe/sci/sciEnum.h>
 #include <cafe/sci/sciPublicApi.h>
+#include <cafe/sysapp.h>
 #include <Content/Wad.h>
 #include <cstdlib>
 #include <GameLoop.h>
@@ -78,10 +79,20 @@ void ForegroundReleaseCallback()
 	ForceKillVideoPlayer();
 }
 
+extern void StopScheduler();
+extern void ResumeScheduler();
+
 u32 ReleaseForegroundCallback( void *context )
 {
+	StopScheduler();
+
 	LOG.Write( "Kill video player in case we are releasing while it's playing.\n" );
 	ForceKillVideoPlayer();
+}
+
+u32 AcquireForegroundCallback( void *context )
+{
+	ResumeScheduler();
 }
 
 CoreWiiU::CoreWiiU( GameLoop &game ) :
@@ -155,6 +166,7 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 
 	ProcUIRegisterCallback( PROCUI_MESSAGE_HBDENIED, HomeButtonDeniedCallback, NULL, 200 );
 	ProcUIRegisterCallback( PROCUI_MESSAGE_RELEASE, ReleaseForegroundCallback, NULL, 200 );
+	ProcUIRegisterCallback( PROCUI_MESSAGE_ACQUIRE, AcquireForegroundCallback, NULL, 200 );
 	//ProcUISetSaveCallback( SaveOnExitCallback, NULL );
 
 	scheduler_ = new Scheduler;
@@ -287,7 +299,13 @@ int CoreWiiU::Run()
 				// Exit and jump to data management!
 				if( currentErrorCode == 1550100 )
 				{
-					Exit();
+					SysStandardArgsIn standardArgs;
+					memset( &standardArgs, 0, sizeof( standardArgs ) );
+
+					SysSettingsArgsIn cpArgs;
+					cpArgs.stdIn = standardArgs;
+					cpArgs.jumpTo = SYS_SETTINGS_JUMP_TO_DATA_MANAGE;
+					SYSLaunchSettings( &cpArgs );
 				}
 
 				if( nn::erreula::GetStateErrorViewer() == nn::erreula::cState_Display )

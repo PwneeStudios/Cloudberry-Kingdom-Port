@@ -39,7 +39,7 @@
 #endif
 
 #define VIDEOSKIP_DELAY         (70)                            // permissible delay time
-#define FILEMEMORYSIZE          (128*1024*1024)                 // 512MByte
+#define FILEMEMORYSIZE          (128*1024*1024)                 // 128 MByte
 #define TEST_MODE               (0)                             // 1:TV only, 2:DRC only, other:TV & DRC
 
 #define MAXTHREADNUM            (8)

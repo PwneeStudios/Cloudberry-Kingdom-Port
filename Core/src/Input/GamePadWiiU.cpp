@@ -13,7 +13,10 @@ VPADStatus vpadStatus;
 s32 readLength;
 bool vpadConnected;
 bool anythingElseConnected;
-
+/*
+KPADStatus kpadStatus[ WPAD_MAX_CONTROLLERS ];
+s32 kpadReadLength[ WPAD_MAX_CONTROLLERS ];
+/*
 static void ConnectCallback( s32 chan, s32 reason )
 {
 	if( reason >= 0 )

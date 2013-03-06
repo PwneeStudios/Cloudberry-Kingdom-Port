@@ -1,8 +1,10 @@
 #include <Architecture/SchedulerWiiU.h>
 
 #include <Architecture/Job.h>
+#include <Architecture/Scheduler.h>
 #include <Content/Resource.h>
 #include <Content/ResourcePtr.h>
+#include <Core.h>
 #include <Utility/Log.h>
 
 #include <cafe.h>
@@ -55,6 +57,32 @@ struct SchedulerInternal
 	void *Stack;
 };
 
+static SchedulerInternal *External = NULL;
+
+class SuspendSchedulerJob : public Job
+{
+public:
+	
+	SuspendSchedulerJob()
+	{
+	}
+
+	void Do()
+	{
+		OSSuspendThread( External->Threads[ 0 ] );
+	}
+};
+
+void StopScheduler()
+{
+	SCHEDULER->RunJobASAP( new SuspendSchedulerJob() );
+}
+
+void ResumeScheduler()
+{
+	OSResumeThread( External->Threads[ 0 ] );
+}
+
 /// Bootstrap for worker thread.
 static int ThreadProc( int argc, void *argv )
 {
@@ -68,6 +96,7 @@ static int ThreadProc( int argc, void *argv )
 SchedulerWiiU::SchedulerWiiU() :
 	internal_( new SchedulerInternal )
 {
+	External = internal_;
 	internal_->WorkersRunning = true;
 
 	OSInitMutex( &internal_->JobQueueMutex );

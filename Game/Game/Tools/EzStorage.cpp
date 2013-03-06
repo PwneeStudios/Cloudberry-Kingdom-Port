@@ -44,10 +44,6 @@ static unsigned int Checksum(const unsigned char *buffer, int length)
 	return val;
 }
 
-// Start and end the saving process under WiiU.
-extern void StartSaveWiiU();
-extern void EndSaveWiiU();
-
 #endif
 
 namespace CloudberryKingdom
@@ -138,10 +134,6 @@ namespace CloudberryKingdom
 
 		if ( !CloudberryKingdomGame::CanSave() ) return;
 
-#ifdef CAFE
-		StartSaveWiiU();
-#endif
-
 		for ( std::vector<boost::shared_ptr<SaveLoad> >::const_iterator ThingToSave = ThingsToSave.begin(); ThingToSave != ThingsToSave.end(); ++ThingToSave )
 		{
 			//if (!(ThingToSave is ScoreList)) Tools::Write("!");
@@ -163,10 +155,6 @@ namespace CloudberryKingdom
 			Wait();
 		}
 	#endif
-
-#ifdef CAFE
-		EndSaveWiiU();
-#endif
 
 	}
 

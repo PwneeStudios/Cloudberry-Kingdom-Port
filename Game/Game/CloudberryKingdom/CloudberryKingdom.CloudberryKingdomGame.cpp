@@ -1377,6 +1377,13 @@ float CloudberryKingdomGame::fps = 0;
                     SmallErrorMessage = null;
                 }
             }
+#else
+		if( DisconnectedController() )
+		{
+#ifdef CAFE
+			DisplayError( ErrorType( 1520100 ) );
+#endif
+		}
 #endif
 
 		UpdateCustomMusic();
