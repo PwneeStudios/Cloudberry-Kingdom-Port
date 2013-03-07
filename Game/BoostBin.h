@@ -29,12 +29,12 @@ void _OnAssignment( std::string class_name, int origin_code )
 		return;
 	}
 
-	if ( std::string::npos != class_name.find( "CameraZone" ) )
-	{
+	//if ( std::string::npos != class_name.find( "CameraZone" ) )
+	//{
 
-		CloudberryKingdom::Tools::Write( L"" );
+	//	CloudberryKingdom::Tools::Nothing();
 
-	}
+	//}
 
 }
 
@@ -68,17 +68,16 @@ void Stats()
 		PrevMetaBoostBinCount[ count ].push_back( n - PrevMetaBoostBinCount[ count ][0] );
 		PrevMetaBoostBinCount[ count ][0] = n;
 
-		if ( name == L"Quad" )
-		{
-			//BoostBin<CloudberryKingdom::Quad>* qbin = static_cast< BoostBin<CloudberryKingdom::Quad>* >( *bin );
-			std::vector< int > vec = PrevMetaBoostBinCount[ count ];
+		//if ( name == L"Quad" )
+		//{
+		//	std::vector< int > vec = PrevMetaBoostBinCount[ count ];
 
-			int m = vec[ vec.size() - 1 ];
-			if ( m > 0 )
-			{
-				CloudberryKingdom::Tools::Write( L"" );
-			}
-		}
+		//	int m = vec[ vec.size() - 1 ];
+		//	if ( m > 0 )
+		//	{
+		//		CloudberryKingdom::Tools::Write( L"" );
+		//	}
+		//}
 
 		std::wstring Line = name + L"\t";
 		for ( int i = 0; i < PrevMetaBoostBinCount[ count ].size(); ++i)
@@ -86,7 +85,14 @@ void Stats()
 			Line += ToString( PrevMetaBoostBinCount[ count ][i] ) + L"\t";
 		}
 
-		CloudberryKingdom::Tools::Write( Line.c_str() );
+		// Print a specific class
+		if ( name == L"GameObject::OnCameraChangeProxy" )
+		{
+			CloudberryKingdom::Tools::Write( Line.c_str() );
+		}
+
+		// Print every class
+		//CloudberryKingdom::Tools::Write( Line.c_str() );
 
 		count++;
 	}

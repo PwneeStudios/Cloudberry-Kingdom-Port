@@ -209,7 +209,8 @@ namespace CloudberryKingdom
 
 	bool GameData::RemoveMarkedLambda::Apply( const boost::shared_ptr<GameObject> &obj )
 	{
-		return obj->getCore()->MarkedForDeletion;
+		return obj->CoreData == 0 || obj->CoreData->MarkedForDeletion;
+		//return obj->getCore()->MarkedForDeletion;
 	}
 
 	GameData::FadeToBlackLambda::FadeToBlackLambda( const boost::shared_ptr<GameData> &game, float FadeOutSpeed )

@@ -15,6 +15,8 @@ namespace CloudberryKingdom
 
 	void ScreenSaver::ConstructorPressAListenerHelper::Apply()
 	{
+		return;
+
 		Tools::CurGameData->FadeToBlack( .0275f );
 		Tools::SongWad->FadeOut();
 		ss->DoBackgroundPhsx = false;

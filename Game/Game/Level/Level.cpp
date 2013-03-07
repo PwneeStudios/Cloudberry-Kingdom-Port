@@ -232,7 +232,8 @@ namespace CloudberryKingdom
 
 	bool Level::CleanObjectListLambda::Apply( const boost::shared_ptr<ObjectBase> &obj )
 	{
-		return obj->getCore()->MarkedForDeletion;
+		//return obj->getCore()->MarkedForDeletion;
+		return obj->CoreData == 0 || obj->CoreData->MarkedForDeletion;
 	}
 
 	Level::CleanDrawLayerLambda::CleanDrawLayerLambda( int layer )
@@ -242,7 +243,7 @@ namespace CloudberryKingdom
 
 	bool Level::CleanDrawLayerLambda::Apply( const boost::shared_ptr<ObjectBase> &obj )
 	{
-		return obj->getCore()->MarkedForDeletion || (obj->getCore()->DrawLayer != layer && obj->getCore()->DrawLayer2 != layer && obj->getCore()->DrawLayer3 != layer);
+		return obj->CoreData == 0 || obj->getCore()->MarkedForDeletion || (obj->getCore()->DrawLayer != layer && obj->getCore()->DrawLayer2 != layer && obj->getCore()->DrawLayer3 != layer);
 	}
 
 	Level::CleanBlockListLambda::CleanBlockListLambda()
@@ -251,7 +252,7 @@ namespace CloudberryKingdom
 
 	bool Level::CleanBlockListLambda::Apply( const boost::shared_ptr<BlockBase> &obj )
 	{
-		return obj->getCore()->MarkedForDeletion;
+		return obj->CoreData == 0 || obj->getCore()->MarkedForDeletion;
 	}
 
 	Level::RemoveForeignLambda::RemoveForeignLambda( const boost::shared_ptr<Level> &level )
