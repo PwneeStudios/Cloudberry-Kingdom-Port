@@ -97,7 +97,7 @@ void SetErrorLanguage( ConsoleLanguage language )
 		internalLanguage = SCI_CAFE_LANGUAGE_GERMAN;
 		break;
 	case ConsoleLanguage_ITALIAN:
-		internalLanguage = SCI_CAFE_LANGUAGE_GERMAN;
+		internalLanguage = SCI_CAFE_LANGUAGE_ITALIAN;
 		break;
 	case ConsoleLanguage_SPANISH:
 		internalLanguage = SCI_CAFE_LANGUAGE_SPANISH;

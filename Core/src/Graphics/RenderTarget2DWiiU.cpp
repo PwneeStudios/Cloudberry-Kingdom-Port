@@ -82,6 +82,8 @@ void RenderTarget2D::Set()
 	LastRT = internal_;
 }
 
+extern GX2ColorBuffer TheColorBuffer;
+
 void RenderTarget2D::SetDefault()
 {
 	if( LastRT )
@@ -95,19 +97,23 @@ void RenderTarget2D::SetDefault()
 		LastRT = 0;
 	}
 
-	int width = DEMOColorBuffer.surface.width;
-	int height = DEMOColorBuffer.surface.height;
+	int width = TheColorBuffer.surface.width;
+	int height = TheColorBuffer.surface.height;
 
-	GX2SetColorBuffer( &DEMOColorBuffer, GX2_RENDER_TARGET_0 );
+	GX2SetColorBuffer( &TheColorBuffer, GX2_RENDER_TARGET_0 );
 	GX2SetDepthBuffer( &DEMODepthBuffer );
 	GX2SetViewport( 0.f, 0.f,
 		static_cast< float >( width ), static_cast< float >( height ),
 		0.f, 1.f );
 	GX2SetScissor( 0, 0, width, height );
 
+	GX2SetDepthOnlyControl( GX2_FALSE, GX2_FALSE, GX2_COMPARE_ALWAYS );
+			GX2SetColorControl( GX2_LOGIC_OP_COPY, 0x1, GX2_DISABLE, GX2_ENABLE );
 	GX2SetBlendControl( GX2_RENDER_TARGET_0,
 		GX2_BLEND_ONE, GX2_BLEND_ONE_MINUS_SRC_ALPHA, GX2_BLEND_COMBINE_ADD,
 		GX2_TRUE, GX2_BLEND_ONE, GX2_BLEND_ONE_MINUS_SRC_ALPHA, GX2_BLEND_COMBINE_ADD );
+
+	DEMOGfxSetContextState();
 }
 
 void RenderTarget2D::Clear( float r, float g, float b, float a )

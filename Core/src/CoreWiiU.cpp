@@ -20,6 +20,7 @@
 #include <Utility/Error.h>
 #include <Utility/Limits.h>
 #include <Utility/Log.h>
+#include "Graphics/WiiU/videorender.h"
 
 #include <fmod.hpp>
 #include <fmodwiiu.h>
@@ -70,6 +71,8 @@ u32 HomeButtonDeniedCallback( void *context )
 	return 0;
 }*/
 
+GX2ColorBuffer TheColorBuffer;
+
 // Kill the video player if it's still alive, we don't want stuff running in the background in case we are exiting.
 extern void ForceKillVideoPlayer();
 
@@ -84,6 +87,8 @@ extern void ResumeScheduler();
 
 u32 ReleaseForegroundCallback( void *context )
 {
+	DEMOGfxFreeMEM1( TheColorBuffer.surface.imagePtr );
+
 	StopScheduler();
 
 	LOG.Write( "Kill video player in case we are releasing while it's playing.\n" );
@@ -92,6 +97,11 @@ u32 ReleaseForegroundCallback( void *context )
 
 u32 AcquireForegroundCallback( void *context )
 {
+	GX2InitColorBuffer( &TheColorBuffer, 1280, 720, GX2_SURFACE_FORMAT_TCS_R8_G8_B8_A8_UNORM, GX2_AA_MODE_1X );
+	void *ptr = DEMOGfxAllocMEM1( TheColorBuffer.surface.imageSize, TheColorBuffer.surface.alignment );
+	GX2Invalidate( GX2_INVALIDATE_CPU, ptr, TheColorBuffer.surface.imageSize );
+	GX2InitColorBufferPtr( &TheColorBuffer, ptr );
+
 	ResumeScheduler();
 }
 
@@ -117,6 +127,11 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 	OSGetMemBound( OSMem_MEM1, ( u32 * )&mem1Storage_, &mem1Size );
 	mem1Storage_ = MEMAllocFromDefaultHeap( mem1Size );
 	ProcUISetMEM1Storage( mem1Storage_, mem1Size );
+
+	GX2InitColorBuffer( &TheColorBuffer, 1280, 720, GX2_SURFACE_FORMAT_TCS_R8_G8_B8_A8_UNORM, GX2_AA_MODE_1X );
+	void *ptr = DEMOGfxAllocMEM1( TheColorBuffer.surface.imageSize, TheColorBuffer.surface.alignment );
+	GX2Invalidate( GX2_INVALIDATE_CPU, ptr, TheColorBuffer.surface.imageSize );
+	GX2InitColorBufferPtr( &TheColorBuffer, ptr );
 
 	// Error viewer.
 	LOG.Write( "nn::erreula::GetWorkMemorySize() = %d MB\n", nn::erreula::GetWorkMemorySize() / ( 1024 * 1024 ) );
@@ -169,6 +184,10 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 	ProcUIRegisterCallback( PROCUI_MESSAGE_ACQUIRE, AcquireForegroundCallback, NULL, 200 );
 	//ProcUISetSaveCallback( SaveOnExitCallback, NULL );
 
+	// Initialize shaders for video renderer.
+	InitShader();
+	InitAttribData();
+
 	scheduler_ = new Scheduler;
 
 	content_ = new Wad( "" );
@@ -192,6 +211,9 @@ CoreWiiU::~CoreWiiU()
 	GamePad::Shutdown();
 
 	delete td_;
+
+	FreeShader();
+	FreeAttribData();
 
 	delete qd_;
 
@@ -385,12 +407,42 @@ int CoreWiiU::Run()
 		// End error viewer bits.
 		FMODSystem->update();
 
+		// Set custom render target and update the game.
 		if( !GLOBAL_VIDEO_OVERRIDE )
 		{
+			DEMOGfxBeforeRender();
+
+			GX2SetColorBuffer( &TheColorBuffer, GX2_RENDER_TARGET_0 );
+			GX2SetViewport( 0.f, 0.f, 1280.f, 720.f, 0.f, 1.f );
+			GX2SetScissor( 0, 0, 1280, 720 );
+
+			GX2SetDepthOnlyControl( GX2_FALSE, GX2_FALSE, GX2_COMPARE_ALWAYS );
+			GX2SetColorControl( GX2_LOGIC_OP_COPY, 0x1, GX2_DISABLE, GX2_ENABLE );
+			GX2SetBlendControl( GX2_RENDER_TARGET_0,
+				GX2_BLEND_ONE, GX2_BLEND_ONE_MINUS_SRC_ALPHA, GX2_BLEND_COMBINE_ADD,
+				GX2_TRUE, GX2_BLEND_ONE, GX2_BLEND_ONE_MINUS_SRC_ALPHA, GX2_BLEND_COMBINE_ADD );
+
+			GX2ClearColor( &TheColorBuffer, 0, 0, 0, 0 );
+			GX2ClearDepthStencil( &DEMODepthBuffer, GX2_CLEAR_BOTH );
+
+			DEMOGfxSetContextState();
+		}
+
+		game_.Update();
+
+		// Restore default render target and draw our frame to it.
+		if( !GLOBAL_VIDEO_OVERRIDE )
+		{
+			DEMOGfxDrawDone();
+
 			if( DEMODRCGetStatus() != GX2_DRC_NONE )
 			{
 				DEMODRCBeforeRender();
-				GX2ClearColor( &DEMODRCColorBuffer, 0, 0, 0, 0 );
+				float r = (float)rand() / RAND_MAX;
+				float g = (float)rand() / RAND_MAX;
+				float b = (float)rand() / RAND_MAX;
+				
+				GX2ClearColor( &DEMODRCColorBuffer, r, g, b, 1 );
 				GX2ClearDepthStencil( &DEMODRCDepthBuffer, GX2_CLEAR_BOTH );
 
 				GX2SetContextState( DEMODRCContextState );
@@ -402,7 +454,6 @@ int CoreWiiU::Run()
 				DEMODRCDoneRender();
 			}
 
-			DEMOGfxBeforeRender();
 			GX2ClearColor( &DEMOColorBuffer, 0, 0, 0, 0 );
 			GX2ClearDepthStencil( &DEMODepthBuffer, GX2_CLEAR_BOTH );
 
@@ -416,18 +467,19 @@ int CoreWiiU::Run()
 			GX2SetBlendControl( GX2_RENDER_TARGET_0,
 				GX2_BLEND_ONE, GX2_BLEND_ONE_MINUS_SRC_ALPHA, GX2_BLEND_COMBINE_ADD,
 				GX2_TRUE, GX2_BLEND_ONE, GX2_BLEND_ONE_MINUS_SRC_ALPHA, GX2_BLEND_COMBINE_ADD );
+
+			DEMOGfxSetContextState();
+
+			GX2CopySurface( &TheColorBuffer.surface, 0, 0, &DEMOColorBuffer.surface, 0, 0 );
+
+			DEMOGfxSetContextState();
+
+			DEMOGfxDoneRender();
 		}
+		else
+			DEMOGfxWaitForSwap( 1, 100 );
 
-		//GX2SetDepthOnlyControl( GX2_FALSE, GX2_FALSE, GX2_COMPARE_ALWAYS );
-		//GX2SetColorControl( GX2_LOGIC_OP_COPY, 0x1, GX2_DISABLE, GX2_ENABLE );
-		/*GX2SetBlendControl( GX2_RENDER_TARGET_0,
-			GX2_BLEND_SRC_COLOR, GX2_BLEND_DST_COLOR, GX2_BLEND_COMBINE_ADD,
-			GX2_TRUE, GX2_BLEND_SRC_ALPHA, GX2_BLEND_ZERO, GX2_BLEND_COMBINE_ADD );*/
-		/*GX2SetBlendControl( GX2_RENDER_TARGET_0,
-			GX2_BLEND_ONE, GX2_BLEND_ONE_MINUS_SRC_ALPHA, GX2_BLEND_COMBINE_ADD,
-			GX2_TRUE, GX2_BLEND_ONE, GX2_BLEND_ONE_MINUS_SRC_ALPHA, GX2_BLEND_COMBINE_ADD );*/
-
-		game_.Update();
+		/*game_.Update();
 
 		if( !GLOBAL_VIDEO_OVERRIDE )
 		{
@@ -449,7 +501,7 @@ int CoreWiiU::Run()
 		else
 		{
 			DEMOGfxWaitForSwap( 1, 100 );
-		}
+		}*/
 
 		// Close down.
 		if( !running_ )

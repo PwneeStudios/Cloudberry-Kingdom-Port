@@ -1918,10 +1918,10 @@ VideoPlayer::VideoPlayer( void (*UpdateElapsedTime)(float, bool), void (*DrawSub
 	::UpdateElapsedTime = UpdateElapsedTime;
 	::DrawSubtitles = DrawSubtitles;
 
-	InitShader();
+	/*InitShader();
 	shadersInitialized = true;
     InitAttribData();
-	attributesInitialized = true;
+	attributesInitialized = true;*/
 }
 
 void ForceKillVideoPlayer()
@@ -1938,13 +1938,13 @@ void ForceKillVideoPlayer()
 	}
 	threadsAlive = false;
 
-	if( shadersInitialized )
+	/*if( shadersInitialized )
 		FreeShader();
 	shadersInitialized = false;
 	
 	if( attributesInitialized )
 		FreeAttribData();
-	attributesInitialized = false;
+	attributesInitialized = false;*/
 
 	ReEnableHomeButton = true;
 	if( nn::erreula::IsAppearHomeNixSign() )
