@@ -24,11 +24,14 @@ struct SmallErrorMenu;
 namespace CloudberryKingdom
 {
 
+
 	enum Presence { Presence_TitleScreen, Presence_Escalation, Presence_TimeCrisis, Presence_HeroRush, Presence_HeroRush2, Presence_Freeplay, Presence_Campaign, Presence_Arcade };
 	enum MainMenuTypes { MainMenuTypes_PC, MainMenuTypes_Xbox, MainMenuTypes_PS3, MainMenuTypes_WiiU, MainMenuTypes_Vita };
 
 	struct CloudberryKingdomGame : public boost::enable_shared_from_this<CloudberryKingdomGame>
 	{
+
+		static int _count;
 
 		static void memdebug_DumpStart();
 		static void memdebug_DumpEnd();

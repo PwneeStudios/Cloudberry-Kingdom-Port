@@ -3,6 +3,11 @@
 
 #include <map>
 
+
+#ifdef DEBUG
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+#endif
+
 namespace CloudberryKingdom
 {
 
@@ -76,8 +81,23 @@ namespace CloudberryKingdom
 		Set()
 		{
 			InitializeInstanceFields();
+
+#if defined(DEBUG)
+			CloudberryKingdomGame::_count++;
+			std::cout << CloudberryKingdomGame::_count << std::endl;
+#endif
 		}
+
+		~Set()
+		{
+#if defined(DEBUG)
+			CloudberryKingdomGame::_count--;
+			std::cout << CloudberryKingdomGame::_count << std::endl;
+#endif
+		}
+
 	};
+
 }
 
 

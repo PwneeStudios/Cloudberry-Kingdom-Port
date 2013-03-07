@@ -16,13 +16,18 @@ namespace CloudberryKingdom
 		Released = true;
 
 		if ( Quads.size() > 0 )
+		{
 			for ( int i = 0; i < static_cast<int>( Quads.size() ); i++ )
 				Quads[ i ].Release();
-			//foreach (SimpleQuad quad in Quads)
-				//quad.Release();
+		}
+		Quads.clear();
+
 		if ( Boxes.size() > 0 )
+		{
 			for ( std::vector<boost::shared_ptr<SimpleBox> >::const_iterator box = Boxes.begin(); box != Boxes.end(); ++box )
 				( *box )->Release();
+		}
+		Boxes.clear();
 
 		//AnimQueue.clear();
 		std::queue<boost::shared_ptr<AnimQueueEntry> > empty;

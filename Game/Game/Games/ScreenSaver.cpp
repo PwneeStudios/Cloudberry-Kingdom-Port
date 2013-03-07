@@ -15,7 +15,8 @@ namespace CloudberryKingdom
 
 	void ScreenSaver::ConstructorPressAListenerHelper::Apply()
 	{
-		return;
+		// Permanent screen saver, always on, can't exit
+		//return;
 
 		Tools::CurGameData->FadeToBlack( .0275f );
 		Tools::SongWad->FadeOut();
