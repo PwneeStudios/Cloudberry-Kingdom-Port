@@ -311,6 +311,13 @@ namespace CloudberryKingdom
 			CurrentPresence = presence;
 
 			// Set the presence for the gamer
+			if( presence == Presence_TitleScreen )
+			{
+				for( int i = 0; i < 4; i++ )
+				{
+					PlayerManager::Players[ i ]->Exists = false;
+				}
+			}
 		}
 
 		int CloudberryKingdomGame::Freeplay_Count = 0;
@@ -1422,6 +1429,9 @@ float CloudberryKingdomGame::fps = 0;
 #ifdef CAFE
 			DisplayError( ErrorType( 1520100,
 				NULL, ErrorType::DEFAULT, ClearError, false ) );
+#elif PS3
+			DisplayError( ErrorType( WstringToUtf8( Localization::WordString( Localization::Words_Err_PS3_NoGamePadDetected ) ),
+				NULL, ErrorType::NONE, ClearError, false ) );
 #endif
 		}
 #endif

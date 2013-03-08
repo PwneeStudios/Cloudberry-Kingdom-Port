@@ -38,7 +38,7 @@ void GamePad::Update()
 			++numConnected;
 	}
 
-	if( numConnected == 0 )
+	/*if( numConnected == 0 )
 	{
 		DisplayError( ErrorType(
 			GLOBAL_DISCONNECT_MESSAGE,
@@ -46,7 +46,7 @@ void GamePad::Update()
 			ErrorType::DEFAULT,
 			AutoCloseWhenConnected
 		) );
-	}
+	}*/
 }
 
 GamePadState GamePad::GetState( PlayerIndex index )

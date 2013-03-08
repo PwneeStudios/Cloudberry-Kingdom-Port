@@ -69,6 +69,10 @@ ConsoleLanguage GetConsoleLanguage()
 	return ConsoleLanguage_ENGLISH;
 }
 
+void SetErrorLanguage( ConsoleLanguage language )
+{
+}
+
 int GetParentalControlLevel()
 {
 	int controlLevel;

@@ -230,7 +230,7 @@ namespace CloudberryKingdom
 		}
 		else if( MovieName == L"LogoSalad_ESRB" )
 		{
-			CurrentVideo->Path = "/vol/content/0010/Movies/LogoSalad_ESRB.mp4";
+			CurrentVideo->Path = "ContentPS3/Movies/LogoSalad_ESRB.mp4";
 			CurrentVideo->Duration.TotalSeconds = 9.933333333f;
 		}
 #elif defined( PC_VERSION )

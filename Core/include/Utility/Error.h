@@ -23,6 +23,7 @@
 			DEFAULT,
 			YESNO,
 			OK,
+			NONE
 		};
 
 		// If this method returns true, the error dialog will be closed.

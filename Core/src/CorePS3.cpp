@@ -658,7 +658,10 @@ int CorePS3::Run()
 	game_.Initialize();
 
 	while( running_ )
-	{
+	{		
+		GamePad::Update();
+		Keyboard::Update();
+
 		if( ErrorDialogOpen )
 		{
 			if( CurrentError.GetAutoClose() )
@@ -701,6 +704,9 @@ int CorePS3::Run()
 					case ErrorType::OK:
 						type |= CELL_MSGDIALOG_TYPE_BUTTON_TYPE_OK;
 						break;
+					case ErrorType::NONE:
+						type |= CELL_MSGDIALOG_TYPE_DISABLE_CANCEL_ON;
+						break;
 					}
 
 					ret = cellMsgDialogOpen2( type, CurrentError.GetMessage().c_str(), ErrorDialogCallback, NULL, NULL );
@@ -713,9 +719,6 @@ int CorePS3::Run()
 				continue;
 			}
 		}
-		
-		GamePad::Update();
-		Keyboard::Update();
 
 		glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
