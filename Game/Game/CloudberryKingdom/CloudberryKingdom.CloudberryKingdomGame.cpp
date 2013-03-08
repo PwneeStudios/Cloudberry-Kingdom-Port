@@ -54,7 +54,10 @@
 namespace CloudberryKingdom
 {
 
+#if defined(DEBUG)
 	int CloudberryKingdomGame::_count = 0;
+	int CloudberryKingdomGame::address = 0;
+#endif
 
 #if defined(_CRTDBG_MAP_ALLOC) && defined(WINDOWS)
 	_CrtMemState s1, s2, s3;

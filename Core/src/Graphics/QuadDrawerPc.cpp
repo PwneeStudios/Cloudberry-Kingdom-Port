@@ -217,6 +217,8 @@ QuadDrawerPc::QuadDrawerPc() :
 	internal_->RightFrameMask = CONTENT->Load< Texture >( "Art/Environments/Castle/Background/v2/Castle_Window_Right_Mask.png" );
 
 	internal_->CastleBackground = CONTENT->Load< Texture >( "Art/Environments/Castle/Background/v2/Castle_Backdrop_2.png" );
+
+	internal_->Batches.reserve( 100 );
 }
 
 QuadDrawerPc::~QuadDrawerPc()
@@ -234,14 +236,21 @@ QuadDrawerPc::~QuadDrawerPc()
 
 void QuadDrawerPc::SetEffect( const boost::shared_ptr<Effect> &effect )
 {
+	const static std::string a_position = "a_position";
+	const static std::string a_texcoord = "a_texcoord";
+	const static std::string a_color = "a_color";
+	const static std::string u_texture = "u_texture";
+	const static std::string u_backTexture = "u_backTexture";
+	const static std::string u_maskTexture = "u_maskTexture";
+
 	internal_->CurrentEffect = effect;
 
-	internal_->VertexAttrib = effect->Attributes( "a_position" );
-	internal_->TexCoordAttrib = effect->Attributes( "a_texcoord" );
-	internal_->ColorAttrib = effect->Attributes( "a_color" );
-	internal_->TextureParameter = effect->Parameters( "u_texture" );
-	internal_->ExtraTextureParameter1 = effect->Parameters( "u_backTexture" );
-	internal_->ExtraTextureParameter2 = effect->Parameters( "u_maskTexture" );
+	internal_->VertexAttrib = effect->Attributes( a_position );
+	internal_->TexCoordAttrib = effect->Attributes( a_texcoord );
+	internal_->ColorAttrib = effect->Attributes( a_color );
+	internal_->TextureParameter = effect->Parameters( u_texture );
+	internal_->ExtraTextureParameter1 = effect->Parameters( u_backTexture );
+	internal_->ExtraTextureParameter2 = effect->Parameters( u_maskTexture );
 }
 
 boost::shared_ptr<Effect> QuadDrawerPc::GetEffect()

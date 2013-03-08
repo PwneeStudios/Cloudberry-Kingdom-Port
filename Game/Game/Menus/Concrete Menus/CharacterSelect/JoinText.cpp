@@ -17,7 +17,16 @@ namespace CloudberryKingdom
 
 		Constructor();
 
+#if defined(DEBUG)
+		boost::shared_ptr<JoinText> This = boost::static_pointer_cast<JoinText>( shared_from_this() );
+		if ( CloudberryKingdomGame::address == 0 )
+		{
+			CloudberryKingdomGame::address = reinterpret_cast<int>( This.px );
+		}
+		return This;
+#else
 		return boost::static_pointer_cast<JoinText>( shared_from_this() );
+#endif
 	}
 
 	void JoinText::ReleaseBody()

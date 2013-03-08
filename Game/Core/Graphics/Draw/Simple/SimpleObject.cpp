@@ -93,7 +93,7 @@ namespace CloudberryKingdom
 
 	void SimpleObject::Constructor( const boost::shared_ptr<SimpleObject> &obj, bool BoxesOnly, bool DeepCopy )
 	{
-		xFlip = false; yFlip = false; CenterFlipOnBox = false;;
+		xFlip = false; yFlip = false; CenterFlipOnBox = false;
 		Play = false; Loop = false; Transfer = false; OldLoop = false; Linear = false;
 		anim = 0; OldAnim = 0;
 		t = 0; OldT = 0; StartT = 0;
@@ -200,15 +200,20 @@ namespace CloudberryKingdom
 		anim = obj->anim;
 		t = obj->t;
 
-		AnimLength = std::vector<int>( 50 );
+		/*
+		//AnimLength = std::vector<int>( 50 );
+		AnimLength = std::vector<int>( obj->AnimLength.size() );
 		CopyFromTo( obj->AnimLength, AnimLength );
-		//obj->AnimLength.CopyTo( AnimLength, 0 );
-		AnimSpeed = std::vector<float>( 50 );
+		//AnimSpeed = std::vector<float>( 50 );
+		AnimSpeed = std::vector<float>( obj->AnimSpeed.size() );
 		CopyFromTo( obj->AnimSpeed, AnimSpeed );
-		//obj->AnimSpeed.CopyTo( AnimSpeed, 0 );
-		AnimName = std::vector<std::wstring>( 50 );
-		CopyFromTo( obj->AnimName, AnimName );
-		//obj->AnimName.CopyTo( AnimName, 0 );
+		//AnimName = std::vector<std::wstring>( 50 );
+		//AnimName = std::vector<std::wstring>( obj->AnimName.size() );
+		//CopyFromTo( obj->AnimName, AnimName );
+		*/
+
+		AnimLength = std::vector<int>(); AnimLength.push_back( obj->AnimLength[ 0 ] );
+		AnimSpeed = std::vector<float>(); AnimSpeed.push_back( obj->AnimSpeed[ 0 ] );
 
 		UpdateEffectList();
 	}

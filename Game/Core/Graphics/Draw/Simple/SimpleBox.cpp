@@ -56,6 +56,8 @@ namespace CloudberryKingdom
 
 		BL.AnimData = box->BL->AnimData;
 		TR.AnimData = box->TR->AnimData;
+			BL.AnimData.Anims = std::vector<OneAnim>(); BL.AnimData.Anims.push_back( box->BL->AnimData.Anims[ 0 ] );
+			TR.AnimData.Anims = std::vector<OneAnim>(); TR.AnimData.Anims.push_back( box->TR->AnimData.Anims[ 0 ] );
 	}
 
 	void SimpleBox::CopyUpdate( boost::shared_ptr<SimpleBox> &SourceBox, Vector2 &shift )

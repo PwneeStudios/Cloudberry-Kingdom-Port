@@ -1210,7 +1210,14 @@ namespace CloudberryKingdom
 		//FreezeCamera = true;
 		getMainCamera()->Update();
 
+		// Release the computer (current Bobs vector)
+		for ( BobVec::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
+		{
+			Clear( ( *bob )->PlayerObject->AnimQueue );
+		}
 		Bobs.clear();
+
+		// Add back the players to the Bobs array
 		AddRange( Bobs, HoldPlayerBobs );
 		for ( BobVec::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
 		{
@@ -1218,6 +1225,7 @@ namespace CloudberryKingdom
 			( *bob )->PlayerObject->EnqueueAnimation( 0, 0, true );
 			( *bob )->PlayerObject->DequeueTransfers();
 		}
+		HoldPlayerBobs.clear();
 
 		if ( OnEndReplay != 0 )
 			OnEndReplay->Apply();
@@ -2600,8 +2608,14 @@ int Level::AfterPostDrawLayer = 12;
 			CurrentRecording.reset();
 		}
 
-		CurrentRecording.reset();
+		// Release Bobs that are being held (because a replay is playing)
+		for ( BobVec::const_iterator bob = HoldPlayerBobs.begin(); bob != HoldPlayerBobs.end(); ++bob )
+		{
+			( *bob )->Release();
+		}
 		HoldPlayerBobs.clear();
+
+		CurrentRecording.reset();
 		LevelPieces.clear();
 		MySwarmBundle.reset();
 

@@ -188,7 +188,7 @@ namespace CloudberryKingdom
 			{
 				Recordings[ i ]->Anim[ level->CurPhsxStep ] = static_cast<unsigned char>( 255 );
 				Recordings[ i ]->AutoLocs[ level->CurPhsxStep ] = level->getMainCamera()->Data.Position;
-			Recordings[ i ]->BoxCenter[ level->CurPhsxStep ] = Recordings[ i ]->AutoLocs[ level->CurPhsxStep ];
+				Recordings[ i ]->BoxCenter[ level->CurPhsxStep ] = Recordings[ i ]->AutoLocs[ level->CurPhsxStep ];
 			}
 		}
 	}

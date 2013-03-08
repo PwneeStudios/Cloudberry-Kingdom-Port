@@ -65,30 +65,6 @@ template<class T> class weak_ptr;
 template<class T> class enable_shared_from_this;
 template<class T> class enable_shared_from_this2;
 
-
-
-
-
-
-//// BoostBin stuff here
-//#ifdef BOOST_BIN
-//
-//extern void _OnAssignment( std::string class_name, int origin_code );
-//
-//template <typename T> void OnAssignment( const boost::shared_ptr<T> * p, int origin_code )
-//{
-//	_OnAssignment( typeid(T).name(), origin_code );
-//}
-//
-//#endif
-//
-
-
-
-
-
-
-
 namespace detail
 {
 
@@ -213,6 +189,10 @@ public:
     explicit shared_ptr( Y * p ): px( p ), pn( p ) // Y must be complete
     {
         boost::detail::sp_enable_shared_from_this( this, p, p );
+
+#ifdef BOOST_BIN
+		OnNew( reinterpret_cast<int>( px ) );
+#endif
     }
 
 	// FIXME: Added by us in order to get cases like "shared_ptr = 0" to work.
@@ -229,6 +209,10 @@ public:
     template<class Y, class D> shared_ptr(Y * p, D d): px(p), pn(p, d)
     {
         boost::detail::sp_enable_shared_from_this( this, p, p );
+
+#ifdef BOOST_BIN
+		OnNew( reinterpret_cast<int>( px ) );
+#endif
     }
 
     // As above, but with allocator. A's copy constructor shall not throw.
@@ -236,6 +220,10 @@ public:
     template<class Y, class D, class A> shared_ptr( Y * p, D d, A a ): px( p ), pn( p, d, a )
     {
         boost::detail::sp_enable_shared_from_this( this, p, p );
+
+#ifdef BOOST_BIN
+		OnNew( reinterpret_cast<int>( px ) );
+#endif
     }
 
 //  generated copy constructor, destructor are fine...
@@ -246,6 +234,9 @@ public:
 
     shared_ptr( shared_ptr const & r ): px( r.px ), pn( r.pn ) // never throws
     {
+#ifdef BOOST_BIN
+		OnNew( reinterpret_cast<int>( px ) );
+#endif
     }
 
 #endif
@@ -255,6 +246,10 @@ public:
     {
         // it is now safe to copy r.px, as pn(r.pn) did not throw
         px = r.px;
+
+#ifdef BOOST_BIN
+		OnNew( reinterpret_cast<int>( px ) );
+#endif
     }
 
     template<class Y>
@@ -264,6 +259,10 @@ public:
         {
             px = r.px;
         }
+
+#ifdef BOOST_BIN
+		OnNew( reinterpret_cast<int>( px ) );
+#endif
     }
 
     template<class Y>
@@ -278,6 +277,9 @@ public:
 #endif
     : px( r.px ), pn( r.pn ) // never throws
     {
+#ifdef BOOST_BIN
+		OnNew( reinterpret_cast<int>( px ) );
+#endif
     }
 
     // aliasing
@@ -286,6 +288,7 @@ public:
     {
 #ifdef BOOST_BIN
 		OnAssignment( this, 0 );	
+		OnNew( reinterpret_cast<int>( px ) );
 #endif
     }
 
@@ -293,7 +296,8 @@ public:
     shared_ptr(shared_ptr<Y> const & r, boost::detail::static_cast_tag): px(static_cast<element_type *>(r.px)), pn(r.pn)
     {
 #ifdef BOOST_BIN
-		OnAssignment( this, 1 );	
+		OnAssignment( this, 1 );
+		OnNew( reinterpret_cast<int>( px ) );
 #endif
     }
 
@@ -301,7 +305,8 @@ public:
     shared_ptr(shared_ptr<Y> const & r, boost::detail::const_cast_tag): px(const_cast<element_type *>(r.px)), pn(r.pn)
     {
 #ifdef BOOST_BIN
-		OnAssignment( this, 2 );	
+		OnAssignment( this, 2 );
+		OnNew( reinterpret_cast<int>( px ) );
 #endif
     }
 
@@ -314,7 +319,8 @@ public:
         }
 
 #ifdef BOOST_BIN
-		OnAssignment( this, 3 );	
+		OnAssignment( this, 3 );
+		OnNew( reinterpret_cast<int>( px ) );
 #endif
     }
 
@@ -327,7 +333,8 @@ public:
         }
 
 #ifdef BOOST_BIN
-		OnAssignment( this, 4 );	
+		OnAssignment( this, 4 );
+		OnNew( reinterpret_cast<int>( px ) );
 #endif
     }
 
@@ -372,6 +379,9 @@ public:
     template<class Y>
     shared_ptr & operator=(shared_ptr<Y> const & r) // never throws
     {
+#ifdef BOOST_BIN
+		OnAssignment( this, 10 );
+#endif
         this_type(r).swap(*this);
         return *this;
     }
@@ -383,6 +393,9 @@ public:
     template<class Y>
     shared_ptr & operator=( std::auto_ptr<Y> & r )
     {
+#ifdef BOOST_BIN
+		OnAssignment( this, 10 );
+#endif
         this_type(r).swap(*this);
         return *this;
     }
@@ -392,6 +405,9 @@ public:
     template<class Ap>
     typename boost::detail::sp_enable_if_auto_ptr< Ap, shared_ptr & >::type operator=( Ap r )
     {
+#ifdef BOOST_BIN
+		OnAssignment( this, 10 );
+#endif
         this_type( r ).swap( *this );
         return *this;
     }
@@ -407,6 +423,9 @@ public:
 
     shared_ptr( shared_ptr && r ): px( r.px ), pn() // never throws
     {
+#ifdef BOOST_BIN
+		OnAssignment( this, 10 );
+#endif
         pn.swap( r.pn );
         r.px = 0;
     }
@@ -425,6 +444,10 @@ public:
     {
         pn.swap( r.pn );
         r.px = 0;
+
+#ifdef BOOST_BIN
+		OnNew( reinterpret_cast<int>( px ) );
+#endif
     }
 
     shared_ptr & operator=( shared_ptr && r ) // never throws

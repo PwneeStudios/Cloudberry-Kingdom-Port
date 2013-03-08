@@ -63,11 +63,12 @@ namespace CloudberryKingdom
 
 	void SwarmRecord::InitializeInstanceFields()
 	{
-#if defined(XBOX)
-		MaxRecords = 200 / __max( 1, PlayerManager::GetNumPlayers() );
-#endif
-#if ! defined(XBOX)
-		MaxRecords = 500 / __max( 1, PlayerManager::GetNumPlayers() );
+#ifdef PC_VERSION
+		Tools::Warning(); // Should be 500, but we are using 50 to test memory usage for consoles.
+		MaxRecords = 50 / __max( 1, PlayerManager::GetNumPlayers() );
+		//MaxRecords = 500 / __max( 1, PlayerManager::GetNumPlayers() );
+#else
+		MaxRecords = 50 / __max( 1, PlayerManager::GetNumPlayers() );
 #endif
 	}
 }

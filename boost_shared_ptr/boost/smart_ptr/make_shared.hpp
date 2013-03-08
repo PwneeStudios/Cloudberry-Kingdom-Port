@@ -26,12 +26,13 @@
 #include <string>
 #include <Utility/mutex.h>
 
-extern void _OnAssignment( std::string class_name, int origin_code );
+extern void OnNew( int address );
+extern void _OnAssignment( std::string class_name, int address, int origin_code );
 extern void OnDestructor( std::string class_name );
 
 template <typename T> void OnAssignment( const boost::shared_ptr<T> * p, int origin_code )
 {
-	_OnAssignment( typeid(T).name(), origin_code );
+	_OnAssignment( typeid(T).name(), reinterpret_cast<int>( p->px ), origin_code );
 }
 
 struct GenericBoostBin;
@@ -56,6 +57,7 @@ struct GenericBoostBin
 	inline void Unlock();
 
 	virtual int Count() = 0;
+	virtual std::vector<int> GetAddress() = 0;
 
 };
 
@@ -68,6 +70,7 @@ struct BoostBin : GenericBoostBin
 	BoostBin();
 
 	int Count();
+	std::vector<int> GetAddress();
 
 };
 
@@ -1169,6 +1172,22 @@ int BoostBin<T>::Count()
 	Unlock();
 
 	return count;
+}
+
+template <typename T>
+std::vector<int> BoostBin<T>::GetAddress()
+{
+	std::vector<int> address;
+
+	for (std::vector<boost::weak_ptr<T> >::const_iterator ptr = MyVec.begin(); ptr != MyVec.end(); ++ptr )
+	{
+		if ( ( *ptr ).pn.use_count() > UseCountCutoff )
+		{
+			address.push_back( reinterpret_cast<int>( ( *ptr ).px ) );
+		}
+	}
+
+	return address;
 }
 
 #endif
