@@ -984,7 +984,8 @@ namespace CloudberryKingdom
 	
 		TimeTypes TimeType;
 
-		ObjectVec ActiveObjectList;
+		ObjectVec* ActiveObjectList;
+		ObjectVec _ActiveObjectList_BoxesOnly;
 
 	
 		void CreateActiveObjectList();
