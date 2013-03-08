@@ -72,6 +72,7 @@ u32 HomeButtonDeniedCallback( void *context )
 }*/
 
 GX2ColorBuffer TheColorBuffer;
+GX2Texture TheColorBufferTexture;
 
 // Kill the video player if it's still alive, we don't want stuff running in the background in case we are exiting.
 extern void ForceKillVideoPlayer();
@@ -102,8 +103,13 @@ u32 AcquireForegroundCallback( void *context )
 	GX2Invalidate( GX2_INVALIDATE_CPU, ptr, TheColorBuffer.surface.imageSize );
 	GX2InitColorBufferPtr( &TheColorBuffer, ptr );
 
+	GX2InitTexturePtrs( &TheColorBufferTexture, TheColorBuffer.surface.imagePtr, 0 );
+
 	ResumeScheduler();
 }
+
+// Draw a texture to the DRC.  Declared in videorenderer.cpp.
+extern void drawDRCTextureFrame( GX2Texture * texture );
 
 CoreWiiU::CoreWiiU( GameLoop &game ) :
 	running_( false ),
@@ -117,8 +123,9 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 	DEMOInit();
 	DEMOTestInit( 0, NULL );
 	char *gfxArgs[] = { "DEMO_CB_FORMAT 8_8_8_8", "DEMO_SCAN_FORMAT 8_8_8_8" };
+	char *drcArgs[] = { "DEMO_DRC_CB_FORMAT 8_8_8_8", "DEMO_DRC_SCAN_FORMAT 8_8_8_8" };
 	DEMOGfxInit( 2, gfxArgs );
-	DEMODRCInit( 0, NULL );
+	DEMODRCInit( 2, drcArgs );
 
 	//DEMOSetReleaseCallback( ForegroundReleaseCallback );
 
@@ -132,6 +139,10 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 	void *ptr = DEMOGfxAllocMEM1( TheColorBuffer.surface.imageSize, TheColorBuffer.surface.alignment );
 	GX2Invalidate( GX2_INVALIDATE_CPU, ptr, TheColorBuffer.surface.imageSize );
 	GX2InitColorBufferPtr( &TheColorBuffer, ptr );
+
+	GX2InitTexture( &TheColorBufferTexture, 1280, 720, 1, 0, GX2_SURFACE_FORMAT_TCS_R8_G8_B8_A8_UNORM,
+		GX2_SURFACE_DIM_2D );
+	GX2InitTexturePtrs( &TheColorBufferTexture, TheColorBuffer.surface.imagePtr, 0 );
 
 	// Error viewer.
 	LOG.Write( "nn::erreula::GetWorkMemorySize() = %d MB\n", nn::erreula::GetWorkMemorySize() / ( 1024 * 1024 ) );
@@ -438,16 +449,13 @@ int CoreWiiU::Run()
 			if( DEMODRCGetStatus() != GX2_DRC_NONE )
 			{
 				DEMODRCBeforeRender();
-				float r = (float)rand() / RAND_MAX;
-				float g = (float)rand() / RAND_MAX;
-				float b = (float)rand() / RAND_MAX;
 				
 				GX2ClearColor( &DEMODRCColorBuffer, r, g, b, 1 );
 				GX2ClearDepthStencil( &DEMODRCDepthBuffer, GX2_CLEAR_BOTH );
 
 				GX2SetContextState( DEMODRCContextState );
 
-				// FIXME: DRC drawing here.
+				drawDRCTextureFrame( &TheColorBufferTexture );
 
 				GX2SetContextState( DEMODRCContextState );
 
