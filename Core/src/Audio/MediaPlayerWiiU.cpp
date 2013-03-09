@@ -69,6 +69,7 @@ void MediaPlayer::Play( const boost::shared_ptr<Song> &song )
 		LOG.Write( "Failed to play song.\n" );
 
 	CurrentChannel->setVolume( Volume );
+	FMOD_WiiU_SetControllerSpeaker( CurrentChannel, FMOD_WIIU_CONTROLLER_TV | FMOD_WIIU_CONTROLLER_DRC );
 	CurrentChannel->setPaused( false );
 }
 

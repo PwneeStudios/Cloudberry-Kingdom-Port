@@ -9,6 +9,7 @@
 #include "CKSounds.h"
 
 #include <fmod.hpp>
+#include <fmodwiiu.h>
 
 extern FMOD::System *FMODSystem;
 
@@ -52,5 +53,6 @@ void SoundEffect::Play( float volume, float pitch, float pan )
 	FMODSystem->playSound( FMOD_CHANNEL_FREE, internal_->Sound, true, &internal_->Channel );
 	internal_->Channel->setVolume( volume );
 	internal_->Channel->setPan( pan );
+	FMOD_WiiU_SetControllerSpeaker( internal_->Channel, FMOD_WIIU_CONTROLLER_TV | FMOD_WIIU_CONTROLLER_DRC );
 	internal_->Channel->setPaused( false );
 }

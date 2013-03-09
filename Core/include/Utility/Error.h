@@ -80,6 +80,12 @@
 typedef unsigned int ErrorType;
 #endif
 
+/// Initialize error subsystem.
+void InitializeErrorSystem();
+
+/// Shutdown error system.
+void ShutdownErrorSystem();
+
 /// Display a system error.
 /**
  * @param errorCode Current error code.

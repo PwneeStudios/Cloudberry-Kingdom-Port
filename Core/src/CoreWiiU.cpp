@@ -209,6 +209,8 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 
 	GamePad::Initialize();
 	MediaPlayer::Initialize();
+
+	InitializeErrorSystem();
 }
 
 CoreWiiU::~CoreWiiU()
@@ -217,6 +219,8 @@ CoreWiiU::~CoreWiiU()
 	
 	nn::act::Finalize();
 	SAVEShutdown();
+
+	ShutdownErrorSystem();
 
 	MediaPlayer::Shutdown();
 	GamePad::Shutdown();

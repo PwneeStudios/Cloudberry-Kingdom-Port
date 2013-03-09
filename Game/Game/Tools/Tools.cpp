@@ -877,7 +877,7 @@ namespace CloudberryKingdom
 	{
 		Tools::SongWad->SuppressNextInfoDisplay = true;
 		Tools::SongWad->SetPlayList( Tools::Song_Heavens );
-		Tools::SongWad->Start( true );
+		//Tools::SongWad->Start( true );
 		Tools::SongWad->Restart(true);
 	}
 
