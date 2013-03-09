@@ -450,6 +450,9 @@ int CoreWiiU::Run()
 			{
 				DEMODRCBeforeRender();
 				
+				float r = (float)rand() / RAND_MAX;
+				float g = (float)rand() / RAND_MAX;
+				float b = (float)rand() / RAND_MAX;
 				GX2ClearColor( &DEMODRCColorBuffer, r, g, b, 1 );
 				GX2ClearDepthStencil( &DEMODRCDepthBuffer, GX2_CLEAR_BOTH );
 
