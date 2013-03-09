@@ -7,6 +7,7 @@
 #include <cafe/procui.h>
 #include <cafe/sci/sciEnum.h>
 #include <cafe/sci/sciPublicApi.h>
+#include <cafe/sysapp.h>
 #include <Content/Wad.h>
 #include <cstdlib>
 #include <GameLoop.h>
@@ -19,6 +20,7 @@
 #include <Utility/Error.h>
 #include <Utility/Limits.h>
 #include <Utility/Log.h>
+#include "Graphics/WiiU/videorender.h"
 
 #include <fmod.hpp>
 #include <fmodwiiu.h>
@@ -69,6 +71,9 @@ u32 HomeButtonDeniedCallback( void *context )
 	return 0;
 }*/
 
+GX2ColorBuffer TheColorBuffer;
+GX2Texture TheColorBufferTexture;
+
 // Kill the video player if it's still alive, we don't want stuff running in the background in case we are exiting.
 extern void ForceKillVideoPlayer();
 
@@ -78,11 +83,33 @@ void ForegroundReleaseCallback()
 	ForceKillVideoPlayer();
 }
 
+extern void StopScheduler();
+extern void ResumeScheduler();
+
 u32 ReleaseForegroundCallback( void *context )
 {
+	DEMOGfxFreeMEM1( TheColorBuffer.surface.imagePtr );
+
+	StopScheduler();
+
 	LOG.Write( "Kill video player in case we are releasing while it's playing.\n" );
 	ForceKillVideoPlayer();
 }
+
+u32 AcquireForegroundCallback( void *context )
+{
+	GX2InitColorBuffer( &TheColorBuffer, 1280, 720, GX2_SURFACE_FORMAT_TCS_R8_G8_B8_A8_UNORM, GX2_AA_MODE_1X );
+	void *ptr = DEMOGfxAllocMEM1( TheColorBuffer.surface.imageSize, TheColorBuffer.surface.alignment );
+	GX2Invalidate( GX2_INVALIDATE_CPU, ptr, TheColorBuffer.surface.imageSize );
+	GX2InitColorBufferPtr( &TheColorBuffer, ptr );
+
+	GX2InitTexturePtrs( &TheColorBufferTexture, TheColorBuffer.surface.imagePtr, 0 );
+
+	ResumeScheduler();
+}
+
+// Draw a texture to the DRC.  Declared in videorenderer.cpp.
+extern void drawDRCTextureFrame( GX2Texture * texture );
 
 CoreWiiU::CoreWiiU( GameLoop &game ) :
 	running_( false ),
@@ -96,8 +123,9 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 	DEMOInit();
 	DEMOTestInit( 0, NULL );
 	char *gfxArgs[] = { "DEMO_CB_FORMAT 8_8_8_8", "DEMO_SCAN_FORMAT 8_8_8_8" };
+	char *drcArgs[] = { "DEMO_DRC_CB_FORMAT 8_8_8_8", "DEMO_DRC_SCAN_FORMAT 8_8_8_8" };
 	DEMOGfxInit( 2, gfxArgs );
-	DEMODRCInit( 0, NULL );
+	DEMODRCInit( 2, drcArgs );
 
 	//DEMOSetReleaseCallback( ForegroundReleaseCallback );
 
@@ -106,6 +134,15 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 	OSGetMemBound( OSMem_MEM1, ( u32 * )&mem1Storage_, &mem1Size );
 	mem1Storage_ = MEMAllocFromDefaultHeap( mem1Size );
 	ProcUISetMEM1Storage( mem1Storage_, mem1Size );
+
+	GX2InitColorBuffer( &TheColorBuffer, 1280, 720, GX2_SURFACE_FORMAT_TCS_R8_G8_B8_A8_UNORM, GX2_AA_MODE_1X );
+	void *ptr = DEMOGfxAllocMEM1( TheColorBuffer.surface.imageSize, TheColorBuffer.surface.alignment );
+	GX2Invalidate( GX2_INVALIDATE_CPU, ptr, TheColorBuffer.surface.imageSize );
+	GX2InitColorBufferPtr( &TheColorBuffer, ptr );
+
+	GX2InitTexture( &TheColorBufferTexture, 1280, 720, 1, 0, GX2_SURFACE_FORMAT_TCS_R8_G8_B8_A8_UNORM,
+		GX2_SURFACE_DIM_2D );
+	GX2InitTexturePtrs( &TheColorBufferTexture, TheColorBuffer.surface.imagePtr, 0 );
 
 	// Error viewer.
 	LOG.Write( "nn::erreula::GetWorkMemorySize() = %d MB\n", nn::erreula::GetWorkMemorySize() / ( 1024 * 1024 ) );
@@ -131,18 +168,12 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 			createArg.mRegion = nn::erreula::cRegionType_Us;
 			break;
 		case SCI_PLATFORM_REGION_EUR:
+		case SCI_PLATFORM_REGION_AUS:
 			createArg.mRegion = nn::erreula::cRegionType_Eu;
 			break;
-		//case SCI_PLATFORM_REGION_AUS: // Obsolete.
-		case SCI_PLATFORM_REGION_CHN:
-			createArg.mRegion = nn::erreula::cRegionType_Cn;
-			break;
-		case SCI_PLATFORM_REGION_KOR:
-			createArg.mRegion = nn::erreula::cRegionType_Kr;
-			break;
+		case SCI_PLATFORM_REGION_CHN:  // These are not supported by the error viewer and are thus
+		case SCI_PLATFORM_REGION_KOR:  // defaulted to English.
 		case SCI_PLATFORM_REGION_TWN:
-			createArg.mRegion = nn::erreula::cRegionType_Tw;
-			break;
 		default:
 			// By default the region is US.
 			break;
@@ -161,7 +192,12 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 
 	ProcUIRegisterCallback( PROCUI_MESSAGE_HBDENIED, HomeButtonDeniedCallback, NULL, 200 );
 	ProcUIRegisterCallback( PROCUI_MESSAGE_RELEASE, ReleaseForegroundCallback, NULL, 200 );
+	ProcUIRegisterCallback( PROCUI_MESSAGE_ACQUIRE, AcquireForegroundCallback, NULL, 200 );
 	//ProcUISetSaveCallback( SaveOnExitCallback, NULL );
+
+	// Initialize shaders for video renderer.
+	InitShader();
+	InitAttribData();
 
 	scheduler_ = new Scheduler;
 
@@ -173,34 +209,6 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 
 	GamePad::Initialize();
 	MediaPlayer::Initialize();
-
-
-	// FIXME: Docs say to delay this as much as possible.
-	// This was reimplemented in InitializeSave to delay execution.
-	/*SAVEInit();
-	nn::act::Initialize();
-
-	u8 accountSlot = nn::act::GetSlotNo();
-	u32 persistentId = nn::act::GetPersistentIdEx( accountSlot );
-
-	if( nn::act::IsSlotOccupied( accountSlot ) )
-	{
-		LOG.Write( "Creating account for slot %d with id 0x%X\n", accountSlot, persistentId );
-
-		if( SAVEInitSaveDir( accountSlot ) != SAVE_STATUS_OK )
-		{
-			LOG.Write( "Failed to create save directory.\n" );
-		}
-	}
-
-	GLOBAL_ACCOUNT_NAME = LOCAL_ACCOUNT_NAME;
-	memset( LOCAL_ACCOUNT_NAME, 0, sizeof( LOCAL_ACCOUNT_NAME ) );
-	sprintf( LOCAL_ACCOUNT_NAME, "Errorberry" );
-	nn::act::GetAccountId( LOCAL_ACCOUNT_NAME );
-	
-	LOG.Write( "Creating global directory\n" );
-	if( SAVEInitSaveDir( ACT_SLOT_NO_COMMON ) != SAVE_STATUS_OK )
-		LOG.Write( "Failed to create common directory.\n" );*/
 }
 
 CoreWiiU::~CoreWiiU()
@@ -214,6 +222,9 @@ CoreWiiU::~CoreWiiU()
 	GamePad::Shutdown();
 
 	delete td_;
+
+	FreeShader();
+	FreeAttribData();
 
 	delete qd_;
 
@@ -240,7 +251,10 @@ extern bool GLOBAL_VIDEO_OVERRIDE;
 extern std::list< ErrorType > GLOBAL_ERROR_QUEUE;
 extern VPADStatus vpadStatus;
 extern s32 readLength;
+extern KPADStatus kpadStatus[ WPAD_MAX_CONTROLLERS ];
+extern s32 kpadReadLength[ WPAD_MAX_CONTROLLERS ];
 extern bool vpadConnected;
+extern bool anythingElseConnected;
 
 void DebugFrame( float r, float g, float b )
 {
@@ -256,6 +270,7 @@ int CoreWiiU::Run()
 
 	//GLOBAL_ERROR_QUEUE.push_back( 1010102 );
 	s32 currentErrorCode = 0;
+	ErrorType currentError( 0 );
 
 	while( DEMOIsRunning() )
 	{
@@ -268,6 +283,7 @@ int CoreWiiU::Run()
 
 				ErrorType error = GLOBAL_ERROR_QUEUE.front();
 				currentErrorCode = error.GetCode();
+				currentError = error;
 				GLOBAL_ERROR_QUEUE.pop_front();
 
 				nn::erreula::AppearArg appearArg;
@@ -298,15 +314,15 @@ int CoreWiiU::Run()
 
 		/*for ( int i = 0; i < WPAD_MAX_CONTROLLERS; ++i )
 		{
-			s32 kpad_read_length = KPADRead( i, &wpad_status[i], 1 );
-			if( kpad_read_length > 0 )
+			//s32 kpad_read_length = KPADRead( i, &wpad_status[i], 1 );
+			if( kpadReadLength[ i ] > 0 )
 			{
-				info.kpad_status[i] = &wpad_status[i];
+				info.kpad_status[ i ] = &kpadStatus[ i ];
 			}
 			else
 			{
 				// Pass NULL if it could not be read
-				info.kpad_status[i] = NULL;
+				info.kpad_status[ i ] = NULL;
 			}
 		}*/
 
@@ -317,6 +333,18 @@ int CoreWiiU::Run()
 		{
 			if( nn::erreula::IsDecideSelectButtonError() )
 			{
+				// Exit and jump to data management!
+				if( currentErrorCode == 1550100 )
+				{
+					SysStandardArgsIn standardArgs;
+					memset( &standardArgs, 0, sizeof( standardArgs ) );
+
+					SysSettingsArgsIn cpArgs;
+					cpArgs.stdIn = standardArgs;
+					cpArgs.jumpTo = SYS_SETTINGS_JUMP_TO_DATA_MANAGE;
+					SYSLaunchSettings( &cpArgs );
+				}
+
 				if( nn::erreula::GetStateErrorViewer() == nn::erreula::cState_Display )
 				{
 					nn::erreula::DisappearErrorViewer();
@@ -324,17 +352,28 @@ int CoreWiiU::Run()
 					//viewerVisible = false;
 				}
 			}
-			else if( currentErrorCode == 1650101 )
+			else if( currentErrorCode == 1520100 )
 			{
-				if( vpadConnected )
+				if( nn::erreula::GetStateErrorViewer() == nn::erreula::cState_Display
+					/*&& ( anythingElseConnected || vpadConnected )*/
+					&& currentError.GetAutoClose()() )
 				{
 					nn::erreula::DisappearErrorViewer();
 					FMOD_WiiU_SetMute( FALSE );
 					currentErrorCode = 0;
 				}
 			}
+			/*else if( currentErrorCode == 1650101 )
+			{
+				if( vpadConnected || anythingElseConnected )
+				{
+					nn::erreula::DisappearErrorViewer();
+					FMOD_WiiU_SetMute( FALSE );
+					currentErrorCode = 0;
+				}
+			}*/
 
-			if( !GLOBAL_VIDEO_OVERRIDE /*&& viewerVisible*/ )
+			if( !GLOBAL_VIDEO_OVERRIDE )
 			{
 				if( DEMODRCGetStatus() != GX2_DRC_NONE )
 				{
@@ -379,24 +418,53 @@ int CoreWiiU::Run()
 		// End error viewer bits.
 		FMODSystem->update();
 
+		// Set custom render target and update the game.
 		if( !GLOBAL_VIDEO_OVERRIDE )
 		{
+			DEMOGfxBeforeRender();
+
+			GX2SetColorBuffer( &TheColorBuffer, GX2_RENDER_TARGET_0 );
+			GX2SetViewport( 0.f, 0.f, 1280.f, 720.f, 0.f, 1.f );
+			GX2SetScissor( 0, 0, 1280, 720 );
+
+			GX2SetDepthOnlyControl( GX2_FALSE, GX2_FALSE, GX2_COMPARE_ALWAYS );
+			GX2SetColorControl( GX2_LOGIC_OP_COPY, 0x1, GX2_DISABLE, GX2_ENABLE );
+			GX2SetBlendControl( GX2_RENDER_TARGET_0,
+				GX2_BLEND_ONE, GX2_BLEND_ONE_MINUS_SRC_ALPHA, GX2_BLEND_COMBINE_ADD,
+				GX2_TRUE, GX2_BLEND_ONE, GX2_BLEND_ONE_MINUS_SRC_ALPHA, GX2_BLEND_COMBINE_ADD );
+
+			GX2ClearColor( &TheColorBuffer, 0, 0, 0, 0 );
+			GX2ClearDepthStencil( &DEMODepthBuffer, GX2_CLEAR_BOTH );
+
+			DEMOGfxSetContextState();
+		}
+
+		game_.Update();
+
+		// Restore default render target and draw our frame to it.
+		if( !GLOBAL_VIDEO_OVERRIDE )
+		{
+			DEMOGfxDrawDone();
+
 			if( DEMODRCGetStatus() != GX2_DRC_NONE )
 			{
 				DEMODRCBeforeRender();
-				GX2ClearColor( &DEMODRCColorBuffer, 0, 0, 0, 0 );
+				
+				float r = (float)rand() / RAND_MAX;
+				float g = (float)rand() / RAND_MAX;
+				float b = (float)rand() / RAND_MAX;
+				GX2ClearColor( &DEMODRCColorBuffer, r, g, b, 1 );
 				GX2ClearDepthStencil( &DEMODRCDepthBuffer, GX2_CLEAR_BOTH );
 
 				GX2SetContextState( DEMODRCContextState );
 
-				// FIXME: DRC drawing here.
+				drawDRCTextureFrame( &TheColorBufferTexture );
 
 				GX2SetContextState( DEMODRCContextState );
 
 				DEMODRCDoneRender();
 			}
 
-			DEMOGfxBeforeRender();
 			GX2ClearColor( &DEMOColorBuffer, 0, 0, 0, 0 );
 			GX2ClearDepthStencil( &DEMODepthBuffer, GX2_CLEAR_BOTH );
 
@@ -410,18 +478,19 @@ int CoreWiiU::Run()
 			GX2SetBlendControl( GX2_RENDER_TARGET_0,
 				GX2_BLEND_ONE, GX2_BLEND_ONE_MINUS_SRC_ALPHA, GX2_BLEND_COMBINE_ADD,
 				GX2_TRUE, GX2_BLEND_ONE, GX2_BLEND_ONE_MINUS_SRC_ALPHA, GX2_BLEND_COMBINE_ADD );
+
+			DEMOGfxSetContextState();
+
+			GX2CopySurface( &TheColorBuffer.surface, 0, 0, &DEMOColorBuffer.surface, 0, 0 );
+
+			DEMOGfxSetContextState();
+
+			DEMOGfxDoneRender();
 		}
+		else
+			DEMOGfxWaitForSwap( 1, 100 );
 
-		//GX2SetDepthOnlyControl( GX2_FALSE, GX2_FALSE, GX2_COMPARE_ALWAYS );
-		//GX2SetColorControl( GX2_LOGIC_OP_COPY, 0x1, GX2_DISABLE, GX2_ENABLE );
-		/*GX2SetBlendControl( GX2_RENDER_TARGET_0,
-			GX2_BLEND_SRC_COLOR, GX2_BLEND_DST_COLOR, GX2_BLEND_COMBINE_ADD,
-			GX2_TRUE, GX2_BLEND_SRC_ALPHA, GX2_BLEND_ZERO, GX2_BLEND_COMBINE_ADD );*/
-		/*GX2SetBlendControl( GX2_RENDER_TARGET_0,
-			GX2_BLEND_ONE, GX2_BLEND_ONE_MINUS_SRC_ALPHA, GX2_BLEND_COMBINE_ADD,
-			GX2_TRUE, GX2_BLEND_ONE, GX2_BLEND_ONE_MINUS_SRC_ALPHA, GX2_BLEND_COMBINE_ADD );*/
-
-		game_.Update();
+		/*game_.Update();
 
 		if( !GLOBAL_VIDEO_OVERRIDE )
 		{
@@ -443,7 +512,7 @@ int CoreWiiU::Run()
 		else
 		{
 			DEMOGfxWaitForSwap( 1, 100 );
-		}
+		}*/
 
 		// Close down.
 		if( !running_ )

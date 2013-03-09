@@ -1254,6 +1254,7 @@
     <ClInclude Include="Game\Hacks\XNA\Viewport.h" />
     <ClInclude Include="Game\MainClass\XboxPC\CloudberryKingdom.XnaGameClass.h" />
     <ClInclude Include="Game\MasterHack.h" />
+    <ClInclude Include="Game\Ratings.h" />
     <ClInclude Include="Game\ResourceList\Resources_Art.h" />
     <ClInclude Include="Game\ResourceList\Resources_Music.h" />
     <ClInclude Include="Game\ResourceList\Resources_Sound.h" />

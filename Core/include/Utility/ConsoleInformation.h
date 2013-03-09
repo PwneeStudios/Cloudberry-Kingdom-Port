@@ -46,6 +46,14 @@ ConsoleRegion GetConsoleRegion();
  */
 ConsoleLanguage GetConsoleLanguage();
 
+/// Set internal error language.
+/**
+ * Set the language for any internal error display.
+ *
+ * @param language New language.
+ */
+void SetErrorLanguage( ConsoleLanguage language );
+
 /// Return level of parental control.
 /**
  * A return value of 0 means there is no parental control.

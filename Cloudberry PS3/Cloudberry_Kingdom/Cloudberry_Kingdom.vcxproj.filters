@@ -3751,6 +3751,9 @@
     <ClInclude Include="Core\include\Utility\NetworkPS3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Ratings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Game\source_files.txt" />

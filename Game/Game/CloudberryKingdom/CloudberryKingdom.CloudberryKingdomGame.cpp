@@ -36,6 +36,8 @@
 #include <BoostBin.h>
 #endif
 
+#include <Ratings.h>
+
 #include <stdio.h>
 #include <string.h>
 
@@ -295,6 +297,21 @@ namespace CloudberryKingdom
 			return true;
 		}
 
+		// FIXME: Make this function part of CloudberryKingdomGame.
+		bool IsParentalLevelSatisfied( bool showError )
+		{
+#ifdef PS3
+			int level = GetParentalControlLevel();
+			if( level < ESRB )
+			{
+				if( showError )
+					DisplayError( ErrorType( "You do not have permissions to access online functionality. Please check the parental controls." ) );
+				return false;
+			}
+#endif
+			return true;
+		}
+
 		bool CloudberryKingdomGame::OnlineFunctionalityAvailable()
         {
 			// Check that online network is available
@@ -323,8 +340,6 @@ namespace CloudberryKingdom
 		void CloudberryKingdomGame::SetPresence(Presence presence)
 		{
 			CurrentPresence = presence;
-
-			// Set the presence for the gamer
 		}
 
 		int CloudberryKingdomGame::Freeplay_Count = 0;
@@ -799,9 +814,9 @@ float CloudberryKingdomGame::fps = 0;
 		{
 			// FIXME: Keep playing logo salad.
 			if( region == ConsoleRegion_USA )
-				MainVideo::StartVideo_CanSkipIfWatched( std::wstring( L"LogoSalad" ) );
-			else
 				MainVideo::StartVideo_CanSkipIfWatched( std::wstring( L"LogoSalad_ESRB" ) );
+			else
+				MainVideo::StartVideo_CanSkipIfWatched( std::wstring( L"LogoSalad" ) );
 		}
 	}
 
@@ -1223,16 +1238,58 @@ float CloudberryKingdomGame::fps = 0;
 #endif
         }
 
+		static bool ClearError()
+		{
+			ButtonCheck::UpdateControllerAndKeyboard_StartOfStep();
+
+			int numConnected = 0;
+			for( int i = 0; i < 4; ++i )
+			{
+				if( Tools::GamepadState[i].IsConnected )
+					numConnected++;
+			}
+
+			if( numConnected == 0 )
+				return false;
+
+			for (int i = 0; i < 4; i++)
+			{
+				if ( ( PlayerManager::Players[i] != 0 ) && PlayerManager::Players[i]->Exists && !Tools::GamepadState[i].IsConnected )
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
 		bool CloudberryKingdomGame::DisconnectedController()
 		{
 #if PC_VERSION
 			return false;
 #endif
-			for (int i = 0; i < 4; i++)
+
+			if( !PastPressStart )
+				return false;
+
+			int numConnected = 0;
+			for( int i = 0; i < 4; ++i )
 			{
-				if ( PlayerManager::Players[i] != 0 && PlayerManager::Players[i]->Exists && !Tools::GamepadState[i].IsConnected )
+				if( Tools::GamepadState[i].IsConnected )
+					numConnected++;
+			}
+
+			if( numConnected == 0 )
+				return true;
+
+			if( CurrentPresence != Presence_TitleScreen )
+			{
+				for (int i = 0; i < 4; i++)
 				{
-					return true;
+					if ( ( PlayerManager::Players[i] != 0 ) && PlayerManager::Players[i]->Exists && !Tools::GamepadState[i].IsConnected )
+					{
+						return true;
+					}
 				}
 			}
 
@@ -1398,6 +1455,17 @@ float CloudberryKingdomGame::fps = 0;
                     SmallErrorMessage = null;
                 }
             }
+#else
+		if( DisconnectedController() )
+		{
+#ifdef CAFE
+			DisplayError( ErrorType( 1520100,
+				NULL, ErrorType::DEFAULT, ClearError, false ) );
+#elif PS3
+			DisplayError( ErrorType( WstringToUtf8( Localization::WordString( Localization::Words_Err_PS3_NoGamePadDetected ) ),
+				NULL, ErrorType::NONE, ClearError, false ) );
+#endif
+		}
 #endif
 
 		UpdateCustomMusic();
