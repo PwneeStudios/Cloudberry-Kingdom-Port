@@ -106,7 +106,6 @@ namespace CloudberryKingdom
 		Chunk::WriteSingle( writer, 23003, Hints::YForHelpNum );
 
 		// Save the names of videos the user has already watched.
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 		for ( std::map<std::wstring, bool>::const_iterator video = UserPowers::WatchedVideo.dict.begin(); video != UserPowers::WatchedVideo.dict.end(); ++video )
 			Chunk::WriteSingle( writer, 23005, video->first );
 		// FIXME: Make sure we need to save the names rather than boolean values.

@@ -1040,6 +1040,7 @@ namespace CloudberryKingdom
 
 		// Destroy the temporary replay camera and
 		// start using the previous camera once again
+		getMainCamera()->MyZone.reset();
 		getMainCamera()->Release();
 		setMainCamera( HoldCamera );
 	}

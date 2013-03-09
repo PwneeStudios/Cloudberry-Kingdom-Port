@@ -29,6 +29,10 @@ void OnNew( int address )
 
 void OnDestructor( std::string class_name )
 {
+	if ( std::string::npos != class_name.find( "Zone" ) )
+	{
+		CloudberryKingdom::Tools::Nothing();
+	}
 }
 
 void _OnAssignment( std::string class_name, int address, int origin_code )
