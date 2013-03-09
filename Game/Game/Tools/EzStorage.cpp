@@ -11,10 +11,11 @@
 
 #include <sys/ppu_thread.h>
 #include <sysutil/sysutil_savedata.h>
-
+#include <np.h>
 #define AUTOSAVEDATA_DIRNAME "TEST00000-AUTO-"
 
 #define AUTOSAVE_FILENAME "SYS-DATA"
+
 #define AUTOSAVE_SIZE (10 * 1024)
 enum {
 	FILE_INDEX_MUSTEXIST = 0,
@@ -28,6 +29,9 @@ static bool _load_done = false;
 const char secureFileId[ CELL_SAVEDATA_SECUREFILEID_SIZE ] = {
 	0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x8, 0x9, 0xa, 0xb, 0xc, 0xd, 0xe, 0xf, 0xff
 };
+
+extern bool ForceGetTrophyContext( SceNpTrophyContext &context, SceNpTrophyHandle &handle );
+
 #endif
 
 #if defined( CAFE ) || defined( PS3 )
@@ -443,10 +447,10 @@ namespace CloudberryKingdom
 			printf( "hddFreeSizeKB = %d, sizeKb = %d, neededKb = %d\n", get->hddFreeSizeKB, sizeKb, neededKb );
 			if( neededKb < 0 )
 			{
-				printf( "Not enough space to save! Need %d more KB.\n", neededKb );
+				printf( "Not enough space to save! Need %d more KB.\n", -neededKb );
 
-				std::wstring error = Format( Localization::WordString( Localization::Words_Err_PS3_NotEnoughSpace ).c_str(), neededKb );
-				DisplayError( ErrorType( WstringToUtf8( error ) ) );
+				std::wstring error = Format( Localization::WordString( Localization::Words_Err_PS3_NotEnoughSpace ).c_str(), -neededKb );
+				DisplayError( ErrorType( WstringToUtf8( error ), NULL, ErrorType::NONE, NULL, true ) );
 
 				result->errNeedSizeKB = neededKb;
 				result->result = CELL_SAVEDATA_CBRESULT_ERR_NOSPACE;
@@ -509,7 +513,7 @@ namespace CloudberryKingdom
 
 		path = "SaveData.bam";
 
-		char dirName[ CELL_SAVEDATA_DIRNAME_SIZE ];
+		char dirName[ CELL_SAVEDATA_DIRNAME_SIZE + 1 ];
 		
 		strncpy( dirName, AUTOSAVEDATA_DIRNAME, CELL_SAVEDATA_DIRNAME_SIZE );
 		dirName[ CELL_SAVEDATA_DIRNAME_SIZE ] = 0;
@@ -728,12 +732,36 @@ namespace CloudberryKingdom
 	}
 
 #ifdef PS3
+	uint64_t RequiredTrophySpace = 0;
+
 	void CallbackDataStatusLoad( CellSaveDataCBResult *result, CellSaveDataStatGet *get, CellSaveDataStatSet *set )
 	{
 		// Check if there is any data to load.
-		if( get->isNewData )
+		if( get->isNewData || RequiredTrophySpace > 0 )
 		{
 			printf( "NO SAVE DATA FOUND!\n" );
+
+			int sizeKb = get->sysSizeKB;
+			if( get->isNewData )
+				sizeKb += AUTOSAVE_SIZE / 1024;
+			if( RequiredTrophySpace > 0 )
+				sizeKb += static_cast< int >( RequiredTrophySpace / 1024 );
+
+			int neededKb = get->hddFreeSizeKB - sizeKb;
+
+			printf( "hddFreeSizeKB = %d, sizeKb = %d, neededKb = %d\n", get->hddFreeSizeKB, sizeKb, neededKb );
+			if( neededKb < 0 )
+			{
+				printf( "Not enough space to save! Need %d more KB.\n", -neededKb );
+
+				std::wstring error = Format( Localization::WordString( Localization::Words_Err_PS3_NotEnoughSpace ).c_str(), -neededKb );
+				DisplayError( ErrorType( WstringToUtf8( error ), NULL, ErrorType::NONE, NULL, true ) );
+
+				result->errNeedSizeKB = -neededKb;
+				result->result = CELL_SAVEDATA_CBRESULT_ERR_NOSPACE;
+				return;
+			}
+
 			result->result = CELL_SAVEDATA_CBRESULT_ERR_NODATA;
 			return;
 		}
@@ -742,6 +770,7 @@ namespace CloudberryKingdom
 		if( get->fileListNum < get->fileNum )
 		{
 			printf( "MORE FILES THAN EXPECTED!\n" );
+			DisplayError( ErrorType( WstringToUtf8( Localization::WordString( Localization::Words_Err_PS3_CorruptLoad ) ) ) );
 			result->result = CELL_SAVEDATA_CBRESULT_ERR_BROKEN;
 			return;
 		}
@@ -754,6 +783,7 @@ namespace CloudberryKingdom
 				if( get->fileList[ i ].st_size != AUTOSAVE_SIZE )
 				{
 					printf( "Save file is of the wrong size! Expected %d but got %d.\n", AUTOSAVE_SIZE, get->fileList[ i ].st_size );
+					DisplayError( ErrorType( WstringToUtf8( Localization::WordString( Localization::Words_Err_PS3_CorruptLoad ) ) ) );
 					result->result = CELL_SAVEDATA_CBRESULT_ERR_BROKEN;
 					return;
 				}
@@ -765,6 +795,7 @@ namespace CloudberryKingdom
 		if( !foundAutosave )
 		{
 			printf( "Save file %s missing!\n", AUTOSAVE_FILENAME );
+			DisplayError( ErrorType( WstringToUtf8( Localization::WordString( Localization::Words_Err_PS3_CorruptLoad ) ) ) );
 			result->result = CELL_SAVEDATA_CBRESULT_ERR_BROKEN;
 			return;
 		}
@@ -841,6 +872,13 @@ namespace CloudberryKingdom
 		path = "SaveData.bam";
 
 		_load_done = false;
+
+		// Get the space needed for save data.
+		SceNpTrophyContext context;
+		SceNpTrophyHandle handle;
+		ForceGetTrophyContext( context, handle );
+		if( sceNpTrophyGetRequiredDiskSpace( context, handle, &RequiredTrophySpace, 0 ) < 0 )
+			RequiredTrophySpace = 0;
 
 		char dirName[ CELL_SAVEDATA_PREFIX_SIZE ];
 		CellSaveDataSetBuf setBuf;

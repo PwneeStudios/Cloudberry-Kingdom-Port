@@ -32,6 +32,8 @@
 
 #include <Game\Player\LeaderboardView.h>
 
+#include <Ratings.h>
+
 #include <stdio.h>
 #include <string.h>
 
@@ -281,6 +283,21 @@ namespace CloudberryKingdom
 			return true;
 		}
 
+		// FIXME: Make this function part of CloudberryKingdomGame.
+		bool IsParentalLevelSatisfied( bool showError )
+		{
+#ifdef PS3
+			int level = GetParentalControlLevel();
+			if( level < ESRB )
+			{
+				if( showError )
+					DisplayError( ErrorType( "You do not have permissions to access online functionality. Please check the parental controls." ) );
+				return false;
+			}
+#endif
+			return true;
+		}
+
 		bool CloudberryKingdomGame::OnlineFunctionalityAvailable()
         {
 			// Check that online network is available
@@ -309,15 +326,6 @@ namespace CloudberryKingdom
 		void CloudberryKingdomGame::SetPresence(Presence presence)
 		{
 			CurrentPresence = presence;
-
-			// Set the presence for the gamer
-			if( presence == Presence_TitleScreen )
-			{
-				for( int i = 0; i < 4; i++ )
-				{
-					PlayerManager::Players[ i ]->Exists = false;
-				}
-			}
 		}
 
 		int CloudberryKingdomGame::Freeplay_Count = 0;
@@ -1253,11 +1261,14 @@ float CloudberryKingdomGame::fps = 0;
 			if( numConnected == 0 )
 				return true;
 
-			for (int i = 0; i < 4; i++)
+			if( CurrentPresence != Presence_TitleScreen )
 			{
-				if ( ( PlayerManager::Players[i] != 0 ) && PlayerManager::Players[i]->Exists && !Tools::GamepadState[i].IsConnected )
+				for (int i = 0; i < 4; i++)
 				{
-					return true;
+					if ( ( PlayerManager::Players[i] != 0 ) && PlayerManager::Players[i]->Exists && !Tools::GamepadState[i].IsConnected )
+					{
+						return true;
+					}
 				}
 			}
 

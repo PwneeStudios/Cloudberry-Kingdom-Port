@@ -366,6 +366,12 @@ bool GetTrophyContext( SceNpTrophyContext &context, SceNpTrophyHandle &handle )
 	return true;
 }
 
+void ForceGetTrophyContext( SceNpTrophyContext &context, SceNpTrophyHandle &handle )
+{
+	context = TrophyContext;
+	handle = TrophyHandle;
+}
+
 int TrophyStatusCallback( SceNpTrophyContext context, SceNpTrophyStatus status, int completed, int total, void *arg )
 {
 	int ret = 0;
@@ -555,6 +561,11 @@ void ErrorDialogCallback( int buttonType, void *userData )
 		if( complete )
 			complete( false );
 		break;
+
+	default:
+		if( complete )
+			complete( false );
+		break;
 	}
 
 	ErrorDialogOpen = false;
@@ -734,6 +745,20 @@ int CorePS3::Run()
 
 		psglSwap();
 	}
+
+	// Close the dialog box if it is still open.
+	/*if( ErrorDialogOpen ) 
+		cellMsgDialogClose( 0.0f );
+
+	while( ErrorDialogOpen )
+	{
+		int ret = cellSysutilCheckCallback();
+		if( ret )
+			LOG.Write( "cellSysutilChecCallback() = 0x%x\n", ret );
+
+		glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+		psglSwap();
+	}*/
 
 	return 0;
 }

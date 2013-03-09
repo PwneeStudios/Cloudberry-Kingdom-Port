@@ -135,9 +135,25 @@ SchedulerPS3::SchedulerPS3() :
 	}
 }
 
+class ExitSchedulerJob : public Job
+{
+public:
+
+	void Do()
+	{
+		pthread_exit( NULL );
+	}
+};
+
 SchedulerPS3::~SchedulerPS3()
 {
 	internal_->WorkersRunning = false;
+
+	RunJobASAP( new ExitSchedulerJob );
+
+	// This frees up space for the current stalled job to execute and lets
+	// the exit scheduler job terminate.
+	sem_post( &internal_->MainThreadSemaphore );
 
 	for( int i = 0; i < NUM_THREADS; ++i )
 		sem_post( &internal_->JobQueueSemaphore );

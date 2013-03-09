@@ -301,6 +301,8 @@ namespace CloudberryKingdom
 	}
 #endif
 
+	extern bool IsParentalLevelSatisfied( bool );
+
 	void GameOverPanel::AddScore()
 	{
 		MyHighScoreList->Add( HighScoreEntry );
@@ -322,10 +324,13 @@ namespace CloudberryKingdom
 
         ArcadeMenu::CheckForArcadeUnlocks(HighScoreEntry);
 
-        if ( !CloudberryKingdomGame::OnlineFunctionalityAvailable() )
-        {
-            CloudberryKingdomGame::ShowError_MustBeSignedInToLiveForLeaderboard();
-        }
+		if( IsParentalLevelSatisfied( false ) )
+		{
+			if ( !CloudberryKingdomGame::OnlineFunctionalityAvailable() )
+			{
+				CloudberryKingdomGame::ShowError_MustBeSignedInToLiveForLeaderboard();
+			}
+		}
 	}
 
 	void GameOverPanel::SetHeaderProperties( const boost::shared_ptr<EzText> &text )
@@ -403,16 +408,19 @@ namespace CloudberryKingdom
 		}
 		else
 		{
-            if ( CloudberryKingdomGame::OnlineFunctionalityAvailable() )
-            {
-				Hide( PresetPos_BOTTOM );
-				Call( MakeMagic( LeaderboardGUI, ( 0, MenuItem::ActivatingPlayer ) ), 0 );
-				Hide();
+			if( IsParentalLevelSatisfied( true ) )
+			{
+				if ( CloudberryKingdomGame::OnlineFunctionalityAvailable() )
+				{
+					Hide( PresetPos_BOTTOM );
+					Call( MakeMagic( LeaderboardGUI, ( 0, MenuItem::ActivatingPlayer ) ), 0 );
+					Hide();
+				}
+				else
+				{
+					CloudberryKingdomGame::ShowError_MustBeSignedInToLive( Localization::Words_Err_MustBeSignedInToLive );
+				}
 			}
-            else
-            {
-                CloudberryKingdomGame::ShowError_MustBeSignedInToLive( Localization::Words_Err_MustBeSignedInToLive );
-            }
 		}
 	}
 

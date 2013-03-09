@@ -410,11 +410,19 @@ if ( ButtonCheck::ControllerInUse )
     boost::shared_ptr<QuadClass> LeaderboardGUI::TL, LeaderboardGUI::Offset_GamerTag, LeaderboardGUI::Offset_Val, LeaderboardGUI::ItemShift;
 	boost::shared_ptr<HsvQuad> LeaderboardGUI::Highlight;
 
+	extern bool IsParentalLevelSatisfied( bool );
+
     void LeaderboardGUI::MyPhsxStep()
     {
         CkBaseMenu::MyPhsxStep();
 
         if ( !Active || BubblingOut ) return;
+
+		if( !IsParentalLevelSatisfied( true ) )
+		{
+			ReturnToCaller();
+			return;
+		}
 
         if ( !CloudberryKingdomGame::OnlineFunctionalityAvailable() )
         {
