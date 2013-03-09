@@ -1,6 +1,6 @@
 #include <Graphics/Effect.h>
 
-#include <cassert>
+#include <PwneeAssert.h>
 #include <fstream>
 #include <GL/glew.h>
 #include <map>

@@ -264,6 +264,9 @@
     <ClInclude Include="include\Utility\Save.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\PwneeAssert.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core.cpp">
@@ -494,5 +497,11 @@
     <ClCompile Include="src\Utility\SavePc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\PwneeAssert.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
 </Project>

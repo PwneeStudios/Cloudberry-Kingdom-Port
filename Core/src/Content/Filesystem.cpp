@@ -1,6 +1,6 @@
 #include <Content/Filesystem.h>
 
-#include <cassert>
+#include <PwneeAssert.h>
 
 template<> Filesystem *Singleton< Filesystem >::singleton_ = 0;
 
