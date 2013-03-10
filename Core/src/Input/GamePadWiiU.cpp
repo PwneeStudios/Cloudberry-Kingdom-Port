@@ -17,6 +17,7 @@ bool anythingElseConnected;
 
 KPADStatus kpadStatus[ WPAD_MAX_CONTROLLERS ];
 s32 kpadReadLength[ WPAD_MAX_CONTROLLERS ];
+bool isConnected[ WPAD_MAX_CONTROLLERS ];
 
 static void ConnectCallback( s32 chan, s32 reason )
 {
@@ -50,6 +51,7 @@ void GamePad::Initialize()
 
 	memset( kpadStatus, 0, sizeof( kpadStatus ) );
 	memset( kpadReadLength, 0, sizeof( kpadReadLength ) );
+	memset( isConnected, 0, sizeof( isConnected ) );
 
 	for( int i = 0; i < WPAD_MAX_CONTROLLERS; ++i )
 		kpadConnectHistory[ i ] = disconnectThreshold;

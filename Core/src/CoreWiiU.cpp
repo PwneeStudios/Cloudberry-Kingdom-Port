@@ -9,6 +9,7 @@
 #include <cafe/sci/sciPublicApi.h>
 #include <cafe/sysapp.h>
 #include <Content/Wad.h>
+#include <Core.h>
 #include <cstdlib>
 #include <GameLoop.h>
 #include <Graphics/QuadDrawer.h>
@@ -433,6 +434,8 @@ int CoreWiiU::Run()
 		// End error viewer bits.
 		//FMODSystem->update();
 		FMOD_System_Update( FMODSystem );
+
+		SCHEDULER->MainThread();
 
 		// Set custom render target and update the game.
 		if( !GLOBAL_VIDEO_OVERRIDE )
