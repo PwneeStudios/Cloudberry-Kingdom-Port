@@ -22,12 +22,13 @@
 #include <Utility/Log.h>
 #include "Graphics/WiiU/videorender.h"
 
-#include <fmod.hpp>
+#include <fmod.h>
 #include <fmodwiiu.h>
 
 // FIXME: This is done in order to get access to update the FMOD system every frame.
 // This should really be done through a method like MediaPlayer::Update().
-extern FMOD::System *FMODSystem;
+//extern FMOD::System *FMODSystem;
+extern FMOD_SYSTEM *FMODSystem;
 
 // Private.
 CoreWiiU::CoreWiiU( const CoreWiiU &other ) :
@@ -77,16 +78,17 @@ GX2Texture TheColorBufferTexture;
 // Kill the video player if it's still alive, we don't want stuff running in the background in case we are exiting.
 extern void ForceKillVideoPlayer();
 
-void ForegroundReleaseCallback()
+/*void ForegroundReleaseCallback()
 {
 	LOG.Write( "Releasing while video is playing.  Kill the player\n" );
 	ForceKillVideoPlayer();
-}
+}*/
 
 extern void StopScheduler();
 extern void ResumeScheduler();
 
 u32 ReleaseForegroundCallback( void *context )
+//void ReleaseForegroundCallback()
 {
 	DEMOGfxFreeMEM1( TheColorBuffer.surface.imagePtr );
 
@@ -94,6 +96,10 @@ u32 ReleaseForegroundCallback( void *context )
 
 	LOG.Write( "Kill video player in case we are releasing while it's playing.\n" );
 	ForceKillVideoPlayer();
+
+	ProcUIDrawDoneRelease();
+
+	return 0;
 }
 
 u32 AcquireForegroundCallback( void *context )
@@ -102,10 +108,14 @@ u32 AcquireForegroundCallback( void *context )
 	void *ptr = DEMOGfxAllocMEM1( TheColorBuffer.surface.imageSize, TheColorBuffer.surface.alignment );
 	GX2Invalidate( GX2_INVALIDATE_CPU, ptr, TheColorBuffer.surface.imageSize );
 	GX2InitColorBufferPtr( &TheColorBuffer, ptr );
-
+	
+	GX2InitTexture( &TheColorBufferTexture, 1280, 720, 1, 0, GX2_SURFACE_FORMAT_TCS_R8_G8_B8_A8_UNORM,
+		GX2_SURFACE_DIM_2D );
 	GX2InitTexturePtrs( &TheColorBufferTexture, TheColorBuffer.surface.imagePtr, 0 );
 
 	ResumeScheduler();
+
+	return 0;
 }
 
 // Draw a texture to the DRC.  Declared in videorenderer.cpp.
@@ -190,9 +200,10 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 	ReEnableHomeButton = false;
 	// End error viewer.
 
-	ProcUIRegisterCallback( PROCUI_MESSAGE_HBDENIED, HomeButtonDeniedCallback, NULL, 200 );
-	ProcUIRegisterCallback( PROCUI_MESSAGE_RELEASE, ReleaseForegroundCallback, NULL, 200 );
-	ProcUIRegisterCallback( PROCUI_MESSAGE_ACQUIRE, AcquireForegroundCallback, NULL, 200 );
+	ProcUIRegisterCallback( PROCUI_MESSAGE_HBDENIED, HomeButtonDeniedCallback, NULL, 100 );
+	ProcUIRegisterCallback( PROCUI_MESSAGE_RELEASE, ReleaseForegroundCallback, NULL, 250 );
+	//DEMOSetReleaseCallback( ReleaseForegroundCallback );
+	ProcUIRegisterCallback( PROCUI_MESSAGE_ACQUIRE, AcquireForegroundCallback, NULL, 250 );
 	//ProcUISetSaveCallback( SaveOnExitCallback, NULL );
 
 	// Initialize shaders for video renderer.
@@ -420,7 +431,8 @@ int CoreWiiU::Run()
 			continue;
 		}
 		// End error viewer bits.
-		FMODSystem->update();
+		//FMODSystem->update();
+		FMOD_System_Update( FMODSystem );
 
 		// Set custom render target and update the game.
 		if( !GLOBAL_VIDEO_OVERRIDE )
