@@ -22,6 +22,7 @@
 #include <Utility/Limits.h>
 #include <Utility/Log.h>
 #include "Graphics/WiiU/videorender.h"
+#include "Graphics/RenderTarget2DWiiUInternal.h"
 
 #include <fmod.h>
 #include <fmodwiiu.h>
@@ -82,6 +83,8 @@ extern void ForceKillVideoPlayer();
 extern void StopScheduler();
 extern void ResumeScheduler();
 
+extern std::vector< RenderTarget2DInternal * > GlobalRenderTargets;
+
 void FinalReleaseCallback()
 {
 	LOG.Write( "Releasing while video is playing.  Kill the player\n" );
@@ -97,6 +100,14 @@ u32 ReleaseForegroundCallback( void *context )
 {
 	DEMOGfxFreeMEM1( TheColorBuffer.surface.imagePtr );
 
+	// Free up render targets.
+	LOG.Write( "Freeing %d render targets\n", GlobalRenderTargets.size() );
+	std::vector< RenderTarget2DInternal * >::iterator i;
+	for( i = GlobalRenderTargets.begin(); i != GlobalRenderTargets.end(); ++i )
+	{
+		DEMOGfxFreeMEM1( ( *i )->ColorBuffer.surface.imagePtr );
+	}
+
 	return 0;
 }
 
@@ -110,6 +121,19 @@ u32 AcquireForegroundCallback( void *context )
 	GX2InitTexture( &TheColorBufferTexture, 1280, 720, 1, 0, GX2_SURFACE_FORMAT_TCS_R8_G8_B8_A8_UNORM,
 		GX2_SURFACE_DIM_2D );
 	GX2InitTexturePtrs( &TheColorBufferTexture, TheColorBuffer.surface.imagePtr, 0 );
+
+	// Restore render targets.
+	LOG.Write( "Restoring %d render targets\n", GlobalRenderTargets.size() );
+	std::vector< RenderTarget2DInternal * >::iterator i;
+	for( i = GlobalRenderTargets.begin(); i != GlobalRenderTargets.end(); ++i )
+	{
+		GX2InitColorBufferPtr( &( *i )->ColorBuffer, DEMOGfxAllocMEM1(
+			( *i )->ColorBuffer.surface.imageSize,
+			( *i )->ColorBuffer.surface.alignment
+		) );
+		GX2Invalidate( GX2_INVALIDATE_CPU, ( *i )->ColorBuffer.surface.imagePtr,
+			( *i )->ColorBuffer.surface.imageSize );
+	}
 
 	ResumeScheduler();
 
