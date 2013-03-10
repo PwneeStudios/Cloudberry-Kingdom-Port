@@ -1747,8 +1747,8 @@ namespace CloudberryKingdom
 		BlackAlpha = 0;
 		FadeOutSpeed = 0;
 		FadeInSpeed = 0;
-		MyGameObjects = GameObjVec();
-		NewGameObjects = GameObjVec();
+		MyGameObjects = GameObjVec(); MyGameObjects.reserve( 20 );
+		NewGameObjects = GameObjVec(); NewGameObjects.reserve( 20 );
 		TakeOnce = false;
 		AlwaysGiveCoinScore = false;
 		CoinScoreMultiplier = 1;

@@ -203,6 +203,10 @@ namespace CloudberryKingdom
 		v1.AnimData = quad->Corner[ 1 ]->AnimData;
 		v2.AnimData = quad->Corner[ 2 ]->AnimData;
 		v3.AnimData = quad->Corner[ 3 ]->AnimData;
+			v0.AnimData.Anims = std::vector<OneAnim>(); v0.AnimData.Anims.push_back( quad->Corner[ 0 ]->AnimData.Anims[ 0 ] );
+			v1.AnimData.Anims = std::vector<OneAnim>(); v1.AnimData.Anims.push_back( quad->Corner[ 1 ]->AnimData.Anims[ 0 ] );
+			v2.AnimData.Anims = std::vector<OneAnim>(); v2.AnimData.Anims.push_back( quad->Corner[ 2 ]->AnimData.Anims[ 0 ] );
+			v3.AnimData.Anims = std::vector<OneAnim>(); v3.AnimData.Anims.push_back( quad->Corner[ 3 ]->AnimData.Anims[ 0 ] );
 
 		PreCalc0 = PreCalc1 = PreCalc2 = PreCalc3 = Vector2();
 

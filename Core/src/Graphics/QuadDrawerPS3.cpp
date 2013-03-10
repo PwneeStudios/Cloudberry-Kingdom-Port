@@ -100,11 +100,15 @@ QuadDrawerPS3::~QuadDrawerPS3()
 
 void QuadDrawerPS3::SetEffect( const boost::shared_ptr<Effect> &effect )
 {
+	const static std::string TextureSampler = "TextureSampler";
+	const static std::string BackTextureSampler = "BackTextureSampler";
+	const static std::string MaskTextureSampler = "MaskTextureSampler";
+
 	internal_->CurrentEffect = effect;
 
-	internal_->TextureParameter = effect->Parameters( "TextureSampler" );
-	internal_->ExtraTextureParameter1 = effect->Parameters( "BackTextureSampler" );
-	internal_->ExtraTextureParameter2 = effect->Parameters( "MaskTextureSampler" );
+	internal_->TextureParameter = effect->Parameters( TextureSampler );
+	internal_->ExtraTextureParameter1 = effect->Parameters( BackTextureSampler );
+	internal_->ExtraTextureParameter2 = effect->Parameters( MaskTextureSampler );
 }
 
 boost::shared_ptr<Effect> QuadDrawerPS3::GetEffect()

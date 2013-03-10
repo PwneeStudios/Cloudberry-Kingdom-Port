@@ -158,6 +158,8 @@ boost::shared_ptr<Coin_AutoGen> Coin_AutoGen::instance = boost::make_shared<Coin
 
 	void Coin_AutoGen::ActiveFill_1( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
+		//return;
+
 		AutoGen::ActiveFill_1( level, BL, TR );
 
 		// Get Coin parameters

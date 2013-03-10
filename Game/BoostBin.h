@@ -19,12 +19,23 @@ std::map< int, std::vector< int > > PrevMetaBoostBinCount;
 		3, dynamic_pointer_cast
 **/
 
-void OnDestructor( std::string class_name )
+void OnNew( int address )
 {
-
+	if ( CloudberryKingdom::CloudberryKingdomGame::address == address && address != 0 )
+	{
+		CloudberryKingdom::Tools::Nothing();
+	}
 }
 
-void _OnAssignment( std::string class_name, int origin_code )
+void OnDestructor( std::string class_name )
+{
+	if ( std::string::npos != class_name.find( "Zone" ) )
+	{
+		CloudberryKingdom::Tools::Nothing();
+	}
+}
+
+void _OnAssignment( std::string class_name, int address, int origin_code )
 {
 
 	if ( origin_code != 10 && origin_code != 0 && origin_code != 1 && origin_code != 3 )
@@ -32,12 +43,20 @@ void _OnAssignment( std::string class_name, int origin_code )
 		return;
 	}
 
-	//if ( std::string::npos != class_name.find( "CameraZone" ) )
-	//{
+	if ( std::string::npos != class_name.find( "JoinText" ) )
+	{
 
-	//	CloudberryKingdom::Tools::Nothing();
+		CloudberryKingdom::Tools::Nothing();
+		//if ( CloudberryKingdom::CloudberryKingdomGame::address == 0 )
+		//	CloudberryKingdom::CloudberryKingdomGame::address = address;
 
-	//}
+	}
+
+	if ( CloudberryKingdom::CloudberryKingdomGame::address == address && address != 0 )
+	{
+		CloudberryKingdom::Tools::Nothing();
+	}
+
 
 }
 
@@ -57,7 +76,7 @@ void Stats()
 	CloudberryKingdom::Tools::Write( L"---------------------------------------------------------" );
 
 	int count = 0;
-	for ( std::vector< GenericBoostBin * >::const_iterator bin = MetaBoostBin.begin(); bin != MetaBoostBin.end(); ++bin )
+	for ( std::vector< GenericBoostBin * >::iterator bin = MetaBoostBin.begin(); bin != MetaBoostBin.end(); ++bin )
 	{
 		int n = ( *bin )->Count();
 		std::wstring name = Utf8ToWstring( ( *bin )->ClassName );
@@ -83,16 +102,55 @@ void Stats()
 		//}
 
 		std::wstring Line = name + L"\t";
-		for ( int i = 0; i < PrevMetaBoostBinCount[ count ].size(); ++i)
+		for ( int i = 0; i < PrevMetaBoostBinCount[ count ].size(); ++i )
 		{
 			Line += ToString( PrevMetaBoostBinCount[ count ][i] ) + L"\t";
 		}
 
-		// Print a specific class
-		if ( name == L"GameObject::OnCameraChangeProxy" )
+		// Search for 'address'
+		BoostBin<CloudberryKingdom::JoinText>* _bin = reinterpret_cast<BoostBin<CloudberryKingdom::JoinText>* >( *bin );
+		std::vector<int> addresses = ( *bin )->GetAddress();
+		for ( int i = 0; i < addresses.size(); i++)
 		{
-			CloudberryKingdom::Tools::Write( Line.c_str() );
+			int ref_count = 0;
+			if ( addresses[ i ] == CloudberryKingdom::CloudberryKingdomGame::address )
+			{
+				ref_count++;
+
+				//boost::shared_ptr<CloudberryKingdom::JoinText>* ptrptr =
+				//	reinterpret_cast<boost::shared_ptr<CloudberryKingdom::JoinText>*>( addresses[ i ] );
+
+				CloudberryKingdom::JoinText* ptrptr =
+					reinterpret_cast<CloudberryKingdom::JoinText*>( addresses[ i ] );
+
+				std::wstring ref = name + L" : ref count = " + ToString( _bin->MyVec[ i ].pn.use_count() ); //ToString( ref_count );
+				CloudberryKingdom::Tools::Write( ref.c_str() );
+			}
 		}
+
+		// Loop through all memory
+		//int _a = CloudberryKingdom::CloudberryKingdomGame::address;
+		//for ( int i = _a - 0x10000000; i < _a + 0x10000000; i += 4 )
+		//{
+		//	int _address = *reinterpret_cast<int*>( i );
+		//	if ( CloudberryKingdom::CloudberryKingdomGame::address == _address )
+		//	{
+		//		CloudberryKingdom::Tools::Nothing();
+
+		//		boost::shared_ptr<CloudberryKingdom::JoinText>* ptrptr =
+		//			reinterpret_cast<boost::shared_ptr<CloudberryKingdom::JoinText>*>( i );
+
+		//		boost::shared_ptr<CloudberryKingdom::JoinText>* ptrptr2 =
+		//			reinterpret_cast<boost::shared_ptr<CloudberryKingdom::JoinText>*>( i - 4 );
+
+		//	}
+		//}
+
+		// Print a specific class
+		//if ( name == L"GameObject::OnCameraChangeProxy" )
+		//{
+		//	CloudberryKingdom::Tools::Write( Line.c_str() );
+		//}
 
 		// Print every class
 		//CloudberryKingdom::Tools::Write( Line.c_str() );

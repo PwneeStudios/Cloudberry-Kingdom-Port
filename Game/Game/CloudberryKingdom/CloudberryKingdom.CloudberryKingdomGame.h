@@ -31,7 +31,10 @@ namespace CloudberryKingdom
 	struct CloudberryKingdomGame : public boost::enable_shared_from_this<CloudberryKingdomGame>
 	{
 
+#if defined(DEBUG)
 		static int _count;
+		static int address;
+#endif
 
 		static void memdebug_DumpStart();
 		static void memdebug_DumpEnd();

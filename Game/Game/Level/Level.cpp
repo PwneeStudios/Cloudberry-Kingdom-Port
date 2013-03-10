@@ -1040,6 +1040,7 @@ namespace CloudberryKingdom
 
 		// Destroy the temporary replay camera and
 		// start using the previous camera once again
+		getMainCamera()->MyZone.reset();
 		getMainCamera()->Release();
 		setMainCamera( HoldCamera );
 	}
@@ -1210,7 +1211,14 @@ namespace CloudberryKingdom
 		//FreezeCamera = true;
 		getMainCamera()->Update();
 
+		// Release the computer (current Bobs vector)
+		for ( BobVec::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
+		{
+			Clear( ( *bob )->PlayerObject->AnimQueue );
+		}
 		Bobs.clear();
+
+		// Add back the players to the Bobs array
 		AddRange( Bobs, HoldPlayerBobs );
 		for ( BobVec::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
 		{
@@ -1218,6 +1226,7 @@ namespace CloudberryKingdom
 			( *bob )->PlayerObject->EnqueueAnimation( 0, 0, true );
 			( *bob )->PlayerObject->DequeueTransfers();
 		}
+		HoldPlayerBobs.clear();
 
 		if ( OnEndReplay != 0 )
 			OnEndReplay->Apply();
@@ -2600,8 +2609,14 @@ int Level::AfterPostDrawLayer = 12;
 			CurrentRecording.reset();
 		}
 
-		CurrentRecording.reset();
+		// Release Bobs that are being held (because a replay is playing)
+		for ( BobVec::const_iterator bob = HoldPlayerBobs.begin(); bob != HoldPlayerBobs.end(); ++bob )
+		{
+			( *bob )->Release();
+		}
 		HoldPlayerBobs.clear();
+
+		CurrentRecording.reset();
 		LevelPieces.clear();
 		MySwarmBundle.reset();
 
@@ -2616,7 +2631,8 @@ int Level::AfterPostDrawLayer = 12;
 				( *obj )->getCore()->MyLevel.reset();
 				( *obj )->Release();
 			}
-		ActiveObjectList.clear();
+		ActiveObjectList->clear();
+		_ActiveObjectList_BoxesOnly.clear();
 		Objects.clear();
 
 		if ( Bobs.size() > 0 )
@@ -3216,9 +3232,9 @@ int Level::AfterPostDrawLayer = 12;
 		else
 		{
 			Objects.push_back( NewObject );
-			if ( Objects != ActiveObjectList )
+			if ( &Objects != ActiveObjectList )
 			{
-				ActiveObjectList.push_back( NewObject );
+				ActiveObjectList->push_back( NewObject );
 			}
 		}
 	}
@@ -3873,7 +3889,7 @@ int Level::AfterPostDrawLayer = 12;
 
 	void Level::UpdateObjects()
 	{
-		for ( ObjectVec::const_iterator Object = ActiveObjectList.begin(); Object != ActiveObjectList.end(); ++Object )
+		for ( ObjectVec::const_iterator Object = ActiveObjectList->begin(); Object != ActiveObjectList->end(); ++Object )
 		{
 			if ( !( *Object )->getCore()->IsGameObject && !(*Object)->getCore()->MarkedForDeletion )
 				( *Object )->PhsxStep();
@@ -3889,7 +3905,7 @@ int Level::AfterPostDrawLayer = 12;
 
 	void Level::UpdateObjects2()
 	{
-		for ( ObjectVec::const_iterator Object = ActiveObjectList.begin(); Object != ActiveObjectList.end(); ++Object )
+		for ( ObjectVec::const_iterator Object = ActiveObjectList->begin(); Object != ActiveObjectList->end(); ++Object )
 		{
 			if ( !( *Object )->getCore()->MarkedForDeletion )
 				( *Object )->PhsxStep2();
@@ -4036,8 +4052,8 @@ int Level::AfterPostDrawLayer = 12;
 
 		ObjectsLocked = false;
 		AddRange( Objects, AddedObjects );
-		if ( ActiveObjectList != Objects )
-			AddRange( ActiveObjectList, AddedObjects );
+		if ( ActiveObjectList != &Objects )
+			AddRange( *ActiveObjectList, AddedObjects );
 		AddedObjects.clear();
 
 		int CleanPeriod = 20;
@@ -4133,39 +4149,40 @@ int Level::AfterPostDrawLayer = 12;
 	{
 		if ( BoxesOnly )
 		{
-			ActiveObjectList = ObjectVec();
+			_ActiveObjectList_BoxesOnly = ObjectVec();
+			ActiveObjectList = &_ActiveObjectList_BoxesOnly;
 			ResetActiveObjectList();
 		}
 		else
-			ActiveObjectList = Objects;
+			ActiveObjectList = &Objects;
 	}
 
 	void Level::UpdateActiveObjectList()
 	{
-		if ( ActiveObjectList == Objects )
+		if ( ActiveObjectList == &Objects )
 			return;
 
-		ActiveObjectList.clear();
+		ActiveObjectList->clear();
 
 		// Keep active all objects that didn't skip their phsx the previous step.
 		for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
 		{
 			if ( !( *obj )->getCore()->SkippedPhsx && !(*obj)->getCore()->MarkedForDeletion )
 			{
-				ActiveObjectList.push_back( *obj );
+				ActiveObjectList->push_back( *obj );
 			}
 		}
 	}
 
 	void Level::ResetActiveObjectList()
 	{
-		if ( ActiveObjectList == Objects )
+		if ( ActiveObjectList == &Objects )
 			return;
 
-		ActiveObjectList.clear();
+		ActiveObjectList->clear();
 
 		for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
-			ActiveObjectList.push_back( *obj );
+			ActiveObjectList->push_back( *obj );
 	}
 
 	bool Level::IsBetween( Vector2 Point, Vector2 p1, Vector2 p2 )

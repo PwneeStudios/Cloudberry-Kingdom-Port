@@ -46,8 +46,11 @@ namespace CloudberryKingdom
 	void CharacterSelect::Release()
 	{
 		MyGamerTag->Release();
+		MyGamerTag.reset();
 		MyHeroLevel->Release();
+		MyHeroLevel.reset();
 		MyDoll->Release();
+		MyDoll.reset();
 	}
 
 	CharacterSelect::CharacterSelect( int PlayerIndex, bool QuickJoin )

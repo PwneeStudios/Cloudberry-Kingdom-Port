@@ -204,7 +204,23 @@ namespace CloudberryKingdom
 		AffectGamePause();
 
 		if ( getCore()->MyLevel != 0 )
-			getCore()->MyLevel->OnCameraChange->Add(boost::make_shared<OnCameraChangeProxy>( boost::static_pointer_cast<GameObject>( shared_from_this() ) ) );
+		{
+			boost::shared_ptr<Multicaster> mc = getCore()->MyLevel->OnCameraChange;
+			mc->Add( boost::make_shared<OnCameraChangeProxy>( boost::static_pointer_cast<GameObject>( shared_from_this() ) ) );
+
+			// Go over list of lambdas in multicaster and remove all lambdas associated with removed or null game objects.
+			std::vector<boost::shared_ptr<Lambda> > NewList;
+			for ( std::vector<boost::shared_ptr<Lambda> >::const_iterator item = mc->MyList.begin(); item != mc->MyList.end(); ++item )
+			{
+				boost::shared_ptr<OnCameraChangeProxy> occp = boost::dynamic_pointer_cast<OnCameraChangeProxy>( *item );
+				if ( 0 != occp )
+				{
+					if ( occp->go != 0 && occp->go->CoreData != 0 && !occp->go->CoreData->Released )
+						NewList.push_back( occp );
+				}
+			}
+			mc->MyList = NewList;
+		}
 	}
 
 	void GameObject::OnCameraChange()

@@ -409,9 +409,18 @@ namespace CloudberryKingdom
 			return StoredName;
 		else
 		{
-			if ( RandomNameIndex == -1 )
-				RandomNameIndex = Tools::GlobalRnd->RndInt( 0, PlayerManager::RandomNames.size() - 1 );
-			return PlayerManager::RandomNames[ RandomNameIndex ];
+			// Pick a random name if there is no stored name
+			//if ( RandomNameIndex == -1 )
+			//	RandomNameIndex = Tools::GlobalRnd->RndInt( 0, PlayerManager::RandomNames.size() - 1 );
+			//return PlayerManager::RandomNames[ RandomNameIndex ];
+			switch ( MyIndex )
+			{
+				case 0: return std::wstring( L"Player 1" );
+				case 1: return std::wstring( L"Player 2" );
+				case 2: return std::wstring( L"Player 3" );
+				case 3: return std::wstring( L"Player 4" );
+				default: return std::wstring( L"Players" );
+			}
 		}
 	}
 

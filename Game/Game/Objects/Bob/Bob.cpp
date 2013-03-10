@@ -1897,7 +1897,7 @@ namespace CloudberryKingdom
 		Box->SetTarget( getCore()->Data.Position, Box->Current->Size + Vector2(.0f,.2f) );
 
 
-		for ( ObjectVec::const_iterator obj = getCore()->MyLevel->ActiveObjectList.begin(); obj != getCore()->MyLevel->ActiveObjectList.end(); ++obj )
+		for ( ObjectVec::const_iterator obj = getCore()->MyLevel->ActiveObjectList->begin(); obj != getCore()->MyLevel->ActiveObjectList->end(); ++obj )
 		{
 			if ( !( *obj )->getCore()->MarkedForDeletion && (*obj)->getCore()->Real && (*obj)->getCore()->Active && (*obj)->getCore()->Show )
 				( *obj )->Interact( boost::static_pointer_cast<Bob>( shared_from_this() ) );

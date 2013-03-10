@@ -467,6 +467,7 @@ namespace CloudberryKingdom
 			data->MyGameFlags.IsTethered = true;
 		}
 
+		//data->SetTileSet( L"sea" );
 		switch ( index )
 		{
 			case 0: data->SetTileSet( L"cave" ); break;
@@ -493,12 +494,10 @@ namespace CloudberryKingdom
 				break;
 		}
 
-		//data.SetTileSet(Tools::GlobalRnd.ChooseOne("sea", "forest", "cave", "castle", "cloud", "hills",
-		//                                          "sea_rain", "forest_snow", "hills_rain"));
-
 		// Adjust the piece seed data
 		for ( std::vector<boost::shared_ptr<PieceSeedData> >::const_iterator piece = data->PieceSeeds.begin(); piece != data->PieceSeeds.end(); ++piece )
 		{
+			//Tools::Warning();
 			if ( First )
 			{
 				FirstLevel( index, *piece );
@@ -539,7 +538,6 @@ namespace CloudberryKingdom
 		piece->MyUpgrades1->Get( Upgrade_CEILING ) = 7;
 
 		piece->MyUpgrades1->CalcGenData( piece->MyGenData->gen1, piece->Style );
-		//piece->MyUpgrades1->UpgradeLevels.CopyTo( piece->MyUpgrades2->UpgradeLevels, 0 );
 		CopyFromTo( piece->MyUpgrades1->UpgradeLevels, piece->MyUpgrades2->UpgradeLevels );
 		piece->MyUpgrades2->CalcGenData( piece->MyGenData->gen2, piece->Style );
 	}
