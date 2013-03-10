@@ -27,9 +27,12 @@ Wad::Wad( const std::string &base ) :
 
 Wad::~Wad()
 {
+	resourceHolders_.clear();
+
 	ResourceSet::iterator i;
 	for( i = uniqueResources_.begin(); i != uniqueResources_.end(); ++i )
 		delete *i;
+	uniqueResources_.clear();
 
 	delete holderAllocator_;
 }

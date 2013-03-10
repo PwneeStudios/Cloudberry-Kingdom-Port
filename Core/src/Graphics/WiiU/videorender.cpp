@@ -25,6 +25,7 @@
 #include <nn/erreula.h>
 #include "videorender.h"
 
+
 // --------- GX2 Data ---------
 
 GX2Texture      g_LTexture[2];

@@ -79,26 +79,23 @@ GX2Texture TheColorBufferTexture;
 // Kill the video player if it's still alive, we don't want stuff running in the background in case we are exiting.
 extern void ForceKillVideoPlayer();
 
-/*void ForegroundReleaseCallback()
+extern void StopScheduler();
+extern void ResumeScheduler();
+
+void FinalReleaseCallback()
 {
 	LOG.Write( "Releasing while video is playing.  Kill the player\n" );
 	ForceKillVideoPlayer();
-}*/
 
-extern void StopScheduler();
-extern void ResumeScheduler();
+	StopScheduler();
+
+	ProcUIDrawDoneRelease();
+}
 
 u32 ReleaseForegroundCallback( void *context )
 //void ReleaseForegroundCallback()
 {
 	DEMOGfxFreeMEM1( TheColorBuffer.surface.imagePtr );
-
-	StopScheduler();
-
-	LOG.Write( "Kill video player in case we are releasing while it's playing.\n" );
-	ForceKillVideoPlayer();
-
-	ProcUIDrawDoneRelease();
 
 	return 0;
 }
@@ -203,7 +200,7 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 
 	ProcUIRegisterCallback( PROCUI_MESSAGE_HBDENIED, HomeButtonDeniedCallback, NULL, 100 );
 	ProcUIRegisterCallback( PROCUI_MESSAGE_RELEASE, ReleaseForegroundCallback, NULL, 250 );
-	//DEMOSetReleaseCallback( ReleaseForegroundCallback );
+	DEMOSetReleaseCallback( FinalReleaseCallback );
 	ProcUIRegisterCallback( PROCUI_MESSAGE_ACQUIRE, AcquireForegroundCallback, NULL, 250 );
 	//ProcUISetSaveCallback( SaveOnExitCallback, NULL );
 
@@ -244,9 +241,9 @@ CoreWiiU::~CoreWiiU()
 
 	delete qd_;
 
-	delete content_;
-
 	delete scheduler_;
+
+	delete content_;
 
 	nn::erreula::Destroy();
 
@@ -435,11 +432,11 @@ int CoreWiiU::Run()
 		//FMODSystem->update();
 		FMOD_System_Update( FMODSystem );
 
-		SCHEDULER->MainThread();
-
 		// Set custom render target and update the game.
 		if( !GLOBAL_VIDEO_OVERRIDE )
 		{
+			SCHEDULER->MainThread();
+
 			DEMOGfxBeforeRender();
 
 			GX2SetColorBuffer( &TheColorBuffer, GX2_RENDER_TARGET_0 );

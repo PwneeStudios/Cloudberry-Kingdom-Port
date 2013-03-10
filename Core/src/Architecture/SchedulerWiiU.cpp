@@ -162,12 +162,27 @@ public:
 	}
 };
 
+class PauseSchedulerJob : public Job
+{
+public:
+	PauseSchedulerJob()
+	{
+	}
+
+	void Do()
+	{
+		OSSuspendThread( &External->Threads[ 0 ] );
+	}
+};
+
 void StopScheduler()
 {
+	SCHEDULER->RunJobASAP( new PauseSchedulerJob );
 }
 
 void ResumeScheduler()
 {
+	OSContinueThread( &External->Threads[ 0 ] );
 }
 
 SchedulerWiiU::SchedulerWiiU() :
@@ -206,6 +221,8 @@ SchedulerWiiU::~SchedulerWiiU()
 
 	ExitSchedulerJob exitSchedulerJob;
 	RunJobASAP( &exitSchedulerJob );
+	if( OSIsThreadSuspended( &internal_->Threads[ 0 ] ) )
+		ResumeScheduler();
 
 	for( int i = 0; i < 2; ++i )
 		OSSignalSemaphore( &internal_->JobQueueSemaphore );
@@ -281,6 +298,8 @@ void SchedulerWiiU::CreateGpuResource( ResourceHolder *holder, Resource *resourc
 
 void SchedulerWiiU::WorkerThread()
 {
+	OSSetThreadCancelState( TRUE );
+
 	while( internal_->WorkersRunning )
 	{
 		OSWaitSemaphore( &internal_->JobQueueSemaphore );
