@@ -1,10 +1,12 @@
 #include <Graphics/VideoPlayer.h>
 
+#include <Architecture/Scheduler.h>
 #include <Core.h>
 #include <Content/ResourcePtr.h>
 #include <Content/Texture.h>
 #include <Content/TextureWiiUInternal.h>
 #include <Content/Wad.h>
+#include <Core.h>
 #include <Graphics/Video.h>
 #include <Graphics/Texture2D.h>
 
@@ -39,7 +41,7 @@
 #endif
 
 #define VIDEOSKIP_DELAY         (70)                            // permissible delay time
-#define FILEMEMORYSIZE          (128*1024*1024)                 // 512MByte
+#define FILEMEMORYSIZE          (128*1024*1024)                 // 128 MByte
 #define TEST_MODE               (0)                             // 1:TV only, 2:DRC only, other:TV & DRC
 
 #define MAXTHREADNUM            (8)
@@ -204,7 +206,11 @@ static s32 VideoOutputThread(s32 intArg, void *ptrArg)
                         OSReport("CurrTime:%d, VPTS:%d, VDIFF:%d, thread:%d\n",
                             (vsys_currtime - sys_basetime[i]), MP4PlayerCorePtr[i]->OutputVideoInfo[MP4PlayerCorePtr[i]->df_v].PTS, abs((vsys_currtime - sys_basetime[i]) - MP4PlayerCorePtr[i]->OutputVideoInfo[MP4PlayerCorePtr[i]->df_v].PTS), i);
 #endif
-                        ret = VideoDraw(MP4PlayerCorePtr[i]->OutputVideoInfo[MP4PlayerCorePtr[i]->df_v].bufp, i);
+						if( GLOBAL_VIDEO_OVERRIDE )
+						{
+							SCHEDULER->MainThread();
+							ret = VideoDraw(MP4PlayerCorePtr[i]->OutputVideoInfo[MP4PlayerCorePtr[i]->df_v].bufp, i);
+						}
 
                         if (ret != 0)
                         {
@@ -256,6 +262,7 @@ static s32 VideoOutputThread(s32 intArg, void *ptrArg)
     }
 
 	GLOBAL_VIDEO_OVERRIDE = false;
+	OSMemoryBarrier();
 
     OSReport("Video Thread Finish\n");
     return(0);
@@ -1918,33 +1925,34 @@ VideoPlayer::VideoPlayer( void (*UpdateElapsedTime)(float, bool), void (*DrawSub
 	::UpdateElapsedTime = UpdateElapsedTime;
 	::DrawSubtitles = DrawSubtitles;
 
-	InitShader();
+	/*InitShader();
 	shadersInitialized = true;
     InitAttribData();
-	attributesInitialized = true;
+	attributesInitialized = true;*/
 }
 
 void ForceKillVideoPlayer()
 {
 	EXIT_PLAYBACK = true;
+	OSMemoryBarrier();
 
 	if( threadsAlive )
 	{
-		OSJoinThread(&Thread[2], NULL);
-		//OSJoinThread(&Thread[3], NULL);
-
 		OSJoinThread(&Thread[0], NULL);
 		OSJoinThread(&Thread[1], NULL);
+
+		OSJoinThread(&Thread[2], NULL);
+		//OSJoinThread(&Thread[3], NULL);
 	}
 	threadsAlive = false;
 
-	if( shadersInitialized )
+	/*if( shadersInitialized )
 		FreeShader();
 	shadersInitialized = false;
 	
 	if( attributesInitialized )
 		FreeAttribData();
-	attributesInitialized = false;
+	attributesInitialized = false;*/
 
 	ReEnableHomeButton = true;
 	if( nn::erreula::IsAppearHomeNixSign() )
@@ -2009,7 +2017,8 @@ void VideoPlayer::Play( const boost::shared_ptr< Video > &video )
 
 
 	GLOBAL_VIDEO_OVERRIDE = true;
-	
+	OSMemoryBarrier();
+
     OSResumeThread(&Thread[0]);
     OSResumeThread(&Thread[1]);
 

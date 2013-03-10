@@ -144,6 +144,7 @@ int LoadMP3(const char *filename, long *addr, long *size)
 		{
 			printf("Invalid MP3 header\n");
 			printf("Offset=0x%x\n",offset);
+			cellFsClose( nFileHandle );
 			return (-1);	// Invalid MP3 header
 		}
 
@@ -239,7 +240,8 @@ public:
 	void Do()
 	{
 		long addr, size;
-		LoadMP3( path_.c_str(), &addr, &size );
+		int fd = LoadMP3( path_.c_str(), &addr, &size );
+		cellFsClose( fd );
 
 		stream = cellMSStreamOpen();
 		//sys_timer_usleep( fps60 * 60 * 2 );

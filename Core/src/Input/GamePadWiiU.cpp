@@ -3,9 +3,11 @@
 #include <cafe/pad.h>
 #include <cafe/vpad.h>
 #include <cafe/wenc.h>
-#include <cafe/pads/wpad/wpad.h>
+//#include <cafe/pads/wpad/wpad.h>
+#include <cafe/pads/kpad/kpad.h>
 
 #include <Utility/Error.h>
+#include <Utility/Log.h>
 
 GamePadState PAD_STATE[ PAD_MAX_CONTROLLERS ];
 
@@ -14,6 +16,10 @@ s32 readLength;
 bool vpadConnected;
 bool anythingElseConnected;
 
+KPADStatus kpadStatus[ WPAD_MAX_CONTROLLERS ];
+s32 kpadReadLength[ WPAD_MAX_CONTROLLERS ];
+bool kpadIsConnected[ WPAD_MAX_CONTROLLERS ];
+
 static void ConnectCallback( s32 chan, s32 reason )
 {
 	if( reason >= 0 )
@@ -21,19 +27,43 @@ static void ConnectCallback( s32 chan, s32 reason )
 		WPADSetDataFormat( chan, WPAD_FMT_CORE );
 		WPADControlSpeaker( chan, WPAD_SPEAKER_OFF, NULL );
 		WPADControlDpd( chan, WPAD_DPD_OFF, NULL );
+		kpadIsConnected[ chan ] = true;
+		LOG.Write( "Gamepad connected\n" );
+	}
+	else if( reason == WPAD_ERR_NO_CONTROLLER )
+	{
+		kpadIsConnected[ chan ] = false;
+		LOG.Write( "Gamepad disconnected\n" );
 	}
 }
+
+/*int kpadConnectHistory[ WPAD_MAX_CONTROLLERS ];
+int vpadConnectHistory;
+const int disconnectThreshold = 30;*/
 
 void GamePad::Initialize()
 {
 	PADInit();
-	WPADInit();
+	KPADInit();
+
+	for( int i = 0; i < WPAD_MAX_CONTROLLERS; ++i )
+		KPADSetConnectCallback( i, ConnectCallback );
+	/*WPADInit();
 
 	for( int i = 0; i < WPAD_MAX_CONTROLLERS; i++ )
-		WPADSetConnectCallback( i, ConnectCallback );
+		WPADSetConnectCallback( i, ConnectCallback );*/
 
 	memset( &vpadStatus, 0, sizeof( VPADStatus ) );
 	vpadConnected = true;
+	readLength = 0;
+
+	memset( kpadStatus, 0, sizeof( kpadStatus ) );
+	memset( kpadReadLength, 0, sizeof( kpadReadLength ) );
+	memset( kpadIsConnected, 0, sizeof( kpadIsConnected ) );
+
+	/*for( int i = 0; i < WPAD_MAX_CONTROLLERS; ++i )
+		kpadConnectHistory[ i ] = disconnectThreshold;
+	vpadConnectHistory = disconnectThreshold;*/
 }
 
 void GamePad::Update()
@@ -44,12 +74,47 @@ void GamePad::Update()
 		PAD_STATE[ i ].Type = GamePadState::ControllerType_Standard;
 
 	// Is anything else other than the vpad connected?
-	bool anythingElseConnected = false;
+	anythingElseConnected = false;
 
 	// Update Wiimotes.
-	for( int i = 0; i < __min( WPAD_MAX_CONTROLLERS, WPAD_MAX_CONTROLLERS ); i++ )
+	for( int i = 0; i < WPAD_MAX_CONTROLLERS; i++ )
 	{
-		u32 type;
+		kpadReadLength[ i ] = KPADRead( i, &kpadStatus[ i ], 1 );
+
+		PAD_STATE[ i ].IsConnected = kpadIsConnected[ i ];// kpadConnectHistory[ i ] < disconnectThreshold;
+		
+		if( !kpadIsConnected[ i ] )
+			continue;
+		/*if( kpadReadLength[ i ] == 0 )
+		{
+			++kpadConnectHistory[ i ];
+			continue;
+		}*/
+
+		anythingElseConnected = true;
+
+		if( kpadStatus[ i ].wpad_err == WPAD_ERR_CORRUPTED )
+			continue;
+		
+		//kpadConnectHistory[ i ] = 0;
+
+		PAD_STATE[ i ].Buttons.A = ( kpadStatus[ i ].hold & KPAD_BUTTON_2 ) ? ButtonState_Pressed : ButtonState_Released;
+		PAD_STATE[ i ].Buttons.B = ( kpadStatus[ i ].hold & KPAD_BUTTON_1 ) ? ButtonState_Pressed : ButtonState_Released;
+		PAD_STATE[ i ].Buttons.X = ( kpadStatus[ i ].hold & KPAD_BUTTON_B ) ? ButtonState_Pressed : ButtonState_Released;
+		PAD_STATE[ i ].Buttons.Y = ( kpadStatus[ i ].hold & KPAD_BUTTON_A
+									|| kpadStatus[ i ].hold & KPAD_BUTTON_MINUS ) ? ButtonState_Pressed : ButtonState_Released;
+
+		PAD_STATE[ i ].Buttons.Start = ( kpadStatus[ i ].hold & KPAD_BUTTON_PLUS ) ? ButtonState_Pressed : ButtonState_Released;
+
+		PAD_STATE[ i ].DPad.Down = ( kpadStatus[ i ].hold & KPAD_BUTTON_LEFT ) ? ButtonState_Pressed : ButtonState_Released;
+		PAD_STATE[ i ].DPad.Left = ( kpadStatus[ i ].hold & KPAD_BUTTON_UP ) ? ButtonState_Pressed : ButtonState_Released;
+		PAD_STATE[ i ].DPad.Right = ( kpadStatus[ i ].hold & KPAD_BUTTON_DOWN ) ? ButtonState_Pressed : ButtonState_Released;
+		PAD_STATE[ i ].DPad.Up = ( kpadStatus[ i ].hold & KPAD_BUTTON_RIGHT ) ? ButtonState_Pressed : ButtonState_Released;
+
+		if( PAD_STATE[ i ].Buttons.A || PAD_STATE[ i ].Buttons.B || PAD_STATE[ i ].Buttons.X || PAD_STATE[ i ].Buttons.Y )
+			PAD_STATE[ i ].Type = GamePadState::ControllerType_Mini;
+
+		/*u32 type;
 		s32 status = WPADProbe( i, &type );
 
 		if( status != WPAD_ERR_NO_CONTROLLER )
@@ -63,8 +128,7 @@ void GamePad::Update()
 
 			anythingElseConnected = true;
 
-			if( /*cr.err == WPAD_ERR_NONE
-				|| */cr.err == WPAD_ERR_CORRUPTED )
+			if( cr.err == WPAD_ERR_CORRUPTED )
 				continue;
 
 			
@@ -85,7 +149,7 @@ void GamePad::Update()
 
 			if( PAD_STATE[ i ].Buttons.A || PAD_STATE[ i ].Buttons.B || PAD_STATE[ i ].Buttons.X || PAD_STATE[ i ].Buttons.Y )
 				PAD_STATE[ i ].Type = GamePadState::ControllerType_Mini;
-		}
+		}*/
 	}
 
 	// Update gamepad.
@@ -96,10 +160,14 @@ void GamePad::Update()
 
 	for( int i = 0; i < PAD_MAX_CONTROLLERS; ++i )
 	{
-		if( status[ i ].err == PAD_ERR_NO_CONTROLLER
-			&& status[ i ].err == PAD_ERR_NOT_READY )
+		if( status[ i ].err == PAD_ERR_NO_CONTROLLER )
 		{
-			PAD_STATE[ i ].IsConnected = false;
+			continue;
+		}
+
+		if( status[ i ].err == PAD_ERR_NOT_READY
+			|| status[ i ].err == PAD_ERR_TRANSFER )
+		{
 			continue;
 		}
 
@@ -138,6 +206,11 @@ void GamePad::Update()
 	{
 		readLength = VPADRead( VPADBASE_CHAN0 + i, &vpadStatus, 1, &error );
 
+		bool wasConnected = PAD_STATE[ i ].IsConnected;
+		PAD_STATE[ i ].IsConnected = true;
+		if( error == VPAD_READ_ERR_NO_CONTROLLER )
+			PAD_STATE[ i ].IsConnected = wasConnected;
+
 		if( error == VPAD_READ_ERR_NONE )
 		{
 			vpadConnected = true;
@@ -170,14 +243,12 @@ void GamePad::Update()
 			PAD_STATE[ i ].ThumbSticks.Left = Vector2( vpadStatus.lStick.x, vpadStatus.lStick.y );
 			PAD_STATE[ i ].ThumbSticks.Right = Vector2( vpadStatus.lStick.x, vpadStatus.lStick.y );
 		}
-		else if( error == VPAD_READ_ERR_NO_CONTROLLER && vpadConnected == true /*&& !anythingElseConnected*/ )
+		else if( error == VPAD_READ_ERR_NO_CONTROLLER && vpadConnected == true/* && !anythingElseConnected*/ )
 		{
 			// Only show error if nothing is connected to the WiiU.
-
 			vpadConnected = false;
-
 			// Unable to communicate with the WiiU gamepad.
-			DisplayError( ErrorType( 1650101 ) );
+			//DisplayError( ErrorType( 1650101 ) );
 		}
 	}
 }

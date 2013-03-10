@@ -25,6 +25,7 @@
 #include <nn/erreula.h>
 #include "videorender.h"
 
+
 // --------- GX2 Data ---------
 
 GX2Texture      g_LTexture[2];
@@ -54,6 +55,9 @@ static GX2Sampler g_Sampler;
 static char *GSHFileName = "/vol/content/0010/Shaders/nv12decode.gsh";
 // Uniform inputs
 static s32 g_Mode[4] = {0, 0, 0, 0};
+
+static DEMOGfxShader s_PlainScreenTextureShader;
+static char *PlainGSHScreenTexturePath = "/vol/content/0010/Shaders/screen_texture.gsh";
 
 
 // The initialization function for the rendering portions of this sample.
@@ -104,6 +108,23 @@ void InitShader()
     // Initialize fetch Shader
     DEMOGfxInitFetchShader(pShader);
 
+
+	// Set up plain screen texture shader.
+	pShader = &s_PlainScreenTextureShader;
+
+	pGshBuf = DEMOFSSimpleRead( PlainGSHScreenTexturePath, &len );
+	ASSERT( NULL != pGshBuf && "Unable to load shader file" );
+
+	DEMOGfxLoadShaders( pShader, 0, pGshBuf );
+	DEMOFree( pGshBuf );
+
+	DEMOGfxInitShaderAttribute( pShader, "a_position", attribBuffer, POS_OFFSET, GX2_ATTRIB_FORMAT_32_32_32_FLOAT );
+	DEMOGfxInitShaderAttribute( pShader, "a_texcoord", attribBuffer, TEXCOORD_OFFSET, GX2_ATTRIB_FORMAT_32_32_FLOAT );
+
+	DEMOGfxGetPixelShaderSamplerLocation( pShader, "s_texture" );
+
+	DEMOGfxInitFetchShader( pShader );
+
     // Should call for mips
     GX2InitSampler(&g_Sampler,
                    GX2_TEX_CLAMP_CLAMP,
@@ -119,6 +140,7 @@ void InitShader()
 void FreeShader()
 {
     DEMOGfxFreeShaders(&s_Shader);
+	DEMOGfxFreeShaders( &s_PlainScreenTextureShader );
 }
 
 void InitVideoBuffer(s32 dest, u16 width, u16 height)
@@ -188,6 +210,31 @@ void FreeAttribData()
     DEMOGfxFreeMEM2(pAttribData->pVertexBuffer);
 }
 
+void drawDRCTextureFrame( GX2Texture *texture )
+{
+	u32 attribBuffer = 0;
+
+    // Set Attrib buffer
+    GX2SetAttribBuffer( attribBuffer,
+                        g_QuadAttribData.vertexSize,
+                        g_QuadAttribData.vertexStride,
+                        g_QuadAttribData.pVertexBuffer );
+
+    // This call with set all shaders.
+    GX2SetShaders( &s_PlainScreenTextureShader.fetchShader,
+                    s_PlainScreenTextureShader.pVertexShader,
+                    s_PlainScreenTextureShader.pPixelShader);
+
+    // Set L Texture and sampler
+    GX2SetPixelTexture( texture, s_PlainScreenTextureShader.samplersPS.location[0] );
+    GX2SetPixelSampler( &g_Sampler, s_PlainScreenTextureShader.samplersPS.location[0] );
+
+    // Draw
+    GX2Draw( GX2_PRIMITIVE_TRIANGLE_STRIP, g_QuadAttribData.vertexCount );
+
+    return;
+}
+
 // Subtitles drawing function pointer from VideoPlayerWiiU.cpp.
 extern void (*DrawSubtitles)();
 
@@ -199,6 +246,15 @@ void drawTVFrame()
     // DEMOGfxBeforeRender and DEMOGfxDoneRender before and after drawing.
     // This function waits for the previous flip to complete.
     DEMOGfxBeforeRender();
+
+	if( DEMODRCGetStatus() != GX2_DRC_NONE )
+	{
+		DEMODRCBeforeRender();
+
+		drawDRCFrame();
+
+		DEMODRCDoneRender();
+	}
 
     GX2ClearColor(&DEMOColorBuffer, 0.0f, 0.3, 0.45, 1.0f);
     GX2ClearDepthStencil(&DEMODepthBuffer, GX2_CLEAR_BOTH);
@@ -288,11 +344,11 @@ void drawDRCFrame()
                    s_Shader.pPixelShader);
 
     // Set L Texture and sampler
-    GX2SetPixelTexture(&g_LTexture[1], s_Shader.samplersPS.location[0]);
+    GX2SetPixelTexture(&g_LTexture[0], s_Shader.samplersPS.location[0]);
     GX2SetPixelSampler(&g_Sampler, s_Shader.samplersPS.location[0]);
 
     // Set UV Texture and sampler
-    GX2SetPixelTexture(&g_UVTexture[1], s_Shader.samplersPS.location[1]);
+    GX2SetPixelTexture(&g_UVTexture[0], s_Shader.samplersPS.location[1]);
     GX2SetPixelSampler(&g_Sampler, s_Shader.samplersPS.location[1]);
 
      // Set pixel shader uniform register
@@ -301,6 +357,19 @@ void drawDRCFrame()
     // Draw
     GX2Draw(GX2_PRIMITIVE_TRIANGLE_STRIP, g_QuadAttribData.vertexCount);
 
+	if( DrawSubtitles )
+		DrawSubtitles();
+
+	GX2SurfaceFormat f = DEMODRCColorBuffer.surface.format;
+	DEMODRCColorBuffer.surface.format = static_cast< GX2SurfaceFormat >( f | 0x00000400 );
+	GX2InitColorBufferRegs( &DEMODRCColorBuffer );
+	GX2SetColorBuffer( &DEMODRCColorBuffer, GX2_RENDER_TARGET_0 );
+
+	nn::erreula::DrawDRC();
+
+	DEMOColorBuffer.surface.format = f;
+	GX2InitColorBufferRegs( &DEMODRCColorBuffer );
+	GX2SetColorBuffer( &DEMODRCColorBuffer, GX2_RENDER_TARGET_0 );
     // This function will copy presenting the rendered buffer to the drc screen buffer
     // Need to call DEMOGfxDoneRender for swapping after this.
 //    DEMODRCDoneRender();

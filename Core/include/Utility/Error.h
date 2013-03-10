@@ -23,6 +23,7 @@
 			DEFAULT,
 			YESNO,
 			OK,
+			NONE
 		};
 
 		// If this method returns true, the error dialog will be closed.
@@ -36,9 +37,10 @@
 		std::string	message_;
 		bool		fatal_;
 		MessageType	messageType_;
-		InputType inputType_;
+		InputType	inputType_;
 		AutoCloseCallback	autoClose_;
 		CompleteCallback	complete_;
+		void *		userData_;
 
 	public:
 		ErrorType( int code, CompleteCallback complete = NULL, InputType inputType = DEFAULT, AutoCloseCallback autoClose = NULL, bool fatal = false )
@@ -48,6 +50,7 @@
 			, inputType_( inputType )
 			, autoClose_( autoClose )
 			, complete_( complete )
+			, userData_( NULL )
 		{
 		}
 
@@ -59,6 +62,7 @@
 			, inputType_( inputType )
 			, autoClose_( autoClose )
 			, complete_( complete )
+			, userData_( NULL )
 		{
 		}
 
@@ -69,10 +73,18 @@
 		InputType GetInputType() const { return inputType_; }
 		AutoCloseCallback GetAutoClose() const { return autoClose_; }
 		CompleteCallback GetComplete() const { return complete_; }
+		void SetUserData( void *data ) { userData_ = data; }
+		void *GetUserData() const { return userData_; }
 	};
 #else
 typedef unsigned int ErrorType;
 #endif
+
+/// Initialize error subsystem.
+void InitializeErrorSystem();
+
+/// Shutdown error system.
+void ShutdownErrorSystem();
 
 /// Display a system error.
 /**

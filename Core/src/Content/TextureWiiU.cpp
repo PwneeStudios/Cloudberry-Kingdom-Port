@@ -14,20 +14,14 @@ TextureWiiU::TextureWiiU() :
 
 TextureWiiU::~TextureWiiU()
 {
+	if( internal_->Buffer )
+		delete[] internal_->Buffer;
+
 	delete internal_;
 }
 
 void TextureWiiU::Load()
 {
-}
-
-void TextureWiiU::Unload()
-{
-}
-
-void TextureWiiU::GpuCreate()
-{
-	BOOL ok;
 	u32 len;
 
 	std::string path = GetPath();
@@ -41,12 +35,30 @@ void TextureWiiU::GpuCreate()
 	}
 
 	boost::shared_ptr<File> file = FILESYSTEM.Open( path );
-	char *buf = new char[ file->Size() ];
-	file->Read( buf, file->Size() );
 
-	ok = DEMOGFDReadTexture( &internal_->Texture, 0, buf );
+	if( file->IsOpen() )
+	{
+		internal_->Buffer = new char[ file->Size() ];
+		file->Read( internal_->Buffer, file->Size() );
 
-	delete[] buf;
+		setLoaded( true );
+	}
+	else
+		setLoaded( false );
+}
+
+void TextureWiiU::Unload()
+{
+}
+
+void TextureWiiU::GpuCreate()
+{
+	BOOL ok;
+	
+	ok = DEMOGFDReadTexture( &internal_->Texture, 0, internal_->Buffer );
+
+	delete[] internal_->Buffer;
+	internal_->Buffer = NULL;
 
 	if( ok )
 		setLoaded( true );

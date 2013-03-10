@@ -6,6 +6,7 @@
 #include "Hacks/NET/File.h"
 #include "Hacks/NET/Path.h"
 #include "Hacks/FileReader.h"
+#include <Utility/ConsoleInformation.h>
 
 #ifdef PS3
 #include <Content/Texture.h>
@@ -212,6 +213,42 @@ namespace CloudberryKingdom
 			}
         }
 
+		ConsoleLanguage errorLanguage = ConsoleLanguage_ENGLISH;
+		switch( SelectedLanguage )
+		{
+		case Language_ENGLISH:
+			errorLanguage = ConsoleLanguage_ENGLISH;
+			break;
+		case Language_JAPANESE:
+			errorLanguage = ConsoleLanguage_JAPANESE;
+			break;
+		case Language_GERMAN:
+			errorLanguage = ConsoleLanguage_GERMAN;
+			break;
+		case Language_PORTUGUESE:
+			errorLanguage = ConsoleLanguage_PORTUGUESE;
+			break;
+		case Language_ITALIAN:
+			errorLanguage = ConsoleLanguage_ITALIAN;
+			break;
+		case Language_FRENCH:
+			errorLanguage = ConsoleLanguage_FRENCH;
+			break;
+		case Language_SPANISH:
+			errorLanguage = ConsoleLanguage_SPANISH;
+			break;
+		case Language_RUSSIAN:
+			errorLanguage = ConsoleLanguage_RUSSIAN;
+			break;
+		case Language_KOREAN:
+			errorLanguage = ConsoleLanguage_KOREAN;
+			break;
+		case Language_CHINESE:
+			errorLanguage = ConsoleLanguage_CHINESE;
+			break;
+		}
+		SetErrorLanguage( errorLanguage );
+
 #ifdef PS3
 		GLOBAL_DISCONNECT_MESSAGE = WstringToUtf8( WordString( Words_Err_PS3_NoGamePadDetected ) );
 #endif
@@ -235,7 +272,7 @@ namespace CloudberryKingdom
 		Languages.insert( std::make_pair( Language_KOREAN, boost::make_shared<LanguageInfo>( Language_KOREAN, std::wstring( L"Korean" ), std::wstring( L"Korean" ) ) ) );
 		Languages.insert( std::make_pair( Language_PORTUGUESE, boost::make_shared<LanguageInfo>( Language_PORTUGUESE, std::wstring( L"Portuguese" ), std::wstring( L"Western" ) ) ) );
 		Languages.insert( std::make_pair( Language_RUSSIAN, boost::make_shared<LanguageInfo>( Language_RUSSIAN, std::wstring( L"Russian" ), std::wstring( L"Western" ) ) ) );
-		Languages.insert( std::make_pair( Language_SPANISH, boost::make_shared<LanguageInfo>( Language_SPANISH, std::wstring( L"English" ), std::wstring( L"Western" ) ) ) );
+		Languages.insert( std::make_pair( Language_SPANISH, boost::make_shared<LanguageInfo>( Language_SPANISH, std::wstring( L"Spanish" ), std::wstring( L"Western" ) ) ) );
 
 		std::wstring path = Path::Combine( Content->RootDirectory, Path::Combine( std::wstring( L"Localization" ), std::wstring( L"LocalizationCpp.tsv" ) ) );
 		ReadTranslationGrid( path );
@@ -277,7 +314,10 @@ namespace CloudberryKingdom
 
 	void Localization::ReadSubtitleInfo( const std::wstring &VideoName )
 	{
+		// FIXME: THIS IS WHERE VIDEOS WITH NO SUBTITLES GO.
 		if( VideoName == L"LogoSalad" )
+			return;
+		else if( VideoName == L"LogoSalad_ESRB" )
 			return;
 		else if( VideoName == L"Credits" )
 			return;

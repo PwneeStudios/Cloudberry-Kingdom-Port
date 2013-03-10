@@ -5,12 +5,9 @@
 #include <Content/Texture.h>
 #include <Content/TextureWiiUInternal.h>
 
-struct RenderTarget2DInternal
-{
-	GX2ColorBuffer ColorBuffer;
-	Texture *RTTexture;
-	ResourceHolder Holder;
-};
+#include "RenderTarget2DWiiUInternal.h"
+
+std::vector< RenderTarget2DInternal * > GlobalRenderTargets;
 
 RenderTarget2D::RenderTarget2D( const boost::shared_ptr<GraphicsDevice> &device, int width, int height, bool mipmap, int surfaceFormat, int depthFormat, int sampleCount, bool discard )
 	: Texture2D( device, width, height )
@@ -40,12 +37,17 @@ RenderTarget2D::RenderTarget2D( const boost::shared_ptr<GraphicsDevice> &device,
 
 	internal_->Holder = internal_->RTTexture;
 	texture_ = ResourcePtr< Texture >( &internal_->Holder );
+
+	GlobalRenderTargets.push_back( internal_ );
 }
 
 static RenderTarget2DInternal *LastRT = 0;
 
 RenderTarget2D::~RenderTarget2D()
 {
+	std::vector< RenderTarget2DInternal * >::iterator i;
+	i = std::find( GlobalRenderTargets.begin(), GlobalRenderTargets.end(), internal_ );
+
 	if( LastRT == internal_ )
 		LastRT = 0;
 
@@ -82,6 +84,8 @@ void RenderTarget2D::Set()
 	LastRT = internal_;
 }
 
+extern GX2ColorBuffer TheColorBuffer;
+
 void RenderTarget2D::SetDefault()
 {
 	if( LastRT )
@@ -95,19 +99,23 @@ void RenderTarget2D::SetDefault()
 		LastRT = 0;
 	}
 
-	int width = DEMOColorBuffer.surface.width;
-	int height = DEMOColorBuffer.surface.height;
+	int width = TheColorBuffer.surface.width;
+	int height = TheColorBuffer.surface.height;
 
-	GX2SetColorBuffer( &DEMOColorBuffer, GX2_RENDER_TARGET_0 );
+	GX2SetColorBuffer( &TheColorBuffer, GX2_RENDER_TARGET_0 );
 	GX2SetDepthBuffer( &DEMODepthBuffer );
 	GX2SetViewport( 0.f, 0.f,
 		static_cast< float >( width ), static_cast< float >( height ),
 		0.f, 1.f );
 	GX2SetScissor( 0, 0, width, height );
 
+	GX2SetDepthOnlyControl( GX2_FALSE, GX2_FALSE, GX2_COMPARE_ALWAYS );
+			GX2SetColorControl( GX2_LOGIC_OP_COPY, 0x1, GX2_DISABLE, GX2_ENABLE );
 	GX2SetBlendControl( GX2_RENDER_TARGET_0,
 		GX2_BLEND_ONE, GX2_BLEND_ONE_MINUS_SRC_ALPHA, GX2_BLEND_COMBINE_ADD,
 		GX2_TRUE, GX2_BLEND_ONE, GX2_BLEND_ONE_MINUS_SRC_ALPHA, GX2_BLEND_COMBINE_ADD );
+
+	DEMOGfxSetContextState();
 }
 
 void RenderTarget2D::Clear( float r, float g, float b, float a )

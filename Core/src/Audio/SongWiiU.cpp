@@ -49,7 +49,8 @@ public:
 		std::string internalPath = "/vol/content/0010/" + path_;
 
 		FMOD_RESULT result;
-		result = FMODSystem->createStream( internalPath.c_str(), FMOD_OPENONLY, 0, &internal_->Song );
+		//result = FMODSystem->createStream( internalPath.c_str(), FMOD_OPENONLY, 0, &internal_->Song );
+		result = FMOD_System_CreateStream( FMODSystem, internalPath.c_str(), FMOD_OPENONLY, 0, &internal_->Song );
 		if( result != FMOD_OK )
 		{
 			LOG.Write( "Failed to load song: %s\n", internalPath.c_str() );
@@ -101,7 +102,8 @@ void Song::Load( const std::string &path )
 	std::string internalPath = "/vol/content/0010/" + path;
 
 	FMOD_RESULT result;
-	result = FMODSystem->createStream( internalPath.c_str(), FMOD_NONBLOCKING, 0, &internal_->Song );
+	//result = FMODSystem->createStream( internalPath.c_str(), FMOD_NONBLOCKING, 0, &internal_->Song );
+	result = FMOD_System_CreateStream( FMODSystem, internalPath.c_str(), FMOD_NONBLOCKING, 0, &internal_->Song );
 	if( result != FMOD_OK )
 	{
 		LOG.Write( "Failed to load song: %s\n", internalPath.c_str() );
