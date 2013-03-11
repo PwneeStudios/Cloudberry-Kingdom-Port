@@ -12,9 +12,9 @@ namespace CloudberryKingdom
 	boost::shared_ptr<PressNote> PressNote::PressNote_Construct( const boost::shared_ptr<Door> &Parent )
 	{
 #if defined(PC_VERSION)
-		GUI_Text_Construct( Format( Localization::WordString( Localization::Words_Press ).c_str(), ButtonString::Up( ButtonScale ) ), Parent->getPos(), true );
+		GUI_Text_Construct( Format( Localization::WordString( Localization::Words_Press ).c_str(), ButtonString::Up( ButtonScale ).c_str() ), Parent->getPos(), true );
 #else
-		GUI_Text_Construct( Format( Localization::WordString( Localization::Words_Press ).c_str(), ButtonString::X( ButtonScale ) ), Parent->getPos(), true );
+		GUI_Text_Construct( Format( Localization::WordString( Localization::Words_Press ).c_str(), ButtonString::X( ButtonScale ).c_str() ), Parent->getPos(), true );
 #endif
 
 		Life = 0;

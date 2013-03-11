@@ -300,6 +300,97 @@ namespace CloudberryKingdom
 #if defined(PC_VERSION)
 	void SimpleMenu::SetPos()
 	{
+		boost::shared_ptr<MenuItem> _item;
+
+        _item = MyMenu->FindItemByName( L"Custom" ); if (_item != 0 ) { _item->setSetPos( Vector2( 0, -87.88895f ) ); _item->MyText->setScale( 0.6731667f ); _item->MySelectedText->setScale( 0.6731667f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+        _item = MyMenu->FindItemByName( L"Random" ); if (_item != 0 ) { _item->setSetPos( Vector2( 0, -263.4445f ) ); _item->MyText->setScale( 0.6948333f ); _item->MySelectedText->setScale( 0.6948333f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+        _item = MyMenu->FindItemByName( L"Done" ); if (_item != 0 ) { _item->setSetPos( Vector2( 0, -441.7778f ) ); _item->MyText->setScale( 0.6962501f ); _item->MySelectedText->setScale( 0.6962501f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+
+		MyMenu->setPos( Vector2( 0, 0 ) );
+		MyPile->setPos( Vector2( 0, 0 ) );
+
+		CharacterSelect::Shift( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+	}
+#endif
+
+#if ! defined(PC_VERSION)
+	SimpleMenu::SimpleMenu( int Control, const boost::shared_ptr<CharacterSelect> &Parent ) : SimpleMenuBase( Control, Parent ) { }
+	boost::shared_ptr<SimpleMenu> SimpleMenu::SimpleMenu_Construct( int Control, const boost::shared_ptr<CharacterSelect> &Parent )
+	{
+		SimpleMenuBase::SimpleMenuBase_Construct( Control, Parent );
+
+		return boost::static_pointer_cast<SimpleMenu>( shared_from_this() );
+	}
+#endif
+
+#if ! defined(PC_VERSION)
+	void SimpleMenu::Init()
+	{
+		SimpleMenuBase::Init();
+
+		SlideInLength = 0;
+		SlideOutLength = 0;
+		CallDelay = 0;
+		ReturnToCallerDelay = 0;
+
+		MyPile = boost::make_shared<DrawPile>();
+
+		ItemFont = Resources::Font_Grobold42;
+		FontScale = .66f;
+
+		int ButtonSize = 95;
+
+		std::wstring Space = std::wstring( L"{s34,0}" );
+		float Shift = 25;
+
+		boost::shared_ptr<QuadClass> q;
+
+		// Press A to continue
+        q = boost::make_shared<QuadClass>( ButtonTexture::getGo() );
+        MyPile->Add(q, L"go");
+
+		boost::shared_ptr<EzText> ContinueText = boost::make_shared<EzText>( Localization::Words_Continue, ItemFont, true, true );
+		ContinueText->setScale( this->FontScale );
+		ContinueText->ShadowOffset = Vector2( 7.5f, 7.5f );
+		ContinueText->ShadowColor = Color( static_cast<unsigned char>( 30 ), static_cast<unsigned char>( 30 ), static_cast<unsigned char>( 30 ) );
+		ContinueText->ColorizePics = true;
+		ContinueText->setPos( Vector2( 23.09587f + Shift, -386.9842f ) );
+
+		MyPile->Add( ContinueText, std::wstring( L"A" ) );
+
+		// Press Y to customize
+        q = boost::make_shared<QuadClass>( ButtonTexture::getY() );
+        MyPile->Add(q, L"y");
+
+		boost::shared_ptr<EzText> CustomizeText = boost::make_shared<EzText>( Localization::Words_Custom, ItemFont, true, true );
+		CustomizeText->setScale( this->FontScale );
+		CustomizeText->ShadowOffset = Vector2( 7.5f, 7.5f );
+		CustomizeText->ShadowColor = Color( static_cast<unsigned char>( 30 ), static_cast<unsigned char>( 30 ), static_cast<unsigned char>( 30 ) );
+		CustomizeText->ColorizePics = true;
+		CustomizeText->setPos( Vector2( 105.2387f + Shift, -611.9048f ) );
+
+		MyPile->Add( CustomizeText, std::wstring( L"Y" ) );
+
+		// Press X to randomize
+        q = boost::make_shared<QuadClass>( ButtonTexture::getX() );
+        MyPile->Add(q, L"x");
+
+		boost::shared_ptr<EzText> RandomText = boost::make_shared<EzText>( Localization::Words_Random, ItemFont, true, true );
+		RandomText->setScale( this->FontScale );
+		RandomText->ShadowOffset = Vector2( 7.5f, 7.5f );
+		RandomText->ShadowColor = Color( static_cast<unsigned char>( 30 ), static_cast<unsigned char>( 30 ), static_cast<unsigned char>( 30 ) );
+		RandomText->ColorizePics = true;
+		RandomText->setPos( Vector2( 69.52449f + Shift, -835.7142f ) );
+
+		MyPile->Add( RandomText, std::wstring( L"X" ) );
+
+		SetPos();
+	}
+#endif
+
+#if ! defined(PC_VERSION)
+	void SimpleMenu::SetPos()
+	{
 			if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_CHINESE )
 			{
 				boost::shared_ptr<EzText> _t;
@@ -420,98 +511,6 @@ namespace CloudberryKingdom
 				_q = MyPile->FindQuad( L"y" ); if (_q != 0 ) { _q->setPos( Vector2(-261.1111f, -302.7778f ) ); _q->setSize( Vector2( 67.6666f, 67.6666f ) ); }
 				_q = MyPile->FindQuad( L"x" ); if (_q != 0 ) { _q->setPos( Vector2(-261.1111f, -461.1111f ) ); _q->setSize( Vector2( 67.6666f, 67.6666f ) ); }
 			}
-
-		CharacterSelect::Shift( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
-	}
-#endif
-
-#if ! defined(PC_VERSION)
-	SimpleMenu::SimpleMenu( int Control, const boost::shared_ptr<CharacterSelect> &Parent ) : SimpleMenuBase( Control, Parent ) { }
-	boost::shared_ptr<SimpleMenu> SimpleMenu::SimpleMenu_Construct( int Control, const boost::shared_ptr<CharacterSelect> &Parent )
-	{
-		SimpleMenuBase::SimpleMenuBase_Construct( Control, Parent );
-
-		return boost::static_pointer_cast<SimpleMenu>( shared_from_this() );
-	}
-#endif
-
-#if ! defined(PC_VERSION)
-	void SimpleMenu::Init()
-	{
-		SimpleMenuBase::Init();
-
-		SlideInLength = 0;
-		SlideOutLength = 0;
-		CallDelay = 0;
-		ReturnToCallerDelay = 0;
-
-		MyPile = boost::make_shared<DrawPile>();
-
-		ItemFont = Resources::Font_Grobold42;
-		FontScale = .66f;
-
-		int ButtonSize = 95;
-
-		std::wstring Space = std::wstring( L"{s34,0}" );
-		float Shift = 25;
-
-		boost::shared_ptr<QuadClass> q;
-
-		// Press A to continue
-        q = boost::make_shared<QuadClass>( ButtonTexture::getGo() );
-        MyPile->Add(q, L"go");
-
-		boost::shared_ptr<EzText> ContinueText = boost::make_shared<EzText>( Localization::Words_Continue, ItemFont, true, true );
-		ContinueText->setScale( this->FontScale );
-		ContinueText->ShadowOffset = Vector2( 7.5f, 7.5f );
-		ContinueText->ShadowColor = Color( static_cast<unsigned char>( 30 ), static_cast<unsigned char>( 30 ), static_cast<unsigned char>( 30 ) );
-		ContinueText->ColorizePics = true;
-		ContinueText->setPos( Vector2( 23.09587f + Shift, -386.9842f ) );
-
-		MyPile->Add( ContinueText, std::wstring( L"A" ) );
-
-		// Press Y to customize
-        q = boost::make_shared<QuadClass>( ButtonTexture::getY() );
-        MyPile->Add(q, L"y");
-
-		boost::shared_ptr<EzText> CustomizeText = boost::make_shared<EzText>( Localization::Words_Custom, ItemFont, true, true );
-		CustomizeText->setScale( this->FontScale );
-		CustomizeText->ShadowOffset = Vector2( 7.5f, 7.5f );
-		CustomizeText->ShadowColor = Color( static_cast<unsigned char>( 30 ), static_cast<unsigned char>( 30 ), static_cast<unsigned char>( 30 ) );
-		CustomizeText->ColorizePics = true;
-		CustomizeText->setPos( Vector2( 105.2387f + Shift, -611.9048f ) );
-
-		MyPile->Add( CustomizeText, std::wstring( L"Y" ) );
-
-		// Press X to randomize
-        q = boost::make_shared<QuadClass>( ButtonTexture::getX() );
-        MyPile->Add(q, L"x");
-
-		boost::shared_ptr<EzText> RandomText = boost::make_shared<EzText>( Localization::Words_Random, ItemFont, true, true );
-		RandomText->setScale( this->FontScale );
-		RandomText->ShadowOffset = Vector2( 7.5f, 7.5f );
-		RandomText->ShadowColor = Color( static_cast<unsigned char>( 30 ), static_cast<unsigned char>( 30 ), static_cast<unsigned char>( 30 ) );
-		RandomText->ColorizePics = true;
-		RandomText->setPos( Vector2( 69.52449f + Shift, -835.7142f ) );
-
-		MyPile->Add( RandomText, std::wstring( L"X" ) );
-
-		SetPos();
-	}
-#endif
-
-#if ! defined(PC_VERSION)
-	void SimpleMenu::SetPos()
-	{
-        boost::shared_ptr<EzText> _t;
-        _t = MyPile->FindEzText( L"A" ); if (_t != 0 ) { _t->setPos( Vector2( 78.6516f, -159.2064f ) ); _t->setScale( 0.5214169f ); }
-        _t = MyPile->FindEzText( L"Y" ); if (_t != 0 ) { _t->setPos( Vector2( 80.23858f, -323.016f ) ); _t->setScale( 0.5039168f ); }
-        _t = MyPile->FindEzText( L"X" ); if (_t != 0 ) { _t->setPos( Vector2( 80.63551f, -471.8254f ) ); _t->setScale( 0.5540001f ); }
-
-        boost::shared_ptr<QuadClass> _q;
-        _q = MyPile->FindQuad( L"go" ); if (_q != 0 ) { _q->setPos( Vector2(-261.1109f, -141.6667f ) ); _q->setSize( Vector2( 67.83331f, 67.83331f ) ); }
-        _q = MyPile->FindQuad( L"x" ); if (_q != 0 ) { _q->setPos( Vector2(-261.1112f, -461.1111f ) ); _q->setSize( Vector2( 63.41657f, 63.41657f ) ); }
-        _q = MyPile->FindQuad( L"y" ); if (_q != 0 ) { _q->setPos( Vector2(-263.8887f, -308.3333f ) ); _q->setSize( Vector2( 67.6666f, 67.6666f ) ); }
 
 		CharacterSelect::Shift( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 	}

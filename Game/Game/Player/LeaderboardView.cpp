@@ -145,7 +145,11 @@ namespace CloudberryKingdom
         boost::shared_ptr<MenuItem> item;
 
         // View Gamer
+#ifdef PS3
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_PS3_Profile, ItemFont ) ) );
+#else
         item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_ViewGamerCard, ItemFont ) ) );
+#endif
         item->Name = L"ViewGamer";
         item->JiggleOnGo = false;
         AddItem( item );
