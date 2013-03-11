@@ -1,10 +1,10 @@
 #include <global_header.h>
-
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
 namespace CloudberryKingdom
 {
 
-	bool SavedSeedsGUI::RefreshList = false;
+	int SavedSeedsGUI::LastSeedSave_TimeStamp = 0;
 
 	SavedSeedsGUI::PostMakeStandardLoadHelper::PostMakeStandardLoadHelper( const boost::shared_ptr<LevelSeedData> &seed )
 	{
@@ -144,11 +144,14 @@ namespace CloudberryKingdom
 #endif
 	}
 
-	SavedSeedsGUI::SavedSeedsGUI() { }
+	SavedSeedsGUI::SavedSeedsGUI()
+	{
+		MyInit_TimeStamp = 0;
+	}
 	boost::shared_ptr<SavedSeedsGUI> SavedSeedsGUI::SavedSeedsGUI_Construct()
 	{
 		CkBaseMenu::CkBaseMenu_Construct();
-
+		
 		//EnableBounce();
 
 		return boost::static_pointer_cast<SavedSeedsGUI>( shared_from_this() );
@@ -280,15 +283,21 @@ namespace CloudberryKingdom
 
 		SaveGroup::SaveAll();
 
-		//MyGame->WaitThenDo( 10, boost::make_shared<ReturnToCallerProxy>( boost::static_pointer_cast<SavedSeedsGUI>( shared_from_this() ) ) );
+		LastSeedSave_TimeStamp = Tools::DrawCount;
 		ReInit();
+
 		SlideOut( PresetPos_LEFT, 0 );
 		SlideInFrom = SlideOutTo = PresetPos_LEFT;
 	}
 
 	void SavedSeedsGUI::ReInit()
 	{
+		MyInit_TimeStamp = Tools::DrawCount;
+
+		boost::shared_ptr<FancyVector2> HoldPos = Pos;
 		Init();
+		Pos = HoldPos;
+
 		if ( bar != 0 )
 		{
 			bar->Release();
@@ -316,7 +325,7 @@ namespace CloudberryKingdom
             EnableBounce();
 		}
 
-		RefreshList = false;
+		MyInit_TimeStamp = Tools::DrawCount;
 
 		CkBaseMenu::Init();
 
@@ -400,10 +409,9 @@ else
 
 		if ( CoreData->Released || !Active ) return;
 
-		if ( RefreshList )
+		if ( MyInit_TimeStamp + 10 < LastSeedSave_TimeStamp )
 		{
 			ReInit();
-			RefreshList = false;
 		}
 
 		// Update "Confirm"
@@ -442,7 +450,7 @@ else
 		int num = NumSeedsToDelete();
 		if ( num > 0 )
 		{
-			boost::shared_ptr<VerifyDeleteSeeds> verify = MakeMagic( VerifyDeleteSeeds, ( getControl(), num ) );
+			boost::shared_ptr<VerifyDeleteSeeds> verify = MakeMagic( VerifyDeleteSeeds, ( getControl(), num, UseBounce ) );
 			verify->OnSelect->Add( boost::make_shared<DoDeletionProxy>( boost::static_pointer_cast<SavedSeedsGUI>( shared_from_this() ) ) );
 
 			SlideOutTo = PresetPos_LEFT;
@@ -493,9 +501,11 @@ else
 
 	void SavedSeedsGUI::SetPos()
 	{
+			boost::shared_ptr<MenuItem> _item;
+			boost::shared_ptr<QuadClass> _q;
+
 if ( ButtonCheck::ControllerInUse )
 {
-			boost::shared_ptr<MenuItem> _item;
 			_item = MyMenu->FindItemByName( L"Header" ); if (_item != 0 ) { _item->setSetPos( Vector2( 69.44482f, 955.5558f ) ); _item->MyText->setScale( 0.666f ); _item->MySelectedText->setScale( 0.666f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 			_item = MyMenu->FindItemByName( L"Load" ); if (_item != 0 ) { _item->setSetPos( Vector2( 736.1101f, 983.3332f ) ); _item->MyText->setScale( 0.4186335f ); _item->MySelectedText->setScale( 0.4186335f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 			_item = MyMenu->FindItemByName( L"Delete" ); if (_item != 0 ) { _item->setSetPos( Vector2( 741.6659f, 860.5553f ) ); _item->MyText->setScale( 0.3892168f ); _item->MySelectedText->setScale( 0.3892168f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
@@ -503,7 +513,6 @@ if ( ButtonCheck::ControllerInUse )
 
 			MyMenu->setPos( Vector2(-1016.667f, 0.f ) );
 
-			boost::shared_ptr<QuadClass> _q;
 			_q = MyPile->FindQuad( L"Button_A" ); if (_q != 0 ) { _q->setPos( Vector2( 658.3345f, 911.1108f ) ); _q->setSize( Vector2( 56.16665f, 56.16665f ) ); }
 			_q = MyPile->FindQuad( L"Button_X" ); if (_q != 0 ) { _q->setPos( Vector2( 661.1113f, 794.4444f ) ); _q->setSize( Vector2( 57.66665f, 57.66665f ) ); }
 			_q = MyPile->FindQuad( L"Button_B" ); if (_q != 0 ) { _q->setPos( Vector2( 663.8892f, 677.7778f ) ); _q->setSize( Vector2( 56.41664f, 56.41664f ) ); }
@@ -512,19 +521,28 @@ if ( ButtonCheck::ControllerInUse )
 			MyPile->setPos( Vector2( 0.f, 0.f ) );
 }
 else
-{
-			boost::shared_ptr<MenuItem> _item;
+{	
 			_item = MyMenu->FindItemByName( L"Header" ); if (_item != 0 ) { _item->setSetPos( Vector2( 88.88916f, 941.6669f ) ); _item->MyText->setScale( 0.666f ); _item->MySelectedText->setScale( 0.666f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 			_item = MyMenu->FindItemByName( L"Load" ); if (_item != 0 ) { _item->setSetPos( Vector2( 591.6653f, 988.889f ) ); _item->MyText->setScale( 0.3920501f ); _item->MySelectedText->setScale( 0.3920501f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 			_item = MyMenu->FindItemByName( L"Back" ); if (_item != 0 ) { _item->setSetPos( Vector2( 591.6661f, 893.8889f ) ); _item->MyText->setScale( 0.3935499f ); _item->MySelectedText->setScale( 0.3935499f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 
 			MyMenu->setPos( Vector2(-1016.667f, 0.f ) );
 
-			boost::shared_ptr<QuadClass> _q;
 			_q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2( 2.77771f, 22.22221f ) ); _q->setSize( Vector2( 1572.44f, 1572.44f ) ); }
 
 			MyPile->setPos( Vector2( 0.f, 0.f ) );
 }
+
+			// Extra squeeze
+			Vector2 squeeze = Vector2(-15, -18 ) * CloudberryKingdomGame::GuiSqueeze;
+
+			_item = MyMenu->FindItemByName( L"Load" ); if (_item != 0 ) { _item->setSetPos( _item->Pos + squeeze ); }
+			_item = MyMenu->FindItemByName( L"Delete" ); if (_item != 0 ) { _item->setSetPos( _item->Pos + squeeze ); }
+			_item = MyMenu->FindItemByName( L"Back" ); if (_item != 0 ) { _item->setSetPos( _item->Pos + squeeze ); }
+
+			_q = MyPile->FindQuad( L"Button_A" ); if (_q != 0 ) { _q->setPos( _q->getPos() + squeeze ); }
+			_q = MyPile->FindQuad( L"Button_X" ); if (_q != 0 ) { _q->setPos( _q->getPos() + squeeze ); }
+			_q = MyPile->FindQuad( L"Button_B" ); if (_q != 0 ) { _q->setPos( _q->getPos() + squeeze ); }
 	}
 
 	void SavedSeedsGUI::MakeList()

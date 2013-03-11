@@ -126,14 +126,20 @@ namespace CloudberryKingdom
 
         if (CallingOptionsMenu)
         {
-			if ( CloudberryKingdomGame::MainMenuType == MainMenuTypes_WiiU )
-			{
-				MyMenu->SelectItem( 3 );
-			}
-			else
-			{
-				MyMenu->SelectItem( 4 );
-			}
+				MyMenu->ReadyToPlaySound = false;
+				if ( CloudberryKingdomGame::MainMenuType == MainMenuTypes_WiiU )
+				{
+					MyMenu->SelectItem(3);
+				}
+				else if ( CloudberryKingdomGame::MainMenuType == MainMenuTypes_Xbox )
+				{
+					MyMenu->SelectItem(3);
+				}
+				else
+				{
+					MyMenu->SelectItem(4);
+				}
+				MyMenu->ReadyToPlaySound = true;
 
             CallingOptionsMenu = false;
         }
@@ -220,18 +226,18 @@ namespace CloudberryKingdom
         BackBox->Quad_Renamed.SetColor( ColorHelper::Gray(.1f ));
         BackBox->setAlpha( .73f );
 
-        boost::shared_ptr<MenuItem> _item;
-        _item = MyMenu->FindItemByName( L"Arcade" ); if (_item != 0 ) { _item->setSetPos( Vector2( 0, 365.5279f ) ); _item->MyText->setScale( 0.66f ); _item->MySelectedText->setScale( 0.66f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
-        _item = MyMenu->FindItemByName( L"Campaign" ); if (_item != 0 ) { _item->setSetPos( Vector2( 0, 160.3057f ) ); _item->MyText->setScale( 0.66f ); _item->MySelectedText->setScale( 0.66f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
-        _item = MyMenu->FindItemByName( L"Freeplay" ); if (_item != 0 ) { _item->setSetPos( Vector2( 0, -26.47217f ) ); _item->MyText->setScale( 0.66f ); _item->MySelectedText->setScale( 0.66f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
-        _item = MyMenu->FindItemByName( L"Options" ); if (_item != 0 ) { _item->setSetPos( Vector2( 0, -216.0278f ) ); _item->MyText->setScale( 0.66f ); _item->MySelectedText->setScale( 0.66f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
-        _item = MyMenu->FindItemByName( L"Exit" ); if (_item != 0 ) { _item->setSetPos( Vector2( 0, -419.1389f ) ); _item->MyText->setScale( 0.66f ); _item->MySelectedText->setScale( 0.66f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+			boost::shared_ptr<MenuItem> _item;
+			_item = MyMenu->FindItemByName( L"Arcade" ); if (_item != 0 ) { _item->setSetPos( Vector2( 0.f, 365.5279f ) ); _item->MyText->setScale( 0.6517504f ); _item->MySelectedText->setScale( 0.6517504f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+			_item = MyMenu->FindItemByName( L"Campaign" ); if (_item != 0 ) { _item->setSetPos( Vector2( 0.f, 174.1946f ) ); _item->MyText->setScale( 0.6517504f ); _item->MySelectedText->setScale( 0.6517504f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+			_item = MyMenu->FindItemByName( L"Freeplay" ); if (_item != 0 ) { _item->setSetPos( Vector2( 0.f, -17.1387f ) ); _item->MyText->setScale( 0.6517504f ); _item->MySelectedText->setScale( 0.6517504f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+			_item = MyMenu->FindItemByName( L"Options" ); if (_item != 0 ) { _item->setSetPos( Vector2( 0.f, -208.472f ) ); _item->MyText->setScale( 0.6517504f ); _item->MySelectedText->setScale( 0.6517504f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+			_item = MyMenu->FindItemByName( L"Exit" ); if (_item != 0 ) { _item->setSetPos( Vector2( 0.f, -399.8053f ) ); _item->MyText->setScale( 0.6517504f ); _item->MySelectedText->setScale( 0.6517504f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 
-        MyMenu->setPos( Vector2(-80.55566f, -219.4445f ) );
+			MyMenu->setPos( Vector2(-80.55566f, -219.4445f ) );
 
-        boost::shared_ptr<QuadClass> _q;
-        _q = MyPile->FindQuad( L"Back" ); if (_q != 0 ) { _q->setPos( Vector2(-61.11133f, -336.1111f ) ); _q->setSize( Vector2( 524.4158f, 524.4158f ) ); }
+			boost::shared_ptr<QuadClass> _q;
+			_q = MyPile->FindQuad( L"Back" ); if (_q != 0 ) { _q->setPos( Vector2(-61.11133f, -336.1111f ) ); _q->setSize( Vector2( 524.4158f, 524.4158f ) ); }
 
-        MyPile->setPos( Vector2(-27.77734f, -33.33337f ) );
+			MyPile->setPos( Vector2(-27.77734f, -33.33337f ) );
 	}
 }

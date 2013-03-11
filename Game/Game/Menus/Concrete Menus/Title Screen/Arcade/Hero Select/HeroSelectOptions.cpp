@@ -171,41 +171,105 @@ namespace CloudberryKingdom
 
 	void HeroSelectOptions::SetPos_Console()
 	{
-		boost::shared_ptr<EzText> _t;
-		_t = MyPile->FindEzText( std::wstring( L"Go" ) );
-		if ( _t != 0 )
-		{
-			_t->setPos( Vector2( 513.8887f, -472.2224f ) );
-			_t->setScale( 0.7423338f );
-		}
-		_t = MyPile->FindEzText( std::wstring( L"Leaderboard" ) );
-		if ( _t != 0 )
-		{
-			_t->setPos( Vector2( 825, -655.5554f ) );
-			_t->setScale( 0.7660002f );
-		}
+			if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_CHINESE )
+			{
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"Go" ); if (_t != 0 ) { _t->setPos( Vector2( 408.3333f, -516.6668f ) ); _t->setScale( 0.7152506f ); }
+				_t = MyPile->FindEzText( L"Leaderboard" ); if (_t != 0 ) { _t->setPos( Vector2( 491.667f, -702.7776f ) ); _t->setScale( 0.7393336f ); }
+				MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_SPANISH )
+			{
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"Go" ); if (_t != 0 ) { _t->setPos( Vector2( 602.7778f, -530.5557f ) ); _t->setScale( 0.7182506f ); }
+				_t = MyPile->FindEzText( L"Leaderboard" ); if (_t != 0 ) { _t->setPos( Vector2( 672.2222f, -711.111f ) ); _t->setScale( 0.7266668f ); }
+				MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_FRENCH )
+			{
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"Go" ); if (_t != 0 ) { _t->setPos( Vector2( 697.2224f, -525.0001f ) ); _t->setScale( 0.7423338f ); }
+				_t = MyPile->FindEzText( L"Leaderboard" ); if (_t != 0 ) { _t->setPos( Vector2( 683.3337f, -711.111f ) ); _t->setScale( 0.7547504f ); }
+				MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_ITALIAN )
+			{
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"Go" ); if (_t != 0 ) { _t->setPos( Vector2( 474.9998f, -472.2224f ) ); _t->setScale( 0.7164173f ); }
+				_t = MyPile->FindEzText( L"Leaderboard" ); if (_t != 0 ) { _t->setPos( Vector2( 708.3333f, -652.7776f ) ); _t->setScale( 0.743167f ); }
+				MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_PORTUGUESE )
+			{
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"Go" ); if (_t != 0 ) { _t->setPos( Vector2( 399.9998f, -522.2224f ) ); _t->setScale( 0.6441671f ); }
+				_t = MyPile->FindEzText( L"Leaderboard" ); if (_t != 0 ) { _t->setPos( Vector2( 744.4443f, -686.1109f ) ); _t->setScale( 0.6407505f ); }
+				MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_GERMAN )
+			{
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"Go" ); if (_t != 0 ) { _t->setPos( Vector2( 413.8887f, -525.f ) ); _t->setScale( 0.7423338f ); }
+				_t = MyPile->FindEzText( L"Leaderboard" ); if (_t != 0 ) { _t->setPos( Vector2( 658.3333f, -708.3331f ) ); _t->setScale( 0.7660002f ); }
+				MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_KOREAN )
+			{
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"Go" ); if (_t != 0 ) { _t->setPos( Vector2( 427.7773f, -522.2224f ) ); _t->setScale( 0.7423338f ); }
+				_t = MyPile->FindEzText( L"Leaderboard" ); if (_t != 0 ) { _t->setPos( Vector2( 513.8887f, -711.111f ) ); _t->setScale( 0.7660002f ); }
+				MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_JAPANESE )
+			{
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"Go" ); if (_t != 0 ) { _t->setPos( Vector2( 477.7776f, -538.889f ) ); _t->setScale( 0.6902504f ); }
+				_t = MyPile->FindEzText( L"Leaderboard" ); if (_t != 0 ) { _t->setPos( Vector2( 536.1111f, -705.5554f ) ); _t->setScale( 0.6942502f ); }
+				MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_RUSSIAN )
+			{
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"Go" ); if (_t != 0 ) { _t->setPos( Vector2( 395.6355f, -525.0002f ) ); _t->setScale( 0.6706704f ); }
+				_t = MyPile->FindEzText( L"Leaderboard" ); if (_t != 0 ) { _t->setPos( Vector2( 748.0187f, -687.6974f ) ); _t->setScale( 0.6805836f ); }
+				MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
+			}
+			else
+			{
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"Go" ); if (_t != 0 ) { _t->setPos( Vector2( 513.8887f, -472.2224f ) ); _t->setScale( 0.7423338f ); }
+				_t = MyPile->FindEzText( L"Leaderboard" ); if (_t != 0 ) { _t->setPos( Vector2( 825.f, -655.5554f ) ); _t->setScale( 0.7660002f ); }
 
-		MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
+				MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
+			}
 	}
 
 	void HeroSelectOptions::SetPos_PC()
 	{
-		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( std::wstring( L"Leaderboard" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( -638.5557f, 110 ) );
-			_item->MyText->setScale( 0.75f );
-			_item->MySelectedText->setScale( 0.75f );
-			_item->SelectIconOffset = Vector2( 0, 0 );
-		}
+			if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_RUSSIAN )
+			{
+				boost::shared_ptr<MenuItem> _item;
+				_item = MyMenu->FindItemByName( L"Leaderboard" ); if (_item != 0 ) { _item->setSetPos( Vector2(-658.0005f, 112.7778f ) ); _item->MyText->setScale( 0.6180833f ); _item->MySelectedText->setScale( 0.6180833f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 
-		MyMenu->setPos( Vector2( 947.2223f, -608.3333f ) );
+				MyMenu->setPos( Vector2( 947.2223f, -608.3333f ) );
 
-        boost::shared_ptr<QuadClass> _q;
-        _q = MyPile->FindQuad( L"Button_X" ); if ( _q != 0 ) { _q->setPos( Vector2(113.8889f, -624.9999f) ); _q->setSize( Vector2(80.f, 75.2f) ); }
+				boost::shared_ptr<QuadClass> _q;
+				_q = MyPile->FindQuad( L"Button_X" ); if (_q != 0 ) { _q->setPos( Vector2( 130.5556f, -627.7776f ) ); _q->setSize( Vector2( 80.f, 75.2f ) ); }
 
-		MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
+				MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
+			}
+			else
+			{
+				boost::shared_ptr<MenuItem> _item;
+				_item = MyMenu->FindItemByName( L"Leaderboard" ); if (_item != 0 ) { _item->setSetPos( Vector2(-638.5557f, 110.f ) ); _item->MyText->setScale( 0.75f ); _item->MySelectedText->setScale( 0.75f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+
+				MyMenu->setPos( Vector2( 947.2223f, -608.3333f ) );
+
+				boost::shared_ptr<QuadClass> _q;
+				_q = MyPile->FindQuad( L"Button_X" ); if (_q != 0 ) { _q->setPos( Vector2( 113.8889f, -624.9999f ) ); _q->setSize( Vector2( 80.f, 75.2f ) ); }
+
+				MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
+			}
 	}
 
 	void HeroSelectOptions::Go( const boost::shared_ptr<MenuItem> &item )

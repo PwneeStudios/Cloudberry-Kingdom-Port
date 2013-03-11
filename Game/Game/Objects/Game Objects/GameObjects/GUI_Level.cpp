@@ -1,4 +1,5 @@
 #include <global_header.h>
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
 namespace CloudberryKingdom
 {
@@ -20,9 +21,15 @@ namespace CloudberryKingdom
 
 		UpdateLevelText();
 
+		// SetPos()
 		boost::shared_ptr<EzText> _t;
 		_t = MyPile->FindEzText( L"Level" ); if (_t != 0 ) { _t->setPos( Vector2( 0.f, 0.f ) ); _t->setScale( 0.55f ); }
 		MyPile->setPos( Vector2( 1590.556f, 803.2224f ) );
+
+		// Extra squeeze
+		Vector2 squeeze = Vector2(-15, -15 ) * CloudberryKingdomGame::GuiSqueeze;
+
+		MyPile->setPos( MyPile->getPos() + squeeze );
 	}
 
 	std::wstring GUI_CampaignLevel::ToString()

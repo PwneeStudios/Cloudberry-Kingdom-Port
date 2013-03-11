@@ -435,16 +435,24 @@ namespace CloudberryKingdom
 
 	void StatsMenu::SetPos()
 	{
-        boost::shared_ptr<MenuItem> _item;
-        _item = MyMenu->FindItemByName( L"Back" ); if (_item != 0 ) { _item->setSetPos( Vector2( 1230.718f, 975.2383f ) ); _item->MyText->setScale( 0.375f ); _item->MySelectedText->setScale( 0.375f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
-        MyMenu->setPos( Vector2( 67.45706f, 0.f ) );
+			//boost::shared_ptr<MenuItem> _item;
+			//_item = MyMenu->FindItemByName( L"Back" ); if (_item != 0 ) { _item->setSetPos( Vector2( 1230.718f, 975.2383f ) ); _item->MyText->setScale( 0.375f ); _item->MySelectedText->setScale( 0.375f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+			//MyMenu->setPos( Vector2( 67.45706f, 0.f ) );
 
-        boost::shared_ptr<QuadClass> _q;
-        _q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2(-91.66821f, -103.8888f ) ); _q->setSize( Vector2( 1907.893f, 1089.838f ) ); }
-        _q = MyPile->FindQuad( L"Button_Back" ); if (_q != 0 ) { _q->setPos( Vector2( 1522.222f, -983.3331f ) ); _q->setSize( Vector2( 90.f, 90.f ) ); }
-        _q = MyPile->FindQuad( L"BackArrow" ); if (_q != 0 ) { _q->setPos( Vector2( 1322.222f, -1008.333f ) ); _q->setSize( Vector2( 100.f, 86.f ) ); }
+			//boost::shared_ptr<QuadClass> _q;
+			//_q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2(-91.66821f, -103.8888f ) ); _q->setSize( Vector2( 1907.893f, 1089.838f ) ); }
+			//_q = MyPile->FindQuad( L"Button_Back" ); if (_q != 0 ) { _q->setPos( Vector2( 1522.222f, -983.3331f ) ); _q->setSize( Vector2( 90.f, 90.f ) ); }
+			//_q = MyPile->FindQuad( L"BackArrow" ); if (_q != 0 ) { _q->setPos( Vector2( 1322.222f, -1008.333f ) ); _q->setSize( Vector2( 100.f, 86.f ) ); }
 
-        MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
+			//MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
+
+			MyMenu->setPos( Vector2( 67.45706f, 0.f ) );
+
+			boost::shared_ptr<QuadClass> _q;
+			_q = MyPile->FindQuad( L"Button_Back" ); if (_q != 0 ) { _q->setPos( Vector2( 1338.889f, -986.1112f ) ); _q->setSize( Vector2( 65.49991f, 65.49991f ) ); }
+			_q = MyPile->FindQuad( L"BackArrow" ); if (_q != 0 ) { _q->setPos( Vector2( 1188.889f, -994.4443f ) ); _q->setSize( Vector2( 78.29454f, 67.33331f ) ); }
+
+			MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
 	}
 
 	void StatsMenu::OnAdd()

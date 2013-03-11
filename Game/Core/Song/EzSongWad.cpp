@@ -59,7 +59,7 @@ namespace CloudberryKingdom
 		std::wstring artistname = song->ArtistName;
 		Replace( artistname, '_', ' ');
 		//SongInfoText = new EzText(songname + "\n" + artistname, Resources::LilFont, true, true);
-		SongInfoText = boost::make_shared<EzText>( songname + std::wstring( L"\n" ) + artistname, Resources::Font_Grobold42_2, true, true );
+		SongInfoText = boost::make_shared<EzText>( songname + std::wstring( L"\n" ) + artistname, Resources::Font_Grobold42_2, 1000.0f, true, true, .85f );
 		SongInfoText->_Pos = Vector2(-850, -790);
 		SongInfoText->MyFloatColor = Vector4(1, 1, 1, 4.5f);
 		SongInfoText->MyFloatColor = Vector4(.9f, .9f, .9f, 4.5f);

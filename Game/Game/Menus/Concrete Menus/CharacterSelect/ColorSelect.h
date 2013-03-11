@@ -76,6 +76,7 @@ namespace CloudberryKingdom
 		ListSelectPanel( int Control, Localization::Words Header, const boost::shared_ptr<CharacterSelect> &Parent, int ClrSelectIndex );
 		boost::shared_ptr<ListSelectPanel> ListSelectPanel_Construct( int Control, Localization::Words Header, const boost::shared_ptr<CharacterSelect> &Parent, int ClrSelectIndex );
 
+		void SetItemProperties( const boost::shared_ptr<MenuItem> &item );
 	
 		void OnSelect();
 

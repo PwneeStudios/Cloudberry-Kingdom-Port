@@ -106,26 +106,27 @@ namespace CloudberryKingdom
 
 		SetPos();
 #else
-        text = boost::make_shared<EzText>( L"+", Resources::Font_Grobold42, true);
+		bool center = false;
+        text = boost::make_shared<EzText>( L"+", Resources::Font_Grobold42, center);
         MyPile->Add(text, L"plus");
         text->MyFloatColor = ColorHelper::Gray(.955f);
 
-        text = boost::make_shared<EzText>(Localization::Words_QuickSpawn, Resources::Font_Grobold42, true);
+        text = boost::make_shared<EzText>(Localization::Words_QuickSpawn, Resources::Font_Grobold42, center);
         MyPile->Add(text, L"quickspawn");
         text->MyFloatColor = ColorHelper::Gray(.955f);
 
-        text = boost::make_shared<EzText>(Localization::Words_Jump, Resources::Font_Grobold42, true);
+        text = boost::make_shared<EzText>(Localization::Words_Jump, Resources::Font_Grobold42, center);
         MyPile->Add(text, L"jump");
         text->MyFloatColor = ColorHelper::Gray(.955f);
 
-        text = boost::make_shared<EzText>(Localization::Words_PowerUpMenu, Resources::Font_Grobold42, true);
+        text = boost::make_shared<EzText>(Localization::Words_PowerUpMenu, Resources::Font_Grobold42, center);
         MyPile->Add(text, L"powerups");
         text->MyFloatColor = ColorHelper::Gray(.955f);
 
-        text = boost::make_shared<EzText>(Localization::Words_Accept, Resources::Font_Grobold42, true);
+        text = boost::make_shared<EzText>(Localization::Words_Accept, Resources::Font_Grobold42, center);
         MyPile->Add(text, L"accept");
 
-        text = boost::make_shared<EzText>(Localization::Words_Back, Resources::Font_Grobold42, true);
+        text = boost::make_shared<EzText>(Localization::Words_Back, Resources::Font_Grobold42, center);
         MyPile->Add(text, L"back");
 
         boost::shared_ptr<QuadClass> q;
@@ -134,6 +135,15 @@ namespace CloudberryKingdom
         MyPile->Add(q, L"x");
 
         q = boost::make_shared<QuadClass>( L"door_castle_1" ); q->ScaleXToMatchRatio(130);
+        MyPile->Add(q, L"door");
+
+        q = boost::make_shared<QuadClass>( L"door_cave_1" ); q->ScaleXToMatchRatio(130);
+        MyPile->Add(q, L"door");
+
+        q = boost::make_shared<QuadClass>( L"door_cloud_1" ); q->ScaleXToMatchRatio(130);
+        MyPile->Add(q, L"door");
+
+        q = boost::make_shared<QuadClass>( L"door_forest_1" ); q->ScaleXToMatchRatio(130);
         MyPile->Add(q, L"door");
 
         q = boost::make_shared<QuadClass>(ButtonTexture::getY() ); q->ScaleXToMatchRatio(130);
@@ -182,26 +192,29 @@ namespace CloudberryKingdom
 #else
         void ControlScreen::SetPos()
         {
-            boost::shared_ptr<EzText> _t;
-            _t = MyPile->FindEzText( L"plus" ); if (_t != 0 ) { _t->setPos( Vector2(-913.889f, 483.3333f ) ); _t->setScale( 0.5140832f ); }
-            _t = MyPile->FindEzText( L"quickspawn" ); if (_t != 0 ) { _t->setPos( Vector2( 209.1257f, 546.4289f ) ); _t->setScale( 0.7971667f ); }
-            _t = MyPile->FindEzText( L"jump" ); if (_t != 0 ) { _t->setPos( Vector2( 211.1111f, 800.f ) ); _t->setScale( 0.7969999f ); }
-            _t = MyPile->FindEzText( L"powerups" ); if (_t != 0 ) { _t->setPos( Vector2( 224.6023f, 292.0634f ) ); _t->setScale( 0.7926666f ); }
-            _t = MyPile->FindEzText( L"accept" ); if (_t != 0 ) { _t->setPos( Vector2(-380.5535f, -145.2382f ) ); _t->setScale( 0.7982503f ); }
-            _t = MyPile->FindEzText( L"back" ); if (_t != 0 ) { _t->setPos( Vector2(-380.9515f, -407.539f ) ); _t->setScale( 0.7832497f ); }
+			boost::shared_ptr<EzText> _t;
+			_t = MyPile->FindEzText( L"plus" ); if (_t != 0 ) { _t->setPos( Vector2(-911.1111f, 500.f ) ); _t->setScale( 0.5140832f ); }
+			_t = MyPile->FindEzText( L"quickspawn" ); if (_t != 0 ) { _t->setPos( Vector2(-438.8888f, 571.4288f ) ); _t->setScale( 0.7971667f ); }
+			_t = MyPile->FindEzText( L"jump" ); if (_t != 0 ) { _t->setPos( Vector2(-438.8888f, 824.9998f ) ); _t->setScale( 0.7969999f ); }
+			_t = MyPile->FindEzText( L"powerups" ); if (_t != 0 ) { _t->setPos( Vector2(-438.8888f, 317.8578f ) ); _t->setScale( 0.7926666f ); }
+			_t = MyPile->FindEzText( L"accept" ); if (_t != 0 ) { _t->setPos( Vector2(-438.8888f, 64.28687f ) ); _t->setScale( 0.7982503f ); }
+			_t = MyPile->FindEzText( L"back" ); if (_t != 0 ) { _t->setPos( Vector2(-438.8888f, -189.2841f ) ); _t->setScale( 0.7832497f ); }
 
-            boost::shared_ptr<QuadClass> _q;
-            _q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2( 0.f, 0.f ) ); _q->setSize( Vector2( 1500.f, 902.2556f ) ); }
-            _q = MyPile->FindQuad( L"x" ); if (_q != 0 ) { _q->setPos( Vector2( 291.6663f, -577.7776f ) ); _q->setSize( Vector2( 91.58332f, 91.58332f ) ); }
-            _q = MyPile->FindQuad( L"door" ); if (_q != 0 ) { _q->setPos( Vector2( 758.3333f, -649.9999f ) ); _q->setSize( Vector2( 337.3586f, 240.4165f ) ); }
-            _q = MyPile->FindQuad( L"y" ); if (_q != 0 ) { _q->setPos( Vector2(-911.1113f, 141.6666f ) ); _q->setSize( Vector2( 97.74995f, 97.74995f ) ); }
-            _q = MyPile->FindQuad( L"lb" ); if (_q != 0 ) { _q->setPos( Vector2(-1141.667f, 397.2222f ) ); _q->setSize( Vector2( 175.4162f, 175.4162f ) ); }
-            _q = MyPile->FindQuad( L"rb" ); if (_q != 0 ) { _q->setPos( Vector2(-700.0002f, 411.1111f ) ); _q->setSize( Vector2( 179.2496f, 179.2496f ) ); }
-            _q = MyPile->FindQuad( L"jump" ); if (_q != 0 ) { _q->setPos( Vector2(-913.889f, 661.1106f ) ); _q->setSize( Vector2( 102.0832f, 102.0832f ) ); }
-            _q = MyPile->FindQuad( L"accep" ); if (_q != 0 ) { _q->setPos( Vector2(-955.5557f, -288.8888f ) ); _q->setSize( Vector2( 99.49992f, 99.49992f ) ); }
-            _q = MyPile->FindQuad( L"back" ); if (_q != 0 ) { _q->setPos( Vector2(-949.9999f, -552.7778f ) ); _q->setSize( Vector2( 95.41663f, 95.41663f ) ); }
+			boost::shared_ptr<QuadClass> _q;
+			_q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2( 0.f, 0.f ) ); _q->setSize( Vector2( 1500.f, 902.2556f ) ); }
+			_q = MyPile->FindQuad( L"x" ); if (_q != 0 ) { _q->setPos( Vector2(-908.3336f, -630.5556f ) ); _q->setSize( Vector2( 91.58332f, 91.58332f ) ); }
+			_q = MyPile->FindQuad( L"door" ); if (_q != 0 ) { _q->setPos( Vector2(-205.5555f, -630.5555f ) ); _q->setSize( Vector2( 177.7416f, 126.6664f ) ); }
+			_q = MyPile->FindQuad( L"door_cave" ); if (_q != 0 ) { _q->setPos( Vector2( 225.f, -622.2222f ) ); _q->setSize( Vector2( 183.0986f, 130.f ) ); }
+			_q = MyPile->FindQuad( L"door_cloud" ); if (_q != 0 ) { _q->setPos( Vector2( 600.f, -630.5555f ) ); _q->setSize( Vector2( 155.f, 130.f ) ); }
+			_q = MyPile->FindQuad( L"door_forest" ); if (_q != 0 ) { _q->setPos( Vector2( 969.4446f, -619.4445f ) ); _q->setSize( Vector2( 164.4898f, 130.f ) ); }
+			_q = MyPile->FindQuad( L"y" ); if (_q != 0 ) { _q->setPos( Vector2(-913.8889f, 149.9999f ) ); _q->setSize( Vector2( 97.74995f, 97.74995f ) ); }
+			_q = MyPile->FindQuad( L"lb" ); if (_q != 0 ) { _q->setPos( Vector2(-1138.889f, 413.8889f ) ); _q->setSize( Vector2( 175.4162f, 175.4162f ) ); }
+			_q = MyPile->FindQuad( L"rb" ); if (_q != 0 ) { _q->setPos( Vector2(-697.2224f, 427.7777f ) ); _q->setSize( Vector2( 179.2496f, 179.2496f ) ); }
+			_q = MyPile->FindQuad( L"jump" ); if (_q != 0 ) { _q->setPos( Vector2(-922.222f, 661.1106f ) ); _q->setSize( Vector2( 102.0832f, 102.0832f ) ); }
+			_q = MyPile->FindQuad( L"accep" ); if (_q != 0 ) { _q->setPos( Vector2(-913.8892f, -105.5554f ) ); _q->setSize( Vector2( 99.49992f, 99.49992f ) ); }
+			_q = MyPile->FindQuad( L"back" ); if (_q != 0 ) { _q->setPos( Vector2(-913.889f, -355.5558f ) ); _q->setSize( Vector2( 95.41663f, 95.41663f ) ); }
 
-            MyPile->setPos( Vector2( 0.f, 0.f ) );
+			MyPile->setPos( Vector2( 0.f, 0.f ) );
         }
 #endif
 

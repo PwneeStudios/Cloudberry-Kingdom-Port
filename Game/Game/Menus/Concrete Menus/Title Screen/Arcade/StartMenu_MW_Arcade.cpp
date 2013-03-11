@@ -87,7 +87,7 @@ namespace CloudberryKingdom
 	}
 
 	void StartMenu_MW_Arcade::SetPos()
-        {
+    {
 if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_PORTUGUESE )
 {
 			boost::shared_ptr<MenuItem> _item;
@@ -203,6 +203,29 @@ else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_GE
 
 			MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
 }
+else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_RUSSIAN )
+{
+			boost::shared_ptr<MenuItem> _item;
+			_item = MyMenu->FindItemByName( L"Header" ); if (_item != 0 ) { _item->setSetPos( Vector2(-2771.113f, 901.9052f ) ); _item->MyText->setScale( 1.697927f ); _item->MySelectedText->setScale( 0.7479278f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); _item->SetSelectedPos( Vector2(-2490.635f, -1.f )); }
+			_item = MyMenu->FindItemByName( L"Escalation" ); if (_item != 0 ) { _item->setSetPos( Vector2(-2458.969f, 323.413f ) ); _item->MyText->setScale( 0.95f ); _item->MySelectedText->setScale( 0.95f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); _item->SetSelectedPos( Vector2(-2490.635f, -1.f )); }
+			_item = MyMenu->FindItemByName( L"Time Crisis" ); if (_item != 0 ) { _item->setSetPos( Vector2(-2467.301f, 123.0817f ) ); _item->MyText->setScale( 0.95f ); _item->MySelectedText->setScale( 0.95f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); _item->SetSelectedPos( Vector2(-2490.635f, -1.f )); }
+			_item = MyMenu->FindItemByName( L"Hero Rush" ); if (_item != 0 ) { _item->setSetPos( Vector2(-2456.189f, -88.36035f ) ); _item->MyText->setScale( 0.95f ); _item->MySelectedText->setScale( 0.95f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); _item->SetSelectedPos( Vector2(-2490.635f, -1.f )); }
+			_item = MyMenu->FindItemByName( L"Hero Rush 2" ); if (_item != 0 ) { _item->setSetPos( Vector2(-2472.857f, -285.9135f ) ); _item->MyText->setScale( 0.95f ); _item->MySelectedText->setScale( 0.95f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); _item->SetSelectedPos( Vector2(-2490.635f, -1.f )); }
+
+			MyMenu->setPos( Vector2( 1070.889f, -45.5556f ) );
+
+			boost::shared_ptr<EzText> _t;
+			_t = MyPile->FindEzText( L"Level" ); if (_t != 0 ) { _t->setPos( Vector2(-188.8888f, -752.7773f ) ); _t->setScale( 0.72f ); }
+			_t = MyPile->FindEzText( L"LevelNum" ); if (_t != 0 ) { _t->setPos( Vector2( 1016.667f, -686.111f ) ); _t->setScale( 0.9744995f ); }
+			_t = MyPile->FindEzText( L"Requirement" ); if (_t != 0 ) { _t->setPos( Vector2( 82.20013f, 576.9747f ) ); _t->setScale( 0.6619421f ); }
+			_t = MyPile->FindEzText( L"Requirement2" ); if (_t != 0 ) { _t->setPos( Vector2( 89.25061f, 359.518f ) ); _t->setScale( 0.5714267f ); }
+
+			boost::shared_ptr<QuadClass> _q;
+			_q = MyPile->FindQuad( L"BoxLeft" ); if (_q != 0 ) { _q->setPos( Vector2( 719.4446f, 338.8889f ) ); _q->setSize( Vector2( 290.9718f, 690.6484f ) ); }
+			_q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2(-290.4752f, -2200.793f ) ); _q->setSize( Vector2( 1234.721f, 740.8326f ) ); }
+
+			MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
+}
 else
 {
 			boost::shared_ptr<MenuItem> _item;
@@ -227,4 +250,5 @@ else
 			MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
 }
 		}
+
 }

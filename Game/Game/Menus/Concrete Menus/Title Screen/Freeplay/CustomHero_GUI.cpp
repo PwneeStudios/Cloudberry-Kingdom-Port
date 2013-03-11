@@ -168,7 +168,7 @@ namespace CloudberryKingdom
 
 	void CustomHero_GUI::MakeSliders()
 	{
-		ItemPos = Vector2( -583.4305f, 698.1083f );
+		ItemPos = Vector2( -807.5f, 698.1083f );
 		PosAdd = Vector2( 0, -93.45f );
 
 		PhsxSlider::Font = ItemFont;
@@ -352,6 +352,7 @@ namespace CloudberryKingdom
 		boost::shared_ptr<MenuList> list = MakeMagic( MenuList, () );
 			MenuList_PostConstruct( list );
 
+		list->Center = false;
 		list->GrayOutOnUnselectable = true;
 
 		return list;
@@ -371,6 +372,22 @@ namespace CloudberryKingdom
 	void CustomHero_GUI::SetListItemProperties( const boost::shared_ptr<MenuItem> &item )
 	{
 		SetItemProperties( item );
+	}
+
+	void ScaleListItem( boost::shared_ptr<MenuItem> item )
+	{
+		const float max_width = 790; //750
+
+		float ListScale = .9f;
+		if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_GERMAN )
+			ListScale = .825f;
+
+		item->MyText->setScale( .45f * ListScale );
+		item->MySelectedText->setScale( .45f * ListScale );
+
+		float width = item->MyText->GetWorldWidth();
+		if (width > max_width)
+			item->ScaleText(max_width / width);
 	}
 
 	void CustomHero_GUI::Init()
@@ -492,7 +509,16 @@ namespace CloudberryKingdom
 		UpdateSliders();
 
 		SetPos();
+
+		for ( std::vector<boost::shared_ptr<MenuItem> >::const_iterator _item = BaseList->MyList.begin(); _item != BaseList->MyList.end(); ++_item )
+			ScaleListItem( *_item );
+		for ( std::vector<boost::shared_ptr<MenuItem> >::const_iterator _item = SizeList->MyList.begin(); _item != SizeList->MyList.end(); ++_item )
+			ScaleListItem( *_item );
+		for ( std::vector<boost::shared_ptr<MenuItem> >::const_iterator _item = JumpList->MyList.begin(); _item != JumpList->MyList.end(); ++_item )
+			ScaleListItem( *_item );
 	}
+
+		
 
 	void CustomHero_GUI::SetListActions()
 	{
@@ -620,28 +646,28 @@ namespace CloudberryKingdom
 	void CustomHero_GUI::SetPos()
         {
 			boost::shared_ptr<MenuItem> _item;
-			_item = MyMenu->FindItemByName( L"base" ); if (_item != 0 ) { _item->setSetPos( Vector2(-1655.38f, 642.6317f ) ); _item->MyText->setScale( 0.5f ); _item->MySelectedText->setScale( 0.5f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
-			_item = MyMenu->FindItemByName( L"jump" ); if (_item != 0 ) { _item->setSetPos( Vector2(-1653.446f, 451.6321f ) ); _item->MyText->setScale( 0.5f ); _item->MySelectedText->setScale( 0.5f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
-			_item = MyMenu->FindItemByName( L"size" ); if (_item != 0 ) { _item->setSetPos( Vector2(-1656.223f, 256.2355f ) ); _item->MyText->setScale( 0.5f ); _item->MySelectedText->setScale( 0.5f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
-			_item = MyMenu->FindItemByName( L"test" ); if (_item != 0 ) { _item->setSetPos( Vector2(-1914.311f, 134.3449f ) ); _item->MyText->setScale( 0.7685415f ); _item->MySelectedText->setScale( 0.7685415f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
-			_item = MyMenu->FindItemByName( L"back" ); if (_item != 0 ) { _item->setSetPos( Vector2(-1909.15f, -90.52583f ) ); _item->MyText->setScale( 0.6955291f ); _item->MySelectedText->setScale( 0.6955291f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
-			_item = MyMenu->FindItemByName( L"continue" ); if (_item != 0 ) { _item->setSetPos( Vector2(-1915.104f, -288.0107f ) ); _item->MyText->setScale( 0.7520385f ); _item->MySelectedText->setScale( 0.7520385f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
-			_item = MyMenu->FindItemByName( L"reset" ); if (_item != 0 ) { _item->setSetPos( Vector2(-1916.694f, -502.1649f ) ); _item->MyText->setScale( 0.7f ); _item->MySelectedText->setScale( 0.7f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+			_item = MyMenu->FindItemByName( L"base" ); if (_item != 0 ) { _item->setSetPos( Vector2(-2252.702f, 575.954f ) ); _item->MyText->setScale( 0.45f ); _item->MySelectedText->setScale( 0.45f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+			_item = MyMenu->FindItemByName( L"jump" ); if (_item != 0 ) { _item->setSetPos( Vector2(-2252.702f, 254.3771f ) ); _item->MyText->setScale( 0.45f ); _item->MySelectedText->setScale( 0.45f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+			_item = MyMenu->FindItemByName( L"size" ); if (_item != 0 ) { _item->setSetPos( Vector2(-2252.702f, -60.48386f ) ); _item->MyText->setScale( 0.45f ); _item->MySelectedText->setScale( 0.45f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+			_item = MyMenu->FindItemByName( L"test" ); if (_item != 0 ) { _item->setSetPos( Vector2(-2189.357f, -132.3662f ) ); _item->MyText->setScale( 0.5196667f ); _item->MySelectedText->setScale( 0.5196667f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+			_item = MyMenu->FindItemByName( L"back" ); if (_item != 0 ) { _item->setSetPos( Vector2(-2189.357f, -273.889f ) ); _item->MyText->setScale( 0.4939956f ); _item->MySelectedText->setScale( 0.4939956f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+			_item = MyMenu->FindItemByName( L"continue" ); if (_item != 0 ) { _item->setSetPos( Vector2(-2189.357f, -415.4118f ) ); _item->MyText->setScale( 0.5253342f ); _item->MySelectedText->setScale( 0.5253342f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+			_item = MyMenu->FindItemByName( L"reset" ); if (_item != 0 ) { _item->setSetPos( Vector2(-2189.357f, -556.9346f ) ); _item->MyText->setScale( 0.4984665f ); _item->MySelectedText->setScale( 0.4984665f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 
 			MyMenu->setPos( Vector2( 1166.862f, -69.45605f ) );
 
 			boost::shared_ptr<EzText> _t;
 			_t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->setPos( Vector2(-664.2021f, 960.7101f ) ); _t->setScale( 0.8010691f ); }
-			_t = MyPile->FindEzText( L"base" ); if (_t != 0 ) { _t->setPos( Vector2(-1269.655f, 708.4517f ) ); _t->setScale( 0.6189448f ); }
-			_t = MyPile->FindEzText( L"jump" ); if (_t != 0 ) { _t->setPos( Vector2(-1270.534f, 507.2669f ) ); _t->setScale( 0.5981081f ); }
-			_t = MyPile->FindEzText( L"size" ); if (_t != 0 ) { _t->setPos( Vector2(-1234.811f, 317.9383f ) ); _t->setScale( 0.6634525f ); }
+			_t = MyPile->FindEzText( L"base" ); if (_t != 0 ) { _t->setPos( Vector2(-1223.304f, 764.0166f ) ); _t->setScale( 0.5947744f ); }
+			_t = MyPile->FindEzText( L"jump" ); if (_t != 0 ) { _t->setPos( Vector2(-1223.304f, 462.8152f ) ); _t->setScale( 0.5887732f ); }
+			_t = MyPile->FindEzText( L"size" ); if (_t != 0 ) { _t->setPos( Vector2(-1223.304f, 145.6873f ) ); _t->setScale( 0.5638525f ); }
 
 			boost::shared_ptr<QuadClass> _q;
 			_q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2( 0.f, 0.f ) ); _q->setSize( Vector2( 1500.f, 1083.871f ) ); }
-			_q = MyPile->FindQuad( L"Button_A" ); if (_q != 0 ) { _q->setPos( Vector2(-830.694f, -77.78476f ) ); _q->setSize( Vector2( 84.f, 84.f ) ); }
-			_q = MyPile->FindQuad( L"Button_B" ); if (_q != 0 ) { _q->setPos( Vector2(-830.694f, -297.2718f ) ); _q->setSize( Vector2( 84.f, 84.f ) ); }
-			_q = MyPile->FindQuad( L"Button_X" ); if (_q != 0 ) { _q->setPos( Vector2(-830.694f, -505.6396f ) ); _q->setSize( Vector2( 84.f, 84.f ) ); }
-			_q = MyPile->FindQuad( L"Button_Y" ); if (_q != 0 ) { _q->setPos( Vector2(-830.694f, -702.895f ) ); _q->setSize( Vector2( 84.f, 84.f ) ); }
+			_q = MyPile->FindQuad( L"Button_A" ); if (_q != 0 ) { _q->setPos( Vector2(-1094.627f, -311.157f ) ); _q->setSize( Vector2( 63.74656f, 63.74656f ) ); }
+			_q = MyPile->FindQuad( L"Button_B" ); if (_q != 0 ) { _q->setPos( Vector2(-1094.627f, -447.2965f ) ); _q->setSize( Vector2( 63.74656f, 63.74656f ) ); }
+			_q = MyPile->FindQuad( L"Button_X" ); if (_q != 0 ) { _q->setPos( Vector2(-1094.627f, -583.436f ) ); _q->setSize( Vector2( 63.74656f, 63.74656f ) ); }
+			_q = MyPile->FindQuad( L"Button_Y" ); if (_q != 0 ) { _q->setPos( Vector2(-1094.627f, -719.5756f ) ); _q->setSize( Vector2( 63.74656f, 63.74656f ) ); }
 
 			MyPile->setPos( Vector2( 0.f, 0.f ) );
 		}

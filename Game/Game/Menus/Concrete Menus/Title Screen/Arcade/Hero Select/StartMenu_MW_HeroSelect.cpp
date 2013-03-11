@@ -356,12 +356,31 @@ namespace CloudberryKingdom
 		if ( 0 == item )
 			return;
 
+		Challenge::ChosenHero = item->Hero;
+
         int TopScore = __max( MyArcadeItem->MyChallenge->TopScore(), PlayerManager::MaxPlayerHighScore(MyArcadeItem->MyChallenge->CalcGameId_Score( item->Hero ) ) );
         int TopLevel = __max( MyArcadeItem->MyChallenge->TopLevel(), PlayerManager::MaxPlayerHighScore(MyArcadeItem->MyChallenge->CalcGameId_Level( item->Hero ) ) );
 
-		Score->RightJustify = Level_Renamed->RightJustify = true;
+
+			bool Center = false;
+			if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_RUSSIAN )
+			{
+				Center = true;
+			}
+
+			if (!Center)
+			{
+				Score->RightJustify = Level_Renamed->RightJustify = true;
+			}
+			else
+			{
+				SetPos();
+			}
+		
 		Score->SubstituteText( StringConverterHelper::toString( TopScore ) );
+		if (Center) Score->Center();
 		Level_Renamed->SubstituteText( StringConverterHelper::toString( TopLevel ) );
+		if (Center) Level_Renamed->Center();
 	}
 
     void StartMenu_MW_HeroSelect::Update()
@@ -400,28 +419,199 @@ namespace CloudberryKingdom
 
 	void StartMenu_MW_HeroSelect::SetPos()
 	{
-        MyMenu->setPos( Vector2(-1340.222f, 104.4444f ) );
+			if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_CHINESE )
+			{
+				MyMenu->setPos( Vector2(-1340.222f, 104.4444f ) );
 
-        boost::shared_ptr<EzText> _t;
-        _t = MyPile->FindEzText( L"ScoreHeader" ); if (_t != 0 ) { _t->setPos( Vector2(-22.22266f, 636.1111f ) ); _t->setScale( 1.f ); }
-        _t = MyPile->FindEzText( L"Score" ); if (_t != 0 ) { _t->setPos( Vector2( 1161.11f, 366.6667f ) ); _t->setScale( 1.f ); }
-        _t = MyPile->FindEzText( L"LevelHeader" ); if (_t != 0 ) { _t->setPos( Vector2(-2.779297f, 105.5556f ) ); _t->setScale( 1.f ); }
-        _t = MyPile->FindEzText( L"Level" ); if (_t != 0 ) { _t->setPos( Vector2( 1163.887f, -155.5555f ) ); _t->setScale( 1.f ); }
-        _t = MyPile->FindEzText( L"LockedHeader" ); if (_t != 0 ) { _t->setPos( Vector2( 33.33325f, 441.6666f ) ); _t->setScale( 0.9f ); }
-        _t = MyPile->FindEzText( L"RequiredHero" ); if (_t != 0 ) { _t->setPos( Vector2( 280.5552f, 163.8889f ) ); _t->setScale( 0.72f ); }
-        _t = MyPile->FindEzText( L"RequiredLevel" ); if (_t != 0 ) { _t->setPos( Vector2( 277.7778f, -44.44443f ) ); _t->setScale( 0.72f ); }
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"ScoreHeader" ); if (_t != 0 ) { _t->setPos( Vector2(-19.44507f, 647.2222f ) ); _t->setScale( 1.f ); }
+				_t = MyPile->FindEzText( L"Score" ); if (_t != 0 ) { _t->setPos( Vector2( 1161.11f, 402.7777f ) ); _t->setScale( 0.9414999f ); }
+				_t = MyPile->FindEzText( L"LevelHeader" ); if (_t != 0 ) { _t->setPos( Vector2(-19.4458f, 133.3334f ) ); _t->setScale( 1.f ); }
+				_t = MyPile->FindEzText( L"Level" ); if (_t != 0 ) { _t->setPos( Vector2( 1166.665f, -133.3333f ) ); _t->setScale( 0.9644167f ); }
+				_t = MyPile->FindEzText( L"LockedHeader" ); if (_t != 0 ) { _t->setPos( Vector2( 33.33325f, 441.6666f ) ); _t->setScale( 0.9f ); }
+				_t = MyPile->FindEzText( L"RequiredHero" ); if (_t != 0 ) { _t->setPos( Vector2( 280.5552f, 163.8889f ) ); _t->setScale( 0.72f ); }
+				_t = MyPile->FindEzText( L"RequiredLevel" ); if (_t != 0 ) { _t->setPos( Vector2( 277.7778f, -44.44443f ) ); _t->setScale( 0.72f ); }
 
-        boost::shared_ptr<QuadClass> _q;
-        _q = MyPile->FindQuad( L"BoxLeft" ); if (_q != 0 ) { _q->setPos( Vector2(-972.2227f, -127.7778f ) ); _q->setSize( Vector2( 616.5465f, 1004.329f ) ); }
-        _q = MyPile->FindQuad( L"BoxRight" ); if (_q != 0 ) { _q->setPos( Vector2( 666.6641f, -88.88879f ) ); _q->setSize( Vector2( 776.5515f, 846.666f ) ); }
-        _q = MyPile->FindQuad( L"Back" ); if (_q != 0 ) { _q->setPos( Vector2(-1269.443f, -1011.111f ) ); _q->setSize( Vector2( 64.49973f, 64.49973f ) ); }
-        _q = MyPile->FindQuad( L"BackArrow" ); if (_q != 0 ) { _q->setPos( Vector2(-1416.666f, -1016.667f ) ); _q->setSize( Vector2( 71.89921f, 61.83332f ) ); }
-            
-        _q = MyPile->FindQuad( L"Scroll" ); if (_q != 0 ) { _q->setPos( Vector2(-1450.f, -441.2393f ) ); _q->setSize( Vector2( 25.9999f, 106.8029f ) ); }
-        _q = MyPile->FindQuad( L"ScrollTop" ); if (_q != 0 ) { _q->setPos( Vector2(-1444.444f, -100.0001f ) ); _q->setSize( Vector2( 27.57401f, 18.96959f ) ); }
-        _q = MyPile->FindQuad( L"ScrollBottom" ); if (_q != 0 ) { _q->setPos( Vector2(-1444.444f, -752.2221f ) ); _q->setSize( Vector2( 28.7499f, 21.2196f ) ); }
+				boost::shared_ptr<QuadClass> _q;
+				_q = MyPile->FindQuad( L"BoxLeft" ); if (_q != 0 ) { _q->setPos( Vector2(-972.2227f, -127.7778f ) ); _q->setSize( Vector2( 616.5464f, 1004.329f ) ); }
+				_q = MyPile->FindQuad( L"BoxRight" ); if (_q != 0 ) { _q->setPos( Vector2( 666.6641f, -88.88879f ) ); _q->setSize( Vector2( 776.5515f, 846.666f ) ); }
+				_q = MyPile->FindQuad( L"Back" ); if (_q != 0 ) { _q->setPos( Vector2(-1269.443f, -1011.111f ) ); _q->setSize( Vector2( 64.49973f, 64.49973f ) ); }
+				_q = MyPile->FindQuad( L"BackArrow" ); if (_q != 0 ) { _q->setPos( Vector2(-1416.666f, -1016.667f ) ); _q->setSize( Vector2( 71.89921f, 61.83332f ) ); }
+				_q = MyPile->FindQuad( L"Scroll" ); if (_q != 0 ) { _q->setPos( Vector2(-1450.f, -206.803f ) ); _q->setSize( Vector2( 25.9999f, 106.8029f ) ); }
+				_q = MyPile->FindQuad( L"ScrollTop" ); if (_q != 0 ) { _q->setPos( Vector2(-1444.444f, -100.0001f ) ); _q->setSize( Vector2( 27.57401f, 18.96959f ) ); }
+				_q = MyPile->FindQuad( L"ScrollBottom" ); if (_q != 0 ) { _q->setPos( Vector2(-1444.444f, -752.2221f ) ); _q->setSize( Vector2( 28.7499f, 21.2196f ) ); }
 
-        MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
+				MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_SPANISH )
+			{
+				MyMenu->setPos( Vector2(-1340.222f, 104.4444f ) );
+
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"ScoreHeader" ); if (_t != 0 ) { _t->setPos( Vector2( 8.332886f, 655.5555f ) ); _t->setScale( 0.9532502f ); }
+				_t = MyPile->FindEzText( L"Score" ); if (_t != 0 ) { _t->setPos( Vector2( 1249.999f, 405.5555f ) ); _t->setScale( 0.90625f ); }
+				_t = MyPile->FindEzText( L"LevelHeader" ); if (_t != 0 ) { _t->setPos( Vector2(-19.44611f, 127.7778f ) ); _t->setScale( 0.9073337f ); }
+				_t = MyPile->FindEzText( L"Level" ); if (_t != 0 ) { _t->setPos( Vector2( 1249.998f, -127.7777f ) ); _t->setScale( 0.9306669f ); }
+				_t = MyPile->FindEzText( L"LockedHeader" ); if (_t != 0 ) { _t->setPos( Vector2( 33.33325f, 441.6666f ) ); _t->setScale( 0.9f ); }
+				_t = MyPile->FindEzText( L"RequiredHero" ); if (_t != 0 ) { _t->setPos( Vector2( 280.5552f, 163.8889f ) ); _t->setScale( 0.72f ); }
+				_t = MyPile->FindEzText( L"RequiredLevel" ); if (_t != 0 ) { _t->setPos( Vector2( 277.7778f, -44.44443f ) ); _t->setScale( 0.72f ); }
+
+				boost::shared_ptr<QuadClass> _q;
+				_q = MyPile->FindQuad( L"BoxLeft" ); if (_q != 0 ) { _q->setPos( Vector2(-972.2227f, -127.7778f ) ); _q->setSize( Vector2( 616.5464f, 1004.329f ) ); }
+				_q = MyPile->FindQuad( L"BoxRight" ); if (_q != 0 ) { _q->setPos( Vector2( 666.6641f, -88.88879f ) ); _q->setSize( Vector2( 776.5515f, 846.666f ) ); }
+				_q = MyPile->FindQuad( L"Back" ); if (_q != 0 ) { _q->setPos( Vector2(-1269.443f, -1011.111f ) ); _q->setSize( Vector2( 64.49973f, 64.49973f ) ); }
+				_q = MyPile->FindQuad( L"BackArrow" ); if (_q != 0 ) { _q->setPos( Vector2(-1416.666f, -1016.667f ) ); _q->setSize( Vector2( 71.89921f, 61.83332f ) ); }
+				_q = MyPile->FindQuad( L"Scroll" ); if (_q != 0 ) { _q->setPos( Vector2(-1450.f, -206.803f ) ); _q->setSize( Vector2( 25.9999f, 106.8029f ) ); }
+				_q = MyPile->FindQuad( L"ScrollTop" ); if (_q != 0 ) { _q->setPos( Vector2(-1444.444f, -100.0001f ) ); _q->setSize( Vector2( 27.57401f, 18.96959f ) ); }
+				_q = MyPile->FindQuad( L"ScrollBottom" ); if (_q != 0 ) { _q->setPos( Vector2(-1444.444f, -752.2221f ) ); _q->setSize( Vector2( 28.7499f, 21.2196f ) ); }
+
+				MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_FRENCH )
+			{
+				MyMenu->setPos( Vector2(-1340.222f, 104.4444f ) );
+
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"ScoreHeader" ); if (_t != 0 ) { _t->setPos( Vector2( 249.9997f, 630.5557f ) ); _t->setScale( 0.8089167f ); }
+				_t = MyPile->FindEzText( L"Score" ); if (_t != 0 ) { _t->setPos( Vector2( 1236.11f, 411.1112f ) ); _t->setScale( 0.9160833f ); }
+				_t = MyPile->FindEzText( L"LevelHeader" ); if (_t != 0 ) { _t->setPos( Vector2(-22.22363f, 136.1111f ) ); _t->setScale( 0.7519999f ); }
+				_t = MyPile->FindEzText( L"Level" ); if (_t != 0 ) { _t->setPos( Vector2( 1236.109f, -61.11107f ) ); _t->setScale( 0.9373333f ); }
+				_t = MyPile->FindEzText( L"LockedHeader" ); if (_t != 0 ) { _t->setPos( Vector2( 33.33325f, 441.6666f ) ); _t->setScale( 0.9f ); }
+				_t = MyPile->FindEzText( L"RequiredHero" ); if (_t != 0 ) { _t->setPos( Vector2( 280.5552f, 163.8889f ) ); _t->setScale( 0.72f ); }
+				_t = MyPile->FindEzText( L"RequiredLevel" ); if (_t != 0 ) { _t->setPos( Vector2( 277.7778f, -44.44443f ) ); _t->setScale( 0.72f ); }
+
+				boost::shared_ptr<QuadClass> _q;
+				_q = MyPile->FindQuad( L"BoxLeft" ); if (_q != 0 ) { _q->setPos( Vector2(-972.2227f, -127.7778f ) ); _q->setSize( Vector2( 616.5464f, 1004.329f ) ); }
+				_q = MyPile->FindQuad( L"BoxRight" ); if (_q != 0 ) { _q->setPos( Vector2( 666.6641f, -88.88879f ) ); _q->setSize( Vector2( 776.5515f, 846.666f ) ); }
+				_q = MyPile->FindQuad( L"Back" ); if (_q != 0 ) { _q->setPos( Vector2(-1269.443f, -1011.111f ) ); _q->setSize( Vector2( 64.49973f, 64.49973f ) ); }
+				_q = MyPile->FindQuad( L"BackArrow" ); if (_q != 0 ) { _q->setPos( Vector2(-1416.666f, -1016.667f ) ); _q->setSize( Vector2( 71.89921f, 61.83332f ) ); }
+				_q = MyPile->FindQuad( L"Scroll" ); if (_q != 0 ) { _q->setPos( Vector2(-1450.f, -206.803f ) ); _q->setSize( Vector2( 25.9999f, 106.8029f ) ); }
+				_q = MyPile->FindQuad( L"ScrollTop" ); if (_q != 0 ) { _q->setPos( Vector2(-1444.444f, -100.0001f ) ); _q->setSize( Vector2( 27.57401f, 18.96959f ) ); }
+				_q = MyPile->FindQuad( L"ScrollBottom" ); if (_q != 0 ) { _q->setPos( Vector2(-1444.444f, -752.2221f ) ); _q->setSize( Vector2( 28.7499f, 21.2196f ) ); }
+
+				MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_ITALIAN )
+			{
+				MyMenu->setPos( Vector2(-1340.222f, 104.4444f ) );
+
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"ScoreHeader" ); if (_t != 0 ) { _t->setPos( Vector2(-5.555912f, 608.3333f ) ); _t->setScale( 0.6490834f ); }
+				_t = MyPile->FindEzText( L"Score" ); if (_t != 0 ) { _t->setPos( Vector2( 1255.555f, 425.0001f ) ); _t->setScale( 0.865916f ); }
+				_t = MyPile->FindEzText( L"LevelHeader" ); if (_t != 0 ) { _t->setPos( Vector2(-0.001403809f, 130.5556f ) ); _t->setScale( 0.6412507f ); }
+				_t = MyPile->FindEzText( L"Level" ); if (_t != 0 ) { _t->setPos( Vector2( 1274.998f, -47.22218f ) ); _t->setScale( 0.8700836f ); }
+				_t = MyPile->FindEzText( L"LockedHeader" ); if (_t != 0 ) { _t->setPos( Vector2( 33.33325f, 441.6666f ) ); _t->setScale( 0.9f ); }
+				_t = MyPile->FindEzText( L"RequiredHero" ); if (_t != 0 ) { _t->setPos( Vector2( 280.5552f, 163.8889f ) ); _t->setScale( 0.72f ); }
+				_t = MyPile->FindEzText( L"RequiredLevel" ); if (_t != 0 ) { _t->setPos( Vector2( 277.7778f, -44.44443f ) ); _t->setScale( 0.72f ); }
+
+				boost::shared_ptr<QuadClass> _q;
+				_q = MyPile->FindQuad( L"BoxLeft" ); if (_q != 0 ) { _q->setPos( Vector2(-972.2227f, -127.7778f ) ); _q->setSize( Vector2( 616.5464f, 1004.329f ) ); }
+				_q = MyPile->FindQuad( L"BoxRight" ); if (_q != 0 ) { _q->setPos( Vector2( 666.6641f, -88.88879f ) ); _q->setSize( Vector2( 776.5515f, 846.666f ) ); }
+				_q = MyPile->FindQuad( L"Back" ); if (_q != 0 ) { _q->setPos( Vector2(-1269.443f, -1011.111f ) ); _q->setSize( Vector2( 64.49973f, 64.49973f ) ); }
+				_q = MyPile->FindQuad( L"BackArrow" ); if (_q != 0 ) { _q->setPos( Vector2(-1416.666f, -1016.667f ) ); _q->setSize( Vector2( 71.89921f, 61.83332f ) ); }
+				_q = MyPile->FindQuad( L"Scroll" ); if (_q != 0 ) { _q->setPos( Vector2(-1450.f, -206.803f ) ); _q->setSize( Vector2( 25.9999f, 106.8029f ) ); }
+				_q = MyPile->FindQuad( L"ScrollTop" ); if (_q != 0 ) { _q->setPos( Vector2(-1444.444f, -100.0001f ) ); _q->setSize( Vector2( 27.57401f, 18.96959f ) ); }
+				_q = MyPile->FindQuad( L"ScrollBottom" ); if (_q != 0 ) { _q->setPos( Vector2(-1444.444f, -752.2221f ) ); _q->setSize( Vector2( 28.7499f, 21.2196f ) ); }
+
+				MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_PORTUGUESE )
+			{
+				MyMenu->setPos( Vector2(-1340.222f, 104.4444f ) );
+
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"ScoreHeader" ); if (_t != 0 ) { _t->setPos( Vector2(-33.33374f, 622.2222f ) ); _t->setScale( 0.8630002f ); }
+				_t = MyPile->FindEzText( L"Score" ); if (_t != 0 ) { _t->setPos( Vector2( 1158.332f, 402.7778f ) ); _t->setScale( 0.8790836f ); }
+				_t = MyPile->FindEzText( L"LevelHeader" ); if (_t != 0 ) { _t->setPos( Vector2(-16.66821f, 108.3334f ) ); _t->setScale( 0.8452501f ); }
+				_t = MyPile->FindEzText( L"Level" ); if (_t != 0 ) { _t->setPos( Vector2( 1166.665f, -105.5555f ) ); _t->setScale( 0.8682501f ); }
+				_t = MyPile->FindEzText( L"LockedHeader" ); if (_t != 0 ) { _t->setPos( Vector2( 33.33325f, 441.6666f ) ); _t->setScale( 0.9f ); }
+				_t = MyPile->FindEzText( L"RequiredHero" ); if (_t != 0 ) { _t->setPos( Vector2( 280.5552f, 163.8889f ) ); _t->setScale( 0.72f ); }
+				_t = MyPile->FindEzText( L"RequiredLevel" ); if (_t != 0 ) { _t->setPos( Vector2( 277.7778f, -44.44443f ) ); _t->setScale( 0.72f ); }
+
+				boost::shared_ptr<QuadClass> _q;
+				_q = MyPile->FindQuad( L"BoxLeft" ); if (_q != 0 ) { _q->setPos( Vector2(-972.2227f, -127.7778f ) ); _q->setSize( Vector2( 616.5464f, 1004.329f ) ); }
+				_q = MyPile->FindQuad( L"BoxRight" ); if (_q != 0 ) { _q->setPos( Vector2( 666.6641f, -88.88879f ) ); _q->setSize( Vector2( 776.5515f, 846.666f ) ); }
+				_q = MyPile->FindQuad( L"Back" ); if (_q != 0 ) { _q->setPos( Vector2(-1269.443f, -1011.111f ) ); _q->setSize( Vector2( 64.49973f, 64.49973f ) ); }
+				_q = MyPile->FindQuad( L"BackArrow" ); if (_q != 0 ) { _q->setPos( Vector2(-1416.666f, -1016.667f ) ); _q->setSize( Vector2( 71.89921f, 61.83332f ) ); }
+				_q = MyPile->FindQuad( L"Scroll" ); if (_q != 0 ) { _q->setPos( Vector2(-1450.f, -206.803f ) ); _q->setSize( Vector2( 25.9999f, 106.8029f ) ); }
+				_q = MyPile->FindQuad( L"ScrollTop" ); if (_q != 0 ) { _q->setPos( Vector2(-1444.444f, -100.0001f ) ); _q->setSize( Vector2( 27.57401f, 18.96959f ) ); }
+				_q = MyPile->FindQuad( L"ScrollBottom" ); if (_q != 0 ) { _q->setPos( Vector2(-1444.444f, -752.2221f ) ); _q->setSize( Vector2( 28.7499f, 21.2196f ) ); }
+
+				MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_GERMAN )
+			{
+				MyMenu->setPos( Vector2(-1340.222f, 104.4444f ) );
+
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"ScoreHeader" ); if (_t != 0 ) { _t->setPos( Vector2(-30.55597f, 608.3334f ) ); _t->setScale( 0.7484168f ); }
+				_t = MyPile->FindEzText( L"Score" ); if (_t != 0 ) { _t->setPos( Vector2( 1158.332f, 433.3333f ) ); _t->setScale( 1.f ); }
+				_t = MyPile->FindEzText( L"LevelHeader" ); if (_t != 0 ) { _t->setPos( Vector2(-27.7793f, 108.3334f ) ); _t->setScale( 0.7689999f ); }
+				_t = MyPile->FindEzText( L"Level" ); if (_t != 0 ) { _t->setPos( Vector2( 1166.665f, -97.22215f ) ); _t->setScale( 1.f ); }
+				_t = MyPile->FindEzText( L"LockedHeader" ); if (_t != 0 ) { _t->setPos( Vector2( 27.33325f, 441.6666f ) ); _t->setScale( 0.88f ); }
+				_t = MyPile->FindEzText( L"RequiredHero" ); if (_t != 0 ) { _t->setPos( Vector2( 280.5552f, 163.8889f ) ); _t->setScale( 0.72f ); }
+				_t = MyPile->FindEzText( L"RequiredLevel" ); if (_t != 0 ) { _t->setPos( Vector2( 277.7778f, -44.44443f ) ); _t->setScale( 0.72f ); }
+
+				boost::shared_ptr<QuadClass> _q;
+				_q = MyPile->FindQuad( L"BoxLeft" ); if (_q != 0 ) { _q->setPos( Vector2(-972.2227f, -127.7778f ) ); _q->setSize( Vector2( 616.5464f, 1004.329f ) ); }
+				_q = MyPile->FindQuad( L"BoxRight" ); if (_q != 0 ) { _q->setPos( Vector2( 666.6641f, -88.88879f ) ); _q->setSize( Vector2( 776.5515f, 846.666f ) ); }
+				_q = MyPile->FindQuad( L"Back" ); if (_q != 0 ) { _q->setPos( Vector2(-1269.443f, -1011.111f ) ); _q->setSize( Vector2( 64.49973f, 64.49973f ) ); }
+				_q = MyPile->FindQuad( L"BackArrow" ); if (_q != 0 ) { _q->setPos( Vector2(-1416.666f, -1016.667f ) ); _q->setSize( Vector2( 71.89921f, 61.83332f ) ); }
+				_q = MyPile->FindQuad( L"Scroll" ); if (_q != 0 ) { _q->setPos( Vector2(-1450.f, -206.803f ) ); _q->setSize( Vector2( 25.9999f, 106.8029f ) ); }
+				_q = MyPile->FindQuad( L"ScrollTop" ); if (_q != 0 ) { _q->setPos( Vector2(-1444.444f, -100.0001f ) ); _q->setSize( Vector2( 27.57401f, 18.96959f ) ); }
+				_q = MyPile->FindQuad( L"ScrollBottom" ); if (_q != 0 ) { _q->setPos( Vector2(-1444.444f, -752.2221f ) ); _q->setSize( Vector2( 28.7499f, 21.2196f ) ); }
+
+				MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_RUSSIAN )
+			{
+				MyMenu->setPos( Vector2(-1340.222f, 104.4444f ) );
+
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"ScoreHeader" ); if (_t != 0 ) { _t->setPos( Vector2( 297.2219f, 658.3333f ) ); _t->setScale( 0.8626668f ); }
+				_t = MyPile->FindEzText( L"Score" ); if (_t != 0 ) { _t->setPos( Vector2( 680, 391.6665f ) ); _t->setScale( 0.6997502f ); }
+				_t = MyPile->FindEzText( L"LevelHeader" ); if (_t != 0 ) { _t->setPos( Vector2(-36.11264f, 80.55562f ) ); _t->setScale( 0.8034166f ); }
+				_t = MyPile->FindEzText( L"Level" ); if (_t != 0 ) { _t->setPos( Vector2( 680, -175.f ) ); _t->setScale( 0.8029999f ); }
+				_t = MyPile->FindEzText( L"LockedHeader" ); if (_t != 0 ) { _t->setPos( Vector2( 33.33325f, 441.6666f ) ); _t->setScale( 0.9f ); }
+				_t = MyPile->FindEzText( L"RequiredHero" ); if (_t != 0 ) { _t->setPos( Vector2( 280.5552f, 163.8889f ) ); _t->setScale( 0.72f ); }
+				_t = MyPile->FindEzText( L"RequiredLevel" ); if (_t != 0 ) { _t->setPos( Vector2( 277.7778f, -44.44443f ) ); _t->setScale( 0.72f ); }
+
+				boost::shared_ptr<QuadClass> _q;
+				_q = MyPile->FindQuad( L"BoxLeft" ); if (_q != 0 ) { _q->setPos( Vector2(-972.2227f, -127.7778f ) ); _q->setSize( Vector2( 616.5464f, 1004.329f ) ); }
+				_q = MyPile->FindQuad( L"BoxRight" ); if (_q != 0 ) { _q->setPos( Vector2( 666.6641f, -88.88879f ) ); _q->setSize( Vector2( 776.5515f, 846.666f ) ); }
+				_q = MyPile->FindQuad( L"Back" ); if (_q != 0 ) { _q->setPos( Vector2(-1269.443f, -1011.111f ) ); _q->setSize( Vector2( 64.49973f, 64.49973f ) ); }
+				_q = MyPile->FindQuad( L"BackArrow" ); if (_q != 0 ) { _q->setPos( Vector2(-1416.666f, -1016.667f ) ); _q->setSize( Vector2( 71.89921f, 61.83332f ) ); }
+				_q = MyPile->FindQuad( L"Scroll" ); if (_q != 0 ) { _q->setPos( Vector2(-1450.f, -434.0609f ) ); _q->setSize( Vector2( 25.9999f, 106.8029f ) ); }
+				_q = MyPile->FindQuad( L"ScrollTop" ); if (_q != 0 ) { _q->setPos( Vector2(-1444.444f, -100.0001f ) ); _q->setSize( Vector2( 27.57401f, 18.96959f ) ); }
+				_q = MyPile->FindQuad( L"ScrollBottom" ); if (_q != 0 ) { _q->setPos( Vector2(-1444.444f, -752.2221f ) ); _q->setSize( Vector2( 28.7499f, 21.2196f ) ); }
+
+				MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
+			}
+			else
+			{
+				MyMenu->setPos( Vector2(-1340.222f, 104.4444f ) );
+
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"ScoreHeader" ); if (_t != 0 ) { _t->setPos( Vector2(-22.22266f, 636.1111f ) ); _t->setScale( 1.f ); }
+				_t = MyPile->FindEzText( L"Score" ); if (_t != 0 ) { _t->setPos( Vector2( 1161.11f, 366.6667f ) ); _t->setScale( 1.f ); }
+				_t = MyPile->FindEzText( L"LevelHeader" ); if (_t != 0 ) { _t->setPos( Vector2(-2.779297f, 105.5556f ) ); _t->setScale( 1.f ); }
+				_t = MyPile->FindEzText( L"Level" ); if (_t != 0 ) { _t->setPos( Vector2( 1163.887f, -155.5555f ) ); _t->setScale( 1.f ); }
+				_t = MyPile->FindEzText( L"LockedHeader" ); if (_t != 0 ) { _t->setPos( Vector2( 33.33325f, 441.6666f ) ); _t->setScale( 0.9f ); }
+				_t = MyPile->FindEzText( L"RequiredHero" ); if (_t != 0 ) { _t->setPos( Vector2( 280.5552f, 163.8889f ) ); _t->setScale( 0.72f ); }
+				_t = MyPile->FindEzText( L"RequiredLevel" ); if (_t != 0 ) { _t->setPos( Vector2( 277.7778f, -44.44443f ) ); _t->setScale( 0.72f ); }
+
+				boost::shared_ptr<QuadClass> _q;
+				_q = MyPile->FindQuad( L"BoxLeft" ); if (_q != 0 ) { _q->setPos( Vector2(-972.2227f, -127.7778f ) ); _q->setSize( Vector2( 616.5465f, 1004.329f ) ); }
+				_q = MyPile->FindQuad( L"BoxRight" ); if (_q != 0 ) { _q->setPos( Vector2( 666.6641f, -88.88879f ) ); _q->setSize( Vector2( 776.5515f, 846.666f ) ); }
+				_q = MyPile->FindQuad( L"Back" ); if (_q != 0 ) { _q->setPos( Vector2(-1269.443f, -1011.111f ) ); _q->setSize( Vector2( 64.49973f, 64.49973f ) ); }
+				_q = MyPile->FindQuad( L"BackArrow" ); if (_q != 0 ) { _q->setPos( Vector2(-1416.666f, -1016.667f ) ); _q->setSize( Vector2( 71.89921f, 61.83332f ) ); }
+
+				_q = MyPile->FindQuad( L"Scroll" ); if (_q != 0 ) { _q->setPos( Vector2(-1450.f, -441.2393f ) ); _q->setSize( Vector2( 25.9999f, 106.8029f ) ); }
+				_q = MyPile->FindQuad( L"ScrollTop" ); if (_q != 0 ) { _q->setPos( Vector2(-1444.444f, -100.0001f ) ); _q->setSize( Vector2( 27.57401f, 18.96959f ) ); }
+				_q = MyPile->FindQuad( L"ScrollBottom" ); if (_q != 0 ) { _q->setPos( Vector2(-1444.444f, -752.2221f ) ); _q->setSize( Vector2( 28.7499f, 21.2196f ) ); }
+
+				MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
+			}
 	}
 
 	void StartMenu_MW_HeroSelect::Go( const boost::shared_ptr<MenuItem> &item )

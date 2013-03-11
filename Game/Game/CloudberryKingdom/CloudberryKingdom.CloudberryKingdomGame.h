@@ -163,6 +163,7 @@ namespace CloudberryKingdom
 		static bool SimpleLeaderboards;
 		static bool AsianButtonSwitch;
 		static bool FakeAwardments;
+		static float GuiSqueeze;
 
 
 

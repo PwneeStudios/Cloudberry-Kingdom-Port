@@ -1,4 +1,5 @@
 #include <global_header.h>
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
 namespace CloudberryKingdom
 {
@@ -139,22 +140,18 @@ namespace CloudberryKingdom
 
 	void GUI_LivesLeft::SetPos()
 	{
-		boost::shared_ptr<EzText> _t;
-		_t = MyPile->FindEzText( std::wstring( L"Text" ) );
-		if ( _t != 0 )
-		{
-			_t->setPos( Vector2( 195.3334f, -43.77777f ) );
-		}
+            boost::shared_ptr<EzText> _t;
+            _t = MyPile->FindEzText( L"Text" ); if (_t != 0 ) { _t->setPos( Vector2( 195.3334f, -43.77777f ) ); }
 
-		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( std::wstring( L"Bob" ) );
-		if ( _q != 0 )
-		{
-			_q->setPos( Vector2( 133.3333f, -27.77774f ) );
-			_q->ScaleYToMatchRatio( 82.5f );
-		}
+            boost::shared_ptr<QuadClass> _q;
+            _q = MyPile->FindQuad( L"Bob" ); if (_q != 0 ) { _q->setPos( Vector2( 133.3333f, -27.77774f ) ); _q->ScaleYToMatchRatio( 82.5f ); }
 
-		MyPile->setPos( Vector2( -222.2232f, 897.222f ) );
+            MyPile->setPos( Vector2(-222.2232f, 897.222f ) );
+
+			// Extra squeeze
+			Vector2 squeeze = Vector2( 0, -15 ) * CloudberryKingdomGame::GuiSqueeze;
+
+			MyPile->setPos( MyPile->getPos() + squeeze );
 	}
 
 	void GUI_LivesLeft::SetParams()

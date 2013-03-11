@@ -119,11 +119,13 @@ namespace CloudberryKingdom
         ItemShift = boost::make_shared<QuadClass>(); ItemShift->Show = false; MyPile->Add( ItemShift, L"Offset" );
 
         // Messages
+		float text_width = 1400.0f;
+		float text_scale = .785f;
         CurrentMessage = Message_None;
-        NotRankedFriends = boost::make_shared<EzText>( Localization::Words_NotRankedFriends, ItemFont, 2000.f, true, true );
+        NotRankedFriends = boost::make_shared<EzText>( Localization::Words_NotRankedFriends, ItemFont, text_width, true, true, text_scale );
         MyPile->Add( NotRankedFriends, L"NotRankedFriends" );
 
-        NotRanked = boost::make_shared<EzText>( Localization::Words_NotRanked, ItemFont, 2000.f, true, true );
+        NotRanked = boost::make_shared<EzText>( Localization::Words_NotRanked, ItemFont, text_width, true, true, text_scale );
         MyPile->Add( NotRanked, L"NotRanked" );
 
         LoadingStr0 = Localization::WordString( Localization::Words_Loading );
@@ -194,8 +196,19 @@ if ( ButtonCheck::ControllerInUse )
 
 		// Left/Right
 		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getLeftRight(), 90.0f, std::wstring( L"Button_LeftRight" ) ) );
-		boost::shared_ptr<EzText> text = boost::make_shared<EzText>( Localization::WordString( Localization::Words_Previous) + L" / " +
-											Localization::WordString( Localization::Words_Next), ItemFont );
+
+			std::wstring prevback = std::wstring( L"");
+			if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_RUSSIAN )
+			{
+				prevback = Localization::WordString( Localization::Words_Previous ) + L" /\n" + Localization::WordString( Localization::Words_Next );
+			}
+			else
+			{
+				prevback = Localization::WordString( Localization::Words_Previous) + L" / " + Localization::WordString( Localization::Words_Next );
+			}
+			boost::shared_ptr<EzText> text = boost::make_shared<EzText>( prevback, ItemFont, 1000.0f, false, false, .75f );
+
+
 		StartMenu::SetTextUnselected_Red( text );
 		MyPile->Add( text, L"LeftRight" );
 
@@ -531,7 +544,7 @@ if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_GERMAN 
 
 	boost::shared_ptr<EzText> _t;
 	_t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->setPos( Vector2(-1308.333f, 991.6661f ) ); _t->setScale( 0.5240005f ); }
-	_t = MyPile->FindEzText( L"GameTitle" ); if (_t != 0 ) { _t->setPos( Vector2(-1302.778f, 861.1112f ) ); _t->setScale( 0.4570001f ); }
+    _t = MyPile->FindEzText( L"GameTitle" ); if (_t != 0 ) { _t->setPos( Vector2(-1302.778f, 861.1112f ) ); _t->setScale( 0.42f/*0.4570001f*/ ); }
 	_t = MyPile->FindEzText( L"NotRankedFriends" ); if (_t != 0 ) { _t->setPos( Vector2(-391.6667f, -16.66664f ) ); _t->setScale( 0.4956669f ); }
 	_t = MyPile->FindEzText( L"NotRanked" ); if (_t != 0 ) { _t->setPos( Vector2(-391.6667f, -16.66664f ) ); _t->setScale( 0.4956669f ); }
 	_t = MyPile->FindEzText( L"Loading" ); if (_t != 0 ) { _t->setPos( Vector2(-391.6667f, -16.66664f ) ); _t->setScale( 0.3519495f ); }
@@ -557,7 +570,7 @@ else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_IT
 {
 	boost::shared_ptr<MenuItem> _item;
 	_item = MyMenu->FindItemByName( L"ViewGamer" ); if (_item != 0 ) { _item->setSetPos( Vector2(-888.5557f, 176.6667f ) ); _item->MyText->setScale( 0.3826668f ); _item->MySelectedText->setScale( 0.3826668f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
-	_item = MyMenu->FindItemByName( L"SwitchView" ); if (_item != 0 ) { _item->setSetPos( Vector2(-877.4443f, 31.66899f ) ); _item->MyText->setScale( 0.4059168f ); _item->MySelectedText->setScale( 0.4059168f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+	_item = MyMenu->FindItemByName( L"SwitchView" ); if (_item != 0 ) { _item->setSetPos( Vector2(-877.4443f, 23.33566f ) ); _item->MyText->setScale( 0.4059168f ); _item->MySelectedText->setScale( 0.4059168f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 	_item = MyMenu->FindItemByName( L"SwitchSort" ); if (_item != 0 ) { _item->setSetPos( Vector2(-880.2222f, -116.1065f ) ); _item->MyText->setScale( 0.4625835f ); _item->MySelectedText->setScale( 0.4625835f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 
 	MyMenu->setPos( Vector2( 1672.222f, 686.1112f ) );
@@ -567,7 +580,7 @@ else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_IT
 	_t = MyPile->FindEzText( L"GameTitle" ); if (_t != 0 ) { _t->setPos( Vector2(-1297.222f, 855.5557f ) ); _t->setScale( 0.3989167f ); }
 	_t = MyPile->FindEzText( L"NotRankedFriends" ); if (_t != 0 ) { _t->setPos( Vector2(-391.6667f, -16.66664f ) ); _t->setScale( 0.4956669f ); }
 	_t = MyPile->FindEzText( L"NotRanked" ); if (_t != 0 ) { _t->setPos( Vector2(-391.6667f, -16.66664f ) ); _t->setScale( 0.4956669f ); }
-	_t = MyPile->FindEzText( L"Loading" ); if (_t != 0 ) { _t->setPos( Vector2(-391.6667f, -16.66664f ) ); _t->setScale( 0.3519495f ); }
+	_t = MyPile->FindEzText( L"Loading" ); if (_t != 0 ) { _t->setPos( Vector2(-391.6667f, -16.66664f ) ); _t->setScale( 0.3739281f ); }
 	_t = MyPile->FindEzText( L"LeftRight" ); if (_t != 0 ) { _t->setPos( Vector2( 797.2221f, 538.8887f ) ); _t->setScale( 0.3720834f ); }
 
 	boost::shared_ptr<QuadClass> _q;
@@ -579,8 +592,41 @@ else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_IT
 	_q = MyPile->FindQuad( L"Offset_Val" ); if (_q != 0 ) { _q->setPos( Vector2( 13808.34f, -116.6667f ) ); _q->setSize( Vector2( 1.f, 1.f ) ); }
 	_q = MyPile->FindQuad( L"Offset" ); if (_q != 0 ) { _q->setPos( Vector2(-869.4451f, -383.3332f ) ); _q->setSize( Vector2( 10.08327f, 10.08327f ) ); }
 	_q = MyPile->FindQuad( L"Button_ViewGamer" ); if (_q != 0 ) { _q->setPos( Vector2( 705.5554f, 783.3331f ) ); _q->setSize( Vector2( 67.25001f, 67.25001f ) ); }
-	_q = MyPile->FindQuad( L"Button_SwitchView" ); if (_q != 0 ) { _q->setPos( Vector2( 705.5557f, 630.5551f ) ); _q->setSize( Vector2( 65.16659f, 65.16659f ) ); }
+	_q = MyPile->FindQuad( L"Button_SwitchView" ); if (_q != 0 ) { _q->setPos( Vector2( 705.5557f, 624.9996f ) ); _q->setSize( Vector2( 65.16659f, 65.16659f ) ); }
 	_q = MyPile->FindQuad( L"Button_LeftRight" ); if (_q != 0 ) { _q->setPos( Vector2( 713.8888f, 480.5554f ) ); _q->setSize( Vector2( 73.74999f, 73.74999f ) ); }
+	_q = MyPile->FindQuad( L"Button_Back" ); if (_q != 0 ) { _q->setPos( Vector2( 1536.111f, 227.7776f ) ); _q->setSize( Vector2( 67.99999f, 67.99999f ) ); }
+	_q = MyPile->FindQuad( L"BackArrow" ); if (_q != 0 ) { _q->setPos( Vector2( 1369.444f, 216.6666f ) ); _q->setSize( Vector2( 77.71317f, 66.83332f ) ); }
+
+	MyPile->setPos( Vector2( 0.f, 5.555542f ) );
+}
+else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_RUSSIAN )
+{
+	boost::shared_ptr<MenuItem> _item;
+    _item = MyMenu->FindItemByName( L"ViewGamer" ); if (_item != 0 ) { _item->setSetPos( Vector2(-908.f, 182.2224f ) ); _item->MyText->setScale( 0.414917f * .97f ); _item->MySelectedText->setScale( 0.414917f * .97f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+    _item = MyMenu->FindItemByName( L"SwitchView" ); if (_item != 0 ) { _item->setSetPos( Vector2(-899.6663f, 31.66904f ) ); _item->MyText->setScale( 0.4285002f * .97f ); _item->MySelectedText->setScale( 0.4285002f * .97f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+    _item = MyMenu->FindItemByName( L"SwitchSort" ); if (_item != 0 ) { _item->setSetPos( Vector2(-874.6667f, -116.1065f ) ); _item->MyText->setScale( 0.5009168f * .97f ); _item->MySelectedText->setScale( 0.5009168f * .97f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+
+	MyMenu->setPos( Vector2( 1672.222f, 686.1112f ) );
+
+	boost::shared_ptr<EzText> _t;
+	_t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->setPos( Vector2(-1308.333f, 991.6661f ) ); _t->setScale( 0.5240005f ); }
+	_t = MyPile->FindEzText( L"GameTitle" ); if (_t != 0 ) { _t->setPos( Vector2(-1302.778f, 861.1112f ) ); _t->setScale( 0.4570001f ); }
+	_t = MyPile->FindEzText( L"NotRankedFriends" ); if (_t != 0 ) { _t->setPos( Vector2(-391.6667f, -16.66664f ) ); _t->setScale( 0.4956669f ); }
+	_t = MyPile->FindEzText( L"NotRanked" ); if (_t != 0 ) { _t->setPos( Vector2(-391.6667f, -16.66664f ) ); _t->setScale( 0.4956669f ); }
+	_t = MyPile->FindEzText( L"Loading" ); if (_t != 0 ) { _t->setPos( Vector2(-391.6667f, -16.66664f ) ); _t->setScale( 0.3795856f ); }
+    _t = MyPile->FindEzText( L"LeftRight" ); if (_t != 0 ) { _t->setPos( Vector2( 780.5557f, 555.5554f ) ); _t->setScale( 0.4296669f * .97f ); }
+
+	boost::shared_ptr<QuadClass> _q;
+	_q = MyPile->FindQuad( L"BoxLeft" ); if (_q != 0 ) { _q->setPos( Vector2(-408.3335f, 2.777821f ) ); _q->setSize( Vector2( 1094.068f, 1006.303f ) ); }
+	_q = MyPile->FindQuad( L"BoxRight" ); if (_q != 0 ) { _q->setPos( Vector2( 1266.665f, 519.4443f ) ); _q->setSize( Vector2( 418.2869f, 684.4695f ) ); }
+	_q = MyPile->FindQuad( L"Highlight" ); if (_q != 0 ) { _q->setPos( Vector2(-413.8886f, 643.8893f ) ); _q->setSize( Vector2( 1005.093f, 49.08278f ) ); }
+	_q = MyPile->FindQuad( L"TL" ); if (_q != 0 ) { _q->setPos( Vector2(-1300.001f, 713.8893f ) ); _q->setSize( Vector2( 0.9999986f, 0.9999986f ) ); }
+	_q = MyPile->FindQuad( L"Offset_GamerTag" ); if (_q != 0 ) { _q->setPos( Vector2( 4820.f, -363.889f ) ); _q->setSize( Vector2( 1.f, 1.f ) ); }
+	_q = MyPile->FindQuad( L"Offset_Val" ); if (_q != 0 ) { _q->setPos( Vector2( 13808.34f, -116.6667f ) ); _q->setSize( Vector2( 1.f, 1.f ) ); }
+	_q = MyPile->FindQuad( L"Offset" ); if (_q != 0 ) { _q->setPos( Vector2(-869.4451f, -383.3332f ) ); _q->setSize( Vector2( 10.08327f, 10.08327f ) ); }
+	_q = MyPile->FindQuad( L"Button_ViewGamer" ); if (_q != 0 ) { _q->setPos( Vector2( 705.5554f, 783.3331f ) ); _q->setSize( Vector2( 67.25001f, 67.25001f ) ); }
+	_q = MyPile->FindQuad( L"Button_SwitchView" ); if (_q != 0 ) { _q->setPos( Vector2( 705.5554f, 627.7772f ) ); _q->setSize( Vector2( 65.16659f, 65.16659f ) ); }
+	_q = MyPile->FindQuad( L"Button_LeftRight" ); if (_q != 0 ) { _q->setPos( Vector2( 705.5554f, 472.2213f ) ); _q->setSize( Vector2( 73.74999f, 73.74999f ) ); }
 	_q = MyPile->FindQuad( L"Button_Back" ); if (_q != 0 ) { _q->setPos( Vector2( 1536.111f, 227.7776f ) ); _q->setSize( Vector2( 67.99999f, 67.99999f ) ); }
 	_q = MyPile->FindQuad( L"BackArrow" ); if (_q != 0 ) { _q->setPos( Vector2( 1369.444f, 216.6666f ) ); _q->setSize( Vector2( 77.71317f, 66.83332f ) ); }
 
@@ -622,19 +668,19 @@ else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_FR
 else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_SPANISH )
 {
 	boost::shared_ptr<MenuItem> _item;
-	_item = MyMenu->FindItemByName( L"ViewGamer" ); if (_item != 0 ) { _item->setSetPos( Vector2(-883.0004f, 171.1111f ) ); _item->MyText->setScale( 0.4280001f ); _item->MySelectedText->setScale( 0.4280001f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
-	_item = MyMenu->FindItemByName( L"SwitchView" ); if (_item != 0 ) { _item->setSetPos( Vector2(-874.6668f, 20.55785f ) ); _item->MyText->setScale( 0.4208333f ); _item->MySelectedText->setScale( 0.4208333f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
-	_item = MyMenu->FindItemByName( L"SwitchSort" ); if (_item != 0 ) { _item->setSetPos( Vector2(-869.1111f, -127.2176f ) ); _item->MyText->setScale( 0.43025f ); _item->MySelectedText->setScale( 0.43025f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+	_item = MyMenu->FindItemByName( L"ViewGamer" ); if (_item != 0 ) { _item->setSetPos( Vector2(-896.1116f, 182.2222f ) ); _item->MyText->setScale( 0.3883668f ); _item->MySelectedText->setScale( 0.3883668f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+	_item = MyMenu->FindItemByName( L"SwitchView" ); if (_item != 0 ) { _item->setSetPos( Vector2(-890.5558f, 15.00228f ) ); _item->MyText->setScale( 0.3815225f ); _item->MySelectedText->setScale( 0.3815225f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+	_item = MyMenu->FindItemByName( L"SwitchSort" ); if (_item != 0 ) { _item->setSetPos( Vector2(-871.1111f, -127.2176f ) ); _item->MyText->setScale( 0.4108887f ); _item->MySelectedText->setScale( 0.4108887f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 
-	MyMenu->setPos( Vector2( 1672.222f, 686.1112f ) );
+	MyMenu->setPos( Vector2( 1672.222f - 60, 686.1112f ) );
 
 	boost::shared_ptr<EzText> _t;
 	_t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->setPos( Vector2(-1308.333f, 991.6661f ) ); _t->setScale( 0.5240005f ); }
 	_t = MyPile->FindEzText( L"GameTitle" ); if (_t != 0 ) { _t->setPos( Vector2(-1291.667f, 861.1112f ) ); _t->setScale( 0.3976667f ); }
 	_t = MyPile->FindEzText( L"NotRankedFriends" ); if (_t != 0 ) { _t->setPos( Vector2(-391.6667f, -16.66664f ) ); _t->setScale( 0.4956669f ); }
 	_t = MyPile->FindEzText( L"NotRanked" ); if (_t != 0 ) { _t->setPos( Vector2(-391.6667f, -16.66664f ) ); _t->setScale( 0.4956669f ); }
-	_t = MyPile->FindEzText( L"Loading" ); if (_t != 0 ) { _t->setPos( Vector2(-391.6667f, -16.66664f ) ); _t->setScale( 0.3824919f ); }
-	_t = MyPile->FindEzText( L"LeftRight" ); if (_t != 0 ) { _t->setPos( Vector2( 799.9999f, 555.5553f ) ); _t->setScale( 0.4340833f ); }
+	_t = MyPile->FindEzText( L"Loading" ); if (_t != 0 ) { _t->setPos( Vector2(-391.6667f, -16.66664f ) ); _t->setScale( 0.351667f ); }
+	_t = MyPile->FindEzText( L"LeftRight" ); if (_t != 0 ) { _t->setPos( Vector2( 786.888f, 547.222f ) ); _t->setScale( 0.3899582f ); }
 
 	boost::shared_ptr<QuadClass> _q;
 	_q = MyPile->FindQuad( L"BoxLeft" ); if (_q != 0 ) { _q->setPos( Vector2(-408.3335f, 2.777821f ) ); _q->setSize( Vector2( 1094.068f, 1006.303f ) ); }
@@ -645,18 +691,18 @@ else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_SP
 	_q = MyPile->FindQuad( L"Offset_Val" ); if (_q != 0 ) { _q->setPos( Vector2( 13808.34f, -116.6667f ) ); _q->setSize( Vector2( 1.f, 1.f ) ); }
 	_q = MyPile->FindQuad( L"Offset" ); if (_q != 0 ) { _q->setPos( Vector2(-869.4451f, -383.3332f ) ); _q->setSize( Vector2( 10.08327f, 10.08327f ) ); }
 	_q = MyPile->FindQuad( L"Button_ViewGamer" ); if (_q != 0 ) { _q->setPos( Vector2( 705.5554f, 783.3331f ) ); _q->setSize( Vector2( 67.25001f, 67.25001f ) ); }
-	_q = MyPile->FindQuad( L"Button_SwitchView" ); if (_q != 0 ) { _q->setPos( Vector2( 705.5557f, 616.6663f ) ); _q->setSize( Vector2( 65.16659f, 65.16659f ) ); }
-	_q = MyPile->FindQuad( L"Button_LeftRight" ); if (_q != 0 ) { _q->setPos( Vector2( 713.8888f, 474.9998f ) ); _q->setSize( Vector2( 73.74999f, 73.74999f ) ); }
+	_q = MyPile->FindQuad( L"Button_SwitchView" ); if (_q != 0 ) { _q->setPos( Vector2( 705.5554f, 616.6663f ) ); _q->setSize( Vector2( 65.16659f, 65.16659f ) ); }
+	_q = MyPile->FindQuad( L"Button_LeftRight" ); if (_q != 0 ) { _q->setPos( Vector2( 708.3333f, 469.4439f ) ); _q->setSize( Vector2( 73.74999f, 73.74999f ) ); }
 	_q = MyPile->FindQuad( L"Button_Back" ); if (_q != 0 ) { _q->setPos( Vector2( 1536.111f, 227.7776f ) ); _q->setSize( Vector2( 67.99999f, 67.99999f ) ); }
 	_q = MyPile->FindQuad( L"BackArrow" ); if (_q != 0 ) { _q->setPos( Vector2( 1369.444f, 216.6666f ) ); _q->setSize( Vector2( 77.71317f, 66.83332f ) ); }
 
-	MyPile->setPos( Vector2( 0.f, 5.555542f ) );
+	MyPile->setPos( Vector2( 0.f - 60, 5.555542f ) );
 }
 else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_PORTUGUESE )
 {
 	boost::shared_ptr<MenuItem> _item;
 	_item = MyMenu->FindItemByName( L"ViewGamer" ); if (_item != 0 ) { _item->setSetPos( Vector2(-908.0002f, 168.3334f ) ); _item->MyText->setScale( 0.3748334f ); _item->MySelectedText->setScale( 0.3748334f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
-	_item = MyMenu->FindItemByName( L"SwitchView" ); if (_item != 0 ) { _item->setSetPos( Vector2(-908.f, 17.78011f ) ); _item->MyText->setScale( 0.3670003f ); _item->MySelectedText->setScale( 0.3670003f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+	_item = MyMenu->FindItemByName( L"SwitchView" ); if (_item != 0 ) { _item->setSetPos( Vector2(-905.2222f, 17.78011f ) ); _item->MyText->setScale( 0.3670003f ); _item->MySelectedText->setScale( 0.3670003f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 	_item = MyMenu->FindItemByName( L"SwitchSort" ); if (_item != 0 ) { _item->setSetPos( Vector2(-874.6667f, -116.1065f ) ); _item->MyText->setScale( 0.5009168f ); _item->MySelectedText->setScale( 0.5009168f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 
 	MyMenu->setPos( Vector2( 1672.222f, 686.1112f ) );
@@ -666,7 +712,7 @@ else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_PO
 	_t = MyPile->FindEzText( L"GameTitle" ); if (_t != 0 ) { _t->setPos( Vector2(-1302.778f, 861.1112f ) ); _t->setScale( 0.4570001f ); }
 	_t = MyPile->FindEzText( L"NotRankedFriends" ); if (_t != 0 ) { _t->setPos( Vector2(-391.6667f, -16.66664f ) ); _t->setScale( 0.4956669f ); }
 	_t = MyPile->FindEzText( L"NotRanked" ); if (_t != 0 ) { _t->setPos( Vector2(-391.6667f, -16.66664f ) ); _t->setScale( 0.4956669f ); }
-	_t = MyPile->FindEzText( L"Loading" ); if (_t != 0 ) { _t->setPos( Vector2(-391.6667f, -16.66664f ) ); _t->setScale( 0.3519495f ); }
+	_t = MyPile->FindEzText( L"Loading" ); if (_t != 0 ) { _t->setPos( Vector2(-391.6667f, -16.66664f ) ); _t->setScale( 0.3595637f ); }
 	_t = MyPile->FindEzText( L"LeftRight" ); if (_t != 0 ) { _t->setPos( Vector2( 769.4445f, 552.7775f ) ); _t->setScale( 0.3768338f ); }
 
 	boost::shared_ptr<QuadClass> _q;
@@ -685,22 +731,22 @@ else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_PO
 
 	MyPile->setPos( Vector2( 0.f, 5.555542f ) );
 }
-else
+else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_JAPANESE )
 {
 	boost::shared_ptr<MenuItem> _item;
-	_item = MyMenu->FindItemByName( L"ViewGamer" ); if (_item != 0 ) { _item->setSetPos( Vector2(-874.6669f, 190.5556f ) ); _item->MyText->setScale( 0.4512501f ); _item->MySelectedText->setScale( 0.4512501f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
-	_item = MyMenu->FindItemByName( L"SwitchView" ); if (_item != 0 ) { _item->setSetPos( Vector2(-880.2222f, 37.22455f ) ); _item->MyText->setScale( 0.5009168f ); _item->MySelectedText->setScale( 0.5009168f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+	_item = MyMenu->FindItemByName( L"ViewGamer" ); if (_item != 0 ) { _item->setSetPos( Vector2(-885.778f, 185.0001f ) ); _item->MyText->setScale( 0.4655002f ); _item->MySelectedText->setScale( 0.4655002f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+	_item = MyMenu->FindItemByName( L"SwitchView" ); if (_item != 0 ) { _item->setSetPos( Vector2(-877.4442f, 34.44678f ) ); _item->MyText->setScale( 0.4790835f ); _item->MySelectedText->setScale( 0.4790835f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 	_item = MyMenu->FindItemByName( L"SwitchSort" ); if (_item != 0 ) { _item->setSetPos( Vector2(-874.6667f, -116.1065f ) ); _item->MyText->setScale( 0.5009168f ); _item->MySelectedText->setScale( 0.5009168f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 
 	MyMenu->setPos( Vector2( 1672.222f, 686.1112f ) );
 
 	boost::shared_ptr<EzText> _t;
-	_t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->setPos( Vector2(-1308.333f, 991.6661f ) ); _t->setScale( 0.5240005f ); }
-	_t = MyPile->FindEzText( L"GameTitle" ); if (_t != 0 ) { _t->setPos( Vector2(-1302.778f, 861.1112f ) ); _t->setScale( 0.4570001f ); }
-	_t = MyPile->FindEzText( L"NotRankedFriends" ); if (_t != 0 ) { _t->setPos( Vector2(-391.6667f, -16.66664f ) ); _t->setScale( 0.4956669f ); }
-	_t = MyPile->FindEzText( L"NotRanked" ); if (_t != 0 ) { _t->setPos( Vector2(-391.6667f, -16.66664f ) ); _t->setScale( 0.4956669f ); }
-	_t = MyPile->FindEzText( L"Loading" ); if (_t != 0 ) { _t->setPos( Vector2(-391.6667f, -16.66664f ) ); _t->setScale( 0.3519495f ); }
-	_t = MyPile->FindEzText( L"LeftRight" ); if (_t != 0 ) { _t->setPos( Vector2( 797.2221f, 583.3331f ) ); _t->setScale( 0.5539168f ); }
+	_t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->setPos( Vector2(-1350.f, 988.8883f ) ); _t->setScale( 0.5240005f ); }
+	_t = MyPile->FindEzText( L"GameTitle" ); if (_t != 0 ) { _t->setPos( Vector2(-1344.445f, 858.3334f ) ); _t->setScale( 0.4432501f ); }
+	_t = MyPile->FindEzText( L"NotRankedFriends" ); if (_t != 0 ) { _t->setPos( Vector2(-402.7775f, -16.66664f ) ); _t->setScale( 0.4863335f ); }
+	_t = MyPile->FindEzText( L"NotRanked" ); if (_t != 0 ) { _t->setPos( Vector2(-391.6667f, -16.66664f ) ); _t->setScale( 0.4925002f ); }
+	_t = MyPile->FindEzText( L"Loading" ); if (_t != 0 ) { _t->setPos( Vector2(-391.6667f, -16.66664f ) ); _t->setScale( 0.3746839f ); }
+	_t = MyPile->FindEzText( L"LeftRight" ); if (_t != 0 ) { _t->setPos( Vector2( 794.4443f, 563.8887f ) ); _t->setScale( 0.4802502f ); }
 
 	boost::shared_ptr<QuadClass> _q;
 	_q = MyPile->FindQuad( L"BoxLeft" ); if (_q != 0 ) { _q->setPos( Vector2(-408.3335f, 2.777821f ) ); _q->setSize( Vector2( 1094.068f, 1006.303f ) ); }
@@ -711,8 +757,41 @@ else
 	_q = MyPile->FindQuad( L"Offset_Val" ); if (_q != 0 ) { _q->setPos( Vector2( 13808.34f, -116.6667f ) ); _q->setSize( Vector2( 1.f, 1.f ) ); }
 	_q = MyPile->FindQuad( L"Offset" ); if (_q != 0 ) { _q->setPos( Vector2(-869.4451f, -383.3332f ) ); _q->setSize( Vector2( 10.08327f, 10.08327f ) ); }
 	_q = MyPile->FindQuad( L"Button_ViewGamer" ); if (_q != 0 ) { _q->setPos( Vector2( 705.5554f, 783.3331f ) ); _q->setSize( Vector2( 67.25001f, 67.25001f ) ); }
-	_q = MyPile->FindQuad( L"Button_SwitchView" ); if (_q != 0 ) { _q->setPos( Vector2( 705.5557f, 630.5551f ) ); _q->setSize( Vector2( 65.16659f, 65.16659f ) ); }
-	_q = MyPile->FindQuad( L"Button_LeftRight" ); if (_q != 0 ) { _q->setPos( Vector2( 713.8888f, 480.5554f ) ); _q->setSize( Vector2( 73.74999f, 73.74999f ) ); }
+	_q = MyPile->FindQuad( L"Button_SwitchView" ); if (_q != 0 ) { _q->setPos( Vector2( 705.5554f, 619.4439f ) ); _q->setSize( Vector2( 65.16659f, 65.16659f ) ); }
+	_q = MyPile->FindQuad( L"Button_LeftRight" ); if (_q != 0 ) { _q->setPos( Vector2( 705.5554f, 472.2213f ) ); _q->setSize( Vector2( 73.74999f, 73.74999f ) ); }
+	_q = MyPile->FindQuad( L"Button_Back" ); if (_q != 0 ) { _q->setPos( Vector2( 1536.111f, 227.7776f ) ); _q->setSize( Vector2( 67.99999f, 67.99999f ) ); }
+	_q = MyPile->FindQuad( L"BackArrow" ); if (_q != 0 ) { _q->setPos( Vector2( 1369.444f, 216.6666f ) ); _q->setSize( Vector2( 77.71317f, 66.83332f ) ); }
+
+	MyPile->setPos( Vector2( 0.f, 5.555542f ) );
+}
+else
+{
+	boost::shared_ptr<MenuItem> _item;
+	_item = MyMenu->FindItemByName( L"ViewGamer" ); if (_item != 0 ) { _item->setSetPos( Vector2(-885.778f, 185.0001f ) ); _item->MyText->setScale( 0.4655002f ); _item->MySelectedText->setScale( 0.4655002f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+	_item = MyMenu->FindItemByName( L"SwitchView" ); if (_item != 0 ) { _item->setSetPos( Vector2(-877.4442f, 34.44678f ) ); _item->MyText->setScale( 0.4790835f ); _item->MySelectedText->setScale( 0.4790835f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+	_item = MyMenu->FindItemByName( L"SwitchSort" ); if (_item != 0 ) { _item->setSetPos( Vector2(-874.6667f, -116.1065f ) ); _item->MyText->setScale( 0.5009168f ); _item->MySelectedText->setScale( 0.5009168f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+
+	MyMenu->setPos( Vector2( 1672.222f, 686.1112f ) );
+
+	boost::shared_ptr<EzText> _t;
+	_t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->setPos( Vector2(-1308.333f, 991.6661f ) ); _t->setScale( 0.5240005f ); }
+	_t = MyPile->FindEzText( L"GameTitle" ); if (_t != 0 ) { _t->setPos( Vector2(-1302.778f, 861.1112f ) ); _t->setScale( 0.4570001f ); }
+	_t = MyPile->FindEzText( L"NotRankedFriends" ); if (_t != 0 ) { _t->setPos( Vector2(-391.6667f, -16.66664f ) ); _t->setScale( 0.4956669f ); }
+	_t = MyPile->FindEzText( L"NotRanked" ); if (_t != 0 ) { _t->setPos( Vector2(-391.6667f, -16.66664f ) ); _t->setScale( 0.4956669f ); }
+	_t = MyPile->FindEzText( L"Loading" ); if (_t != 0 ) { _t->setPos( Vector2(-391.6667f, -16.66664f ) ); _t->setScale( 0.3850924f ); }
+	_t = MyPile->FindEzText( L"LeftRight" ); if (_t != 0 ) { _t->setPos( Vector2( 802.7778f, 558.3332f ) ); _t->setScale( 0.4802502f ); }
+
+	boost::shared_ptr<QuadClass> _q;
+	_q = MyPile->FindQuad( L"BoxLeft" ); if (_q != 0 ) { _q->setPos( Vector2(-408.3335f, 2.777821f ) ); _q->setSize( Vector2( 1094.068f, 1006.303f ) ); }
+	_q = MyPile->FindQuad( L"BoxRight" ); if (_q != 0 ) { _q->setPos( Vector2( 1266.665f, 519.4443f ) ); _q->setSize( Vector2( 418.2869f, 684.4695f ) ); }
+	_q = MyPile->FindQuad( L"Highlight" ); if (_q != 0 ) { _q->setPos( Vector2(-413.8886f, 643.8893f ) ); _q->setSize( Vector2( 1005.093f, 49.08278f ) ); }
+	_q = MyPile->FindQuad( L"TL" ); if (_q != 0 ) { _q->setPos( Vector2(-1300.001f, 713.8893f ) ); _q->setSize( Vector2( 0.9999986f, 0.9999986f ) ); }
+	_q = MyPile->FindQuad( L"Offset_GamerTag" ); if (_q != 0 ) { _q->setPos( Vector2( 4820.f, -363.889f ) ); _q->setSize( Vector2( 1.f, 1.f ) ); }
+	_q = MyPile->FindQuad( L"Offset_Val" ); if (_q != 0 ) { _q->setPos( Vector2( 13808.34f, -116.6667f ) ); _q->setSize( Vector2( 1.f, 1.f ) ); }
+	_q = MyPile->FindQuad( L"Offset" ); if (_q != 0 ) { _q->setPos( Vector2(-869.4451f, -383.3332f ) ); _q->setSize( Vector2( 10.08327f, 10.08327f ) ); }
+	_q = MyPile->FindQuad( L"Button_ViewGamer" ); if (_q != 0 ) { _q->setPos( Vector2( 705.5554f, 783.3331f ) ); _q->setSize( Vector2( 67.25001f, 67.25001f ) ); }
+	_q = MyPile->FindQuad( L"Button_SwitchView" ); if (_q != 0 ) { _q->setPos( Vector2( 705.5554f, 619.4439f ) ); _q->setSize( Vector2( 65.16659f, 65.16659f ) ); }
+	_q = MyPile->FindQuad( L"Button_LeftRight" ); if (_q != 0 ) { _q->setPos( Vector2( 705.5554f, 472.2213f ) ); _q->setSize( Vector2( 73.74999f, 73.74999f ) ); }
 	_q = MyPile->FindQuad( L"Button_Back" ); if (_q != 0 ) { _q->setPos( Vector2( 1536.111f, 227.7776f ) ); _q->setSize( Vector2( 67.99999f, 67.99999f ) ); }
 	_q = MyPile->FindQuad( L"BackArrow" ); if (_q != 0 ) { _q->setPos( Vector2( 1369.444f, 216.6666f ) ); _q->setSize( Vector2( 77.71317f, 66.83332f ) ); }
 

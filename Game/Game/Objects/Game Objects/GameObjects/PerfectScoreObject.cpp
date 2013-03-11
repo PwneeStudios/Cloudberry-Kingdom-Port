@@ -1,5 +1,5 @@
 #include <global_header.h>
-
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 #include <Hacks/String.h>
 
 namespace CloudberryKingdom
@@ -427,9 +427,14 @@ int PerfectScoreObject::GlobalBonus = 0;
 
     void PerfectScoreObject::SetPos()
     {
-        boost::shared_ptr<EzText> _t;
-        _t = MyPile->FindEzText( L"Text" ); if ( _t != 0 ) { _t->setPos( Vector2(0) ); _t->setScale( 0.8000005f ); }
-        MyPile->setPos( Vector2(1569.445f, -772.2226f) );
+			boost::shared_ptr<EzText> _t;
+			_t = MyPile->FindEzText( L"Text" ); if (_t != 0 ) { _t->setPos( Vector2( 0.f, 0.f ) ); _t->setScale( 0.8000005f ); }
+			MyPile->setPos( Vector2( 1569.445f, -772.2226f ) );
+
+			// Extra squeeze
+			Vector2 squeeze = Vector2(-15, 15 ) * CloudberryKingdomGame::GuiSqueeze;
+
+			MyPile->setPos( MyPile->getPos() + squeeze );
     }
 
     void PerfectScoreObject::Release()

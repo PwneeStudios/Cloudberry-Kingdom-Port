@@ -172,6 +172,7 @@ namespace CloudberryKingdom
                     LanguageList->AddItem(item, l);
                 }
                 AddItem(LanguageList);
+				LanguageList->SelectSound.reset(); // Don't play a sound (since pushing (A) will cause the back action anyway).
                 LanguageList->SetIndex((int)Localization::CurrentLanguage->MyLanguage);
                 LanguageList->OnConfirmedIndexSelect = boost::make_shared<InitOnConfirmedIndexSelect_Language>( boost::static_pointer_cast<SoundMenu>( shared_from_this() ), LanguageList );
             }

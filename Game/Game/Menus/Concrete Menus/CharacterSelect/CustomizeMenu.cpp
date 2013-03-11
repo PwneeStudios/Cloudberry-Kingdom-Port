@@ -88,57 +88,144 @@ namespace CloudberryKingdom
 
 	void CustomizeMenu::SetPos()
 	{
-		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( std::wstring( L"Color" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( -208.3333f, 5.555542f ) );
-			_item->MyText->setScale( 0.5835f );
-			_item->MySelectedText->setScale( 0.5835f );
-			_item->SelectIconOffset = Vector2( 0, -160 );
-		}
-		_item = MyMenu->FindItemByName( std::wstring( L"Beard" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( -205.5554f, -123.8889f ) );
-			_item->MyText->setScale( 0.5835f );
-			_item->MySelectedText->setScale( 0.5835f );
-			_item->SelectIconOffset = Vector2( 0, -160 );
-		}
-		_item = MyMenu->FindItemByName( std::wstring( L"Hat" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( -141.6667f, -250.5555f ) );
-			_item->MyText->setScale( 0.5835f );
-			_item->MySelectedText->setScale( 0.5835f );
-			_item->SelectIconOffset = Vector2( 0, -160 );
-		}
-		_item = MyMenu->FindItemByName( std::wstring( L"Cape" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( -188.8889f, -377.2222f ) );
-			_item->MyText->setScale( 0.5835f );
-			_item->MySelectedText->setScale( 0.5835f );
-			_item->SelectIconOffset = Vector2( 0, -160 );
-		}
-		_item = MyMenu->FindItemByName( std::wstring( L"Lining" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( -191.6665f, -501.1112f ) );
-			_item->MyText->setScale( 0.5835f );
-			_item->MySelectedText->setScale( 0.5835f );
-			_item->SelectIconOffset = Vector2( 0, -160 );
-		}
-		_item = MyMenu->FindItemByName( std::wstring( L"Done" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( -177.7778f, -672.2223f ) );
-			_item->MyText->setScale( 0.5835f );
-			_item->MySelectedText->setScale( 0.5835f );
-			_item->SelectIconOffset = Vector2( 0, -160 );
-		}
+			if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_PORTUGUESE )
+			{
+				boost::shared_ptr<MenuItem> _item;
+				_item = MyMenu->FindItemByName( L"Color" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, 5.555542f ) ); _item->MyText->setScale( 0.4920831f ); _item->MySelectedText->setScale( 0.4920831f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Beard" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -123.8889f ) ); _item->MyText->setScale( 0.4920831f ); _item->MySelectedText->setScale( 0.4920831f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Hat" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -250.5555f ) ); _item->MyText->setScale( 0.4920831f ); _item->MySelectedText->setScale( 0.4920831f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Cape" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -377.2222f ) ); _item->MyText->setScale( 0.4920831f ); _item->MySelectedText->setScale( 0.4920831f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Lining" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -501.1112f ) ); _item->MyText->setScale( 0.4920831f ); _item->MySelectedText->setScale( 0.4920831f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Done" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -672.2223f ) ); _item->MyText->setScale( 0.4920831f ); _item->MySelectedText->setScale( 0.4920831f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
 
-		MyMenu->setPos( Vector2( MyMenu->getPos().X, -22.22222f ) );
+				MyMenu->setPos( Vector2(-1370.f, 22.22222f ) );
+
+				MyPile->setPos( Vector2(-1320.f, 0.f ) );
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_SPANISH )
+			{
+				boost::shared_ptr<MenuItem> _item;
+				_item = MyMenu->FindItemByName( L"Color" ); if (_item != 0 ) { _item->setSetPos( Vector2(-200.f, 5.555542f ) ); _item->MyText->setScale( 0.5619169f ); _item->MySelectedText->setScale( 0.5619169f ); _item->SelectIconOffset = Vector2( 0.f, -160.f );  }
+				_item = MyMenu->FindItemByName( L"Beard" ); if (_item != 0 ) { _item->setSetPos( Vector2(-205.5554f, -123.8889f ) ); _item->MyText->setScale( 0.5619169f ); _item->MySelectedText->setScale( 0.5619169f ); _item->SelectIconOffset = Vector2( 0.f, -160.f );  }
+				_item = MyMenu->FindItemByName( L"Hat" ); if (_item != 0 ) { _item->setSetPos( Vector2(-311.1113f, -245.f ) ); _item->MyText->setScale( 0.5619169f ); _item->MySelectedText->setScale( 0.5619169f ); _item->SelectIconOffset = Vector2( 0.f, -160.f );  }
+				_item = MyMenu->FindItemByName( L"Cape" ); if (_item != 0 ) { _item->setSetPos( Vector2(-197.2219f, -368.8889f ) ); _item->MyText->setScale( 0.5619169f ); _item->MySelectedText->setScale( 0.5619169f ); _item->SelectIconOffset = Vector2( 0.f, -160.f );  }
+				_item = MyMenu->FindItemByName( L"Lining" ); if (_item != 0 ) { _item->setSetPos( Vector2(-191.6665f, -501.1112f ) ); _item->MyText->setScale( 0.5619169f ); _item->MySelectedText->setScale( 0.5619169f ); _item->SelectIconOffset = Vector2( 0.f, -160.f );  }
+				_item = MyMenu->FindItemByName( L"Done" ); if (_item != 0 ) { _item->setSetPos( Vector2(-177.7778f, -672.2223f ) ); _item->MyText->setScale( 0.5619169f ); _item->MySelectedText->setScale( 0.5619169f ); _item->SelectIconOffset = Vector2( 0.f, -160.f );  }
+
+				MyMenu->setPos( Vector2(-1322.778f, 5.555559f ) );
+
+				MyPile->setPos( Vector2(-1320.f, 0.f ) );
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_RUSSIAN )
+			{
+				boost::shared_ptr<MenuItem> _item;
+				_item = MyMenu->FindItemByName( L"Color" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, 5.555542f ) ); _item->MyText->setScale( 0.4379163f ); _item->MySelectedText->setScale( 0.4379163f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Beard" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -123.8889f ) ); _item->MyText->setScale( 0.4379163f ); _item->MySelectedText->setScale( 0.4379163f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Hat" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -250.5555f ) ); _item->MyText->setScale( 0.4379163f ); _item->MySelectedText->setScale( 0.4379163f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Cape" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -377.2222f ) ); _item->MyText->setScale( 0.4379163f ); _item->MySelectedText->setScale( 0.4379163f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Lining" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -501.1112f ) ); _item->MyText->setScale( 0.4379163f ); _item->MySelectedText->setScale( 0.4379163f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Done" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -672.2223f ) ); _item->MyText->setScale( 0.4379163f ); _item->MySelectedText->setScale( 0.4379163f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+
+				MyMenu->setPos( Vector2(-1389.444f, -2.777761f ) );
+
+				MyPile->setPos( Vector2(-1320.f, 0.f ) );
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_FRENCH )
+			{
+				boost::shared_ptr<MenuItem> _item;
+				_item = MyMenu->FindItemByName( L"Color" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, 5.555542f ) ); _item->MyText->setScale( 0.4379163f ); _item->MySelectedText->setScale( 0.4379163f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Beard" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -123.8889f ) ); _item->MyText->setScale( 0.4379163f ); _item->MySelectedText->setScale( 0.4379163f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Hat" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -250.5555f ) ); _item->MyText->setScale( 0.4379163f ); _item->MySelectedText->setScale( 0.4379163f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Cape" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -377.2222f ) ); _item->MyText->setScale( 0.4379163f ); _item->MySelectedText->setScale( 0.4379163f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Lining" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -501.1112f ) ); _item->MyText->setScale( 0.4379163f ); _item->MySelectedText->setScale( 0.4379163f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Done" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -672.2223f ) ); _item->MyText->setScale( 0.4379163f ); _item->MySelectedText->setScale( 0.4379163f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+
+				MyMenu->setPos( Vector2(-1389.444f, -2.777761f ) );
+
+				MyPile->setPos( Vector2(-1320.f, 0.f ) );
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_ITALIAN )
+			{
+				boost::shared_ptr<MenuItem> _item;
+				_item = MyMenu->FindItemByName( L"Color" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, 5.555542f ) ); _item->MyText->setScale( 0.4379163f ); _item->MySelectedText->setScale( 0.4379163f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Beard" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -123.8889f ) ); _item->MyText->setScale( 0.4379163f ); _item->MySelectedText->setScale( 0.4379163f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Hat" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -250.5555f ) ); _item->MyText->setScale( 0.4379163f ); _item->MySelectedText->setScale( 0.4379163f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Cape" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -377.2222f ) ); _item->MyText->setScale( 0.4379163f ); _item->MySelectedText->setScale( 0.4379163f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Lining" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -501.1112f ) ); _item->MyText->setScale( 0.4379163f ); _item->MySelectedText->setScale( 0.4379163f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Done" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -672.2223f ) ); _item->MyText->setScale( 0.4379163f ); _item->MySelectedText->setScale( 0.4379163f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+
+				MyMenu->setPos( Vector2(-1389.444f, -2.777761f ) );
+
+				MyPile->setPos( Vector2(-1320.f, 0.f ) );
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_GERMAN )
+			{
+				boost::shared_ptr<MenuItem> _item;
+				_item = MyMenu->FindItemByName( L"Color" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, 5.555542f ) ); _item->MyText->setScale( 0.4920831f ); _item->MySelectedText->setScale( 0.4920831f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Beard" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -123.8889f ) ); _item->MyText->setScale( 0.4920831f ); _item->MySelectedText->setScale( 0.4920831f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Hat" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -250.5555f ) ); _item->MyText->setScale( 0.4920831f ); _item->MySelectedText->setScale( 0.4920831f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Cape" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -377.2222f ) ); _item->MyText->setScale( 0.4920831f ); _item->MySelectedText->setScale( 0.4920831f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Lining" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -501.1112f ) ); _item->MyText->setScale( 0.4920831f ); _item->MySelectedText->setScale( 0.4920831f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Done" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -672.2223f ) ); _item->MyText->setScale( 0.4920831f ); _item->MySelectedText->setScale( 0.4920831f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+
+				MyMenu->setPos( Vector2(-1381.111f, 0.0f ) );
+
+				MyPile->setPos( Vector2(-1320.f, 0.f ) );
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_CHINESE )
+			{
+				boost::shared_ptr<MenuItem> _item;
+				_item = MyMenu->FindItemByName( L"Color" ); if (_item != 0 ) { _item->setSetPos( Vector2(-219.4443f, 8.333324f ) ); _item->MyText->setScale( 0.5408335f ); _item->MySelectedText->setScale( 0.5408335f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Beard" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -123.8889f ) ); _item->MyText->setScale( 0.5408335f ); _item->MySelectedText->setScale( 0.5408335f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Hat" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -250.5555f ) ); _item->MyText->setScale( 0.5408335f ); _item->MySelectedText->setScale( 0.5408335f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Cape" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -377.2222f ) ); _item->MyText->setScale( 0.5408335f ); _item->MySelectedText->setScale( 0.5408335f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Lining" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -501.1112f ) ); _item->MyText->setScale( 0.5408335f ); _item->MySelectedText->setScale( 0.5408335f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Done" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -672.2223f ) ); _item->MyText->setScale( 0.5408335f ); _item->MySelectedText->setScale( 0.5408335f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+
+				MyMenu->setPos( Vector2(-1275.556f, -5.555534f ) );
+
+				MyPile->setPos( Vector2(-1320.f, 0.f ) );
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_JAPANESE )
+			{
+				boost::shared_ptr<MenuItem> _item;
+				_item = MyMenu->FindItemByName( L"Color" ); if (_item != 0 ) { _item->setSetPos( Vector2(-219.4443f, 8.333324f ) ); _item->MyText->setScale( 0.5408335f ); _item->MySelectedText->setScale( 0.5408335f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Beard" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -123.8889f ) ); _item->MyText->setScale( 0.5408335f ); _item->MySelectedText->setScale( 0.5408335f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Hat" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -250.5555f ) ); _item->MyText->setScale( 0.5408335f ); _item->MySelectedText->setScale( 0.5408335f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Cape" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -377.2222f ) ); _item->MyText->setScale( 0.5408335f ); _item->MySelectedText->setScale( 0.5408335f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Lining" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -501.1112f ) ); _item->MyText->setScale( 0.5408335f ); _item->MySelectedText->setScale( 0.5408335f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Done" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -672.2223f ) ); _item->MyText->setScale( 0.5408335f ); _item->MySelectedText->setScale( 0.5408335f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+
+				MyMenu->setPos( Vector2(-1275.556f, -5.555534f ) );
+
+				MyPile->setPos( Vector2(-1320.f, 0.f ) );
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_KOREAN )
+			{
+				boost::shared_ptr<MenuItem> _item;
+				_item = MyMenu->FindItemByName( L"Color" ); if (_item != 0 ) { _item->setSetPos( Vector2(-219.4443f, 8.333324f ) ); _item->MyText->setScale( 0.5408335f ); _item->MySelectedText->setScale( 0.5408335f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Beard" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -123.8889f ) ); _item->MyText->setScale( 0.5408335f ); _item->MySelectedText->setScale( 0.5408335f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Hat" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -250.5555f ) ); _item->MyText->setScale( 0.5408335f ); _item->MySelectedText->setScale( 0.5408335f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Cape" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -377.2222f ) ); _item->MyText->setScale( 0.5408335f ); _item->MySelectedText->setScale( 0.5408335f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Lining" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -501.1112f ) ); _item->MyText->setScale( 0.5408335f ); _item->MySelectedText->setScale( 0.5408335f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Done" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, -672.2223f ) ); _item->MyText->setScale( 0.5408335f ); _item->MySelectedText->setScale( 0.5408335f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+
+				MyMenu->setPos( Vector2(-1275.556f, -5.555534f ) );
+
+				MyPile->setPos( Vector2(-1320.f, 0.f ) );
+			}
+			else
+			{
+				boost::shared_ptr<MenuItem> _item;
+				_item = MyMenu->FindItemByName( L"Color" ); if (_item != 0 ) { _item->setSetPos( Vector2(-208.3333f, 5.555542f ) ); _item->MyText->setScale( 0.5835f ); _item->MySelectedText->setScale( 0.5835f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Beard" ); if (_item != 0 ) { _item->setSetPos( Vector2(-205.5554f, -123.8889f ) ); _item->MyText->setScale( 0.5835f ); _item->MySelectedText->setScale( 0.5835f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Hat" ); if (_item != 0 ) { _item->setSetPos( Vector2(-141.6667f, -250.5555f ) ); _item->MyText->setScale( 0.5835f ); _item->MySelectedText->setScale( 0.5835f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Cape" ); if (_item != 0 ) { _item->setSetPos( Vector2(-188.8889f, -377.2222f ) ); _item->MyText->setScale( 0.5835f ); _item->MySelectedText->setScale( 0.5835f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Lining" ); if (_item != 0 ) { _item->setSetPos( Vector2(-191.6665f, -501.1112f ) ); _item->MyText->setScale( 0.5835f ); _item->MySelectedText->setScale( 0.5835f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+				_item = MyMenu->FindItemByName( L"Done" ); if (_item != 0 ) { _item->setSetPos( Vector2(-177.7778f, -672.2223f ) ); _item->MyText->setScale( 0.5835f ); _item->MySelectedText->setScale( 0.5835f ); _item->SelectIconOffset = Vector2( 0.f, -160.f ); }
+
+				MyMenu->setPos( Vector2( MyMenu->getPos().X, -22.22222f ) );
+			}
 	}
 
 	void CustomizeMenu::Go( const boost::shared_ptr<MenuItem> &item )

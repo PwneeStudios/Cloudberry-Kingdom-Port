@@ -39,16 +39,19 @@ namespace CloudberryKingdom
 		vds->ReturnToCaller();
 	}
 
-	VerifyDeleteSeeds::VerifyDeleteSeeds( int Control, int NumSeeds ) :
+	VerifyDeleteSeeds::VerifyDeleteSeeds( int Control, int NumSeeds, bool DoEnableBounce ) :
 		VerifyBaseMenu( false ),
 		NumSeeds( 0 )
 	{
 	}
-	boost::shared_ptr<VerifyDeleteSeeds> VerifyDeleteSeeds::VerifyDeleteSeeds_Construct( int Control, int NumSeeds )
+	boost::shared_ptr<VerifyDeleteSeeds> VerifyDeleteSeeds::VerifyDeleteSeeds_Construct( int Control, int NumSeeds, bool DoEnableBounce )
 	{
 		VerifyBaseMenu::VerifyBaseMenu_Construct( false );
 
-		//EnableBounce();
+		if (DoEnableBounce)
+		{
+			EnableBounce();
+		}
 
 		this->NumSeeds = NumSeeds;
 		this->setControl( Control );

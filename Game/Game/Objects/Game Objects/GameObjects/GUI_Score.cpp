@@ -1,4 +1,5 @@
 #include <global_header.h>
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
 namespace CloudberryKingdom
 {
@@ -137,18 +138,23 @@ namespace CloudberryKingdom
 
 		MyPile->Add( ScoreText );
 
-		if ( TimeCrisis )
-		{
-			boost::shared_ptr<EzText> _t;
-			_t = MyPile->FindEzText( L"Score" ); if (_t != 0 ) { _t->setPos( Vector2( 381.4434f, 85.55492f ) ); _t->setScale( 0.5f ); }
-			MyPile->setPos( Vector2( 1240.555f, 756.1112f ) );
-		}
-		else
-		{
-			boost::shared_ptr<EzText> _t;
-			_t = MyPile->FindEzText( L"Score" ); if (_t != 0 ) { _t->setPos( Vector2( 381.4434f, 85.55492f ) ); _t->setScale( 0.5f ); }
-			MyPile->setPos( Vector2( 865.5554f, 781.1111f ) );
-		}
+			if ( TimeCrisis )
+			{
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"Score" ); if (_t != 0 ) { _t->setPos( Vector2( 396.5f, 85.55492f ) ); _t->setScale( 0.5f ); }
+				MyPile->setPos( Vector2( 1240.555f, 756.1112f ) );
+			}
+			else
+			{
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"Score" ); if (_t != 0 ) { _t->setPos( Vector2( 381.4434f, 85.55492f ) ); _t->setScale( 0.5f ); }
+				MyPile->setPos( Vector2( 865.5554f, 781.1111f ) );
+			}
+
+			// Extra squeeze
+			Vector2 squeeze = Vector2(-15, -15 ) * CloudberryKingdomGame::GuiSqueeze;
+
+			MyPile->setPos( MyPile->getPos() + squeeze );
 	}
 
 	void GUI_Score::MyDraw()

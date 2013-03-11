@@ -419,6 +419,7 @@ Version CloudberryKingdomGame::GameVersion = Version( 0, 2, 4 );
 		MainMenuTypes CloudberryKingdomGame::MainMenuType = MainMenuTypes_PS3;
 		bool CloudberryKingdomGame::SimpleLeaderboards = false;
 		bool CloudberryKingdomGame::FakeAwardments = false;
+		float CloudberryKingdomGame::GuiSqueeze = 0;
 #elif XBOX
 		bool CloudberryKingdomGame::HideLogos = false;
 		bool CloudberryKingdomGame::LockCampaign = false;
@@ -426,6 +427,7 @@ Version CloudberryKingdomGame::GameVersion = Version( 0, 2, 4 );
 		MainMenuTypes CloudberryKingdomGame::MainMenuType = MainMenuTypes_Xbox;
 		bool CloudberryKingdomGame::SimpleLeaderboards = false;
 		bool CloudberryKingdomGame::FakeAwardments = false;
+		float CloudberryKingdomGame::GuiSqueeze = 0.3f;
 #elif CAFE
 		bool CloudberryKingdomGame::HideLogos = false;
 		bool CloudberryKingdomGame::LockCampaign = false;
@@ -433,6 +435,7 @@ Version CloudberryKingdomGame::GameVersion = Version( 0, 2, 4 );
 		MainMenuTypes CloudberryKingdomGame::MainMenuType = MainMenuTypes_WiiU;
 		bool CloudberryKingdomGame::SimpleLeaderboards = true;
 		bool CloudberryKingdomGame::FakeAwardments = false;
+		float CloudberryKingdomGame::GuiSqueeze = 1.0f;
 #elif PS3
 		bool CloudberryKingdomGame::HideLogos = false;
 		bool CloudberryKingdomGame::LockCampaign = false;
@@ -440,6 +443,7 @@ Version CloudberryKingdomGame::GameVersion = Version( 0, 2, 4 );
 		MainMenuTypes CloudberryKingdomGame::MainMenuType = MainMenuTypes_PS3;
 		bool CloudberryKingdomGame::SimpleLeaderboards = false;
 		bool CloudberryKingdomGame::FakeAwardments = false;
+		float CloudberryKingdomGame::GuiSqueeze = 1.0f;
 #endif
 
 
@@ -813,7 +817,7 @@ float CloudberryKingdomGame::fps = 0;
 		if (!HideLogos)
 		{
 			// FIXME: Keep playing logo salad.
-			if( region == ConsoleRegion_USA )
+			if( CloudberryKingdomGame::getIsDemo() && region == ConsoleRegion_USA )
 				MainVideo::StartVideo_CanSkipIfWatched( std::wstring( L"LogoSalad_ESRB" ) );
 			else
 				MainVideo::StartVideo_CanSkipIfWatched( std::wstring( L"LogoSalad" ) );

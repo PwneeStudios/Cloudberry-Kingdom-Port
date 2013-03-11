@@ -54,6 +54,14 @@ namespace CloudberryKingdom
 		{
 			ButtonSize = 75;
 		}
+		else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_KOREAN )
+		{
+			ButtonSize = 75;
+		}
+		else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_FRENCH )
+		{
+			ButtonSize = 94;
+		}
 
 #ifdef PC_VERSION
 		std::wstring pressa = Format( Localization::WordString( Localization::Words_PressToJoin ).c_str(), ButtonString::Go_Controller( ButtonSize ).c_str() );
@@ -64,6 +72,12 @@ namespace CloudberryKingdom
 		if  (Localization::CurrentLanguage->MyLanguage == Localization::Language_JAPANESE )
 		{
 			Text = boost::make_shared<EzText>( pressa, Resources::Font_Grobold42, 1000.0f, true, true, .5f );
+
+			Text->setPos( Vector2( 11.11133f, 63.88889f ) ); Text->setScale( 0.9542501f );
+		}
+		else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_KOREAN )
+		{
+			Text = boost::make_shared<EzText>( pressa, Resources::Font_Grobold42, 1000, true, true, .5f );
 
 			Text->setPos( Vector2( 11.11133f, 63.88889f ) ); Text->setScale( 0.9542501f );
 		}
@@ -81,6 +95,28 @@ namespace CloudberryKingdom
 		MyPile->Add( Text );
 
 		CharacterSelect::Shift( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+
+		// SetPos
+		if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_GERMAN )
+		{
+			Text->setPos( Vector2( 0.f, 0.f ) );
+			Text->setScale( 0.5720017f );
+		}
+		else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_PORTUGUESE )
+		{
+			Text->setPos( Vector2( 0.f, 0.f ) );
+			Text->setScale( 0.570833f );
+		}
+		else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_FRENCH )
+		{
+			Text->setPos( Vector2( 0.f, 0.f ) );
+			Text->setScale( 0.575f );
+		}
+		else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_SPANISH )
+		{
+			Text->setPos( Vector2( 0.f, 0.f ) );
+			Text->setScale( 0.5195001f );
+		}
 	}
 
 	void JoinText::ScaleGamerTag( const boost::shared_ptr<EzText> &GamerTag_Renamed )

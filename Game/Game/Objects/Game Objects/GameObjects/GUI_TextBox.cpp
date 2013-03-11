@@ -96,6 +96,14 @@ namespace CloudberryKingdom
 			return;
 		}
 
+		MyText->setScale( .8f);
+		float w = MyText->GetWorldWidth();
+		float MaxWidth = 2400.0f;
+		if ( w > MaxWidth )
+		{
+			MyText->setScale( MyText->getScale() * MaxWidth / w);
+		}
+
 		// Decide if we should draw the caret
 		if ( HasFocus )
 		{
@@ -105,7 +113,8 @@ namespace CloudberryKingdom
 			else
 			{
 				// Draw the caret every other half second
-				Caret->Show = Tools::TheGame->DrawCount / 30 % 2 == 0;
+				//Caret->Show = Tools::TheGame->DrawCount / 30 % 2 == 0;
+				Caret->Show = Tools::TheGame->DrawCount % 65 > 23;
 			}
 
 #if defined(WINDOWS)
@@ -225,6 +234,7 @@ namespace CloudberryKingdom
 			Enter();
 			return;
 		}
+		if ( ButtonCheck::State( ControllerButtons_B, -1 ).Pressed) { Cancel(); return; }
 
 		Vector2 dir = ButtonCheck::GetDir( -1 );
 
@@ -397,9 +407,10 @@ namespace CloudberryKingdom
 	{
 		/*setText( getText().erase( SelectIndex_Start, SelectIndex_End - SelectIndex_Start) );*/
 		
-		std::wstring s = getText();
-		s.substr(0, SelectIndex_Start ) + s.substr( SelectIndex_End );
-		
+		//std::wstring s = getText();
+		//s.substr(0, SelectIndex_Start ) + s.substr( SelectIndex_End );
+		setText( std::wstring( L"A" ) );
+
 		Unselect();
 	}
 
@@ -410,6 +421,7 @@ namespace CloudberryKingdom
 
 		SelectQuad->setSize( Vector2( width / 2, SelectQuad->getSize().Y ) );
 		SelectQuad->setLeft( MyText->getPos().X + pos );
+		SelectQuad->setPos( MyText->getPos() + Vector2( MyText->GetWorldWidth() / 2, -MyText->GetWorldHeight() / 4 ) );
 	}
 
 	boost::shared_ptr<EzText> GUI_TextBox::MakeText( std::wstring text, bool centered, const boost::shared_ptr<EzFont> &font )
@@ -442,8 +454,11 @@ namespace CloudberryKingdom
 
 	void GUI_TextBox::Recenter()
 	{
-		// Position the caret at the end of the text
-		Caret->setX( MyText->getPos().X + MyText->GetWorldWidth() );
+            // Position the caret at the end of the text
+			float width = MyText->GetWorldWidth();
+			if (width == 0) width = 90;
+            Caret->setX( MyText->getPos().X + width - 120 );
+			Caret->setY( MyText->getPos().Y + 5 );
 
 		// If we're selecting move the caret one character to the left
 		if ( SelectIndex_End - SelectIndex_Start > 0 )
@@ -461,7 +476,7 @@ namespace CloudberryKingdom
 		else
 		{
 			// Otherwise delete one character
-			if ( getLength() == 0 )
+			if ( getLength() == 1 )
 				return;
 
 			setText( getText().substr(0, getLength() - 1) );

@@ -300,14 +300,126 @@ namespace CloudberryKingdom
 #if defined(PC_VERSION)
 	void SimpleMenu::SetPos()
 	{
-		boost::shared_ptr<MenuItem> _item;
+			if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_CHINESE )
+			{
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"A" ); if (_t != 0 ) { _t->setPos( Vector2( 81.55566f, -139.7619f ) ); _t->setScale( 0.6048333f ); }
+				_t = MyPile->FindEzText( L"Y" ); if (_t != 0 ) { _t->setPos( Vector2( 128.7777f, -314.6826f ) ); _t->setScale( 0.5580834f ); }
+				_t = MyPile->FindEzText( L"X" ); if (_t != 0 ) { _t->setPos( Vector2( 84.33325f, -491.27f ) ); _t->setScale( 0.5925835f ); }
 
-        _item = MyMenu->FindItemByName( L"Custom" ); if (_item != 0 ) { _item->setSetPos( Vector2( 0, -87.88895f ) ); _item->MyText->setScale( 0.6731667f ); _item->MySelectedText->setScale( 0.6731667f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
-        _item = MyMenu->FindItemByName( L"Random" ); if (_item != 0 ) { _item->setSetPos( Vector2( 0, -263.4445f ) ); _item->MyText->setScale( 0.6948333f ); _item->MySelectedText->setScale( 0.6948333f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
-        _item = MyMenu->FindItemByName( L"Done" ); if (_item != 0 ) { _item->setSetPos( Vector2( 0, -441.7778f ) ); _item->MyText->setScale( 0.6962501f ); _item->MySelectedText->setScale( 0.6962501f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+				boost::shared_ptr<QuadClass> _q;
+				_q = MyPile->FindQuad( L"go" ); if (_q != 0 ) { _q->setPos( Vector2(-175.f, -141.6667f ) ); _q->setSize( Vector2( 67.6666f, 67.6666f ) ); }
+				_q = MyPile->FindQuad( L"y" ); if (_q != 0 ) { _q->setPos( Vector2(-177.7776f, -319.4444f ) ); _q->setSize( Vector2( 67.6666f, 67.6666f ) ); }
+				_q = MyPile->FindQuad( L"x" ); if (_q != 0 ) { _q->setPos( Vector2(-174.9998f, -494.4444f ) ); _q->setSize( Vector2( 67.6666f, 67.6666f ) ); }
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_SPANISH )
+			{
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"A" ); if (_t != 0 ) { _t->setPos( Vector2( 84.33325f, -148.0953f ) ); _t->setScale( 0.5214169f ); }
+				_t = MyPile->FindEzText( L"Y" ); if (_t != 0 ) { _t->setPos( Vector2( 31.55566f, -311.9048f ) ); _t->setScale( 0.5206664f ); }
+				_t = MyPile->FindEzText( L"X" ); if (_t != 0 ) { _t->setPos( Vector2( 64.88892f, -471.8255f ) ); _t->setScale( 0.5540001f ); }
 
-		MyMenu->setPos( Vector2( 0, 0 ) );
-		MyPile->setPos( Vector2( 0, 0 ) );
+				boost::shared_ptr<QuadClass> _q;
+				_q = MyPile->FindQuad( L"go" ); if (_q != 0 ) { _q->setPos( Vector2(-261.1111f, -141.6667f ) ); _q->setSize( Vector2( 69.08327f, 69.08327f ) ); }
+				_q = MyPile->FindQuad( L"y" ); if (_q != 0 ) { _q->setPos( Vector2(-261.1111f, -308.3333f ) ); _q->setSize( Vector2( 68.99995f, 68.99995f ) ); }
+				_q = MyPile->FindQuad( L"x" ); if (_q != 0 ) { _q->setPos( Vector2(-261.1111f, -466.6667f ) ); _q->setSize( Vector2( 67.6666f, 67.6666f ) ); }
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_FRENCH )
+			{
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"A" ); if (_t != 0 ) { _t->setPos( Vector2( 42.54058f, -164.762f ) ); _t->setScale( 0.4098337f ); }
+				_t = MyPile->FindEzText( L"Y" ); if (_t != 0 ) { _t->setPos( Vector2( 99.68316f, -314.6826f ) ); _t->setScale( 0.3790001f ); }
+				_t = MyPile->FindEzText( L"X" ); if (_t != 0 ) { _t->setPos( Vector2( 38.9688f, -466.2699f ) ); _t->setScale( 0.4091668f ); }
+
+				boost::shared_ptr<QuadClass> _q;
+				_q = MyPile->FindQuad( L"go" ); if (_q != 0 ) { _q->setPos( Vector2(-244.4442f, -163.8889f ) ); _q->setSize( Vector2( 61.49994f, 61.49994f ) ); }
+				_q = MyPile->FindQuad( L"y" ); if (_q != 0 ) { _q->setPos( Vector2(-244.4441f, -316.6666f ) ); _q->setSize( Vector2( 60.58324f, 60.58324f ) ); }
+				_q = MyPile->FindQuad( L"x" ); if (_q != 0 ) { _q->setPos( Vector2(-241.6666f, -469.4445f ) ); _q->setSize( Vector2( 61.4999f, 61.4999f ) ); }
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_ITALIAN )
+			{
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"A" ); if (_t != 0 ) { _t->setPos( Vector2( 78.6516f, -159.2064f ) ); _t->setScale( 0.5214169f ); }
+				_t = MyPile->FindEzText( L"Y" ); if (_t != 0 ) { _t->setPos( Vector2( 85.79449f, -325.7938f ) ); _t->setScale( 0.5118334f ); }
+				_t = MyPile->FindEzText( L"X" ); if (_t != 0 ) { _t->setPos( Vector2( 86.19106f, -491.2698f ) ); _t->setScale( 0.5290835f ); }
+
+				boost::shared_ptr<QuadClass> _q;
+				_q = MyPile->FindQuad( L"go" ); if (_q != 0 ) { _q->setPos( Vector2(-261.1109f, -152.7778f ) ); _q->setSize( Vector2( 67.83331f, 67.83331f ) ); }
+				_q = MyPile->FindQuad( L"y" ); if (_q != 0 ) { _q->setPos( Vector2(-258.3333f, -324.9999f ) ); _q->setSize( Vector2( 67.58327f, 67.58327f ) ); }
+				_q = MyPile->FindQuad( L"x" ); if (_q != 0 ) { _q->setPos( Vector2(-252.778f, -486.1111f ) ); _q->setSize( Vector2( 66.91656f, 66.91656f ) ); }
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_PORTUGUESE )
+			{
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"A" ); if (_t != 0 ) { _t->setPos( Vector2( 34.20775f, -150.8731f ) ); _t->setScale( 0.4363339f ); }
+				_t = MyPile->FindEzText( L"Y" ); if (_t != 0 ) { _t->setPos( Vector2( 85.7934f, -284.1271f ) ); _t->setScale( 0.4254172f ); }
+				_t = MyPile->FindEzText( L"X" ); if (_t != 0 ) { _t->setPos( Vector2( 30.63515f, -413.4923f ) ); _t->setScale( 0.4363339f ); }
+
+				boost::shared_ptr<QuadClass> _q;
+				_q = MyPile->FindQuad( L"go" ); if (_q != 0 ) { _q->setPos( Vector2(-263.8889f, -150.0001f ) ); _q->setSize( Vector2( 59.99992f, 59.99992f ) ); }
+				_q = MyPile->FindQuad( L"y" ); if (_q != 0 ) { _q->setPos( Vector2(-263.8885f, -283.3335f ) ); _q->setSize( Vector2( 59.99992f, 59.99992f ) ); }
+				_q = MyPile->FindQuad( L"x" ); if (_q != 0 ) { _q->setPos( Vector2(-266.667f, -413.8891f ) ); _q->setSize( Vector2( 59.99992f, 59.99992f ) ); }
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_JAPANESE )
+			{
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"A" ); if (_t != 0 ) { _t->setPos( Vector2( 73.09618f, -161.9842f ) ); _t->setScale( 0.535f ); }
+				_t = MyPile->FindEzText( L"Y" ); if (_t != 0 ) { _t->setPos( Vector2( 96.90533f, -325.7938f ) ); _t->setScale( 0.535f ); }
+				_t = MyPile->FindEzText( L"X" ); if (_t != 0 ) { _t->setPos( Vector2( 100.0798f, -491.2699f ) ); _t->setScale( 0.535f ); }
+
+				boost::shared_ptr<QuadClass> _q;
+				_q = MyPile->FindQuad( L"go" ); if (_q != 0 ) { _q->setPos( Vector2(-169.4442f, -161.1112f ) ); _q->setSize( Vector2( 72.24997f, 72.24997f ) ); }
+				_q = MyPile->FindQuad( L"y" ); if (_q != 0 ) { _q->setPos( Vector2(-169.4444f, -327.7777f ) ); _q->setSize( Vector2( 72.24997f, 72.24997f ) ); }
+				_q = MyPile->FindQuad( L"x" ); if (_q != 0 ) { _q->setPos( Vector2(-169.4445f, -491.6667f ) ); _q->setSize( Vector2( 72.24997f, 72.24997f ) ); }
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_KOREAN )
+			{
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"A" ); if (_t != 0 ) { _t->setPos( Vector2( 34.20727f, -161.9842f ) ); _t->setScale( 0.535f ); }
+				_t = MyPile->FindEzText( L"Y" ); if (_t != 0 ) { _t->setPos( Vector2( 84.20727f, -336.9049f ) ); _t->setScale( 0.535f ); }
+				_t = MyPile->FindEzText( L"X" ); if (_t != 0 ) { _t->setPos( Vector2( 36.98534f, -497.9367f ) ); _t->setScale( 0.535f ); }
+
+				boost::shared_ptr<QuadClass> _q;
+				_q = MyPile->FindQuad( L"go" ); if (_q != 0 ) { _q->setPos( Vector2(-169.4442f, -161.1112f ) ); _q->setSize( Vector2( 72.24997f, 72.24997f ) ); }
+				_q = MyPile->FindQuad( L"y" ); if (_q != 0 ) { _q->setPos( Vector2(-169.4444f, -327.7777f ) ); _q->setSize( Vector2( 72.24997f, 72.24997f ) ); }
+				_q = MyPile->FindQuad( L"x" ); if (_q != 0 ) { _q->setPos( Vector2(-169.4445f, -491.6667f ) ); _q->setSize( Vector2( 72.24997f, 72.24997f ) ); }
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_GERMAN )
+			{
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"A" ); if (_t != 0 ) { _t->setPos( Vector2(-10.2374f, -164.762f ) ); _t->setScale( 0.4177502f ); }
+				_t = MyPile->FindEzText( L"Y" ); if (_t != 0 ) { _t->setPos( Vector2( 96.90533f, -317.4604f ) ); _t->setScale( 0.389917f ); }
+				_t = MyPile->FindEzText( L"X" ); if (_t != 0 ) { _t->setPos( Vector2( 13.9689f, -466.2699f ) ); _t->setScale( 0.40025f ); }
+
+				boost::shared_ptr<QuadClass> _q;
+				_q = MyPile->FindQuad( L"go" ); if (_q != 0 ) { _q->setPos( Vector2(-244.444f, -161.1111f ) ); _q->setSize( Vector2( 62.49989f, 62.49989f ) ); }
+				_q = MyPile->FindQuad( L"y" ); if (_q != 0 ) { _q->setPos( Vector2(-244.4444f, -313.8889f ) ); _q->setSize( Vector2( 61.9999f, 61.9999f ) ); }
+				_q = MyPile->FindQuad( L"x" ); if (_q != 0 ) { _q->setPos( Vector2(-244.4445f, -469.4445f ) ); _q->setSize( Vector2( 63.41657f, 63.41657f ) ); }
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_RUSSIAN )
+			{
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"A" ); if (_t != 0 ) { _t->setPos( Vector2( 103.6518f, -148.0953f ) ); _t->setScale( 0.3990837f ); }
+				_t = MyPile->FindEzText( L"Y" ); if (_t != 0 ) { _t->setPos( Vector2( 88.57208f, -298.0161f ) ); _t->setScale( 0.4368334f ); }
+				_t = MyPile->FindEzText( L"X" ); if (_t != 0 ) { _t->setPos( Vector2( 27.8578f, -452.381f ) ); _t->setScale( 0.4505002f ); }
+
+				boost::shared_ptr<QuadClass> _q;
+				_q = MyPile->FindQuad( L"go" ); if (_q != 0 ) { _q->setPos( Vector2(-222.2217f, -144.4445f ) ); _q->setSize( Vector2( 67.83331f, 67.83331f ) ); }
+				_q = MyPile->FindQuad( L"y" ); if (_q != 0 ) { _q->setPos( Vector2(-222.222f, -294.4445f ) ); _q->setSize( Vector2( 67.83317f, 67.83317f ) ); }
+				_q = MyPile->FindQuad( L"x" ); if (_q != 0 ) { _q->setPos( Vector2(-222.222f, -450.f ) ); _q->setSize( Vector2( 66.41657f, 66.41657f ) ); }
+			}
+			else
+			{
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"A" ); if (_t != 0 ) { _t->setPos( Vector2( 76.f, -148.0953f ) ); _t->setScale( 0.5214169f ); }
+				_t = MyPile->FindEzText( L"Y" ); if (_t != 0 ) { _t->setPos( Vector2( 87.11108f, -309.1271f ) ); _t->setScale( 0.5048334f ); }
+				_t = MyPile->FindEzText( L"X" ); if (_t != 0 ) { _t->setPos( Vector2( 76.f, -469.0477f ) ); _t->setScale( 0.5540001f ); }
+
+				boost::shared_ptr<QuadClass> _q;
+				_q = MyPile->FindQuad( L"go" ); if (_q != 0 ) { _q->setPos( Vector2(-261.1111f, -141.6667f ) ); _q->setSize( Vector2( 67.6666f, 67.6666f ) ); }
+				_q = MyPile->FindQuad( L"y" ); if (_q != 0 ) { _q->setPos( Vector2(-261.1111f, -302.7778f ) ); _q->setSize( Vector2( 67.6666f, 67.6666f ) ); }
+				_q = MyPile->FindQuad( L"x" ); if (_q != 0 ) { _q->setPos( Vector2(-261.1111f, -461.1111f ) ); _q->setSize( Vector2( 67.6666f, 67.6666f ) ); }
+			}
 
 		CharacterSelect::Shift( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 	}

@@ -149,10 +149,10 @@ namespace CloudberryKingdom
 
 		clipboard = Tools::SantitizeOneLineString( clipboard, Resources::LilFont );
 		TextBox = MakeMagic( GUI_TextBox, ( clipboard, Vector2(), Vector2( 1.85f,.65f ), .95f ) );
-		TextBox->MaxLength = 80;
+		TextBox->MaxLength = 40;
 		TextBox->FixedToCamera = false;
 		TextBox->Pos->SetCenter( MyPile->FancyPos );
-		TextBox->Pos->RelVal = Vector2( 1175.001f, 277.7778f );
+		TextBox->Pos->RelVal = Vector2( 830.0f, 277.7778f );
 		TextBox->OnEnter->Add( boost::make_shared<LoadSeedAsOnEnterLambda>( boost::static_pointer_cast<LoadSeedAs>( shared_from_this() ) ) );
 		TextBox->OnEscape->Add( boost::make_shared<LoadSeedAsBackLambda>( boost::static_pointer_cast<LoadSeedAs>( shared_from_this() ) ) );
 		MyGame->AddGameObject( TextBox );

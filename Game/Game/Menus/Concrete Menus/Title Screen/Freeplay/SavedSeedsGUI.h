@@ -16,7 +16,7 @@ namespace CloudberryKingdom
 		}
 
 
-		static bool RefreshList;
+		static int LastSeedSave_TimeStamp;
 
 		void ReInit();
 
@@ -181,6 +181,7 @@ namespace CloudberryKingdom
 		void Sort();
 
 		boost::shared_ptr<PlayerData> player;
+		int MyInit_TimeStamp;
 	
 		virtual void Init();
 

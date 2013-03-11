@@ -51,8 +51,8 @@ namespace CloudberryKingdom
 	
 		int NumSeeds;
 	
-		VerifyDeleteSeeds( int Control, int NumSeeds );
-		boost::shared_ptr<VerifyDeleteSeeds> VerifyDeleteSeeds_Construct( int Control, int NumSeeds );
+		VerifyDeleteSeeds( int Control, int NumSeeds, bool DoEnableBounce );
+		boost::shared_ptr<VerifyDeleteSeeds> VerifyDeleteSeeds_Construct( int Control, int NumSeeds, bool DoEnableBounce );
 
 		virtual void Init();
 

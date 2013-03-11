@@ -12,9 +12,9 @@ namespace CloudberryKingdom
 	boost::shared_ptr<PressNote> PressNote::PressNote_Construct( const boost::shared_ptr<Door> &Parent )
 	{
 #if defined(PC_VERSION)
-		GUI_Text_Construct( std::wstring( L"Press " ) + ButtonString::Up( ButtonScale ), Parent->getPos(), true );
+		GUI_Text_Construct( Format( Localization::WordString( Localization::Words_Press ).c_str(), ButtonString::Up( ButtonScale ) ), Parent->getPos(), true );
 #else
-		GUI_Text_Construct( std::wstring( L"Press " ) + ButtonString::X( ButtonScale ), Parent->getPos(), true );
+		GUI_Text_Construct( Format( Localization::WordString( Localization::Words_Press ).c_str(), ButtonString::X( ButtonScale ) ), Parent->getPos(), true );
 #endif
 
 		Life = 0;
@@ -47,14 +47,69 @@ namespace CloudberryKingdom
 
 		Active = true;
 
-		// Set Position
-		boost::shared_ptr<EzText> _t;
-		_t = MyPile->FindEzText( L"" ); if (_t != 0 ) { _t->setPos( Vector2( 0.f, 0.f ) ); _t->setScale( 0.6342857f ); }
+		// Set Position SetPos()
+			boost::shared_ptr<EzText> _t;
+			if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_KOREAN )
+			{
+				_t = MyPile->FindEzText( L"" ); if (_t != 0 ) { _t->setPos( Vector2( 0.f, 0.f ) ); _t->setScale( 0.6342857f ); }
 
-		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( L"" ); if (_q != 0 ) { _q->setPos( Vector2(-25.f, -47.22223f ) ); _q->setSize( Vector2( 388.2494f, 146.3333f ) ); }
+				boost::shared_ptr<QuadClass> _q;
+				_q = MyPile->FindQuad( L"" ); if (_q != 0 ) { _q->setPos( Vector2(-60.f, -47.22223f ) ); _q->setSize( Vector2( 388.2494f, 146.3333f ) ); }
 
-		MyPile->setPos( Vector2( 33.f, 340.f ) );
+				MyPile->setPos( Vector2( 33.f, 340.f ) );
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_CHINESE )
+			{
+				_t = MyPile->FindEzText( L"" ); if (_t != 0 ) { _t->setPos( Vector2(-13.88867f, 2.777771f ) ); _t->setScale( 0.6342857f ); }
+
+				boost::shared_ptr<QuadClass> _q;
+				_q = MyPile->FindQuad( L"" ); if (_q != 0 ) { _q->setPos( Vector2(-25.f, -47.22223f ) ); _q->setSize( Vector2( 388.2494f, 146.3333f ) ); }
+
+				MyPile->setPos( Vector2( 33.f, 340.f ) );
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_SPANISH )
+			{
+				_t = MyPile->FindEzText( L"" ); if (_t != 0 ) { _t->setPos( Vector2(-5.554688f, 0.f ) ); _t->setScale( 0.575303f ); }
+
+				boost::shared_ptr<QuadClass> _q;
+				_q = MyPile->FindQuad( L"" ); if (_q != 0 ) { _q->setPos( Vector2(-25.f, -47.22223f ) ); _q->setSize( Vector2( 388.2494f, 146.3333f ) ); }
+
+				MyPile->setPos( Vector2( 33.f, 340.f ) );
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_FRENCH )
+			{
+				_t = MyPile->FindEzText( L"" ); if (_t != 0 ) { _t->setPos( Vector2(-16.66699f, -2.777771f ) ); _t->setScale( 0.4835555f ); }
+
+				boost::shared_ptr<QuadClass> _q;
+				_q = MyPile->FindQuad( L"" ); if (_q != 0 ) { _q->setPos( Vector2(-25.f, -47.22223f ) ); _q->setSize( Vector2( 388.2494f, 146.3333f ) ); }
+
+				MyPile->setPos( Vector2( 33.f, 340.f ) );
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_JAPANESE )
+			{
+				_t = MyPile->FindEzText( L"" ); if (_t != 0 ) { _t->setPos( Vector2( 36.11133f, -2.777832f ) ); _t->setScale( 0.5663899f ); }
+
+				boost::shared_ptr<QuadClass> _q;
+				_q = MyPile->FindQuad( L"" ); if (_q != 0 ) { _q->setPos( Vector2(-25.f, -47.22223f ) ); _q->setSize( Vector2( 388.2494f, 146.3333f ) ); }
+
+				MyPile->setPos( Vector2( 33.f, 340.f ) );
+			}
+			else
+			{
+				_t = MyPile->FindEzText( L"" ); if (_t != 0 ) { _t->setPos( Vector2( 0.f, 0.f ) ); _t->setScale( 0.6342857f ); }
+
+				boost::shared_ptr<QuadClass> _q;
+				_q = MyPile->FindQuad( L"" ); if (_q != 0 ) { _q->setPos( Vector2(-25.f, -47.22223f ) ); _q->setSize( Vector2( 388.2494f, 146.3333f ) ); }
+
+				MyPile->setPos( Vector2( 33.f, 340.f ) );
+			}
+			
+			
+			float w = _t->GetWorldWidth();
+			if ( w > 810.0f )
+			{
+				_t->setScale( _t->getScale() * 810.0f / w );
+			}
 
 		return boost::static_pointer_cast<PressNote>( shared_from_this() );
 	}

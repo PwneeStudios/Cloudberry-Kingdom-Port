@@ -69,9 +69,13 @@ namespace CloudberryKingdom
 
     void StartMenu_MW_Pre::OnReturnTo()
     {
+		CloudberryKingdomGame::SetPresence( Presence_TitleScreen );
+
         if ( CallingOptionsMenu )
         {
+			MyMenu->ReadyToPlaySound = false;
             MyMenu->SelectItem( 4 );
+			MyMenu->ReadyToPlaySound = true;
             CallingOptionsMenu = false;
         }
 

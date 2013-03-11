@@ -35,6 +35,15 @@ namespace CloudberryKingdom
 		lsp->Select();
 	}
 
+	void ListSelectPanel::SetItemProperties( const boost::shared_ptr<MenuItem> &item )
+	{
+		item->MyText->setScale( FontScale );
+		item->MySelectedText->setScale( FontScale );
+		item->MySelectedText->MyFloatColor = bColor( 50, 220, 50 ).ToVector4();
+
+		item->SelectIconOffset = Vector2( 0, -160 );
+	}
+
 	void ListSelectPanel::ReleaseBody()
 	{
 		CkBaseMenu::ReleaseBody();
@@ -141,16 +150,123 @@ namespace CloudberryKingdom
 	{
 		CkBaseMenu::OnAdd();
 
-        boost::shared_ptr<MenuItem> _item;
-        _item = MyMenu->FindItemByName( L"list" ); if ( _item != 0 ) { _item->setSetPos( Vector2(-2.77784f, 153.1746f) ); _item->MyText->setScale( 0.375f ); _item->MySelectedText->setScale( 0.375f ); _item->SelectIconOffset = Vector2(0.f, 0.f); }
-        _item = MyMenu->FindItemByName( L"Done" ); if ( _item != 0 ) { _item->setSetPos( Vector2(-227.4442f, 51.66659f) ); _item->MyText->setScale( 0.5535835f ); _item->MySelectedText->setScale( 0.5535835f ); _item->SelectIconOffset = Vector2(0.f, 0.f); }
-        _item = MyMenu->FindItemByName( L"Cancel" ); if ( _item != 0 ) { _item->setSetPos( Vector2(-230.2225f, -82.21997f) ); _item->MyText->setScale( 0.5352504f ); _item->MySelectedText->setScale( 0.5352504f ); _item->SelectIconOffset = Vector2(0.f, 0.f); }
+			if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_PORTUGUESE )
+			{
+				boost::shared_ptr<MenuItem> _item;
+				_item = MyMenu->FindItemByName( L"list" ); if (_item != 0 ) { _item->setSetPos( Vector2(-2.77784f, 153.1746f ) ); _item->MyText->setScale( 0.375f ); _item->MySelectedText->setScale( 0.375f ); _item->SelectIconOffset = Vector2( 0.f, 0.f );  }
+				_item = MyMenu->FindItemByName( L"Done" ); if (_item != 0 ) { _item->setSetPos( Vector2(-299.6664f, 48.88882f ) ); _item->MyText->setScale( 0.5535835f ); _item->MySelectedText->setScale( 0.5535835f ); _item->SelectIconOffset = Vector2( 0.f, 0.f );  }
+				_item = MyMenu->FindItemByName( L"Cancel" ); if (_item != 0 ) { _item->setSetPos( Vector2(-294.1117f, -96.10889f ) ); _item->MyText->setScale( 0.5352504f ); _item->MySelectedText->setScale( 0.5352504f ); _item->SelectIconOffset = Vector2( 0.f, 0.f );  }
 
-        MyMenu->setPos( Vector2(MyMenu->getPos().X, -484.127f) );
+				MyMenu->setPos( Vector2(-1320.f, -484.127f ) );
 
-        boost::shared_ptr<EzText> _t;
-        _t = MyPile->FindEzText( L"Header" ); if ( _t != 0 ) { _t->setPos( Vector2(9.920441f, 536.9045f) ); _t->setScale( 1.f ); }
-        MyPile->setPos( Vector2(MyPile->getPos().X, -492.0635f) );
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->setPos( Vector2( 9.920441f, 536.9045f ) ); _t->setScale( 1.f ); }
+				MyPile->setPos( Vector2(-1320.f, -492.0635f ) );
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_RUSSIAN )
+			{
+				boost::shared_ptr<MenuItem> _item;
+				_item = MyMenu->FindItemByName( L"list" ); if (_item != 0 ) { _item->setSetPos( Vector2(-2.77784f, 153.1746f ) ); _item->MyText->setScale( 0.375f ); _item->MySelectedText->setScale( 0.375f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+				_item = MyMenu->FindItemByName( L"Done" ); if (_item != 0 ) { _item->setSetPos( Vector2(-324.6669f, 51.66659f ) ); _item->MyText->setScale( 0.5425833f ); _item->MySelectedText->setScale( 0.5425833f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+				_item = MyMenu->FindItemByName( L"Cancel" ); if (_item != 0 ) { _item->setSetPos( Vector2(-330.2227f, -90.55334f ) ); _item->MyText->setScale( 0.4997506f ); _item->MySelectedText->setScale( 0.4997506f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+
+				MyMenu->setPos( Vector2(-1303.333f, -423.016f ) );
+
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->setPos( Vector2( 7.142685f, 531.3489f ) ); _t->setScale( 0.7875f ); }
+				MyPile->setPos( Vector2(-1320.f, -492.0635f ) );
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_FRENCH )
+			{
+				boost::shared_ptr<MenuItem> _item;
+				_item = MyMenu->FindItemByName( L"list" ); if (_item != 0 ) { _item->setSetPos( Vector2(-2.77784f, 153.1746f ) ); _item->MyText->setScale( 0.375f ); _item->MySelectedText->setScale( 0.375f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+				_item = MyMenu->FindItemByName( L"Done" ); if (_item != 0 ) { _item->setSetPos( Vector2(-324.6669f, 51.66659f ) ); _item->MyText->setScale( 0.5425833f ); _item->MySelectedText->setScale( 0.5425833f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+				_item = MyMenu->FindItemByName( L"Cancel" ); if (_item != 0 ) { _item->setSetPos( Vector2(-330.2227f, -90.55334f ) ); _item->MyText->setScale( 0.4997506f ); _item->MySelectedText->setScale( 0.4997506f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+
+				MyMenu->setPos( Vector2(-1303.333f, -423.016f ) );
+
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->setPos( Vector2( 7.142685f, 531.3489f ) ); _t->setScale( 0.7875f ); }
+				MyPile->setPos( Vector2(-1320.f, -492.0635f ) );
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_ITALIAN )
+			{
+				boost::shared_ptr<MenuItem> _item;
+				_item = MyMenu->FindItemByName( L"list" ); if (_item != 0 ) { _item->setSetPos( Vector2(-2.77784f, 153.1746f ) ); _item->MyText->setScale( 0.375f ); _item->MySelectedText->setScale( 0.375f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+				_item = MyMenu->FindItemByName( L"Done" ); if (_item != 0 ) { _item->setSetPos( Vector2(-324.6669f, 51.66659f ) ); _item->MyText->setScale( 0.5425833f ); _item->MySelectedText->setScale( 0.5425833f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+				_item = MyMenu->FindItemByName( L"Cancel" ); if (_item != 0 ) { _item->setSetPos( Vector2(-330.2227f, -90.55334f ) ); _item->MyText->setScale( 0.4997506f ); _item->MySelectedText->setScale( 0.4997506f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+
+				MyMenu->setPos( Vector2(-1320.f, -484.127f ) );
+
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->setPos( Vector2( 9.920441f, 536.9045f ) ); _t->setScale( 1.f ); }
+				MyPile->setPos( Vector2(-1320.f, -492.0635f ) );
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_GERMAN )
+			{
+				boost::shared_ptr<MenuItem> _item;
+				_item = MyMenu->FindItemByName( L"list" ); if (_item != 0 ) { _item->setSetPos( Vector2(-2.77784f, 153.1746f ) ); _item->MyText->setScale( 0.375f ); _item->MySelectedText->setScale( 0.375f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+				_item = MyMenu->FindItemByName( L"Done" ); if (_item != 0 ) { _item->setSetPos( Vector2(-332.9999f, 46.11105f ) ); _item->MyText->setScale( 0.5192502f ); _item->MySelectedText->setScale( 0.5192502f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+				_item = MyMenu->FindItemByName( L"Cancel" ); if (_item != 0 ) { _item->setSetPos( Vector2(-330.2227f, -90.55334f ) ); _item->MyText->setScale( 0.4997506f ); _item->MySelectedText->setScale( 0.4997506f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+
+				MyMenu->setPos( Vector2(-1320.f, -484.127f ) );
+
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->setPos( Vector2( 9.920441f, 536.9045f ) ); _t->setScale( 1.f ); }
+				MyPile->setPos( Vector2(-1320.f, -492.0635f ) );
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_CHINESE )
+			{
+				boost::shared_ptr<MenuItem> _item;
+				_item = MyMenu->FindItemByName( L"list" ); if (_item != 0 ) { _item->setSetPos( Vector2(-2.77784f, 153.1746f ) ); _item->MyText->setScale( 0.375f ); _item->MySelectedText->setScale( 0.375f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+				_item = MyMenu->FindItemByName( L"Done" ); if (_item != 0 ) { _item->setSetPos( Vector2(-246.8888f, 62.77774f ) ); _item->MyText->setScale( 0.5192502f ); _item->MySelectedText->setScale( 0.5192502f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+				_item = MyMenu->FindItemByName( L"Cancel" ); if (_item != 0 ) { _item->setSetPos( Vector2(-238.5559f, -84.9978f ) ); _item->MyText->setScale( 0.5033337f ); _item->MySelectedText->setScale( 0.5033337f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+
+				MyMenu->setPos( Vector2(-1320.f, -484.127f ) );
+
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->setPos( Vector2( 9.920441f, 536.9045f ) ); _t->setScale( 1.f ); }
+				MyPile->setPos( Vector2(-1320.f, -492.0635f ) );
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_SPANISH )
+			{
+				boost::shared_ptr<MenuItem> _item;
+				_item = MyMenu->FindItemByName( L"list" ); if (_item != 0 ) { _item->setSetPos( Vector2(-2.77784f, 153.1746f ) ); _item->MyText->setScale( 0.375f ); _item->MySelectedText->setScale( 0.375f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+				_item = MyMenu->FindItemByName( L"Done" ); if (_item != 0 ) { _item->setSetPos( Vector2(-257.4442f, 51.66659f ) ); _item->MyText->setScale( 0.5535835f ); _item->MySelectedText->setScale( 0.5535835f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+				_item = MyMenu->FindItemByName( L"Cancel" ); if (_item != 0 ) { _item->setSetPos( Vector2(-260.2225f, -82.21997f ) ); _item->MyText->setScale( 0.5352504f ); _item->MySelectedText->setScale( 0.5352504f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+
+				MyMenu->setPos( Vector2( MyMenu->getPos().X, -484.127f ) );
+
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->setPos( Vector2( 9.920441f, 536.9045f ) ); _t->setScale( 1.f ); }
+				MyPile->setPos( Vector2( MyPile->getPos().X, -492.0635f ) );
+			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_JAPANESE )
+			{
+				boost::shared_ptr<MenuItem> _item;
+				_item = MyMenu->FindItemByName( L"list" ); if (_item != 0 ) { _item->setSetPos( Vector2(-2.77784f, 153.1746f ) ); _item->MyText->setScale( 0.375f ); _item->MySelectedText->setScale( 0.375f ); _item->SelectIconOffset = Vector2( 0.f, 0.f );  }
+				_item = MyMenu->FindItemByName( L"Done" ); if (_item != 0 ) { _item->setSetPos( Vector2(-232.9996f, 73.88882f ) ); _item->MyText->setScale( 0.5535835f ); _item->MySelectedText->setScale( 0.5535835f ); _item->SelectIconOffset = Vector2( 0.f, 0.f );  }
+				_item = MyMenu->FindItemByName( L"Cancel" ); if (_item != 0 ) { _item->setSetPos( Vector2(-224.6671f, -62.77551f ) ); _item->MyText->setScale( 0.5352504f ); _item->MySelectedText->setScale( 0.5352504f ); _item->SelectIconOffset = Vector2( 0.f, 0.f );  }
+
+				MyMenu->setPos( Vector2(-1320.f, -484.127f ) );
+
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->setPos( Vector2( 9.920441f, 536.9045f ) ); _t->setScale( 1.f ); }
+				MyPile->setPos( Vector2(-1320.f, -492.0635f ) );
+			}
+			else
+			{
+				boost::shared_ptr<MenuItem> _item;
+				_item = MyMenu->FindItemByName( L"list" ); if (_item != 0 ) { _item->setSetPos( Vector2(-2.77784f, 153.1746f ) ); _item->MyText->setScale( 0.375f ); _item->MySelectedText->setScale( 0.375f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+				_item = MyMenu->FindItemByName( L"Done" ); if (_item != 0 ) { _item->setSetPos( Vector2(-227.4442f, 51.66659f ) ); _item->MyText->setScale( 0.5535835f ); _item->MySelectedText->setScale( 0.5535835f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+				_item = MyMenu->FindItemByName( L"Cancel" ); if (_item != 0 ) { _item->setSetPos( Vector2(-230.2225f, -82.21997f ) ); _item->MyText->setScale( 0.5352504f ); _item->MySelectedText->setScale( 0.5352504f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+
+				MyMenu->setPos( Vector2( MyMenu->getPos().X, -484.127f ) );
+
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->setPos( Vector2( 9.920441f, 536.9045f ) ); _t->setScale( 1.f ); }
+				MyPile->setPos( Vector2( MyPile->getPos().X, -492.0635f ) );
+			}
 	}
 
 	void ListSelectPanel::Back()

@@ -438,7 +438,7 @@ namespace CloudberryKingdom
 
 		Vector2 IconOffset = Vector2( -150, 0 );
 
-		std::wstring CoinPrefix = std::wstring( L"{pCoin_Blue,68,?}" );
+		std::wstring CoinPrefix = std::wstring( L"{pCoin_Blue,100,?}" );
 
 		// Watch the computer
 		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( CoinPrefix + std::wstring( L"x" ) + StringConverterHelper::toString( Cost_Watch * CostMultiplier ), ItemFont ) ) );
@@ -525,63 +525,29 @@ namespace CloudberryKingdom
 
 	void HelpMenu::SetPos()
 	{
-		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( std::wstring( L"WatchComputer" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( -1050, 285.0002f ) );
-			_item->MyText->setScale( 0.8f );
-			_item->MySelectedText->setScale( 0.8f );
-			_item->SelectIconOffset = Vector2( 0, 0 );
-		}
-		_item = MyMenu->FindItemByName( std::wstring( L"ShowPath" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( -1047.222f, -98.8887f ) );
-			_item->MyText->setScale( 0.8f );
-			_item->MySelectedText->setScale( 0.8f );
-			_item->SelectIconOffset = Vector2( 0, 0 );
-		}
-		_item = MyMenu->FindItemByName( std::wstring( L"SlowMo" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( -1052.777f, -499.4443f ) );
-			_item->MyText->setScale( 0.8f );
-			_item->MySelectedText->setScale( 0.8f );
-			_item->SelectIconOffset = Vector2( 0, 0 );
-		}
+            boost::shared_ptr<MenuItem> _item;
+            _item = MyMenu->FindItemByName( L"WatchComputer" ); if (_item != 0 ) { _item->setSetPos( Vector2(-1050.f, 285.0002f ) ); _item->MyText->setScale( 0.8f ); _item->MySelectedText->setScale( 0.8f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+            _item = MyMenu->FindItemByName( L"ShowPath" ); if (_item != 0 ) { _item->setSetPos( Vector2(-1047.222f, -98.8887f ) ); _item->MyText->setScale( 0.8f ); _item->MySelectedText->setScale( 0.8f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+            _item = MyMenu->FindItemByName( L"SlowMo" ); if (_item != 0 ) { _item->setSetPos( Vector2(-1052.777f, -499.4443f ) ); _item->MyText->setScale( 0.8f ); _item->MySelectedText->setScale( 0.8f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 
-		MyMenu->setPos( Vector2( 0, 0 ) );
+            MyMenu->setPos( Vector2( 0.f, 0.f ) );
 
-		boost::shared_ptr<EzText> _t;
-		_t = MyPile->FindEzText( std::wstring( L"Coins" ) );
-		if ( _t != 0 )
-		{
-			_t->setPos( Vector2( -771.3337f, 622.889f ) );
-			_t->setScale( 0.6593335f );
-		}
-		_t = MyPile->FindEzText( std::wstring( L"Header" ) );
-		if ( _t != 0 )
-		{
-			_t->setPos( Vector2( -1497.222f, 816.3335f ) );
-			_t->setScale( 0.9640832f );
-		}
+            boost::shared_ptr<EzText> _t;
+			_t = MyPile->FindEzText( L"Coins" ); if (_t != 0 ) { _t->setPos( Vector2(-1497.222f, 615.889f ) ); _t->setScale( 0.6593335f ); }
+            _t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->setPos( Vector2(-1497.222f, 816.3335f ) ); _t->setScale( 0.9640832f ); }
 
-		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( std::wstring( L"Backdrop" ) );
-		if ( _q != 0 )
-		{
-			_q->setPos( Vector2( 22.22229f, -33.33333f ) );
-			_q->setSize( Vector2( 1740.553f, 1044.332f ) );
-		}
-		_q = MyPile->FindQuad( std::wstring( L"Coin" ) );
-		if ( _q != 0 )
-		{
-			_q->setPos( Vector2( -798.1558f, 634.4669f ) );
-			_q->setSize( Vector2( 110.5714f, 110.5714f ) );
-		}
+            boost::shared_ptr<QuadClass> _q;
+            _q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2( 22.22229f, -33.33333f ) ); _q->setSize( Vector2( 1740.553f, 1044.332f ) ); }
+            _q = MyPile->FindQuad( L"Coin" ); if (_q != 0 ) { _q->setPos( Vector2(-798.1558f, 634.4669f ) ); _q->setSize( Vector2( 110.5714f, 110.5714f ) ); }
 
-		MyPile->setPos( Vector2( 0, 0 ) );
+            MyPile->setPos( Vector2( 0.f, 0.f ) );
+
+
+			// Position coins
+			float x = 0;
+			_t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->CalcBounds(); x = CoinsText->getPos().X + _t->GetWorldWidth(); }
+			CoinsText->setPos( Vector2( x, CoinsText->getPos().Y ) );
+			_q = MyPile->FindQuad( L"Coin" ); if (_q != 0 ) { _q->setPos( Vector2( x + 10, _q->getPos().Y ) ); }
 	}
 
 	void HelpMenu::AddItem( const boost::shared_ptr<MenuItem> &item )

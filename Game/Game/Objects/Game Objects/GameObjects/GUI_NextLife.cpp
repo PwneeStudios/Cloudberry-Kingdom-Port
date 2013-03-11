@@ -2,6 +2,8 @@
 
 #include <Hacks/String.h>
 
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
 
@@ -144,13 +146,18 @@ namespace CloudberryKingdom
 
 	void GUI_NextLife::SetPos()
 	{
-		boost::shared_ptr<EzText> _t;
-		_t = MyPile->FindEzText( L"coin" ); if (_t != 0 ) { _t->setPos( Vector2( 189.7776f, 111.7778f ) ); _t->setScale( 0.55f ); }
+			boost::shared_ptr<EzText> _t;
+			_t = MyPile->FindEzText( L"coin" ); if (_t != 0 ) { _t->setPos( Vector2( 189.7776f, 111.7778f ) ); _t->setScale( 0.55f ); }
 
-		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( L"coin" ); if (_q != 0 ) { _q->setPos( Vector2( 140.7331f, 117.8001f ) ); _q->setSize( Vector2( 100.f, 100.f ) ); }
+			boost::shared_ptr<QuadClass> _q;
+			_q = MyPile->FindQuad( L"coin" ); if (_q != 0 ) { _q->setPos( Vector2( 140.7331f, 117.8001f ) ); _q->setSize( Vector2( 100.f, 100.f ) ); }
 
-		MyPile->setPos( Vector2( 1232.689f, 762.2109f ) );
+			MyPile->setPos( Vector2( 1232.689f, 758.2109f ) );
+
+			// Extra squeeze
+			Vector2 squeeze = Vector2(-15, -15 ) * CloudberryKingdomGame::GuiSqueeze;
+
+			MyPile->setPos( MyPile->getPos() + squeeze );
 	}
 
 	void GUI_NextLife::OnAdd()
