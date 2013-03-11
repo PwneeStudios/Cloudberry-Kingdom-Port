@@ -1,12 +1,17 @@
 #include <Input/GamePad.h>
 
 #include "PS3/gfxPad.h"
+#include <Utility/ConsoleInformation.h>
 #include <Utility/Error.h>
 #include <Utility/Log.h>
+
+static bool asianButtonConfiguration = false;
 
 void GamePad::Initialize()
 {
 	gfxInitPad();
+
+	asianButtonConfiguration = IsAsianButtonConfiguration();
 }
 
 bool AutoCloseWhenConnected()
@@ -68,8 +73,17 @@ GamePadState GamePad::GetState( PlayerIndex index )
 	gs.Triggers.Left = gfxL2Down( i ) ? ButtonState_Pressed : ButtonState_Released;
 	gs.Triggers.Right = gfxR2Down( i ) ? ButtonState_Pressed : ButtonState_Released;
 
-	gs.Buttons.A = gfxDpadCross( i ) ? ButtonState_Pressed : ButtonState_Released;
-	gs.Buttons.B = gfxDpadCircle( i ) ? ButtonState_Pressed : ButtonState_Released;
+	if( asianButtonConfiguration )
+	{
+		gs.Buttons.A = gfxDpadCross( i ) ? ButtonState_Pressed : ButtonState_Released;
+		gs.Buttons.B = gfxDpadCircle( i ) ? ButtonState_Pressed : ButtonState_Released;
+	}
+	else
+	{
+		gs.Buttons.B = gfxDpadCross( i ) ? ButtonState_Pressed : ButtonState_Released;
+		gs.Buttons.A = gfxDpadCircle( i ) ? ButtonState_Pressed : ButtonState_Released;
+	}
+
 	gs.Buttons.X = gfxDpadSquare( i ) ? ButtonState_Pressed : ButtonState_Released;
 	gs.Buttons.Y = gfxDpadTri( i ) ? ButtonState_Pressed : ButtonState_Released;
 

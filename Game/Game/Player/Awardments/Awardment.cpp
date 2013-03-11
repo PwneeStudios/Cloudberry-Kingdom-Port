@@ -347,10 +347,16 @@ namespace CloudberryKingdom
 
             if (award == 0) return;
 
-            if ( player == 0 && PlayerManager::NotAllAwarded(award) ||
-                 player != 0 && !player->Awardments_Renamed->Has( award->Guid ) )
+            if (
+#ifdef PS3
+				true
+#else
+				player == 0 && PlayerManager::NotAllAwarded(award) || player != 0 && !player->Awardments_Renamed->Has( award->Guid )
+#endif
+				)
             {
                 // Give the award to each player, or to the specified player
+#ifndef PS3
                 if (player == 0)
                 {
 					std::vector<boost::shared_ptr<PlayerData> > vec = PlayerManager::getExistingPlayers();
@@ -358,6 +364,7 @@ namespace CloudberryKingdom
                         ( *p )->Awardments_Renamed->Add( award->Guid );
                 }
                 else
+#endif
                     player->Awardments_Renamed->Add( award->Guid );
 
 #ifdef NOT_PC
