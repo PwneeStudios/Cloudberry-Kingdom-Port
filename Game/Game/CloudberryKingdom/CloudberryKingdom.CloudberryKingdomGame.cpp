@@ -305,7 +305,10 @@ namespace CloudberryKingdom
 			if( level < ESRB )
 			{
 				if( showError )
-					DisplayError( ErrorType( "You do not have permissions to access online functionality. Please check the parental controls." ) );
+				{
+					std::string str = WstringToUtf8( Localization::WordString( Localization::Words_PS3_OnlinePermission ) );
+					DisplayError( ErrorType( str ) );
+				}
 				return false;
 			}
 #endif

@@ -78,9 +78,10 @@ namespace CloudberryKingdom
 	#else
 		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getGo(), 90.f, std::wstring( L"Button_Go" ) ) );
 		Play = boost::make_shared<EzText>( Localization::Words_Play, ItemFont, true );
-		Play->MyFloatColor = ( Color( static_cast<unsigned char>( 67 ), static_cast<unsigned char>( 198 ), static_cast<unsigned char>( 48 ), static_cast<unsigned char>( 255 ) ) ).ToVector4();
+		//Play->MyFloatColor = ( Color( static_cast<unsigned char>( 67 ), static_cast<unsigned char>( 198 ), static_cast<unsigned char>( 48 ), static_cast<unsigned char>( 255 ) ) ).ToVector4();
 		Play->Name = std::wstring( L"Play" );
-		SetHeaderProperties( Play );
+		//SetHeaderProperties( Play );
+		SetGrayHeaderProperties( Play );
 	#endif
 
 
@@ -97,9 +98,10 @@ namespace CloudberryKingdom
 	#else
 		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getBack(), 85.f, static_cast<std::wstring>( std::wstring( L"Button_Back" ) ) ) );
 		End = boost::make_shared<EzText>( back_word, ItemFont, true );
-		End->MyFloatColor = ( Color( static_cast<unsigned char>( 239 ), static_cast<unsigned char>( 41 ), static_cast<unsigned char>( 41 ), static_cast<unsigned char>( 255 ) ) ).ToVector4();
+		//End->MyFloatColor = ( Color( static_cast<unsigned char>( 239 ), static_cast<unsigned char>( 41 ), static_cast<unsigned char>( 41 ), static_cast<unsigned char>( 255 ) ) ).ToVector4();
 		End->Name = std::wstring( L"Back" );
-		SetHeaderProperties( End );
+		//SetHeaderProperties( End );
+		SetGrayHeaderProperties( End );
 	#endif
 
 		if ( Type == ReplayGUIType_REPLAY )
@@ -110,9 +112,10 @@ namespace CloudberryKingdom
 	#if defined(PC_VERSION)
 			SetGrayHeaderProperties( Toggle );
 	#else
-			SetHeaderProperties( Toggle );
+			//SetHeaderProperties( Toggle );
 			//Toggle->MyFloatColor = ( Color( static_cast<unsigned char>( 0 ), static_cast<unsigned char>( 0 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) ) ).ToVector4();
-			Toggle->MyFloatColor = Menu::DefaultMenuInfo::UnselectedXColor;
+			//Toggle->MyFloatColor = Menu::DefaultMenuInfo::UnselectedXColor;
+			SetGrayHeaderProperties( Toggle );
 	#endif
 			SetToggleText();
 		}

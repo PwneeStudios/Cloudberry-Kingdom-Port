@@ -2002,7 +2002,7 @@ void VideoPlayer::Play( const boost::shared_ptr< Video > &video )
                     NULL,
                     ThreadStack[0] + STACK_SIZE,    // initial stack address
                     STACK_SIZE,                     // stack size
-                    16,                             // scheduling priority
+                    15,                             // scheduling priority
                     0);         // detached
 
     // Create the audio thread.
@@ -2012,7 +2012,7 @@ void VideoPlayer::Play( const boost::shared_ptr< Video > &video )
                     NULL,
                     ThreadStack[1] + STACK_SIZE,    // initial stack address
                     STACK_SIZE,                     // stack size
-                    16,                             // scheduling priority
+                    15,                             // scheduling priority
                     0);         // detached
 
 
