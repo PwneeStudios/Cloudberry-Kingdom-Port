@@ -15,6 +15,7 @@ VPADStatus vpadStatus;
 s32 readLength;
 bool vpadConnected;
 bool anythingElseConnected;
+bool vpadActive;
 
 KPADStatus kpadStatus[ WPAD_MAX_CONTROLLERS ];
 s32 kpadReadLength[ WPAD_MAX_CONTROLLERS ];
@@ -57,6 +58,9 @@ void GamePad::Initialize()
 	vpadConnected = true;
 	readLength = 0;
 
+	// FIXME: Should not always be active.
+	vpadActive = true;
+
 	memset( kpadStatus, 0, sizeof( kpadStatus ) );
 	memset( kpadReadLength, 0, sizeof( kpadReadLength ) );
 	memset( kpadIsConnected, 0, sizeof( kpadIsConnected ) );
@@ -75,6 +79,8 @@ void GamePad::Update()
 
 	// Is anything else other than the vpad connected?
 	anythingElseConnected = false;
+
+	bool wiiMoteActive = false;
 
 	// Update Wiimotes.
 	for( int i = 0; i < WPAD_MAX_CONTROLLERS; i++ )
@@ -96,8 +102,9 @@ void GamePad::Update()
 		if( kpadStatus[ i ].wpad_err == WPAD_ERR_CORRUPTED )
 			continue;
 		
-		//kpadConnectHistory[ i ] = 0;
+		wiiMoteActive |= ( kpadStatus[ i ].hold != 0 );
 
+		//kpadConnectHistory[ i ] = 0;
 		PAD_STATE[ i ].Buttons.A = ( kpadStatus[ i ].hold & KPAD_BUTTON_2 ) ? ButtonState_Pressed : ButtonState_Released;
 		PAD_STATE[ i ].Buttons.B = ( kpadStatus[ i ].hold & KPAD_BUTTON_1 ) ? ButtonState_Pressed : ButtonState_Released;
 		PAD_STATE[ i ].Buttons.X = ( kpadStatus[ i ].hold & KPAD_BUTTON_B ) ? ButtonState_Pressed : ButtonState_Released;
@@ -151,6 +158,8 @@ void GamePad::Update()
 				PAD_STATE[ i ].Type = GamePadState::ControllerType_Mini;
 		}*/
 	}
+
+	vpadActive = !wiiMoteActive;
 
 	// Update gamepad.
 	PADStatus status[ PAD_MAX_CONTROLLERS ];
@@ -214,6 +223,7 @@ void GamePad::Update()
 		if( error == VPAD_READ_ERR_NONE )
 		{
 			vpadConnected = true;
+			vpadActive = vpadStatus.hold != 0;
 
 			// Mapping is inverse of XBox.
 			PAD_STATE[ i ].Buttons.A = __max( PAD_STATE[ i ].Buttons.A, vpadStatus.hold & VPAD_BUTTON_A ? ButtonState_Pressed : ButtonState_Released );
@@ -251,6 +261,9 @@ void GamePad::Update()
 			//DisplayError( ErrorType( 1650101 ) );
 		}
 	}
+
+	// FIXME: Should not always be active.
+	vpadActive = true;
 }
 
 GamePadState GamePad::GetState( PlayerIndex index )
