@@ -1,6 +1,6 @@
     # defines required when building for Cafe OS 2.0
     -Dcafe
-    -D_DEBUG
+    -DNDEBUG
     -DNDEV=1
     -DCAFE=2
     -DPLATFORM=CAFE
@@ -12,7 +12,7 @@
     # Cafe header files
     -I$(__OS_DIR)/system/include
     # Cafe library directory
-    -L$(__OS_DIR)/system/lib/ghs/cafe/DEBUG
+    -L$(__OS_DIR)/system/lib/ghs/cafe/NDEBUG
     # Required options (to match Cafe library options)
     -c99
     -language=cxx

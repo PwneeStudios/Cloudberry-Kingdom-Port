@@ -5,12 +5,9 @@
 #include <Content/Texture.h>
 #include <Content/TextureWiiUInternal.h>
 
-struct RenderTarget2DInternal
-{
-	GX2ColorBuffer ColorBuffer;
-	Texture *RTTexture;
-	ResourceHolder Holder;
-};
+#include "RenderTarget2DWiiUInternal.h"
+
+std::vector< RenderTarget2DInternal * > GlobalRenderTargets;
 
 RenderTarget2D::RenderTarget2D( const boost::shared_ptr<GraphicsDevice> &device, int width, int height, bool mipmap, int surfaceFormat, int depthFormat, int sampleCount, bool discard )
 	: Texture2D( device, width, height )
@@ -40,12 +37,17 @@ RenderTarget2D::RenderTarget2D( const boost::shared_ptr<GraphicsDevice> &device,
 
 	internal_->Holder = internal_->RTTexture;
 	texture_ = ResourcePtr< Texture >( &internal_->Holder );
+
+	GlobalRenderTargets.push_back( internal_ );
 }
 
 static RenderTarget2DInternal *LastRT = 0;
 
 RenderTarget2D::~RenderTarget2D()
 {
+	std::vector< RenderTarget2DInternal * >::iterator i;
+	i = std::find( GlobalRenderTargets.begin(), GlobalRenderTargets.end(), internal_ );
+
 	if( LastRT == internal_ )
 		LastRT = 0;
 

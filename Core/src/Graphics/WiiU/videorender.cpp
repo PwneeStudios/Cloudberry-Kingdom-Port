@@ -25,6 +25,7 @@
 #include <nn/erreula.h>
 #include "videorender.h"
 
+
 // --------- GX2 Data ---------
 
 GX2Texture      g_LTexture[2];
@@ -356,6 +357,19 @@ void drawDRCFrame()
     // Draw
     GX2Draw(GX2_PRIMITIVE_TRIANGLE_STRIP, g_QuadAttribData.vertexCount);
 
+	if( DrawSubtitles )
+		DrawSubtitles();
+
+	GX2SurfaceFormat f = DEMODRCColorBuffer.surface.format;
+	DEMODRCColorBuffer.surface.format = static_cast< GX2SurfaceFormat >( f | 0x00000400 );
+	GX2InitColorBufferRegs( &DEMODRCColorBuffer );
+	GX2SetColorBuffer( &DEMODRCColorBuffer, GX2_RENDER_TARGET_0 );
+
+	nn::erreula::DrawDRC();
+
+	DEMOColorBuffer.surface.format = f;
+	GX2InitColorBufferRegs( &DEMODRCColorBuffer );
+	GX2SetColorBuffer( &DEMODRCColorBuffer, GX2_RENDER_TARGET_0 );
     // This function will copy presenting the rendered buffer to the drc screen buffer
     // Need to call DEMOGfxDoneRender for swapping after this.
 //    DEMODRCDoneRender();

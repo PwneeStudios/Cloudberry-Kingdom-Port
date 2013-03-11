@@ -7,6 +7,7 @@
 #include <cafe/pads/kpad/kpad.h>
 
 #include <Utility/Error.h>
+#include <Utility/Log.h>
 
 GamePadState PAD_STATE[ PAD_MAX_CONTROLLERS ];
 
@@ -14,9 +15,11 @@ VPADStatus vpadStatus;
 s32 readLength;
 bool vpadConnected;
 bool anythingElseConnected;
+bool vpadActive;
 
 KPADStatus kpadStatus[ WPAD_MAX_CONTROLLERS ];
 s32 kpadReadLength[ WPAD_MAX_CONTROLLERS ];
+bool kpadIsConnected[ WPAD_MAX_CONTROLLERS ];
 
 static void ConnectCallback( s32 chan, s32 reason )
 {
@@ -25,12 +28,19 @@ static void ConnectCallback( s32 chan, s32 reason )
 		WPADSetDataFormat( chan, WPAD_FMT_CORE );
 		WPADControlSpeaker( chan, WPAD_SPEAKER_OFF, NULL );
 		WPADControlDpd( chan, WPAD_DPD_OFF, NULL );
+		kpadIsConnected[ chan ] = true;
+		LOG.Write( "Gamepad connected\n" );
+	}
+	else if( reason == WPAD_ERR_NO_CONTROLLER )
+	{
+		kpadIsConnected[ chan ] = false;
+		LOG.Write( "Gamepad disconnected\n" );
 	}
 }
 
-int kpadConnectHistory[ WPAD_MAX_CONTROLLERS ];
+/*int kpadConnectHistory[ WPAD_MAX_CONTROLLERS ];
 int vpadConnectHistory;
-const int disconnectThreshold = 30;
+const int disconnectThreshold = 30;*/
 
 void GamePad::Initialize()
 {
@@ -48,12 +58,16 @@ void GamePad::Initialize()
 	vpadConnected = true;
 	readLength = 0;
 
+	// FIXME: Should not always be active.
+	vpadActive = true;
+
 	memset( kpadStatus, 0, sizeof( kpadStatus ) );
 	memset( kpadReadLength, 0, sizeof( kpadReadLength ) );
+	memset( kpadIsConnected, 0, sizeof( kpadIsConnected ) );
 
-	for( int i = 0; i < WPAD_MAX_CONTROLLERS; ++i )
+	/*for( int i = 0; i < WPAD_MAX_CONTROLLERS; ++i )
 		kpadConnectHistory[ i ] = disconnectThreshold;
-	vpadConnectHistory = disconnectThreshold;
+	vpadConnectHistory = disconnectThreshold;*/
 }
 
 void GamePad::Update()
@@ -66,26 +80,31 @@ void GamePad::Update()
 	// Is anything else other than the vpad connected?
 	anythingElseConnected = false;
 
+	bool wiiMoteActive = false;
+
 	// Update Wiimotes.
 	for( int i = 0; i < WPAD_MAX_CONTROLLERS; i++ )
 	{
 		kpadReadLength[ i ] = KPADRead( i, &kpadStatus[ i ], 1 );
 
-		PAD_STATE[ i ].IsConnected = kpadConnectHistory[ i ] < disconnectThreshold;
+		PAD_STATE[ i ].IsConnected = kpadIsConnected[ i ];// kpadConnectHistory[ i ] < disconnectThreshold;
 		
-		if( kpadReadLength[ i ] == 0 )
+		if( !kpadIsConnected[ i ] )
+			continue;
+		/*if( kpadReadLength[ i ] == 0 )
 		{
 			++kpadConnectHistory[ i ];
 			continue;
-		}
+		}*/
 
 		anythingElseConnected = true;
 
 		if( kpadStatus[ i ].wpad_err == WPAD_ERR_CORRUPTED )
 			continue;
 		
-		kpadConnectHistory[ i ] = 0;
+		wiiMoteActive |= ( kpadStatus[ i ].hold != 0 );
 
+		//kpadConnectHistory[ i ] = 0;
 		PAD_STATE[ i ].Buttons.A = ( kpadStatus[ i ].hold & KPAD_BUTTON_2 ) ? ButtonState_Pressed : ButtonState_Released;
 		PAD_STATE[ i ].Buttons.B = ( kpadStatus[ i ].hold & KPAD_BUTTON_1 ) ? ButtonState_Pressed : ButtonState_Released;
 		PAD_STATE[ i ].Buttons.X = ( kpadStatus[ i ].hold & KPAD_BUTTON_B ) ? ButtonState_Pressed : ButtonState_Released;
@@ -139,6 +158,8 @@ void GamePad::Update()
 				PAD_STATE[ i ].Type = GamePadState::ControllerType_Mini;
 		}*/
 	}
+
+	vpadActive = !wiiMoteActive;
 
 	// Update gamepad.
 	PADStatus status[ PAD_MAX_CONTROLLERS ];
@@ -202,6 +223,7 @@ void GamePad::Update()
 		if( error == VPAD_READ_ERR_NONE )
 		{
 			vpadConnected = true;
+			vpadActive = vpadStatus.hold != 0;
 
 			// Mapping is inverse of XBox.
 			PAD_STATE[ i ].Buttons.A = __max( PAD_STATE[ i ].Buttons.A, vpadStatus.hold & VPAD_BUTTON_A ? ButtonState_Pressed : ButtonState_Released );
@@ -239,6 +261,9 @@ void GamePad::Update()
 			//DisplayError( ErrorType( 1650101 ) );
 		}
 	}
+
+	// FIXME: Should not always be active.
+	vpadActive = true;
 }
 
 GamePadState GamePad::GetState( PlayerIndex index )

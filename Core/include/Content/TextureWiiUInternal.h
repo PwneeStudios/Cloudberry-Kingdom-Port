@@ -6,6 +6,7 @@
 struct TextureInternal
 {
 	GX2Texture *Texture;
+	char *Buffer;
 };
 
 #endif

@@ -91,6 +91,7 @@
     <ClInclude Include="include\Input\GamePadTriggers.h" />
     <ClInclude Include="include\Graphics\Video.h" />
     <ClInclude Include="include\Graphics\VideoPlayer.h" />
+    <ClInclude Include="src\Graphics\RenderTarget2DWiiUInternal.h" />
     <ClInclude Include="src\Graphics\WiiU\MovieTest.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>

@@ -33,7 +33,7 @@
 #include <Game\Player\LeaderboardView.h>
 
 #ifdef BOOST_BIN
-#include <BoostBin.h>
+	#include <BoostBin.h>
 #endif
 
 #include <Ratings.h>

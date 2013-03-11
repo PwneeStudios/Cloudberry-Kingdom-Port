@@ -8,6 +8,11 @@
 #include <cmath>
 #include <Game\CloudberryKingdom\CloudberryKingdom.CloudberryKingdomGame.h>
 
+#ifdef CAFE
+// Are buttons being pressed on the vpad? Defined in GamePadWiiU.cpp.
+extern bool vpadActive;
+#endif
+
 namespace CloudberryKingdom
 {
 
@@ -206,6 +211,11 @@ boost::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 
 		Tools::UpdateVibrations();
 
+#if CAFE
+		// Determine if the gamepad is in use
+		ButtonTexture::UseGamepad = vpadActive;
+#endif
+
 	#if defined(PC_VERSION)
 		UpdateMouseUse();
 	#endif
@@ -213,10 +223,6 @@ boost::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 
 	void ButtonCheck::UpdateControllerAndKeyboard_EndOfStep( ResolutionGroup Resolution )
 	{
-#if CAFE
-		// Determine if the gamepad is in use
-		ButtonTexture::UseGamepad = false;
-#endif
 
 #if defined( PC_VERSION )
 		// Determine if the mouse is in the window or not.
