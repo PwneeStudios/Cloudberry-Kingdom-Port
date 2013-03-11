@@ -12,9 +12,16 @@
 #include <sys/ppu_thread.h>
 #include <sysutil/sysutil_savedata.h>
 #include <np.h>
-#define AUTOSAVEDATA_DIRNAME "TEST00000-AUTO-"
+
+#define SCEA
+
+#ifdef SCEA
+#define AUTOSAVEDATA_DIRNAME "NPUB31177-AUTO-"
+#endif
 
 #define AUTOSAVE_FILENAME "SYS-DATA"
+#define AUTOSAVE_PARAMSFO_TITLE "Cloudberry Kingdom Save File"
+#define AUTOSAVE_PARAMSFO_DETAIL "Progress through Cloudberry Kingdom."
 
 #define AUTOSAVE_SIZE (10 * 1024)
 enum {
@@ -456,6 +463,15 @@ namespace CloudberryKingdom
 				result->result = CELL_SAVEDATA_CBRESULT_ERR_NOSPACE;
 				return;
 			}
+
+			memset( set->setParam->title, 0, CELL_SAVEDATA_SYSP_TITLE_SIZE );
+			strncpy( set->setParam->title, AUTOSAVE_PARAMSFO_TITLE, CELL_SAVEDATA_SYSP_TITLE_SIZE );
+
+			memset( set->setParam->subTitle, 0, CELL_SAVEDATA_SYSP_SUBTITLE_SIZE );
+			strncpy( set->setParam->subTitle, AUTOSAVE_PARAMSFO_DETAIL, CELL_SAVEDATA_SYSP_SUBTITLE_SIZE );
+
+			memset( set->setParam->reserved, 0, sizeof( set->setParam->reserved ) );
+			memset( set->setParam->reserved2, 0, sizeof( set->setParam->reserved2 ) );
 		}
 
 		result->result = CELL_SAVEDATA_CBRESULT_OK_NEXT;

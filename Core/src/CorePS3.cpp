@@ -411,7 +411,8 @@ void RegisterTrophyContextThread( uint64_t context )
 	ContextRegistered = false;
 
 	// Register trophy.
-	int ret = sceNpTrophyRegisterContext( TrophyContext, TrophyHandle, TrophyStatusCallback, NULL, 0 );
+	int ret = sceNpTrophyRegisterContext( TrophyContext, TrophyHandle, TrophyStatusCallback, NULL,
+		SCE_NP_TROPHY_OPTIONS_REGISTER_CONTEXT_SHOW_ERROR_EXIT );
 	if( ret < 0 )
 	{
 		LOG.Write( "Couldn't register trophy context: 0x%x\n", ret );

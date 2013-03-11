@@ -1,7 +1,7 @@
 #ifndef BOOST_SMART_PTR_SHARED_PTR_HPP_INCLUDED
 #define BOOST_SMART_PTR_SHARED_PTR_HPP_INCLUDED
 
-#ifdef DEBUG
+#if defined( DEBUG ) && defined( WINDOWS )
 	#define BOOST_BIN
 	#include <string>
 #endif
