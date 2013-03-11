@@ -44,8 +44,8 @@ namespace CloudberryKingdom
     boost::shared_ptr<EzTexture> ButtonTexture::getX() { return Tools::Texture( std::wstring( L"PS3_Square" ) ); }
     boost::shared_ptr<EzTexture> ButtonTexture::getY() { return Tools::Texture( std::wstring( L"PS3_Triangle" ) ); }
     boost::shared_ptr<EzTexture> ButtonTexture::getLeftRight() { return Tools::Texture( std::wstring( L"PS3_Dir" ) ); }
-    boost::shared_ptr<EzTexture> ButtonTexture::getLeftBumper() { return Tools::Texture( std::wstring( L"PS3_1" ) ); }
-    boost::shared_ptr<EzTexture> ButtonTexture::getRightBumper() { return Tools::Texture( std::wstring( L"PS3_1" ) ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::getLeftBumper() { return Tools::Texture( std::wstring( L"PS3_L1" ) ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::getRightBumper() { return Tools::Texture( std::wstring( L"PS3_R1" ) ); }
 #elif CAFE
     bool ButtonTexture::UseGamepad = true;
     boost::shared_ptr<EzTexture> ButtonTexture::_Go() { return Tools::Texture( std::wstring( UseGamepad ? L"WiiU_A" : L"WiiU_2" ) ); }
@@ -53,8 +53,8 @@ namespace CloudberryKingdom
     boost::shared_ptr<EzTexture> ButtonTexture::getX() { return Tools::Texture( std::wstring( UseGamepad ? L"WiiU_Y" : L"WiiU_1" ) ); }
     boost::shared_ptr<EzTexture> ButtonTexture::getY() { return Tools::Texture( std::wstring( UseGamepad ? L"WiiU_X" : L"WiiU_Dash" ) ); }
     boost::shared_ptr<EzTexture> ButtonTexture::getLeftRight() { return Tools::Texture( std::wstring( UseGamepad ? L"WiiU_Dir" : L"WiiU_Dir" ) ); }
-    boost::shared_ptr<EzTexture> ButtonTexture::getLeftBumper() { return Tools::Texture( std::wstring( UseGamepad ? L"WiiU_R" : L"WiiU_R" ) ); }
-    boost::shared_ptr<EzTexture> ButtonTexture::getRightBumper() { return Tools::Texture( std::wstring( UseGamepad ? L"WiiU_L" : L"WiiU_L" ) ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::getLeftBumper() { return Tools::Texture( std::wstring( UseGamepad ? L"WiiU_L" : L"WiiU_L" ) ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::getRightBumper() { return Tools::Texture( std::wstring( UseGamepad ? L"WiiU_R" : L"WiiU_R" ) ); }
 #else
     boost::shared_ptr<EzTexture> ButtonTexture::_Go() { return Tools::Texture( std::wstring( L"Xbox_A" ) ); }
     boost::shared_ptr<EzTexture> ButtonTexture::_Back() { return Tools::Texture( std::wstring( L"Xbox_B" ) ); }
