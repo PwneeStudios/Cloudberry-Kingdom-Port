@@ -57,7 +57,7 @@ void *               s_pMultiStreamMemory    = NULL;
 void *               s_pSulphaMemory		 = NULL;
 
 
-#define   CHANNEL   CELL_AUDIO_PORT_8CH
+#define   CHANNEL   CELL_AUDIO_PORT_2CH/*CELL_AUDIO_PORT_8CH*/
 #define   BLOCK     CELL_AUDIO_BLOCK_8
 
 CellAudioPortParam   audioParam;
@@ -184,7 +184,7 @@ static int audioInitCell(bool _skipGraphicsInit)
 	//	Bits 0-3:	Number of available output channels
 	//	Bit    4:	Dolby On status
 	//	Bit    5:	DTS On status
-	int retSysUtil = cellMSSystemConfigureSysUtilEx(CELL_MS_AUDIOMODESELECT_SUPPORTSLPCM | CELL_MS_AUDIOMODESELECT_SUPPORTSDOLBY | CELL_MS_AUDIOMODESELECT_SUPPORTSDTS | CELL_MS_AUDIOMODESELECT_PREFERDOLBY);
+	int retSysUtil = cellMSSystemConfigureSysUtilEx(CELL_MS_AUDIOMODESELECT_SUPPORTSLPCM /*| CELL_MS_AUDIOMODESELECT_SUPPORTSDOLBY | CELL_MS_AUDIOMODESELECT_SUPPORTSDTS | CELL_MS_AUDIOMODESELECT_PREFERDOLBY*/ );
 	if( retSysUtil < 0 )
 	{
 		printf("error cellMSSystemConfigureSysUtilEx\n");

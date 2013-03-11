@@ -229,7 +229,7 @@ CorePS3::CorePS3( GameLoop &game ) :
 	// To test an hdd game in release mode with the debugger we need to tell it about the
 	// game code.  Also the files should be pre-installed on the disk.
 	// PS3_PATH_PREFIX = "/dev_hdd0/game/NPEB01312/USRDIR/"; // SCEE
-	PS3_PATH_PREFIX = "/dev_hdd0/game/NPUB31177/USRDIR/"; // SCEA
+	// PS3_PATH_PREFIX = "/dev_hdd0/game/NPUB31177/USRDIR/"; // SCEA
 	LOG.Write( "Running in %s\nContent dir %s\n", dirName, usrdirPath );
 #ifdef DEBUG
 	PS3_PATH_PREFIX = "/app_home/";
@@ -411,7 +411,8 @@ void RegisterTrophyContextThread( uint64_t context )
 	ContextRegistered = false;
 
 	// Register trophy.
-	int ret = sceNpTrophyRegisterContext( TrophyContext, TrophyHandle, TrophyStatusCallback, NULL, 0 );
+	int ret = sceNpTrophyRegisterContext( TrophyContext, TrophyHandle, TrophyStatusCallback, NULL,
+		SCE_NP_TROPHY_OPTIONS_REGISTER_CONTEXT_SHOW_ERROR_EXIT );
 	if( ret < 0 )
 	{
 		LOG.Write( "Couldn't register trophy context: 0x%x\n", ret );
