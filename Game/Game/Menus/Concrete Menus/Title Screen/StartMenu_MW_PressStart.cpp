@@ -56,6 +56,8 @@ namespace CloudberryKingdom
 		Text = boost::make_shared<EzText>( Localization::
 		#ifdef PS3
 			Words_PressStart_PS3
+		#elif CAFE
+			Words_PressStart_WiiU
 		#else
 			Words_PressStart
 		#endif
