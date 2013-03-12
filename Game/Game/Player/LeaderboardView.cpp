@@ -13,7 +13,14 @@ namespace CloudberryKingdom
     {
         switch ( type )
         {
-			case LeaderboardType_FriendsScores: return Localization::WordString( Localization::Words_FriendsScores );
+			case LeaderboardType_FriendsScores:
+				return Localization::WordString(
+#if PS3
+					Localization::Words_FriendsScores_PS3
+#else
+					Localization::Words_FriendsScores
+#endif
+					);
             case LeaderboardType_MyScores: return Localization::WordString( Localization::Words_MyScores );
             case LeaderboardType_TopScores: return Localization::WordString( Localization::Words_TopScores );
             default: return L"";
@@ -122,10 +129,20 @@ namespace CloudberryKingdom
 		float text_width = 1400.0f;
 		float text_scale = .785f;
         CurrentMessage = Message_None;
-        NotRankedFriends = boost::make_shared<EzText>( Localization::Words_NotRankedFriends, ItemFont, text_width, true, true, text_scale );
+
+		Localization::Words notranked, notrankedfriends;
+#ifdef PS3
+		notranked = Localization::Words_NotRanked_PS3;
+		notrankedfriends = Localization::Words_NotRankedFriends_PS3;
+#else
+		notranked = Localization::Words_NotRanked;
+		notrankedfriends = Localization::Words_NotRankedFriends;
+#endif
+
+        NotRankedFriends = boost::make_shared<EzText>( notrankedfriends, ItemFont, text_width, true, true, text_scale );
         MyPile->Add( NotRankedFriends, L"NotRankedFriends" );
 
-        NotRanked = boost::make_shared<EzText>( Localization::Words_NotRanked, ItemFont, text_width, true, true, text_scale );
+        NotRanked = boost::make_shared<EzText>( notranked, ItemFont, text_width, true, true, text_scale );
         MyPile->Add( NotRanked, L"NotRanked" );
 
         LoadingStr0 = Localization::WordString( Localization::Words_Loading );
@@ -146,7 +163,7 @@ namespace CloudberryKingdom
 
         // View Gamer
 #ifdef PS3
-		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_PS3_Profile, ItemFont ) ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_ViewProfile_PS3, ItemFont ) ) );
 #else
         item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_ViewGamerCard, ItemFont ) ) );
 #endif

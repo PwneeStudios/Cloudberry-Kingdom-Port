@@ -423,8 +423,13 @@ Words_Err_PS3_PsnRequired_WillUploadLater,
 Words_Err_PS3_NotEnoughSpace,
 Words_Err_PS3_SaveDataNotUsed,
 Words_Err_PS3_PsnLoggedOut,
-Words_PS3_Profile,
-Words_PS3_OnlinePermission,
+Words_Err_PS3_NotEnoughSpaceForTrophy,
+Words_ViewProfile_PS3,
+Words_OnlinePermission_PS3,
+Words_NotRanked_PS3,
+Words_FriendsScores_PS3,
+Words_PressStart_PS3,
+
 
 Words_EnumLength
 		};

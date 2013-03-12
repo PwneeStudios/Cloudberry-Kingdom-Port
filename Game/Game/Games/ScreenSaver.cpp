@@ -149,7 +149,13 @@ namespace CloudberryKingdom
 	#if defined(PC_VERSION)
 		ss->PressA = MakeMagic( GUI_Text, ( Localization::Words_PressAnyKey, Vector2( 0, -865 ), true ) );
 	#else
-		ss->PressA = MakeMagic( GUI_Text, ( Localization::Words_PressStart, Vector2( 0, -865 ), true ) );
+		ss->PressA = MakeMagic( GUI_Text, ( Localization::
+		#ifdef PS3
+			Words_PressStart_PS3
+		#else
+			Words_PressStart
+		#endif
+		, Vector2( 0, -865 ), true ) );
 	#endif
 		ss->PressA->MyText->setScale( ss->PressA->MyText->getScale() * .68f );
 		ss->PressA->PreventRelease = true;

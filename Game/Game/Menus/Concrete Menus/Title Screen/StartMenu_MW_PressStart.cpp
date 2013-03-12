@@ -53,9 +53,13 @@ namespace CloudberryKingdom
 
 		EnsureFancy();
 
-		//Text = new EzText("Press any key to start", Resources::Font_Grobold42, true);
-		Text = boost::make_shared<EzText>( Localization::Words_PressStart, Resources::Font_Grobold42, true );
-		//Text = new EzText(Localization::Words_PressStart, ItemFont);
+		Text = boost::make_shared<EzText>( Localization::
+		#ifdef PS3
+			Words_PressStart_PS3
+		#else
+			Words_PressStart
+		#endif
+		, Resources::Font_Grobold42, true );
 
 		Text->MyFloatColor = ( bColor( 226, 10, 83 ) ).ToVector4();
 		Text->OutlineColor = Color::Black.ToVector4();

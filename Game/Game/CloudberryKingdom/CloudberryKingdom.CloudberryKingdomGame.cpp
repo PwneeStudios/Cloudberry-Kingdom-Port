@@ -306,7 +306,7 @@ namespace CloudberryKingdom
 			{
 				if( showError )
 				{
-					std::string str = WstringToUtf8( Localization::WordString( Localization::Words_PS3_OnlinePermission ) );
+					std::string str = WstringToUtf8( Localization::WordString( Localization::Words_OnlinePermission_PS3 ) );
 					DisplayError( ErrorType( str ) );
 				}
 				return false;
