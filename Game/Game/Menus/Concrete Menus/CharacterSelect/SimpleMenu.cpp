@@ -1,6 +1,7 @@
 #include <global_header.h>
 
 #include <Core\Tools\Set.h>
+#include <Utility\ConsoleInformation.h>
 
 namespace CloudberryKingdom
 {
@@ -510,6 +511,12 @@ namespace CloudberryKingdom
 				_q = MyPile->FindQuad( L"go" ); if (_q != 0 ) { _q->setPos( Vector2(-261.1111f, -141.6667f ) ); _q->setSize( Vector2( 67.6666f, 67.6666f ) ); }
 				_q = MyPile->FindQuad( L"y" ); if (_q != 0 ) { _q->setPos( Vector2(-261.1111f, -302.7778f ) ); _q->setSize( Vector2( 67.6666f, 67.6666f ) ); }
 				_q = MyPile->FindQuad( L"x" ); if (_q != 0 ) { _q->setPos( Vector2(-261.1111f, -461.1111f ) ); _q->setSize( Vector2( 67.6666f, 67.6666f ) ); }
+			}
+
+			bool Squeeze;
+			if ( Squeeze )
+			{
+				MyPile->
 			}
 
 		CharacterSelect::Shift( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );

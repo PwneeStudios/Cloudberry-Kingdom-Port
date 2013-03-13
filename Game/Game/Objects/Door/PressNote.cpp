@@ -13,6 +13,8 @@ namespace CloudberryKingdom
 	{
 #if defined(PC_VERSION)
 		GUI_Text_Construct( Format( Localization::WordString( Localization::Words_Press ).c_str(), ButtonString::Up( ButtonScale ).c_str() ), Parent->getPos(), true );
+#elif defined(CAFE)
+		GUI_Text_Construct( Format( Localization::WordString( Localization::Words_Press_WiiU ).c_str(), ButtonString::X( ButtonScale ).c_str() ), Parent->getPos(), true );
 #else
 		GUI_Text_Construct( Format( Localization::WordString( Localization::Words_Press ).c_str(), ButtonString::X( ButtonScale ).c_str() ), Parent->getPos(), true );
 #endif

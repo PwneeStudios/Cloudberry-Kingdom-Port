@@ -432,6 +432,7 @@ Words_PressStart_PS3,
 
 Words_PressStart_WiiU,
 Words_PressToJoin_WiiU,
+Words_Press_WiiU,
 
 Words_EnumLength
 		};
