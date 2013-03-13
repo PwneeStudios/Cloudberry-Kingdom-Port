@@ -20,7 +20,7 @@
 #endif
 
 #define AUTOSAVE_FILENAME "SYS-DATA"
-#define AUTOSAVE_PARAMSFO_TITLE "Cloudberry Kingdom Save File"
+#define AUTOSAVE_PARAMSFO_TITLE "Cloudberry Kingdom"
 #define AUTOSAVE_PARAMSFO_DETAIL "Progress through Cloudberry Kingdom."
 
 #define AUTOSAVE_SIZE (10 * 1024)
@@ -782,6 +782,15 @@ namespace CloudberryKingdom
 			return;
 		}
 
+		// First check if the data belongs to the current user.
+		if( get->bind & CELL_SAVEDATA_BINDSTAT_ERR_OWNER )
+		{
+			printf( "WRONG OWNER!\n" );
+			DisplayError( ErrorType( WstringToUtf8( Localization::WordString( Localization::Words_Err_PS3_SaveDataNotUsed ) ) ) );
+			result->result = CELL_SAVEDATA_CBRESULT_ERR_FAILURE;
+			return;
+		}
+
 		// There is some data!
 		if( get->fileListNum < get->fileNum )
 		{
@@ -890,11 +899,13 @@ namespace CloudberryKingdom
 		_load_done = false;
 
 		// Get the space needed for save data.
-		SceNpTrophyContext context;
+		// FIXME: The trophy initialization function does its own check for available space.
+		/*SceNpTrophyContext context;
 		SceNpTrophyHandle handle;
 		ForceGetTrophyContext( context, handle );
 		if( sceNpTrophyGetRequiredDiskSpace( context, handle, &RequiredTrophySpace, 0 ) < 0 )
-			RequiredTrophySpace = 0;
+			RequiredTrophySpace = 0;*/
+		RequiredTrophySpace = 0;
 
 		char dirName[ CELL_SAVEDATA_PREFIX_SIZE ];
 		CellSaveDataSetBuf setBuf;

@@ -29,8 +29,6 @@ bool AutoCloseWhenConnected()
 	return numConnected != 0;
 }
 
-// FIXME: Fuck you Oleg. Fuck you.
-std::string GLOBAL_DISCONNECT_MESSAGE = "Error:\nNo Gamepad detected\nPlease press the PS button if the gamepad is connected.";
 
 void GamePad::Update()
 {
@@ -42,16 +40,6 @@ void GamePad::Update()
 		if( gfxPadConnected( i ) )
 			++numConnected;
 	}
-
-	/*if( numConnected == 0 )
-	{
-		DisplayError( ErrorType(
-			GLOBAL_DISCONNECT_MESSAGE,
-			NULL,
-			ErrorType::DEFAULT,
-			AutoCloseWhenConnected
-		) );
-	}*/
 }
 
 GamePadState GamePad::GetState( PlayerIndex index )
@@ -73,7 +61,7 @@ GamePadState GamePad::GetState( PlayerIndex index )
 	gs.Triggers.Left = gfxL2Down( i ) ? ButtonState_Pressed : ButtonState_Released;
 	gs.Triggers.Right = gfxR2Down( i ) ? ButtonState_Pressed : ButtonState_Released;
 
-	if( asianButtonConfiguration )
+	if( !asianButtonConfiguration )
 	{
 		gs.Buttons.A = gfxDpadCross( i ) ? ButtonState_Pressed : ButtonState_Released;
 		gs.Buttons.B = gfxDpadCircle( i ) ? ButtonState_Pressed : ButtonState_Released;

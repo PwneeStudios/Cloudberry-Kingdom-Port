@@ -6,6 +6,7 @@
 #include "Hacks/NET/File.h"
 #include "Hacks/NET/Path.h"
 #include "Hacks/FileReader.h"
+#include <Utility/Error.h>
 #include <Utility/ConsoleInformation.h>
 
 #ifdef PS3
@@ -18,7 +19,7 @@
 
 
 extern std::string PS3_PATH_PREFIX;
-extern std::string GLOBAL_DISCONNECT_MESSAGE;
+extern ErrorType GLOBAL_NP_DISCONNECT_MESSAGE;
 
 #endif
 
@@ -250,7 +251,9 @@ namespace CloudberryKingdom
 		SetErrorLanguage( errorLanguage );
 
 #ifdef PS3
-		GLOBAL_DISCONNECT_MESSAGE = WstringToUtf8( WordString( Words_Err_PS3_NoGamePadDetected ) );
+		GLOBAL_NP_DISCONNECT_MESSAGE = ErrorType(
+			WstringToUtf8( WordString( Words_Err_PS3_PsnLoggedOut ) )
+		);
 #endif
 	}
 
