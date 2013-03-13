@@ -43,6 +43,17 @@
 		void *		userData_;
 
 	public:
+		ErrorType()
+			: code_( 0 )
+			, fatal_( false )
+			, messageType_( CODE )
+			, inputType_( DEFAULT )
+			, autoClose_( NULL )
+			, complete_( NULL )
+			, userData_( NULL )
+		{
+		}
+
 		ErrorType( int code, CompleteCallback complete = NULL, InputType inputType = DEFAULT, AutoCloseCallback autoClose = NULL, bool fatal = false )
 			: code_( code )
 			, fatal_( fatal )

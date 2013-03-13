@@ -132,8 +132,8 @@ namespace CloudberryKingdom
 
 		Localization::Words notranked, notrankedfriends;
 #ifdef PS3
-		notranked = Localization::Words_NotRanked_PS3;
-		notrankedfriends = Localization::Words_NotRankedFriends_PS3;
+		notranked = Localization::Words_NotRanked;
+		notrankedfriends = Localization::Words_NotRanked_PS3;
 #else
 		notranked = Localization::Words_NotRanked;
 		notrankedfriends = Localization::Words_NotRankedFriends;

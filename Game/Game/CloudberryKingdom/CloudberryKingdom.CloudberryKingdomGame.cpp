@@ -1152,7 +1152,13 @@ float CloudberryKingdomGame::fps = 0;
 		{
 #if PC_VERSION
 #else
+
+	#ifdef PS3
+			ShowError(Localization::Words_Err_CorruptLoadHeader, Localization::Words_Err_PS3_CorruptLoad, Localization::Words_Err_Ok);
+	#else
 			ShowError(Localization::Words_Err_CorruptLoadHeader, Localization::Words_Err_CorruptLoad, Localization::Words_Err_Ok);
+	#endif
+
 #endif
 		}
 
