@@ -1,6 +1,7 @@
 ﻿#include <global_header.h>
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+#include <Utility/Log.h>
 #include <Utility/Error.h>
 #include <Hacks/String.h>
 
@@ -549,6 +550,7 @@ namespace CloudberryKingdom
 		case OperationState_SaveIcon:
 			if( fileAllocLoad( ( PS3_PATH_PREFIX + "ContentPS3/SaveMeta/ICON0.PNG" ).c_str(), &ICON0_DATA, &fileSize ) == 0 )
 			{
+				LOG.Write( "File size %d, expected size %d\n", fileSize, ICON0_SIZE );
 				set->fileOperation = CELL_SAVEDATA_FILEOP_WRITE;
 				set->fileBuf = ICON0_DATA;
 				set->fileBufSize = ICON0_SIZE;
@@ -633,7 +635,7 @@ namespace CloudberryKingdom
 		setBuf.dirListMax = 0;
 		setBuf.fileListMax = FILE_INDEX_END;
 		memset( setBuf.reserved, 0, sizeof( setBuf.reserved ) );
-		setBuf.bufSize = sizeof( CellSaveDataFileStat );
+		setBuf.bufSize = FILE_INDEX_END * sizeof( CellSaveDataFileStat );
 		setBuf.buf = malloc( setBuf.bufSize );
 
 		assert( setBuf.buf );
