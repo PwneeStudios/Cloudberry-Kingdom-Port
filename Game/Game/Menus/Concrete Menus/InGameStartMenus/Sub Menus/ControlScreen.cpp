@@ -106,10 +106,10 @@ namespace CloudberryKingdom
 
 		SetPos();
 #else
-		bool center = false;
-        text = boost::make_shared<EzText>( L"+", Resources::Font_Grobold42, center);
+        text = boost::make_shared<EzText>( L"+", Resources::Font_Grobold42, true);
         MyPile->Add(text, L"plus");
         text->MyFloatColor = ColorHelper::Gray(.955f);
+		bool center = false;
 
         text = boost::make_shared<EzText>(Localization::Words_QuickSpawn, Resources::Font_Grobold42, center);
         MyPile->Add(text, L"quickspawn");
@@ -138,13 +138,13 @@ namespace CloudberryKingdom
         MyPile->Add(q, L"door");
 
         q = boost::make_shared<QuadClass>( L"door_cave_1" ); q->ScaleXToMatchRatio(130);
-        MyPile->Add(q, L"door");
+        MyPile->Add(q, L"door_cave");
 
         q = boost::make_shared<QuadClass>( L"door_cloud_1" ); q->ScaleXToMatchRatio(130);
-        MyPile->Add(q, L"door");
+        MyPile->Add(q, L"door_cloud");
 
         q = boost::make_shared<QuadClass>( L"door_forest_1" ); q->ScaleXToMatchRatio(130);
-        MyPile->Add(q, L"door");
+        MyPile->Add(q, L"door_forest");
 
         q = boost::make_shared<QuadClass>(ButtonTexture::getY() ); q->ScaleXToMatchRatio(130);
         MyPile->Add(q, L"y");

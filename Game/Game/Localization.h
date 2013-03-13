@@ -430,6 +430,8 @@ Words_NotRanked_PS3,
 Words_FriendsScores_PS3,
 Words_PressStart_PS3,
 
+Words_PressStart_WiiU,
+Words_PressToJoin_WiiU,
 
 Words_EnumLength
 		};
