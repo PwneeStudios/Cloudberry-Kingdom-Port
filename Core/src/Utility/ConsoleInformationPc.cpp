@@ -33,3 +33,8 @@ bool IsSystemMenuVisible()
 {
 	return false;
 }
+
+bool IsAspect4by3()
+{
+	return false;
+}

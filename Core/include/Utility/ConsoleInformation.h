@@ -80,4 +80,10 @@ bool IsCustomMusicPlaying();
  */
 bool IsSystemMenuVisible();
 
+/// Is the system running in 4:3 mode.
+/**
+ * @return True if system is running in 4:3.
+ */
+bool IsAspect4by3();
+
 #endif

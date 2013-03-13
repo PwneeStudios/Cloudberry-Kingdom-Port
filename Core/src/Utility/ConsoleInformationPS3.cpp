@@ -121,3 +121,8 @@ bool IsSystemMenuVisible()
 {
 	return GLOBAL_SYSTEM_MENU_OPEN;
 }
+
+bool IsAspect4by3()
+{
+	return false;
+}
