@@ -82,18 +82,18 @@ namespace CloudberryKingdom
 		{
 			InitializeInstanceFields();
 
-#if defined(DEBUG)
+/*#if defined(DEBUG)
 			CloudberryKingdomGame::_count++;
 			std::cout << CloudberryKingdomGame::_count << std::endl;
-#endif
+#endif*/
 		}
 
 		~Set()
 		{
-#if defined(DEBUG)
+/*#if defined(DEBUG)
 			CloudberryKingdomGame::_count--;
 			std::cout << CloudberryKingdomGame::_count << std::endl;
-#endif
+#endif*/
 		}
 
 	};

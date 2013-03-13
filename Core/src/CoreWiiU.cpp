@@ -306,6 +306,7 @@ int CoreWiiU::Run()
 	//bool viewerVisible = false;
 
 	//GLOBAL_ERROR_QUEUE.push_back( 1010102 );
+
 	s32 currentErrorCode = 0;
 	ErrorType currentError( 0 );
 
@@ -380,6 +381,8 @@ int CoreWiiU::Run()
 					cpArgs.stdIn = standardArgs;
 					cpArgs.jumpTo = SYS_SETTINGS_JUMP_TO_DATA_MANAGE;
 					SYSLaunchSettings( &cpArgs );
+
+					DEMOStopRunning();
 				}
 
 				if( nn::erreula::GetStateErrorViewer() == nn::erreula::cState_Display )
