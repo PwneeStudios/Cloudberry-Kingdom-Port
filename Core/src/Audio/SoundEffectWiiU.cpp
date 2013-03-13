@@ -34,7 +34,8 @@ SoundEffect::~SoundEffect()
 	if( internal_->Sound )
 	{
 		//internal_->Sound->release();
-		FMOD_Sound_Release( internal_->Sound );
+		// FIXME: Seems to hang here sometimes, so we won't do it :D
+		//FMOD_Sound_Release( internal_->Sound );
 	}
 
 	delete internal_;

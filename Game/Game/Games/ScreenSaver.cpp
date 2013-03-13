@@ -149,13 +149,13 @@ namespace CloudberryKingdom
 	#if defined(PC_VERSION)
 		ss->PressA = MakeMagic( GUI_Text, ( Localization::Words_PressAnyKey, Vector2( 0, -865 ), true ) );
 	#else
-		ss->PressA = MakeMagic( GUI_Text, ( Localization::
+		ss->PressA = MakeMagic( GUI_Text, ( 
 		#ifdef PS3
-			Words_PressStart_PS3
+			Localization::Words_PressStart_PS3
 		#elif CAFE
-			Words_PressStart_WiiU
+			Format( Localization::WordString( Localization::Words_PressStart_WiiU ).c_str(), L"{pWiiU_Plus,90,?} " )
 		#else
-			Words_PressStart
+			Localization::Words_PressStart
 		#endif
 		, Vector2( 0, -865 ), true ) );
 	#endif

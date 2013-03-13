@@ -53,13 +53,13 @@ namespace CloudberryKingdom
 
 		EnsureFancy();
 
-		Text = boost::make_shared<EzText>( Localization::
+		Text = boost::make_shared<EzText>( 
 		#ifdef PS3
-			Words_PressStart_PS3
+			Localization::Words_PressStart_PS3
 		#elif CAFE
-			Words_PressStart_WiiU
+			Format( Localization::WordString( Localization::Words_PressStart_WiiU ).c_str(), L"{pWiiU_Plus,90,?} " )
 		#else
-			Words_PressStart
+			Localization::Words_PressStart
 		#endif
 		, Resources::Font_Grobold42, true );
 

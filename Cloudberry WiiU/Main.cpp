@@ -44,5 +44,6 @@ int main( int argc, char *argv[] )
 	
 	theLog.RemoveListener( osLog );
 
+	_Exit( 0 );
 	return result;
 }
