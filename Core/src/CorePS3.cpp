@@ -230,7 +230,6 @@ CorePS3::CorePS3( GameLoop &game ) :
 	// game code.  Also the files should be pre-installed on the disk.
 	// PS3_PATH_PREFIX = "/dev_hdd0/game/NPEB01312/USRDIR/"; // SCEE
 	// PS3_PATH_PREFIX = "/dev_hdd0/game/NPUB31177/USRDIR/"; // SCEA
-	PS3_PATH_PREFIX = "/app_home/"; 
 	LOG.Write( "Running in %s\nContent dir %s\n", dirName, usrdirPath );
 #ifdef DEBUG
 	PS3_PATH_PREFIX = "/app_home/";

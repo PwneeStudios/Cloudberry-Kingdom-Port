@@ -169,22 +169,22 @@ namespace CloudberryKingdom
 		else if( MovieName == L"Cutscene_6" )
 		{
 			CurrentVideo->Path = "/vol/content/0010/Movies/Cutscene_6.mp4";
-			CurrentVideo->Duration.TotalSeconds = 206.875f;
+			CurrentVideo->Duration.TotalSeconds = 3 /* minutes */ * 60 * 60 + 34 /* seconds */ * 60 + 29 /* thirtieths */ / 30.0f * 60;
 		}
 		else if( MovieName == L"Credits" )
 		{
 			CurrentVideo->Path = "/vol/content/0010/Movies/Credits.mp4";
-			CurrentVideo->Duration.TotalSeconds = 150.0f;
+			CurrentVideo->Duration.TotalSeconds = 2 /* minutes */ * 60 * 60 + 59 /* seconds */ * 60 + 29 /* thirtieths */ / 30.0f * 60;
 		}
 		else if( MovieName == L"LogoSalad" )
 		{
 			CurrentVideo->Path = "/vol/content/0010/Movies/LogoSalad.mp4";
-			CurrentVideo->Duration.TotalSeconds = 9.933333333f;
+			CurrentVideo->Duration.TotalSeconds = 0 /* minutes */ * 60 * 60 + 10 /* seconds */ * 60 + 4 /* thirtieths */ / 30.0f * 60;
 		}
 		else if( MovieName == L"LogoSalad_ESRB" )
 		{
 			CurrentVideo->Path = "/vol/content/0010/Movies/LogoSalad_ESRB.mp4";
-			CurrentVideo->Duration.TotalSeconds = 9.933333333f;
+			CurrentVideo->Duration.TotalSeconds = 0 /* minutes */ * 60 * 60 + 15 /* seconds */ * 60 + 2 /* thirtieths */ / 30.0f * 60;
 		}
 
 #elif defined( PS3 )

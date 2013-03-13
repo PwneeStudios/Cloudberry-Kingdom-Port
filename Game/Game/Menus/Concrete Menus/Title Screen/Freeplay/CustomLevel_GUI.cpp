@@ -840,7 +840,7 @@ if (ButtonCheck::ControllerInUse)
 		Menu::DefaultMenuInfo::SetX( item );
 #endif
 
-		MyPile->Add(boost::make_shared<QuadClass>( ButtonTexture::getX(), 90.f, std::wstring( L"Button_Y" ) ) );
+		MyPile->Add(boost::make_shared<QuadClass>( ButtonTexture::getY(), 90.f, std::wstring( L"Button_Y" ) ) );
 		item->Selectable = false;
 }
 		item->ScaleText( .92f );
@@ -868,8 +868,8 @@ if (ButtonCheck::ControllerInUse)
 		GameList->SetIndex( 0 );
 		DiffList->SetIndex( 0 );
 		MyMenu->OnB = boost::make_shared<MenuReturnToCallerLambdaFunc>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
-		//MyMenu->OnY = boost::make_shared<BringLoadProxy>( boost::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ) );
-		MyMenu->OnX = Cast::ToMenu( boost::make_shared<BringLoadProxy>( boost::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ) ) );
+		MyMenu->OnY = boost::make_shared<BringLoadProxy>( boost::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ) );
+		//MyMenu->OnX = Cast::ToMenu( boost::make_shared<BringLoadProxy>( boost::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ) ) );
 	}
 
 	boost::shared_ptr<MenuItem> CustomLevel_GUI::AddHeroItem( const boost::shared_ptr<BobPhsx> &hero )

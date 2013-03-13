@@ -320,11 +320,14 @@ namespace CloudberryKingdom
 			if( GetTrophyContext( context, handle ) )
 			{
 				int ps3Id = TranslateAwardmentGuid( awardGuid );
+				LOG.Write( "ps3ID = %d!\n", ps3Id );
 
 				if( ps3Id >= 0 )
 				{
 					SceNpTrophyId platinumId = SCE_NP_TROPHY_INVALID_TROPHY_ID;
 					int ret = sceNpTrophyUnlockTrophy( context, handle, ps3Id, &platinumId );
+
+					LOG.Write( "ret = %d!\n", ret );
 
 					if( platinumId != SCE_NP_TROPHY_INVALID_TROPHY_ID )
 						LOG.Write( "Unlocked impossible platinum trophy!\n" );
