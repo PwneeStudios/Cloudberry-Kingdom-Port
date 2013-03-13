@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <vector>
 
+#include <cell/cell_fs.h>
 #include <sys/ppu_thread.h>
 #include <sysutil/sysutil_savedata.h>
 #include <np.h>
@@ -21,11 +22,16 @@
 
 #define AUTOSAVE_FILENAME "SYS-DATA"
 #define AUTOSAVE_PARAMSFO_TITLE "Cloudberry Kingdom"
-#define AUTOSAVE_PARAMSFO_DETAIL "Progress through Cloudberry Kingdom."
+#define AUTOSAVE_PARAMSFO_DETAIL "Progress in Cloudberry Kingdom."
 
 #define AUTOSAVE_SIZE (10 * 1024)
+
+#define ICON0_SIZE (13121)
+static void *ICON0_DATA = NULL;
+
 enum {
 	FILE_INDEX_MUSTEXIST = 0,
+	FILE_INDEX_ICON0 = 1,
 	FILE_INDEX_END
 };
 
@@ -38,6 +44,7 @@ const char secureFileId[ CELL_SAVEDATA_SECUREFILEID_SIZE ] = {
 };
 
 extern bool ForceGetTrophyContext( SceNpTrophyContext &context, SceNpTrophyHandle &handle );
+extern std::string PS3_PATH_PREFIX;
 
 #endif
 
@@ -438,6 +445,11 @@ namespace CloudberryKingdom
 	}
 
 #ifdef PS3
+	enum {
+		OperationState_SaveIcon,
+		OperationState_SaveAutosave
+	} SaveOperationState;
+
 	void CallbackDataStatusSave( CellSaveDataCBResult *result, CellSaveDataStatGet *get, CellSaveDataStatSet *set )
 	{
 		set->reCreateMode = CELL_SAVEDATA_RECREATE_NO;
@@ -448,7 +460,7 @@ namespace CloudberryKingdom
 		{
 			printf( "Save data %s does NOT exists.\n", get->dir.dirName );
 
-			int sizeKb = get->sysSizeKB + AUTOSAVE_SIZE / 1024;
+			int sizeKb = get->sysSizeKB + AUTOSAVE_SIZE / 1024 + ICON0_SIZE / 1024;
 			int neededKb = get->hddFreeSizeKB - sizeKb;
 
 			printf( "hddFreeSizeKB = %d, sizeKb = %d, neededKb = %d\n", get->hddFreeSizeKB, sizeKb, neededKb );
@@ -474,28 +486,111 @@ namespace CloudberryKingdom
 			memset( set->setParam->reserved2, 0, sizeof( set->setParam->reserved2 ) );
 		}
 
+		ICON0_DATA = NULL;
+		SaveOperationState = OperationState_SaveIcon;
+
 		result->result = CELL_SAVEDATA_CBRESULT_OK_NEXT;
+	}
+
+	/* Load binary from file to memory */
+	int fileAllocLoad(const char *filePath, void **buf, unsigned int *size)
+	{
+		int ret;
+		int fd;
+		CellFsStat status;
+		uint64_t readlen;
+
+		*buf = NULL;
+		*size = 0;
+
+		ret = cellFsOpen(filePath, CELL_FS_O_RDONLY, &fd, NULL, 0);
+		if(ret != CELL_FS_SUCCEEDED){
+			return -1;
+		}
+
+		ret = cellFsFstat(fd, &status);
+		if(ret != CELL_FS_SUCCEEDED){
+			cellFsClose(fd);
+			return -1;
+		}
+
+		*buf = malloc( (size_t)status.st_size );
+		if( *buf == NULL ) {
+			cellFsClose(fd);
+			return -1;
+		}
+
+		ret = cellFsRead(fd, *buf, status.st_size, &readlen);
+		if(ret != CELL_FS_SUCCEEDED || status.st_size != readlen ) {
+			cellFsClose(fd);
+			free(*buf);
+			*buf = NULL;
+			return -1;
+		}
+
+		ret = cellFsClose(fd);
+		if(ret != CELL_FS_SUCCEEDED){
+			free(*buf);
+			*buf = NULL;
+			return -1;
+		}
+
+		*size = status.st_size;
+
+		return 0;
 	}
 
 	void CallbackFileOperationSave( CellSaveDataCBResult *result, CellSaveDataFileGet *get, CellSaveDataFileSet *set )
 	{
-		result->result = _save_done ? CELL_SAVEDATA_CBRESULT_OK_LAST : CELL_SAVEDATA_CBRESULT_OK_NEXT;
+		unsigned int fileSize;
 
-		if( _save_done )
-			return;
+		switch( SaveOperationState )
+		{
+		case OperationState_SaveIcon:
+			if( fileAllocLoad( ( PS3_PATH_PREFIX + "ContentPS3/SaveMeta/ICON0.PNG" ).c_str(), &ICON0_DATA, &fileSize ) == 0 )
+			{
+				set->fileOperation = CELL_SAVEDATA_FILEOP_WRITE;
+				set->fileBuf = ICON0_DATA;
+				set->fileBufSize = ICON0_SIZE;
+				set->fileSize = ICON0_SIZE;
+				set->fileOffset = 0;
+				set->fileType = CELL_SAVEDATA_FILETYPE_CONTENT_ICON0;
+				set->reserved = NULL;
+				
+				SaveOperationState = OperationState_SaveAutosave;
+				result->result = CELL_SAVEDATA_CBRESULT_OK_NEXT;
+			}
+			else
+			{
+				result->result = CELL_SAVEDATA_CBRESULT_ERR_FAILURE;
+			}
 
-		set->fileOperation = CELL_SAVEDATA_FILEOP_WRITE;
-		set->fileBuf = _file_buffer;
-		set->fileBufSize = AUTOSAVE_SIZE;
-		set->fileName = AUTOSAVE_FILENAME;
-		set->fileSize = AUTOSAVE_SIZE;
-		set->fileOffset = 0;
+			break;
+		case OperationState_SaveAutosave:
+			if( ICON0_DATA )
+			{
+				free( ICON0_DATA );
+				ICON0_DATA = NULL;
+			}
+			result->result = _save_done ? CELL_SAVEDATA_CBRESULT_OK_LAST : CELL_SAVEDATA_CBRESULT_OK_NEXT;
 
-		set->fileType = CELL_SAVEDATA_FILETYPE_SECUREFILE;
-		memcpy( set->secureFileId, secureFileId, CELL_SAVEDATA_SECUREFILEID_SIZE );
-		set->reserved = NULL;
+			if( _save_done )
+				return;
 
-		_save_done = true;
+			set->fileOperation = CELL_SAVEDATA_FILEOP_WRITE;
+			set->fileBuf = _file_buffer;
+			set->fileBufSize = AUTOSAVE_SIZE;
+			set->fileName = AUTOSAVE_FILENAME;
+			set->fileSize = AUTOSAVE_SIZE;
+			set->fileOffset = 0;
+
+			set->fileType = CELL_SAVEDATA_FILETYPE_SECUREFILE;
+			memcpy( set->secureFileId, secureFileId, CELL_SAVEDATA_SECUREFILEID_SIZE );
+			set->reserved = NULL;
+
+			_save_done = true;
+			break;
+		}
 	}
 #endif
 
@@ -759,7 +854,7 @@ namespace CloudberryKingdom
 
 			int sizeKb = get->sysSizeKB;
 			if( get->isNewData )
-				sizeKb += AUTOSAVE_SIZE / 1024;
+				sizeKb += ( ( AUTOSAVE_SIZE / 1024 ) + ( ICON0_SIZE / 1024 ) );
 			if( RequiredTrophySpace > 0 )
 				sizeKb += static_cast< int >( RequiredTrophySpace / 1024 );
 
