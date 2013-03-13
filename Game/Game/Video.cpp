@@ -144,94 +144,76 @@ namespace CloudberryKingdom
 		if( MovieName == L"Cutscene_1" )
 		{
 			CurrentVideo->Path = "/vol/content/0010/Movies/Cutscene_1.mp4";
-			CurrentVideo->Duration.TotalSeconds = 64.083333f;
 		}
 		else if( MovieName == L"Cutscene_2" )
 		{
 			CurrentVideo->Path = "/vol/content/0010/Movies/Cutscene_2.mp4";
-			CurrentVideo->Duration.TotalSeconds = 34.0416666f;
 		}
 		else if( MovieName == L"Cutscene_3" )
 		{
 			CurrentVideo->Path = "/vol/content/0010/Movies/Cutscene_3.mp4";
-			CurrentVideo->Duration.TotalSeconds = 30.8333333f;
 		}
 		else if( MovieName == L"Cutscene_4" )
 		{
 			CurrentVideo->Path = "/vol/content/0010/Movies/Cutscene_4.mp4";
-			CurrentVideo->Duration.TotalSeconds = 40.25f;
 		}
 		else if( MovieName == L"Cutscene_5" )
 		{
 			CurrentVideo->Path = "/vol/content/0010/Movies/Cutscene_5.mp4";
-			CurrentVideo->Duration.TotalSeconds = 55.29166666f;
 		}
 		else if( MovieName == L"Cutscene_6" )
 		{
 			CurrentVideo->Path = "/vol/content/0010/Movies/Cutscene_6.mp4";
-			CurrentVideo->Duration.TotalSeconds = 3 /* minutes */ * 60 * 60 + 34 /* seconds */ * 60 + 29 /* thirtieths */ / 30.0f * 60;
 		}
 		else if( MovieName == L"Credits" )
 		{
 			CurrentVideo->Path = "/vol/content/0010/Movies/Credits.mp4";
-			CurrentVideo->Duration.TotalSeconds = 2 /* minutes */ * 60 * 60 + 59 /* seconds */ * 60 + 29 /* thirtieths */ / 30.0f * 60;
 		}
 		else if( MovieName == L"LogoSalad" )
 		{
 			CurrentVideo->Path = "/vol/content/0010/Movies/LogoSalad.mp4";
-			CurrentVideo->Duration.TotalSeconds = 0 /* minutes */ * 60 * 60 + 10 /* seconds */ * 60 + 4 /* thirtieths */ / 30.0f * 60;
 		}
 		else if( MovieName == L"LogoSalad_ESRB" )
 		{
 			CurrentVideo->Path = "/vol/content/0010/Movies/LogoSalad_ESRB.mp4";
-			CurrentVideo->Duration.TotalSeconds = 0 /* minutes */ * 60 * 60 + 15 /* seconds */ * 60 + 2 /* thirtieths */ / 30.0f * 60;
 		}
 
 #elif defined( PS3 )
 		if( MovieName == L"Cutscene_1" )
 		{
 			CurrentVideo->Path = "ContentPS3/Movies/Cutscene_1.mp4";
-			CurrentVideo->Duration.TotalSeconds = 64.083333f;
 		}
 		else if( MovieName == L"Cutscene_2" )
 		{
 			CurrentVideo->Path = "ContentPS3/Movies/Cutscene_2.mp4";
-			CurrentVideo->Duration.TotalSeconds = 34.0416666f;
 		}
 		else if( MovieName == L"Cutscene_3" )
 		{
 			CurrentVideo->Path = "ContentPS3/Movies/Cutscene_3.mp4";
-			CurrentVideo->Duration.TotalSeconds = 30.8333333f;
 		}
 		else if( MovieName == L"Cutscene_4" )
 		{
 			CurrentVideo->Path = "ContentPS3/Movies/Cutscene_4.mp4";
-			CurrentVideo->Duration.TotalSeconds = 40.25f;
 		}
 		else if( MovieName == L"Cutscene_5" )
 		{
 			CurrentVideo->Path = "ContentPS3/Movies/Cutscene_5.mp4";
-			CurrentVideo->Duration.TotalSeconds = 55.29166666f;
 		}
 		else if( MovieName == L"Cutscene_6" )
 		{
 			CurrentVideo->Path = "ContentPS3/Movies/Cutscene_6.mp4";
-			CurrentVideo->Duration.TotalSeconds = 206.875f;
 		}
 		else if( MovieName == L"Credits" )
 		{
 			CurrentVideo->Path = "ContentPS3/Movies/Credits.mp4";
-			CurrentVideo->Duration.TotalSeconds = 150.0f;
 		}
 		else if( MovieName == L"LogoSalad" )
 		{
 			CurrentVideo->Path = "ContentPS3/Movies/LogoSalad.mp4";
-			CurrentVideo->Duration.TotalSeconds = 9.933333333f;
 		}
 		else if( MovieName == L"LogoSalad_ESRB" )
 		{
 			CurrentVideo->Path = "ContentPS3/Movies/LogoSalad_ESRB.mp4";
-			CurrentVideo->Duration.TotalSeconds = 9.933333333f;
 		}
 #elif defined( PC_VERSION )
 		//CurrentVideo = Content->Load<Video>( Path::Combine( std::wstring( L"Movies" ), MovieName ) );
@@ -241,6 +223,45 @@ namespace CloudberryKingdom
 		Duration = 1;
 		Elapsed = 0;
 		return;
+#endif
+
+#if defined( CAFE ) || defined( PS3 )
+		if( MovieName == L"Cutscene_1" )
+		{
+			CurrentVideo->Duration.TotalSeconds = 64.083333f;
+		}
+		else if( MovieName == L"Cutscene_2" )
+		{
+			CurrentVideo->Duration.TotalSeconds = 34.0416666f;
+		}
+		else if( MovieName == L"Cutscene_3" )
+		{
+			CurrentVideo->Duration.TotalSeconds = 30.8333333f;
+		}
+		else if( MovieName == L"Cutscene_4" )
+		{
+			CurrentVideo->Duration.TotalSeconds = 40.25f;
+		}
+		else if( MovieName == L"Cutscene_5" )
+		{
+			CurrentVideo->Duration.TotalSeconds = 55.29166666f;
+		}
+		else if( MovieName == L"Cutscene_6" )
+		{
+			CurrentVideo->Duration.TotalSeconds = 3 /* minutes */ * 60 + 34 /* seconds */ + 29 /* thirtieths */ / 30.0f;
+		}
+		else if( MovieName == L"Credits" )
+		{
+			CurrentVideo->Duration.TotalSeconds = 2 /* minutes */ * 60 + 59 /* seconds */ + 29 /* thirtieths */ / 30.0f;
+		}
+		else if( MovieName == L"LogoSalad" )
+		{
+			CurrentVideo->Duration.TotalSeconds = 0 /* minutes */ * 60 + 10 /* seconds */ + 4 /* thirtieths */ / 30.0f;
+		}
+		else if( MovieName == L"LogoSalad_ESRB" )
+		{
+			CurrentVideo->Duration.TotalSeconds = 0 /* minutes */ * 60 + 15 /* seconds */ + 2 /* thirtieths */ / 30.0f;
+		}
 #endif
 		
 		Duration = CurrentVideo->Duration.TotalSeconds;

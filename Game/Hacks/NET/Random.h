@@ -1,6 +1,8 @@
 #ifndef _RANDOM_H_
 #define _RANDOM_H_
 
+#include <ctime>
+
 struct Random
 {
 
@@ -19,7 +21,13 @@ public:
 		inext( 0 ),
 		inextp( 0 )
 	{
-		initialize( 'rofl' );
+		time_t t;
+		time( &t );
+
+		int time_seed = static_cast<int>( t ) % 10000;
+
+		//initialize( 'rofl' );
+		initialize( t );
 	}
 
 	Random( int seed ) :
@@ -36,6 +44,10 @@ private:
 
 	void initialize( int Seed )
 	{
+#ifdef CAFE
+		Seed += 1;
+#endif
+
 		int num = /*( Seed == -2147483648 ) ? 2147483647 : */abs(Seed);
 		int num2 = 161803398 - num;
 
