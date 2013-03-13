@@ -65,6 +65,8 @@ namespace CloudberryKingdom
 
 #ifdef PC_VERSION
 		std::wstring pressa = Format( Localization::WordString( Localization::Words_PressToJoin ).c_str(), ButtonString::Go_Controller( ButtonSize ).c_str() );
+#elif CAFE
+		std::wstring pressa = Format( Localization::WordString( Localization::Words_PressToJoin_WiiU ).c_str(), ButtonString::Go( ButtonSize ).c_str() );
 #else
         std::wstring pressa = Format( Localization::WordString( Localization::Words_PressToJoin ).c_str(), ButtonString::Go( ButtonSize ).c_str() );
 #endif
