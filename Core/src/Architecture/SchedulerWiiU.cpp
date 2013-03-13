@@ -177,6 +177,7 @@ public:
 
 void StopScheduler()
 {
+	LOG.Write( "Stopping scheduler!\n" );
 	SCHEDULER->RunJobASAP( new PauseSchedulerJob );
 }
 
@@ -206,7 +207,7 @@ SchedulerWiiU::SchedulerWiiU() :
 	const u32 stackSize = 1024 * 1024;
 	internal_->Stack = new char[ stackSize ];
 	BOOL ret = OSCreateThread( &internal_->Threads[ 0 ], ThreadProc, 1, this,
-		internal_->Stack + stackSize, stackSize, 20, OS_THREAD_ATTR_AFFINITY_CORE2 );
+		internal_->Stack + stackSize, stackSize, 16, OS_THREAD_ATTR_AFFINITY_CORE2 );
 	OSSetThreadName( &internal_->Threads[ 0 ], "SchedulerThread" );
 
 	if( !ret )
@@ -220,12 +221,13 @@ SchedulerWiiU::~SchedulerWiiU()
 	internal_->WorkersRunning = false;
 
 	ExitSchedulerJob exitSchedulerJob;
+
 	RunJobASAP( &exitSchedulerJob );
 	if( OSIsThreadSuspended( &internal_->Threads[ 0 ] ) )
 		ResumeScheduler();
 
-	for( int i = 0; i < 2; ++i )
-		OSSignalSemaphore( &internal_->JobQueueSemaphore );
+	/*for( int i = 0; i < 2; ++i )
+		OSSignalSemaphore( &internal_->JobQueueSemaphore );*/
 
 	//OSJoinThread( internal_->Threads[ 0 ], NULL );
 	OSJoinThread( &internal_->Threads[ 0 ], NULL );
