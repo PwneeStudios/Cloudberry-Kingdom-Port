@@ -364,8 +364,8 @@ namespace CloudberryKingdom
                         ( *p )->Awardments_Renamed->Add( award->Guid );
                 }
                 else
-#endif
                     player->Awardments_Renamed->Add( award->Guid );
+#endif
 
 #ifdef NOT_PC
 				//Tools::Warning();

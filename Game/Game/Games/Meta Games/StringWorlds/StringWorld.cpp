@@ -138,7 +138,7 @@ namespace CloudberryKingdom
 		}
 
 		// Release the next level
-		if ( NextLevelSeed != 0 )
+		if ( NextLevelSeed != 0 && NextLevelSeed->Loaded != 0 )
 		{
             if ( LevelIsLoaded( NextLevelSeed ) )
             {

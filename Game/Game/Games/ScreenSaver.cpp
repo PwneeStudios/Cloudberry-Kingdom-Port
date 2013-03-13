@@ -152,6 +152,8 @@ namespace CloudberryKingdom
 		ss->PressA = MakeMagic( GUI_Text, ( Localization::
 		#ifdef PS3
 			Words_PressStart_PS3
+		#elif CAFE
+			Words_PressStart_WiiU
 		#else
 			Words_PressStart
 		#endif
