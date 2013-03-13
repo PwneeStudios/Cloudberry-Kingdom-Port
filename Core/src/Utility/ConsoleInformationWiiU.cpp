@@ -1,6 +1,7 @@
 #include <Utility/ConsoleInformation.h>
 
 #include <cafe.h>
+#include <cafe/gx2.h>
 #include <cafe/sci/sciEnum.h>
 #include <cafe/sci/sciPublicApi.h>
 #include <nn/erreula.h>
@@ -173,4 +174,9 @@ bool IsCustomMusicPlaying()
 bool IsSystemMenuVisible()
 {
 	return false;
+}
+
+bool IsAspect4by3()
+{
+	return GX2GetSystemTVAspectRatio() == GX2_ASPECT_RATIO_4_BY_3;
 }
