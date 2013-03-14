@@ -170,7 +170,7 @@ static s32 VideoOutputThread(s32 intArg, void *ptrArg)
 
     OSReport("Video Thread Start\n");
 
-    while(1)
+    while( !EXIT_PLAYBACK )
     {
         vsys_currtime = OSTicksToMilliseconds(OSGetTime());
 //#if TEST_MODE == 1
@@ -282,7 +282,7 @@ static s32 AudioOutputThread(s32 intArg, void *ptrArg)
 
     OSReport("Audio Thread Start\n");
 
-    while( 1 )
+    while( !EXIT_PLAYBACK )
     {
         asys_currtime = OSTicksToMilliseconds(OSGetTime());
 #if TEST_MODE == 1
@@ -1242,7 +1242,7 @@ ERROR:
 
         while(1)
         {
-            if (vendflag[intArg] && aendflag[intArg])
+            if ((vendflag[intArg] && aendflag[intArg]) || EXIT_PLAYBACK)
             {
                 break;
             }
