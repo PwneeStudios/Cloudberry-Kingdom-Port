@@ -71,6 +71,11 @@ class MemAllocator : public cell::Sail::memallocator
 
 	void* AllocateTexture(uint32_t size, uint32_t alignment=0) 
 	{
+		size_t sizeRequired = 3 * 1280 * 720 * sizeof( uint32_t );
+		const size_t roundTo = 1024 * 1024;
+		sizeRequired = roundTo * ( ( sizeRequired + ( roundTo - 1 ) ) / roundTo );
+		memset( PBOBuffer, 0, sizeRequired );
+
 		// Just need one preallocated PBO now.
 		return PBOBuffer;	
 	}

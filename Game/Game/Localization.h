@@ -429,6 +429,7 @@ Words_OnlinePermission_PS3,
 Words_NotRanked_PS3,
 Words_FriendsScores_PS3,
 Words_PressStart_PS3,
+Words_Err_PS3_NotEnoughSpace_Trophy,
 
 Words_PressStart_WiiU,
 Words_PressToJoin_WiiU,

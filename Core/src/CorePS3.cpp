@@ -231,7 +231,7 @@ CorePS3::CorePS3( GameLoop &game ) :
 	// game code.  Also the files should be pre-installed on the disk.
 	// PS3_PATH_PREFIX = "/dev_hdd0/game/NPEB01312/USRDIR/"; // SCEE
 	// PS3_PATH_PREFIX = "/dev_hdd0/game/NPUB31177/USRDIR/"; // SCEA
-	//PS3_PATH_PREFIX = "/app_home/"; 
+	// PS3_PATH_PREFIX = "/app_home/";
 	LOG.Write( "Running in %s\nContent dir %s\n", dirName, usrdirPath );
 #ifdef DEBUG
 	PS3_PATH_PREFIX = "/app_home/";
@@ -630,13 +630,6 @@ int CorePS3::Run()
 
 	sceNpManagerRegisterCallback( NPManagerCallback, NULL );
 
-	int npState;
-	sceNpManagerGetStatus( &npState );
-
-	// Initialize our own connection to NP if the console is already connected.
-	if( npState == SCE_NP_MANAGER_STATUS_ONLINE )
-		ConnectToNP();
-	
 	// Initialize NP score system.
 	ret = sceNpScoreInit();
 	if( ret < 0 )
@@ -646,6 +639,13 @@ int CorePS3::Run()
 	ret = sceNpTrophyInit( NULL, 0, SYS_MEMORY_CONTAINER_ID_INVALID, 0 );
 	if( ret < 0 )
 		LOG.Write( "Failed to initialize trophy system: 0x%x\n", ret );
+
+	int npState;
+	sceNpManagerGetStatus( &npState );
+
+	// Initialize our own connection to NP if the console is already connected.
+	if( npState == SCE_NP_MANAGER_STATUS_ONLINE )
+		ConnectToNP();
 
 	// The communication ID comes from PSN Server Management Tools on PSN.
 	TrophyContext = SCE_NP_TROPHY_INVALID_CONTEXT;
