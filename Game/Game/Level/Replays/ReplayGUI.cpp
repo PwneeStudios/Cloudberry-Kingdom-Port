@@ -164,6 +164,355 @@ namespace CloudberryKingdom
 		SetPlayText();
 
 
+#ifdef CAFE
+			if ( ButtonTexture::UseGamepad )
+#else
+			if ( false )
+#endif
+			{
+				// This is special positioning for the WiiU Wii Remote, because it does not have two triggers like the other gamepads.
+				// SetPos()
+				if ( Type == ReplayGUIType_COMPUTER )
+				{
+					if ( ButtonCheck::ControllerInUse )
+					{
+						////////////////////////////////////////////////////////////////////////////////
+						/////// Console version, computer replay ///////////////////////////////////////
+						////////////////////////////////////////////////////////////////////////////////
+						if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_RUSSIAN )
+						{
+							boost::shared_ptr<EzText> _t;
+							_t = MyPile->FindEzText( L"Play" ); if (_t != 0 ) { _t->setPos( Vector2(-315.6231f, -832.2222f ) ); _t->setScale( 0.44f ); }
+							_t = MyPile->FindEzText( L"Back" ); if (_t != 0 ) { _t->setPos( Vector2( 224.444f, -832.2222f ) ); _t->setScale( 0.44f ); }
+							_t = MyPile->FindEzText( L"Speed" ); if (_t != 0 ) { _t->setPos( Vector2( 611.2224f, -832.2222f ) ); _t->setScale( 0.44f ); }
+							_t = MyPile->FindEzText( L"Reset" ); if (_t != 0 ) { _t->setPos( Vector2( 909.8889f, -1373.889f ) ); _t->setScale( 0.3969166f ); }
+
+							boost::shared_ptr<QuadClass> _q;
+							_q = MyPile->FindQuad( L"Backdrop2" ); if (_q != 0 ) { _q->setPos( Vector2( 69.44431f, -2049.777f ) ); _q->setSize( Vector2( 825.0781f, 1240.663f ) ); }
+							_q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2( 66.66653f, -2049.777f ) ); _q->setSize( Vector2( 814.4113f, 1229.996f ) ); }
+							_q = MyPile->FindQuad( L"Button_Go" ); if (_q != 0 ) { _q->setPos( Vector2(-575.0011f, -911.1113f ) ); _q->setSize( Vector2( 69.64276f, 69.64276f ) ); }
+							_q = MyPile->FindQuad( L"Button_Back" ); if (_q != 0 ) { _q->setPos( Vector2(-44.44458f, -911.1113f ) ); _q->setSize( Vector2( 71.76664f, 71.76664f ) ); }
+							_q = MyPile->FindQuad( L"Button_LR" ); if (_q != 0 ) { _q->setPos( Vector2( 527.7776f, -911.1113f ) ); _q->setSize( Vector2( 83.48316f, 83.48316f ) ); }
+							_q = MyPile->FindQuad( L"Button_LB" ); if (_q != 0 ) { _q->setPos( Vector2( 463.8887f, -1444.445f ) ); _q->setSize( Vector2( 152.0833f, 152.0833f ) ); }
+							_q = MyPile->FindQuad( L"" ); if (_q != 0 ) { _q->setPos( Vector2( 1277.222f, 774.4444f ) ); _q->setSize( Vector2( 255.f, 128.775f ) ); }
+							_q = MyPile->FindQuad( L"" ); if (_q != 0 ) { _q->setPos( Vector2( 1277.222f, 774.4444f ) ); _q->setSize( Vector2( 255.f, 128.775f ) ); }
+
+							MyPile->setPos( Vector2( 0.f, 8.400001f ) );
+						}
+						else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_GERMAN )
+						{
+							boost::shared_ptr<EzText> _t;
+							_t = MyPile->FindEzText( L"Play" ); if (_t != 0 ) { _t->setPos( Vector2(-329.512f, -826.6667f ) ); _t->setScale( 0.44f ); }
+							_t = MyPile->FindEzText( L"Back" ); if (_t != 0 ) { _t->setPos( Vector2( 249.4438f, -826.6667f ) ); _t->setScale( 0.44f ); }
+							_t = MyPile->FindEzText( L"Speed" ); if (_t != 0 ) { _t->setPos( Vector2( 644.5557f, -826.6667f ) ); _t->setScale( 0.44f ); }
+							_t = MyPile->FindEzText( L"Reset" ); if (_t != 0 ) { _t->setPos( Vector2( 982.1111f, -1160.f ) ); _t->setScale( 0.3969166f ); }
+
+							boost::shared_ptr<QuadClass> _q;
+							_q = MyPile->FindQuad( L"Backdrop2" ); if (_q != 0 ) { _q->setPos( Vector2( 77.77765f, -2047.f ) ); _q->setSize( Vector2( 852.9119f, 1248.496f ) ); }
+							_q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2( 74.99988f, -2047.f ) ); _q->setSize( Vector2( 842.2455f, 1237.83f ) ); }
+							_q = MyPile->FindQuad( L"Button_Go" ); if (_q != 0 ) { _q->setPos( Vector2(-530.5568f, -905.5558f ) ); _q->setSize( Vector2( 69.64276f, 69.64276f ) ); }
+							_q = MyPile->FindQuad( L"Button_Back" ); if (_q != 0 ) { _q->setPos( Vector2(-0.0002441406f, -905.5558f ) ); _q->setSize( Vector2( 71.76664f, 71.76664f ) ); }
+							_q = MyPile->FindQuad( L"Button_LR" ); if (_q != 0 ) { _q->setPos( Vector2( 572.222f, -905.5558f ) ); _q->setSize( Vector2( 83.48316f, 83.48316f ) ); }
+							_q = MyPile->FindQuad( L"Button_LB" ); if (_q != 0 ) { _q->setPos( Vector2( 549.9998f, -1230.556f ) ); _q->setSize( Vector2( 152.0833f, 152.0833f ) ); }
+							_q = MyPile->FindQuad( L"" ); if (_q != 0 ) { _q->setPos( Vector2( 1277.222f, 774.4444f ) ); _q->setSize( Vector2( 300.f, 105.f ) ); }
+							_q = MyPile->FindQuad( L"" ); if (_q != 0 ) { _q->setPos( Vector2( 1277.222f, 774.4444f ) ); _q->setSize( Vector2( 255.f, 128.775f ) ); }
+
+							MyPile->setPos( Vector2( 0.f, 8.400001f ) );
+						}
+						else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_JAPANESE )
+						{
+							boost::shared_ptr<EzText> _t;
+							_t = MyPile->FindEzText( L"Play" ); if (_t != 0 ) { _t->setPos( Vector2(-368.4008f, -810.0001f ) ); _t->setScale( 0.5329166f ); }
+							_t = MyPile->FindEzText( L"Back" ); if (_t != 0 ) { _t->setPos( Vector2( 232.7773f, -810.0001f ) ); _t->setScale( 0.5329166f ); }
+							_t = MyPile->FindEzText( L"Speed" ); if (_t != 0 ) { _t->setPos( Vector2( 589.f, -815.5556f ) ); _t->setScale( 0.4961667f ); }
+							_t = MyPile->FindEzText( L"Reset" ); if (_t != 0 ) { _t->setPos( Vector2( 971.0002f, -1093.334f ) ); _t->setScale( 0.5030003f ); }
+
+							boost::shared_ptr<QuadClass> _q;
+							_q = MyPile->FindQuad( L"Backdrop2" ); if (_q != 0 ) { _q->setPos( Vector2( 55.55542f, -2055.333f ) ); _q->setSize( Vector2( 948.9962f, 1244.163f ) ); }
+							_q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2( 52.77765f, -2055.333f ) ); _q->setSize( Vector2( 938.3292f, 1233.496f ) ); }
+							_q = MyPile->FindQuad( L"Button_Go" ); if (_q != 0 ) { _q->setPos( Vector2(-605.5565f, -911.1113f ) ); _q->setSize( Vector2( 76.39275f, 70.4761f ) ); }
+							_q = MyPile->FindQuad( L"Button_Back" ); if (_q != 0 ) { _q->setPos( Vector2(-22.22293f, -911.1113f ) ); _q->setSize( Vector2( 78.51664f, 72.59997f ) ); }
+							_q = MyPile->FindQuad( L"Button_LR" ); if (_q != 0 ) { _q->setPos( Vector2( 511.1107f, -911.1113f ) ); _q->setSize( Vector2( 90.23312f, 84.3165f ) ); }
+							_q = MyPile->FindQuad( L"Button_LB" ); if (_q != 0 ) { _q->setPos( Vector2( 655.555f, -1188.89f ) ); _q->setSize( Vector2( 152.0833f, 152.0833f ) ); }
+							_q = MyPile->FindQuad( L"" ); if (_q != 0 ) { _q->setPos( Vector2( 1277.222f, 774.4444f ) ); _q->setSize( Vector2( 255.f, 128.775f ) ); }
+							_q = MyPile->FindQuad( L"" ); if (_q != 0 ) { _q->setPos( Vector2( 1277.222f, 774.4444f ) ); _q->setSize( Vector2( 255.f, 128.775f ) ); }
+
+							MyPile->setPos( Vector2( 0.f, 8.400001f ) );
+						}
+						else
+						{
+							boost::shared_ptr<EzText> _t;
+							_t = MyPile->FindEzText( L"Play" ); if (_t != 0 ) { _t->setPos( Vector2(-365.6229f, -826.6667f ) ); _t->setScale( 0.44f ); }
+							_t = MyPile->FindEzText( L"Back" ); if (_t != 0 ) { _t->setPos( Vector2( 235.5551f, -826.6667f ) ); _t->setScale( 0.44f ); }
+							_t = MyPile->FindEzText( L"Speed" ); if (_t != 0 ) { _t->setPos( Vector2( 619.5557f, -826.6667f ) ); _t->setScale( 0.44f ); }
+							_t = MyPile->FindEzText( L"Reset" ); if (_t != 0 ) { _t->setPos( Vector2( 940.4446f, -1221.111f ) ); _t->setScale( 0.4176667f ); }
+
+							boost::shared_ptr<QuadClass> _q;
+							_q = MyPile->FindQuad( L"Backdrop2" ); if (_q != 0 ) { _q->setPos( Vector2( 55.55542f, -2055.333f ) ); _q->setSize( Vector2( 900.329f, 1244.413f ) ); }
+							_q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2( 52.77765f, -2055.333f ) ); _q->setSize( Vector2( 889.662f, 1233.746f ) ); }
+							_q = MyPile->FindQuad( L"Button_Go" ); if (_q != 0 ) { _q->setPos( Vector2(-575.0008f, -905.5558f ) ); _q->setSize( Vector2( 69.64276f, 69.64276f ) ); }
+							_q = MyPile->FindQuad( L"Button_Back" ); if (_q != 0 ) { _q->setPos( Vector2( 8.332733f, -905.5558f ) ); _q->setSize( Vector2( 71.76664f, 71.76664f ) ); }
+							_q = MyPile->FindQuad( L"Button_LR" ); if (_q != 0 ) { _q->setPos( Vector2( 541.6663f, -905.5558f ) ); _q->setSize( Vector2( 83.48316f, 83.48316f ) ); }
+							_q = MyPile->FindQuad( L"Button_LB" ); if (_q != 0 ) { _q->setPos( Vector2( 647.222f, -1294.444f ) ); _q->setSize( Vector2( 152.0833f, 152.0833f ) ); }
+							_q = MyPile->FindQuad( L"" ); if (_q != 0 ) { _q->setPos( Vector2( 1277.222f, 774.4444f ) ); _q->setSize( Vector2( 255.f, 128.775f ) ); }
+							_q = MyPile->FindQuad( L"" ); if (_q != 0 ) { _q->setPos( Vector2( 1277.222f, 774.4444f ) ); _q->setSize( Vector2( 255.f, 128.775f ) ); }
+
+							MyPile->setPos( Vector2( 0.f, 8.400001f ) );
+						}
+					}
+				}
+				else
+				{
+					if ( ButtonCheck::ControllerInUse )
+					{
+						////////////////////////////////////////////////////////////////////////////////
+						/////// Console version, player replay /////////////////////////////////////////
+						////////////////////////////////////////////////////////////////////////////////
+						if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_SPANISH )
+						{
+							boost::shared_ptr<EzText> _t;
+							_t = MyPile->FindEzText( L"Play" ); if (_t != 0 ) { _t->setPos( Vector2(-480.556f, -827.778f ) ); _t->setScale( 0.4145834f ); }
+							_t = MyPile->FindEzText( L"Back" ); if (_t != 0 ) { _t->setPos( Vector2( 24.99994f, -827.778f ) ); _t->setScale( 0.4147499f ); }
+							_t = MyPile->FindEzText( L"Toggle" ); if (_t != 0 ) { _t->setPos( Vector2( 511.1105f, -827.778f ) ); _t->setScale( 0.4139166f ); }
+							_t = MyPile->FindEzText( L"Speed" ); if (_t != 0 ) { _t->setPos( Vector2( 863.8886f, -827.778f ) ); _t->setScale( 0.3873335f ); }
+							_t = MyPile->FindEzText( L"Prev" ); if (_t != 0 ) { _t->setPos( Vector2( 905.5554f, -1263.889f ) ); _t->setScale( 0.3769997f ); }
+							_t = MyPile->FindEzText( L"Next" ); if (_t != 0 ) { _t->setPos( Vector2( 1474.998f, -1263.889f ) ); _t->setScale( 0.3787504f ); }
+
+							boost::shared_ptr<QuadClass> _q;
+							_q = MyPile->FindQuad( L"Backdrop2" ); if (_q != 0 ) { _q->setPos( Vector2( 136.1106f, -2324.78f ) ); _q->setSize( Vector2( 1046.165f, 1524.581f ) ); }
+							_q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2( 136.1113f, -2327.556f ) ); _q->setSize( Vector2( 1028.333f, 1506.749f ) ); }
+							_q = MyPile->FindQuad( L"Button_Go" ); if (_q != 0 ) { _q->setPos( Vector2(-680.556f, -905.5554f ) ); _q->setSize( Vector2( 64.55943f, 64.55943f ) ); }
+							_q = MyPile->FindQuad( L"Button_Back" ); if (_q != 0 ) { _q->setPos( Vector2(-183.333f, -905.5554f ) ); _q->setSize( Vector2( 67.34993f, 67.34993f ) ); }
+							_q = MyPile->FindQuad( L"Button_X" ); if (_q != 0 ) { _q->setPos( Vector2( 275.0002f, -905.5554f ) ); _q->setSize( Vector2( 65.58324f, 65.58324f ) ); }
+							_q = MyPile->FindQuad( L"Button_LR" ); if (_q != 0 ) { _q->setPos( Vector2( 811.1104f, -902.7777f ) ); _q->setSize( Vector2( 79.56668f, 79.56668f ) ); }
+							_q = MyPile->FindQuad( L"Button_LB" ); if (_q != 0 ) { _q->setPos( Vector2( 650.0002f, -1333.333f ) ); _q->setSize( Vector2( 116.8998f, 116.8998f ) ); }
+							_q = MyPile->FindQuad( L"Button_RB" ); if (_q != 0 ) { _q->setPos( Vector2( 1166.667f, -1330.555f ) ); _q->setSize( Vector2( 113.7331f, 113.7331f ) ); }
+							_q = MyPile->FindQuad( L"" ); if (_q != 0 ) { _q->setPos( Vector2( 1277.222f, 774.4444f ) ); _q->setSize( Vector2( 255.f, 128.775f ) ); }
+							_q = MyPile->FindQuad( L"" ); if (_q != 0 ) { _q->setPos( Vector2( 1277.222f, 774.4444f ) ); _q->setSize( Vector2( 255.f, 128.775f ) ); }
+
+							MyPile->setPos( Vector2( 0.f, 8.400001f ) );
+						}
+						else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_FRENCH )
+						{
+							boost::shared_ptr<EzText> _t;
+							_t = MyPile->FindEzText( L"Play" ); if (_t != 0 ) { _t->setPos( Vector2(-419.444f, -833.3336f ) ); _t->setScale( 0.4145834f ); }
+							_t = MyPile->FindEzText( L"Back" ); if (_t != 0 ) { _t->setPos( Vector2( 52.77795f, -833.3336f ) ); _t->setScale( 0.4147499f ); }
+							_t = MyPile->FindEzText( L"Toggle" ); if (_t != 0 ) { _t->setPos( Vector2( 461.111f, -833.3336f ) ); _t->setScale( 0.4139166f ); }
+							_t = MyPile->FindEzText( L"Speed" ); if (_t != 0 ) { _t->setPos( Vector2( 800.0002f, -833.3336f ) ); _t->setScale( 0.3873335f ); }
+							_t = MyPile->FindEzText( L"Prev" ); if (_t != 0 ) { _t->setPos( Vector2( 705.5554f, -1708.333f ) ); _t->setScale( 0.3271667f ); }
+							_t = MyPile->FindEzText( L"Next" ); if (_t != 0 ) { _t->setPos( Vector2( 1338.886f, -1702.778f ) ); _t->setScale( 0.3494168f ); }
+
+							boost::shared_ptr<QuadClass> _q;
+							_q = MyPile->FindQuad( L"Backdrop2" ); if (_q != 0 ) { _q->setPos( Vector2( 111.1106f, -2324.78f ) ); _q->setSize( Vector2( 918.5801f, 1525.996f ) ); }
+							_q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2( 111.1113f, -2327.556f ) ); _q->setSize( Vector2( 900.7482f, 1508.164f ) ); }
+							_q = MyPile->FindQuad( L"Button_Go" ); if (_q != 0 ) { _q->setPos( Vector2(-594.4449f, -911.111f ) ); _q->setSize( Vector2( 64.55943f, 64.55943f ) ); }
+							_q = MyPile->FindQuad( L"Button_Back" ); if (_q != 0 ) { _q->setPos( Vector2(-108.3323f, -911.111f ) ); _q->setSize( Vector2( 67.34993f, 67.34993f ) ); }
+							_q = MyPile->FindQuad( L"Button_X" ); if (_q != 0 ) { _q->setPos( Vector2( 272.223f, -911.111f ) ); _q->setSize( Vector2( 65.58324f, 65.58324f ) ); }
+							_q = MyPile->FindQuad( L"Button_LR" ); if (_q != 0 ) { _q->setPos( Vector2( 733.3336f, -908.3332f ) ); _q->setSize( Vector2( 79.56668f, 79.56668f ) ); }
+							_q = MyPile->FindQuad( L"Button_LB" ); if (_q != 0 ) { _q->setPos( Vector2( 402.778f, -1769.444f ) ); _q->setSize( Vector2( 116.8998f, 116.8998f ) ); }
+							_q = MyPile->FindQuad( L"Button_RB" ); if (_q != 0 ) { _q->setPos( Vector2( 1075.f, -1766.667f ) ); _q->setSize( Vector2( 113.7331f, 113.7331f ) ); }
+							_q = MyPile->FindQuad( L"" ); if (_q != 0 ) { _q->setPos( Vector2( 1277.222f, 774.4444f ) ); _q->setSize( Vector2( 255.f, 128.775f ) ); }
+							_q = MyPile->FindQuad( L"" ); if (_q != 0 ) { _q->setPos( Vector2( 1277.222f, 774.4444f ) ); _q->setSize( Vector2( 255.f, 128.775f ) ); }
+
+							MyPile->setPos( Vector2( 0.f, 8.400001f ) );
+						}
+						else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_ITALIAN )
+						{
+							boost::shared_ptr<EzText> _t;
+							_t = MyPile->FindEzText( L"Play" ); if (_t != 0 ) { _t->setPos( Vector2(-466.6666f, -833.3336f ) ); _t->setScale( 0.4145834f ); }
+							_t = MyPile->FindEzText( L"Back" ); if (_t != 0 ) { _t->setPos( Vector2(-22.2226f, -833.3336f ) ); _t->setScale( 0.4147499f ); }
+							_t = MyPile->FindEzText( L"Toggle" ); if (_t != 0 ) { _t->setPos( Vector2( 463.8883f, -833.3336f ) ); _t->setScale( 0.4139166f ); }
+							_t = MyPile->FindEzText( L"Speed" ); if (_t != 0 ) { _t->setPos( Vector2( 827.7778f, -833.3336f ) ); _t->setScale( 0.3873335f ); }
+							_t = MyPile->FindEzText( L"Prev" ); if (_t != 0 ) { _t->setPos( Vector2( 805.5554f, -1200.f ) ); _t->setScale( 0.3271667f ); }
+							_t = MyPile->FindEzText( L"Next" ); if (_t != 0 ) { _t->setPos( Vector2( 1405.553f, -1194.445f ) ); _t->setScale( 0.3494168f ); }
+
+							boost::shared_ptr<QuadClass> _q;
+							_q = MyPile->FindQuad( L"Backdrop2" ); if (_q != 0 ) { _q->setPos( Vector2( 105.555f, -2319.225f ) ); _q->setSize( Vector2( 978.4958f, 1519.663f ) ); }
+							_q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2( 105.5557f, -2322.f ) ); _q->setSize( Vector2( 960.6643f, 1501.831f ) ); }
+							_q = MyPile->FindQuad( L"Button_Go" ); if (_q != 0 ) { _q->setPos( Vector2(-675.0006f, -911.111f ) ); _q->setSize( Vector2( 64.55943f, 64.55943f ) ); }
+							_q = MyPile->FindQuad( L"Button_Back" ); if (_q != 0 ) { _q->setPos( Vector2(-222.2218f, -911.111f ) ); _q->setSize( Vector2( 67.34993f, 67.34993f ) ); }
+							_q = MyPile->FindQuad( L"Button_X" ); if (_q != 0 ) { _q->setPos( Vector2( 213.8894f, -911.111f ) ); _q->setSize( Vector2( 65.58324f, 65.58324f ) ); }
+							_q = MyPile->FindQuad( L"Button_LR" ); if (_q != 0 ) { _q->setPos( Vector2( 763.8887f, -908.3333f ) ); _q->setSize( Vector2( 79.56668f, 79.56668f ) ); }
+							_q = MyPile->FindQuad( L"Button_LB" ); if (_q != 0 ) { _q->setPos( Vector2( 494.4443f, -1261.111f ) ); _q->setSize( Vector2( 116.8998f, 116.8998f ) ); }
+							_q = MyPile->FindQuad( L"Button_RB" ); if (_q != 0 ) { _q->setPos( Vector2( 1133.334f, -1258.333f ) ); _q->setSize( Vector2( 113.7331f, 113.7331f ) ); }
+							_q = MyPile->FindQuad( L"" ); if (_q != 0 ) { _q->setPos( Vector2( 1277.222f, 774.4444f ) ); _q->setSize( Vector2( 255.f, 128.775f ) ); }
+							_q = MyPile->FindQuad( L"" ); if (_q != 0 ) { _q->setPos( Vector2( 1277.222f, 774.4444f ) ); _q->setSize( Vector2( 255.f, 128.775f ) ); }
+
+							MyPile->setPos( Vector2( 0.f, 8.400001f ) );
+						}
+						else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_RUSSIAN )
+						{
+							boost::shared_ptr<EzText> _t;
+							_t = MyPile->FindEzText( L"Play" ); if (_t != 0 ) { _t->setPos( Vector2(-569.4445f, -830.5557f ) ); _t->setScale( 0.4145834f ); }
+							_t = MyPile->FindEzText( L"Back" ); if (_t != 0 ) { _t->setPos( Vector2(-88.888f, -830.5557f ) ); _t->setScale( 0.4147499f ); }
+							_t = MyPile->FindEzText( L"Toggle" ); if (_t != 0 ) { _t->setPos( Vector2( 475.0004f, -830.5557f ) ); _t->setScale( 0.4139166f ); }
+							_t = MyPile->FindEzText( L"Speed" ); if (_t != 0 ) { _t->setPos( Vector2( 850.0005f, -830.5557f ) ); _t->setScale( 0.3873335f ); }
+							_t = MyPile->FindEzText( L"Prev" ); if (_t != 0 ) { _t->setPos( Vector2( 791.667f, -1733.333f ) ); _t->setScale( 0.304f ); }
+							_t = MyPile->FindEzText( L"Next" ); if (_t != 0 ) { _t->setPos( Vector2( 1494.442f, -1727.778f ) ); _t->setScale( 0.3178333f ); }
+
+							boost::shared_ptr<QuadClass> _q;
+							_q = MyPile->FindQuad( L"Backdrop2" ); if (_q != 0 ) { _q->setPos( Vector2( 63.88884f, -2322.002f ) ); _q->setSize( Vector2( 1039.073f, 1525.914f ) ); }
+							_q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2( 63.88953f, -2324.778f ) ); _q->setSize( Vector2( 1018.492f, 1508.082f ) ); }
+							_q = MyPile->FindQuad( L"Button_Go" ); if (_q != 0 ) { _q->setPos( Vector2(-802.7775f, -908.3332f ) ); _q->setSize( Vector2( 64.55943f, 64.55943f ) ); }
+							_q = MyPile->FindQuad( L"Button_Back" ); if (_q != 0 ) { _q->setPos( Vector2(-319.4435f, -908.3332f ) ); _q->setSize( Vector2( 67.34993f, 67.34993f ) ); }
+							_q = MyPile->FindQuad( L"Button_X" ); if (_q != 0 ) { _q->setPos( Vector2( 163.8896f, -908.3332f ) ); _q->setSize( Vector2( 65.58324f, 65.58324f ) ); }
+							_q = MyPile->FindQuad( L"Button_LR" ); if (_q != 0 ) { _q->setPos( Vector2( 800.0003f, -905.5555f ) ); _q->setSize( Vector2( 79.56668f, 79.56668f ) ); }
+							_q = MyPile->FindQuad( L"Button_LB" ); if (_q != 0 ) { _q->setPos( Vector2( 405.5562f, -1794.444f ) ); _q->setSize( Vector2( 116.8998f, 116.8998f ) ); }
+							_q = MyPile->FindQuad( L"Button_RB" ); if (_q != 0 ) { _q->setPos( Vector2( 1180.556f, -1791.667f ) ); _q->setSize( Vector2( 113.7331f, 113.7331f ) ); }
+							_q = MyPile->FindQuad( L"" ); if (_q != 0 ) { _q->setPos( Vector2( 1277.222f, 774.4444f ) ); _q->setSize( Vector2( 255.f, 128.775f ) ); }
+							_q = MyPile->FindQuad( L"" ); if (_q != 0 ) { _q->setPos( Vector2( 1277.222f, 774.4444f ) ); _q->setSize( Vector2( 255.f, 128.775f ) ); }
+
+							MyPile->setPos( Vector2( 0.f, 8.400001f ) );
+						}
+						else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_GERMAN )
+						{
+							boost::shared_ptr<EzText> _t;
+							_t = MyPile->FindEzText( L"Play" ); if (_t != 0 ) { _t->setPos( Vector2(-524.9999f, -830.5557f ) ); _t->setScale( 0.4145834f ); }
+							_t = MyPile->FindEzText( L"Back" ); if (_t != 0 ) { _t->setPos( Vector2(-2.77771f, -830.5557f ) ); _t->setScale( 0.4147499f ); }
+							_t = MyPile->FindEzText( L"Toggle" ); if (_t != 0 ) { _t->setPos( Vector2( 480.5553f, -830.5557f ) ); _t->setScale( 0.4139166f ); }
+							_t = MyPile->FindEzText( L"Speed" ); if (_t != 0 ) { _t->setPos( Vector2( 822.2222f, -830.5557f ) ); _t->setScale( 0.3873335f ); }
+							_t = MyPile->FindEzText( L"Prev" ); if (_t != 0 ) { _t->setPos( Vector2( 486.1113f, -1700.f ) ); _t->setScale( 0.3271667f ); }
+							_t = MyPile->FindEzText( L"Next" ); if (_t != 0 ) { _t->setPos( Vector2( 1047.22f, -1694.444f ) ); _t->setScale( 0.3494168f ); }
+
+							boost::shared_ptr<QuadClass> _q;
+							_q = MyPile->FindQuad( L"Backdrop2" ); if (_q != 0 ) { _q->setPos( Vector2( 108.3328f, -2324.78f ) ); _q->setSize( Vector2( 1044.163f, 1530.164f ) ); }
+							_q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2( 108.3335f, -2327.556f ) ); _q->setSize( Vector2( 1026.332f, 1512.331f ) ); }
+							_q = MyPile->FindQuad( L"Button_Go" ); if (_q != 0 ) { _q->setPos( Vector2(-713.8889f, -908.3332f ) ); _q->setSize( Vector2( 64.55943f, 64.55943f ) ); }
+							_q = MyPile->FindQuad( L"Button_Back" ); if (_q != 0 ) { _q->setPos( Vector2(-230.5553f, -908.3332f ) ); _q->setSize( Vector2( 67.34993f, 67.34993f ) ); }
+							_q = MyPile->FindQuad( L"Button_X" ); if (_q != 0 ) { _q->setPos( Vector2( 252.7781f, -908.3332f ) ); _q->setSize( Vector2( 65.58324f, 65.58324f ) ); }
+							_q = MyPile->FindQuad( L"Button_LR" ); if (_q != 0 ) { _q->setPos( Vector2( 744.4444f, -905.5555f ) ); _q->setSize( Vector2( 79.56668f, 79.56668f ) ); }
+							_q = MyPile->FindQuad( L"Button_LB" ); if (_q != 0 ) { _q->setPos( Vector2( 227.7781f, -1800.f ) ); _q->setSize( Vector2( 116.8998f, 116.8998f ) ); }
+							_q = MyPile->FindQuad( L"Button_RB" ); if (_q != 0 ) { _q->setPos( Vector2( 800.0007f, -1758.333f ) ); _q->setSize( Vector2( 113.7331f, 113.7331f ) ); }
+							_q = MyPile->FindQuad( L"" ); if (_q != 0 ) { _q->setPos( Vector2( 1277.222f, 774.4444f ) ); _q->setSize( Vector2( 255.f, 128.775f ) ); }
+							_q = MyPile->FindQuad( L"" ); if (_q != 0 ) { _q->setPos( Vector2( 1277.222f, 774.4444f ) ); _q->setSize( Vector2( 255.f, 128.775f ) ); }
+
+							MyPile->setPos( Vector2( 0.f, 8.400001f ) );
+						}
+						else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_CHINESE )
+						{
+							boost::shared_ptr<EzText> _t;
+							_t = MyPile->FindEzText( L"Play" ); if (_t != 0 ) { _t->setPos( Vector2(-408.3335f, -819.4447f ) ); _t->setScale( 0.4576671f ); }
+							_t = MyPile->FindEzText( L"Back" ); if (_t != 0 ) { _t->setPos( Vector2( 55.55499f, -816.6666f ) ); _t->setScale( 0.4578336f ); }
+							_t = MyPile->FindEzText( L"Toggle" ); if (_t != 0 ) { _t->setPos( Vector2( 508.3321f, -819.4445f ) ); _t->setScale( 0.4533335f ); }
+							_t = MyPile->FindEzText( L"Speed" ); if (_t != 0 ) { _t->setPos( Vector2( 811.1106f, -830.5552f ) ); _t->setScale( 0.3993336f ); }
+							_t = MyPile->FindEzText( L"Prev" ); if (_t != 0 ) { _t->setPos( Vector2( 680.5558f, -1561.111f ) ); _t->setScale( 0.4095834f ); }
+							_t = MyPile->FindEzText( L"Next" ); if (_t != 0 ) { _t->setPos( Vector2( 1222.22f, -1558.333f ) ); _t->setScale( 0.4487502f ); }
+
+							boost::shared_ptr<QuadClass> _q;
+							_q = MyPile->FindQuad( L"Backdrop2" ); if (_q != 0 ) { _q->setPos( Vector2( 161.1106f, -2316.447f ) ); _q->setSize( Vector2( 942.1636f, 1519.498f ) ); }
+							_q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2( 161.1113f, -2319.223f ) ); _q->setSize( Vector2( 924.3314f, 1501.666f ) ); }
+							_q = MyPile->FindQuad( L"Button_Go" ); if (_q != 0 ) { _q->setPos( Vector2(-558.3335f, -905.5554f ) ); _q->setSize( Vector2( 64.55943f, 64.55943f ) ); }
+							_q = MyPile->FindQuad( L"Button_Back" ); if (_q != 0 ) { _q->setPos( Vector2(-136.1108f, -905.5554f ) ); _q->setSize( Vector2( 67.34993f, 67.34993f ) ); }
+							_q = MyPile->FindQuad( L"Button_X" ); if (_q != 0 ) { _q->setPos( Vector2( 308.333f, -908.3333f ) ); _q->setSize( Vector2( 65.58324f, 65.58324f ) ); }
+							_q = MyPile->FindQuad( L"Button_LR" ); if (_q != 0 ) { _q->setPos( Vector2( 755.555f, -902.7777f ) ); _q->setSize( Vector2( 72.98328f, 72.98328f ) ); }
+							_q = MyPile->FindQuad( L"Button_LB" ); if (_q != 0 ) { _q->setPos( Vector2( 383.3333f, -1641.666f ) ); _q->setSize( Vector2( 121.4832f, 121.4832f ) ); }
+							_q = MyPile->FindQuad( L"Button_RB" ); if (_q != 0 ) { _q->setPos( Vector2( 997.2222f, -1641.667f ) ); _q->setSize( Vector2( 120.8164f, 120.8164f ) ); }
+							_q = MyPile->FindQuad( L"" ); if (_q != 0 ) { _q->setPos( Vector2( 1277.222f, 774.4444f ) ); _q->setSize( Vector2( 255.f, 128.775f ) ); }
+							_q = MyPile->FindQuad( L"" ); if (_q != 0 ) { _q->setPos( Vector2( 1277.222f, 774.4444f ) ); _q->setSize( Vector2( 255.f, 128.775f ) ); }
+
+							MyPile->setPos( Vector2( 0.f, 8.400001f ) );
+						}
+						else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_KOREAN )
+						{
+							boost::shared_ptr<EzText> _t;
+							_t = MyPile->FindEzText( L"Play" ); if (_t != 0 ) { _t->setPos( Vector2(-400.0003f, -813.8892f ) ); _t->setScale( 0.4778334f ); }
+							_t = MyPile->FindEzText( L"Back" ); if (_t != 0 ) { _t->setPos( Vector2( 72.22229f, -816.667f ) ); _t->setScale( 0.4779999f ); }
+							_t = MyPile->FindEzText( L"Toggle" ); if (_t != 0 ) { _t->setPos( Vector2( 536.1105f, -816.667f ) ); _t->setScale( 0.4771666f ); }
+							_t = MyPile->FindEzText( L"Speed" ); if (_t != 0 ) { _t->setPos( Vector2( 869.4443f, -830.5558f ) ); _t->setScale( 0.3873335f ); }
+							_t = MyPile->FindEzText( L"Prev" ); if (_t != 0 ) { _t->setPos( Vector2( 922.2226f, -2033.333f ) ); _t->setScale( 0.4539167f ); }
+							_t = MyPile->FindEzText( L"Next" ); if (_t != 0 ) { _t->setPos( Vector2( 1397.221f, -2036.111f ) ); _t->setScale( 0.4569168f ); }
+
+							boost::shared_ptr<QuadClass> _q;
+							_q = MyPile->FindQuad( L"Backdrop2" ); if (_q != 0 ) { _q->setPos( Vector2( 152.7773f, -2316.447f ) ); _q->setSize( Vector2( 970.1627f, 1518.83f ) ); }
+							_q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2( 152.778f, -2319.223f ) ); _q->setSize( Vector2( 952.3304f, 1500.998f ) ); }
+							_q = MyPile->FindQuad( L"Button_Go" ); if (_q != 0 ) { _q->setPos( Vector2(-636.1112f, -908.3333f ) ); _q->setSize( Vector2( 64.55943f, 64.55943f ) ); }
+							_q = MyPile->FindQuad( L"Button_Back" ); if (_q != 0 ) { _q->setPos( Vector2(-133.3329f, -908.3333f ) ); _q->setSize( Vector2( 67.34993f, 67.34993f ) ); }
+							_q = MyPile->FindQuad( L"Button_X" ); if (_q != 0 ) { _q->setPos( Vector2( 344.4448f, -908.3333f ) ); _q->setSize( Vector2( 65.58324f, 65.58324f ) ); }
+							_q = MyPile->FindQuad( L"Button_LR" ); if (_q != 0 ) { _q->setPos( Vector2( 808.333f, -905.5555f ) ); _q->setSize( Vector2( 79.56668f, 79.56668f ) ); }
+							_q = MyPile->FindQuad( L"Button_LB" ); if (_q != 0 ) { _q->setPos( Vector2( 700.0005f, -2125.f ) ); _q->setSize( Vector2( 116.8998f, 116.8998f ) ); }
+							_q = MyPile->FindQuad( L"Button_RB" ); if (_q != 0 ) { _q->setPos( Vector2( 1180.556f, -2122.222f ) ); _q->setSize( Vector2( 113.7331f, 113.7331f ) ); }
+							_q = MyPile->FindQuad( L"" ); if (_q != 0 ) { _q->setPos( Vector2( 1277.222f, 774.4444f ) ); _q->setSize( Vector2( 255.f, 128.775f ) ); }
+							_q = MyPile->FindQuad( L"" ); if (_q != 0 ) { _q->setPos( Vector2( 1277.222f, 774.4444f ) ); _q->setSize( Vector2( 255.f, 128.775f ) ); }
+
+							MyPile->setPos( Vector2( 0.f, 8.400001f ) );
+						}
+						else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_JAPANESE )
+						{
+							boost::shared_ptr<EzText> _t;
+							_t = MyPile->FindEzText( L"Play" ); if (_t != 0 ) { _t->setPos( Vector2(-505.5563f, -830.5558f ) ); _t->setScale( 0.4328336f ); }
+							_t = MyPile->FindEzText( L"Back" ); if (_t != 0 ) { _t->setPos( Vector2(-44.44495f, -827.7776f ) ); _t->setScale( 0.4330001f ); }
+							_t = MyPile->FindEzText( L"Toggle" ); if (_t != 0 ) { _t->setPos( Vector2( 433.3322f, -830.5555f ) ); _t->setScale( 0.4285f ); }
+							_t = MyPile->FindEzText( L"Speed" ); if (_t != 0 ) { _t->setPos( Vector2( 819.4438f, -841.6663f ) ); _t->setScale( 0.3993336f ); }
+							_t = MyPile->FindEzText( L"Prev" ); if (_t != 0 ) { _t->setPos( Vector2( 930.5559f, -1116.667f ) ); _t->setScale( 0.4390835f ); }
+							_t = MyPile->FindEzText( L"Next" ); if (_t != 0 ) { _t->setPos( Vector2( 1413.887f, -1113.889f ) ); _t->setScale( 0.4487502f ); }
+
+							boost::shared_ptr<QuadClass> _q;
+							_q = MyPile->FindQuad( L"Backdrop2" ); if (_q != 0 ) { _q->setPos( Vector2( 83.3328f, -2322.002f ) ); _q->setSize( Vector2( 989.4137f, 1529.081f ) ); }
+							_q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2( 83.3335f, -2324.778f ) ); _q->setSize( Vector2( 971.5814f, 1511.249f ) ); }
+							_q = MyPile->FindQuad( L"Button_Go" ); if (_q != 0 ) { _q->setPos( Vector2(-713.8892f, -908.3333f ) ); _q->setSize( Vector2( 64.55943f, 64.55943f ) ); }
+							_q = MyPile->FindQuad( L"Button_Back" ); if (_q != 0 ) { _q->setPos( Vector2(-244.4443f, -908.3332f ) ); _q->setSize( Vector2( 67.34993f, 67.34993f ) ); }
+							_q = MyPile->FindQuad( L"Button_X" ); if (_q != 0 ) { _q->setPos( Vector2( 186.1108f, -911.1111f ) ); _q->setSize( Vector2( 65.58324f, 65.58324f ) ); }
+							_q = MyPile->FindQuad( L"Button_LR" ); if (_q != 0 ) { _q->setPos( Vector2( 747.2219f, -905.5555f ) ); _q->setSize( Vector2( 72.98328f, 72.98328f ) ); }
+							_q = MyPile->FindQuad( L"Button_LB" ); if (_q != 0 ) { _q->setPos( Vector2( 705.5557f, -1197.222f ) ); _q->setSize( Vector2( 121.4832f, 121.4832f ) ); }
+							_q = MyPile->FindQuad( L"Button_RB" ); if (_q != 0 ) { _q->setPos( Vector2( 1200.f, -1197.222f ) ); _q->setSize( Vector2( 120.8164f, 120.8164f ) ); }
+							_q = MyPile->FindQuad( L"" ); if (_q != 0 ) { _q->setPos( Vector2( 1277.222f, 774.4444f ) ); _q->setSize( Vector2( 255.f, 128.775f ) ); }
+							_q = MyPile->FindQuad( L"" ); if (_q != 0 ) { _q->setPos( Vector2( 1277.222f, 774.4444f ) ); _q->setSize( Vector2( 255.f, 128.775f ) ); }
+
+							MyPile->setPos( Vector2( 0.f, 8.400001f ) );
+						}
+						else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_PORTUGUESE )
+						{
+							boost::shared_ptr<EzText> _t;
+							_t = MyPile->FindEzText( L"Play" ); if (_t != 0 ) { _t->setPos( Vector2(-397.2228f, -825.0002f ) ); _t->setScale( 0.4145834f ); }
+							_t = MyPile->FindEzText( L"Back" ); if (_t != 0 ) { _t->setPos( Vector2( 97.22205f, -827.7777f ) ); _t->setScale( 0.4136664f ); }
+							_t = MyPile->FindEzText( L"Toggle" ); if (_t != 0 ) { _t->setPos( Vector2( 594.4437f, -830.5555f ) ); _t->setScale( 0.4139166f ); }
+							_t = MyPile->FindEzText( L"Speed" ); if (_t != 0 ) { _t->setPos( Vector2( 947.2214f, -833.333f ) ); _t->setScale( 0.3873335f ); }
+							_t = MyPile->FindEzText( L"Prev" ); if (_t != 0 ) { _t->setPos( Vector2( 922.2219f, -1444.444f ) ); _t->setScale( 0.3584168f ); }
+							_t = MyPile->FindEzText( L"Next" ); if (_t != 0 ) { _t->setPos( Vector2( 1461.11f, -1447.222f ) ); _t->setScale( 0.354f ); }
+
+							boost::shared_ptr<QuadClass> _q;
+							_q = MyPile->FindQuad( L"Backdrop2" ); if (_q != 0 ) { _q->setPos( Vector2( 199.9988f, -2324.78f ) ); _q->setSize( Vector2( 1023.164f, 1529.664f ) ); }
+							_q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2( 197.2221f, -2324.778f ) ); _q->setSize( Vector2( 1005.333f, 1511.832f ) ); }
+							_q = MyPile->FindQuad( L"Button_Go" ); if (_q != 0 ) { _q->setPos( Vector2(-605.5557f, -902.7777f ) ); _q->setSize( Vector2( 64.55943f, 64.55943f ) ); }
+							_q = MyPile->FindQuad( L"Button_Back" ); if (_q != 0 ) { _q->setPos( Vector2(-127.7779f, -908.3333f ) ); _q->setSize( Vector2( 67.34993f, 67.34993f ) ); }
+							_q = MyPile->FindQuad( L"Button_X" ); if (_q != 0 ) { _q->setPos( Vector2( 363.8889f, -908.3333f ) ); _q->setSize( Vector2( 65.58324f, 65.58324f ) ); }
+							_q = MyPile->FindQuad( L"Button_LR" ); if (_q != 0 ) { _q->setPos( Vector2( 869.4436f, -897.2221f ) ); _q->setSize( Vector2( 79.48331f, 79.48331f ) ); }
+							_q = MyPile->FindQuad( L"Button_LB" ); if (_q != 0 ) { _q->setPos( Vector2( 680.556f, -1513.889f ) ); _q->setSize( Vector2( 126.1499f, 126.1499f ) ); }
+							_q = MyPile->FindQuad( L"Button_RB" ); if (_q != 0 ) { _q->setPos( Vector2( 1177.778f, -1508.333f ) ); _q->setSize( Vector2( 128.233f, 128.233f ) ); }
+							_q = MyPile->FindQuad( L"" ); if (_q != 0 ) { _q->setPos( Vector2( 1321.666f, 774.4444f ) ); _q->setSize( Vector2( 255.f, 128.775f ) ); }
+							_q = MyPile->FindQuad( L"" ); if (_q != 0 ) { _q->setPos( Vector2( 1277.222f, 774.4444f ) ); _q->setSize( Vector2( 255.f, 128.775f ) ); }
+
+							MyPile->setPos( Vector2(-55.55542f, 8.400001f ) );
+						}
+						else
+						{
+							boost::shared_ptr<EzText> _t;
+							_t = MyPile->FindEzText( L"Play" ); if (_t != 0 ) { _t->setPos( Vector2(-647.2225f, -825.0002f ) ); _t->setScale( 0.4145834f ); }
+							_t = MyPile->FindEzText( L"Back" ); if (_t != 0 ) { _t->setPos( Vector2(-122.2223f, -825.0002f ) ); _t->setScale( 0.4147499f ); }
+							_t = MyPile->FindEzText( L"Toggle" ); if (_t != 0 ) { _t->setPos( Vector2( 369.4437f, -825.0002f ) ); _t->setScale( 0.4139166f ); }
+							_t = MyPile->FindEzText( L"Speed" ); if (_t != 0 ) { _t->setPos( Vector2( 722.2219f, -825.0002f ) ); _t->setScale( 0.3873335f ); }
+							_t = MyPile->FindEzText( L"Prev" ); if (_t != 0 ) { _t->setPos( Vector2( 1316.667f, -1025.f ) ); _t->setScale( 0.4208333f ); }
+							_t = MyPile->FindEzText( L"Next" ); if (_t != 0 ) { _t->setPos( Vector2( 1797.22f, -1025.f ) ); _t->setScale( 0.4238334f ); }
+
+							boost::shared_ptr<QuadClass> _q;
+							_q = MyPile->FindQuad( L"Backdrop2" ); if (_q != 0 ) { _q->setPos( Vector2(-11.11169f, -2283.113f ) ); _q->setSize( Vector2( 1037.991f, 1503.489f ) ); }
+							_q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2(-11.11096f, -2285.889f ) ); _q->setSize( Vector2( 1020.161f, 1485.661f ) ); }
+							_q = MyPile->FindQuad( L"Button_Go" ); if (_q != 0 ) { _q->setPos( Vector2(-847.2225f, -902.7777f ) ); _q->setSize( Vector2( 64.55943f, 64.55943f ) ); }
+							_q = MyPile->FindQuad( L"Button_Back" ); if (_q != 0 ) { _q->setPos( Vector2(-344.4443f, -902.7777f ) ); _q->setSize( Vector2( 67.34993f, 67.34993f ) ); }
+							_q = MyPile->FindQuad( L"Button_X" ); if (_q != 0 ) { _q->setPos( Vector2( 133.3335f, -902.7777f ) ); _q->setSize( Vector2( 65.58324f, 65.58324f ) ); }
+							_q = MyPile->FindQuad( L"Button_LR" ); if (_q != 0 ) { _q->setPos( Vector2( 661.1106f, -899.9999f ) ); _q->setSize( Vector2( 79.56668f, 79.56668f ) ); }
+							_q = MyPile->FindQuad( L"Button_LB" ); if (_q != 0 ) { _q->setPos( Vector2( 1091.667f, -1105.555f ) ); _q->setSize( Vector2( 116.8998f, 116.8998f ) ); }
+							_q = MyPile->FindQuad( L"Button_RB" ); if (_q != 0 ) { _q->setPos( Vector2( 1572.222f, -1102.778f ) ); _q->setSize( Vector2( 113.7331f, 113.7331f ) ); }
+							_q = MyPile->FindQuad( L"" ); if (_q != 0 ) { _q->setPos( Vector2( 1277.222f, 774.4444f ) ); _q->setSize( Vector2( 367.9286f, 128.775f ) ); }
+							_q = MyPile->FindQuad( L"" ); if (_q != 0 ) { _q->setPos( Vector2( 1277.222f, 774.4444f ) ); _q->setSize( Vector2( 255.f, 128.775f ) ); }
+
+							MyPile->setPos( Vector2( 11.11108f, 5.622231f ) );
+						}
+					}
+				}
+
+			}
+			else
 
 			// SetPos()
 			if ( Type == ReplayGUIType_COMPUTER )
