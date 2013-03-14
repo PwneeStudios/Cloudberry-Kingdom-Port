@@ -485,6 +485,17 @@ int CoreWiiU::Run()
 
 		game_.Update();
 
+		static int frame_count = 0;
+		frame_count++;
+		if ( frame_count % 60 == 0 )
+		{
+			LOG.Write( "DEMODRCColorBuffer.surface.format = %d\n", DEMODRCColorBuffer.surface.format );
+			LOG.Write( "DEMODRCColorBuffer Size: %d, %d\n", DEMODRCColorBuffer.surface.width, DEMODRCColorBuffer.surface.height );
+			LOG.Write( "DEMODRCColorBuffer Antialising mode %d, %d\n", DEMODRCColorBuffer.surface.aa, DEMODRCColorBuffer.surface.aa );
+			LOG.Write( "DEMODRCColorBuffer Tile mode %d, %d\n\n", DEMODRCColorBuffer.surface.tileMode, DEMODRCColorBuffer.surface.tileMode );
+			LOG.Write( "DEMODRCColorBuffer.surface.imagePtr %d, %d\n\n", DEMODRCColorBuffer.surface.imagePtr, DEMODRCColorBuffer.surface.tileMode );
+		}
+
 		// Restore default render target and draw our frame to it.
 		if( !GLOBAL_VIDEO_OVERRIDE )
 		{
@@ -525,6 +536,11 @@ int CoreWiiU::Run()
 
 			DEMOGfxSetContextState();
 
+			//LOG.Write( "GX2CopySurface formats: %d, %d\n", TheColorBuffer.surface.format, DEMOColorBuffer.surface.format );
+			//LOG.Write( "	TheColorBuffer Size: %d, %d\n", TheColorBuffer.surface.width, TheColorBuffer.surface.height );
+			//LOG.Write( "	DEMOColorBuffer Size: %d, %d\n", DEMOColorBuffer.surface.width, DEMOColorBuffer.surface.height );
+			//LOG.Write( "	Antialising mode %d, %d\n", TheColorBuffer.surface.aa, DEMOColorBuffer.surface.aa );
+			//LOG.Write( "	Tile mode %d, %d\n", TheColorBuffer.surface.tileMode, DEMOColorBuffer.surface.tileMode );
 			GX2CopySurface( &TheColorBuffer.surface, 0, 0, &DEMOColorBuffer.surface, 0, 0 );
 
 			DEMOGfxSetContextState();

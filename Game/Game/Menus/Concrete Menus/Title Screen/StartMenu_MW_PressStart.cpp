@@ -63,6 +63,7 @@ namespace CloudberryKingdom
 		#endif
 		, Resources::Font_Grobold42, true );
 
+		Text->ColorizePics = false;
 		Text->MyFloatColor = ( bColor( 226, 10, 83 ) ).ToVector4();
 		Text->OutlineColor = Color::Black.ToVector4();
 		MyPile->Add( Text );

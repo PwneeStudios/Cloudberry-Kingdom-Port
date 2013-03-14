@@ -132,13 +132,14 @@ namespace CloudberryKingdom
 		EnsureFancy();
 
 
+		// SetPos()
         boost::shared_ptr<MenuItem> _item;
-        _item = MyMenu->FindItemByName( L"Message" ); if (_item != 0 ) { _item->setSetPos( Vector2( 22.55518f, -626.111f ) ); _item->MyText->setScale( 0.8f ); _item->MySelectedText->setScale( 0.8f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+        _item = MyMenu->FindItemByName( L"Message" ); if (_item != 0 ) { _item->setSetPos( Vector2(-2.44482f, -334.4445f ) ); _item->MyText->setScale( 0.8f ); _item->MySelectedText->setScale( 0.8f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 
         MyMenu->setPos( Vector2( 0.f, 0.f ) );
 
         boost::shared_ptr<EzText> _t;
-        _t = MyPile->FindEzText( L"Message" ); if (_t != 0 ) { _t->setPos( Vector2( 0.f, 0.f ) ); _t->setScale( 1.f ); }
+        _t = MyPile->FindEzText( L"Message" ); if (_t != 0 ) { _t->setPos( Vector2(-13.88892f, 375.f ) ); _t->setScale( 1.f ); }
 
         boost::shared_ptr<QuadClass> _q;
         _q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2( 0.f, 0.f ) ); _q->setSize( Vector2( 1500.f, 902.439f ) ); }

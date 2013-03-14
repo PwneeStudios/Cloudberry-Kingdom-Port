@@ -604,6 +604,8 @@ namespace CloudberryKingdom
 			NumJumpsSlider->Selectable &= false;
 			JetPackSlider->Selectable &= false;
 			JetPackFuelSlider->Selectable &= false;
+
+			BaseList->Selectable &= false;
 		}
 
 		// Shape

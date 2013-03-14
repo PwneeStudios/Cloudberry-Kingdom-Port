@@ -207,7 +207,7 @@ SchedulerWiiU::SchedulerWiiU() :
 	const u32 stackSize = 1024 * 1024;
 	internal_->Stack = new char[ stackSize ];
 	BOOL ret = OSCreateThread( &internal_->Threads[ 0 ], ThreadProc, 1, this,
-		internal_->Stack + stackSize, stackSize, 16, OS_THREAD_ATTR_AFFINITY_CORE2 );
+		internal_->Stack + stackSize, stackSize, 16 /*WARNING*/, OS_THREAD_ATTR_AFFINITY_CORE2 );
 	OSSetThreadName( &internal_->Threads[ 0 ], "SchedulerThread" );
 
 	if( !ret )
@@ -273,8 +273,9 @@ void SchedulerWiiU::RunJobASAP( Job *job )
 
 void SchedulerWiiU::CreateResource( ResourceHolder *holder, Resource *resource )
 {
-	RunJob( new ResourceLoaderJob( holder, resource ) );
-	/*resource->Load();
+	//RunJob( new ResourceLoaderJob( holder, resource ) );
+	
+	resource->Load();
 	resource->GpuCreate();
 
 	if( !resource->IsLoaded() )
@@ -286,16 +287,16 @@ void SchedulerWiiU::CreateResource( ResourceHolder *holder, Resource *resource )
 	LOG.Write( "Loaded: %s\n", resource->GetPath().c_str() );
 	holder->SetResource( resource );
 
-	CreateGpuResource( holder, resource );*/
+	CreateGpuResource( holder, resource );
 }
 
 void SchedulerWiiU::CreateGpuResource( ResourceHolder *holder, Resource *resource )
 {
-	OSLockMutex( &internal_->MainThreadJobQueueMutex );
-	internal_->MainThreadJobQueue.push_back( new ResourceCreatorJob( holder, resource ) );
-	OSUnlockMutex( &internal_->MainThreadJobQueueMutex );
-	/*resource->GpuCreate();
-	holder->SetResource( resource );*/
+	//OSLockMutex( &internal_->MainThreadJobQueueMutex );
+	//internal_->MainThreadJobQueue.push_back( new ResourceCreatorJob( holder, resource ) );
+	//OSUnlockMutex( &internal_->MainThreadJobQueueMutex );
+	resource->GpuCreate();
+	holder->SetResource( resource );
 }
 
 void SchedulerWiiU::WorkerThread()

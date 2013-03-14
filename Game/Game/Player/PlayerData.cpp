@@ -204,7 +204,7 @@ namespace CloudberryKingdom
 
         int PlayerData::GetTotalLevel()
         {
-            return GetTotalArcadeLevel() + GetTotalCampaignLevel();
+            return GetTotalArcadeLevel() + GetTotalCampaignLevel() + 1;
         }
 
         int PlayerData::GetTotalCampaignLevel()

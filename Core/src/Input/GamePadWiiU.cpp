@@ -121,9 +121,10 @@ void GamePad::Update()
 
 			PAD_STATE[ i ].Buttons.A = ( kpadStatus[ i ].hold & KPAD_BUTTON_2 ) ? ButtonState_Pressed : ButtonState_Released;
 			PAD_STATE[ i ].Buttons.B = ( kpadStatus[ i ].hold & KPAD_BUTTON_1 ) ? ButtonState_Pressed : ButtonState_Released;
-			PAD_STATE[ i ].Buttons.X = ( kpadStatus[ i ].hold & KPAD_BUTTON_B ) ? ButtonState_Pressed : ButtonState_Released;
-			PAD_STATE[ i ].Buttons.Y = ( kpadStatus[ i ].hold & KPAD_BUTTON_A
-										|| kpadStatus[ i ].hold & KPAD_BUTTON_MINUS ) ? ButtonState_Pressed : ButtonState_Released;
+			PAD_STATE[ i ].Buttons.X = ( kpadStatus[ i ].hold & KPAD_BUTTON_A ) ? ButtonState_Pressed : ButtonState_Released;
+			PAD_STATE[ i ].Buttons.Y = ( 
+										//kpadStatus[ i ].hold & KPAD_BUTTON_A ||
+										kpadStatus[ i ].hold & KPAD_BUTTON_MINUS ) ? ButtonState_Pressed : ButtonState_Released;
 
 			PAD_STATE[ i ].Buttons.Start = ( kpadStatus[ i ].hold & KPAD_BUTTON_PLUS ) ? ButtonState_Pressed : ButtonState_Released;
 

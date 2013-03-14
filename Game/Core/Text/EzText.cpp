@@ -50,7 +50,7 @@ namespace CloudberryKingdom
     bool ButtonTexture::UseGamepad = true;
     boost::shared_ptr<EzTexture> ButtonTexture::_Go() { return Tools::Texture( std::wstring( UseGamepad ? L"WiiU_A" : L"WiiU_2" ) ); }
     boost::shared_ptr<EzTexture> ButtonTexture::_Back() { return Tools::Texture( std::wstring( UseGamepad ? L"WiiU_B" : L"WiiU_1" ) ); }
-    boost::shared_ptr<EzTexture> ButtonTexture::getX() { return Tools::Texture( std::wstring( UseGamepad ? L"WiiU_Y" : L"WiiU_1" ) ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::getX() { return Tools::Texture( std::wstring( UseGamepad ? L"WiiU_Y" : L"WiiU_A" ) ); }
     boost::shared_ptr<EzTexture> ButtonTexture::getY() { return Tools::Texture( std::wstring( UseGamepad ? L"WiiU_X" : L"WiiU_Dash" ) ); }
     boost::shared_ptr<EzTexture> ButtonTexture::getLeftRight() { return Tools::Texture( std::wstring( UseGamepad ? L"WiiU_Dir" : L"WiiU_DPad" ) ); }
     boost::shared_ptr<EzTexture> ButtonTexture::getLeftBumper() { return Tools::Texture( std::wstring( UseGamepad ? L"WiiU_L" : L"WiiU_L" ) ); }
@@ -1090,6 +1090,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 				// This conditional is a hack to avoid drawing any picture shadows =o
 				//if ( static_cast<int>( piccolor.R ) > 100 )
 				{
+					if( DrawingShadow ) piccolor.R = static_cast<unsigned char>( 23 ); // Hack. Signals to use NoTexture shader
 					Tools::QDrawer->DrawPic( pos, pos2, ( *pic )->tex, piccolor );
 				}
 			}

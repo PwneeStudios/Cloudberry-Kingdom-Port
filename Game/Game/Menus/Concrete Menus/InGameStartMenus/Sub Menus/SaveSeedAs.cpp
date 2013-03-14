@@ -80,17 +80,26 @@ namespace CloudberryKingdom
 		MyPile->Add( HeaderText );
 
 		// Save seed
-		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_SaveSeed, ItemFont ) ) );
-		item->Name = std::wstring( L"Save" );
-		item->setGo( boost::make_shared<SaveProxy>( boost::static_pointer_cast<SaveSeedAs>( shared_from_this() ) ) );
-		AddItem( item );
+		//item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_SaveSeed, ItemFont ) ) );
+		//item->Name = std::wstring( L"Save" );
+		//item->setGo( boost::make_shared<SaveProxy>( boost::static_pointer_cast<SaveSeedAs>( shared_from_this() ) ) );
+		//AddItem( item );
 
-#ifdef PC_VERSION
-            MakeBackButton();
-#else
-            MakeBackButton();
-            //MakeStaticBackButton();
-#endif
+		// Console version: Start to save
+		MyPile->Add( boost::make_shared<EzText>( Localization::Words_PressStart, ItemFont ), std::wstring( L"Start" ) );
+
+        MyPile->Add( boost::make_shared<EzText>( Localization::Words_Delete, ItemFont ), std::wstring( L"Delete" ) );
+		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getX(), 90.0f, std::wstring( L"Button_X" ) ) );
+
+		MyPile->Add( boost::make_shared<EzText>( Localization::Words_Back, ItemFont ), std::wstring( L"Back" ) );
+		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getBack(), 90.0f, std::wstring( L"Button_B" ) ) );
+
+//#ifdef PC_VERSION
+//            MakeBackButton();
+//#else
+//            MakeBackButton();
+//            //MakeStaticBackButton();
+//#endif
 
 		MyMenu->OnX = MyMenu->OnB = boost::make_shared<MenuReturnToCallerLambdaFunc>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
@@ -157,30 +166,21 @@ namespace CloudberryKingdom
 
 	void SaveSeedAs::SetPosition()
 	{
-		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( std::wstring( L"Save" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( 1269.445f, 161 ) );
-		}
-		_item = MyMenu->FindItemByName( std::wstring( L"Back" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( 1338.89f, -52.8888f ) );
-		}
+			MyMenu->setPos( Vector2(-1125.001f, -319.4444f ) );
 
-		MyMenu->setPos( Vector2( -1125.001f, -319.4444f ) );
+			boost::shared_ptr<EzText> _t;
+			_t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->setPos( Vector2( 558.3326f, 913.5556f ) ); _t->setScale( 0.8019168f ); }
+			_t = MyPile->FindEzText( L"Start" ); if (_t != 0 ) { _t->setPos( Vector2( 705.5557f, -125.f ) ); _t->setScale( 0.6350001f ); }
+			_t = MyPile->FindEzText( L"Delete" ); if (_t != 0 ) { _t->setPos( Vector2( 2080.556f, 102.7779f ) ); _t->setScale( 0.4135835f ); }
+			_t = MyPile->FindEzText( L"Back" ); if (_t != 0 ) { _t->setPos( Vector2( 2080.554f, -0.0f ) ); _t->setScale( 0.4390834f ); }
 
-		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( std::wstring( L"Backdrop" ) );
-		if ( _q != 0 )
-		{
-			_q->setPos( Vector2( 1175.696f, 233.3334f ) );
-			_q->setSize( Vector2( 1500, 803.2258f ) );
-		}
-		MyPile->FindEzText( std::wstring( L"Header" ) )->setPos( Vector2( 61.11098f, 821.8887f ) );
+			boost::shared_ptr<QuadClass> _q;
+			_q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2( 1175.696f, 233.3334f ) ); _q->setSize( Vector2( 1500.f, 803.2258f ) ); }
+			_q = MyPile->FindQuad( L"Button_X" ); if (_q != 0 ) { _q->setPos( Vector2( 2033.333f, 27.77777f ) ); _q->setSize( Vector2( 46.08334f, 46.08334f ) ); }
+			_q = MyPile->FindQuad( L"Button_B" ); if (_q != 0 ) { _q->setPos( Vector2( 2033.333f, -83.33337f ) ); _q->setSize( Vector2( 45.91659f, 45.91659f ) ); }
 
-		MyPile->setPos( Vector2( -1125.001f, -319.4444f ) );
+			//MyPile->setPos( Vector2(-1125.001f, -319.4444f ) );
+			MyPile->setPos( Vector2(-1175.001f, -220.0f ) );
 	}
 
 	void SaveSeedAs::OnAdd()
@@ -195,6 +195,9 @@ namespace CloudberryKingdom
 		TextBox->OnEnter->Add( boost::make_shared<SaveSeedAsOnEnterLambda>( boost::static_pointer_cast<SaveSeedAs>( shared_from_this() ) ) );
 		TextBox->OnEscape->Add( boost::make_shared<SaveSeedAsOnEscapeLambda>( boost::static_pointer_cast<SaveSeedAs>( shared_from_this() ) ) );
 		MyGame->AddGameObject( TextBox );
+
+		TextBox->MyText->OutlineColor = ColorHelper::Gray( 0.1f );
+		StartMenu::SetTextSelected_Red( TextBox->MyText );
 
 		MyMenu->Active = false;
 

@@ -872,10 +872,14 @@ namespace CloudberryKingdom
 
             CurrentTexture = texture;
 
-			if ( static_cast<int>( color.R ) > 100 )
-				CurrentEffect = Tools::BasicEffect;
-			else
+			if ( static_cast<int>( color.R ) == 23 ) // Hack. Signals to use NoTexture shader
+			{
+				color.R = color.G;
 				CurrentEffect = Tools::NoTexture;
+			}
+			else
+				CurrentEffect = Tools::BasicEffect;
+
 
 			QUAD_DRAWER->SetEffect( CurrentEffect->effect );
 

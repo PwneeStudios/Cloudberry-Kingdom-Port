@@ -278,46 +278,22 @@ namespace CloudberryKingdom
 			MyPile->setPos( Vector2( -1125.001f, -319.4444f ) );
 		}
 	#else
-		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( std::wstring( L"Save" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( 686.1115f, 633.2222f ) );
-		}
-		_item = MyMenu->FindItemByName( std::wstring( L"Load" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( 694.4447f, 441.5555f ) );
-		}
-		_item = MyMenu->FindItemByName( std::wstring( L"Copy" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( 672.2223f, 222.1111f ) );
-		}
-		_item = MyMenu->FindItemByName( std::wstring( L"LoadString" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( 672.2225f, 27.66663f ) );
-		}
-		_item = MyMenu->FindItemByName( std::wstring( L"Back" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( 727.7777f, -163.9999f ) );
-		}
+			boost::shared_ptr<MenuItem> _item;
+			_item = MyMenu->FindItemByName( L"Save" ); if (_item != 0 ) { _item->setSetPos( Vector2( 741.6669f, 547.111f ) ); _item->MyText->setScale( 0.7334167f ); _item->MySelectedText->setScale( 0.7334167f ); _item->SelectIconOffset = Vector2( 0.f, 0.f );  }
+			_item = MyMenu->FindItemByName( L"Load" ); if (_item != 0 ) { _item->setSetPos( Vector2( 750.0004f, 330.4444f ) ); _item->MyText->setScale( 0.72f ); _item->MySelectedText->setScale( 0.72f ); _item->SelectIconOffset = Vector2( 0.f, 0.f );  }
+			_item = MyMenu->FindItemByName( L"Copy" ); if (_item != 0 ) { _item->setSetPos( Vector2( 3044.444f, -1480.667f ) ); _item->MyText->setScale( 0.72f ); _item->MySelectedText->setScale( 0.72f ); _item->SelectIconOffset = Vector2( 0.f, 0.f );  }
+			_item = MyMenu->FindItemByName( L"LoadString" ); if (_item != 0 ) { _item->setSetPos( Vector2( 1527.778f, -1983.444f ) ); _item->MyText->setScale( 0.72f ); _item->MySelectedText->setScale( 0.72f ); _item->SelectIconOffset = Vector2( 0.f, 0.f );  }
+			_item = MyMenu->FindItemByName( L"Back" ); if (_item != 0 ) { _item->setSetPos( Vector2( 758.3339f, 8.222351f ) ); _item->MyText->setScale( 0.72f ); _item->MySelectedText->setScale( 0.72f ); _item->SelectIconOffset = Vector2( 0.f, 0.f );  }
 
-		MyMenu->setPos( Vector2( -1125.001f, -319.4444f ) );
+			MyMenu->setPos( Vector2(-1125.001f, -319.4444f ) );
 
-		MyPile->FindEzText( std::wstring( L"Header" ) )->setPos( Vector2( 402.7776f, 871.8887f ) );
+			boost::shared_ptr<EzText> _t;
+			_t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->setPos( Vector2( 658.333f, 905.222f ) ); _t->setScale( 0.864f ); }
 
-		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( std::wstring( L"Backdrop" ) );
-		if ( _q != 0 )
-		{
-			_q->setPos( Vector2( 1181.251f, 241.6668f ) );
-			_q->setSize( Vector2( 1500, 803.2258f ) );
-		}
+			boost::shared_ptr<QuadClass> _q;
+			_q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2( 1181.251f, 313.889f ) ); _q->setSize( Vector2( 1089.917f, 752.6426f ) ); }
 
-		MyPile->setPos( Vector2( -1125.001f, -319.4444f ) );
+			MyPile->setPos( Vector2(-1127.779f, -322.2222f ) );
 	#endif
 	}
 

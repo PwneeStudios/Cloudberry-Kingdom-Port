@@ -1394,7 +1394,19 @@ float CloudberryKingdomGame::fps = 0;
 
 
 
+	void DrawWatermark()
+	{
+		if (Tools::QDrawer == 0) return;
+		if (Resources::Font_Grobold42 == 0) return;
+		if (Resources::Font_Grobold42->HFont == 0) return;
+		if (Resources::Font_Grobold42->HOutlineFont == 0) return;
 
+		boost::shared_ptr<Camera> cam = boost::make_shared<Camera>();
+		cam->SetVertexCamera();
+		Tools::QDrawer->DrawString( Resources::Font_Grobold42->HOutlineFont, L"Version 0.9.0", Vector2(1200, 870), Color::Black.ToVector4(), Vector2(.8f));
+		Tools::QDrawer->DrawString( Resources::Font_Grobold42->HFont, L"Version 0.9.0", Vector2(1200, 870), Color::SkyBlue.ToVector4(), Vector2(.8f));
+		Tools::QDrawer->Flush();
+	}
 
 
 
@@ -1412,28 +1424,40 @@ float CloudberryKingdomGame::fps = 0;
 #ifdef CAFE
 		// Main Video
 		if ( MainVideo::Draw() )
+		{
+			DrawWatermark();
 			return;
+		}
 
 		// Prepare to draw
 		Tools::DrawCount++;
 		if ( SetupToRender() )
+		{
+			DrawWatermark();
 			return;
+		}
 #else
 		// Prepare to draw
 		Tools::DrawCount++;
 		if ( SetupToRender() )
+		{
+			DrawWatermark();
 			return;
+		}
 
 		// Main Video
 		if ( MainVideo::Draw() )
+		{
+			DrawWatermark();
 			return;
+		}
 #endif
 		// Fps
 		UpdateFps( gameTime );
 
 		// Draw nothing if Xbox guide is up
 #if defined(XBOX) || defined(XBOX_SIGNIN)
-			if (Guide.IsVisible) { DrawNothing(); return; }
+			if (Guide.IsVisible) { DrawNothing(); DrawWatermark(); return; }
             if (ShowKeyboard)
             {
                 SaveLoadSeedMenu.BeginShowKeyboard();
@@ -1502,6 +1526,8 @@ float CloudberryKingdomGame::fps = 0;
 			DrawNothing();
 
 		DrawExtra();
+
+		DrawWatermark();
 	}
 
 	void CloudberryKingdomGame::DrawExtra()

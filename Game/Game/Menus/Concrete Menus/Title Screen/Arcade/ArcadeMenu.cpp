@@ -305,24 +305,17 @@ namespace CloudberryKingdom
                         ( *player )->AddHighScore( boost::make_shared<ScoreEntry>( ( *player )->GetName(), Challenge::CurrentId - Challenge::LevelMask, Challenge::CurrentScore, Challenge::CurrentScore, level + 1, 0, 0, 0));
                     }
 
-					bool contains = false;
 					int Goal = 0;
 					for ( int i = 0; i < static_cast<int>( ChallengeGoal.size() ); i++ )
 					{
 						if ( ChallengeGoal[ i ].first == Challenge::CurrentId )
 						{
-							contains = true;
 							Goal = ChallengeGoal[ i ].second;
-						}
-					}
-					//if (ChallengeGoal.ContainsKey(Challenge.CurrentId))
-					if ( contains )					
-					{
-						//int Goal = ChallengeGoal[Challenge::CurrentId];
 
-						if (level + 1 >= Goal && CurHighLevel < Goal)
-						{
-							DoSave = true;
+							if (level + 1 >= Goal && CurHighLevel < Goal)
+							{
+								DoSave = true;
+							}
 						}
 					}
                 }

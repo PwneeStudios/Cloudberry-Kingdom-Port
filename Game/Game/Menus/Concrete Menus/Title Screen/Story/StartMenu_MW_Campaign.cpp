@@ -515,7 +515,31 @@ else
 
     void StartMenu_MW_Campaign::SetPos_WithCinematic()
         {
-if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_PORTUGUESE )
+if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_KOREAN )
+{
+	boost::shared_ptr<MenuItem> _item;
+	_item = MyMenu->FindItemByName( L"Continue" ); if (_item != 0 ) { _item->setSetPos( Vector2( 759.4447f, 260.0001f ) ); _item->MyText->setScale( 0.678417f ); _item->MySelectedText->setScale( 0.678417f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+	_item = MyMenu->FindItemByName( L"Chapter1" ); if (_item != 0 ) { _item->setSetPos( Vector2( 759.4447f, 97.22227f ) ); _item->MyText->setScale( 0.7379997f ); _item->MySelectedText->setScale( 0.7379997f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+	_item = MyMenu->FindItemByName( L"Chapter2" ); if (_item != 0 ) { _item->setSetPos( Vector2( 759.4447f, -65.55551f ) ); _item->MyText->setScale( 0.7379997f ); _item->MySelectedText->setScale( 0.7379997f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+	_item = MyMenu->FindItemByName( L"Chapter3" ); if (_item != 0 ) { _item->setSetPos( Vector2( 759.4447f, -228.3333f ) ); _item->MyText->setScale( 0.7379997f ); _item->MySelectedText->setScale( 0.7379997f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+	_item = MyMenu->FindItemByName( L"Chapter4" ); if (_item != 0 ) { _item->setSetPos( Vector2( 759.4447f, -391.1111f ) ); _item->MyText->setScale( 0.7379997f ); _item->MySelectedText->setScale( 0.7379997f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+	_item = MyMenu->FindItemByName( L"Chapter5" ); if (_item != 0 ) { _item->setSetPos( Vector2( 759.4447f, -553.889f ) ); _item->MyText->setScale( 0.7379997f ); _item->MySelectedText->setScale( 0.7379997f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+	_item = MyMenu->FindItemByName( L"Chapter6" ); if (_item != 0 ) { _item->setSetPos( Vector2( 759.4447f, -716.6667f ) ); _item->MyText->setScale( 0.7379997f ); _item->MySelectedText->setScale( 0.7379997f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+	_item = MyMenu->FindItemByName( L"Chapter7" ); if (_item != 0 ) { _item->setSetPos( Vector2( 759.4447f, -879.4445f ) ); _item->MyText->setScale( 0.7379997f ); _item->MySelectedText->setScale( 0.7379997f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+
+	MyMenu->setPos( Vector2(-675.0004f, 213.889f ) );
+
+	boost::shared_ptr<EzText> _t;
+	_t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->setPos( Vector2(-800.0029f, 863.8889f ) ); _t->setScale( 1.3f ); }
+	_t = MyPile->FindEzText( L"Level" ); if (_t != 0 ) { _t->setPos( Vector2(-1241.667f, -577.7778f ) ); _t->setScale( 0.7490832f ); }
+	_t = MyPile->FindEzText( L"LevelNum" ); if (_t != 0 ) { _t->setPos( Vector2(-798.8153f, -529.7655f ) ); _t->setScale( 0.9310196f ); }
+
+	boost::shared_ptr<QuadClass> _q;
+	_q = MyPile->FindQuad( L"BoxLeft" ); if (_q != 0 ) { _q->setPos( Vector2(-755.5557f, -702.7777f ) ); _q->setSize( Vector2( 172.6158f, 503.8864f ) ); }
+
+	MyPile->setPos( Vector2( 0.f, 0.f ) );
+}
+else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_PORTUGUESE )
 {
 			boost::shared_ptr<MenuItem> _item;
 			_item = MyMenu->FindItemByName( L"Continue" ); if (_item != 0 ) { _item->setSetPos( Vector2( 726.1112f, 262.7778f ) ); _item->MyText->setScale( 0.6477503f ); _item->MySelectedText->setScale( 0.6477503f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
@@ -608,6 +632,30 @@ else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_SP
 
 			boost::shared_ptr<QuadClass> _q;
 			_q = MyPile->FindQuad( L"BoxLeft" ); if (_q != 0 ) { _q->setPos( Vector2(-795.2476f, -698.8085f ) ); _q->setSize( Vector2( 174.1638f, 583.3118f ) ); }
+
+			MyPile->setPos( Vector2( 0.f, 0.f ) );
+}
+else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_RUSSIAN )
+{
+			boost::shared_ptr<MenuItem> _item;
+			_item = MyMenu->FindItemByName( L"Continue" ); if (_item != 0 ) { _item->setSetPos( Vector2( 726.1112f, 262.7778f ) ); _item->MyText->setScale( 0.6477503f ); _item->MySelectedText->setScale( 0.6477503f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+			_item = MyMenu->FindItemByName( L"Chapter1" ); if (_item != 0 ) { _item->setSetPos( Vector2( 740.f, 58.33334f ) ); _item->MyText->setScale( 0.5883336f ); _item->MySelectedText->setScale( 0.5883336f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+			_item = MyMenu->FindItemByName( L"Chapter2" ); if (_item != 0 ) { _item->setSetPos( Vector2( 740.f, -92.00005f ) ); _item->MyText->setScale( 0.5883336f ); _item->MySelectedText->setScale( 0.5883336f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+			_item = MyMenu->FindItemByName( L"Chapter3" ); if (_item != 0 ) { _item->setSetPos( Vector2( 742.7776f, -247.8891f ) ); _item->MyText->setScale( 0.5883336f ); _item->MySelectedText->setScale( 0.5883336f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+			_item = MyMenu->FindItemByName( L"Chapter4" ); if (_item != 0 ) { _item->setSetPos( Vector2( 745.5554f, -400.9998f ) ); _item->MyText->setScale( 0.5883336f ); _item->MySelectedText->setScale( 0.5883336f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+			_item = MyMenu->FindItemByName( L"Chapter5" ); if (_item != 0 ) { _item->setSetPos( Vector2( 740.f, -548.5557f ) ); _item->MyText->setScale( 0.5883336f ); _item->MySelectedText->setScale( 0.5883336f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+			_item = MyMenu->FindItemByName( L"Chapter6" ); if (_item != 0 ) { _item->setSetPos( Vector2( 750.3334f, -700.3333f ) ); _item->MyText->setScale( 0.5883336f ); _item->MySelectedText->setScale( 0.5883336f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+			_item = MyMenu->FindItemByName( L"Chapter7" ); if (_item != 0 ) { _item->setSetPos( Vector2( 750.3334f, -850.6672f ) ); _item->MyText->setScale( 0.5883336f ); _item->MySelectedText->setScale( 0.5883336f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+
+			MyMenu->setPos( Vector2(-708.3339f, 216.6667f ) );
+
+			boost::shared_ptr<EzText> _t;
+			_t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->setPos( Vector2(-800.0029f, 863.8889f ) ); _t->setScale( 1.3f ); }
+			_t = MyPile->FindEzText( L"Level" ); if (_t != 0 ) { _t->setPos( Vector2(-1261.111f, -594.4445f ) ); _t->setScale( 0.6298336f ); }
+			_t = MyPile->FindEzText( L"LevelNum" ); if (_t != 0 ) { _t->setPos( Vector2(-704.3712f, -551.9877f ) ); _t->setScale( 0.7738534f ); }
+
+			boost::shared_ptr<QuadClass> _q;
+			_q = MyPile->FindQuad( L"BoxLeft" ); if (_q != 0 ) { _q->setPos( Vector2(-763.8892f, -702.7777f ) ); _q->setSize( Vector2( 165.1158f, 494.5531f ) ); }
 
 			MyPile->setPos( Vector2( 0.f, 0.f ) );
 }

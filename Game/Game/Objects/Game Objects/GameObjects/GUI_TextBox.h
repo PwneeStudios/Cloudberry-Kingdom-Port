@@ -35,6 +35,8 @@ namespace CloudberryKingdom
 
 		void ReleaseFocus();
 
+		void PosCaret();
+		void ScaleTextToFit();
 	
 		virtual void MyPhsxStep();
 

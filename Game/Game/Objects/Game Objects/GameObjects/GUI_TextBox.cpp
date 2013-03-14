@@ -81,6 +81,39 @@ namespace CloudberryKingdom
 	#endif
 	}
 
+		void GUI_TextBox::PosCaret()
+		{
+			// Position the caret at the end of the text
+			std::wstring hold = getText();
+			std::wstring _s = getText().substr(0, __max( 0, getText().size() - 1) );
+			//string _s = Text;
+			MyText->SubstituteText( _s );
+			float width = MyText->GetWorldWidth();
+			MyText->SubstituteText( hold );
+
+			Caret->setScale( MyText->getScale() * 1.105f );
+			if ( _s.size() == 0 )
+				Caret->setX( MyText->getPos().X + 15.5f );
+			else
+				Caret->setX( MyText->getPos().X + width - 130 * Caret->getScale() );
+			Caret->setY( MyText->getPos().Y + 7 * Caret->getScale() );
+
+			// If we're selecting move the caret one character to the left
+			//if (SelectIndex_End - SelectIndex_Start > 0)
+			//    Caret.X -= MyText.GetWorldWidth(" ");
+		}
+
+		void GUI_TextBox::ScaleTextToFit()
+		{
+			MyText->setScale( .8f );
+			float w = MyText->GetWorldWidth();
+			float MaxWidth = 2400.0f;
+			if (w > MaxWidth)
+			{
+				MyText->setScale( MyText->getScale() * MaxWidth / w );
+			}
+		}
+
 	void GUI_TextBox::MyPhsxStep()
 	{
 		int static DownCount = 0;
@@ -89,20 +122,18 @@ namespace CloudberryKingdom
 
 		GUI_Text::MyPhsxStep();
 
-		if ( !Active )
-		{
-			DownCount = 0;
-			LastPress.clear();
-			return;
-		}
+        if (!Active) return;
 
-		MyText->setScale( .8f);
-		float w = MyText->GetWorldWidth();
-		float MaxWidth = 2400.0f;
-		if ( w > MaxWidth )
-		{
-			MyText->setScale( MyText->getScale() * MaxWidth / w);
-		}
+		//if ( !Active )
+		//{
+		//	DownCount = 0;
+		//	LastPress.clear();
+		//	return;
+		//}
+
+		ScaleTextToFit();
+
+		PosCaret();
 
 		// Decide if we should draw the caret
 		if ( HasFocus )
@@ -126,7 +157,7 @@ namespace CloudberryKingdom
 					DownCount > RepeatKeyOnceDelay && (DownCount - RepeatKeyOnceDelay) % RepeatKeyMultipleDelay == 0 ||
 					LastPress.size() > 0 && keys.size() > 0 && LastPress[0] != keys[0] )
 				{				
-					DeleteSelected();
+					//DeleteSelected();
 
 					for ( std::vector<Keys>::const_iterator itr = keys.begin(); itr != keys.end(); ++itr )
 					{
@@ -357,7 +388,7 @@ namespace CloudberryKingdom
 		Backdrop->setTextureName( std::wstring( L"score_screen" ) );
 		Backdrop->setSize( Vector2( 640.4763f, 138.0953f ) * scale );
 
-		MyText->setPos( Vector2( -522.2222f, 23.80954f ) * scale );
+		MyText->setPos( Vector2( -522.2222f + 40, 23.80954f ) * scale );
 		//MyPile.Insert(0, Backdrop);
 
 		// Caret
@@ -416,12 +447,15 @@ namespace CloudberryKingdom
 
 	void GUI_TextBox::UpdateSelectQuad()
 	{
-		float width = MyText->GetWorldWidth( getText().substr(SelectIndex_Start, SelectIndex_End - SelectIndex_Start) );
+		//float width = MyText->GetWorldWidth( getText().substr(SelectIndex_Start, SelectIndex_End - SelectIndex_Start) );
+		float width = 2438;
 		float pos = MyText->GetWorldWidth( getText().substr(0, SelectIndex_Start) );
 
-		SelectQuad->setSize( Vector2( width / 2, SelectQuad->getSize().Y ) );
+		SelectQuad->setSize( Vector2( width / 2 + 50, SelectQuad->getSize().Y + 30 ) );
 		SelectQuad->setLeft( MyText->getPos().X + pos );
-		SelectQuad->setPos( MyText->getPos() + Vector2( MyText->GetWorldWidth() / 2, -MyText->GetWorldHeight() / 4 ) );
+		//SelectQuad->setPos( MyText->getPos() + Vector2( MyText->GetWorldWidth() / 2 + 50, -MyText->GetWorldHeight() / 4 ) );
+		/*SelectQuad->setPos( Vector2( 377.0f, -MyText->GetWorldHeight() / 4 ) );*/
+		SelectQuad->setPos( Vector2( 344.0f, -MyText->GetWorldHeight() / 4 ) );
 	}
 
 	boost::shared_ptr<EzText> GUI_TextBox::MakeText( std::wstring text, bool centered, const boost::shared_ptr<EzFont> &font )
@@ -454,26 +488,22 @@ namespace CloudberryKingdom
 
 	void GUI_TextBox::Recenter()
 	{
-            // Position the caret at the end of the text
-			float width = MyText->GetWorldWidth();
-			if (width == 0) width = 90;
-            Caret->setX( MyText->getPos().X + width - 120 );
-			Caret->setY( MyText->getPos().Y + 5 );
-
-		// If we're selecting move the caret one character to the left
-		if ( SelectIndex_End - SelectIndex_Start > 0 )
-			Caret->setX( Caret->getX() - MyText->GetWorldWidth(std::wstring( L" " )) );
-
 		if ( DoRecenter )
 			MyText->setPos( Vector2( -MyText->GetWorldWidth() / 2, 0 ) );
+
+		if ( MyText != 0 && MyText->Bits.size() > 0 && MyText->Bits[ 0 ] != 0 )
+			MyText->Bits[ 0 ]->loc.X = 0;
+
+		ScaleTextToFit();
+		PosCaret();
 	}
 
 	void GUI_TextBox::Backspace()
 	{
 		// If we're selecting delete the selection
-		if ( SelectIndex_End - SelectIndex_Start > 0 )
-			DeleteSelected();
-		else
+		//if ( SelectIndex_End - SelectIndex_Start > 0 )
+		//	DeleteSelected();
+		//else
 		{
 			// Otherwise delete one character
 			if ( getLength() == 1 )

@@ -32,6 +32,8 @@ namespace CloudberryKingdom
 	{
 		GameTypeId = 1;
 		MenuName = Name = Localization::Words_TimeCrisis;
+
+		SetGameId();
 	}
 
 	boost::shared_ptr<BobPhsx> Challenge_TimeCrisis::GetHero( int i )

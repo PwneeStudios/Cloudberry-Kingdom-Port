@@ -125,6 +125,8 @@ namespace CloudberryKingdom
 		InitializeInstanceFields();
 		GameTypeId = 0;
 		MenuName = Name = Localization::Words_Escalation;
+
+		SetGameId();
 	}
 
 	void Challenge_Escalation::Start( int StartLevel )

@@ -165,7 +165,7 @@ namespace CloudberryKingdom
 
 
 #ifdef CAFE
-			if ( ButtonTexture::UseGamepad )
+			if ( !ButtonTexture::UseGamepad )
 #else
 			if ( false )
 #endif

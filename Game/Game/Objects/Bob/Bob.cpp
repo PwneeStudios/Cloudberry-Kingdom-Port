@@ -918,13 +918,8 @@ namespace CloudberryKingdom
 
 		if ( pad.IsConnected )
 		{
-#ifdef CAFE
-			if ( !CloudberryKingdomGame::AsianButtonSwitch && pad.Buttons.B == ButtonState_Pressed ||
-				  CloudberryKingdomGame::AsianButtonSwitch && pad.Buttons.A == ButtonState_Pressed )
-#else
 			if ( !CloudberryKingdomGame::AsianButtonSwitch && pad.Buttons.A == ButtonState_Pressed ||
 				  CloudberryKingdomGame::AsianButtonSwitch && pad.Buttons.B == ButtonState_Pressed )
-#endif
 			{
 				CurInput.A_Button = true;
 			}
