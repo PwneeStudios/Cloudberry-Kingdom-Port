@@ -2015,7 +2015,7 @@ void VideoPlayer::Play( const boost::shared_ptr< Video > &video )
                     ThreadStack[0] + STACK_SIZE,    // initial stack address
                     STACK_SIZE,                     // stack size
                     16,                             // scheduling priority
-                    0);         // detached
+                    OS_THREAD_ATTR_DETACH);         // detached
 
     // Create the audio thread.
     ret = OSCreateThread( &Thread[1],   // ptr to the thread to init
@@ -2025,7 +2025,7 @@ void VideoPlayer::Play( const boost::shared_ptr< Video > &video )
                     ThreadStack[1] + STACK_SIZE,    // initial stack address
                     STACK_SIZE,                     // stack size
                     16,                             // scheduling priority
-                    0);         // detached
+                    OS_THREAD_ATTR_DETACH);         // detached
 
 
 	GLOBAL_VIDEO_OVERRIDE = true;
