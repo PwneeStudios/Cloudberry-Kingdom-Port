@@ -124,5 +124,9 @@ bool IsSystemMenuVisible()
 
 bool IsAspect4by3()
 {
-	return false;
+	CellVideoOutState videoOutState;
+	if( cellVideoOutGetState( CELL_VIDEO_OUT_PRIMARY, 0, &videoOutState ) < 0 )
+		return false;
+
+	return videoOutState.displayMode.aspect == CELL_VIDEO_OUT_ASPECT_4_3;
 }
