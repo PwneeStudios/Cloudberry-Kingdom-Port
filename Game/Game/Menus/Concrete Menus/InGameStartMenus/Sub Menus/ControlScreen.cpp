@@ -111,10 +111,11 @@ namespace CloudberryKingdom
         text->MyFloatColor = ColorHelper::Gray(.955f);
 		bool center = false;
 
+#ifndef CAFE
         text = boost::make_shared<EzText>(Localization::Words_QuickSpawn, Resources::Font_Grobold42, center);
         MyPile->Add(text, L"quickspawn");
         text->MyFloatColor = ColorHelper::Gray(.955f);
-
+#endif
         text = boost::make_shared<EzText>(Localization::Words_Jump, Resources::Font_Grobold42, center);
         MyPile->Add(text, L"jump");
         text->MyFloatColor = ColorHelper::Gray(.955f);
@@ -149,11 +150,12 @@ namespace CloudberryKingdom
         q = boost::make_shared<QuadClass>(ButtonTexture::getY() ); q->ScaleXToMatchRatio(130);
         MyPile->Add(q, L"y");
 
+#ifndef CAFE
         q = boost::make_shared<QuadClass>(ButtonTexture::getLeftBumper() ); q->ScaleXToMatchRatio(130);
         MyPile->Add(q, L"lb");
         q = boost::make_shared<QuadClass>(ButtonTexture::getRightBumper() ); q->ScaleXToMatchRatio(130);
         MyPile->Add(q, L"rb");
-
+#endif
 
         q = boost::make_shared<QuadClass>(ButtonTexture::getGo() ); q->ScaleXToMatchRatio(130);
         MyPile->Add(q, L"jump");

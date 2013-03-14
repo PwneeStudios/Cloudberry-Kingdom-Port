@@ -52,7 +52,7 @@ namespace CloudberryKingdom
     boost::shared_ptr<EzTexture> ButtonTexture::_Back() { return Tools::Texture( std::wstring( UseGamepad ? L"WiiU_B" : L"WiiU_1" ) ); }
     boost::shared_ptr<EzTexture> ButtonTexture::getX() { return Tools::Texture( std::wstring( UseGamepad ? L"WiiU_Y" : L"WiiU_1" ) ); }
     boost::shared_ptr<EzTexture> ButtonTexture::getY() { return Tools::Texture( std::wstring( UseGamepad ? L"WiiU_X" : L"WiiU_Dash" ) ); }
-    boost::shared_ptr<EzTexture> ButtonTexture::getLeftRight() { return Tools::Texture( std::wstring( UseGamepad ? L"WiiU_Dir" : L"WiiU_Dir" ) ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::getLeftRight() { return Tools::Texture( std::wstring( UseGamepad ? L"WiiU_Dir" : L"WiiU_DPad" ) ); }
     boost::shared_ptr<EzTexture> ButtonTexture::getLeftBumper() { return Tools::Texture( std::wstring( UseGamepad ? L"WiiU_L" : L"WiiU_L" ) ); }
     boost::shared_ptr<EzTexture> ButtonTexture::getRightBumper() { return Tools::Texture( std::wstring( UseGamepad ? L"WiiU_R" : L"WiiU_R" ) ); }
 #else

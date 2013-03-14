@@ -108,6 +108,10 @@ namespace CloudberryKingdom
 
 	void HintGiver::Check_QuickSpawn()
 	{
+#if CAFE
+		if ( !ButtonTexture::UseGamepad ) return;
+#endif
+
 		boost::shared_ptr<Level> level = getCore()->MyLevel;
 
 		// "Quickspawn"

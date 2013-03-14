@@ -513,10 +513,11 @@ namespace CloudberryKingdom
 				_q = MyPile->FindQuad( L"x" ); if (_q != 0 ) { _q->setPos( Vector2(-261.1111f, -461.1111f ) ); _q->setSize( Vector2( 67.6666f, 67.6666f ) ); }
 			}
 
-			bool Squeeze;
+			bool Squeeze = IsAspect4by3();
 			if ( Squeeze )
 			{
-				MyPile->
+				MyPile->setPos( MyPile->getPos() + Vector2(-8, 0) );
+				MyPile->Scale( 0.65f );
 			}
 
 		CharacterSelect::Shift( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
