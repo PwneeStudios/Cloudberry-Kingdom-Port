@@ -113,12 +113,12 @@ u32 ReleaseForegroundCallback( void *context )
 
 u32 AcquireForegroundCallback( void *context )
 {
-	GX2InitColorBuffer( &TheColorBuffer, 1280, 720, GX2_SURFACE_FORMAT_TCS_R8_G8_B8_A8_UNORM, GX2_AA_MODE_1X );
+	GX2InitColorBuffer( &TheColorBuffer, 1280, 720, DEMOColorBuffer.surface.format/*GX2_SURFACE_FORMAT_TCS_R8_G8_B8_A8_UNORM*/, GX2_AA_MODE_1X );
 	void *ptr = DEMOGfxAllocMEM1( TheColorBuffer.surface.imageSize, TheColorBuffer.surface.alignment );
 	GX2Invalidate( GX2_INVALIDATE_CPU, ptr, TheColorBuffer.surface.imageSize );
 	GX2InitColorBufferPtr( &TheColorBuffer, ptr );
 	
-	GX2InitTexture( &TheColorBufferTexture, 1280, 720, 1, 0, GX2_SURFACE_FORMAT_TCS_R8_G8_B8_A8_UNORM,
+	GX2InitTexture( &TheColorBufferTexture, 1280, 720, 1, 0, DEMOColorBuffer.surface.format/*GX2_SURFACE_FORMAT_TCS_R8_G8_B8_A8_UNORM*/,
 		GX2_SURFACE_DIM_2D );
 	GX2InitTexturePtrs( &TheColorBufferTexture, TheColorBuffer.surface.imagePtr, 0 );
 
@@ -167,12 +167,13 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 	mem1Storage_ = MEMAllocFromDefaultHeap( mem1Size );
 	ProcUISetMEM1Storage( mem1Storage_, mem1Size );
 
-	GX2InitColorBuffer( &TheColorBuffer, 1280, 720, GX2_SURFACE_FORMAT_TCS_R8_G8_B8_A8_UNORM, GX2_AA_MODE_1X );
+	GX2InitColorBuffer( &TheColorBuffer, 1280, 720, DEMOColorBuffer.surface.format/*GX2_SURFACE_FORMAT_TCS_R8_G8_B8_A8_UNORM*/,
+		GX2_AA_MODE_1X );
 	void *ptr = DEMOGfxAllocMEM1( TheColorBuffer.surface.imageSize, TheColorBuffer.surface.alignment );
 	GX2Invalidate( GX2_INVALIDATE_CPU, ptr, TheColorBuffer.surface.imageSize );
 	GX2InitColorBufferPtr( &TheColorBuffer, ptr );
 
-	GX2InitTexture( &TheColorBufferTexture, 1280, 720, 1, 0, GX2_SURFACE_FORMAT_TCS_R8_G8_B8_A8_UNORM,
+	GX2InitTexture( &TheColorBufferTexture, 1280, 720, 1, 0, DEMOColorBuffer.surface.format/*GX2_SURFACE_FORMAT_TCS_R8_G8_B8_A8_UNORM*/,
 		GX2_SURFACE_DIM_2D );
 	GX2InitTexturePtrs( &TheColorBufferTexture, TheColorBuffer.surface.imagePtr, 0 );
 
