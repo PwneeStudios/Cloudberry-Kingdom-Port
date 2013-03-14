@@ -367,7 +367,7 @@ void drawDRCFrame()
 
 	nn::erreula::DrawDRC();
 
-	DEMOColorBuffer.surface.format = f;
+	DEMODRCColorBuffer.surface.format = f;
 	GX2InitColorBufferRegs( &DEMODRCColorBuffer );
 	GX2SetColorBuffer( &DEMODRCColorBuffer, GX2_RENDER_TARGET_0 );
     // This function will copy presenting the rendered buffer to the drc screen buffer
