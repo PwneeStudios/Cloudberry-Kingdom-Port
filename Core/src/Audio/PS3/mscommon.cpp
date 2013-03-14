@@ -57,7 +57,7 @@ void *               s_pMultiStreamMemory    = NULL;
 void *               s_pSulphaMemory		 = NULL;
 
 
-#define   CHANNEL   CELL_AUDIO_PORT_2CH/*CELL_AUDIO_PORT_8CH*/
+#define   CHANNEL   CELL_AUDIO_PORT_8CH
 #define   BLOCK     CELL_AUDIO_BLOCK_8
 
 CellAudioPortParam   audioParam;
