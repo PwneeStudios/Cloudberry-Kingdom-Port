@@ -664,7 +664,7 @@ namespace CloudberryKingdom
 		int ret = cellSaveDataAutoSave2(
 			CELL_SAVEDATA_VERSION_420,
 			dirName,
-			CELL_SAVEDATA_ERRDIALOG_ALWAYS,
+			CELL_SAVEDATA_ERRDIALOG_NONE,
 			&setBuf,
 			CallbackDataStatusSave,
 			CallbackFileOperationSave,
@@ -1052,6 +1052,12 @@ namespace CloudberryKingdom
 
 				FailLogic->Apply();
 			}
+		}
+		else if( ret == CELL_SAVEDATA_ERROR_BROKEN )
+		{
+			CloudberryKingdomGame::ShowError_LoadError();
+
+			FailLogic->Apply();
 		}
 		else
 			FailLogic->Apply();

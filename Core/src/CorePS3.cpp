@@ -387,7 +387,6 @@ int TrophyStatusCallback( SceNpTrophyContext context, SceNpTrophyStatus status, 
 		break;
 	case SCE_NP_TROPHY_STATUS_INSTALLED:
 		LOG.Write( "Trophy configuration has been installed.\n" );
-		ContextRegistered = true;
 		break;
 	case SCE_NP_TROPHY_STATUS_REQUIRES_UPDATE:
 		LOG.Write( "Trophy configuration requires update.\n" );
@@ -397,7 +396,6 @@ int TrophyStatusCallback( SceNpTrophyContext context, SceNpTrophyStatus status, 
 		break;
 	case SCE_NP_TROPHY_STATUS_UNKNOWN:
 		LOG.Write( "Trophy status unknown.\n" );
-		ret = -1;
 		break;
 	default:
 		LOG.Write( "Trophy status: %d\n", status );
@@ -418,6 +416,11 @@ void RegisterTrophyContextThread( uint64_t context )
 	{
 		LOG.Write( "Couldn't register trophy context: 0x%x\n", ret );
 		ContextRegistered = false;
+	}
+	else
+	{
+		LOG.Write( "Trophy context registered.\n", ret );
+		ContextRegistered = true;
 	}
 
 	LOG.Write( "Trophy configuration done.\n" );
