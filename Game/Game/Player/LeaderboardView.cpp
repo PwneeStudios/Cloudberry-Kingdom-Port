@@ -452,18 +452,18 @@ if ( ButtonCheck::ControllerInUse )
 
         if ( !Active || BubblingOut ) return;
 
-		if( !IsParentalLevelSatisfied( true ) )
-		{
-			ReturnToCaller();
-			return;
-		}
-
         if ( !CloudberryKingdomGame::OnlineFunctionalityAvailable() )
         {
             ReturnToCaller();
             CloudberryKingdomGame::ShowError_MustBeSignedInToLive( Localization::Words_Err_MustBeSignedInToLive );
             return;
         }
+
+		if( !IsParentalLevelSatisfied( true ) )
+		{
+			ReturnToCaller();
+			return;
+		}
 
         if (DelayToMake > 0)
         {

@@ -62,6 +62,12 @@ void SetErrorLanguage( ConsoleLanguage language );
  */
 int GetParentalControlLevel();
 
+/// Is the online aspect of gameplay restricted?
+/**
+ * @returns True if online content is restricted, false otherwise.
+ */
+bool IsOnlineContentRestricted();
+
 /// Should the confirm button be swapped?
 /**
  * @return True in regions where the confirm button should be swapped.

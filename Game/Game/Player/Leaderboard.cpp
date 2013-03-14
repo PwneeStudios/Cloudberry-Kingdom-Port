@@ -77,9 +77,9 @@ namespace CloudberryKingdom
 
 	void Leaderboard::WriteToLeaderboard( boost::shared_ptr<ScoreEntry> score )
 	{
-		if( !IsParentalLevelSatisfied( false ) ) return;
-
 		if ( !CloudberryKingdomGame::OnlineFunctionalityAvailable() ) return;
+
+		if( !IsParentalLevelSatisfied( false ) ) return;
 
         if ( WritingInProgress ) return;
 

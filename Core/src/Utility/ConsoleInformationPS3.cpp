@@ -1,5 +1,7 @@
 #include <Utility/ConsoleInformation.h>
 #include <Utility/Log.h>
+
+#include <np.h>
 #include <sysutil/sysutil_common.h>
 #include <sysutil/sysutil_licensearea.h>
 #include <sysutil/sysutil_sysparam.h>
@@ -81,6 +83,21 @@ int GetParentalControlLevel()
 		return -1;
 
 	return controlLevel;
+}
+
+bool IsOnlineContentRestricted()
+{
+	int isRestricted;
+	int age;
+
+	int ret = sceNpManagerGetContentRatingFlag( &isRestricted, &age );
+	if( ret < 0 )
+	{
+		LOG.Write( "sceNpManagerGetContentRatingFlag failed: 0x%x\n", ret );
+		return true;
+	}
+
+	return isRestricted;
 }
 
 bool IsAsianButtonConfiguration()

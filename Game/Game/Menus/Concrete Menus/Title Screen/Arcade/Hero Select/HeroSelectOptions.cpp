@@ -90,18 +90,18 @@ namespace CloudberryKingdom
 		}
 		else
 		{
-			if( IsParentalLevelSatisfied( true ) )
+			if ( CloudberryKingdomGame::OnlineFunctionalityAvailable() )
 			{
-				if ( CloudberryKingdomGame::OnlineFunctionalityAvailable() )
+				if( IsParentalLevelSatisfied( true ) )
 				{
 					HeroSelect->Call( MakeMagic( LeaderboardGUI, ( 0, MenuItem::ActivatingPlayer ) ), 0 );
 					HeroSelect->Hide();
 					HeroSelect->MyHeroDoll->Hide();
 				}
-				else
-				{
-					CloudberryKingdomGame::ShowError_MustBeSignedInToLive( Localization::Words_Err_MustBeSignedInToLive );
-				}
+			}
+			else
+			{
+				CloudberryKingdomGame::ShowError_MustBeSignedInToLive( Localization::Words_Err_MustBeSignedInToLive );
 			}
 		}
 	}

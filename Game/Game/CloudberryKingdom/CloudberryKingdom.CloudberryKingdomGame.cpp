@@ -301,8 +301,7 @@ namespace CloudberryKingdom
 		bool IsParentalLevelSatisfied( bool showError )
 		{
 #ifdef PS3
-			int level = GetParentalControlLevel();
-			if( level < ESRB )
+			if( IsOnlineContentRestricted() )
 			{
 				if( showError )
 				{

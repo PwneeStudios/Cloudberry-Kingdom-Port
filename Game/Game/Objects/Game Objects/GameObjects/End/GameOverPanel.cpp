@@ -324,9 +324,9 @@ namespace CloudberryKingdom
 
         ArcadeMenu::CheckForArcadeUnlocks(HighScoreEntry);
 
-		if( IsParentalLevelSatisfied( false ) )
+		if ( !CloudberryKingdomGame::OnlineFunctionalityAvailable() )
 		{
-			if ( !CloudberryKingdomGame::OnlineFunctionalityAvailable() )
+			if( IsParentalLevelSatisfied( false ) )
 			{
 				CloudberryKingdomGame::ShowError_MustBeSignedInToLiveForLeaderboard();
 			}
@@ -408,18 +408,18 @@ namespace CloudberryKingdom
 		}
 		else
 		{
-			if( IsParentalLevelSatisfied( true ) )
+			if ( CloudberryKingdomGame::OnlineFunctionalityAvailable() )
 			{
-				if ( CloudberryKingdomGame::OnlineFunctionalityAvailable() )
+				if( IsParentalLevelSatisfied( true ) )
 				{
 					Hide( PresetPos_BOTTOM );
 					Call( MakeMagic( LeaderboardGUI, ( 0, MenuItem::ActivatingPlayer ) ), 0 );
 					Hide();
 				}
-				else
-				{
-					CloudberryKingdomGame::ShowError_MustBeSignedInToLive( Localization::Words_Err_MustBeSignedInToLive );
-				}
+			}
+			else
+			{
+				CloudberryKingdomGame::ShowError_MustBeSignedInToLive( Localization::Words_Err_MustBeSignedInToLive );
 			}
 		}
 	}
