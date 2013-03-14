@@ -453,7 +453,7 @@ namespace CloudberryKingdom
 
 	void CallbackDataStatusSave( CellSaveDataCBResult *result, CellSaveDataStatGet *get, CellSaveDataStatSet *set )
 	{
-		set->reCreateMode = CELL_SAVEDATA_RECREATE_NO;
+		set->reCreateMode = CELL_SAVEDATA_RECREATE_YES;
 		set->setParam = &get->getParam;
 		set->indicator = NULL;
 
