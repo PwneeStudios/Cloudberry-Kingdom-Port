@@ -1,5 +1,5 @@
 #include <global_header.h>
-
+#include <Utility\ConsoleInformation.h>
 #include <Hacks\List.h>
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
@@ -612,6 +612,13 @@ namespace CloudberryKingdom
 
 				MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
 			}
+
+		if ( IsAspect4by3() )
+		{
+			boost::shared_ptr<QuadClass> _q;
+			_q = MyPile->FindQuad( L"Back" ); if (_q != 0 ) { _q->setPos( _q->getPos() + Vector2(0, 20.0f ) ); }
+			_q = MyPile->FindQuad( L"BackArrow" ); if (_q != 0 ) { _q->setPos( _q->getPos() + Vector2(0, 20.0f ) );  }
+		}
 	}
 
 	void StartMenu_MW_HeroSelect::Go( const boost::shared_ptr<MenuItem> &item )

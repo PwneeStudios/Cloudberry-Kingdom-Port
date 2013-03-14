@@ -1,5 +1,5 @@
 #include <Utility/ConsoleInformation.h>
-
+#include <Utility/Log.h>
 #include <sysutil/sysutil_common.h>
 #include <sysutil/sysutil_licensearea.h>
 #include <sysutil/sysutil_sysparam.h>
@@ -124,9 +124,16 @@ bool IsSystemMenuVisible()
 
 bool IsAspect4by3()
 {
+	LOG.Write( "Begin 4by3." );
+
 	CellVideoOutState videoOutState;
 	if( cellVideoOutGetState( CELL_VIDEO_OUT_PRIMARY, 0, &videoOutState ) < 0 )
+	{
+		LOG.Write( "..false" );
 		return false;
+	}
+
+	LOG.Write( "..true" );
 
 	return videoOutState.displayMode.aspect == CELL_VIDEO_OUT_ASPECT_4_3;
 }

@@ -1,5 +1,5 @@
 #include <global_header.h>
-
+#include <Utility\ConsoleInformation.h>
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
 namespace CloudberryKingdom
@@ -905,6 +905,11 @@ namespace CloudberryKingdom
 			// Extra push up
 			float MoveUp = 28 * CloudberryKingdomGame::GuiSqueeze;
 			Vector2 MoveUp_Back = Vector2( 0, 10 ) * CloudberryKingdomGame::GuiSqueeze;
+
+			if ( IsAspect4by3() )
+			{
+				MoveUp += 30;
+			}
 
 			MyPile->setPos( Vector2( MyPile->getPos().X, MyPile->getPos().Y + MoveUp ) );
 			boost::shared_ptr<QuadClass> __q;

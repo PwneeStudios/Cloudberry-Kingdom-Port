@@ -1,5 +1,5 @@
 #include <global_header.h>
-
+#include <Utility\ConsoleInformation.h>
 #include <Hacks/String.h>
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
@@ -156,6 +156,11 @@ namespace CloudberryKingdom
 
 			// Extra squeeze
 			Vector2 squeeze = Vector2(-15, -15 ) * CloudberryKingdomGame::GuiSqueeze;
+
+			if ( IsAspect4by3() )
+			{
+				squeeze += Vector2( -15, -15 );
+			}
 
 			MyPile->setPos( MyPile->getPos() + squeeze );
 	}

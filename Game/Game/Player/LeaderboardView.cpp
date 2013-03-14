@@ -1,5 +1,5 @@
 #include <global_header.h>
-
+#include <Utility\ConsoleInformation.h>
 #include <Hacks\List.h>
 
 #include "LeaderboardView.h"
@@ -818,6 +818,14 @@ else
 
 	MyPile->setPos( Vector2( 0.f, 5.555542f ) );
 }
+
+
+
+		if ( IsAspect4by3() )
+		{
+			MyPile->setPos( MyPile->getPos() + Vector2(-20, -10) );
+		}
+
     }
 
 

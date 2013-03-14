@@ -27,7 +27,7 @@
 
 #define AUTOSAVE_SIZE (10 * 1024)
 
-#define ICON0_SIZE (13121)
+#define ICON0_SIZE (101151)
 static void *ICON0_DATA = NULL;
 
 enum {

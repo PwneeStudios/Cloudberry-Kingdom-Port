@@ -1,5 +1,5 @@
 #include <global_header.h>
-
+#include <Utility\ConsoleInformation.h>
 #include <Hacks\Parse.h>
 #include <Hacks\String.h>
 #include <Hacks\List.h>
@@ -453,6 +453,13 @@ namespace CloudberryKingdom
 			_q = MyPile->FindQuad( L"BackArrow" ); if (_q != 0 ) { _q->setPos( Vector2( 1188.889f, -994.4443f ) ); _q->setSize( Vector2( 78.29454f, 67.33331f ) ); }
 
 			MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
+
+		if ( IsAspect4by3() )
+		{
+			_q = MyPile->FindQuad( L"Button_Back" ); if (_q != 0 ) { _q->setPos( _q->getPos() + Vector2( 0, 20 ) ); }
+			_q = MyPile->FindQuad( L"BackArrow" ); if (_q != 0 ) { _q->setPos( _q->getPos() + Vector2( 0, 20 ) ); }
+		}
+
 	}
 
 	void StatsMenu::OnAdd()

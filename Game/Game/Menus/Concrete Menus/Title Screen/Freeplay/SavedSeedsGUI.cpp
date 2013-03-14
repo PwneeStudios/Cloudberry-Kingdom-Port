@@ -1,4 +1,5 @@
 #include <global_header.h>
+#include <Utility\ConsoleInformation.h>
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
 namespace CloudberryKingdom
@@ -543,6 +544,12 @@ else
 			_q = MyPile->FindQuad( L"Button_A" ); if (_q != 0 ) { _q->setPos( _q->getPos() + squeeze ); }
 			_q = MyPile->FindQuad( L"Button_X" ); if (_q != 0 ) { _q->setPos( _q->getPos() + squeeze ); }
 			_q = MyPile->FindQuad( L"Button_B" ); if (_q != 0 ) { _q->setPos( _q->getPos() + squeeze ); }
+
+		if ( IsAspect4by3() )
+		{
+			MyPile->setPos( MyPile->getPos() + Vector2(0, -20) );
+		}
+
 	}
 
 	void SavedSeedsGUI::MakeList()

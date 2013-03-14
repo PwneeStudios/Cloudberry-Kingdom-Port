@@ -1,5 +1,5 @@
 ﻿#include <global_header.h>
-
+#include <Utility\ConsoleInformation.h>
 #include <Core\Tools\Set.h>
 
 namespace CloudberryKingdom
@@ -125,6 +125,12 @@ namespace CloudberryKingdom
 		{
 			Text->setPos( Vector2( 0.f, 0.f ) );
 			Text->setScale( 0.5195001f );
+		}
+
+
+		if ( IsAspect4by3() )
+		{
+			Text->setScale( Text->getScale() * .88f );
 		}
 	}
 
