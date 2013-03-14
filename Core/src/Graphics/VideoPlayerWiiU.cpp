@@ -170,7 +170,7 @@ static s32 VideoOutputThread(s32 intArg, void *ptrArg)
 
     OSReport("Video Thread Start\n");
 
-    while(1)
+    while( 1 )
     {
         vsys_currtime = OSTicksToMilliseconds(OSGetTime());
 //#if TEST_MODE == 1
@@ -210,6 +210,18 @@ static s32 VideoOutputThread(s32 intArg, void *ptrArg)
 						{
 							SCHEDULER->MainThread();
 							ret = VideoDraw(MP4PlayerCorePtr[i]->OutputVideoInfo[MP4PlayerCorePtr[i]->df_v].bufp, i);
+						}
+						else
+						{
+							// Flush buffer.
+							for(i = 0; i < MAX_FRAME_BUFFER; i++)
+							{
+								if(MP4PlayerCorePtr[i]->List_h264decfm[i].used && MP4PlayerCorePtr[i]->List_h264decfm[i].h264decfm==(void *)MP4PlayerCorePtr[i]->OutputVideoInfo[MP4PlayerCorePtr[i]->df_v].bufp)
+								{
+									MP4PlayerCorePtr[i]->List_h264decfm[i].used = 0;
+									break;
+								}
+							}
 						}
 
                         if (ret != 0)
@@ -1938,8 +1950,8 @@ void ForceKillVideoPlayer()
 
 	if( threadsAlive )
 	{
-		OSJoinThread(&Thread[0], NULL);
-		OSJoinThread(&Thread[1], NULL);
+		/*OSJoinThread(&Thread[0], NULL);
+		OSJoinThread(&Thread[1], NULL);*/
 
 		OSJoinThread(&Thread[2], NULL);
 		//OSJoinThread(&Thread[3], NULL);
