@@ -142,9 +142,9 @@ namespace CloudberryKingdom
 			StartLevel = ChapterStart[ Chapter ];
 		}
 
-#ifdef DEBUG
+/*#ifdef DEBUG
 		StartLevel = 320;
-#endif
+#endif*/
 
 		LevelSequence::Start( StartLevel );
 	}
