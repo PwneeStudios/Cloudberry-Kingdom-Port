@@ -22,20 +22,29 @@ s32 kpadReadLength[ WPAD_MAX_CONTROLLERS ];
 bool kpadIsConnected[ WPAD_MAX_CONTROLLERS ];
 bool kpadIsURCC[ WPAD_MAX_CONTROLLERS ];
 
+enum MyControllerTypes
+{
+	Who_NOONE,
+	Who_VPAD,
+	Who_KPAD
+};
+
+int WhoIsDisconnected = Who_NOONE;
+
 static void ConnectCallback( s32 chan, s32 reason )
 {
 	if( reason >= 0 )
 	{
 		u32 dataFormat = WPADGetDataFormat( chan );
-		if( dataFormat != WPAD_FMT_URCC )
+		/*if( dataFormat != WPAD_FMT_URCC )
 		{
 			dataFormat = WPAD_FMT_CORE;
 			kpadIsURCC[ chan ] = false;
 		}
 		else
 			kpadIsURCC[ chan ] = true;
-
-		WPADSetDataFormat( chan, dataFormat );
+		*/
+		//WPADSetDataFormat( chan, dataFormat );
 		WPADControlSpeaker( chan, WPAD_SPEAKER_OFF, NULL );
 		WPADControlDpd( chan, WPAD_DPD_OFF, NULL );
 		kpadIsConnected[ chan ] = true;
@@ -43,6 +52,8 @@ static void ConnectCallback( s32 chan, s32 reason )
 	}
 	else if( reason == WPAD_ERR_NO_CONTROLLER )
 	{
+		WhoIsDisconnected = Who_KPAD;
+
 		kpadIsConnected[ chan ] = false;
 		LOG.Write( "Gamepad disconnected\n" );
 	}
@@ -114,7 +125,9 @@ void GamePad::Update()
 		if( kpadStatus[ i ].wpad_err == WPAD_ERR_CORRUPTED )
 			continue;
 		
-		if( !kpadIsURCC[ i ] )
+		if( kpadStatus[ i ].data_format == WPAD_FMT_CORE
+			|| kpadStatus[ i ].data_format == WPAD_FMT_CORE_ACC
+			|| kpadStatus[ i ].data_format == WPAD_FMT_CORE_ACC_DPD )
 		{
 			if( kpadStatus[ i ].hold != 0 )
 				vpadActive = false;
@@ -136,11 +149,14 @@ void GamePad::Update()
 			if( PAD_STATE[ i ].Buttons.A || PAD_STATE[ i ].Buttons.B || PAD_STATE[ i ].Buttons.X || PAD_STATE[ i ].Buttons.Y )
 				PAD_STATE[ i ].Type = GamePadState::ControllerType_Mini;
 		}
-		else
+		else if( kpadStatus[ i ].data_format == WPAD_FMT_URCC )
 		{
 			u32 hold = kpadStatus[ i ].ex_status.uc.hold;
 			Vec2 lStick = kpadStatus[ i ].ex_status.uc.lstick;
 			Vec2 rStick = kpadStatus[ i ].ex_status.uc.rstick;
+
+			if( hold != 0 )
+				vpadActive = true;
 
 			PAD_STATE[ i ].Buttons.A = __max( PAD_STATE[ i ].Buttons.A, ( hold & KPAD_UC_BUTTON_A ) ? ButtonState_Pressed : ButtonState_Released );
 			PAD_STATE[ i ].Buttons.B = __max( PAD_STATE[ i ].Buttons.B, ( hold & KPAD_UC_BUTTON_B ) ? ButtonState_Pressed : ButtonState_Released );
@@ -161,6 +177,7 @@ void GamePad::Update()
 
 			PAD_STATE[ i ].ThumbSticks.Left = Vector2( lStick.x, lStick.y );
 			PAD_STATE[ i ].ThumbSticks.Right = Vector2( rStick.x, rStick.y );
+
 			if( 0 == i )
 				channel0ThumbsticksWritten = true;
 		}
@@ -270,6 +287,9 @@ void GamePad::Update()
 		{
 			// Only show error if nothing is connected to the WiiU.
 			vpadConnected = false;
+
+			WhoIsDisconnected = Who_VPAD;
+
 			// Unable to communicate with the WiiU gamepad.
 			//DisplayError( ErrorType( 1650101 ) );
 		}

@@ -161,6 +161,11 @@ void SetErrorLanguage( ConsoleLanguage language )
 	nn::erreula::ChangeLangError( static_cast< nn::erreula::LangType >( internalLanguage ) );
 }
 
+bool IsOnlineContentRestricted()
+{
+	return false;
+}
+
 bool IsAsianButtonConfiguration()
 {
 	return false;

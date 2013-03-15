@@ -393,7 +393,7 @@ int CoreWiiU::Run()
 					//viewerVisible = false;
 				}
 			}
-			else if( currentErrorCode == 1520100 )
+			else if( currentErrorCode == 1520100 || currentErrorCode == 1650101 )
 			{
 				if( nn::erreula::GetStateErrorViewer() == nn::erreula::cState_Display
 					/*&& ( anythingElseConnected || vpadConnected )*/
