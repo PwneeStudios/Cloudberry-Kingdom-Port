@@ -1436,7 +1436,7 @@ float CloudberryKingdomGame::fps = 0;
 		// Main Video
 		if ( MainVideo::Draw() )
 		{
-			DrawWatermark();
+			//DrawWatermark();
 			return;
 		}
 

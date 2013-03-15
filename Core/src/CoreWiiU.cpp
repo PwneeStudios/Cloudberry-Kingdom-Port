@@ -485,16 +485,17 @@ int CoreWiiU::Run()
 
 		game_.Update();
 
-		static int frame_count = 0;
-		frame_count++;
-		if ( frame_count % 60 == 0 )
-		{
-			LOG.Write( "DEMODRCColorBuffer.surface.format = %d\n", DEMODRCColorBuffer.surface.format );
-			LOG.Write( "DEMODRCColorBuffer Size: %d, %d\n", DEMODRCColorBuffer.surface.width, DEMODRCColorBuffer.surface.height );
-			LOG.Write( "DEMODRCColorBuffer Antialising mode %d, %d\n", DEMODRCColorBuffer.surface.aa, DEMODRCColorBuffer.surface.aa );
-			LOG.Write( "DEMODRCColorBuffer Tile mode %d, %d\n", DEMODRCColorBuffer.surface.tileMode, DEMODRCColorBuffer.surface.tileMode );
-			LOG.Write( "DEMODRCColorBuffer.surface.imagePtr 0x%x\n\n", DEMODRCColorBuffer.surface.imagePtr );
-		}
+		// For debuggin the DRC
+		//static int frame_count = 0;
+		//frame_count++;
+		//if ( frame_count % 60 == 0 )
+		//{
+		//	LOG.Write( "DEMODRCColorBuffer.surface.format = %d\n", DEMODRCColorBuffer.surface.format );
+		//	LOG.Write( "DEMODRCColorBuffer Size: %d, %d\n", DEMODRCColorBuffer.surface.width, DEMODRCColorBuffer.surface.height );
+		//	LOG.Write( "DEMODRCColorBuffer Antialising mode %d, %d\n", DEMODRCColorBuffer.surface.aa, DEMODRCColorBuffer.surface.aa );
+		//	LOG.Write( "DEMODRCColorBuffer Tile mode %d, %d\n", DEMODRCColorBuffer.surface.tileMode, DEMODRCColorBuffer.surface.tileMode );
+		//	LOG.Write( "DEMODRCColorBuffer.surface.imagePtr 0x%x\n\n", DEMODRCColorBuffer.surface.imagePtr );
+		//}
 
 		// Restore default render target and draw our frame to it.
 		if( !GLOBAL_VIDEO_OVERRIDE )
