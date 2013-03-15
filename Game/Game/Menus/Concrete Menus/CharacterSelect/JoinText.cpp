@@ -2,6 +2,10 @@
 #include <Utility\ConsoleInformation.h>
 #include <Core\Tools\Set.h>
 
+//#ifdef CAFE
+#include <Input/GamePad.h>
+//#endif
+
 namespace CloudberryKingdom
 {
 
@@ -66,7 +70,14 @@ namespace CloudberryKingdom
 #ifdef PC_VERSION
 		std::wstring pressa = Format( Localization::WordString( Localization::Words_PressToJoin ).c_str(), ButtonString::Go_Controller( ButtonSize ).c_str() );
 #elif CAFE
+		PlayerIndex index = MyCharacterSelect->getPlayer()->MyPlayerIndex;
+		bool UseGamepad = GamePad::GetState( index ).Type == GamePadState::ControllerType_Standard;
+		bool Hold_UseGamepad = ButtonTexture::UseGamepad;
+		ButtonTexture::UseGamepad = UseGamepad;		
+		
 		std::wstring pressa = Format( Localization::WordString( Localization::Words_PressToJoin_WiiU ).c_str(), ButtonString::Go( ButtonSize ).c_str() );
+
+		ButtonTexture::UseGamepad = Hold_UseGamepad;
 #else
         std::wstring pressa = Format( Localization::WordString( Localization::Words_PressToJoin ).c_str(), ButtonString::Go( ButtonSize ).c_str() );
 #endif

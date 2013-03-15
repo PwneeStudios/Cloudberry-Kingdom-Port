@@ -94,10 +94,15 @@ void GamePad::Initialize()
 
 void GamePad::Update()
 {
+	// Save controller types
+	GamePadState::ControllerType SaveType[4];
+	for ( int i = 0; i < 4; ++i ) SaveType[ i ] = PAD_STATE[ i ].Type;
+
+	// Reset states
 	memset( PAD_STATE, 0, sizeof( PAD_STATE ) );
 
-	for( int i = 0; i < PAD_MAX_CONTROLLERS; ++i )
-		PAD_STATE[ i ].Type = GamePadState::ControllerType_Standard;
+	// Reset controller types to what they were before memset
+	for ( int i = 0; i < 4; ++i ) PAD_STATE[ i ].Type = SaveType[ i ];
 
 	// Is anything else other than the vpad connected?
 	anythingElseConnected = false;
@@ -141,13 +146,16 @@ void GamePad::Update()
 
 			PAD_STATE[ i ].Buttons.Start = ( kpadStatus[ i ].hold & KPAD_BUTTON_PLUS ) ? ButtonState_Pressed : ButtonState_Released;
 
-			PAD_STATE[ i ].DPad.Down = ( kpadStatus[ i ].hold & KPAD_BUTTON_LEFT ) ? ButtonState_Pressed : ButtonState_Released;
-			PAD_STATE[ i ].DPad.Left = ( kpadStatus[ i ].hold & KPAD_BUTTON_UP ) ? ButtonState_Pressed : ButtonState_Released;
-			PAD_STATE[ i ].DPad.Right = ( kpadStatus[ i ].hold & KPAD_BUTTON_DOWN ) ? ButtonState_Pressed : ButtonState_Released;
-			PAD_STATE[ i ].DPad.Up = ( kpadStatus[ i ].hold & KPAD_BUTTON_RIGHT ) ? ButtonState_Pressed : ButtonState_Released;
+			PAD_STATE[ i ].DPad.Down =  ( kpadStatus[ i ].hold & KPAD_BUTTON_LEFT  ) ? ButtonState_Pressed : ButtonState_Released;
+			PAD_STATE[ i ].DPad.Left =  ( kpadStatus[ i ].hold & KPAD_BUTTON_UP    ) ? ButtonState_Pressed : ButtonState_Released;
+			PAD_STATE[ i ].DPad.Right = ( kpadStatus[ i ].hold & KPAD_BUTTON_DOWN  ) ? ButtonState_Pressed : ButtonState_Released;
+			PAD_STATE[ i ].DPad.Up =    ( kpadStatus[ i ].hold & KPAD_BUTTON_RIGHT ) ? ButtonState_Pressed : ButtonState_Released;
 
 			if( PAD_STATE[ i ].Buttons.A || PAD_STATE[ i ].Buttons.B || PAD_STATE[ i ].Buttons.X || PAD_STATE[ i ].Buttons.Y )
+			{
 				PAD_STATE[ i ].Type = GamePadState::ControllerType_Mini;
+				if ( i == 1 ) LOG.Write( "Controller %d is mini.\n", i );
+			}
 		}
 		else if( kpadStatus[ i ].data_format == WPAD_FMT_URCC )
 		{
@@ -156,7 +164,11 @@ void GamePad::Update()
 			Vec2 rStick = kpadStatus[ i ].ex_status.uc.rstick;
 
 			if( hold != 0 )
+			{
 				vpadActive = true;
+				PAD_STATE[ i ].Type = GamePadState::ControllerType_Standard;
+				if ( i == 1 ) LOG.Write( "Controller %d is standard.\n", i );
+			}
 
 			PAD_STATE[ i ].Buttons.A = __max( PAD_STATE[ i ].Buttons.A, ( hold & KPAD_UC_BUTTON_A ) ? ButtonState_Pressed : ButtonState_Released );
 			PAD_STATE[ i ].Buttons.B = __max( PAD_STATE[ i ].Buttons.B, ( hold & KPAD_UC_BUTTON_B ) ? ButtonState_Pressed : ButtonState_Released );
@@ -181,6 +193,8 @@ void GamePad::Update()
 			if( 0 == i )
 				channel0ThumbsticksWritten = true;
 		}
+
+		LOG.Write( "Controler types: 0 = %d, 1 = %d, 2 = %d, 3 = %d\n", PAD_STATE[ 0 ].Type, PAD_STATE[ 1 ].Type, PAD_STATE[ 2 ].Type, PAD_STATE[ 3 ].Type );
 	}
 
 	// Update gamepad.
@@ -250,7 +264,11 @@ void GamePad::Update()
 			vpadConnected = true;
 
 			if( vpadStatus.hold != 0 )
+			{
 				vpadActive = true;
+				PAD_STATE[ i ].Type = GamePadState::ControllerType_Standard;
+				if ( i == 1 ) LOG.Write( "Controller %d is standard.\n", i );
+			}
 
 			// Mapping is inverse of XBox.
 			PAD_STATE[ i ].Buttons.A = __max( PAD_STATE[ i ].Buttons.A, vpadStatus.hold & VPAD_BUTTON_A ? ButtonState_Pressed : ButtonState_Released );

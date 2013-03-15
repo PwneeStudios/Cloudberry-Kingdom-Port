@@ -131,7 +131,13 @@ namespace CloudberryKingdom
 
         boost::shared_ptr<QuadClass> q;
 
-        q = boost::make_shared<QuadClass>(ButtonTexture::getX() ); q->ScaleXToMatchRatio(130);
+#ifdef CAFE
+		if ( !ButtonTexture::UseGamepad )
+			q = boost::make_shared<QuadClass>( ButtonTexture::getBack() );
+		else
+#endif
+			q = boost::make_shared<QuadClass>( ButtonTexture::getX() );
+		q->ScaleXToMatchRatio(130);
         MyPile->Add(q, L"x");
 
         q = boost::make_shared<QuadClass>( L"door_castle_1" ); q->ScaleXToMatchRatio(130);

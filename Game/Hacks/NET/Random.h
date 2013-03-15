@@ -2,6 +2,7 @@
 #define _RANDOM_H_
 
 #include <ctime>
+#include <Utility\Log.h>
 
 struct Random
 {
@@ -24,6 +25,7 @@ public:
 		time_t t;
 		time( &t );
 
+		LOG.Write( "Time is %d\n", t );
 		int time_seed = static_cast<int>( t ) % 10000;
 
 		//initialize( 'rofl' );
@@ -47,6 +49,8 @@ private:
 #ifdef CAFE
 		Seed += 1;
 #endif
+
+		LOG.Write( "Random Seed is %d\n", Seed );
 
 		int num = /*( Seed == -2147483648 ) ? 2147483647 : */abs(Seed);
 		int num2 = 161803398 - num;
