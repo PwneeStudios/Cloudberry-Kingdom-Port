@@ -228,6 +228,12 @@ static int audioInitCell(bool _skipGraphicsInit)
 		return -1;
 	}
 
+	printf( "cellAudioGetPortConfig:\n" );
+	printf( "\tnChannel: %u\n", portConfig.nChannel );
+	printf( "\tnBlock: %u\n", portConfig.nBlock );
+	printf( "\tportSize: %u\n", portConfig.portSize );
+	printf( "\n" );
+
 	cellMSSystemConfigureLibAudio(&audioParam, &portConfig);
 
 
