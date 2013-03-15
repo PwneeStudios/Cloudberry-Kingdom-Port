@@ -154,7 +154,7 @@ void GamePad::Update()
 			if( PAD_STATE[ i ].Buttons.A || PAD_STATE[ i ].Buttons.B || PAD_STATE[ i ].Buttons.X || PAD_STATE[ i ].Buttons.Y )
 			{
 				PAD_STATE[ i ].Type = GamePadState::ControllerType_Mini;
-				if ( i == 1 ) LOG.Write( "Controller %d is mini.\n", i );
+				//if ( i == 1 ) LOG.Write( "Controller %d is mini.\n", i );
 			}
 		}
 		else if( kpadStatus[ i ].data_format == WPAD_FMT_URCC )
@@ -167,7 +167,7 @@ void GamePad::Update()
 			{
 				vpadActive = true;
 				PAD_STATE[ i ].Type = GamePadState::ControllerType_Standard;
-				if ( i == 1 ) LOG.Write( "Controller %d is standard.\n", i );
+				//if ( i == 1 ) LOG.Write( "Controller %d is standard.\n", i );
 			}
 
 			PAD_STATE[ i ].Buttons.A = __max( PAD_STATE[ i ].Buttons.A, ( hold & KPAD_UC_BUTTON_A ) ? ButtonState_Pressed : ButtonState_Released );
@@ -194,7 +194,7 @@ void GamePad::Update()
 				channel0ThumbsticksWritten = true;
 		}
 
-		LOG.Write( "Controler types: 0 = %d, 1 = %d, 2 = %d, 3 = %d\n", PAD_STATE[ 0 ].Type, PAD_STATE[ 1 ].Type, PAD_STATE[ 2 ].Type, PAD_STATE[ 3 ].Type );
+		//LOG.Write( "Controler types: 0 = %d, 1 = %d, 2 = %d, 3 = %d\n", PAD_STATE[ 0 ].Type, PAD_STATE[ 1 ].Type, PAD_STATE[ 2 ].Type, PAD_STATE[ 3 ].Type );
 	}
 
 	// Update gamepad.
@@ -267,7 +267,7 @@ void GamePad::Update()
 			{
 				vpadActive = true;
 				PAD_STATE[ i ].Type = GamePadState::ControllerType_Standard;
-				if ( i == 1 ) LOG.Write( "Controller %d is standard.\n", i );
+				//if ( i == 1 ) LOG.Write( "Controller %d is standard.\n", i );
 			}
 
 			// Mapping is inverse of XBox.
