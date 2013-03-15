@@ -3414,6 +3414,9 @@ int Level::AfterPostDrawLayer = 12;
 	void Level::setUseLighting( const bool &value )
 	{
 		_UseLighting = value;
+		
+		// FIXME: We have disabled lighting to save memory on PS3!
+		_UseLighting = false;
 
 		if ( _UseLighting )
 		{

@@ -204,6 +204,14 @@ static int audioInitCell(bool _skipGraphicsInit)
 		return -1;
 	}
 
+	// Force downsampling to 2 channels.
+	CellAudioOutConfiguration audioConfig;
+	memset( &audioConfig, 0, sizeof( audioConfig ) );
+	audioConfig.channel = 2;
+	audioConfig.encoder = CELL_AUDIO_OUT_CODING_TYPE_LPCM;
+	audioConfig.downMixer = CELL_AUDIO_OUT_DOWNMIXER_TYPE_A;
+	cellAudioOutConfigure( CELL_AUDIO_OUT_PRIMARY, &audioConfig, NULL, 0 );
+
 	// audio port open.
 	memset(&audioParam, 0, sizeof(CellAudioPortParam));
 	audioParam.nChannel = CHANNEL;
