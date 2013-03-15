@@ -657,7 +657,6 @@ void DebugFrame(float r, float g, float b)
 	//glDisable(GL_SCISSOR_TEST);
 }
 
-
 int CorePS3::Run()
 {
 	running_ = true;

@@ -52,6 +52,18 @@
 	#include <netex/libnetctl.h>
 #endif
 
+#ifdef CAFE
+
+enum MyControllerTypes
+{
+	Who_NOONE,
+	Who_VPAD,
+	Who_KPAD
+};
+
+extern int WhoIsDisconnected;
+
+#endif
 
 namespace CloudberryKingdom
 {
@@ -1471,8 +1483,16 @@ float CloudberryKingdomGame::fps = 0;
 		if( DisconnectedController() )
 		{
 #ifdef CAFE
-			DisplayError( ErrorType( 1520100,
-				NULL, ErrorType::DEFAULT, ClearError, false ) );
+			if( WhoIsDisconnected == Who_VPAD )
+			{
+				DisplayError( ErrorType( 1650101,
+					NULL, ErrorType::DEFAULT, ClearError, false ) );
+			}
+			else if( WhoIsDisconnected == Who_KPAD )
+				DisplayError( ErrorType( 1520100,
+					NULL, ErrorType::DEFAULT, ClearError, false ) );
+
+			WhoIsDisconnected = Who_NOONE;
 #elif PS3
 
 			// Figure out which gamepad is disconnected.
