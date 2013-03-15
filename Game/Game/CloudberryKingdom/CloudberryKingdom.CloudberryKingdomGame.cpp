@@ -1474,7 +1474,36 @@ float CloudberryKingdomGame::fps = 0;
 			DisplayError( ErrorType( 1520100,
 				NULL, ErrorType::DEFAULT, ClearError, false ) );
 #elif PS3
-			DisplayError( ErrorType( WstringToUtf8( Localization::WordString( Localization::Words_Err_PS3_NoGamePadDetected ) ),
+
+			// Figure out which gamepad is disconnected.
+
+			int controller = 0;
+
+			int numConnected = 0;
+			for( int i = 0; i < 4; ++i )
+			{
+				if( Tools::GamepadState[i].IsConnected )
+					numConnected++;
+			}
+
+			if( numConnected == 0 )
+				controller = 0;
+
+			if( CurrentPresence != Presence_TitleScreen )
+			{
+				int i = 0;
+				
+				for (; i < 4; i++)
+				{
+					if ( ( PlayerManager::Players[i] != 0 ) && PlayerManager::Players[i]->Exists && !Tools::GamepadState[i].IsConnected )
+						break;
+				}
+
+				controller = i;
+			}
+
+			DisplayError( ErrorType( WstringToUtf8(
+				Format( Localization::WordString( Localization::Words_Err_PS3_NoGamePadDetected ).c_str(), controller + 1 ) ),
 				NULL, ErrorType::NONE, ClearError, false ) );
 #endif
 		}
