@@ -5,6 +5,7 @@
 #include <Audio/PS3/mscommon.h>
 #include <Content/Wad.h>
 #include <Core.h>
+#include <cstdarg>
 #include <cstdlib>
 #include <GameLoop.h>
 #include <Graphics/QuadDrawer.h>
@@ -16,6 +17,7 @@
 #include <Utility/Limits.h>
 #include <Utility/Log.h>
 
+#include <cell/l10n.h>
 #include <cell/sysmodule.h>
 #include <netex/libnetctl.h>
 #include <np.h>
@@ -28,6 +30,7 @@
 #include <sysutil/sysutil_gamecontent.h>
 #include <sysutil/sysutil_msgdialog.h>
 #include <sysutil/sysutil_savedata.h>
+
 
 SYS_PROCESS_PARAM ( 1000, 0x80000 )
 
@@ -406,17 +409,53 @@ int TrophyStatusCallback( SceNpTrophyContext context, SceNpTrophyStatus status, 
 	return ret;
 }
 
+// Stuff to localize the register trophy message.
+static std::string WstringToUtf8( const std::wstring& str )
+{
+	char utf8[ 512 ];
+	size_t inSize = str.size();
+	size_t outSize = sizeof( utf8 );
+	if( l10n_convert_str( l10n_get_converter( L10N_UTF16, L10N_UTF8 ), str.c_str(), &inSize, utf8, &outSize ) != ConversionOK )
+		return "";
+
+	return std::string( utf8, utf8 + outSize );
+}
+
+static std::wstring Format( const wchar_t *format, ... )
+{
+	wchar_t buffer[512];
+
+	va_list args;
+	va_start( args, format );
+	vswprintf( buffer, sizeof( buffer ) / sizeof( wchar_t ), format, args );
+	va_end( args );
+
+	return std::wstring( buffer );
+}
+
 void RegisterTrophyContextThread( uint64_t context )
 {
 	ContextRegistered = false;
 
 	// Register trophy.
-	int ret = sceNpTrophyRegisterContext( TrophyContext, TrophyHandle, TrophyStatusCallback, NULL,
-		SCE_NP_TROPHY_OPTIONS_REGISTER_CONTEXT_SHOW_ERROR_EXIT );
+	int ret = sceNpTrophyRegisterContext( TrophyContext, TrophyHandle, TrophyStatusCallback, NULL, 0 );
 	if( ret < 0 )
 	{
 		LOG.Write( "Couldn't register trophy context: 0x%x\n", ret );
 		ContextRegistered = false;
+
+		if( SCE_NP_TROPHY_ERROR_INSUFFICIENT_DISK_SPACE == ret )
+		{
+			uint64_t requiredTrophySpace;
+			ret = sceNpTrophyGetRequiredDiskSpace( TrophyContext, TrophyHandle, &requiredTrophySpace, 0 );
+			if( ret == 0 )
+			{
+				std::string errorMsg = WstringToUtf8( Format( L"There is not enough free space on the system storage to register Trophy information.\nPlease quit the game and free %d KB.", requiredTrophySpace / 1024 ) );
+				DisplayError( ErrorType( errorMsg, NULL, ErrorType::NONE, NULL, true ) );
+			}
+			else
+				DisplayError( ErrorType( ret, NULL, ErrorType::NONE, NULL, true ) );
+		}
 	}
 	else
 	{
@@ -511,7 +550,7 @@ void ConnectToNP()
 	int ret = sys_ppu_thread_create( &tid, ConnectToNPThread, 0,
 		1001, 16 * 1024, 0, "ConnectToNP" );
 	if( ret != 0 )
-		LOG.Write( "Failed to start RegisterTrophyContextThread: 0x%x\n", ret );
+		LOG.Write( "Failed to start ConnectToNP: 0x%x\n", ret );
 }
 
 ErrorType GLOBAL_NP_DISCONNECT_MESSAGE;
