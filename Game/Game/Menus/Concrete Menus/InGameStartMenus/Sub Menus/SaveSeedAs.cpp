@@ -86,7 +86,18 @@ namespace CloudberryKingdom
 		//AddItem( item );
 
 		// Console version: Start to save
-		MyPile->Add( boost::make_shared<EzText>( Localization::Words_PressStart, ItemFont ), std::wstring( L"Start" ) );
+		boost::shared_ptr<EzText> Text = boost::make_shared<EzText>( 
+		#ifdef PS3
+			Localization::Words_PressStart_PS3
+		#elif CAFE
+			Format( Localization::WordString( Localization::Words_PressStart_WiiU ).c_str(), L"{pWiiU_Plus,90,?} " )
+		#else
+			Localization::Words_PressStart
+		#endif
+		, ItemFont );
+
+		//Text = boost::make_shared<EzText>( Localization::Words_PressStart, ItemFont );
+		MyPile->Add( Text, std::wstring( L"Start" ) );
 
         MyPile->Add( boost::make_shared<EzText>( Localization::Words_Delete, ItemFont ), std::wstring( L"Delete" ) );
 		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getX(), 90.0f, std::wstring( L"Button_X" ) ) );

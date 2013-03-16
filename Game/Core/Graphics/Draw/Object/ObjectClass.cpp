@@ -801,9 +801,9 @@ namespace CloudberryKingdom
 		DrawWidth = Width;
 		DrawHeight = Height;
 
-		ObjectRenderTarget = boost::make_shared<RenderTarget2D>( device, DrawWidth, DrawHeight, false, pp->BackBufferFormat, pp->DepthStencilFormat, pp->MultiSampleCount, true );
+		//ObjectRenderTarget = boost::make_shared<RenderTarget2D>( device, DrawWidth, DrawHeight, false, pp->BackBufferFormat, pp->DepthStencilFormat, pp->MultiSampleCount, true );
 
-		ToTextureRenderTarget = boost::make_shared<RenderTarget2D>( device, DrawWidth, DrawHeight, false, pp->BackBufferFormat, pp->DepthStencilFormat, pp->MultiSampleCount, true );
+		//ToTextureRenderTarget = boost::make_shared<RenderTarget2D>( device, DrawWidth, DrawHeight, false, pp->BackBufferFormat, pp->DepthStencilFormat, pp->MultiSampleCount, true );
 	}
 
 	boost::shared_ptr<BaseQuad> ObjectClass::FindQuad( const std::wstring &name )
