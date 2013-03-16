@@ -9,6 +9,9 @@
 
 std::vector< RenderTarget2DInternal * > GlobalRenderTargets;
 
+extern void *AllocFromTheMEM1Heap( u32, u32 );
+extern void FreeToTheMEM1Heap( void * );
+
 RenderTarget2D::RenderTarget2D( const boost::shared_ptr<GraphicsDevice> &device, int width, int height, bool mipmap, int surfaceFormat, int depthFormat, int sampleCount, bool discard )
 	: Texture2D( device, width, height )
 	, internal_( new RenderTarget2DInternal )
@@ -18,7 +21,7 @@ RenderTarget2D::RenderTarget2D( const boost::shared_ptr<GraphicsDevice> &device,
 		width, height, GX2_SURFACE_FORMAT_TCS_R8_G8_B8_A8_UNORM,
 		GX2_AA_MODE_1X );
 	GX2InitColorBufferPtr( &internal_->ColorBuffer,
-		DEMOGfxAllocMEM1( internal_->ColorBuffer.surface.imageSize,
+		AllocFromTheMEM1Heap( internal_->ColorBuffer.surface.imageSize,
 			internal_->ColorBuffer.surface.alignment ) );
 	GX2Invalidate( GX2_INVALIDATE_CPU, internal_->ColorBuffer.surface.imagePtr,
 		internal_->ColorBuffer.surface.imageSize );
@@ -51,7 +54,7 @@ RenderTarget2D::~RenderTarget2D()
 	if( LastRT == internal_ )
 		LastRT = 0;
 
-	DEMOGfxFreeMEM1( internal_->ColorBuffer.surface.imagePtr );
+	FreeToTheMEM1Heap( internal_->ColorBuffer.surface.imagePtr );
 	DEMOFree( internal_->RTTexture->impl_.internal_->Texture );
 
 	delete internal_->RTTexture;

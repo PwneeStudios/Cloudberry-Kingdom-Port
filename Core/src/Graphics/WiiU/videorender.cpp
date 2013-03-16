@@ -256,7 +256,12 @@ void drawTVFrame()
 		DEMODRCDoneRender();
 	}
 
+#ifdef DEBUG
     GX2ClearColor(&DEMOColorBuffer, 0.0f, 0.3, 0.45, 1.0f);
+#else
+    GX2ClearColor(&DEMOColorBuffer, 0, 0, 0, 1.0f);
+#endif
+
     GX2ClearDepthStencil(&DEMODepthBuffer, GX2_CLEAR_BOTH);
 
     // Restore state that was saved when DEMOGfxInit was called.
@@ -311,6 +316,8 @@ void drawTVFrame()
     return;
 }
 
+// Force st the drc color buffer in case it got mangled.
+extern void SetDRCColorBuffer();
 
 void drawDRCFrame()
 {
@@ -326,11 +333,17 @@ void drawDRCFrame()
     // while state shadowing is disabled. When using state shadowing it is
     // therefore necessary to call GX2SetContextState with the saved context
     // state after a call to GX2ClearColor or GX2ClearDepthStencil.
+#ifdef DEBUG
     GX2ClearColor(&DEMODRCColorBuffer,  0.45, 0.3, 0.0, 1.0f);
+#else
+    GX2ClearColor(&DEMODRCColorBuffer, 0, 0, 0, 1);
+#endif
     GX2ClearDepthStencil(&DEMODRCDepthBuffer, GX2_CLEAR_BOTH);
 
     // Restore state that was saved when DEMODRCInit was called.
     GX2SetContextState(DEMODRCContextState);
+
+	SetDRCColorBuffer();
 
     // Set Attrib buffer
     GX2SetAttribBuffer(attribBuffer,

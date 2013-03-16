@@ -8,6 +8,9 @@
 bool initializeCalled = false;
 bool isInitialized = false;
 
+char *GLOBAL_ACCOUNT_NAME = NULL;
+static char LOCAL_ACCOUNT_NAME[ ACT_ACCOUNT_ID_SIZE ];
+
 bool InitializeSave()
 {
 	if( initializeCalled )
@@ -38,10 +41,10 @@ bool InitializeSave()
 		}
 	}
 
-	/*GLOBAL_ACCOUNT_NAME = LOCAL_ACCOUNT_NAME;
+	GLOBAL_ACCOUNT_NAME = LOCAL_ACCOUNT_NAME;
 	memset( LOCAL_ACCOUNT_NAME, 0, sizeof( LOCAL_ACCOUNT_NAME ) );
 	sprintf( LOCAL_ACCOUNT_NAME, "Errorberry" );
-	nn::act::GetAccountId( LOCAL_ACCOUNT_NAME );*/
+	nn::act::GetAccountId( LOCAL_ACCOUNT_NAME );
 	
 	LOG.Write( "Creating global directory\n" );
 	if( SAVEInitSaveDir( ACT_SLOT_NO_COMMON ) != SAVE_STATUS_OK )

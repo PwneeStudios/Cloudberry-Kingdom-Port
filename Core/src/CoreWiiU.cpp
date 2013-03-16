@@ -46,8 +46,6 @@ CoreWiiU &CoreWiiU::operator = ( const CoreWiiU &rhs )
 	return *this;
 }
 
-char *GLOBAL_ACCOUNT_NAME;
-static char LOCAL_ACCOUNT_NAME[ ACT_ACCOUNT_ID_SIZE ];
 static u8 *ErrorViewerWorkArea = NULL;
 extern FSClient *GLOBAL_FSClient;
 bool ReEnableHomeButton = false;
@@ -76,6 +74,63 @@ u32 HomeButtonDeniedCallback( void *context )
 
 GX2ColorBuffer TheColorBuffer;
 GX2Texture TheColorBufferTexture;
+static MEMHeapHandle TheMEM1Heap = MEM_HEAP_INVALID_HANDLE;
+static const int DRCRenderWidth = 854;
+static const int DRCRenderHeight = 480;
+
+
+static void InitTheMEM1Heap()
+{
+	// Create a heap for our own render targets.
+	MEMHeapHandle hMEM1 = MEMGetBaseHeapHandle( MEM_ARENA_1 );
+	u32 uMEM1Size = 3 * 1280 * 720 * 4;
+	void *startOfMem1 = MEMAllocFromFrmHeapEx( hMEM1, uMEM1Size, 4 );
+	TheMEM1Heap = MEMCreateExpHeap( startOfMem1, uMEM1Size );
+	if( TheMEM1Heap != MEM_HEAP_INVALID_HANDLE )
+		LOG.Write( "Good MEM1 heap\n" );
+
+}
+
+static void DestroyTheMEM1Heap()
+{
+	DEMOAssert( TheMEM1Heap != MEM_HEAP_INVALID_HANDLE );
+
+	MEMDestroyExpHeap( TheMEM1Heap );
+	TheMEM1Heap = MEM_HEAP_INVALID_HANDLE;
+
+	MEMHeapHandle hMEM1 = MEMGetBaseHeapHandle( MEM_ARENA_1 );
+	MEMFreeToFrmHeap( hMEM1, MEM_FRMHEAP_FREE_ALL );
+}
+
+void *AllocFromTheMEM1Heap( u32 size, u32 align )
+{
+	if( align < 4 )
+		align = 4;
+
+	DEMOAssert( TheMEM1Heap != MEM_HEAP_INVALID_HANDLE );
+
+	void *ptr = MEMAllocFromExpHeapEx( TheMEM1Heap, size, align );
+	GX2NotifyMemAlloc( ptr, size, align );
+
+	DEMOAssert( ptr && "Failed allocation from TheMEM1Heap" );
+	return ptr;
+}
+
+void FreeToTheMEM1Heap( void *ptr )
+{
+	MEMFreeToExpHeap( TheMEM1Heap, ptr );
+	GX2NotifyMemFree( ptr );
+}
+
+void SetDRCColorBuffer()
+{
+	GX2SetColorBuffer( &DEMODRCColorBuffer, GX2_RENDER_TARGET_0 );
+	GX2SetDepthBuffer( &DEMODRCDepthBuffer );
+
+	GX2SetViewport( 0, 0, (f32)DRCRenderWidth, (f32)DRCRenderHeight, 0.0f, 1.0f );
+	GX2SetScissor( 0, 0, DRCRenderWidth, DRCRenderHeight );
+	GX2SetDRCScale( DRCRenderWidth, DRCRenderHeight );
+}
 
 // Kill the video player if it's still alive, we don't want stuff running in the background in case we are exiting.
 extern void ForceKillVideoPlayer();
@@ -92,29 +147,33 @@ void FinalReleaseCallback()
 
 	StopScheduler();
 
-	ProcUIDrawDoneRelease();
-}
-
-u32 ReleaseForegroundCallback( void *context )
-//void ReleaseForegroundCallback()
-{
-	DEMOGfxFreeMEM1( TheColorBuffer.surface.imagePtr );
+	FreeToTheMEM1Heap( TheColorBuffer.surface.imagePtr );
 
 	// Free up render targets.
 	LOG.Write( "Freeing %d render targets\n", GlobalRenderTargets.size() );
 	std::vector< RenderTarget2DInternal * >::iterator i;
 	for( i = GlobalRenderTargets.begin(); i != GlobalRenderTargets.end(); ++i )
 	{
-		DEMOGfxFreeMEM1( ( *i )->ColorBuffer.surface.imagePtr );
+		FreeToTheMEM1Heap( ( *i )->ColorBuffer.surface.imagePtr );
 	}
 
+	DestroyTheMEM1Heap();
+
+	ProcUIDrawDoneRelease();
+}
+
+u32 ReleaseForegroundCallback( void *context )
+//void ReleaseForegroundCallback()
+{
 	return 0;
 }
 
 u32 AcquireForegroundCallback( void *context )
 {
+	InitTheMEM1Heap();
+
 	GX2InitColorBuffer( &TheColorBuffer, 1280, 720, DEMOColorBuffer.surface.format/*GX2_SURFACE_FORMAT_TCS_R8_G8_B8_A8_UNORM*/, GX2_AA_MODE_1X );
-	void *ptr = DEMOGfxAllocMEM1( TheColorBuffer.surface.imageSize, TheColorBuffer.surface.alignment );
+	void *ptr = AllocFromTheMEM1Heap( TheColorBuffer.surface.imageSize, TheColorBuffer.surface.alignment );
 	GX2Invalidate( GX2_INVALIDATE_CPU, ptr, TheColorBuffer.surface.imageSize );
 	GX2InitColorBufferPtr( &TheColorBuffer, ptr );
 	
@@ -127,7 +186,7 @@ u32 AcquireForegroundCallback( void *context )
 	std::vector< RenderTarget2DInternal * >::iterator i;
 	for( i = GlobalRenderTargets.begin(); i != GlobalRenderTargets.end(); ++i )
 	{
-		GX2InitColorBufferPtr( &( *i )->ColorBuffer, DEMOGfxAllocMEM1(
+		GX2InitColorBufferPtr( &( *i )->ColorBuffer, AllocFromTheMEM1Heap(
 			( *i )->ColorBuffer.surface.imageSize,
 			( *i )->ColorBuffer.surface.alignment
 		) );
@@ -153,6 +212,9 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 	GX2DebugCaptureInit( NULL );
 
 	DEMOInit();
+
+	InitTheMEM1Heap();
+
 	DEMOTestInit( 0, NULL );
 	char *gfxArgs[] = { "DEMO_CB_FORMAT 8_8_8_8", "DEMO_SCAN_FORMAT 8_8_8_8" };
 	char *drcArgs[] = { "DEMO_DRC_CB_FORMAT 8_8_8_8", "DEMO_DRC_SCAN_FORMAT 8_8_8_8" };
@@ -162,14 +224,14 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 	//DEMOSetReleaseCallback( ForegroundReleaseCallback );
 
 	// Allocate space for MEM1 for process switching.
-	u32 mem1Size;
+	/*u32 mem1Size;
 	OSGetMemBound( OSMem_MEM1, ( u32 * )&mem1Storage_, &mem1Size );
 	mem1Storage_ = MEMAllocFromDefaultHeap( mem1Size );
-	ProcUISetMEM1Storage( mem1Storage_, mem1Size );
+	ProcUISetMEM1Storage( mem1Storage_, mem1Size );*/
 
 	GX2InitColorBuffer( &TheColorBuffer, 1280, 720, DEMOColorBuffer.surface.format/*GX2_SURFACE_FORMAT_TCS_R8_G8_B8_A8_UNORM*/,
 		GX2_AA_MODE_1X );
-	void *ptr = DEMOGfxAllocMEM1( TheColorBuffer.surface.imageSize, TheColorBuffer.surface.alignment );
+	void *ptr = AllocFromTheMEM1Heap( TheColorBuffer.surface.imageSize, TheColorBuffer.surface.alignment );
 	GX2Invalidate( GX2_INVALIDATE_CPU, ptr, TheColorBuffer.surface.imageSize );
 	GX2InitColorBufferPtr( &TheColorBuffer, ptr );
 
@@ -226,7 +288,7 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 	ProcUIRegisterCallback( PROCUI_MESSAGE_HBDENIED, HomeButtonDeniedCallback, NULL, 100 );
 	ProcUIRegisterCallback( PROCUI_MESSAGE_RELEASE, ReleaseForegroundCallback, NULL, 250 );
 	DEMOSetReleaseCallback( FinalReleaseCallback );
-	ProcUIRegisterCallback( PROCUI_MESSAGE_ACQUIRE, AcquireForegroundCallback, NULL, 250 );
+	ProcUIRegisterCallback( PROCUI_MESSAGE_ACQUIRE, AcquireForegroundCallback, NULL, 50 );
 	//ProcUISetSaveCallback( SaveOnExitCallback, NULL );
 
 	// Initialize shaders for video renderer.
@@ -275,8 +337,8 @@ CoreWiiU::~CoreWiiU()
 	delete ErrorViewerWorkArea;
 
 	// Free MEM1 backup.
-	ProcUISetMEM1Storage( NULL, 0 );
-	MEMFreeToDefaultHeap( mem1Storage_ );
+	/*ProcUISetMEM1Storage( NULL, 0 );
+	MEMFreeToDefaultHeap( mem1Storage_ );*/
 
 	DEMODRCShutdown();
 	DEMOGfxShutdown();
@@ -505,14 +567,13 @@ int CoreWiiU::Run()
 			if( DEMODRCGetStatus() != GX2_DRC_NONE )
 			{
 				DEMODRCBeforeRender();
-				
-				float r = (float)rand() / RAND_MAX;
-				float g = (float)rand() / RAND_MAX;
-				float b = (float)rand() / RAND_MAX;
-				GX2ClearColor( &DEMODRCColorBuffer, r, g, b, 1 );
+
+				GX2ClearColor( &DEMODRCColorBuffer, 0, 0, 0, 1 );
 				GX2ClearDepthStencil( &DEMODRCDepthBuffer, GX2_CLEAR_BOTH );
 
 				GX2SetContextState( DEMODRCContextState );
+
+				SetDRCColorBuffer();
 
 				drawDRCTextureFrame( &TheColorBufferTexture );
 

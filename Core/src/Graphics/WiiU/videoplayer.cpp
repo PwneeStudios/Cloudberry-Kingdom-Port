@@ -405,6 +405,9 @@ s32 VideoInit(s32 threadnum)
             }
             MP4PlayerCorePtr[threadnum]->List_h264decfm[i].used = 0;
             MP4PlayerCorePtr[threadnum]->List_h264decfm[i].h264decfm = MP4PlayerCorePtr[threadnum]->h264decfm[i];
+
+			// FIXME: This empties the buffer before use to prevent previous memory from being displayed.
+			memset( MP4PlayerCorePtr[ threadnum ]->h264decfm[ i ], 0, YuvBufSize );
         }
     }
 
