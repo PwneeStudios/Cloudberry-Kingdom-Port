@@ -414,6 +414,8 @@ namespace CloudberryKingdom
 
 	void Door::Interact( const boost::shared_ptr<Bob> &bob )
 	{
+		static int FramesSinceInteractedWith = 0;
+
 		if ( Locked || getOnOpen() == 0 || getMyLevel()->PlayMode != 0 )
 			return;
 
@@ -432,6 +434,8 @@ namespace CloudberryKingdom
 		bool InteractedWith = false;
 		if ( ( ( fabs( bob->getPos().X - getPos().X ) < x_pad && fabs(bob->getPos().Y - getPos().Y) < y_pad ) ) && (!bob->CompControl || AllowCompControl) && !getCore()->MyLevel->Watching && !getCore()->MyLevel->Replay )
 		{
+			FramesSinceInteractedWith = 0;
+
 			NearCount++;
 			//if (NearCount > 10 || MyPressNote != null) // For debugging purposes, always have the note show up.
 			if ( NearCount > getDelayToShowNote() || MyPressNote != 0 )
@@ -463,8 +467,11 @@ namespace CloudberryKingdom
 		}
 		else
 		{
-			NearCount = CoreMath::RestrictVal( 0, 30, NearCount );
-			NearCount--;
+			if (FramesSinceInteractedWith > 3)
+			{
+				NearCount = CoreMath::RestrictVal( 0, 30, NearCount );
+				NearCount--;
+			}
 		}
 
 		if ( !InteractedWith )
