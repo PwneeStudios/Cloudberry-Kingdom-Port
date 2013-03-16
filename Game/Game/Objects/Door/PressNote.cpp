@@ -18,6 +18,8 @@ namespace CloudberryKingdom
 			GUI_Text_Construct( Format( Localization::WordString( Localization::Words_Press_WiiU ).c_str(), ButtonString::X(    ButtonScale ).c_str() ), Parent->getPos(), true );
 		else
 			GUI_Text_Construct( Format( Localization::WordString( Localization::Words_Press_WiiU ).c_str(), ButtonString::Back( ButtonScale ).c_str() ), Parent->getPos(), true );
+#elif defined(PS3)
+		GUI_Text_Construct( Format( Localization::WordString( Localization::Words_PressStart_PS3 ).c_str(), ButtonString::X( ButtonScale ).c_str() ), Parent->getPos(), true );
 #else
 		GUI_Text_Construct( Format( Localization::WordString( Localization::Words_Press ).c_str(), ButtonString::X( ButtonScale ).c_str() ), Parent->getPos(), true );
 #endif

@@ -3438,9 +3438,9 @@ int Level::AfterPostDrawLayer = 12;
 		boost::shared_ptr<PresentationParameters> pp = Tools::Device->PP;
 
 #ifdef CAFE
-		LightRenderTarget = boost::make_shared<RenderTarget2D>( Tools::Device, 1280, 720, false, pp->BackBufferFormat, pp->DepthStencilFormat, pp->MultiSampleCount, true );
+		//LightRenderTarget = boost::make_shared<RenderTarget2D>( Tools::Device, 1280, 720, false, pp->BackBufferFormat, pp->DepthStencilFormat, pp->MultiSampleCount, true );
 #else
-		LightRenderTarget = boost::make_shared<RenderTarget2D>( Tools::Device, pp->BackBufferWidth, pp->BackBufferHeight, false, pp->BackBufferFormat, pp->DepthStencilFormat, pp->MultiSampleCount, true );
+		//LightRenderTarget = boost::make_shared<RenderTarget2D>( Tools::Device, pp->BackBufferWidth, pp->BackBufferHeight, false, pp->BackBufferFormat, pp->DepthStencilFormat, pp->MultiSampleCount, true );
 #endif
 
 		LightQuad = boost::make_shared<QuadClass>();
