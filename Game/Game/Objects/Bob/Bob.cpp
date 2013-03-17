@@ -105,7 +105,7 @@ namespace CloudberryKingdom
 			if (angle < 0)
 				angle += tau;
 
-			unsigned int x = static_cast<unsigned int>( abs( v.X ) * 0.7f ) << 20;
+			unsigned int x = static_cast<unsigned int>( fabs( v.X ) * 0.7f ) << 20;
 			x += v.X > static_cast<unsigned int>( 0 ) ? static_cast<unsigned int>( 0 ) : ((static_cast<unsigned int>( 1 )) << 31 );
 			unsigned int y = ( static_cast<unsigned int>( v.Y * 1.0f ) << 20 ) >> 12;
 			unsigned int a = ( static_cast<unsigned int>( angle * 32.0f ) << 24 ) >> 24;

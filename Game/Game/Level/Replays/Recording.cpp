@@ -151,7 +151,8 @@ namespace CloudberryKingdom
 		Recordings.clear();
 	}
 
-	Recording::Recording( int NumBobs, int Length )
+	Recording::Recording( int NumBobs, int Length ) :
+		Length( 0 )
 	{
 		Init( NumBobs, Length );
 	}
@@ -180,8 +181,7 @@ namespace CloudberryKingdom
 		Length = level->CurPhsxStep;
 		for ( int i = 0; i < NumBobs; i++ )
 		{
-			if ( i >= static_cast<int>( level->Bobs.size() ) )
-				continue;
+			if ( i >= static_cast<int>( level->Bobs.size() ) ) continue;
 
 			Recordings[i]->t[ level->CurPhsxStep ] = level->Bobs[i]->StoredRecordTexture;
 
@@ -191,7 +191,6 @@ namespace CloudberryKingdom
 				Recordings[i]->Box_Size[ level->CurPhsxStep ] = level->Bobs[i]->StoredRecord_QuadSize;
 			}
 
-			Recordings[ i ]->t[ level->CurPhsxStep ] = level->Bobs[ i ]->PlayerObject->t;
 			Recordings[ i ]->AutoLocs[ level->CurPhsxStep ] = level->Bobs[ i ]->getCore()->Data.Position;
 			Recordings[ i ]->AutoVel[ level->CurPhsxStep ] = level->Bobs[ i ]->getCore()->Data.Velocity;
 			Recordings[ i ]->Input[ level->CurPhsxStep ] = level->Bobs[ i ]->CurInput;

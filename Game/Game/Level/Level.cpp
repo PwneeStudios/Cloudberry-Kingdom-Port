@@ -1214,7 +1214,9 @@ namespace CloudberryKingdom
 		// Release the computer (current Bobs vector)
 		for ( BobVec::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
 		{
+			( *bob )->MyRecord.reset();
 			Clear( ( *bob )->PlayerObject->AnimQueue );
+			( *bob )->Release();
 		}
 		Bobs.clear();
 

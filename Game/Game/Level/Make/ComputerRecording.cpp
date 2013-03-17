@@ -129,15 +129,15 @@ namespace CloudberryKingdom
 	{
 		if ( SuperSparse ) return;
 
-		Input.clear();
-		AutoJump.clear();
-		AutoLocs.clear();
-		AutoVel.clear();
-		AutoOnGround.clear();
+		std::vector<BobInput>( ).swap( Input );
+		std::vector<int>( ).swap( AutoJump );
+		std::vector<Vector2>( ).swap( AutoLocs );
+		std::vector<Vector2>( ).swap( AutoVel );
+		std::vector<bool>( ).swap( AutoOnGround );
 
-		Box_BL.resize( Step + 1, 0 );
-		Box_Size.resize( Step + 1, 0 );
-		t.resize( Step + 1, 0 );
+		std::vector<unsigned int>( Box_BL	).swap( Box_BL  );
+		std::vector<unsigned int>( Box_Size ).swap( Box_Size );
+		std::vector<int>		 ( t		).swap( t		 );
 
 		SuperSparse = true;
 	}
