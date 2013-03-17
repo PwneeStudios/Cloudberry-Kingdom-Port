@@ -8,6 +8,11 @@
 
 #endif
 
+#ifdef CAFE
+	// From SaveWiiU.cpp.  Trying to get the account name.
+	extern char *GLOBAL_ACCOUNT_NAME;
+#endif
+
 namespace CloudberryKingdom
 {
 
@@ -390,15 +395,12 @@ namespace CloudberryKingdom
 		//text.OutlineColor = Generic.PlayerColorSchemes[PlayerIndex].OutlineColor.Clr.ToVector4();
 	}
 
-	// From CoreWiiU.  Trying to get the account name.
-	extern char *GLOBAL_ACCOUNT_NAME;
-
 	std::wstring PlayerData::GetName()
 	{
-/*#if CAFE
+#if CAFE
 		if( MyIndex == 0 )
-			return Utf8ToWstring( GLOBAL_ACCOUNT_NAME );
-#endif*/
+			return Utf8ToWstring( GLOBAL_ACCOUNT_NAME ? GLOBAL_ACCOUNT_NAME : "" );
+#endif
 
 	#if defined(XBOX) || defined(XBOX_SIGNIN)
 		if ( getMyGamer() != 0 )

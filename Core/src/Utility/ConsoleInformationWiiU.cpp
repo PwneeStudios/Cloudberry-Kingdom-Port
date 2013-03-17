@@ -1,5 +1,7 @@
 #include <Utility/ConsoleInformation.h>
 
+#include <Utility/Log.h>
+
 #include <cafe.h>
 #include <cafe/gx2.h>
 #include <cafe/sci/sciEnum.h>
@@ -78,7 +80,8 @@ ConsoleLanguage GetConsoleLanguage()
 
 void SetErrorLanguage( ConsoleLanguage language )
 {
-	SCIPlatformRegion region;
+	LOG.Write( "Ignoring SetErrorLanguage\n" );
+	/*SCIPlatformRegion region;
 	SCIStatus status = SCIGetPlatformRegion( &region );
 	if( status != SCI_STATUS_SUCCESS )
 		region = SCI_PLATFORM_REGION_USA;
@@ -158,7 +161,7 @@ void SetErrorLanguage( ConsoleLanguage language )
 		}
 	}
 
-	nn::erreula::ChangeLangError( static_cast< nn::erreula::LangType >( internalLanguage ) );
+	nn::erreula::ChangeLangError( static_cast< nn::erreula::LangType >( internalLanguage ) );*/
 }
 
 bool IsOnlineContentRestricted()
