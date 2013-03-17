@@ -209,7 +209,7 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 	content_( 0 ),
 	scheduler_( 0 )
 {
-	GX2DebugCaptureInit( NULL );
+	//GX2DebugCaptureInit( NULL );
 
 	DEMOInit();
 

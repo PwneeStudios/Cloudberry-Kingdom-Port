@@ -161,14 +161,17 @@ static void startStreamPcm16(s32 threadnum)
     addrR[threadnum].endOffset     = MP4PlayerCorePtr[threadnum]->STREAMBUFFER_SIZE >> 1;
     addrR[threadnum].currentOffset = 0;
 
-    if (threadnum)
+	AXSetDeviceUpsampleStage( AX_DEVICE_DRC, 0 );
+	AXSetDeviceUpsampleStage( AX_DEVICE_TV, 0 );
+
+    /*if (threadnum)
     {
         AXSetDeviceUpsampleStage        (AX_DEVICE_DRC, 0); // 32kHz データ再生する時は、この引数を 1 に。
     }
     else
     {
         AXSetDeviceUpsampleStage        (AX_DEVICE_TV,  0); // 32kHz データ再生する時は、この引数を 1 に。
-    }
+    }*/
 }
 
 
@@ -262,7 +265,7 @@ static void handleFinalMixDRC(AX_FINAL_MIX_CB_STRUCT *info)
     
     ASSERT(info->numChnsIn == AX_MAX_NUM_DRC_CHS);
     
-    threadnum = 1;
+    threadnum = 0;
 
     lptr     = info->data[0];
     rptr     = info->data[1];
@@ -297,10 +300,10 @@ static void handleFinalMixDRC(AX_FINAL_MIX_CB_STRUCT *info)
         *surRight++ = 0;
     }
     
-    addrL[threadnum].currentOffset = indexL;
-    addrR[threadnum].currentOffset = indexR;
+    /*addrL[threadnum].currentOffset = indexL;
+    addrR[threadnum].currentOffset = indexR;*/
     
-    callbackAudioFrame(threadnum);
+    //callbackAudioFrame(threadnum);
 }
 
 
@@ -312,7 +315,15 @@ static void handleFinalMixDRC(AX_FINAL_MIX_CB_STRUCT *info)
  *-------------------------------------------------------------------------*/
 void AudioStart(s32 mode)
 {
-    if (mode == 0)
+	if( MP4DemuxCorePtr[ 0 ]->AudioTrackFound )
+	{
+		AXRegisterDeviceFinalMixCallback( AX_DEVICE_TV,  handleFinalMixTV );
+		AXRegisterDeviceFinalMixCallback( AX_DEVICE_DRC, handleFinalMixDRC );
+        OSSleepMilliseconds( 50 );
+        MP4PlayerCorePtr[ 0 ]->Audio_Action = STREAM_STARTED;
+	}
+
+	/*if (mode == 0)
     {
         if (MP4DemuxCorePtr[0]->AudioTrackFound)
         {
@@ -329,7 +340,7 @@ void AudioStart(s32 mode)
             OSSleepMilliseconds(50);
             MP4PlayerCorePtr[1]->Audio_Action = STREAM_STARTED;
         }
-    }
+    }*/
 }
 
 
@@ -381,14 +392,16 @@ void AudioBufferAlloc(s32 SampleSize, s32 threadnum)
 void AudioExit(s32 threadnum)
 {
     // stop the adpcm stream
-    if (threadnum == 0)
+    AXRegisterDeviceFinalMixCallback( AX_DEVICE_TV,  NULL );
+	AXRegisterDeviceFinalMixCallback( AX_DEVICE_DRC,  NULL );
+    /*if (threadnum == 0)
     {
         AXRegisterDeviceFinalMixCallback(AX_DEVICE_TV,  NULL);
     }
     else
     {
         AXRegisterDeviceFinalMixCallback(AX_DEVICE_DRC,  NULL);
-    }
+    }*/
     MP4PlayerCorePtr[threadnum]->Audio_Action = STREAM_NONE;
 
     memset(MP4PlayerCorePtr[threadnum]->PCMBufferL, 0, MP4PlayerCorePtr[threadnum]->STREAMBUFFER_SIZE);   // Buffer Initialize

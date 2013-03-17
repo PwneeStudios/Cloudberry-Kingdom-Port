@@ -1,5 +1,6 @@
 #include <Utility/Save.h>
 
+#include <Hacks/String.h>
 #include <nn/act.h>
 #include <nn/save.h>
 #include <Utility/Error.h>
@@ -41,10 +42,11 @@ bool InitializeSave()
 		}
 	}
 
+	nn::Result r;
 	GLOBAL_ACCOUNT_NAME = LOCAL_ACCOUNT_NAME;
 	memset( LOCAL_ACCOUNT_NAME, 0, sizeof( LOCAL_ACCOUNT_NAME ) );
 	sprintf( LOCAL_ACCOUNT_NAME, "Errorberry" );
-	nn::act::GetAccountId( LOCAL_ACCOUNT_NAME );
+	r = nn::act::GetAccountId( LOCAL_ACCOUNT_NAME );
 	
 	LOG.Write( "Creating global directory\n" );
 	if( SAVEInitSaveDir( ACT_SLOT_NO_COMMON ) != SAVE_STATUS_OK )
