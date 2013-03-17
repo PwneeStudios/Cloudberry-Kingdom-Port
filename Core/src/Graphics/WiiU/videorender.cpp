@@ -316,9 +316,6 @@ void drawTVFrame()
     return;
 }
 
-// Force st the drc color buffer in case it got mangled.
-extern void SetDRCColorBuffer();
-
 void drawDRCFrame()
 {
     u32 attribBuffer = 0;
@@ -342,8 +339,6 @@ void drawDRCFrame()
 
     // Restore state that was saved when DEMODRCInit was called.
     GX2SetContextState(DEMODRCContextState);
-
-	SetDRCColorBuffer();
 
     // Set Attrib buffer
     GX2SetAttribBuffer(attribBuffer,
@@ -372,6 +367,8 @@ void drawDRCFrame()
 
 	if( DrawSubtitles )
 		DrawSubtitles();
+
+	DEMODRCSetContextState();
 
 	GX2SurfaceFormat f = DEMODRCColorBuffer.surface.format;
 	DEMODRCColorBuffer.surface.format = static_cast< GX2SurfaceFormat >( f | 0x00000400 );
