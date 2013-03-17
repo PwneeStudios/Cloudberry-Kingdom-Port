@@ -276,10 +276,46 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 	}
 
 	createArg.mLang = nn::erreula::cLangType_En;
-	SCICafeLanguage language;
-	status = SCIGetCafeLanguage( &language );
+	SCICafeLanguage internalLanguage;
+	status = SCIGetCafeLanguage( &internalLanguage );
+
+	if( region == SCI_PLATFORM_REGION_JPN
+		&& ( internalLanguage != SCI_CAFE_LANGUAGE_JAPANESE ) )
+		internalLanguage = SCI_CAFE_LANGUAGE_JAPANESE;
+	else if( region == SCI_PLATFORM_REGION_USA )
+	{
+		switch( internalLanguage )
+		{
+		case SCI_CAFE_LANGUAGE_ENGLISH:
+		case SCI_CAFE_LANGUAGE_FRENCH:
+		case SCI_CAFE_LANGUAGE_SPANISH:
+		case SCI_CAFE_LANGUAGE_PORTUGUESE:
+			break;
+		default:
+			internalLanguage = SCI_CAFE_LANGUAGE_ENGLISH;
+		}
+	}
+	else if( region == SCI_PLATFORM_REGION_EUR
+		|| ( region == SCI_PLATFORM_REGION_AUS ) )
+	{
+		switch( internalLanguage )
+		{
+		case SCI_CAFE_LANGUAGE_ENGLISH:
+		case SCI_CAFE_LANGUAGE_FRENCH:
+		case SCI_CAFE_LANGUAGE_SPANISH:
+		case SCI_CAFE_LANGUAGE_PORTUGUESE:
+		case SCI_CAFE_LANGUAGE_GERMAN:
+		case SCI_CAFE_LANGUAGE_ITALIAN:
+		case SCI_CAFE_LANGUAGE_DUTCH:
+		case SCI_CAFE_LANGUAGE_RUSSIAN:
+			break;
+		default:
+			internalLanguage = SCI_CAFE_LANGUAGE_ENGLISH;
+		}
+	}
+
 	if( status == SCI_STATUS_SUCCESS )
-		createArg.mLang = static_cast< nn::erreula::LangType >( language );
+		createArg.mLang = static_cast< nn::erreula::LangType >( internalLanguage );
 
 	nn::erreula::Create( createArg );
 	ReEnableHomeButton = false;
