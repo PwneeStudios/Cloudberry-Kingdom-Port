@@ -195,6 +195,8 @@ int GLOBAL_HEIGHT;
 // Preallocate all memory used by video player.  Defined in VideoPlayerPS3.cpp.
 extern void ReserveVideoPlayerMemory();
 
+extern void KillVideoPlayer();
+
 CorePS3::CorePS3( GameLoop &game ) :
 	running_( false ),
 	game_( game ),
@@ -806,6 +808,8 @@ int CorePS3::Run()
 		glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 		psglSwap();
 	}*/
+
+	KillVideoPlayer();
 
 	return 0;
 }

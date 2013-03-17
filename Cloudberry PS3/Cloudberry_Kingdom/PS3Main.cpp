@@ -1,6 +1,7 @@
 #include <Core.h>
 #include <CloudberryKingdom.h>
 #include <Content/Filesystem.h>
+#include <stdlib.h>
 #include <stdio.h>
 
 #include <Utility/Log.h>
@@ -43,5 +44,6 @@ int main(int argc, char *argv)
 
 	theLog.RemoveListener( osLog );
 
+	_Exit( 0 );
 	return result;
 }
