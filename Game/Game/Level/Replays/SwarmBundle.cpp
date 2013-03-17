@@ -17,6 +17,12 @@ namespace CloudberryKingdom
 
 	void SwarmBundle::Release()
 	{
+		for ( std::vector<boost::shared_ptr<BobLink> >::const_iterator link = BobLinks.begin(); link != BobLinks.end(); ++link )
+		{
+			( *link )->j.reset();
+			( *link )->k.reset();
+		}
+
 		BobLinks.clear();
 
 		for ( std::vector<boost::shared_ptr<SwarmRecord> >::const_iterator swarm = Swarms.begin(); swarm != Swarms.end(); ++swarm )

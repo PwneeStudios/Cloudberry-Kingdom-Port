@@ -34,11 +34,10 @@ namespace CloudberryKingdom
 
 		std::vector<BobInput> Input;
 		std::vector<int> AutoJump;
-		std::vector<Vector2> AutoLocs, AutoVel, BoxCenter;
+		std::vector<Vector2> AutoLocs, AutoVel;
+		std::vector<unsigned int> Box_BL, Box_Size;
 		std::vector<bool> AutoOnGround;
-		std::vector<unsigned char> Anim;
-		std::vector<float> t;
-		std::vector<bool> Alive;
+		std::vector<int> t;
 
 		void Shift( Vector2 shift );
 
@@ -50,20 +49,12 @@ namespace CloudberryKingdom
 
 		void Clean();
 
-		bool GetAlive( int Step );
-
-		unsigned char GetAnim( int Step );
-
-		float Gett( int Step );
+		int Gett( int Step );
 
 		Vector2 GetBoxCenter( int Step );
+		Vector2 GetBoxSize( int Step );
 
-
-
-		template<typename T>
-		std::vector<T> PareDown( std::vector<T> SourceArray );
-
-		void ConvertToSuperSparse();
+		void ConvertToSuperSparse( int Step );
 
 		void Release();
 

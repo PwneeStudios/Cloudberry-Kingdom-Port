@@ -79,7 +79,8 @@ namespace CloudberryKingdom
 		{
 			for ( std::vector<boost::shared_ptr<BobLink> >::const_iterator link = BobLinks.begin(); link != BobLinks.end(); ++link )
 			{
-				if ( boost::dynamic_pointer_cast<BobPhsxSpaceship>( level->DefaultHeroType ) != 0 && ( !Recordings[ ( *link )->_j ]->GetAlive( Step ) || !Recordings[ ( *link )->_k ]->GetAlive( Step ) ) )
+				if ( boost::dynamic_pointer_cast<BobPhsxSpaceship>( level->DefaultHeroType ) != 0 &&
+					( Recordings[ ( *link )->_j ]->Gett( Step ) == 0 || Recordings[ ( *link )->_k ]->Gett( Step ) == 0 ) )
 					continue;
 				( *link )->Draw( Recordings[ ( *link )->_j ]->GetBoxCenter( Step ), Recordings[ ( *link )->_k ]->GetBoxCenter( Step ) );
 			}
@@ -87,14 +88,16 @@ namespace CloudberryKingdom
 
 		for ( int i = 0; i < NumBobs; i++ )
 		{
-			if ( i >= static_cast<int>( level->Bobs.size() ) )
-				continue;
+			if ( i >= static_cast<int>( level->Bobs.size() ) ) continue;
+			if ( Step > 2 && Step == Recordings[i]->Box_BL.size() - 2 ) ParticleEffects::AddPop( level, Recordings[i]->GetBoxCenter( Step - 2 ) );
+			if ( Step >= Recordings[ i ]->Box_BL.size() ) continue;
+
 			if ( Step < Length - 1 )
 			{
-				if ( boost::dynamic_pointer_cast<BobPhsxSpaceship>( level->DefaultHeroType ) != 0 )
-					if ( Step > 0 && !Recordings[ i ]->GetAlive( Step ) )
+				//if ( boost::dynamic_pointer_cast<BobPhsxSpaceship>( level->DefaultHeroType ) != 0 )
+					if ( Step > 0 && Recordings[ i ]->Gett( Step ) <= 0 )
 					{
-						if ( Recordings[ i ]->GetAlive( Step - 1 ) )
+						if ( Recordings[ i ]->Gett( Step - 1 ) > 0 )
 						{
 							ParticleEffects::AddPop( level, Recordings[ i ]->GetBoxCenter( Step ) );
 						}
@@ -102,14 +105,21 @@ namespace CloudberryKingdom
 					}
 
 				Vector2 padding = Vector2();
-				int anim = static_cast<int>( Recordings[ i ]->GetAnim( Step ) );
-				if ( anim > 200 )
-					continue;
 
-				BobQuad->Quad_Renamed.getMyTexture()->setTex( AnimGroup[ i ]->Get( anim, Recordings[ i ]->Gett( Step ), padding ) );
+				//BobQuad->Quad_Renamed.getMyTexture()->setTex( AnimGroup[ i ]->Get( anim, Recordings[ i ]->Gett( Step ), padding ) );
+				int texture_index = Recordings[ i ]->Gett( Step );
+				if ( texture_index == 0 ) continue;
+				BobQuad->Quad_Renamed.getMyTexture()->_Tex = Tools::TextureWad->TextureList[ texture_index ]->_Tex;
 
-				BobQuad->Base.e1 = Vector2( BoxSize.X + padding.X, 0 );
-				BobQuad->Base.e2 = Vector2( 0, BoxSize.Y + padding.Y );
+				Vector2 size = Recordings[ i ]->GetBoxSize( Step ) / 2.0f;
+
+				BobQuad->Base.e1 = Vector2( size.X, 0 );
+				BobQuad->Base.e2 = Vector2( 0, size.Y );
+
+				float a = Bob::UnpackIntIntoVector_Angle( Recordings[ i ]->Box_Size[ Step ] );
+				if (a != 0)
+					CoreMath::PointxAxisToAngle( BobQuad->Base, a );
+  
 				BobQuad->Base.Origin = Recordings[ i ]->GetBoxCenter( Step );
 				if ( BobQuad->Base.Origin == Vector2() )
 					continue;
@@ -117,17 +127,17 @@ namespace CloudberryKingdom
 				BobQuad->Draw();
 				Tools::QDrawer->Flush();
 			}
-			else
-				if ( Step == Length - 1 && !level->ReplayPaused && !( boost::dynamic_pointer_cast<BobPhsxSpaceship>( level->DefaultHeroType ) != 0 && !Recordings[ i ]->GetAlive( Length - 1 ) ) )
-					ParticleEffects::AddPop( level, Recordings[ i ]->GetBoxCenter( Length - 1 ) );
+			//else
+			//	if ( Step == Length - 1 && !level->ReplayPaused && !( boost::dynamic_pointer_cast<BobPhsxSpaceship>( level->DefaultHeroType ) != 0 && !Recordings[ i ]->GetAlive( Length - 1 ) ) )
+			//		ParticleEffects::AddPop( level, Recordings[ i ]->GetBoxCenter( Length - 1 ) );
 		}
 	}
 
-	void Recording::ConvertToSuperSparse()
+	void Recording::ConvertToSuperSparse( int Step )
 	{
 		for ( int i = 0; i < static_cast<int>( Recordings.size() ); i++ )
 		{
-			Recordings[ i ]->ConvertToSuperSparse();
+			Recordings[ i ]->ConvertToSuperSparse( this->Length );
 		}
 	}
 
@@ -167,28 +177,30 @@ namespace CloudberryKingdom
 		if ( level->CurPhsxStep < 0 )
 			return;
 
-		BoxSize = level->Bobs[ 0 ]->PlayerObject->BoxList[ 0 ]->Size() / 2;
-
 		Length = level->CurPhsxStep;
 		for ( int i = 0; i < NumBobs; i++ )
 		{
 			if ( i >= static_cast<int>( level->Bobs.size() ) )
 				continue;
 
-			Recordings[ i ]->Anim[ level->CurPhsxStep ] = static_cast<unsigned char>( level->Bobs[ i ]->PlayerObject->anim );
+			Recordings[i]->t[ level->CurPhsxStep ] = level->Bobs[i]->StoredRecordTexture;
+
+			if (level->CurPhsxStep < Recordings[i]->Box_BL.size() )
+			{
+				Recordings[i]->Box_BL[ level->CurPhsxStep ] = level->Bobs[i]->StoredRecord_BL;
+				Recordings[i]->Box_Size[ level->CurPhsxStep ] = level->Bobs[i]->StoredRecord_QuadSize;
+			}
 
 			Recordings[ i ]->t[ level->CurPhsxStep ] = level->Bobs[ i ]->PlayerObject->t;
-			Recordings[ i ]->BoxCenter[ level->CurPhsxStep ] = level->Bobs[ i ]->PlayerObject->BoxList[ 0 ]->Center();
 			Recordings[ i ]->AutoLocs[ level->CurPhsxStep ] = level->Bobs[ i ]->getCore()->Data.Position;
 			Recordings[ i ]->AutoVel[ level->CurPhsxStep ] = level->Bobs[ i ]->getCore()->Data.Velocity;
 			Recordings[ i ]->Input[ level->CurPhsxStep ] = level->Bobs[ i ]->CurInput;
-			Recordings[ i ]->Alive[ level->CurPhsxStep ] = !( level->Bobs[ i ]->Dead || level->Bobs[ i ]->Dying );
 
 			if ( !level->Bobs[ i ]->getCore()->Show )
 			{
-				Recordings[ i ]->Anim[ level->CurPhsxStep ] = static_cast<unsigned char>( 255 );
-				Recordings[ i ]->AutoLocs[ level->CurPhsxStep ] = level->getMainCamera()->Data.Position;
-				Recordings[ i ]->BoxCenter[ level->CurPhsxStep ] = Recordings[ i ]->AutoLocs[ level->CurPhsxStep ];
+				Recordings[ i ]->t[ level->CurPhsxStep ] = 0;
+				Recordings[ i ]->Box_BL[ level->CurPhsxStep ] = 0;
+				Recordings[ i ]->AutoLocs[ level->CurPhsxStep ] = Vector2();
 			}
 		}
 	}

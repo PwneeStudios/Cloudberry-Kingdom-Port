@@ -2876,7 +2876,10 @@ int Level::AfterPostDrawLayer = 12;
 		PrepareBundleToAddRecording();
 
 		if ( CurrentRecording != 0 )
+		{
 			MySwarmBundle->CurrentSwarm->AddRecord( CurrentRecording, CurPhsxStep );
+			CurrentRecording->ConvertToSuperSparse( CurPhsxStep );
+		}
 
 		if ( MySwarmBundle->CurrentSwarm->MyLevelPiece != CurPiece )
 		{

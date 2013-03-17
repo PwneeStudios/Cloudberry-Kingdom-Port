@@ -359,7 +359,7 @@ namespace CloudberryKingdom
 				)
             {
                 // Give the award to each player, or to the specified player
-#ifndef PS3
+//#ifndef PS3
                 if (player == 0)
                 {
 					std::vector<boost::shared_ptr<PlayerData> > vec = PlayerManager::getExistingPlayers();
@@ -368,7 +368,7 @@ namespace CloudberryKingdom
                 }
                 else
                     player->Awardments_Renamed->Add( award->Guid );
-#endif
+//#endif
 
 #ifdef NOT_PC
 				//Tools::Warning();

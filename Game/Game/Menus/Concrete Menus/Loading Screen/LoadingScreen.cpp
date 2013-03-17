@@ -63,10 +63,11 @@ namespace CloudberryKingdom
 
 		boost::shared_ptr<BobPhsx> type;
 		//if (Tools::WorldMap != null)
-		if ( Tools::CurGameData == 0 || Tools::CurGameData->DefaultHeroType == 0 )
-			type = Tools::WorldMap->DefaultHeroType;
-		else
-			type = Tools::CurGameData->DefaultHeroType;
+		//if ( Tools::CurGameData == 0 || Tools::CurGameData->DefaultHeroType == 0 )
+		//	type = Tools::WorldMap->DefaultHeroType;
+		//else
+		//	type = Tools::CurGameData->DefaultHeroType;
+		type = BobPhsxNormal::getInstance();
 
 		//if ( boost::dynamic_pointer_cast<BobPhsxSpaceship>( type ) != 0 )
 		//{
@@ -99,11 +100,11 @@ namespace CloudberryKingdom
 						( *quad )->Show = false;
 			}
 
-			if ( boost::dynamic_pointer_cast<BobPhsxSpaceship>( type ) != 0 )
-			{
-				for ( std::vector<boost::shared_ptr<BaseQuad> >::const_iterator quad = CenterObject->QuadList.begin(); quad != CenterObject->QuadList.end(); ++quad )
-					( *quad )->MyDrawOrder = ObjectDrawOrder_WITH_OUTLINE;
-			}
+			//if ( boost::dynamic_pointer_cast<BobPhsxSpaceship>( type ) != 0 )
+			//{
+			//	for ( std::vector<boost::shared_ptr<BaseQuad> >::const_iterator quad = CenterObject->QuadList.begin(); quad != CenterObject->QuadList.end(); ++quad )
+			//		( *quad )->MyDrawOrder = ObjectDrawOrder_WITH_OUTLINE;
+			//}
 		}
 	}
 

@@ -100,94 +100,46 @@ namespace CloudberryKingdom
 			AutoLocs[ i ] = Vector2();
 		for ( int i = 0; i < static_cast<int>( AutoVel.size() ); i++ )
 			AutoVel[ i ] = Vector2();
-		for ( int i = 0; i < static_cast<int>( BoxCenter.size() ); i++ )
-			BoxCenter[ i ] = Vector2();
+		for ( int i = 0; i < static_cast<int>( Box_BL.size() ); i++ )
+			Box_BL[ i ] = 0;
+		for ( int i = 0; i < static_cast<int>( Box_Size.size() ); i++ )
+			Box_Size[ i ] = 0;
 		for ( int i = 0; i < static_cast<int>( AutoOnGround.size() ); i++ )
 			AutoOnGround[ i ] = false;
-		for ( int i = 0; i < static_cast<int>( Anim.size() ); i++ )
-			Anim[ i ] = 0;
 		for ( int i = 0; i < static_cast<int>( t.size() ); i++ )
 			t[ i ] = 0;
-		for ( int i = 0; i < static_cast<int>( Alive.size() ); i++ )
-			Alive[ i ] = false;
 	}
 
-	bool ComputerRecording::GetAlive( int Step )
+	int ComputerRecording::Gett( int Step )
 	{
-		//if (!SuperSparse)
-			return Alive[ Step ];
-		//else
-		//    return Alive[Step / PareDivider];
-	}
-
-	unsigned char ComputerRecording::GetAnim( int Step )
-	{
-		if ( !SuperSparse )
-			return Anim[ Step ];
-		else
-			return Anim[ Step / PareDivider ];
-	}
-
-	float ComputerRecording::Gett( int Step )
-	{
-		if ( !SuperSparse )
-			return t[ Step ];
-		else
-			return t[ Step / PareDivider ];
+		return t[ Step ];
 	}
 
 	Vector2 ComputerRecording::GetBoxCenter( int Step )
 	{
-		//if (!SuperSparse)
-		if ( true )
-			return BoxCenter[ Step ];
-		else
-		{
-			//return BoxCenter[Step / PareDivider];
-
-			int i1 = Step / PareDivider;
-			int i2 = i1 + 1;
-			if ( i2 >= static_cast<int>( BoxCenter.size() ) )
-				i2 = i1;
-
-			Vector2 p1 = BoxCenter[ i1 ];
-			Vector2 p2 = BoxCenter[ i2 ];
-
-			float t = static_cast<float>( i1 * PareDivider - Step ) / static_cast<float>( PareDivider );
-			return Vector2::Lerp( p2, p1, t );
-		}
+		return Bob::UnpackIntIntoVector_Pos( Box_BL[ Step ] ) + GetBoxSize( Step ) / 2.0f;
 	}
 
-	template<typename T>
-	std::vector<T> ComputerRecording::PareDown( std::vector<T> SourceArray )
+	Vector2 ComputerRecording::GetBoxSize( int Step )
 	{
-		int n = static_cast<int>( SourceArray.size() );
-		int m = n / PareDivider;
-		std::vector<T> ParedArray = std::vector<T>( m );
-
-		for ( int i = 0; i < m; i++ )
-			ParedArray[ i ] = SourceArray[ i * PareDivider ];
-
-		return ParedArray;
+		return Bob::UnpackIntIntoVector_Size( Box_Size[ Step ] );
 	}
 
-	void ComputerRecording::ConvertToSuperSparse()
+	void ComputerRecording::ConvertToSuperSparse( int Step )
 	{
+		if ( SuperSparse ) return;
+
 		Input.clear();
 		AutoJump.clear();
 		AutoLocs.clear();
 		AutoVel.clear();
 		AutoOnGround.clear();
 
-		if ( !SuperSparse )
-		{
-			//BoxCenter = PareDown<Vector2>(BoxCenter);
-			//Alive = PareDown<bool>(Alive);
-			t = PareDown<float>( t );
-			Anim = PareDown<unsigned char>( Anim );
+		Box_BL.resize( Step + 1, 0 );
+		Box_Size.resize( Step + 1, 0 );
+		t.resize( Step + 1, 0 );
 
-			SuperSparse = true;
-		}
+		SuperSparse = true;
 	}
 
 	void ComputerRecording::Release()
@@ -198,13 +150,12 @@ namespace CloudberryKingdom
 			return;
 		}
 
-		Alive.clear();
-		Anim.clear();
 		AutoJump.clear();
 		AutoLocs.clear();
 		AutoOnGround.clear();
 		AutoVel.clear();
-		BoxCenter.clear();
+		Box_BL.clear();
+		Box_Size.clear();
 		Input.clear();
 		t.clear();
 	}
@@ -218,22 +169,18 @@ namespace CloudberryKingdom
 	{
 		this->Sparse = Sparse;
 
-		BoxCenter = std::vector<Vector2>( length );
+		Box_BL   = std::vector<unsigned int>( length );
+		Box_Size = std::vector<unsigned int>( length );
 		AutoLocs = std::vector<Vector2>( length );
-		AutoVel = std::vector<Vector2>( length );
-		Input = std::vector<BobInput>( length );
+		AutoVel  = std::vector<Vector2>( length );
+		Input    = std::vector<BobInput>( length );
 
-		Anim = std::vector<unsigned char>( length );
-		t = std::vector<float>( length );
-
-		Alive = std::vector<bool>( length );
+		t = std::vector<int>( length );
 
 		if ( !Sparse )
 		{
 			AutoJump = std::vector<int>( length );
 			AutoOnGround = std::vector<bool>( length );
 		}
-		else
-			Tools::Nothing();
 	}
 }

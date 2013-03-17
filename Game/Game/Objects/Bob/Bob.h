@@ -16,7 +16,20 @@ namespace CloudberryKingdom
 #endif
 		}
 
-	
+
+
+		unsigned int StoredRecord_BL, StoredRecord_QuadSize;
+		int StoredRecordTexture;
+
+		boost::shared_ptr<Quad> MainQuad;
+
+		void SetRecordingInfo();
+		static unsigned int PackVectorIntoInt_Pos( Vector2 v );
+		static Vector2 UnpackIntIntoVector_Pos( unsigned int i );
+		static unsigned int PackVectorIntoInt_SizeAngle( Vector2 v, float angle );
+		static Vector2 UnpackIntIntoVector_Size( unsigned int i );
+		static float UnpackIntIntoVector_Angle( unsigned int i );
+
 		static void InitializeStatics();
 
 	
