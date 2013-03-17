@@ -368,6 +368,8 @@ void drawDRCFrame()
 	if( DrawSubtitles )
 		DrawSubtitles();
 
+	DEMODRCSetContextState();
+
 	GX2SurfaceFormat f = DEMODRCColorBuffer.surface.format;
 	DEMODRCColorBuffer.surface.format = static_cast< GX2SurfaceFormat >( f | 0x00000400 );
 	GX2InitColorBufferRegs( &DEMODRCColorBuffer );
