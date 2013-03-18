@@ -5,6 +5,7 @@
 #include <Content/TextureWiiUInternal.h>
 #include <cafe/demo.h>
 #include <cafe/gx2.h>
+#include <cafe/mem.h>
 #include <Utility/Log.h>
 
 TextureWiiU::TextureWiiU() :
@@ -14,10 +15,22 @@ TextureWiiU::TextureWiiU() :
 
 TextureWiiU::~TextureWiiU()
 {
-	if( internal_->Buffer )
-		delete[] internal_->Buffer;
-
 	delete internal_;
+}
+
+static MEMHeapHandle IntermediateTextureHeap;
+
+void InitializeIntermediateTextureHeap()
+{
+	const u32 heapSize = 256 * 1024 * 1024;
+	void *heapBase = MEMAllocFromDefaultHeap( heapSize );
+	IntermediateTextureHeap = MEMCreateExpHeapEx( heapBase, heapSize, MEM_HEAP_OPT_THREAD_SAFE );
+}
+
+void FreeIntermediateTextureHeap()
+{
+	void *heapBase = MEMDestroyExpHeap( IntermediateTextureHeap );
+	MEMFreeToDefaultHeap( heapBase );
 }
 
 void TextureWiiU::Load()
@@ -38,7 +51,16 @@ void TextureWiiU::Load()
 
 	if( file->IsOpen() )
 	{
-		internal_->Buffer = new char[ file->Size() ];
+		internal_->Buffer = NULL;
+		while( internal_->Buffer == NULL )
+		{
+			internal_->Buffer = reinterpret_cast< char * >( MEMAllocFromExpHeap( IntermediateTextureHeap, file->Size() ) );
+			if( internal_->Buffer )
+				break;
+
+			OSYieldThread();
+		}
+
 		file->Read( internal_->Buffer, file->Size() );
 
 		setLoaded( true );
@@ -57,7 +79,7 @@ void TextureWiiU::GpuCreate()
 	
 	ok = DEMOGFDReadTexture( &internal_->Texture, 0, internal_->Buffer );
 
-	delete[] internal_->Buffer;
+	MEMFreeToExpHeap( IntermediateTextureHeap, internal_->Buffer );
 	internal_->Buffer = NULL;
 
 	if( ok )

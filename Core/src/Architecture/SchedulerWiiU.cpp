@@ -93,7 +93,7 @@ public:
 
 	void Do()
 	{
-		resource_->Load();
+		/*resource_->Load();
 
 		if( !resource_->IsLoaded() )
 		{
@@ -102,7 +102,7 @@ public:
 		}
 
 		LOG.Write( "Loaded: %s\n", resource_->GetPath().c_str() );
-
+		*/
 		resource_->GpuCreate();
 		holder_->SetResource( resource_ );
 	}
@@ -301,8 +301,8 @@ void SchedulerWiiU::CreateResource( ResourceHolder *holder, Resource *resource )
 	internal_->MainThreadJobQueue.push_back( new ResourceCreatorJob( holder, resource ) );
 	OSUnlockMutex( &internal_->MainThreadJobQueueMutex );*/
 
-	//RunJob( new ResourceLoaderJob( holder, resource ) );
-	RunJob( new ResourceCreatorJob( holder, resource ) );
+	RunJob( new ResourceLoaderJob( holder, resource ) );
+	//RunJob( new ResourceCreatorJob( holder, resource ) );
 
 	/*resource->Load();
 	resource->GpuCreate();
@@ -320,11 +320,11 @@ void SchedulerWiiU::CreateResource( ResourceHolder *holder, Resource *resource )
 
 void SchedulerWiiU::CreateGpuResource( ResourceHolder *holder, Resource *resource )
 {
-	//OSLockMutex( &internal_->MainThreadJobQueueMutex );
-	//internal_->MainThreadJobQueue.push_back( new ResourceCreatorJob( holder, resource ) );
-	//OSUnlockMutex( &internal_->MainThreadJobQueueMutex );
-	resource->GpuCreate();
-	holder->SetResource( resource );
+	OSLockMutex( &internal_->MainThreadJobQueueMutex );
+	internal_->MainThreadJobQueue.push_back( new ResourceCreatorJob( holder, resource ) );
+	OSUnlockMutex( &internal_->MainThreadJobQueueMutex );
+	/*resource->GpuCreate();
+	holder->SetResource( resource );*/
 }
 
 void SchedulerWiiU::WorkerThread()
