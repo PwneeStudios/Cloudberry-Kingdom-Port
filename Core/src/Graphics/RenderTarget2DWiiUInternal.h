@@ -10,6 +10,7 @@ struct RenderTarget2DInternal
 	GX2ColorBuffer ColorBuffer;
 	Texture *RTTexture;
 	ResourceHolder Holder;
+	GX2ContextState *ContextState;
 };
 
 #endif

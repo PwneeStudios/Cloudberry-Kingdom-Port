@@ -554,7 +554,7 @@ int CoreWiiU::Run()
 		// End error viewer bits.
 
 		FMOD_System_Update( FMODSystem );
-
+		
 		// Set custom render target and update the game.
 		if( !GLOBAL_VIDEO_OVERRIDE )
 		{
