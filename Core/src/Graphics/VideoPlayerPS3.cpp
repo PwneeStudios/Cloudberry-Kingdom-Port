@@ -18,6 +18,9 @@
 
 #include <sysutil/sysutil_bgmplayback.h>
 
+extern bool StartTimeSet;
+extern time_t StartTime;
+
 struct VideoPlayerInternal
 {
 	cell::Sail::hlPlayer *Player;
@@ -132,6 +135,8 @@ VideoPlayer::VideoPlayer()
 	: internal_( new VideoPlayerInternal )
 	, IsLooped( false )
 {
+	StartTimeSet = false;
+
 	memset( internal_, 0, sizeof( VideoPlayerInternal ) );
 
 	// A pointer to this is kept by the hlPlayer.  Probably a bad idea to have it leave the stack.
@@ -216,7 +221,13 @@ void VideoPlayer::DrawFrame()
 	VideoFrameInfo displayFrame;
 
 	if( g_Player && g_Player->vsyncGetFrame( &displayFrame ) )
-	{
+	{	
+		if ( !StartTimeSet )
+		{
+			StartTime = time( NULL );
+			StartTimeSet = true;
+		}
+
 		glBindBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE, PBO );
 
 		glBindTexture( GL_TEXTURE_2D, MovieTexture->impl_.internal_->Ref.textureID );

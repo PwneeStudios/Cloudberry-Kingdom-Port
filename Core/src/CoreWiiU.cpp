@@ -401,7 +401,6 @@ int CoreWiiU::Run()
 
 	//bool viewerVisible = false;
 
-	//GLOBAL_ERROR_QUEUE.push_back( 1010102 );
 	//DisplayError( ErrorType( 1550100 ) );
 
 	s32 currentErrorCode = 0;
@@ -479,7 +478,7 @@ int CoreWiiU::Run()
 					cpArgs.jumpTo = SYS_SETTINGS_JUMP_TO_DATA_MANAGE;
 					s32 error = SYSLaunchSettings( &cpArgs );
 					LOG.Write( "SYSLaunchSettings returned %d\n", error );
-					DEMOStopRunning();
+					/*DEMOStopRunning();*/
 				}
 
 				if( nn::erreula::GetStateErrorViewer() == nn::erreula::cState_Display )

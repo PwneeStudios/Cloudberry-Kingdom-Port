@@ -14,11 +14,16 @@
 
 #include <boost/shared_ptr.hpp>
 
+#include <ctime>
+
 // Set elapsed time on PS3 for subtitles.
 void SetElapsedVideoTime( float time )
 {
 	CloudberryKingdom::MainVideo::Elapsed = time;
 }
+
+bool StartTimeSet;
+time_t StartTime;
 
 namespace CloudberryKingdom
 {
@@ -340,6 +345,12 @@ bool MainVideo::Paused = false;
 
 		if ( SubtitleIndex >= static_cast<int>( Subtitles.size() ) )
 			return;
+
+#ifdef PS3
+		if ( !StartTimeSet ) return;
+		time_t CurrentTime = time( NULL );
+		double Elapsed = difftime( CurrentTime, StartTime ) + .45f;
+#endif
 
 		boost::shared_ptr<SubtitleAction> NextSubtitle = Subtitles[ SubtitleIndex ];
 		if ( Elapsed > NextSubtitle->Time )
