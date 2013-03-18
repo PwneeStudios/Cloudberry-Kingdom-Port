@@ -222,11 +222,12 @@ void VideoPlayer::DrawFrame()
 
 	if( g_Player && g_Player->vsyncGetFrame( &displayFrame ) )
 	{	
-		if ( !StartTimeSet )
+		if ( !StartTimeSet && g_Player->isPlaying() )
 		{
 			StartTime = time( NULL );
 			StartTimeSet = true;
 		}
+		
 
 		glBindBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE, PBO );
 

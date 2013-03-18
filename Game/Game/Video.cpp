@@ -334,6 +334,11 @@ bool MainVideo::Paused = false;
 
 	void MainVideo::Subtitle()
 	{
+#if defined(PS3) || defined(CAFE)
+		if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_ENGLISH )
+			return;
+#endif
+
 		if ( Subtitles.empty() )
 			return;
 

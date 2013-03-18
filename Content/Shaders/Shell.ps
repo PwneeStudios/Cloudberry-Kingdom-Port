@@ -9,6 +9,20 @@ uniform sampler2D u_texture;
 
 void main()
 {
-    gl_FragColor = v_color * texture( u_texture, v_texcoord );
+	// Standard color
+	vec4 baseColor = v_color * texture( u_texture, v_texcoord );
+
+	// Distance function
+	float d = ( v_texcoord.x - .5 ) * ( v_texcoord.x - .5 ) + ( v_texcoord.y - .5 ) * ( v_texcoord.y - .5 );
+	
+	// Cutoff
+	baseColor.a *= clamp( 100 * ( .25 - d ), 0.0, 1.0 );
+	baseColor.a *= 1.25 * pow( d / .25, 2 );
+
+	// Premultiply the alpha
+	baseColor.rgb *= baseColor.a;	
+	
+	// Return
+	gl_FragColor = baseColor;
 }
 
