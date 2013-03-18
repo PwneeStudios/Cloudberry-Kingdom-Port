@@ -34,6 +34,7 @@ extern std::string PS3_PATH_PREFIX;
 bool g_runDrawThread;
 
 static cell::Sail::hlPlayer *g_Player = NULL;
+static VideoPlayerInternal *g_Internals = NULL;
 static uint8_t *PlayerMemoryBase;
 static uint8_t *PlayerMemory;
 static GLuint PBO = 0;
@@ -153,24 +154,35 @@ VideoPlayer::VideoPlayer()
 	// Global player reference so it can be used from another thread.
 	g_Player = internal_->Player;
 
+	g_Internals = internal_;
 	// Disable BGM playback.
 	int ret = cellSysutilDisableBgmPlayback();
 	if( ret < 0 )
 		LOG.Write( "Failed to stop BGM playback: 0x%x\n", ret );
 }
 
+void KillVideoPlayer()
+{
+	if( g_Internals )
+	{
+		g_Internals->Player = NULL;
+		g_Internals = NULL;
+	}
+
+	delete g_Player;
+	g_Player = NULL;
+}
+
 VideoPlayer::~VideoPlayer()
 {
 	g_runDrawThread = false;
 
-	g_Player = NULL;
-	delete internal_->Player;
-
+	KillVideoPlayer();
+	
 	// Enable BGM playback.
 	int ret = cellSysutilEnableBgmPlayback();
 	if( ret < 0 )
 		LOG.Write( "Failed to start BGM playback: 0x%x\n", ret );
-
 
 	delete internal_;
 }
@@ -196,6 +208,8 @@ void VideoPlayer::Play( const boost::shared_ptr< Video > &video )
 		g_Player = NULL;
 	}
 }
+
+extern void SetElapsedVideoTime( float time );
 
 void VideoPlayer::DrawFrame()
 {
