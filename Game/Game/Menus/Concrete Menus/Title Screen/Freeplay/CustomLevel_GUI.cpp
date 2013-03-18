@@ -10,6 +10,9 @@
 namespace CloudberryKingdom
 {
 
+		static bool NoCheckpoints_Rocketbox = false;
+		static bool NoCheckpoints_WallLevel = false;
+
 		struct CLG_PlayGameProxy : public Lambda
 		{
 		
@@ -211,6 +214,8 @@ namespace CloudberryKingdom
 
 	void CustomLevel_GUI::InitOnIndexSelect::Apply()
 	{
+		NoCheckpoints_WallLevel = false;
+
 		clGui->LevelSeed->MyGameFlags.SetToDefault();
 		clGui->LevelSeed->Masochistic = false;
 
@@ -238,6 +243,8 @@ namespace CloudberryKingdom
 		//}
 		else if ( gamename == Localization::Words_WallLevel )
 		{
+			NoCheckpoints_WallLevel = true;
+
 			clGui->LevelSeed->MyGameType = NormalGameData::Factory;
 			clGui->LevelSeed->MyGeometry = LevelGeometry_RIGHT;
 			clGui->SelectNormal();
@@ -523,6 +530,8 @@ namespace CloudberryKingdom
 
 	void CustomLevel_GUI::ShowCheckpoints( bool Show )
 	{
+		Show = !NoCheckpoints_Rocketbox && !NoCheckpoints_WallLevel;
+
 		if ( Show )
 		{
 			if ( !checkpoints->Show )
@@ -533,10 +542,13 @@ namespace CloudberryKingdom
 		}
 		else
 		{
-			HoldNumCheckpoints = checkpoints->getVal();
-			HoldDesiredNumCheckpoints = DesiredNumCheckpoints;
-			checkpoints->setVal( 0 );
-			DesiredNumCheckpoints = 0;
+			if ( checkpoints->Show )
+			{
+				HoldNumCheckpoints = checkpoints->getVal();
+				HoldDesiredNumCheckpoints = DesiredNumCheckpoints;
+				checkpoints->setVal( 0 );
+				DesiredNumCheckpoints = 0;
+			}
 		}
 
 		checkpoints->Show = Show;
@@ -929,7 +941,19 @@ if (ButtonCheck::ControllerInUse)
 			default: HeroIcon->setPos( Vector2(1050.003f, 383.3334f) ); break;
 		}
 
-		//HeroIcon->setPos( Vector2( 1050.003f, 383.3334f ) );
+		if ( checkpoints != 0 )
+		{
+			if ( Hero == BobPhsxRocketbox::getInstance() )
+			{
+				NoCheckpoints_Rocketbox = true;
+				ShowCheckpoints( false );
+			}
+			else
+			{
+				NoCheckpoints_Rocketbox = false;
+				ShowCheckpoints( true );
+			}
+		}
 	}
 
 	bool CustomLevel_GUI::IsCustomHero()
@@ -1350,6 +1374,9 @@ if (ButtonCheck::ControllerInUse)
 
 	void CustomLevel_GUI::InitializeInstanceFields()
 	{
+		NoCheckpoints_Rocketbox = false;
+		NoCheckpoints_WallLevel = false;
+
 		HoldNumCheckpoints = 1;
 		HasWall = false;
 		LeftJustify = true;
