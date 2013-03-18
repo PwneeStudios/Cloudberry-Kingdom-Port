@@ -304,10 +304,16 @@ namespace CloudberryKingdom
 
 	const int ScreenSaver::getMandatoryWatchLength()
 	{
+#ifdef DEBUG
+		return 0;
+#elif PC_VERSION
 		if ( UserPowers::CanSkipScreensaver )
 			return 0;
 		else
 			return MandatoryWatchLength_Initial;
+#else
+		return MandatoryWatchLength_Initial;
+#endif
 	}
 
 	int ScreenSaver::InitialDarkness = 30;

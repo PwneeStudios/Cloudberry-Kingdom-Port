@@ -54,9 +54,9 @@ namespace CloudberryKingdom
 			DevectordRecord->Release();
 		}
 
-		for ( std::list<boost::shared_ptr<Recording> >::const_iterator record = Records.begin(); record != Records.end(); ++record )
-			if ( *record != MainRecord )
-				( *record )->ConvertToSuperSparse();
+		//for ( std::list<boost::shared_ptr<Recording> >::const_iterator record = Records.begin(); record != Records.end(); ++record )
+		//	if ( *record != MainRecord )
+		//		( *record )->ConvertToSuperSparse( Step );
 
 		Records.push_back( Record );
 	}

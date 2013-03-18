@@ -13,6 +13,166 @@
 namespace CloudberryKingdom
 {
 
+		void Bob::SetRecordingInfo()
+		{
+			if ( MainQuad == 0 )
+			{
+				if ( PlayerObject != 0 && PlayerObject->QuadList.size() > 2 )
+				{
+					if ( boost::dynamic_pointer_cast<BobPhsxSpaceship>( MyPhsx ) != 0 )
+						MainQuad = boost::static_pointer_cast<Quad>( PlayerObject->QuadList[ 1 ] );
+					else
+						MainQuad = boost::static_pointer_cast<Quad>( PlayerObject->FindQuad( L"MainQuad" ) );
+				}
+				else
+					MainQuad.reset();
+			}
+
+			if ( MainQuad == 0 )
+			{
+				StoredRecord_BL = 0;
+				StoredRecord_QuadSize = 0;
+				StoredRecordTexture = 0;
+			}
+			else
+			{
+				Vector2 _BL = MainQuad->BL();
+				Vector2 _Size = MainQuad->TR() - _BL;
+
+				if ( PlayerObject->xFlip )
+				{
+					_BL.X += _Size.X;
+					_Size.X *= -1;
+				}
+
+				StoredRecord_BL = PackVectorIntoInt_Pos( _BL );
+				StoredRecord_QuadSize = PackVectorIntoInt_SizeAngle( _Size, PlayerObject->ContainedQuadAngle );
+
+				//Vector2 BL = MainQuad.Corner[2].Pos;
+				//Vector2 TR = MainQuad.Corner[1].Pos;
+				//StoredRecord_BL = PackVectorIntoInt_Pos(BL);
+				//StoredRecord_QuadSize = PackVectorIntoInt_Size(TR - BL);
+
+
+				if ( getGame() != 0 )
+				{
+					if ( ( Dead || Dying ) && !getGame()->MyGameFlags.IsTethered )
+					{
+						StoredRecordTexture = 0;
+					}
+					else
+					{
+						StoredRecordTexture = CoreMath::RestrictVal(0, Tools::TextureWad->TextureList.size() - 1,
+														        	IndexOf( Tools::TextureWad->TextureList, MainQuad->MyTexture ) );						
+					}
+				}
+			}
+		}
+
+		unsigned int Bob::PackVectorIntoInt_Pos( Vector2 v )
+		{
+			v.X += 600;
+			v.Y += 1000;
+
+			unsigned int x = static_cast<unsigned int>(v.X * 4.0f) << 14;
+			unsigned int y = static_cast<unsigned int>(v.Y * 4.0f);
+			unsigned int i = x + y;
+
+			//Vector2 _v = UnpackIntIntoVector_Pos(i);
+
+			return i;
+		}
+
+		Vector2 Bob::UnpackIntIntoVector_Pos( unsigned int i )
+		{
+			unsigned int _x = i >> 14;
+			unsigned int _y = i - (_x << 14);
+
+			float x = static_cast<float>(_x) / 4.0f;
+			float y = static_cast<float>(_y) / 4.0f;
+
+			x -= 600;
+			y -= 1000;
+			
+			return Vector2(x, y);
+		}
+
+		unsigned int Bob::PackVectorIntoInt_SizeAngle( Vector2 v, float angle )
+		{
+			float tau = static_cast<float>(2 * 3.14159265);
+			float revs = angle / tau;
+			angle -= static_cast<int>( revs ) * tau;
+			if (angle < 0)
+				angle += tau;
+
+			unsigned int x = static_cast<unsigned int>( fabs( v.X ) * 0.7f ) << 20;
+			x += v.X > static_cast<unsigned int>( 0 ) ? static_cast<unsigned int>( 0 ) : ((static_cast<unsigned int>( 1 )) << 31 );
+			unsigned int y = ( static_cast<unsigned int>( v.Y * 1.0f ) << 20 ) >> 12;
+			unsigned int a = ( static_cast<unsigned int>( angle * 32.0f ) << 24 ) >> 24;
+			unsigned int i = x + y + a;
+
+			//Vector2 _v = UnpackIntIntoVector_Size(i);
+			//float _a  = UnpackIntIntoVector_Angle(i);
+
+			return i;
+		}
+
+		Vector2 Bob::UnpackIntIntoVector_Size( unsigned int i )
+		{
+			bool sign = (i & ((static_cast<unsigned int>( 1 )) << 31)) == ((static_cast<unsigned int>( 1 )) << 31);
+			if (sign)
+				i -= ((static_cast<unsigned int>( 1 )) << 31);
+
+			unsigned int _x = i >> 20;
+			unsigned int _y = (i - (_x << 20)) >> 8;
+			
+			float x = static_cast<float>(_x) / 0.7f;
+			float y = static_cast<float>(_y) / 1.0f;
+
+			if (sign) x = -x;
+
+			return Vector2(x, y);
+		}
+
+		float Bob::UnpackIntIntoVector_Angle( unsigned int i )
+		{
+			unsigned int _x = i >> 20;
+			unsigned int _y = ( i - ( _x << 20 ) ) >> 8;
+			unsigned int _a = ( i - ( _x << 20 ) - ( _y << 8 ) );
+
+			float a = static_cast<float>( _a ) / 32.0f;
+
+			return a;
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	void Bob::InitializeStatics()
 	{
 		typedef std::pair<BobDeathType, Localization::Words> DeathNamePair;
@@ -107,6 +267,8 @@ namespace CloudberryKingdom
 
 	void Bob::Release()
 	{
+		MainQuad.reset();
+
 		if ( Head != 0 )
 		{
 			Head->Release();
@@ -1648,11 +1810,15 @@ namespace CloudberryKingdom
 		DoLightSourceFade();
 
 		if ( !getCore()->Show )
+		{
+			SetRecordingInfo();
 			return;
+		}
 
 		if ( CharacterSelect2 )
 		{
 			DollPhsxStep();
+			SetRecordingInfo();
 			return;
 		}
 
@@ -1686,6 +1852,7 @@ namespace CloudberryKingdom
 			if ( getCore()->MyLevel->PlayMode == 0 && MyCape != 0 )
 				UpdateCape();
 
+			SetRecordingInfo();
 			return;
 		}
 
@@ -1818,6 +1985,7 @@ namespace CloudberryKingdom
 			if ( CinematicFunc != 0 )
 				CinematicFunc->Apply( ControlCount );
 
+			SetRecordingInfo();
 			return;
 		}
 
@@ -1876,6 +2044,7 @@ namespace CloudberryKingdom
 		MyPhsx->PhsxStep2();
 
 		PrevInput = CurInput;
+		SetRecordingInfo();
 	}
 
 	void Bob::ObjectInteractions()
@@ -2033,6 +2202,8 @@ namespace CloudberryKingdom
 
 	void Bob::InitializeInstanceFields()
 	{
+		StoredRecordTexture = 0;
+
 		Prevent_A_Button = false;
 
 		InputFromKeyboard = false;

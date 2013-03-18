@@ -22,14 +22,16 @@ public:
 		inext( 0 ),
 		inextp( 0 )
 	{
-		time_t t;
-		time( &t );
+		//time_t t;
+		//time( &t );
 
-		LOG.Write( "Time is %d\n", t );
-		int time_seed = static_cast<int>( t ) % 10000;
+		//LOG.Write( "Time is %d\n", t );
+		//int time_seed = static_cast<int>( t ) % 10000;
+		//
+		//initialize( t );
 
-		//initialize( 'rofl' );
-		initialize( t );
+		/*initialize( 'rofl' );*/
+		initialize( 0 );
 	}
 
 	Random( int seed ) :

@@ -44,11 +44,9 @@ namespace CloudberryKingdom
 		std::vector<boost::shared_ptr<ComputerRecording> > Recordings;
 		int Length;
 
-		Vector2 BoxSize;
-
 		void Draw( const boost::shared_ptr<QuadClass> &BobQuad, int Step, const boost::shared_ptr<Level> &level, std::vector<boost::shared_ptr<SpriteAnimGroup> > AnimGroup, std::vector<boost::shared_ptr<BobLink> > &BobLinks );
 
-		void ConvertToSuperSparse();
+		void ConvertToSuperSparse( int Step );
 
 		void Release();
 
