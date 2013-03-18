@@ -41,7 +41,25 @@ RenderTarget2D::RenderTarget2D( const boost::shared_ptr<GraphicsDevice> &device,
 	internal_->Holder = internal_->RTTexture;
 	texture_ = ResourcePtr< Texture >( &internal_->Holder );
 
+	internal_->ContextState = reinterpret_cast< GX2ContextState * >( DEMOGfxAllocMEM2( sizeof( GX2ContextState ),
+		GX2_CONTEXT_STATE_ALIGNMENT ) );
+
 	GlobalRenderTargets.push_back( internal_ );
+
+	GX2SetupContextState( internal_->ContextState );
+
+	GX2SetContextState( internal_->ContextState );
+
+	GX2SetColorBuffer( &internal_->ColorBuffer, GX2_RENDER_TARGET_0 );
+	GX2SetViewport( 0.f, 0.f,
+		static_cast< float >( Width ), static_cast< float >( Height ),
+		0.f, 1.f );
+	GX2SetScissor( 0, 0, Width, Height );
+	
+	GX2SetColorControl( GX2_LOGIC_OP_COPY, 0x1, GX2_DISABLE, GX2_ENABLE );
+	GX2SetBlendControl( GX2_RENDER_TARGET_0,
+		GX2_BLEND_ONE, GX2_BLEND_ONE, GX2_BLEND_COMBINE_ADD,
+		GX2_TRUE, GX2_BLEND_ONE, GX2_BLEND_ONE_MINUS_SRC_ALPHA, GX2_BLEND_COMBINE_ADD );
 }
 
 static RenderTarget2DInternal *LastRT = 0;
@@ -56,6 +74,8 @@ RenderTarget2D::~RenderTarget2D()
 
 	FreeToTheMEM1Heap( internal_->ColorBuffer.surface.imagePtr );
 	DEMOFree( internal_->RTTexture->impl_.internal_->Texture );
+
+	DEMOGfxFreeMEM2( internal_->ContextState );
 
 	delete internal_->RTTexture;
 	delete internal_;
@@ -74,7 +94,7 @@ void RenderTarget2D::Set()
 		LastRT = 0;
 	}
 
-	GX2SetColorBuffer( &internal_->ColorBuffer, GX2_RENDER_TARGET_0 );
+	/*GX2SetColorBuffer( &internal_->ColorBuffer, GX2_RENDER_TARGET_0 );
 	GX2SetViewport( 0.f, 0.f,
 		static_cast< float >( Width ), static_cast< float >( Height ),
 		0.f, 1.f );
@@ -82,11 +102,13 @@ void RenderTarget2D::Set()
 
 	GX2SetBlendControl( GX2_RENDER_TARGET_0,
 		GX2_BLEND_ONE, GX2_BLEND_ONE, GX2_BLEND_COMBINE_ADD,
-		GX2_TRUE, GX2_BLEND_ONE, GX2_BLEND_ONE_MINUS_SRC_ALPHA, GX2_BLEND_COMBINE_ADD );
+		GX2_TRUE, GX2_BLEND_ONE, GX2_BLEND_ONE_MINUS_SRC_ALPHA, GX2_BLEND_COMBINE_ADD );*/
+	GX2SetContextState( internal_->ContextState );
 
 	LastRT = internal_;
 }
 
+extern GX2ContextState *TheContextState;
 extern GX2ColorBuffer TheColorBuffer;
 
 void RenderTarget2D::SetDefault()
@@ -102,7 +124,7 @@ void RenderTarget2D::SetDefault()
 		LastRT = 0;
 	}
 
-	int width = TheColorBuffer.surface.width;
+	/*int width = TheColorBuffer.surface.width;
 	int height = TheColorBuffer.surface.height;
 
 	GX2SetColorBuffer( &TheColorBuffer, GX2_RENDER_TARGET_0 );
@@ -116,9 +138,10 @@ void RenderTarget2D::SetDefault()
 			GX2SetColorControl( GX2_LOGIC_OP_COPY, 0x1, GX2_DISABLE, GX2_ENABLE );
 	GX2SetBlendControl( GX2_RENDER_TARGET_0,
 		GX2_BLEND_ONE, GX2_BLEND_ONE_MINUS_SRC_ALPHA, GX2_BLEND_COMBINE_ADD,
-		GX2_TRUE, GX2_BLEND_ONE, GX2_BLEND_ONE_MINUS_SRC_ALPHA, GX2_BLEND_COMBINE_ADD );
+		GX2_TRUE, GX2_BLEND_ONE, GX2_BLEND_ONE_MINUS_SRC_ALPHA, GX2_BLEND_COMBINE_ADD );*/
 
-	DEMOGfxSetContextState();
+	//DEMOGfxSetContextState();
+	GX2SetContextState( TheContextState );
 }
 
 void RenderTarget2D::Clear( float r, float g, float b, float a )
@@ -126,5 +149,6 @@ void RenderTarget2D::Clear( float r, float g, float b, float a )
 	GX2ClearColor( &internal_->ColorBuffer, r, g, b, a );
 	GX2ClearDepthStencil( &DEMODepthBuffer, GX2_CLEAR_BOTH );
 
-	DEMOGfxSetContextState();
+	//DEMOGfxSetContextState();
+	GX2SetContextState( internal_->ContextState );
 }
