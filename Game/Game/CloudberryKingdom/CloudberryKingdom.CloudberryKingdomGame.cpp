@@ -1414,8 +1414,8 @@ float CloudberryKingdomGame::fps = 0;
 
 		boost::shared_ptr<Camera> cam = boost::make_shared<Camera>();
 		cam->SetVertexCamera();
-		Tools::QDrawer->DrawString( Resources::Font_Grobold42->HOutlineFont, L"Version 0.9.0", Vector2(1200, 870), Color::Black.ToVector4(), Vector2(.8f));
-		Tools::QDrawer->DrawString( Resources::Font_Grobold42->HFont, L"Version 0.9.0", Vector2(1200, 870), Color::SkyBlue.ToVector4(), Vector2(.8f));
+		Tools::QDrawer->DrawString( Resources::Font_Grobold42->HOutlineFont, L"Version 0.9.7", Vector2(1200, 870), Color::Black.ToVector4(), Vector2(.8f));
+		Tools::QDrawer->DrawString( Resources::Font_Grobold42->HFont, L"Version 0.9.7", Vector2(1200, 870), Color::SkyBlue.ToVector4(), Vector2(.8f));
 		Tools::QDrawer->Flush();
 	}
 

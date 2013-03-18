@@ -172,7 +172,7 @@ namespace CloudberryKingdom
 		}
 
 		// Ducking animation
-		int DuckAnim = 8;
+		//int DuckAnim = 8;
 		if ( Ducking && MyBob->PlayerObject->DestinationAnim() != DuckAnim )
 		{
 			Clear( MyBob->PlayerObject->AnimQueue );
