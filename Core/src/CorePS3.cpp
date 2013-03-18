@@ -197,6 +197,9 @@ extern void ReserveVideoPlayerMemory();
 
 extern void KillVideoPlayer();
 
+// Wait for save and load operations to finish.  Defined in EzStorage.cpp.
+extern void WaitForSaveLoad();
+
 CorePS3::CorePS3( GameLoop &game ) :
 	running_( false ),
 	game_( game ),
@@ -810,6 +813,7 @@ int CorePS3::Run()
 	}*/
 
 	KillVideoPlayer();
+	WaitForSaveLoad();
 
 	return 0;
 }

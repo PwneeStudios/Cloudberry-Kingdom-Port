@@ -47,6 +47,17 @@ const char secureFileId[ CELL_SAVEDATA_SECUREFILEID_SIZE ] = {
 extern bool ForceGetTrophyContext( SceNpTrophyContext &context, SceNpTrophyHandle &handle );
 extern std::string PS3_PATH_PREFIX;
 
+static bool saveInFlight = false;
+static bool loadInFlight = false;
+
+void WaitForSaveLoad()
+{
+	while( loadInFlight )
+		sys_ppu_thread_yield();
+	while( saveInFlight )
+		sys_ppu_thread_yield();
+}
+
 #endif
 
 #if defined( CAFE ) || defined( PS3 )
@@ -616,12 +627,10 @@ namespace CloudberryKingdom
 		}
 
 		// FIXME: Allow more than one save operation in flight.
-		static bool saveInFlight = false;
-		
 		if( saveInFlight )
 			return;
-
 		saveInFlight = true;
+
 		_save_done = false;
 
 		path = "SaveData.bam";
@@ -995,6 +1004,8 @@ namespace CloudberryKingdom
 
 		_load_done = false;
 
+		loadInFlight = true;
+
 		// Get the space needed for save data.
 		// FIXME: The trophy initialization function does its own check for available space.
 		/*SceNpTrophyContext context;
@@ -1070,6 +1081,8 @@ namespace CloudberryKingdom
 			free( _file_buffer );
 			_file_buffer = NULL;
 		}
+
+		loadInFlight = false;
 #endif
 
 #ifdef CAFE

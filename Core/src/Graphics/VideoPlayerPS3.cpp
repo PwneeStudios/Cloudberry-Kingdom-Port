@@ -209,6 +209,8 @@ void VideoPlayer::Play( const boost::shared_ptr< Video > &video )
 	}
 }
 
+extern void SetElapsedVideoTime( float time );
+
 void VideoPlayer::DrawFrame()
 {
 	VideoFrameInfo displayFrame;

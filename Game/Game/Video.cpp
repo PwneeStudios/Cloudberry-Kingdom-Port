@@ -14,6 +14,12 @@
 
 #include <boost/shared_ptr.hpp>
 
+// Set elapsed time on PS3 for subtitles.
+void SetElapsedVideoTime( float time )
+{
+	CloudberryKingdom::MainVideo::Elapsed = time;
+}
+
 namespace CloudberryKingdom
 {
 
