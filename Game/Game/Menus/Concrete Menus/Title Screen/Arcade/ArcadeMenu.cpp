@@ -321,7 +321,8 @@ namespace CloudberryKingdom
                 }
 
                 // Check for awards
-                int TotalArcadeLevel = ( *player )->GetTotalArcadeLevel();
+                //int TotalArcadeLevel = ( *player )->GetTotalArcadeLevel();
+				int TotalArcadeLevel = ( *player )->GetTotalLevel();
                 Awardments::CheckForAward_TimeCrisisUnlock(TotalArcadeLevel, ( *player ) );
                 Awardments::CheckForAward_HeroRushUnlock(TotalArcadeLevel, ( *player ) );
                 Awardments::CheckForAward_HeroRush2Unlock(TotalArcadeLevel, ( *player ) );

@@ -62,15 +62,15 @@ namespace CloudberryKingdom
 			}
 		}
 
-		AnimGroup = std::vector<boost::shared_ptr<SpriteAnimGroup> >( 4 );
+		//AnimGroup = std::vector<boost::shared_ptr<SpriteAnimGroup> >( 4 );
 
-		int count = 0;
-		for ( BobVec::iterator bob = level->Bobs.begin(); bob != level->Bobs.end(); ++bob )
-		{
-			AnimGroup[ count ] = boost::make_shared<SpriteAnimGroup>();
-			AnimGroup[ count ]->Init( ( *bob )->PlayerObject, ( *bob )->MyPhsx->SpritePadding, boost::make_shared<BobToSpritesLambda>( *bob ) );
-			count++;
-		}
+		//int count = 0;
+		//for ( BobVec::iterator bob = level->Bobs.begin(); bob != level->Bobs.end(); ++bob )
+		//{
+		//	AnimGroup[ count ] = boost::make_shared<SpriteAnimGroup>();
+		//	AnimGroup[ count ]->Init( ( *bob )->PlayerObject, ( *bob )->MyPhsx->SpritePadding, boost::make_shared<BobToSpritesLambda>( *bob ) );
+		//	count++;
+		//}
 		Initialized = true;
 	}
 

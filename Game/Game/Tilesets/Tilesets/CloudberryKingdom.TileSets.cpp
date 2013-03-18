@@ -854,7 +854,7 @@ namespace CloudberryKingdom
 	sprite_anim( std::wstring( L"door_cave" ), std::wstring( L"door_cave" ), 1, 2, 2 );
 	info->Doors->Sprite->Sprite = TextureOrAnim::Get( std::wstring( L"door_cave" ) );
 	info->Doors->Sprite->Size = Vector2( 500, -1 );
-	info->Doors->Sprite->Offset = Vector2( -250, 135 );
+	info->Doors->Sprite->Offset = Vector2( -250, 138 );
 	info->Doors->ShiftStart = Vector2( 0, 190 );
 	info->Doors->SizePadding = Vector2( 25, 0 );
 

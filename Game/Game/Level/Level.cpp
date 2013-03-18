@@ -1048,7 +1048,18 @@ namespace CloudberryKingdom
 	void Level::SetReplay()
 	{
 		int NumBobs = static_cast<int>( Bobs.size() );
+		
+		for ( BobVec::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
+		{
+			if ( ( *bob )->CompControl )
+			{
+				( *bob )->MyRecord.reset();
+				Clear( ( *bob )->PlayerObject->AnimQueue );
+				( *bob )->Release();
+			}
+		}
 		Bobs.clear();
+
 		//for (int i = 0; i < CurrentRecording.NumBobs; i++)
 		for ( int i = 0; i < NumBobs; i++ )
 		{
@@ -1150,7 +1161,17 @@ namespace CloudberryKingdom
 		HoldPlayerBobs.clear();
 		AddRange( HoldPlayerBobs, Bobs );
 
+		for ( BobVec::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
+		{
+			if ( ( *bob )->CompControl )
+			{
+				( *bob )->MyRecord.reset();
+				Clear( ( *bob )->PlayerObject->AnimQueue );
+				( *bob )->Release();
+			}
+		}
 		Bobs.clear();
+
 		for ( int i = 0; i < CurPiece->NumBobs; i++ )
 		{
 			//Bob Comp = new Bob(Prototypes.bob[DefaultHeroType], false);
@@ -3871,7 +3892,17 @@ int Level::AfterPostDrawLayer = 12;
 		SuppressCheckpoints = false;
 		GhostCheckpoints = false;
 
+		for ( BobVec::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
+		{
+			if ( ( *bob )->CompControl )
+			{
+				( *bob )->MyRecord.reset();
+				Clear( ( *bob )->PlayerObject->AnimQueue );
+				( *bob )->Release();
+			}
+		}
 		Bobs.clear();
+
 		AddRange( Bobs, HoldPlayerBobs );
 
 		setSetToReset( true );

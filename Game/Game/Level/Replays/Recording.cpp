@@ -89,7 +89,7 @@ namespace CloudberryKingdom
 		for ( int i = 0; i < NumBobs; i++ )
 		{
 			if ( i >= static_cast<int>( level->Bobs.size() ) ) continue;
-			if ( Step > 2 && Step == Recordings[i]->Box_BL.size() - 2 ) ParticleEffects::AddPop( level, Recordings[i]->GetBoxCenter( Step - 2 ) );
+			if ( Step > 3 && Step == Recordings[i]->Box_BL.size() - 3 ) ParticleEffects::AddPop( level, Recordings[i]->GetBoxCenter( Step - 3 ) );
 			if ( Step >= Recordings[ i ]->Box_BL.size() ) continue;
 
 			if ( Step < Length - 1 )
@@ -182,6 +182,7 @@ namespace CloudberryKingdom
 		for ( int i = 0; i < NumBobs; i++ )
 		{
 			if ( i >= static_cast<int>( level->Bobs.size() ) ) continue;
+			if ( level->CurPhsxStep >= static_cast<int>( Recordings[i]->t.capacity() ) ) continue;
 
 			Recordings[i]->t[ level->CurPhsxStep ] = level->Bobs[i]->StoredRecordTexture;
 

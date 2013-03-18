@@ -896,6 +896,12 @@ namespace CloudberryKingdom
 
 	void GameData::GotCheckpoint( const boost::shared_ptr<Bob> &CheckpointBob )
 	{
+		// Don't let this last recording be sparse (since it is the 'real' bob)
+		for ( int i = 0; i < MyLevel->CurrentRecording->Recordings.size(); ++i )
+		{
+			MyLevel->CurrentRecording->Recordings[ i ]->Sparse = false;
+		}
+
 		MyLevel->PieceAttempts = 0;
 
 		for ( BobVec::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )

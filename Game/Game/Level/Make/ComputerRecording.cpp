@@ -127,6 +127,7 @@ namespace CloudberryKingdom
 
 	void ComputerRecording::ConvertToSuperSparse( int Step )
 	{
+		if ( !Sparse ) return;
 		if ( SuperSparse ) return;
 
 		std::vector<BobInput>( ).swap( Input );
@@ -135,6 +136,9 @@ namespace CloudberryKingdom
 		std::vector<Vector2>( ).swap( AutoVel );
 		std::vector<bool>( ).swap( AutoOnGround );
 
+		Box_BL.resize( Step + 1 );
+		Box_Size.resize( Step + 1 );
+		t.resize( Step + 1);
 		std::vector<unsigned int>( Box_BL	).swap( Box_BL  );
 		std::vector<unsigned int>( Box_Size ).swap( Box_Size );
 		std::vector<int>		 ( t		).swap( t		 );
@@ -150,19 +154,19 @@ namespace CloudberryKingdom
 			return;
 		}
 
-		AutoJump.clear();
-		AutoLocs.clear();
-		AutoOnGround.clear();
-		AutoVel.clear();
-		Box_BL.clear();
-		Box_Size.clear();
-		Input.clear();
-		t.clear();
+		std::vector<BobInput>( ).swap( Input );
+		std::vector<int>( ).swap( AutoJump );
+		std::vector<Vector2>( ).swap( AutoLocs );
+		std::vector<Vector2>( ).swap( AutoVel );
+		std::vector<bool>( ).swap( AutoOnGround );
+		std::vector<unsigned int>( ).swap( Box_BL  );
+		std::vector<unsigned int>( ).swap( Box_Size );
+		std::vector<int>		 ( ).swap( t		 );
 	}
 
 	void ComputerRecording::Init( int length )
 	{
-		Init( length, false );
+		Init( length, true );
 	}
 
 	void ComputerRecording::Init( int length, bool Sparse )
