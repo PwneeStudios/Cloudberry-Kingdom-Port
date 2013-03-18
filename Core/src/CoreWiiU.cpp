@@ -193,6 +193,9 @@ u32 AcquireForegroundCallback( void *context )
 // Draw a texture to the DRC.  Declared in videorenderer.cpp.
 extern void drawDRCTextureFrame( GX2Texture * texture );
 
+// Create a heap for sharing texture file data between threads.
+extern void InitializeIntermediateTextureHeap();
+
 CoreWiiU::CoreWiiU( GameLoop &game ) :
 	running_( false ),
 	game_( game ),
@@ -214,6 +217,7 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 	DEMOGfxInit( 2, gfxArgs );
 	DEMODRCInit( 2, drcArgs );
 
+	InitializeIntermediateTextureHeap();
 	//DEMOSetReleaseCallback( ForegroundReleaseCallback );
 
 	// Allocate space for MEM1 for process switching.
