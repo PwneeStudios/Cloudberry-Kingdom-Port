@@ -2515,10 +2515,9 @@ float CloudberryKingdomGame::fps = 0;
 			if ( LoadingScreen_Renamed->IsDone )
 			{
 				LogoScreenUp = false;
-/*#ifdef CAFE
+
 				Tools::BeginLoadingScreen( false );
 				Tools::CurrentLoadingScreen->MakeFake();
-#endif*/
 			}
 
 			return;

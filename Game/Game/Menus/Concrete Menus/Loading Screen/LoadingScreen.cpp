@@ -121,6 +121,12 @@ namespace CloudberryKingdom
 
 	void LoadingScreen::End()
 	{
+		if( Fake )
+		{
+			if( MinLoading > 0 || ( !Resources::FinalLoadDone && DrawCount <= DrawCount_Max ) )
+				return;
+		}
+
 		Fade = true;
 	}
 
@@ -138,7 +144,11 @@ namespace CloudberryKingdom
 
 		if ( Fade && MinLoading <= 0 )
 		{
-			FadeAlpha += .07f;
+			if( Fake )
+				FadeAlpha += 0.035f;
+			else
+				FadeAlpha += .07f;
+
             if ( Fake && FadeAlpha > 1.4f || !Fake && FadeAlpha > 1.2f )
 			{
 				Tools::ShowLoadingScreen = false;

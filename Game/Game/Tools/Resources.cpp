@@ -32,11 +32,11 @@ extern void StopScheduler();
 namespace CloudberryKingdom
 {
 
+#ifdef CAFE
+	bool Resources::FinalLoadDone = true;
+#else
 	// FIXME: should be false and set to true once loading is done.
 	bool Resources::FinalLoadDone = true;
-
-#ifdef CAFE
-	//bool Resources::FinalLoadDone = false;
 #endif
 
 	boost::shared_ptr<WrappedBool> Resources::LoadingResources = 0;
