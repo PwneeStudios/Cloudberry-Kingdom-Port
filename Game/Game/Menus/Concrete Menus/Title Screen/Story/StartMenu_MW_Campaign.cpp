@@ -316,6 +316,8 @@ namespace CloudberryKingdom
 		if ( c_item->Locked ) return;
 
 		Go( c_item->Chapter );
+
+		ButtonCheck::PreLogIn = false;
 	}
 
 	void StartMenu_MW_Campaign::Go( int StartLevel )
