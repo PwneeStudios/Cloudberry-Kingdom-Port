@@ -6,6 +6,7 @@
 #include <Game\Player\LeaderboardView.h>
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+#include <Utility/Error.h>
 
 namespace CloudberryKingdom
 {
@@ -326,7 +327,7 @@ namespace CloudberryKingdom
 
 		if ( !CloudberryKingdomGame::OnlineFunctionalityAvailable() )
 		{
-			if( IsParentalLevelSatisfied( false ) )
+			//if( IsParentalLevelSatisfied( false ) )
 			{
 				CloudberryKingdomGame::ShowError_MustBeSignedInToLiveForLeaderboard();
 			}

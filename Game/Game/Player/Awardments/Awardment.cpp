@@ -191,10 +191,34 @@ namespace CloudberryKingdom
 				level = PlayerManager::MaxPlayerHighScore(id);
 				bool escalation_complete = level >= ArcadeMenu::HighestLevelNeeded;
 
+				id = Challenge_Escalation::getInstance()->CalcGameId_Level( BobPhsxBouncy::getInstance() );
+				level = PlayerManager::MaxPlayerHighScore(id);
+				escalation_complete &= level >= 25;
+
+				id = Challenge_Escalation::getInstance()->CalcGameId_Level( BobPhsxSmall::getInstance() );
+				level = PlayerManager::MaxPlayerHighScore(id);
+				escalation_complete &= level >= 50;
+
+				id = Challenge_Escalation::getInstance()->CalcGameId_Level( BobPhsxWheel::getInstance() );
+				level = PlayerManager::MaxPlayerHighScore(id);
+				escalation_complete &= level >= 75;
+
 				// Check we've gotten all Time Crisis heroes
 				id = Challenge_TimeCrisis::getInstance()->CalcGameId_Level( ArcadeMenu::HighestHero );
 				level = PlayerManager::MaxPlayerHighScore( id );
 				bool timecrisis_complete = level >= ArcadeMenu::HighestLevelNeeded;
+
+				id = Challenge_TimeCrisis::getInstance()->CalcGameId_Level( BobPhsxBouncy::getInstance() );
+				level = PlayerManager::MaxPlayerHighScore( id );
+				timecrisis_complete &= level >= 25;
+
+				id = Challenge_TimeCrisis::getInstance()->CalcGameId_Level( BobPhsxSmall::getInstance() );
+				level = PlayerManager::MaxPlayerHighScore( id );
+				timecrisis_complete &= level >= 50;
+
+				id = Challenge_TimeCrisis::getInstance()->CalcGameId_Level( BobPhsxWheel::getInstance() );
+				level = PlayerManager::MaxPlayerHighScore( id );
+				timecrisis_complete &= level >= 75;
 
 				// Give award for unlocking everything
 				if (escalation_complete && timecrisis_complete)

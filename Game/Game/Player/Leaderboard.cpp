@@ -85,7 +85,7 @@ namespace CloudberryKingdom
 
 		// Modify the score entry's id
 		boost::shared_ptr<ScoreEntry> copy = boost::make_shared<ScoreEntry>( score->GamerTag_Renamed, score->GameId, score->Value, score->Score, score->Level_Renamed, score->Attempts, score->Time, score->Date );
-		copy->GameId += Challenge::LevelMask;
+		//copy->GameId += Challenge::LevelMask;
 
 #if PS3
 		int contextId;

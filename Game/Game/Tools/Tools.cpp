@@ -15,6 +15,8 @@
 #include <MasterHack.h>
 #include <Utility/Log.h>
 
+#include <Game\Video.h>
+
 namespace CloudberryKingdom
 {
 
@@ -830,6 +832,12 @@ namespace CloudberryKingdom
 	void Tools::UpdateVolume()
 	{
 		float NewVolume = Tools::MusicVolume->getVal() * Tools::getVolumeFade() * Tools::CurSongVolume;
+
+		if ( MainVideo::Playing )
+		{
+			NewVolume = 0;
+		}
+
 		if ( Tools::SongWad != 0 && Tools::SongWad->Paused )
 			NewVolume = 0;
 		if ( NewVolume != CurVolume )

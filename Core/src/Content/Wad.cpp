@@ -13,7 +13,11 @@ Wad::Wad( const std::string &base ) :
 	defaultTexture_( 0 )
 {
 	Texture *pinkX = new Texture;
+#if DEBUG
 	std::string path = base + "Art/default.png";
+#else
+	std::string path = base + "Transparent.png";
+#endif
 	
 	pinkX->SetPath( path ); 
 	pinkX->Load();

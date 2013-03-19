@@ -351,7 +351,8 @@ namespace CloudberryKingdom
 			Black->setAlpha( 3.45f );
 			MyMenu->Active = true;
 			Tools::SongWad->Stop();
-			Tools::PlayHappyMusic();
+			//Tools::PlayHappyMusic();
+			Tools::SongWad->Start(true);
 		}
 
         void SoundMenu::Release()

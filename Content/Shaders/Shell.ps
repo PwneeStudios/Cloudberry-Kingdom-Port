@@ -20,7 +20,7 @@ void main()
 	baseColor.a *= 1.25 * pow( d / .25, 2 );
 
 	// Premultiply the alpha
-	baseColor.rgb *= baseColor.a;	
+	// baseColor.rgb *= baseColor.a;	
 	
 	// Return
 	gl_FragColor = baseColor;

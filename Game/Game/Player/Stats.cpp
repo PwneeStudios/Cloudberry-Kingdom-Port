@@ -125,6 +125,8 @@ namespace CloudberryKingdom
 		FinalTimeSpentNotMoving += stats->FinalTimeSpentNotMoving;
 		FinalTimeSpent += stats->FinalTimeSpent;
 
+		ObstaclesSeen += stats->ObstaclesSeen;
+
 		for ( size_t i = 0; i < DeathsBy.size(); i++ )
 			DeathsBy[ i ] += stats->DeathsBy[ i ];
 
@@ -159,6 +161,8 @@ namespace CloudberryKingdom
 
 		FinalTimeSpentNotMoving = 0;
 		FinalTimeSpent = 0;
+
+		ObstaclesSeen = 0;
 
 		for ( size_t i = 0; i < DeathsBy.size(); i++ )
 			DeathsBy[ i ] = 0;

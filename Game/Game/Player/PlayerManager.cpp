@@ -582,7 +582,8 @@ namespace CloudberryKingdom
 			for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
             {
                 int level = ( *player )->GetTotalCampaignLevel();
-                min = min == 0 ? level : __min( min, level );
+                //min = min == 0 ? level : __min( min, level );
+				min = min == 0 ? level : __max( min, level );
             }
 
             return min;
@@ -595,7 +596,8 @@ namespace CloudberryKingdom
 			for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
             {
                 int level = ( *player )->GetTotalCampaignIndex();
-                min = min == 0 ? level : __min( min, level );
+                //min = min == 0 ? level : __min( min, level );
+				min = min == 0 ? level : __max( min, level );
             }
 
             return min;

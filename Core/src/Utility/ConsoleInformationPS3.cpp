@@ -7,6 +7,8 @@
 #include <sysutil/sysutil_sysparam.h>
 #include <sysutil/sysutil_bgmplayback.h>
 
+#include <Ratings.h>
+
 ConsoleRegion GetConsoleRegion()
 {
 	int licenseArea = cellSysutilGetLicenseArea();
@@ -97,6 +99,11 @@ bool IsOnlineContentRestricted()
 		return true;
 	}
 
+	if( age >= ONLINE_AGE_CUTOFF )
+	{
+		isRestricted = false;
+	}
+
 	return isRestricted;
 }
 
@@ -146,7 +153,6 @@ bool IsAspect4by3()
 	CellVideoOutState videoOutState;
 	if( cellVideoOutGetState( CELL_VIDEO_OUT_PRIMARY, 0, &videoOutState ) < 0 )
 	{
-		LOG.Write( "..false" );
 		return false;
 	}
 

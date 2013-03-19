@@ -1425,7 +1425,10 @@ namespace CloudberryKingdom
 			if ( !SkipDraw )
 			{
 				if ( MyPhsx->ThrustType == BobPhsx::RocketThrustType_DOUBLE )
+				{
 					DrawTheRocket();
+					Tools::QDrawer->Flush();
+				}
 
 				Tools::QDrawer->SetAddressMode( false, false );
 				if ( PlayerObject->ContainedQuadAngle == 0 )

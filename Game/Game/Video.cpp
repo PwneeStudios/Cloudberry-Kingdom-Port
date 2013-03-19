@@ -259,7 +259,7 @@ namespace CloudberryKingdom
 		}
 		else if( MovieName == L"Cutscene_6" )
 		{
-			CurrentVideo->Duration.TotalSeconds = 3 /* minutes */ * 60 + 34 /* seconds */ + 29 /* thirtieths */ / 30.0f;
+			CurrentVideo->Duration.TotalSeconds = 4 /* minutes */ * 60 + 4 /* seconds */ + 29 /* thirtieths */ / 30.0f;
 		}
 		else if( MovieName == L"Credits" )
 		{

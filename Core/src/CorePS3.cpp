@@ -1,4 +1,4 @@
-#include <CorePS3.h>
+﻿#include <CorePS3.h>
 
 #include <Architecture/Scheduler.h>
 #include <Audio/MediaPlayer.h>
@@ -31,6 +31,7 @@
 #include <sysutil/sysutil_msgdialog.h>
 #include <sysutil/sysutil_savedata.h>
 
+#include <Utility/ConsoleInformation.h>
 
 SYS_PROCESS_PARAM ( 1000, 0x80000 )
 
@@ -239,7 +240,7 @@ CorePS3::CorePS3( GameLoop &game ) :
 	// game code.  Also the files should be pre-installed on the disk.
 	// PS3_PATH_PREFIX = "/dev_hdd0/game/NPEB01312/USRDIR/"; // SCEE
 	// PS3_PATH_PREFIX = "/dev_hdd0/game/NPUB31177/USRDIR/"; // SCEA
-	//PS3_PATH_PREFIX = "/app_home/";
+	PS3_PATH_PREFIX = "/app_home/";
 	LOG.Write( "Running in %s\nContent dir %s\n", dirName, usrdirPath );
 #ifdef DEBUG
 	PS3_PATH_PREFIX = "/app_home/";
@@ -456,6 +457,45 @@ void RegisterTrophyContextThread( uint64_t context )
 			if( ret == 0 )
 			{
 				std::string errorMsg = WstringToUtf8( Format( L"There is not enough free space on the system storage to register Trophy information.\nPlease quit the game and free %d KB.", requiredTrophySpace / 1024 ) );
+
+				ConsoleLanguage language = GetConsoleLanguage();
+				switch ( language )
+				{
+					case ConsoleLanguage_JAPANESE:
+						errorMsg = WstringToUtf8( Format( L"トロフィー情報を登録するにはシステムストレージに十分な空き容量がありません。ゲームを終了し %d を確保してください。", requiredTrophySpace / 1024 ) );
+						break;
+					case ConsoleLanguage_FRENCH:
+						errorMsg = WstringToUtf8( Format( L"Espace insuffisant sur le stockage système pour enregistrer les information de trophées. Veuillez quitter le jeu et libérer %d KB.", requiredTrophySpace / 1024 ) );
+						break;
+					case ConsoleLanguage_GERMAN:
+						errorMsg = WstringToUtf8( Format( L"Es ist nicht genügend freier Speicherplatz im Systemspeicher vorhanden, um Trophäen-Informationen einzutragen. Bitte beende das Spiel und schaffe %d KB freien Speicher.", requiredTrophySpace / 1024 ) );
+						break;
+					case ConsoleLanguage_ITALIAN:
+						errorMsg = WstringToUtf8( Format( L"Non c'è sufficiente spazio libero nello spazio di archiviazione del sistema per registrare le informazioni sui trofei. Uscire dal gioco e liberare %d KB.", requiredTrophySpace / 1024 ) );
+						break;
+					case ConsoleLanguage_SPANISH:
+						errorMsg = WstringToUtf8( Format( L"No hay suficiente espacio libre en el almacenamiento del sistema para registrar la información de trofeos. Sal del juego y libera %d KB.", requiredTrophySpace / 1024 ) );
+						break;
+					case ConsoleLanguage_CHINESE:
+						errorMsg = WstringToUtf8( Format( L"主机存储器剩余空间不足, 无法保存Trophy（奖杯）信息。请退出游戏并释放至少 %d KB剩余空间。", requiredTrophySpace / 1024 ) );
+						break;
+					case ConsoleLanguage_KOREAN:
+						errorMsg = WstringToUtf8( Format( L"트로피 정보를 기록하는데 필요한 본체 스토리지의 디스크 공간이 부족합니다. 게임을 종료하신 후, %d KB의 공간을 비우십시오.", requiredTrophySpace / 1024 ) );
+						break;
+					case ConsoleLanguage_PORTUGUESE:
+						errorMsg = WstringToUtf8( Format( L"Não há espaço suficiente no armazenamento do sistema para registrar as informações de Troféu. Por favor saia do jogo e libere %d KB.", requiredTrophySpace / 1024 ) );
+						break;
+					case ConsoleLanguage_RUSSIAN:
+						errorMsg = WstringToUtf8( Format( L"Недостаточно места на системном накопителе, чтобы зарегистрировать информацию о призах. Пожалуйста, выйдите из игры и очистите %d Кбайт.", requiredTrophySpace / 1024 ) );
+						break;
+					
+					case ConsoleLanguage_DUTCH:
+					case ConsoleLanguage_TAIWANESE:
+					case ConsoleLanguage_ENGLISH:
+					default:
+						break;
+				}
+
 				DisplayError( ErrorType( errorMsg, NULL, ErrorType::NONE, NULL, true ) );
 			}
 			else

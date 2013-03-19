@@ -439,7 +439,7 @@ namespace CloudberryKingdom
 		{
 			( *player )->CampaignLevel = __max( ( *player )->CampaignLevel, level->MyLevelSeed->LevelNum );
 
-            ( *player )->CampaignIndex = __max( ( *player )->CampaignLevel, level->MyLevelSeed->LevelIndex );
+            ( *player )->CampaignIndex = __max( ( *player )->CampaignIndex, level->MyLevelSeed->LevelIndex );
             ( *player )->Changed = true;
 		}
 	}

@@ -136,6 +136,7 @@ bool InGameStartMenu::PreventMenu = false;
 	{
 		boost::shared_ptr<Listener> listener = MakeMagic( Listener, () );
 		listener->MyButton = ControllerButtons_START;
+		listener->setControl( -1 );
 
 		listener->Tags->Add( GameObject::Tag_REMOVE_ON_LEVEL_FINISH );
 
