@@ -41,7 +41,7 @@
 #endif
 
 #define VIDEOSKIP_DELAY         (70)                            // permissible delay time
-#define FILEMEMORYSIZE          (128*1024*1024)                 // 128 MByte
+#define FILEMEMORYSIZE          (130*1024*1024)                 // Big enough for largest movie.
 #define TEST_MODE               (0)                             // 1:TV only, 2:DRC only, other:TV & DRC
 
 #define MAXTHREADNUM            (8)
@@ -1234,6 +1234,7 @@ static s32 MP4PlayTVorDRC(s32 intArg, void *ptrArg)
 			}
 
 			exc_start_time_stamp[ intArg ] += 100;
+			OSYieldThread();
 		}
 #endif
 
@@ -1971,9 +1972,22 @@ void ForceKillVideoPlayer()
 		nn::erreula::DisappearHomeNixSign();
 }
 
+// Flag to pause the scheduler during initial logo.
+extern bool SchedulerPausedForLogo;
+
+// Resume the scheduler. Defined in SchedulerWiiU.cpp.
+extern void ResumeScheduler();
+
 VideoPlayer::~VideoPlayer()
 {
 	ForceKillVideoPlayer();
+
+	if( SchedulerPausedForLogo )
+	{
+		ResumeScheduler();
+		SchedulerPausedForLogo = false;
+		OSMemoryBarrier();
+	}
 
 	delete internal_;
 }

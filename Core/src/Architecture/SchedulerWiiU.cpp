@@ -190,14 +190,19 @@ public:
 
 void StopScheduler()
 {
-	LOG.Write( "Stopping scheduler!\n" );
+	if( !OSIsThreadSuspended( &External->Threads[ 0 ] ) )
+	{
+		LOG.Write( "Stopping scheduler!\n" );
 
-	OSInitSemaphore( &SchedulerPausingSemaphore, 0 );
+		OSInitSemaphore( &SchedulerPausingSemaphore, 0 );
 
-	SCHEDULER->RunJobASAP( new PauseSchedulerJob );
-	OSWaitSemaphore( &SchedulerPausingSemaphore );
+		SCHEDULER->RunJobASAP( new PauseSchedulerJob );
+		OSWaitSemaphore( &SchedulerPausingSemaphore );
 
-	LOG.Write( "Scheduler stopped in PauseSchedulerJob\n" );
+		LOG.Write( "Scheduler stopped in PauseSchedulerJob\n" );
+	}
+	else
+		LOG.Write( "Scheduler already suspended!\n" );
 }
 
 void ResumeScheduler()
@@ -263,7 +268,7 @@ SchedulerWiiU::~SchedulerWiiU()
 void SchedulerWiiU::MainThread()
 {
 	OSLockMutex( &internal_->MainThreadJobQueueMutex );
-	for( int i = 0; i < 5; ++i )
+	for( int i = 0; i < 20; ++i )
 	{
 		if( !internal_->MainThreadJobQueue.empty() )
 		{
