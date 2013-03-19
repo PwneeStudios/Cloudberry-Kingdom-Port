@@ -2513,7 +2513,12 @@ float CloudberryKingdomGame::fps = 0;
 		if ( !DoInnerLogoPhsx )
 		{
 			if ( LoadingScreen_Renamed->IsDone )
+			{
 				LogoScreenUp = false;
+
+				Tools::BeginLoadingScreen( false );
+				Tools::CurrentLoadingScreen->MakeFake();
+			}
 
 			return;
 		}

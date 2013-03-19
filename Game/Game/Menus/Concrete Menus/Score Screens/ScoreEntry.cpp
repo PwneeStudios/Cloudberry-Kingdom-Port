@@ -2,6 +2,11 @@
 
 #include <Hacks/String.h>
 
+#ifdef CAFE
+	#include <cafe/os.h>
+	#include <time.h>
+#endif
+
 namespace CloudberryKingdom
 {
 
@@ -28,9 +33,28 @@ namespace CloudberryKingdom
 		InitializeInstanceFields();
 		if ( GamerTag_Renamed == std::wstring( L"" ) )
 			GamerTag_Renamed = getDefaultName();
-		this->GamerTag_Renamed = GamerTag_Renamed;
+		
+#ifdef CAFE
+		OSCalendarTime td;
+		OSTicksToCalendarTime( OSGetTime(), &td );
+		struct tm theTime;
+		theTime.tm_sec = td.sec;
+		theTime.tm_min = td.min;
+		theTime.tm_hour = td.hour;
+		theTime.tm_mday = td.mday;
+		theTime.tm_mon = td.mon;
+		theTime.tm_year = td.year;
+		theTime.tm_yday = td.yday;
+		/*time_t currentTime;
+		time( &currentTime );
+		struct tm *theTime = localtime( &currentTime );*/
 
+		char timeStr[ 64 ];
+		strftime( timeStr, sizeof( timeStr ), "%x", &theTime );
+		this->GamerTag_Renamed = Utf8ToWstring( timeStr );
+#else
 		this->GamerTag_Renamed = GamerTag_Renamed;
+#endif
 		this->GameId = Game;
 		this->Value = Value;
 		this->Score = Score;

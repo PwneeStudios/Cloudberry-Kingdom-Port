@@ -292,6 +292,8 @@ void drawTVFrame()
     // Draw
     GX2Draw(GX2_PRIMITIVE_TRIANGLE_STRIP, g_QuadAttribData.vertexCount);
 
+	DEMOGfxSetContextState();
+
 	if( DrawSubtitles )
 		DrawSubtitles();
 
@@ -364,6 +366,8 @@ void drawDRCFrame()
 
     // Draw
     GX2Draw(GX2_PRIMITIVE_TRIANGLE_STRIP, g_QuadAttribData.vertexCount);
+
+	DEMODRCSetContextState();
 
 	if( DrawSubtitles )
 		DrawSubtitles();

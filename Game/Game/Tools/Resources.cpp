@@ -22,11 +22,22 @@
 #include <sys/ppu_thread.h>
 #endif
 
+#ifdef CAFE
+#include <cafe/mem.h>
+
+bool SchedulerPausedForLogo;
+extern void StopScheduler();
+#endif
+
 namespace CloudberryKingdom
 {
 
+#ifdef CAFE
+	bool Resources::FinalLoadDone = true;
+#else
 	// FIXME: should be false and set to true once loading is done.
 	bool Resources::FinalLoadDone = true;
+#endif
 
 	boost::shared_ptr<WrappedBool> Resources::LoadingResources = 0;
 	boost::shared_ptr<WrappedFloat> Resources::ResourceLoadedCountRef = 0;
@@ -386,6 +397,12 @@ boost::shared_ptr<Thread> Resources::LoadThread = 0;
 
 		// Fireball texture
 		Fireball::PreInit();
+
+#ifdef CAFE
+		SchedulerPausedForLogo = true;
+		OSMemoryBarrier();
+		StopScheduler();
+#endif
 
         // Set off load calls
 		for ( std::vector<boost::shared_ptr<EzTexture> >::const_iterator Tex = Tools::TextureWad->TextureList.begin();
