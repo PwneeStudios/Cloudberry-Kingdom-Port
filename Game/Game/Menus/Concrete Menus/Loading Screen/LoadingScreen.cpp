@@ -121,11 +121,13 @@ namespace CloudberryKingdom
 
 	void LoadingScreen::End()
 	{
+#ifdef CAFE
 		if( Fake )
 		{
 			if( MinLoading > 0 || ( !Resources::FinalLoadDone && DrawCount <= DrawCount_Max ) )
 				return;
 		}
+#endif
 
 		Fade = true;
 	}
@@ -144,10 +146,14 @@ namespace CloudberryKingdom
 
 		if ( Fade && MinLoading <= 0 )
 		{
+#ifdef CAFE
 			if( Fake )
 				FadeAlpha += 0.035f;
 			else
 				FadeAlpha += .07f;
+#else
+			FadeAlpha += .07f;
+#endif
 
             if ( Fake && FadeAlpha > 1.4f || !Fake && FadeAlpha > 1.2f )
 			{

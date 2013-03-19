@@ -10,6 +10,9 @@
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
+#include <Architecture/Job.h>
+#include <Architecture/Scheduler.h>
+#include <Core.h>
 #include <ResourceList\Resources_Art.h>
 #include <ResourceList\Resources_Music.h>
 #include <ResourceList\Resources_Sound.h>
@@ -33,7 +36,7 @@ namespace CloudberryKingdom
 {
 
 #ifdef CAFE
-	bool Resources::FinalLoadDone = true;
+	bool Resources::FinalLoadDone = false;
 #else
 	// FIXME: should be false and set to true once loading is done.
 	bool Resources::FinalLoadDone = true;
@@ -377,6 +380,21 @@ namespace CloudberryKingdom
 
 boost::shared_ptr<Thread> Resources::LoadThread = 0;
 
+#ifdef CAFE
+	class FinishLoadingJob : public Job
+	{
+
+	public:
+
+		void Do()
+		{
+			Resources::FinalLoadDone = true;
+			OSMemoryBarrier();
+		}
+
+	};
+#endif
+
 	void Resources::_LoadThread()
 	{
 		hf_Mutex = boost::make_shared<Mutex>();
@@ -414,6 +432,10 @@ boost::shared_ptr<Thread> Resources::LoadThread = 0;
 				( *Tex )->setTex( Tools::GameClass->Content->Load< Texture2D >( ( *Tex )->Path ) );
 			}
 		}
+
+#ifdef CAFE
+		SCHEDULER->RunJob( new FinishLoadingJob );
+#endif
 
 		//for ( std::vector<boost::shared_ptr<EzTexture> >::const_iterator Tex = Tools::TextureWad->TextureList.begin(); Tex != Tools::TextureWad->TextureList.end(); ++Tex )
 		//{
