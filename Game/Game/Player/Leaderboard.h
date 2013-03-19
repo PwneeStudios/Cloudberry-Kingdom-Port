@@ -6,6 +6,10 @@
 
 #include <Utility/Mutex.h>
 
+#ifdef PS3
+	#include <np.h>
+#endif
+
 namespace CloudberryKingdom
 {
 
@@ -19,6 +23,9 @@ namespace CloudberryKingdom
 	{
 		int Id;
 		std::wstring GamerTag;
+#ifdef PS3
+		SceNpId NPID;
+#endif
 
 		OnlineGamer()
 		{

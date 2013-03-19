@@ -6,6 +6,10 @@
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
+#ifdef PS3
+#include <np.h>
+#endif
+
 namespace CloudberryKingdom
 {
 
@@ -978,6 +982,14 @@ else
             MotionCount_UpDown = 0;
     }
 
+#ifdef PS3
+	int ProfileResultHandler( int result, void *arg )
+	{
+		LOG.Write( "ProfileResultHandler result: %d(0x%x)\n", result, result );
+		return 0;
+	}
+#endif
+
         void LeaderboardView::ViewGamer()
         {
 			// FIXME
@@ -994,6 +1006,10 @@ else
 							// Show the gamer card!
 #if XBOX
                             CloudberryKingdomGame.ShowGamerCard((PlayerIndex)MenuItem::ActivatingPlayer, gamer);
+#elif PS3
+							int ret = sceNpProfileCallGui( &gamer.NPID, ProfileResultHandler, NULL, 0 );
+							if( ret < 0 )
+								LOG.Write( "sceNpProfileCallGui error: 0x%x\n", ret );
 #endif
                         }
                     }

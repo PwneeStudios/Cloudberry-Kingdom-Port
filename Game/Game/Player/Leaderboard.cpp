@@ -421,6 +421,7 @@ namespace CloudberryKingdom
 				OnlineGamer gamer;
 				gamer.Id = rank;
 				gamer.GamerTag = name;
+				gamer.NPID = Ranks[ i ].npId;
 
 				LeaderboardItem item( gamer, value, rank );
 
