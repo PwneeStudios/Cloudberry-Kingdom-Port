@@ -71,7 +71,10 @@ namespace CloudberryKingdom
 		std::wstring pressa = Format( Localization::WordString( Localization::Words_PressToJoin ).c_str(), ButtonString::Go_Controller( ButtonSize ).c_str() );
 #elif CAFE
 		PlayerIndex index = MyCharacterSelect->getPlayer()->MyPlayerIndex;
-		bool UseGamepad = GamePad::GetState( index ).Type == GamePadState::ControllerType_Standard;
+		// Use this line if the press join button should be different for Wii Remotes
+		//bool UseGamepad = GamePad::GetState( index ).Type == GamePadState::ControllerType_Standard;
+		// Use this line if the press join button should always be (A)
+		bool UseGamepad = true;
 		bool Hold_UseGamepad = ButtonTexture::UseGamepad;
 		ButtonTexture::UseGamepad = UseGamepad;		
 		
@@ -197,7 +200,12 @@ namespace CloudberryKingdom
 		// Use this if statement if you want keyboard to control all characters (For debugging)
 		//if (ButtonCheck.State(ControllerButtons.A, -2).Pressed)
 
+#ifdef CAFE
+		if ( ButtonCheck::State( ControllerButtons_A, getControl() ).Pressed || 
+			 ButtonCheck::State( ControllerButtons_X, getControl() ).Pressed )
+#else
 		if ( ButtonCheck::State( ControllerButtons_A, getControl() ).Pressed )
+#endif
 		{
 	#if defined(XBOX) || defined(XBOX_SIGNIN)
 			if ( MyCharacterSelect->getPlayer()->getMyGamer() != 0 )

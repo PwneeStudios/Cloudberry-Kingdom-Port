@@ -69,7 +69,7 @@ namespace CloudberryKingdom
 	void ScreenSaver::OnSwapLambda::Apply( const boost::shared_ptr<LevelSeedData> &data )
 	{
 		//Tools::ShowLoadingScreen = false;
-		ReleaseLoadingScreen( Tools::CurrentLoadingScreen );
+		//ReleaseLoadingScreen( Tools::CurrentLoadingScreen );
 		Tools::TheGame->LogoScreenPropUp = false;
 		//Tools::Write( _T( "+++++++++++++++++++ Ending screensave load..." ) );
 	}
