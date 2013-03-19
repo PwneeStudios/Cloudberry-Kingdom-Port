@@ -73,6 +73,7 @@ namespace CloudberryKingdom
 		Tools::ShowLoadingScreen = false;
 		ReleaseLoadingScreen( Tools::CurrentLoadingScreen );
 #endif
+
 		Tools::TheGame->LogoScreenPropUp = false;
 		//Tools::Write( _T( "+++++++++++++++++++ Ending screensave load..." ) );
 	}
