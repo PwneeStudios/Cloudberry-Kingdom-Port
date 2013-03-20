@@ -13,6 +13,7 @@
 #include <Architecture/Job.h>
 #include <Architecture/Scheduler.h>
 #include <Core.h>
+#include <Content/Wad.h>
 #include <ResourceList\Resources_Art.h>
 #include <ResourceList\Resources_Music.h>
 #include <ResourceList\Resources_Sound.h>
@@ -430,6 +431,19 @@ boost::shared_ptr<Thread> Resources::LoadThread = 0;
 		for ( std::vector<boost::shared_ptr<EzTexture> >::const_iterator Tex = Tools::TextureWad->TextureList.begin();
 			  Tex != Tools::TextureWad->TextureList.end(); ++Tex )
 		{
+#ifdef CAFE
+			// We want to load the first 5 textures right away as they are needed for copyright screen.
+			if( ( *Tex )->Path.find( L"Grobold" ) != std::wstring::npos
+				|| ( *Tex )->Path.find( L"CopyRight" ) != std::wstring::npos )
+			{
+				boost::shared_ptr<Texture2D> t2d = boost::make_shared<Texture2D>(boost::shared_ptr<GraphicsDevice>(), 1, 1);
+				LOG.Write( "Force load: %s\n", WstringToUtf8( ( *Tex )->Path ).c_str() );
+				t2d->texture_ = CONTENT->ForceLoadTexture( WstringToUtf8( ( *Tex )->Path ) + ".png" );
+				( *Tex )->setTex( t2d );
+				continue;
+			}
+#endif
+
 			// If texture hasn't been loaded yet, load it
 			if ( ( *Tex )->getTex() == 0 && !(*Tex)->FromCode )
 			{

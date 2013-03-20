@@ -42,6 +42,29 @@ Wad::~Wad()
 	delete holderAllocator_;
 }
 
+ResourcePtr< Texture > Wad::ForceLoadTexture( const std::string &name )
+{
+	std::string path = base_ + name;
+
+	HolderMap::iterator i = resourceHolders_.find( path );
+	if( i != resourceHolders_.end() )
+		return i->second;
+
+	ResourceHolder *rh = new ( holderAllocator_->Allocate() ) ResourceHolder( *defaultTexture_ );
+	
+	// Kick off a loader job.
+	Texture *texture = new Texture;
+	texture->SetPath( path );
+	texture->Load();
+	texture->GpuCreate();
+	rh->SetResource( texture );
+
+	resourceHolders_[ path ] = rh;
+	uniqueResources_.insert( texture );
+
+	return rh;
+}
+
 // Private.
 ResourceHolder *Wad::load( const std::string &path )
 {
@@ -55,7 +78,7 @@ ResourceHolder *Wad::load( const std::string &path )
 	Texture *texture = new Texture;
 	texture->SetPath( path );
 	SCHEDULER->CreateResource( rh, texture );
-
+	
 	resourceHolders_[ path ] = rh;
 	uniqueResources_.insert( texture );
 
