@@ -1069,7 +1069,7 @@ namespace CloudberryKingdom
 			//Bob Comp = new Bob(Prototypes.bob[DefaultHeroType], false);
 			boost::shared_ptr<Bob> Comp = boost::make_shared<Bob>( DefaultHeroType, false );
 			Bob_PostConstruct( Comp, DefaultHeroType, false );
-			Comp->SetColorScheme( PlayerManager::Get( i )->ColorScheme_Renamed );
+			Comp->SetColorScheme( PlayerManager::Get( NumBobs - i - 1 )->ColorScheme_Renamed );
 
 			//Comp.MyRecord = CurrentRecording.Recordings[i];
 			Comp->MyRecord = MySwarmBundle->CurrentSwarm->MainRecord->Recordings[ i ];
