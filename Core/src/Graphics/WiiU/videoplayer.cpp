@@ -210,6 +210,7 @@ u32		ReservedVideoPlayerMemorySize;
 void *	ReservedVideoPlayerMemory;
 u32		ReservedVideoFrameSize;
 void *	ReservedVideoFrames[ MAX_FRAME_BUFFER ];
+void *	MovieBuffer;
 
 // FIXME: This is hard coded for our particular use case.
 void ReserveVideoPlayerMemory()
@@ -296,6 +297,8 @@ void ReserveVideoPlayerMemory()
     }
 
 	ReservedVideoFrameSize = YuvBufSize;
+
+	MovieBuffer = MEMAllocFromDefaultHeapEx( FILEMEMORYSIZE, 64 );
 }
 
 /*-------------------------------------------------------------------------*

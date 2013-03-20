@@ -22,8 +22,15 @@ void SetElapsedVideoTime( float time )
 	CloudberryKingdom::MainVideo::Elapsed = time;
 }
 
-bool StartTimeSet;
-time_t StartTime;
+#ifdef PS3
+	bool StartTimeSet;
+	time_t StartTime;
+#elif CAFE
+	#include <cafe/os.h>
+
+	bool StartTimeSet;
+	OSTick StartTime;
+#endif
 
 namespace CloudberryKingdom
 {
@@ -355,6 +362,11 @@ bool MainVideo::Paused = false;
 		if ( !StartTimeSet ) return;
 		time_t CurrentTime = time( NULL );
 		double Elapsed = difftime( CurrentTime, StartTime ) + .45f;
+#elif CAFE
+		if ( !StartTimeSet ) return;
+		OSTick CurrentTime = OSGetTick();
+		OSTick difference = OSDiffTick( CurrentTime, StartTime );
+		double Elapsed = static_cast< double >( OSTicksToMilliseconds( difference ) ) / 1000.0 + 0.45;
 #endif
 
 		boost::shared_ptr<SubtitleAction> NextSubtitle = Subtitles[ SubtitleIndex ];

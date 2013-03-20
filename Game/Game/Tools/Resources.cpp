@@ -30,6 +30,10 @@
 
 bool SchedulerPausedForLogo;
 extern void StopScheduler();
+
+// Declared in SchedulerWiiU.cpp.
+extern void TellSchedulerToCleanUpTextureHeap();
+
 #endif
 
 namespace CloudberryKingdom
@@ -389,7 +393,7 @@ boost::shared_ptr<Thread> Resources::LoadThread = 0;
 		void Do()
 		{
 			Resources::FinalLoadDone = true;
-			OSMemoryBarrier();
+			TellSchedulerToCleanUpTextureHeap();
 		}
 
 	};

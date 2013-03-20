@@ -210,6 +210,29 @@ void ResumeScheduler()
 	OSContinueThread( &External->Threads[ 0 ] );
 }
 
+// Free the heap for loading textures.  Defined in TextureWiiU.cpp.
+extern void FreeIntermediateTextureHeap();
+
+class FreeIntermediateTextureHeapJob : public Job
+{
+public:
+	FreeIntermediateTextureHeapJob()
+	{
+	}
+
+	void Do()
+	{
+		FreeIntermediateTextureHeap();
+	}
+};
+
+void TellSchedulerToCleanUpTextureHeap()
+{
+	OSLockMutex( &External->MainThreadJobQueueMutex );
+	External->MainThreadJobQueue.push_back( new FreeIntermediateTextureHeapJob );
+	OSUnlockMutex( &External->MainThreadJobQueueMutex );
+}
+
 SchedulerWiiU::SchedulerWiiU() :
 	internal_( new SchedulerInternal )
 {
