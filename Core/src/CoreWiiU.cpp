@@ -196,6 +196,9 @@ extern void drawDRCTextureFrame( GX2Texture * texture );
 // Create a heap for sharing texture file data between threads.
 extern void InitializeIntermediateTextureHeap();
 
+// Reserve space for video player.
+extern void ReserveVideoPlayerMemory();
+
 CoreWiiU::CoreWiiU( GameLoop &game ) :
 	running_( false ),
 	game_( game ),
@@ -217,6 +220,7 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 	DEMOGfxInit( 2, gfxArgs );
 	DEMODRCInit( 2, drcArgs );
 
+	ReserveVideoPlayerMemory();
 	InitializeIntermediateTextureHeap();
 	//DEMOSetReleaseCallback( ForegroundReleaseCallback );
 
