@@ -114,7 +114,7 @@ namespace CloudberryKingdom
 		QUAD_DRAWER->SetEffect( Tools::BasicEffect->effect );
 
 		// FIXME: This ensures that the subtitle is never displayed when a movie is killed.
-		if( MainVideo::Elapsed < 500000.f )
+		if( MainVideo::Elapsed < 500000.f && MainVideo::Elapsed < MainVideo::CurrentVideo->Duration.TotalSeconds )
 			MainVideo::Subtitle();
 
 		/*Tools::QDrawer->DrawString( Resources::Font_Grobold42->HFont, ToString( MainVideo::Elapsed ),  Vector2( 0 ), Vector4( 1 ), Vector2( 1 ) );
@@ -341,10 +341,11 @@ bool MainVideo::Paused = false;
 
 	void MainVideo::Subtitle()
 	{
-#if defined(PS3) || defined(CAFE)
-		if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_ENGLISH )
-			return;
-#endif
+// Hide subtitles if in English.
+//#if defined(PS3) || defined(CAFE)
+//		if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_ENGLISH )
+//			return;
+//#endif
 
 		if ( Subtitles.empty() )
 			return;

@@ -550,7 +550,7 @@ namespace CloudberryKingdom
 				{
 					if ( ThrustSoundCount <= 0 && ThrustSound != 0 )
 					{
-						ThrustSoundCount = ThrustSoundDelay;
+						ThrustSoundCount = ThrustSoundDelay + 3;
 						ThrustSound->PlayModulated( .02f );
 					}
 					ThrustSoundCount--;

@@ -262,7 +262,8 @@ namespace CloudberryKingdom
 		if ( !Active )
 			return;
 
-		if ( ButtonCheck::State( ControllerButtons_A, -1 ).Pressed || ButtonCheck::State( ControllerButtons_B, -1 ).Pressed )
+		//if ( ButtonCheck::State( ControllerButtons_A, -1 ).Pressed || ButtonCheck::State( ControllerButtons_B, -1 ).Pressed )
+		if ( ButtonCheck::State( ControllerButtons_A, getControl() ).Pressed || ButtonCheck::State( ControllerButtons_B, getControl() ).Pressed )
 		{
 			Active = false;
 			ReturnToCaller();

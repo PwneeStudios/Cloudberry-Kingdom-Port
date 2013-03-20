@@ -19,7 +19,7 @@ void main()
 
 	uv.y = .9 / max(.7,pow(uv.x,.75)) * (uv.y + (.023 * pow(uv.x,1) + .017)*sin(uv.x*10 + 25*v_t) - .5) + .5;    	
     
-    vec4 C = texture( u_texture, v_texcoord );
+    vec4 C = texture( u_texture, uv );
     
     C.r *= 1.2;
     C *= 1.3;

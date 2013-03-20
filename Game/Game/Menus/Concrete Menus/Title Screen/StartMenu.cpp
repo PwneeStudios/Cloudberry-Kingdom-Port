@@ -195,6 +195,7 @@ namespace CloudberryKingdom
 	void StartMenu::MenuGo_Options( const boost::shared_ptr<MenuItem> &item )
 	{
 		Call( MakeMagic( SoundMenu, ( getControl(), false ) ), 0 );
+		ButtonCheck::PreLogIn = true;
 	}
 
 	void StartMenu::MenuGo_Exit( const boost::shared_ptr<MenuItem> &item )

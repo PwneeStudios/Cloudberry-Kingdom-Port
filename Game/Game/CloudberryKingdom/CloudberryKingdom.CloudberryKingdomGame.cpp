@@ -68,6 +68,8 @@ extern int WhoIsDisconnected;
 namespace CloudberryKingdom
 {
 
+	const bool FinalRelease = true;
+
 #if defined(DEBUG)
 	int CloudberryKingdomGame::_count = 0;
 	int CloudberryKingdomGame::address = 0;
@@ -412,7 +414,7 @@ namespace CloudberryKingdom
 Version CloudberryKingdomGame::GameVersion = Version( 0, 2, 4 );
 
 		// Flags
-		bool CloudberryKingdomGame::GodMode = true;
+		bool CloudberryKingdomGame::GodMode = !FinalRelease;
 		bool CloudberryKingdomGame::AsianButtonSwitch = false;
 
 #ifdef PC_VERSION
@@ -472,7 +474,7 @@ Version CloudberryKingdomGame::GameVersion = Version( 0, 2, 4 );
 #else
         bool CloudberryKingdomGame::AlwaysGiveTutorials = false;
         bool CloudberryKingdomGame::Unlock_Customization = true;
-        bool CloudberryKingdomGame::Unlock_Levels = false;
+        bool CloudberryKingdomGame::Unlock_Levels = true && !FinalRelease;
 #endif
 
         bool FakeDemo = false;
@@ -892,6 +894,8 @@ float CloudberryKingdomGame::fps = 0;
 
     void CloudberryKingdomGame::GodModePhxs()
     {
+
+
 #ifdef BOOST_BIN
         if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_D ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_D ) )
 		{
@@ -921,6 +925,7 @@ float CloudberryKingdomGame::fps = 0;
 			for ( BobVec::const_iterator bob = Tools::CurLevel->Bobs.begin(); bob != Tools::CurLevel->Bobs.end(); ++bob )
 			{
 				( *bob )->getMyStats()->Score += 100000;
+				( *bob )->getMyPlayerData()->CampaignCoins += 1000000;
 			}
         }
 
@@ -1405,6 +1410,7 @@ float CloudberryKingdomGame::fps = 0;
 
 	void DrawWatermark()
 	{
+		if ( FinalRelease ) return;
 		if (Tools::QDrawer == 0) return;
 		if (Resources::Font_Grobold42 == 0) return;
 		if (Resources::Font_Grobold42->HFont == 0) return;
