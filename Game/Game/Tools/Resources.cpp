@@ -153,7 +153,7 @@ namespace CloudberryKingdom
 		Tools::Song_Happy->Volume = .9f;
 
 		Tools::Song_140mph = Tools::SongWad->FindByName( std::wstring( L"140_Mph_in_the_Fog^Blind_Digital" ) );
-		Tools::Song_140mph->Volume = .6f;
+		Tools::Song_140mph->Volume = .5f;
 
 		Tools::Song_BlueChair = Tools::SongWad->FindByName( std::wstring( L"Blue_Chair^Blind_Digital" ) );
 		Tools::Song_BlueChair->Volume = .7f;
