@@ -20,6 +20,7 @@
 #include <cafe/h264.h>
 #include "videorender.h"
 #include "MovieTest.h"
+#include <cassert>
 
 /*=========================================================================*
             definitions
@@ -204,6 +205,98 @@ s32 set_parameters(s32 memory_size, void *mem_ptr, void **usermem, s32 threadnum
     return 0;
 }
 
+// Some reserved memory for the video player work area.
+u32		ReservedVideoPlayerMemorySize;
+void *	ReservedVideoPlayerMemory;
+u32		ReservedVideoFrameSize;
+void *	ReservedVideoFrames[ MAX_FRAME_BUFFER ];
+
+// FIXME: This is hard coded for our particular use case.
+void ReserveVideoPlayerMemory()
+{
+#ifdef DEBUG
+	s32 codec_mem_size = 40 * 1024 * 1024;
+#else
+	s32 codec_mem_size = 27 * 1024 * 1024;
+#endif
+
+	void *ngptr[ 16 ];
+	s32 ngptrnum = 0;
+
+	ReservedVideoPlayerMemorySize = 0;
+	ReservedVideoFrameSize = 0;
+
+	// Preallocate work area memory.
+
+    while (1)
+    {
+        ReservedVideoPlayerMemory = MEMAllocFromDefaultHeapEx( codec_mem_size, 512 );
+        if (H264DECCheckMemSegmentation(ReservedVideoPlayerMemory, codec_mem_size) != 0)
+        {
+            ngptr[ngptrnum] = ReservedVideoPlayerMemory;
+            OSReport("H264WorkBuffer malloc retry : 0x%x-0x%x\n", (s32)ngptr[ngptrnum], (s32)ngptr[ngptrnum] + codec_mem_size - 1);
+            ngptrnum++;
+            if (ngptrnum == 16)
+            {
+                for (s32 i = 0; i < 16; i++)
+                {
+                    MEMFreeToDefaultHeap(ngptr[i]);
+                }
+                ngptrnum = 0;
+            }
+        }
+        else
+        {
+            break;
+        }
+    }
+
+	for (s32 i = 0; i < ngptrnum; i++)
+    {
+        MEMFreeToDefaultHeap(ngptr[i]);
+    }
+
+	ReservedVideoPlayerMemorySize = codec_mem_size;
+
+	// Preallocate frame memory.
+
+	s32 YuvBufSize = (((UVD_ALIGN_PITCH_IN_PIXELS(1280))*720*3)/2 + UVD_BUFFER_PAD);
+
+	for (s32 i = 0; i < MAX_FRAME_BUFFER; i++)
+    {
+        ReservedVideoFrames[ i ] = MEMAllocFromDefaultHeapEx(YuvBufSize, UVD_BUFFER_ALIGNMENT);
+        if (H264DECCheckMemSegmentation(ReservedVideoFrames[i], YuvBufSize) != 0)
+        {
+            ngptr[ngptrnum] = ReservedVideoFrames[i];
+            OSReport("h264decfm malloc retry : 0x%x-0x%x\n", (s32)ngptr[ngptrnum], (s32)ngptr[ngptrnum] + YuvBufSize - 1);
+            ngptrnum++;
+            if (ngptrnum == 16)
+            {
+                for (s32 j = 0; j < 16; j++)
+                {
+                    MEMFreeToDefaultHeap(ngptr[j]);
+                }
+                ngptrnum = 0;
+            }
+            i -= 1;
+        }
+        else
+        {
+            if (ReservedVideoFrames[ i ] == NULL)
+            {
+                OSReport("cannot allocate framebuffer\n");
+                return;
+            }
+        }
+    }
+
+	for (s32 i = 0; i < ngptrnum; i++)
+    {
+        MEMFreeToDefaultHeap(ngptr[i]);
+    }
+
+	ReservedVideoFrameSize = YuvBufSize;
+}
 
 /*-------------------------------------------------------------------------*
     Name:           VideoOpenH264
@@ -230,7 +323,7 @@ s32 VideoOpenH264(s32 threadnum)
     ngptrnum = 0;
     while (1)
     {
-        MP4DemuxCorePtr[threadnum]->H264WorkBuffer = MEMAllocFromDefaultHeapEx(codec_mem_size, 512);
+        MP4DemuxCorePtr[threadnum]->H264WorkBuffer = ReservedVideoPlayerMemory;/*MEMAllocFromDefaultHeapEx(codec_mem_size, 512);*/
         if (H264DECCheckMemSegmentation(MP4DemuxCorePtr[threadnum]->H264WorkBuffer, codec_mem_size) != 0)
         {
             ngptr[ngptrnum] = MP4DemuxCorePtr[threadnum]->H264WorkBuffer;
@@ -240,7 +333,7 @@ s32 VideoOpenH264(s32 threadnum)
             {
                 for (i = 0; i < 16; i++)
                 {
-                    MEMFreeToDefaultHeap(ngptr[i]);
+                    //MEMFreeToDefaultHeap(ngptr[i]);
                 }
                 ngptrnum = 0;
             }
@@ -251,10 +344,10 @@ s32 VideoOpenH264(s32 threadnum)
         }
     }
 
-    for (i = 0; i < ngptrnum; i++)
+    /*for (i = 0; i < ngptrnum; i++)
     {
         MEMFreeToDefaultHeap(ngptr[i]);
-    }
+    }*/
 
     if (MP4DemuxCorePtr[threadnum]->H264WorkBuffer == NULL)
     {
@@ -377,10 +470,12 @@ s32 VideoInit(s32 threadnum)
     YuvBufSize = (((UVD_ALIGN_PITCH_IN_PIXELS(MP4DemuxCorePtr[threadnum]->H264ImageWidth))*MP4DemuxCorePtr[threadnum]->H264ImageHeight*3)/2 + UVD_BUFFER_PAD);
     MP4PlayerCorePtr[threadnum]->UVDOutFrameSize = (u32)(((YuvBufSize + (UVD_BUFFER_ALIGNMENT - 1)) / UVD_BUFFER_ALIGNMENT))*UVD_BUFFER_ALIGNMENT;
 
+	assert( ( YuvBufSize == ReservedVideoFrameSize ) && "VIDEO FRAME SIZES ARE NOT THE SAME" );
+
     ngptrnum = 0;
     for (i = 0; i < MAX_FRAME_BUFFER; i++)
     {
-        MP4PlayerCorePtr[threadnum]->h264decfm[i] = MEMAllocFromDefaultHeapEx(YuvBufSize, UVD_BUFFER_ALIGNMENT);
+        MP4PlayerCorePtr[threadnum]->h264decfm[i] = ReservedVideoFrames[ i ];//MEMAllocFromDefaultHeapEx(YuvBufSize, UVD_BUFFER_ALIGNMENT);
         if (H264DECCheckMemSegmentation(MP4PlayerCorePtr[threadnum]->h264decfm[i], YuvBufSize) != 0)
         {
             ngptr[ngptrnum] = MP4PlayerCorePtr[threadnum]->h264decfm[i];
@@ -390,7 +485,7 @@ s32 VideoInit(s32 threadnum)
             {
                 for (j = 0; j < 16; j++)
                 {
-                    MEMFreeToDefaultHeap(ngptr[j]);
+                    //MEMFreeToDefaultHeap(ngptr[j]);
                 }
                 ngptrnum = 0;
             }
@@ -411,10 +506,10 @@ s32 VideoInit(s32 threadnum)
         }
     }
 
-    for (i = 0; i < ngptrnum; i++)
+    /*for (i = 0; i < ngptrnum; i++)
     {
         MEMFreeToDefaultHeap(ngptr[i]);
-    }
+    }*/
 
     // VideoBuffer setting
     for (i = 0; i < VIDEO_BUFFER_NUM; i++)
@@ -444,13 +539,13 @@ void VideoExit(s32 threadnum)
     {
         if (MP4DemuxCorePtr[threadnum]->H264WorkBuffer != NULL)
         {
-            MEMFreeToDefaultHeap(MP4DemuxCorePtr[threadnum]->H264WorkBuffer);
+            //	MEMFreeToDefaultHeap(MP4DemuxCorePtr[threadnum]->H264WorkBuffer);
         }
         for (i = 0; i < MAX_FRAME_BUFFER; i++)
         {
             if (MP4PlayerCorePtr[threadnum]->h264decfm[i] != NULL)
             {
-                MEMFreeToDefaultHeap(MP4PlayerCorePtr[threadnum]->h264decfm[i]);
+                //MEMFreeToDefaultHeap(MP4PlayerCorePtr[threadnum]->h264decfm[i]);
             }
         }
 
