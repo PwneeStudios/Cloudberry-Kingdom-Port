@@ -18,12 +18,12 @@
 #define SCEA
 
 #ifdef SCEA
-#define AUTOSAVEDATA_DIRNAME "NPUB31177-AUTO-"
+#define AUTOSAVEDATA_DIRNAME "NPUB31177-AUTO"
 #endif
 
 #define AUTOSAVE_FILENAME "SYS-DATA"
 #define AUTOSAVE_PARAMSFO_TITLE "Cloudberry Kingdom"
-#define AUTOSAVE_PARAMSFO_DETAIL "Progress in Cloudberry Kingdom."
+//#define AUTOSAVE_PARAMSFO_DETAIL "Progress in Cloudberry Kingdom."
 
 #define AUTOSAVE_SIZE (10 * 1024)
 
@@ -492,7 +492,7 @@ namespace CloudberryKingdom
 			strncpy( set->setParam->title, AUTOSAVE_PARAMSFO_TITLE, CELL_SAVEDATA_SYSP_TITLE_SIZE );
 
 			memset( set->setParam->subTitle, 0, CELL_SAVEDATA_SYSP_SUBTITLE_SIZE );
-			strncpy( set->setParam->subTitle, AUTOSAVE_PARAMSFO_DETAIL, CELL_SAVEDATA_SYSP_SUBTITLE_SIZE );
+			//strncpy( set->setParam->subTitle, AUTOSAVE_PARAMSFO_DETAIL, CELL_SAVEDATA_SYSP_SUBTITLE_SIZE );
 
 			memset( set->setParam->reserved, 0, sizeof( set->setParam->reserved ) );
 			memset( set->setParam->reserved2, 0, sizeof( set->setParam->reserved2 ) );
