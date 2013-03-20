@@ -8,6 +8,7 @@
 #include <Utility/ConsoleInformation.h>
 
 #include <sys/ppu_thread.h>
+#include <sys/timer.h>
 
 #include <Core.h>
 #include <Architecture/Scheduler.h>
@@ -203,12 +204,10 @@ float vol;
 	cellMSStreamSetCallbackFunc( nCh, StreamCallback );
 // Note: No callback has been setup. This sound will just constantly play. No callbacks required.
 
-    cellMSStreamPlay(nCh);
+	cellMSStreamPlay(nCh);
 
 	cellMSCoreSetVolume1(nCh, CELL_MS_DRY, CELL_MS_SPEAKER_FL, CELL_MS_CHANNEL_0, musicVolume);
 	cellMSCoreSetVolume1(nCh, CELL_MS_DRY, CELL_MS_SPEAKER_FR, CELL_MS_CHANNEL_0, musicVolume);
-	/*cellMSCoreSetVolume1(nCh, CELL_MS_WET, CELL_MS_SPEAKER_FL, CELL_MS_CHANNEL_0, musicVolume);
-	cellMSCoreSetVolume1(nCh, CELL_MS_WET, CELL_MS_SPEAKER_FR, CELL_MS_CHANNEL_0, musicVolume);*/
     return nCh;
 }
 
@@ -244,7 +243,6 @@ public:
 		cellFsClose( fd );
 
 		stream = cellMSStreamOpen();
-		//sys_timer_usleep( fps60 * 60 * 2 );
 		stream = TriggerStream( stream, addr, addr, size, size, 44100, 2 );
 
 		PlayJobInProgress = false;
@@ -269,6 +267,7 @@ void MediaPlayer::Play( const boost::shared_ptr<Song> &song )
 		cellMSCoreSetVolume1(stream, CELL_MS_DRY, CELL_MS_SPEAKER_FR, CELL_MS_CHANNEL_0, 0);
 		/*cellMSCoreSetVolume1(stream, CELL_MS_WET, CELL_MS_SPEAKER_FL, CELL_MS_CHANNEL_0, 0);
 		cellMSCoreSetVolume1(stream, CELL_MS_WET, CELL_MS_SPEAKER_FR, CELL_MS_CHANNEL_0, 0);*/
+		//cellMSCoreStop( stream, CELL_MS_STOP );
 		cellMSStreamClose( stream );
 		stream = -1;
 	}

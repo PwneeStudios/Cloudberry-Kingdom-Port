@@ -132,6 +132,8 @@ namespace CloudberryKingdom
 		Elapsed += Tools::TheGame->DeltaT;
 	}
 
+	static int SongChangeCooloff = 0;
+
 	void EzSongWad::CheckForNext()
 	{
 		if ( SongChangeCooloff > 0 )
@@ -170,8 +172,6 @@ namespace CloudberryKingdom
 				Next();
 		}
 	}
-
-	static int SongChangeCooloff = 0;
 
 	bool EzSongWad::IsPlaying()
 	{
