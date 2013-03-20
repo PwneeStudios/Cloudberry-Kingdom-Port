@@ -24,7 +24,7 @@ void SetElapsedVideoTime( float time )
 
 #ifdef PS3
 	bool StartTimeSet;
-	time_t StartTime;
+	clock_t StartTime;
 #elif CAFE
 	#include <cafe/os.h>
 
@@ -360,8 +360,8 @@ bool MainVideo::Paused = false;
 
 #ifdef PS3
 		if ( !StartTimeSet ) return;
-		time_t CurrentTime = time( NULL );
-		double Elapsed = difftime( CurrentTime, StartTime ) + .45f;
+		clock_t CurrentTime = clock();
+		double Elapsed = static_cast< double >( CurrentTime - StartTime ) / CLOCKS_PER_SEC + .45f;
 #elif CAFE
 		if ( !StartTimeSet ) return;
 		OSTick CurrentTime = OSGetTick();

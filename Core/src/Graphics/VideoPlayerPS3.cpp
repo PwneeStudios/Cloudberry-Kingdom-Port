@@ -19,7 +19,7 @@
 #include <sysutil/sysutil_bgmplayback.h>
 
 extern bool StartTimeSet;
-extern time_t StartTime;
+extern clock_t StartTime;
 
 struct VideoPlayerInternal
 {
@@ -225,7 +225,7 @@ void VideoPlayer::DrawFrame()
 	{	
 		if ( !StartTimeSet && g_Player->isPlaying() )
 		{
-			StartTime = time( NULL );
+			StartTime = clock();
 			StartTimeSet = true;
 		}
 		
