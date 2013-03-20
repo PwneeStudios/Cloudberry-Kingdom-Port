@@ -205,6 +205,7 @@ void VideoPlayer::Play( const boost::shared_ptr< Video > &video )
 	snprintf( buffer, sizeof( buffer ), "%s", moviePath.c_str() );
 
 	bool check = internal_->Player->Play( buffer, false );
+	internal_->Player->Volume( 2.0f );
 	if( !check )
 	{
 		LOG.Write( "Couldn't play file: %s\n", buffer );
