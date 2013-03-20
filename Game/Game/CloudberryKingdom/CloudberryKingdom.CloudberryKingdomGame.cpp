@@ -1310,10 +1310,8 @@ float CloudberryKingdomGame::fps = 0;
 			{
 				for (int i = 0; i < 4; i++)
 				{
-					if ( ( PlayerManager::Players[i] != 0 ) && PlayerManager::Players[i]->Exists && !Tools::GamepadState[i].IsConnected )
-					{
+					if( ( PlayerManager::Players[i] != 0 ) && PlayerManager::Players[i]->Exists && !Tools::GamepadState[i].IsConnected )
 						return true;
-					}
 				}
 			}
 
@@ -1420,6 +1418,48 @@ float CloudberryKingdomGame::fps = 0;
 	}
 
 
+	
+		template< typename T, size_t N >
+		class RollingBuffer
+		{
+
+			T buffer_[ N ];
+			size_t index_;
+
+		public:
+
+			RollingBuffer()
+				: index_( 0 )
+			{
+				memset( buffer_, 0, sizeof( buffer_ ) );
+			}
+
+			RollingBuffer( const T &value )
+				: index_( 0 )
+			{
+				for( size_t i = 0; i < N; ++i )
+					buffer_[ i ] = value;
+			}
+
+			void Put( const T &value )
+			{
+				buffer_[ index_ ] = value;
+				index_ = ( index_ + 1 ) % N;
+			}
+
+			bool All( const T &value )
+			{
+				for( size_t i = 0; i < N; ++i )
+				{
+					if( buffer_[ i ] != value )
+						return false;
+				}
+
+				return true;
+			}
+
+		};
+
 
 	void CloudberryKingdomGame::Draw( const boost::shared_ptr<GameTime> &gameTime )
 	{
@@ -1504,8 +1544,16 @@ float CloudberryKingdomGame::fps = 0;
                 }
             }
 #else
+
+/*#ifdef CAFE
+		static RollingBuffer< bool, 10 > disconnectedController;
+		disconnectedController.Put( DisconnectedController() );
+		if( disconnectedController.All( true ) )
+#else*/
 		if( DisconnectedController() )
+//#endif
 		{
+
 #ifdef CAFE
 			if( WhoIsDisconnected == Who_VPAD )
 			{
