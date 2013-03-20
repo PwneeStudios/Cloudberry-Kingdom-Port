@@ -226,8 +226,8 @@ namespace CloudberryKingdom
 
 		//device->Clear( Color::Transparent );
 		FlameRenderTarget->Clear( 0.f, 0.f, 0.f, 0.f );
-		float scalex = 175;
-		float scaley = 175;
+		float scalex = 190;
+		float scaley = 190;
 
 		boost::shared_ptr<EzEffect> fx = Tools::BasicEffect;
 
