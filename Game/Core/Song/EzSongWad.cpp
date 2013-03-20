@@ -134,6 +134,9 @@ namespace CloudberryKingdom
 
 	void EzSongWad::CheckForNext()
 	{
+		if ( SongChangeCooloff > 0 )
+			SongChangeCooloff--;
+
 		if ( StartingSong )
 		{
 			if ( MediaPlayer::GetState() == MediaState_Playing )
@@ -151,16 +154,24 @@ namespace CloudberryKingdom
 				if ( PlayList.empty() || PlayList.size() <= 1 )
 					CanControl = false;
 
-			if ( CanControl && ButtonCheck::State( ControllerButtons_RT, -1 ).Pressed )
+			if ( SongChangeCooloff == 0 && CanControl && ButtonCheck::State( ControllerButtons_RT, -1 ).Pressed )
+			{
+				SongChangeCooloff = 30;
 				Next();
-			else if ( CanControl && ButtonCheck::State( ControllerButtons_LT, -1 ).Pressed )
+			}
+			else if ( SongChangeCooloff == 0 && CanControl && ButtonCheck::State( ControllerButtons_LT, -1 ).Pressed )
+			{
+				SongChangeCooloff = 30;
 				Prev();
+			}
 
 			// Switch to the next song if the current song is over
 			else if ( PlayNext && Elapsed > Duration )
 				Next();
 		}
 	}
+
+	static int SongChangeCooloff = 0;
 
 	bool EzSongWad::IsPlaying()
 	{
