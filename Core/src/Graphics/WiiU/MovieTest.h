@@ -35,8 +35,9 @@ static const s32 AACDEC_giFreqIndex[AACDEC_MAX_FREQ_INDEX] = {
 /*******************
  System
 *******************/
-#define VIDEO_BUFFER_NUM        (60)    // max 60fps
+#define VIDEO_BUFFER_NUM        (30)    // max 60fps
 #define AUDIO_BUFFER_NUM        (300)    // max 48kHz 48000/1024
+#define FILEMEMORYSIZE          (130*1024*1024) // Big enough for largest movie.
 //#define MAX_FRAME_NUM           (100)    // max video frame rate(60fps)
 
 /*******************

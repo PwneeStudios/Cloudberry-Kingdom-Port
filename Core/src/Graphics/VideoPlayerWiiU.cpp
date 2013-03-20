@@ -41,7 +41,6 @@
 #endif
 
 #define VIDEOSKIP_DELAY         (70)                            // permissible delay time
-#define FILEMEMORYSIZE          (130*1024*1024)                 // Big enough for largest movie.
 #define TEST_MODE               (0)                             // 1:TV only, 2:DRC only, other:TV & DRC
 
 #define MAXTHREADNUM            (8)
@@ -152,6 +151,10 @@ static void ProcessChangeWait(s32 threadnum, s32 pos)
 // Flag in CoreWiiU to have it re-enable the home button when warning fades out.
 extern bool ReEnableHomeButton;
 
+// Subtitle parameters from Video.cpp.
+extern bool		StartTimeSet;
+extern OSTick	StartTime;
+
 /*-------------------------------------------------------------------------*
     Name:           VideoOutputThread
     Description:    
@@ -169,6 +172,8 @@ static s32 VideoOutputThread(s32 intArg, void *ptrArg)
 	OSEnableHomeButtonMenu( FALSE );
 
     OSReport("Video Thread Start\n");
+
+	bool subtitleTimeStarted = false;
 
     while( 1 )
     {
@@ -199,6 +204,13 @@ static s32 VideoOutputThread(s32 intArg, void *ptrArg)
                     }
                     if (MP4PlayerCorePtr[i]->OutputVideoInfo[MP4PlayerCorePtr[i]->df_v].Status == 1)
                     {
+						if( !subtitleTimeStarted )
+						{
+							subtitleTimeStarted = true;
+							StartTimeSet = true;
+							StartTime = OSGetTick();
+						}
+
                         starttime = OSTicksToMilliseconds(OSGetTime());
 
                         // video frame draw
@@ -208,7 +220,7 @@ static s32 VideoOutputThread(s32 intArg, void *ptrArg)
 #endif
 						if( GLOBAL_VIDEO_OVERRIDE )
 						{
-							SCHEDULER->MainThread();
+							//SCHEDULER->MainThread();
 							ret = VideoDraw(MP4PlayerCorePtr[i]->OutputVideoInfo[MP4PlayerCorePtr[i]->df_v].bufp, i);
 						}
 						else
@@ -903,6 +915,8 @@ s32 cbGetMediaSampleData(MP4DMXFW_UNIT *unit, void *handle)
     return MP4DMXFW_RET_SUCCESS;
 }
 
+// Preallocated buffer for loading movies. Defined in videoplayer.cpp.
+extern void *MovieBuffer;
 
 /*-------------------------------------------------------------------------*
     Name:           MP4PlayTVorDRC
@@ -933,7 +947,7 @@ static s32 MP4PlayTVorDRC(s32 intArg, void *ptrArg)
     MP4PlayerCorePtr[intArg]->InputFileSize = 0;
 
     // allocate memory to store the input data
-    MP4PlayerCorePtr[intArg]->streamFullBuffer = (u8 *)MEMAllocFromDefaultHeapEx(FILEMEMORYSIZE, 64);
+    MP4PlayerCorePtr[intArg]->streamFullBuffer = (u8 *)MovieBuffer;
 
     // Allocate buffers.
     GpClient[intArg] = reinterpret_cast< FSClient * >( MEMAllocFromDefaultHeap(sizeof(FSClient)) );
@@ -1304,7 +1318,7 @@ ERROR:
     MEMFreeToDefaultHeap(GpClient[intArg]);
     MEMFreeToDefaultHeap(GpCmd[intArg]);
 
-    MEMFreeToDefaultHeap(MP4PlayerCorePtr[intArg]->streamFullBuffer);
+    //MEMFreeToDefaultHeap(MP4PlayerCorePtr[intArg]->streamFullBuffer);
     // FS delete
     if (MP4PlayerCorePtr[intArg]->file_input_mode == 1)
     {
@@ -1438,7 +1452,7 @@ static s32 MP4PlayDRC(s32 intArg, void *ptrArg)
     MP4PlayerCorePtr[intArg]->InputFileSize = 0;
 
     // allocate memory to store the input data
-    MP4PlayerCorePtr[intArg]->streamFullBuffer = (u8 *)MEMAllocFromDefaultHeapEx(FILEMEMORYSIZE, 64);
+    MP4PlayerCorePtr[intArg]->streamFullBuffer = (u8 *)MovieBuffer;
 
     // Allocate buffers.
     GpClient[intArg] = MEMAllocFromDefaultHeap(sizeof(FSClient));
@@ -1773,7 +1787,7 @@ ERROR:
     MEMFreeToDefaultHeap(GpClient[intArg]);
     MEMFreeToDefaultHeap(GpCmd[intArg]);
 
-    MEMFreeToDefaultHeap(MP4PlayerCorePtr[intArg]->streamFullBuffer);
+    //MEMFreeToDefaultHeap(MP4PlayerCorePtr[intArg]->streamFullBuffer);
     // FS delete
     if (MP4PlayerCorePtr[intArg]->file_input_mode == 1)
     {
@@ -1937,6 +1951,8 @@ VideoPlayer::VideoPlayer( void (*UpdateElapsedTime)(float, bool), void (*DrawSub
 {
 	::UpdateElapsedTime = UpdateElapsedTime;
 	::DrawSubtitles = DrawSubtitles;
+
+	StartTimeSet = false;
 
 	/*InitShader();
 	shadersInitialized = true;

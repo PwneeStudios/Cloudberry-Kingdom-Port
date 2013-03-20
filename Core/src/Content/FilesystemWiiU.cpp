@@ -181,6 +181,7 @@ public:
 };
 
 FSClient *GLOBAL_FSClient = NULL;
+Mutex *GLOBSL_FSMutex = NULL;
 
 struct FilesystemWiiUInternal
 {
@@ -196,7 +197,9 @@ void StateChangeCallback( FSClient *client, FSVolumeState state, void *context )
 
 	if( FSGetVolumeState( client ) != FS_VOLSTATE_READY )
 	{
-		DisplayError( FSGetLastErrorCodeForViewer( client ) );
+		s32 errorCode = FSGetLastErrorCodeForViewer( client );
+		LOG.Write( "Error code: 0x%x\n", errorCode );
+		DisplayError( errorCode );
 	}
 }
 
