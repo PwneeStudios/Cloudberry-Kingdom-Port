@@ -262,6 +262,7 @@ void ReserveVideoPlayerMemory()
 	// Preallocate frame memory.
 
 	s32 YuvBufSize = (((UVD_ALIGN_PITCH_IN_PIXELS(1280))*720*3)/2 + UVD_BUFFER_PAD);
+	ngptrnum = 0;
 
 	for (s32 i = 0; i < MAX_FRAME_BUFFER; i++)
     {

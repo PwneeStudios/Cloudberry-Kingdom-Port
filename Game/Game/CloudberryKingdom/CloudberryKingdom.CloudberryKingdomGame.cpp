@@ -63,6 +63,8 @@ enum MyControllerTypes
 
 extern int WhoIsDisconnected;
 
+extern bool GLOBAL_CONNECTION_STATUS[ 5 ];
+
 #endif
 
 namespace CloudberryKingdom
@@ -1292,6 +1294,95 @@ float CloudberryKingdomGame::fps = 0;
 			return true;
 		}
 
+		static bool ClearErrorVPAD()
+		{
+			ButtonCheck::UpdateControllerAndKeyboard_StartOfStep();
+
+
+			bool noPlayersExist = true;
+			for( int i = 0; i < 4; i++ )
+			{
+				if( ( PlayerManager::Players[ i ] != 0 ) && PlayerManager::Players[ i ]->Exists )
+					noPlayersExist = false;
+			}
+
+			if( noPlayersExist )
+			{
+				for( int i = 0; i < 5; ++i )
+				{
+					if( GLOBAL_CONNECTION_STATUS[ i ] )
+						return true;
+				}
+			}
+
+			if( !GLOBAL_CONNECTION_STATUS[ 0 ] )
+				return false;
+
+			/*int numConnected = 0;
+			for( int i = 0; i < 4; ++i )
+			{
+				if( Tools::GamepadState[i].IsConnected )
+					numConnected++;
+			}
+
+			if( numConnected == 0 )
+				return false;
+
+			for (int i = 0; i < 4; i++)
+			{
+				if ( ( PlayerManager::Players[i] != 0 ) && PlayerManager::Players[i]->Exists && !Tools::GamepadState[i].IsConnected )
+				{
+					return false;
+				}
+			}*/
+
+			return true;
+		}
+
+		static bool ClearErrorKPAD()
+		{
+			ButtonCheck::UpdateControllerAndKeyboard_StartOfStep();
+
+			/*int numConnected = 0;
+			for( int i = 0; i < 4; ++i )
+			{
+				if( Tools::GamepadState[i].IsConnected )
+					numConnected++;
+			}
+
+			if( numConnected == 0 )
+				return false;*/
+			
+			// This handles the case when there are no players that exist and we don't care about
+			// which kpad is connected.
+			bool noPlayersExist = true;
+			for( int i = 0; i < 4; i++ )
+			{
+				if( ( PlayerManager::Players[ i ] != 0 ) && PlayerManager::Players[ i ]->Exists )
+					noPlayersExist = false;
+			}
+
+			if( noPlayersExist )
+			{
+				for( int i = 0; i < 5; ++i )
+				{
+					if( GLOBAL_CONNECTION_STATUS[ i ] )
+						return true;
+				}
+			}
+
+			// Here we actually care about which kpad is connected.
+			for (int i = 0; i < 4; i++)
+			{
+				if ( ( PlayerManager::Players[i] != 0 ) && PlayerManager::Players[i]->Exists && !GLOBAL_CONNECTION_STATUS[ i + 1 ] )
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
 		bool CloudberryKingdomGame::DisconnectedController()
 		{
 #if PC_VERSION
@@ -1564,11 +1655,11 @@ float CloudberryKingdomGame::fps = 0;
 			if( WhoIsDisconnected == Who_VPAD )
 			{
 				DisplayError( ErrorType( 1650101,
-					NULL, ErrorType::DEFAULT, ClearError, false ) );
+					NULL, ErrorType::DEFAULT, ClearErrorVPAD, false ) );
 			}
 			else if( WhoIsDisconnected == Who_KPAD )
 				DisplayError( ErrorType( 1520100,
-					NULL, ErrorType::DEFAULT, ClearError, false ) );
+					NULL, ErrorType::DEFAULT, ClearErrorKPAD, false ) );
 
 			WhoIsDisconnected = Who_NOONE;
 #elif PS3

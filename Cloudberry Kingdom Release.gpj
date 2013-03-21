@@ -16,8 +16,8 @@ primaryTarget=ppc_cos.tgt
 	-DGAME
 	-DNOT_PC
 	-Ospeed
-	--no_debug
 	-U_DEBUG
+	--no_debug
 Cloudberry WiiU\Cloudberry_Kingdom_Release.gpj		[Program]
 Core\CoreRelease.gpj		[Library]
 tgt\resources.gpj		[Project]
