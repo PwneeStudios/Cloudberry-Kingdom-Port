@@ -78,7 +78,7 @@ namespace CloudberryKingdom
 #ifdef PC_VERSION
 	const bool FinalRelease = false;
 #elif CAFE
-	const bool FinalRelease = false;
+	const bool FinalRelease = true;
 #elif PS3
 	const bool FinalRelease = true;
 #elif XBOX
