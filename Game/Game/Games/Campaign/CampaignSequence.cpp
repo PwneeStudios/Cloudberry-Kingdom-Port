@@ -225,6 +225,8 @@ namespace CloudberryKingdom
 		Tools::UseInvariantCulture();
 #if defined(PC_VERSION)
 		FileReader reader = FileReader( std::wstring( L"Content/Campaign/CampaignList.txt" ) );
+#elif CAFE
+		FileReader reader = FileReader( std::wstring( L"Campaign/CampaignList_3.txt" ) );
 #else
 		FileReader reader = FileReader( std::wstring( L"Campaign/CampaignList.txt" ) );
 #endif

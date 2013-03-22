@@ -557,9 +557,15 @@ namespace CloudberryKingdom
 	int PlayerManager::MaxPlayerHighScore( int GameId )
 	{
 		int max = 0;
-		std::vector<boost::shared_ptr<PlayerData> > vec = getExistingPlayers();
-		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
-			max = __max( max, ( *player )->GetHighScore( GameId ) );
+		//std::vector<boost::shared_ptr<PlayerData> > vec = getExistingPlayers();
+		//for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
+		//	max = __max( max, ( *player )->GetHighScore( GameId ) );
+
+		for ( int i = 0; i < 4; ++i )
+		{
+			if ( Players[ i ] != 0 )
+				max = __max( max, Players[ i ]->GetHighScore( GameId ) );
+		}
 
 		return max;
 	}
@@ -568,49 +574,72 @@ namespace CloudberryKingdom
         {
             int max = 0;
 
-			std::vector<boost::shared_ptr<PlayerData> > vec = getExistingPlayers();
-			for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
-                max = __max( max, ( *player )->GetTotalArcadeLevel( ) );
+			//std::vector<boost::shared_ptr<PlayerData> > vec = getExistingPlayers();
+			//for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
+   //             max = __max( max, ( *player )->GetTotalArcadeLevel( ) );
+
+			for ( int i = 0; i < 4; ++i )
+			{
+				if ( Players[ i ] != 0 )
+					max = __max( max, Players[ i ]->GetTotalArcadeLevel() );
+			}
 
             return max;
         }
 
         int PlayerManager::MinPlayerTotalCampaignLevel()
         {
-            int min = 0;
-			std::vector<boost::shared_ptr<PlayerData> > vec = getExistingPlayers();
-			for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
-            {
-                int level = ( *player )->GetTotalCampaignLevel();
-                //min = min == 0 ? level : __min( min, level );
-				min = min == 0 ? level : __max( min, level );
-            }
+            int max = 0;
+			//std::vector<boost::shared_ptr<PlayerData> > vec = getExistingPlayers();
+			//for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
+   //         {
+   //             int level = ( *player )->GetTotalCampaignLevel();
+   //             //min = min == 0 ? level : __min( min, level );
+			//	min = min == 0 ? level : __max( min, level );
+   //         }
 
-            return min;
+			for ( int i = 0; i < 4; ++i )
+			{
+				if ( Players[ i ] != 0 )
+					max = __max( max, Players[ i ]->GetTotalCampaignLevel() );
+			}
+
+			return max;
         }
 
         int PlayerManager::MinPlayerTotalCampaignIndex()
         {
-            int min = 0;
-			std::vector<boost::shared_ptr<PlayerData> > vec = getExistingPlayers();
-			for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
-            {
-                int level = ( *player )->GetTotalCampaignIndex();
-                //min = min == 0 ? level : __min( min, level );
-				min = min == 0 ? level : __max( min, level );
-            }
+            int max = 0;
+			//std::vector<boost::shared_ptr<PlayerData> > vec = getExistingPlayers();
+			//for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
+			//{
+   //             int level = ( *player )->GetTotalCampaignIndex();
+			//	min = min == 0 ? level : __max( min, level );
+			//}
 
-            return min;
+			for ( int i = 0; i < 4; ++i )
+			{
+				if ( Players[ i ] != 0 )
+					max = __max( max, Players[ i ]->GetTotalCampaignIndex() );
+			}
+
+            return max;
         }
 
         int PlayerManager::MaxPlayerTotalLevel()
         {
             int max = 0;
-			std::vector<boost::shared_ptr<PlayerData> > vec = getExistingPlayers();
-			for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
-                max = __max( max, ( *player )->GetTotalLevel( ) );
+			//std::vector<boost::shared_ptr<PlayerData> > vec = getExistingPlayers();
+			//for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
+   //             max = __max( max, ( *player )->GetTotalLevel( ) );
 
-            return max;
+			for ( int i = 0; i < 4; ++i )
+			{
+				if ( Players[ i ] != 0 )
+					max = __max( max, Players[ i ]->GetTotalLevel( ) );
+			}
+
+			return max;
         }
 
 	bool PlayerManager::Awarded( const boost::shared_ptr<Awardment> &award )

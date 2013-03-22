@@ -76,7 +76,17 @@ static bool LAST_CONNECTION_STATUS[ 5 ];
 namespace CloudberryKingdom
 {
 
+#ifdef PC_VERSION
+	const bool FinalRelease = false;
+#elif CAFE
 	const bool FinalRelease = true;
+#elif PS3
+	const bool FinalRelease = true;
+#elif XBOX
+	const bool FinalRelease = true;
+#endif
+
+
 
 #if defined(DEBUG)
 	int CloudberryKingdomGame::_count = 0;
@@ -964,6 +974,7 @@ float CloudberryKingdomGame::fps = 0;
             }
         }
 
+		/*
         // Turn on/off flying.
 #ifdef PC_VERSION
         if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_O ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_O ) )
@@ -971,6 +982,38 @@ float CloudberryKingdomGame::fps = 0;
 		if ( ButtonCheck::State( ControllerButtons_LJ, -2 ).Down && ButtonCheck::State( ControllerButtons_A, -2).Pressed )
 #endif
         {
+			for ( BobVec::const_iterator bob = Tools::CurLevel->Bobs.begin(); bob != Tools::CurLevel->Bobs.end(); ++bob )
+			{
+                ( *bob )->Flying = !( *bob )->Flying;
+            }
+        }
+		*/
+
+        // Incr/Decr campaign index
+#ifdef PC_VERSION
+        if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_O ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_O ) )
+#else
+		if ( ButtonCheck::State( ControllerButtons_LJ, -2 ).Down && ButtonCheck::State( ControllerButtons_A, -2).Pressed )
+#endif
+        {
+			PlayerManager::Players[ 0 ]->CampaignIndex = CoreMath::RestrictVal(0, 320, PlayerManager::Players[ 0 ]->CampaignIndex + 1 );
+			PlayerManager::Players[ 0 ]->CampaignLevel = CoreMath::RestrictVal(0, 320, PlayerManager::Players[ 0 ]->CampaignLevel + 1 );
+
+			for ( BobVec::const_iterator bob = Tools::CurLevel->Bobs.begin(); bob != Tools::CurLevel->Bobs.end(); ++bob )
+			{
+                ( *bob )->Flying = !( *bob )->Flying;
+            }
+        }
+
+#ifdef PC_VERSION
+        if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_O ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_P ) )
+#else
+		if ( ButtonCheck::State( ControllerButtons_LJ, -2 ).Down && ButtonCheck::State( ControllerButtons_B, -2).Pressed )
+#endif
+        {
+			PlayerManager::Players[ 0 ]->CampaignIndex = CoreMath::RestrictVal(0, 330, PlayerManager::Players[ 0 ]->CampaignIndex - 1 );
+			PlayerManager::Players[ 0 ]->CampaignLevel = CoreMath::RestrictVal(0, 330, PlayerManager::Players[ 0 ]->CampaignLevel - 1 );
+
 			for ( BobVec::const_iterator bob = Tools::CurLevel->Bobs.begin(); bob != Tools::CurLevel->Bobs.end(); ++bob )
 			{
                 ( *bob )->Flying = !( *bob )->Flying;
@@ -1019,6 +1062,17 @@ float CloudberryKingdomGame::fps = 0;
 	void CloudberryKingdomGame::PhsxStep()
 	{
 		DoToDoList();
+
+//#if WINDOWS
+//		// Load a test level.
+//		if ( !FinalRelease && KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_D5 ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_D5 ) )
+//		{
+//			GameData::LockLevelStart = false;
+//			LevelSeedData::ForcedReturnEarly = 0;
+//			MakeTestLevel();
+//		}
+//#endif
+
 #if defined(WINDOWS)
 	#if defined(PC_DEBUG) || (defined(WINDOWS) && defined(DEBUG)) || defined(INCLUDE_EDITOR)
 		// Debug tools
@@ -2374,11 +2428,12 @@ float CloudberryKingdomGame::fps = 0;
 		//PlayerManager::Players[3].Exists = true;
 
 		boost::shared_ptr<LevelSeedData> data = boost::make_shared<LevelSeedData>();
+		data->ReadString( 
+			L"0;s:1798893931;h:6,0,0,0;t:cave;n:0;l:5174;u:0,0,0,0.3395454,0,0.5031818,0.422163,0,0,0.4819185,0.5773649,0.4231443,0.3020037,0,0,0,0,0,0,0,0,4.280785,4.361663,9;u:0,0,0,0.3395454,0,0.5031818,0.422163,0,0,0.4819185,0.5773649,0.4231443,0.3020037,0,0,0,0,0,0,0,0,4.280785,4.361663,9;u:0,0,0,0.3395454,0,0.5031818,0.422163,0,0,0.4819185,0.5773649,0.4231443,0.3020037,0,0,0,0,0,0,0,0,4.280785,4.361663,9;"
+			);
 
-
-		//data.ReadString("0;s:1830873138;h:2,0,2,0;t:sea;n:1;l:2150;u:0,0,0,0,0,2,4.625,0,0,0,0,0,3.75,6.375,0,0,0,0,0,0,0,7.75,0,6.625;");
-		//GameData.StartLevel(data);
-		//return;
+		GameData::StartLevel( data );
+		return;
 
 		data->setSeed( Tools::GlobalRnd->Rnd->Next() );
 		//data.Seed = 110040853;
