@@ -54,16 +54,21 @@
 
 #ifdef CAFE
 
-enum MyControllerTypes
+// Queue of devices that have been disconnected.
+extern std::list< int > GLOBAL_DISCONNECT_QUEUE;
+
+// Status of all connected devices.  From GamePadWiiU.cpp.
+extern bool GLOBAL_CONNECTION_STATUS[ 5 ];
+
+enum DisconnectedType
 {
-	Who_NOONE,
-	Who_VPAD,
-	Who_KPAD
+	DisconnectedType_NONE,
+	DisconnectedType_ALL,
+	DisconnectedType_VPAD,
+	DisconnectedType_KPAD
 };
 
-extern int WhoIsDisconnected;
-
-extern bool GLOBAL_CONNECTION_STATUS[ 5 ];
+static bool LAST_CONNECTION_STATUS[ 5 ];
 
 #endif
 
@@ -111,6 +116,10 @@ namespace CloudberryKingdom
 
 	void CloudberryKingdomGame::StaticIntializer_NoDependence()
 	{
+#ifdef CAFE
+		memset( LAST_CONNECTION_STATUS, 0, sizeof( LAST_CONNECTION_STATUS ) );
+#endif
+
 		TitleGameData_MW::InitializeStatics();
 		
 		Globals::InitializeStatics();
@@ -1294,94 +1303,109 @@ float CloudberryKingdomGame::fps = 0;
 			return true;
 		}
 
+		#ifdef CAFE
+
+		// Check for disconnected controller on CAFE.
+		DisconnectedType DisconnectedControllerCAFE( bool saveState )
+		{
+			if( !CloudberryKingdomGame::PastPressStart )
+			{
+				return DisconnectedType_NONE;
+			}
+
+			if( CloudberryKingdomGame::CurrentPresence != Presence_TitleScreen )
+			{
+				if( ( PlayerManager::Players[ 0 ] != 0 ) && PlayerManager::Players[ 0 ]->Exists )
+				{
+					bool vpadConnected = GLOBAL_CONNECTION_STATUS[ 0 ];
+					bool kpadConnected = GLOBAL_CONNECTION_STATUS[ 1 ];
+					bool lastVpadConnected = LAST_CONNECTION_STATUS[ 0 ];
+					bool lastKpadConnected = LAST_CONNECTION_STATUS[ 1 ];
+
+					if( !vpadConnected && !kpadConnected )
+					{
+						if( lastVpadConnected )
+						{
+							return DisconnectedType_VPAD;
+						}
+						else
+						{
+							return DisconnectedType_KPAD;
+						}
+					}
+				}
+
+				for( int i = 1; i < 4; ++i )
+				{
+					if( ( PlayerManager::Players[i] != 0 ) && PlayerManager::Players[i]->Exists && !GLOBAL_CONNECTION_STATUS[ i + 1 ] )
+					{
+						return DisconnectedType_KPAD;
+					}
+				}
+			}
+
+			int numConnected = 0;
+			for( int i = 0; i < 5; ++i )
+			{
+				if( GLOBAL_CONNECTION_STATUS[ i ] )
+					++numConnected;
+			}
+
+			if( numConnected == 0 )
+			{
+				return DisconnectedType_ALL;
+			}
+
+			return DisconnectedType_NONE;
+		}
+
+		DisconnectedType LastDType;
+
+		static bool ClearErrorCAFE()
+		{
+			DisconnectedType dType = DisconnectedControllerCAFE( false );
+
+			if( dType != LastDType )
+			{
+				switch( dType )
+				{
+				case DisconnectedType_VPAD:
+						LastDType = dType;
+						DisplayError( ErrorType( 1650101,
+							NULL, ErrorType::DEFAULT, ClearErrorCAFE, false ) );
+						return true;
+				case DisconnectedType_KPAD:
+				case DisconnectedType_ALL:
+						LastDType = dType;
+						DisplayError( ErrorType( 1520100,
+							NULL, ErrorType::DEFAULT, ClearErrorCAFE, false ) );
+						return true;
+				case DisconnectedType_NONE:
+					return true;
+				}
+			}
+
+			if( dType == DisconnectedType_NONE )
+				memset( LAST_CONNECTION_STATUS, 0, sizeof( LAST_CONNECTION_STATUS ) );
+
+			return dType == DisconnectedType_NONE;
+		}
+
 		static bool ClearErrorVPAD()
 		{
 			ButtonCheck::UpdateControllerAndKeyboard_StartOfStep();
 
-
-			bool noPlayersExist = true;
-			for( int i = 0; i < 4; i++ )
-			{
-				if( ( PlayerManager::Players[ i ] != 0 ) && PlayerManager::Players[ i ]->Exists )
-					noPlayersExist = false;
-			}
-
-			if( noPlayersExist )
-			{
-				for( int i = 0; i < 5; ++i )
-				{
-					if( GLOBAL_CONNECTION_STATUS[ i ] )
-						return true;
-				}
-			}
-
-			if( !GLOBAL_CONNECTION_STATUS[ 0 ] )
-				return false;
-
-			/*int numConnected = 0;
-			for( int i = 0; i < 4; ++i )
-			{
-				if( Tools::GamepadState[i].IsConnected )
-					numConnected++;
-			}
-
-			if( numConnected == 0 )
-				return false;
-
-			for (int i = 0; i < 4; i++)
-			{
-				if ( ( PlayerManager::Players[i] != 0 ) && PlayerManager::Players[i]->Exists && !Tools::GamepadState[i].IsConnected )
-				{
-					return false;
-				}
-			}*/
-
-			return true;
+			return false;
 		}
 
 		static bool ClearErrorKPAD()
 		{
 			ButtonCheck::UpdateControllerAndKeyboard_StartOfStep();
 
-			/*int numConnected = 0;
-			for( int i = 0; i < 4; ++i )
-			{
-				if( Tools::GamepadState[i].IsConnected )
-					numConnected++;
-			}
-
-			if( numConnected == 0 )
-				return false;*/
-			
-			// This handles the case when there are no players that exist and we don't care about
-			// which kpad is connected.
-			bool noPlayersExist = true;
-			for( int i = 0; i < 4; i++ )
-			{
-				if( ( PlayerManager::Players[ i ] != 0 ) && PlayerManager::Players[ i ]->Exists )
-					noPlayersExist = false;
-			}
-
-			if( noPlayersExist )
-			{
-				for( int i = 0; i < 5; ++i )
-				{
-					if( GLOBAL_CONNECTION_STATUS[ i ] )
-						return true;
-				}
-			}
-
-			// Here we actually care about which kpad is connected.
-			for (int i = 0; i < 4; i++)
-			{
-				if ( ( PlayerManager::Players[i] != 0 ) && PlayerManager::Players[i]->Exists && !GLOBAL_CONNECTION_STATUS[ i + 1 ] )
-				{
-					return false;
-				}
-			}
-
-			return true;
+			return false;
 		}
+
+#endif
 
 		bool CloudberryKingdomGame::DisconnectedController()
 		{
@@ -1642,26 +1666,30 @@ float CloudberryKingdomGame::fps = 0;
             }
 #else
 
-/*#ifdef CAFE
-		static RollingBuffer< bool, 10 > disconnectedController;
-		disconnectedController.Put( DisconnectedController() );
-		if( disconnectedController.All( true ) )
-#else*/
+#ifdef CAFE
+		DisconnectedType dType;
+		if( dType = DisconnectedControllerCAFE( true ) )
+#else
 		if( DisconnectedController() )
-//#endif
+#endif
 		{
 
 #ifdef CAFE
-			if( WhoIsDisconnected == Who_VPAD )
+			switch( dType )
 			{
-				DisplayError( ErrorType( 1650101,
-					NULL, ErrorType::DEFAULT, ClearErrorVPAD, false ) );
+			case DisconnectedType_VPAD:
+					LastDType = dType;
+					DisplayError( ErrorType( 1650101,
+						NULL, ErrorType::DEFAULT, ClearErrorCAFE, false ) );
+					break;
+			case DisconnectedType_KPAD:
+			case DisconnectedType_ALL:
+					LastDType = dType;
+					DisplayError( ErrorType( 1520100,
+						NULL, ErrorType::DEFAULT, ClearErrorCAFE, false ) );
+					break;
 			}
-			else if( WhoIsDisconnected == Who_KPAD )
-				DisplayError( ErrorType( 1520100,
-					NULL, ErrorType::DEFAULT, ClearErrorKPAD, false ) );
 
-			WhoIsDisconnected = Who_NOONE;
 #elif PS3
 
 			// Figure out which gamepad is disconnected.
@@ -1696,6 +1724,13 @@ float CloudberryKingdomGame::fps = 0;
 				NULL, ErrorType::NONE, ClearError, false ) );
 #endif
 		}
+#ifdef CAFE
+		else
+		{
+			memcpy( LAST_CONNECTION_STATUS, GLOBAL_CONNECTION_STATUS, sizeof( LAST_CONNECTION_STATUS ) );
+		}
+#endif
+
 #endif
 
 		UpdateCustomMusic();
