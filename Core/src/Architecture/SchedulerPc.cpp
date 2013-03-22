@@ -46,11 +46,11 @@ public:
 		// If there is an error, stop.
 		if( !resource_->IsLoaded() )
 		{
-			LOG.Write( "Failed: %s\n", resource_->GetPath().c_str() );
+			LOG_WRITE( "Failed: %s\n", resource_->GetPath().c_str() );
 			return;
 		}
 
-		LOG.Write( "Loaded: %s\n", resource_->GetPath().c_str() );
+		LOG_WRITE( "Loaded: %s\n", resource_->GetPath().c_str() );
 
 		// Kick off a creation job.
 		if( gpuCreate_ )

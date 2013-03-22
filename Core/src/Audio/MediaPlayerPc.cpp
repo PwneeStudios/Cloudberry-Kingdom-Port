@@ -13,7 +13,7 @@ void MediaPlayer::Initialize()
 	Device = alcOpenDevice( NULL );
 	if( !Device )
 	{
-		LOG.Write( "Failed to open sound device.\n" );
+		LOG_WRITE( "Failed to open sound device.\n" );
 		return;
 	}
 
@@ -21,7 +21,7 @@ void MediaPlayer::Initialize()
 	alcMakeContextCurrent( Context );
 	if( !Context )
 	{
-		LOG.Write( "Failed to create sound context.\n" );
+		LOG_WRITE( "Failed to create sound context.\n" );
 		alcCloseDevice( Device );
 		Device = 0;
 		return;

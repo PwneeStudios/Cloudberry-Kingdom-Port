@@ -10,7 +10,7 @@ template<class T>
 int Compare( const T a, const T b )
 {
 //#if defined(DEBUG)
-//	LOG.Write( WstringToUtf8( ToString( a ) + L" " + ToString( b ) + L"\n" ).c_str() );
+//	LOG_WRITE( WstringToUtf8( ToString( a ) + L" " + ToString( b ) + L"\n" ).c_str() );
 //#endif
 
 	// C# style compare:

@@ -60,7 +60,7 @@ boost::shared_ptr<EffectParameter> Effect::Parameters( const std::string &name )
 {
 	if( internal_->Parameters.find( name ) == internal_->Parameters.end() )
 	{
-		//LOG.Write( "Unknown parameter %s\n", name.c_str() );
+		//LOG_WRITE( "Unknown parameter %s\n", name.c_str() );
 
 		return internal_->Parameters[ "SecretDefaultParameter" ];
 	}
@@ -120,7 +120,7 @@ static GLuint CreateShader( GLenum type, const std::string &src )
 		glGetShaderInfoLog( shader, param, NULL, errBuf );
 		errBuf[ param ] = '\0';
 		
-		LOG.Write( static_cast< const char * >( errBuf ) );
+		LOG_WRITE( static_cast< const char * >( errBuf ) );
 
 		assert( !errBuf );
 		delete errBuf;
@@ -164,7 +164,7 @@ static GLuint CreateProgram( const std::string &name )
 			glGetProgramInfoLog( program, param, NULL, errBuf );
 			errBuf[ param ] = '\0';
 
-			LOG.Write( static_cast< const char * >( errBuf ) );
+			LOG_WRITE( static_cast< const char * >( errBuf ) );
 
 			assert( !errBuf );
 			delete errBuf;

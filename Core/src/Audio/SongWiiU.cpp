@@ -53,7 +53,7 @@ public:
 		result = FMOD_System_CreateStream( FMODSystem, internalPath.c_str(), FMOD_OPENONLY, 0, &internal_->Song );
 		if( result != FMOD_OK )
 		{
-			LOG.Write( "Failed to load song: %s\n", internalPath.c_str() );
+			LOG_WRITE( "Failed to load song: %s\n", internalPath.c_str() );
 			internal_->Song = NULL;
 			return;
 		}
@@ -106,7 +106,7 @@ void Song::Load( const std::string &path )
 	result = FMOD_System_CreateStream( FMODSystem, internalPath.c_str(), FMOD_NONBLOCKING, 0, &internal_->Song );
 	if( result != FMOD_OK )
 	{
-		LOG.Write( "Failed to load song: %s\n", internalPath.c_str() );
+		LOG_WRITE( "Failed to load song: %s\n", internalPath.c_str() );
 		internal_->Song = NULL;
 		return;
 	}

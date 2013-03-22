@@ -80,7 +80,7 @@ ConsoleLanguage GetConsoleLanguage()
 
 void SetErrorLanguage( ConsoleLanguage language )
 {
-	LOG.Write( "Ignoring SetErrorLanguage\n" );
+	LOG_WRITE( "Ignoring SetErrorLanguage\n" );
 	/*SCIPlatformRegion region;
 	SCIStatus status = SCIGetPlatformRegion( &region );
 	if( status != SCI_STATUS_SUCCESS )

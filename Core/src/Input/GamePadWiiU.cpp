@@ -29,6 +29,11 @@ enum MyControllerTypes
 	Who_KPAD
 };
 
+// Global controller connection status.
+//  0	- WiiU gamepad.
+//  1-4	- WiiMote.
+bool GLOBAL_CONNECTION_STATUS[ 5 ];
+
 int WhoIsDisconnected = Who_NOONE;
 
 static void ConnectCallback( s32 chan, s32 reason )
@@ -47,15 +52,15 @@ static void ConnectCallback( s32 chan, s32 reason )
 		//WPADSetDataFormat( chan, dataFormat );
 		WPADControlSpeaker( chan, WPAD_SPEAKER_OFF, NULL );
 		WPADControlDpd( chan, WPAD_DPD_OFF, NULL );
-		kpadIsConnected[ chan ] = true;
-		LOG.Write( "Gamepad connected, format = %d\n", dataFormat );
+		//kpadIsConnected[ chan ] = true;
+		LOG_WRITE( "Gamepad connected, format = %d\n", dataFormat );
 	}
 	else if( reason == WPAD_ERR_NO_CONTROLLER )
 	{
-		WhoIsDisconnected = Who_KPAD;
+		//WhoIsDisconnected = Who_KPAD;
 
-		kpadIsConnected[ chan ] = false;
-		LOG.Write( "Gamepad disconnected\n" );
+		//kpadIsConnected[ chan ] = false;
+		LOG_WRITE( "Gamepad disconnected\n" );
 	}
 }
 
@@ -77,7 +82,7 @@ void GamePad::Initialize()
 		WPADSetConnectCallback( i, ConnectCallback );*/
 
 	memset( &vpadStatus, 0, sizeof( VPADStatus ) );
-	vpadConnected = true;
+	vpadConnected = false;
 	readLength = 0;
 
 	// FIXME: Should not always be active.
@@ -86,6 +91,7 @@ void GamePad::Initialize()
 	memset( kpadStatus, 0, sizeof( kpadStatus ) );
 	memset( kpadReadLength, 0, sizeof( kpadReadLength ) );
 	memset( kpadIsConnected, 0, sizeof( kpadIsConnected ) );
+	memset( GLOBAL_CONNECTION_STATUS, 0, sizeof( GLOBAL_CONNECTION_STATUS ) );
 	memset( kpadIsURCC, 0, sizeof( kpadIsURCC ) );
 	/*for( int i = 0; i < WPAD_MAX_CONTROLLERS; ++i )
 		kpadConnectHistory[ i ] = disconnectThreshold;
@@ -113,12 +119,24 @@ void GamePad::Update()
 	// Update Wiimotes.
 	for( int i = 0; i < WPAD_MAX_CONTROLLERS; i++ )
 	{
-		kpadReadLength[ i ] = KPADRead( i, &kpadStatus[ i ], 1 );
+		s32 error;
+		kpadReadLength[ i ] = KPADReadEx( i, &kpadStatus[ i ], 1, &error);
 
-		PAD_STATE[ i ].IsConnected = kpadIsConnected[ i ];// kpadConnectHistory[ i ] < disconnectThreshold;
+		PAD_STATE[ i ].IsConnected = error != KPAD_READ_ERR_NO_CONTROLLER;
+		GLOBAL_CONNECTION_STATUS[ i + 1 ] = PAD_STATE[ i ].IsConnected;
+
+		if( kpadIsConnected[ i ] && !PAD_STATE[ i ].IsConnected )
+		{
+			WhoIsDisconnected = Who_KPAD;
+		}
+		kpadIsConnected[ i ] = PAD_STATE[ i ].IsConnected;
+
+		if( !PAD_STATE[ i ].IsConnected )
+			continue;
+		/*PAD_STATE[ i ].IsConnected = kpadIsConnected[ i ];// kpadConnectHistory[ i ] < disconnectThreshold;
 		
 		if( !kpadIsConnected[ i ] )
-			continue;
+			continue;*/
 		/*if( kpadReadLength[ i ] == 0 )
 		{
 			++kpadConnectHistory[ i ];
@@ -154,7 +172,7 @@ void GamePad::Update()
 			if( PAD_STATE[ i ].Buttons.A || PAD_STATE[ i ].Buttons.B || PAD_STATE[ i ].Buttons.X || PAD_STATE[ i ].Buttons.Y )
 			{
 				PAD_STATE[ i ].Type = GamePadState::ControllerType_Mini;
-				//if ( i == 1 ) LOG.Write( "Controller %d is mini.\n", i );
+				//if ( i == 1 ) LOG_WRITE( "Controller %d is mini.\n", i );
 			}
 		}
 		else if( kpadStatus[ i ].data_format == WPAD_FMT_URCC )
@@ -167,7 +185,7 @@ void GamePad::Update()
 			{
 				vpadActive = true;
 				PAD_STATE[ i ].Type = GamePadState::ControllerType_Standard;
-				//if ( i == 1 ) LOG.Write( "Controller %d is standard.\n", i );
+				//if ( i == 1 ) LOG_WRITE( "Controller %d is standard.\n", i );
 			}
 
 			PAD_STATE[ i ].Buttons.A = __max( PAD_STATE[ i ].Buttons.A, ( hold & KPAD_UC_BUTTON_A ) ? ButtonState_Pressed : ButtonState_Released );
@@ -194,7 +212,7 @@ void GamePad::Update()
 				channel0ThumbsticksWritten = true;
 		}
 
-		//LOG.Write( "Controler types: 0 = %d, 1 = %d, 2 = %d, 3 = %d\n", PAD_STATE[ 0 ].Type, PAD_STATE[ 1 ].Type, PAD_STATE[ 2 ].Type, PAD_STATE[ 3 ].Type );
+		//LOG_WRITE( "Controler types: 0 = %d, 1 = %d, 2 = %d, 3 = %d\n", PAD_STATE[ 0 ].Type, PAD_STATE[ 1 ].Type, PAD_STATE[ 2 ].Type, PAD_STATE[ 3 ].Type );
 	}
 
 	// Update gamepad.
@@ -255,19 +273,32 @@ void GamePad::Update()
 		readLength = VPADRead( VPADBASE_CHAN0 + i, &vpadStatus, 1, &error );
 
 		bool wasConnected = PAD_STATE[ i ].IsConnected;
-		PAD_STATE[ i ].IsConnected = true;
-		if( error == VPAD_READ_ERR_NO_CONTROLLER )
+
+		bool isVpadConnectedNow = error != VPAD_READ_ERR_NO_CONTROLLER;
+
+		PAD_STATE[ i ].IsConnected = isVpadConnectedNow;
+		if( !PAD_STATE[ i ].IsConnected )
 			PAD_STATE[ i ].IsConnected = wasConnected;
+		
+		GLOBAL_CONNECTION_STATUS[ 0 ] = isVpadConnectedNow;
+
+		// If the vpad was connected but is no longer.
+		if( vpadConnected && !isVpadConnectedNow )
+		{
+			WhoIsDisconnected = Who_VPAD;
+		}
+		vpadConnected = isVpadConnectedNow;
+
+		if( !isVpadConnectedNow )
+			continue;
 
 		if( error == VPAD_READ_ERR_NONE )
 		{
-			vpadConnected = true;
-
 			if( vpadStatus.hold != 0 )
 			{
 				vpadActive = true;
 				PAD_STATE[ i ].Type = GamePadState::ControllerType_Standard;
-				//if ( i == 1 ) LOG.Write( "Controller %d is standard.\n", i );
+				//if ( i == 1 ) LOG_WRITE( "Controller %d is standard.\n", i );
 			}
 
 			// Mapping is inverse of XBox.
@@ -300,16 +331,6 @@ void GamePad::Update()
 				PAD_STATE[ i ].ThumbSticks.Left = Vector2( vpadStatus.lStick.x, vpadStatus.lStick.y );
 				PAD_STATE[ i ].ThumbSticks.Right = Vector2( vpadStatus.lStick.x, vpadStatus.lStick.y );
 			}
-		}
-		else if( error == VPAD_READ_ERR_NO_CONTROLLER && vpadConnected == true/* && !anythingElseConnected*/ )
-		{
-			// Only show error if nothing is connected to the WiiU.
-			vpadConnected = false;
-
-			WhoIsDisconnected = Who_VPAD;
-
-			// Unable to communicate with the WiiU gamepad.
-			//DisplayError( ErrorType( 1650101 ) );
 		}
 	}
 }

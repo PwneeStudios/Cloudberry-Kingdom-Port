@@ -289,16 +289,18 @@ namespace CloudberryKingdom
 
 	void Tools::Break()
 	{
-#if defined(DEBUG)
+/*#if defined(DEBUG)
 	std::cout << _T( "!" ) << std::endl;
-#endif
+#endif*/
+		LOG_WRITE( "!\n" );
 	}
 
 	void Tools::Write( const boost::shared_ptr<Object> &obj )
 	{
-#if defined(DEBUG)
+/*#if defined(DEBUG)
 	std::cout << obj << std::endl;
-#endif
+#endif*/
+		LOG_WRITE( "0x%x\n", &obj );
 	}
 
 	void Tools::Write( const wchar_t *str, ... )

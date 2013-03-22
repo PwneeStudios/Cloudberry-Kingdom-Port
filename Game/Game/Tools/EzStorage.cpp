@@ -381,7 +381,7 @@ namespace CloudberryKingdom
 
 	void EzStorage::Save( const std::wstring &ContainerName, const std::wstring &FileName, const boost::shared_ptr<Lambda_1<boost::shared_ptr<BinaryWriter> > > &SaveLogic, const boost::shared_ptr<Lambda> &Fail )
 	{
-		printf( "Save( ContainerName = %s, FileName = %s );\n", WstringToUtf8( ContainerName ).c_str(), WstringToUtf8( FileName ).c_str() );
+		LOG_WRITE( "Save( ContainerName = %s, FileName = %s );\n", WstringToUtf8( ContainerName ).c_str(), WstringToUtf8( FileName ).c_str() );
 		
 		/*if ( !DeviceOK() )
 			GetDevice();
@@ -471,15 +471,15 @@ namespace CloudberryKingdom
 
 		if( get->isNewData )
 		{
-			printf( "Save data %s does NOT exists.\n", get->dir.dirName );
+			LOG_WRITE( "Save data %s does NOT exists.\n", get->dir.dirName );
 
 			int sizeKb = get->sysSizeKB + AUTOSAVE_SIZE / 1024 + ICON0_SIZE / 1024;
 			int neededKb = get->hddFreeSizeKB - sizeKb;
 
-			printf( "hddFreeSizeKB = %d, sizeKb = %d, neededKb = %d\n", get->hddFreeSizeKB, sizeKb, neededKb );
+			LOG_WRITE( "hddFreeSizeKB = %d, sizeKb = %d, neededKb = %d\n", get->hddFreeSizeKB, sizeKb, neededKb );
 			if( neededKb < 0 )
 			{
-				printf( "Not enough space to save! Need %d more KB.\n", -neededKb );
+				LOG_WRITE( "Not enough space to save! Need %d more KB.\n", -neededKb );
 
 				std::wstring error = Format( Localization::WordString( Localization::Words_Err_PS3_NotEnoughSpace ).c_str(), -neededKb );
 				DisplayError( ErrorType( WstringToUtf8( error ), NULL, ErrorType::NONE, NULL, true ) );
@@ -562,7 +562,7 @@ namespace CloudberryKingdom
 		case OperationState_SaveIcon:
 			if( fileAllocLoad( ( PS3_PATH_PREFIX + "ContentPS3/SaveMeta/ICON0.PNG" ).c_str(), &ICON0_DATA, &fileSize ) == 0 )
 			{
-				LOG.Write( "File size %d, expected size %d\n", fileSize, ICON0_SIZE );
+				LOG_WRITE( "File size %d, expected size %d\n", fileSize, ICON0_SIZE );
 				set->fileOperation = CELL_SAVEDATA_FILEOP_WRITE;
 				set->fileBuf = ICON0_DATA;
 				set->fileBufSize = ICON0_SIZE;
@@ -611,7 +611,7 @@ namespace CloudberryKingdom
 	void EzStorage::SaveToContainer( const boost::shared_ptr<StorageContainer> &container, const std::wstring &FileName, const boost::shared_ptr<Lambda_1<boost::shared_ptr< BinaryWriter > > > &SaveLogic, const boost::shared_ptr<Lambda> &Fail )
 	{
 		std::string path = WstringToUtf8( FileName );
-		printf( "Save( FileName = %s );\n", path.c_str() );
+		LOG_WRITE( "Save( FileName = %s );\n", path.c_str() );
 
 		// Check to see whether the save exists.
 		/*if ( container->FileExists( FileName ) )
@@ -778,7 +778,7 @@ namespace CloudberryKingdom
 
 	void EzStorage::Load( const std::wstring &ContainerName, const std::wstring &FileName, const boost::shared_ptr<Lambda_1<std::vector<unsigned char> > > &LoadLogic, const boost::shared_ptr<Lambda> &Fail )
 	{
-		printf( "Load( ContainerName = %s, FileName = %s );\n", WstringToUtf8( ContainerName ).c_str(), WstringToUtf8( FileName ).c_str() );
+		LOG_WRITE( "Load( ContainerName = %s, FileName = %s );\n", WstringToUtf8( ContainerName ).c_str(), WstringToUtf8( FileName ).c_str() );
 		
 		/*if ( !DeviceOK() )
 			GetDevice();
@@ -862,7 +862,7 @@ namespace CloudberryKingdom
 		// Check if there is any data to load.
 		if( get->isNewData || RequiredTrophySpace > 0 )
 		{
-			printf( "NO SAVE DATA FOUND!\n" );
+			LOG_WRITE( "NO SAVE DATA FOUND!\n" );
 
 			int sizeKb = get->sysSizeKB;
 			if( get->isNewData )
@@ -872,10 +872,10 @@ namespace CloudberryKingdom
 
 			int neededKb = get->hddFreeSizeKB - sizeKb;
 
-			printf( "hddFreeSizeKB = %d, sizeKb = %d, neededKb = %d\n", get->hddFreeSizeKB, sizeKb, neededKb );
+			LOG_WRITE( "hddFreeSizeKB = %d, sizeKb = %d, neededKb = %d\n", get->hddFreeSizeKB, sizeKb, neededKb );
 			if( neededKb < 0 )
 			{
-				printf( "Not enough space to save! Need %d more KB.\n", -neededKb );
+				LOG_WRITE( "Not enough space to save! Need %d more KB.\n", -neededKb );
 
 				std::wstring error = Format( Localization::WordString( Localization::Words_Err_PS3_NotEnoughSpace ).c_str(), -neededKb );
 				DisplayError( ErrorType( WstringToUtf8( error ), NULL, ErrorType::NONE, NULL, true ) );
@@ -892,7 +892,7 @@ namespace CloudberryKingdom
 		// First check if the data belongs to the current user.
 		if( get->bind & CELL_SAVEDATA_BINDSTAT_ERR_OWNER )
 		{
-			printf( "WRONG OWNER!\n" );
+			LOG_WRITE( "WRONG OWNER!\n" );
 			DisplayError( ErrorType( WstringToUtf8( Localization::WordString( Localization::Words_Err_PS3_SaveDataNotUsed ) ) ) );
 			result->result = CELL_SAVEDATA_CBRESULT_ERR_FAILURE;
 			return;
@@ -901,7 +901,7 @@ namespace CloudberryKingdom
 		// There is some data!
 		if( get->fileListNum < get->fileNum )
 		{
-			printf( "MORE FILES THAN EXPECTED!\n" );
+			LOG_WRITE( "MORE FILES THAN EXPECTED!\n" );
 			DisplayError( ErrorType( WstringToUtf8( Localization::WordString( Localization::Words_Err_PS3_CorruptLoad ) ) ) );
 			result->result = CELL_SAVEDATA_CBRESULT_ERR_BROKEN;
 			return;
@@ -914,7 +914,7 @@ namespace CloudberryKingdom
 			{
 				if( get->fileList[ i ].st_size != AUTOSAVE_SIZE )
 				{
-					printf( "Save file is of the wrong size! Expected %d but got %d.\n", AUTOSAVE_SIZE, get->fileList[ i ].st_size );
+					LOG_WRITE( "Save file is of the wrong size! Expected %d but got %d.\n", AUTOSAVE_SIZE, get->fileList[ i ].st_size );
 					DisplayError( ErrorType( WstringToUtf8( Localization::WordString( Localization::Words_Err_PS3_CorruptLoad ) ) ) );
 					result->result = CELL_SAVEDATA_CBRESULT_ERR_BROKEN;
 					return;
@@ -926,7 +926,7 @@ namespace CloudberryKingdom
 
 		if( !foundAutosave )
 		{
-			printf( "Save file %s missing!\n", AUTOSAVE_FILENAME );
+			LOG_WRITE( "Save file %s missing!\n", AUTOSAVE_FILENAME );
 			DisplayError( ErrorType( WstringToUtf8( Localization::WordString( Localization::Words_Err_PS3_CorruptLoad ) ) ) );
 			result->result = CELL_SAVEDATA_CBRESULT_ERR_BROKEN;
 			return;
@@ -938,7 +938,7 @@ namespace CloudberryKingdom
 
 		result->result = CELL_SAVEDATA_CBRESULT_OK_NEXT;
 		result->userdata = NULL;
-		printf( "CallbackDataStatusLoad end.\n" );
+		LOG_WRITE( "CallbackDataStatusLoad end.\n" );
 	}
 
 	void CallbackFileOperationLoad( CellSaveDataCBResult *result, CellSaveDataFileGet *get, CellSaveDataFileSet *set )
@@ -970,7 +970,7 @@ namespace CloudberryKingdom
 	void EzStorage::LoadFromContainer( const boost::shared_ptr<StorageContainer> &container, const std::wstring &FileName, const boost::shared_ptr<Lambda_1<std::vector<unsigned char> > > &LoadLogic, const boost::shared_ptr<Lambda> &FailLogic )
 	{
 		std::string path = WstringToUtf8( FileName );
-		printf( "Load( FileName = %s );\n", path.c_str() );
+		LOG_WRITE( "Load( FileName = %s );\n", path.c_str() );
 
 		// Fallback action if file doesn't exist
 		/*if ( !container->FileExists( FileName ) )

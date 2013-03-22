@@ -344,21 +344,21 @@ namespace CloudberryKingdom
 			if( GetTrophyContext( context, handle ) )
 			{
 				int ps3Id = TranslateAwardmentGuid( awardGuid );
-				LOG.Write( "ps3ID = %d!\n", ps3Id );
+				LOG_WRITE( "ps3ID = %d!\n", ps3Id );
 
 				if( ps3Id >= 0 )
 				{
 					SceNpTrophyId platinumId = SCE_NP_TROPHY_INVALID_TROPHY_ID;
 					int ret = sceNpTrophyUnlockTrophy( context, handle, ps3Id, &platinumId );
 
-					LOG.Write( "ret = %d!\n", ret );
+					LOG_WRITE( "ret = %d!\n", ret );
 
 					if( platinumId != SCE_NP_TROPHY_INVALID_TROPHY_ID )
-						LOG.Write( "Unlocked impossible platinum trophy!\n" );
+						LOG_WRITE( "Unlocked impossible platinum trophy!\n" );
 				}
 			}
 
-			LOG.Write( "Awardment given!\n" );
+			LOG_WRITE( "Awardment given!\n" );
 
 			sys_ppu_thread_exit( 0 );
 		}
@@ -412,7 +412,7 @@ namespace CloudberryKingdom
 					award->Guid, 1001, 16 * 1024, 0, "AwardAwardmentThread" );
 
 				if( ret != 0 )
-					LOG.Write( "Failed to start AwardAwardmentThread" );
+					LOG_WRITE( "Failed to start AwardAwardmentThread" );
 #endif
 
                 // Show a note saying the reward was given

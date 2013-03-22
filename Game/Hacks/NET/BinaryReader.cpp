@@ -148,8 +148,8 @@ struct SaveReaderWiiUInternal
 static void stateChangeCallback( FSClient *pClient, FSVolumeState state, void *pContext )
 {
 	FSError lastError = FSGetLastError( pClient );
-	LOG.Write( "Volume state of client 0X%08X changed to %d\n", pClient, state );
-	LOG.Write( "Last error: %d\n", lastError );
+	LOG_WRITE( "Volume state of client 0X%08X changed to %d\n", pClient, state );
+	LOG_WRITE( "Last error: %d\n", lastError );
 }
 
 SaveReaderWiiU::SaveReaderWiiU( const std::string &path, bool global )

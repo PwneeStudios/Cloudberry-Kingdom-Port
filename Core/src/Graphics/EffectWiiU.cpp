@@ -103,7 +103,7 @@ void InitShader( const std::string &shaderFile, DEMOGfxShader *shader )
 	u32 attribBuffer = 0;
 
 	// Load shader from file and then into a shader object.
-	LOG.Write( "DEMOFSSimpleRead( %s )\n", shaderFile.c_str() );
+	LOG_WRITE( "DEMOFSSimpleRead( %s )\n", shaderFile.c_str() );
 	gshBuf = DEMOFSSimpleRead( shaderFile.c_str(), &gshLen );
 	DEMOGfxLoadShaders( shader, 0, gshBuf );
 	DEMOFree( gshBuf );

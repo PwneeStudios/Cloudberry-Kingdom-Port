@@ -40,11 +40,11 @@ public:
 
 		if( !resource_->IsLoaded() )
 		{
-			LOG.Write( "Failed: %s\n", resource_->GetPath().c_str() );
+			LOG_WRITE( "Failed: %s\n", resource_->GetPath().c_str() );
 			return;
 		}
 
-		LOG.Write( "Loaded: %s\n", resource_->GetPath().c_str() );
+		LOG_WRITE( "Loaded: %s\n", resource_->GetPath().c_str() );
 
 		SCHEDULER->CreateGpuResource( holder_, resource_ );
 	}
@@ -97,11 +97,11 @@ public:
 
 		if( !resource_->IsLoaded() )
 		{
-			LOG.Write( "Failed: %s\n", resource_->GetPath().c_str() );
+			LOG_WRITE( "Failed: %s\n", resource_->GetPath().c_str() );
 			return;
 		}
 
-		LOG.Write( "Loaded: %s\n", resource_->GetPath().c_str() );
+		LOG_WRITE( "Loaded: %s\n", resource_->GetPath().c_str() );
 		*/
 		resource_->GpuCreate();
 		holder_->SetResource( resource_ );
@@ -148,7 +148,7 @@ struct SchedulerInternal
 /// Bootstrap for worker thread.
 static int ThreadProc( int argc, void *argv )
 {
-	LOG.Write( "Scheduler running on thread %s\n", OSGetThreadName( OSGetCurrentThread() ) );
+	LOG_WRITE( "Scheduler running on thread %s\n", OSGetThreadName( OSGetCurrentThread() ) );
 	SchedulerWiiU *scheduler = reinterpret_cast< SchedulerWiiU * >( argv );
 	scheduler->WorkerThread();
 
@@ -192,17 +192,17 @@ void StopScheduler()
 {
 	if( !OSIsThreadSuspended( &External->Threads[ 0 ] ) )
 	{
-		LOG.Write( "Stopping scheduler!\n" );
+		LOG_WRITE( "Stopping scheduler!\n" );
 
 		OSInitSemaphore( &SchedulerPausingSemaphore, 0 );
 
 		SCHEDULER->RunJobASAP( new PauseSchedulerJob );
 		OSWaitSemaphore( &SchedulerPausingSemaphore );
 
-		LOG.Write( "Scheduler stopped in PauseSchedulerJob\n" );
+		LOG_WRITE( "Scheduler stopped in PauseSchedulerJob\n" );
 	}
 	else
-		LOG.Write( "Scheduler already suspended!\n" );
+		LOG_WRITE( "Scheduler already suspended!\n" );
 }
 
 void ResumeScheduler()
@@ -258,7 +258,7 @@ SchedulerWiiU::SchedulerWiiU() :
 	OSSetThreadName( &internal_->Threads[ 0 ], "SchedulerThread" );
 
 	if( !ret )
-		LOG.Write( "NO JOB SYSTEM!" );
+		LOG_WRITE( "NO JOB SYSTEM!" );
 
 	OSResumeThread( &internal_->Threads[ 0 ] );
 }
@@ -283,7 +283,7 @@ SchedulerWiiU::~SchedulerWiiU()
 	delete ResourceLoaderFreelist;
 	delete ResourceCreatorFreelist;
 
-	LOG.Write( "Worker threads shut down.\n" );
+	LOG_WRITE( "Worker threads shut down.\n" );
 
 	delete internal_;
 }
@@ -337,11 +337,11 @@ void SchedulerWiiU::CreateResource( ResourceHolder *holder, Resource *resource )
 
 	if( !resource->IsLoaded() )
 	{
-		LOG.Write( "Failed: %s\n", resource->GetPath().c_str() );
+		LOG_WRITE( "Failed: %s\n", resource->GetPath().c_str() );
 		return;
 	}
 
-	LOG.Write( "Loaded: %s\n", resource->GetPath().c_str() );
+	LOG_WRITE( "Loaded: %s\n", resource->GetPath().c_str() );
 
 	CreateGpuResource( holder, resource );*/
 }

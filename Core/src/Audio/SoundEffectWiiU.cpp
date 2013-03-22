@@ -48,7 +48,7 @@ void SoundEffect::Load( const std::string &path )
 	result = FMOD_System_CreateSound( FMODSystem, ( "/vol/content/0010/" + path ).c_str(), FMOD_NONBLOCKING, 0, &internal_->Sound );
 	if( result != FMOD_OK )
 	{
-		LOG.Write( "Failed to load sound: %s\n", path.c_str() );
+		LOG_WRITE( "Failed to load sound: %s\n", path.c_str() );
 		internal_->Sound = NULL;
 	}
 }

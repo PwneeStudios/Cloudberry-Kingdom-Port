@@ -20,6 +20,7 @@
 #include <cafe/ax.h>
 #include "MovieTest.h"
 
+#include <Utility/Log.h>
 
 /*=========================================================================*
             external variables
@@ -356,8 +357,8 @@ void AudioInit(s32 threadnum)
     MP4PlayerCorePtr[threadnum]->VoiceParamL = NULL;
     MP4PlayerCorePtr[threadnum]->VoiceParamR = NULL;
 
-    OSReport("Running axstream audio on core %d\r", OSGetCoreId());
-    OSReport("Preparing the PCM16 Stream for playback\r");
+    LOG_WRITE("Running axstream audio on core %d\r", OSGetCoreId());
+    LOG_WRITE("Preparing the PCM16 Stream for playback\r");
     MP4PlayerCorePtr[threadnum]->AudioBuff_Offset = 0;
     MP4PlayerCorePtr[threadnum]->pre_AudioBuff_Offset = -1;
     startStreamPcm16(threadnum);
@@ -425,7 +426,7 @@ void AudioExit(s32 threadnum)
         AXRegisterDeviceFinalMixCallback(AX_DEVICE_TV, NULL);
     }
     
-    OSReport("Audio Shut down completed\r");
+    LOG_WRITE("Audio Shut down completed\r");
 }
 
 

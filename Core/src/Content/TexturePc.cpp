@@ -207,7 +207,7 @@ void TexturePc::loadPng()
 	}
 	else
 	{
-		LOG.Write( "Unknown PNG format (ColorType = %d, BitDepth = %d) in: %s\n",
+		LOG_WRITE( "Unknown PNG format (ColorType = %d, BitDepth = %d) in: %s\n",
 			ihdr.ColorType, ihdr.BitDepth, path );
 		setLoaded( false );
 		return;
@@ -417,7 +417,7 @@ bool TexturePc::uncompress( const std::vector< char > &compressed, std::vector< 
 	err = inflateInit( &stream );
 	if( err != Z_OK )
 	{
-		LOG.Write( "PNG: Failed to initialize de-compressor\n" );
+		LOG_WRITE( "PNG: Failed to initialize de-compressor\n" );
 		return false;
 	}
 
@@ -429,7 +429,7 @@ bool TexturePc::uncompress( const std::vector< char > &compressed, std::vector< 
 		if( err == Z_NEED_DICT
 			|| ( err == Z_BUF_ERROR && stream.avail_in == 0 ) )
 		{
-			LOG.Write( "PNG: Data inflation error" );
+			LOG_WRITE( "PNG: Data inflation error" );
 			return false;
 		}
 		return false;

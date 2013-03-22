@@ -985,7 +985,7 @@ else
 #ifdef PS3
 	int ProfileResultHandler( int result, void *arg )
 	{
-		LOG.Write( "ProfileResultHandler result: %d(0x%x)\n", result, result );
+		LOG_WRITE( "ProfileResultHandler result: %d(0x%x)\n", result, result );
 		return 0;
 	}
 #endif
@@ -1009,7 +1009,7 @@ else
 #elif PS3
 							int ret = sceNpProfileCallGui( &gamer.NPID, ProfileResultHandler, NULL, 0 );
 							if( ret < 0 )
-								LOG.Write( "sceNpProfileCallGui error: 0x%x\n", ret );
+								LOG_WRITE( "sceNpProfileCallGui error: 0x%x\n", ret );
 #endif
                         }
                     }

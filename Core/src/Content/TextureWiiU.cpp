@@ -96,7 +96,7 @@ void TextureWiiU::Load()
 	}
 	else
 	{
-		LOG.Write( "HEAP NOT AVAILABLE FOR: %s\n", localPath.c_str() );
+		LOG_WRITE( "HEAP NOT AVAILABLE FOR: %s\n", localPath.c_str() );
 
 		setLoaded( false );
 	}
