@@ -63,7 +63,7 @@ extern bool GLOBAL_CONNECTION_STATUS[ 5 ];
 enum DisconnectedType
 {
 	DisconnectedType_NONE,
-	DisconnectedType_ALL,
+	//DisconnectedType_ALL,
 	DisconnectedType_VPAD,
 	DisconnectedType_KPAD
 };
@@ -1343,17 +1343,37 @@ float CloudberryKingdomGame::fps = 0;
 					}
 				}
 			}
-
-			int numConnected = 0;
-			for( int i = 0; i < 5; ++i )
+			
+			bool anyoneExists = false;
+			for( int i = 0; i < 4; ++i )
 			{
-				if( GLOBAL_CONNECTION_STATUS[ i ] )
-					++numConnected;
+				if( ( PlayerManager::Players[ i ] != 0 ) && PlayerManager::Players[ i ]->Exists )
+				{
+					anyoneExists = true;
+					break;
+				}
 			}
 
-			if( numConnected == 0 )
+			if( !anyoneExists )
 			{
-				return DisconnectedType_ALL;
+				int numConnected = 0;
+				for( int i = 0; i < 5; ++i )
+				{
+					if( GLOBAL_CONNECTION_STATUS[ i ] )
+						++numConnected;
+				}
+
+				if( numConnected == 0 )
+				{
+					if( LAST_CONNECTION_STATUS[ 0 ] && !GLOBAL_CONNECTION_STATUS[ 0 ] )
+						return DisconnectedType_VPAD;
+					
+					for( int i = 1; i < 5; ++i )
+					{
+						if( LAST_CONNECTION_STATUS[ i ] && !GLOBAL_CONNECTION_STATUS[ i ] )
+							return DisconnectedType_KPAD;
+					}
+				}
 			}
 
 			return DisconnectedType_NONE;
@@ -1375,7 +1395,7 @@ float CloudberryKingdomGame::fps = 0;
 							NULL, ErrorType::DEFAULT, ClearErrorCAFE, false ) );
 						return true;
 				case DisconnectedType_KPAD:
-				case DisconnectedType_ALL:
+				//case DisconnectedType_ALL:
 						LastDType = dType;
 						DisplayError( ErrorType( 1520100,
 							NULL, ErrorType::DEFAULT, ClearErrorCAFE, false ) );
@@ -1683,7 +1703,7 @@ float CloudberryKingdomGame::fps = 0;
 						NULL, ErrorType::DEFAULT, ClearErrorCAFE, false ) );
 					break;
 			case DisconnectedType_KPAD:
-			case DisconnectedType_ALL:
+			//case DisconnectedType_ALL:
 					LastDType = dType;
 					DisplayError( ErrorType( 1520100,
 						NULL, ErrorType::DEFAULT, ClearErrorCAFE, false ) );
