@@ -25,7 +25,7 @@ public:
 		//time_t t;
 		//time( &t );
 
-		//LOG.Write( "Time is %d\n", t );
+		//LOG_WRITE( "Time is %d\n", t );
 		//int time_seed = static_cast<int>( t ) % 10000;
 		//
 		//initialize( t );
@@ -52,7 +52,7 @@ private:
 		Seed += 1;
 #endif
 
-		LOG.Write( "Random Seed is %d\n", Seed );
+		LOG_WRITE( "Random Seed is %d\n", Seed );
 
 		int num = /*( Seed == -2147483648 ) ? 2147483647 : */abs(Seed);
 		int num2 = 161803398 - num;

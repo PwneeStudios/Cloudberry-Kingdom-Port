@@ -49,7 +49,7 @@ namespace CloudberryKingdom
 		int ret = sceNpScoreCreateTransactionCtx( contextId );
 		if( ret < 0 )
 		{
-			LOG.Write( "Failed to create score transaction: 0x%x\n", ret );
+			LOG_WRITE( "Failed to create score transaction: 0x%x\n", ret );
 			Leaderboard::WritingInProgress = false;
 			sys_ppu_thread_exit( 0 );
 			return;
@@ -63,7 +63,7 @@ namespace CloudberryKingdom
 		UnpackBoardAndScore( context, board, score );
 		ret = sceNpScoreRecordScore( transactionId, board, score, NULL, NULL, &rank, NULL );
 		if( ret < 0 )
-			LOG.Write( "Failed to record score: 0x%x\n", ret );
+			LOG_WRITE( "Failed to record score: 0x%x\n", ret );
 
 		sceNpScoreDestroyTransactionCtx( transactionId );
 
@@ -99,7 +99,7 @@ namespace CloudberryKingdom
 			PackBoardAndScore( GetLeaderboardId( copy->GameId ), copy->Value ),
 			1001, 16 * 1024, 0, "WriteToLeaderboardThread" );
 		if( ret != 0 )
-			LOG.Write( "Failed to start WriteToLeaderboardThread: 0x%x\n", ret );
+			LOG_WRITE( "Failed to start WriteToLeaderboardThread: 0x%x\n", ret );
 #endif
 	}
 
@@ -253,7 +253,7 @@ namespace CloudberryKingdom
 		int ret = sceNpScoreCreateTransactionCtx( contextId );
 		if( ret < 0 )
 		{
-			LOG.Write( "Failed to create score transaction: 0x%x\n", ret );
+			LOG_WRITE( "Failed to create score transaction: 0x%x\n", ret );
 			CurrentLeaderboard->OnInfo_Fail();
 			CurrentLeaderboard = NULL;
 			sys_ppu_thread_exit( 0 );
@@ -270,7 +270,7 @@ namespace CloudberryKingdom
 			uint32_t friendCount = 0;
 			ret = sceNpBasicGetFriendListEntryCount( &friendCount );
 			if( ret < 0 )
-				LOG.Write( "Couldn't get friend list count: 0x%x\n", ret );
+				LOG_WRITE( "Couldn't get friend list count: 0x%x\n", ret );
 
 			// Just in case limits change later.
 			if( friendCount > 100 )
@@ -280,7 +280,7 @@ namespace CloudberryKingdom
 			{
 				ret = sceNpBasicGetFriendListEntry( i, &FriendIds[ i ] );
 				if( ret < 0 )
-					LOG.Write( "Couldn't get friend %d: 0x%x\n", i, ret );
+					LOG_WRITE( "Couldn't get friend %d: 0x%x\n", i, ret );
 			}
 
 			// Add us to the list.
@@ -288,7 +288,7 @@ namespace CloudberryKingdom
 			if( ret == 0 )
 				++friendCount;
 			else
-				LOG.Write( "Failed to get our own NpId: 0x%x\n", ret );
+				LOG_WRITE( "Failed to get our own NpId: 0x%x\n", ret );
 
 			if( friendCount > 0 )
 			{
@@ -327,14 +327,14 @@ namespace CloudberryKingdom
 		if( ret == SCE_NP_COMMUNITY_SERVER_ERROR_GAME_RANKING_NOT_FOUND )
 		{
 			NumRanks = 0;
-			LOG.Write( "No more scores!\n" );
+			LOG_WRITE( "No more scores!\n" );
 			CurrentLeaderboard->OnInfo_Fail();
 		}
 		else
 		{
 			if( ret < 0 )
 			{
-				LOG.Write( "Failed to request scores: 0x%x\n", ret );
+				LOG_WRITE( "Failed to request scores: 0x%x\n", ret );
 				NumRanks = 0;
 				CurrentLeaderboard->OnInfo_Fail();
 			}
@@ -387,7 +387,7 @@ namespace CloudberryKingdom
 		int ret = sys_ppu_thread_create( &tid, RequestLeaderboardThread,
 			0, 1001, 16 * 1024, 0, "RequestLeaderboardThread" );
 		if( ret != 0 )
-			LOG.Write( "Failed to start RequestLeaderboardThread: 0x%x\n", ret );
+			LOG_WRITE( "Failed to start RequestLeaderboardThread: 0x%x\n", ret );
 #endif
 
 		//result = LeaderboardReader.BeginRead(Identity, RequestPage, EntriesPerPage, OnInfo_TopScores, null);

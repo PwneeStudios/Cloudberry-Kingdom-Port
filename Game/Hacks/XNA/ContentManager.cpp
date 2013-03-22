@@ -26,7 +26,7 @@ template<> boost::shared_ptr<SoundEffect> ContentManager::Load<SoundEffect>( con
 template<> boost::shared_ptr<Song> ContentManager::Load<Song>( const std::wstring &name )
 {
 	DebugFrame(0, 1, 0);
-	LOG.Write( "Loading song %s\n", WstringToUtf8( name ).c_str() );
+	LOG_WRITE( "Loading song %s\n", WstringToUtf8( name ).c_str() );
 	boost::shared_ptr<Song> song = boost::make_shared<Song>();
 	song->Load( WstringToUtf8( name ) );
 	return song;
@@ -56,7 +56,7 @@ template<> boost::shared_ptr<SpriteFont> ContentManager::Load<SpriteFont>( const
 template<> boost::shared_ptr<Effect> ContentManager::Load<Effect>( const std::wstring &name )
 {
 	DebugFrame(0, 1, 1);
-	LOG.Write( "Loading effect: %s\n", WstringToUtf8( name ).c_str() );
+	LOG_WRITE( "Loading effect: %s\n", WstringToUtf8( name ).c_str() );
 	boost::shared_ptr<Effect> effect = boost::make_shared<Effect>();
 	effect->Load( WstringToUtf8( name ) );
 	return effect;

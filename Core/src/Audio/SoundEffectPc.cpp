@@ -51,7 +51,7 @@ void SoundEffect::Load( const std::string &path )
 
 	if( !soundFile->IsOpen() )
 	{
-		LOG.Write( "Failed: %s\n", path.c_str() );
+		LOG_WRITE( "Failed: %s\n", path.c_str() );
 		return;
 	}
 

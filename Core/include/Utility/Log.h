@@ -46,4 +46,10 @@ public:
 
 #define LOG Log::GetSingleton()
 
+#ifdef DEBUG
+	#define LOG_WRITE( ... ) LOG.Write( __VA_ARGS__ )
+#else
+	#define LOG_WRITE( ... ) 
+#endif
+
 #endif

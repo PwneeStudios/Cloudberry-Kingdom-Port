@@ -95,7 +95,7 @@ bool IsOnlineContentRestricted()
 	int ret = sceNpManagerGetContentRatingFlag( &isRestricted, &age );
 	if( ret < 0 )
 	{
-		LOG.Write( "sceNpManagerGetContentRatingFlag failed: 0x%x\n", ret );
+		LOG_WRITE( "sceNpManagerGetContentRatingFlag failed: 0x%x\n", ret );
 		return true;
 	}
 
@@ -148,7 +148,7 @@ bool IsSystemMenuVisible()
 
 bool IsAspect4by3()
 {
-	LOG.Write( "Begin 4by3." );
+	LOG_WRITE( "Begin 4by3." );
 
 	CellVideoOutState videoOutState;
 	if( cellVideoOutGetState( CELL_VIDEO_OUT_PRIMARY, 0, &videoOutState ) < 0 )
@@ -156,7 +156,7 @@ bool IsAspect4by3()
 		return false;
 	}
 
-	LOG.Write( "..true" );
+	LOG_WRITE( "..true" );
 
 	return videoOutState.displayMode.aspect == CELL_VIDEO_OUT_ASPECT_4_3;
 }

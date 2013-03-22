@@ -377,7 +377,7 @@ namespace CloudberryKingdom
 			0, 1001, 64 * 1024, 0, "TheLoadThread" );
 
 		if( ret != 0 )
-			LOG.Write( "Load thread failed!" );
+			LOG_WRITE( "Load thread failed!" );
 #else
 		_LoadThread();
 #endif
@@ -412,7 +412,7 @@ boost::shared_ptr<Thread> Resources::LoadThread = 0;
 		//Thread::SpinWait( 100 );
 
 		//Tools::Write( _T( "Start" ) );
-		LOG.Write( "Start\n" );
+		LOG_WRITE( "Start\n" );
 
 		// Initialize the Gamepads
 		Tools::GamepadState = std::vector<GamePadState>( 4 );
@@ -437,7 +437,7 @@ boost::shared_ptr<Thread> Resources::LoadThread = 0;
 				|| ( *Tex )->Path.find( L"CopyRight" ) != std::wstring::npos )
 			{
 				boost::shared_ptr<Texture2D> t2d = boost::make_shared<Texture2D>(boost::shared_ptr<GraphicsDevice>(), 1, 1);
-				LOG.Write( "Force load: %s\n", WstringToUtf8( ( *Tex )->Path ).c_str() );
+				LOG_WRITE( "Force load: %s\n", WstringToUtf8( ( *Tex )->Path ).c_str() );
 				t2d->texture_ = CONTENT->ForceLoadTexture( WstringToUtf8( ( *Tex )->Path ) + ".png" );
 				( *Tex )->setTex( t2d );
 				continue;
@@ -467,7 +467,7 @@ boost::shared_ptr<Thread> Resources::LoadThread = 0;
 		//}
 
 		//Tools::Write( _T( "ArtMusic done..." ) );
-		LOG.Write( "ArtMusic done...\n" );
+		LOG_WRITE( "ArtMusic done...\n" );
 
 		// Load the tile info
 		LoadInfo();
@@ -500,15 +500,15 @@ boost::shared_ptr<Thread> Resources::LoadThread = 0;
 
 
 		//std::cout << _T( "Total resources: " ) << ResourceLoadedCountRef->MyFloat << std::endl;
-		LOG.Write( "Total resources: %d\n", static_cast<int>( ResourceLoadedCountRef->MyFloat ) );
+		LOG_WRITE( "Total resources: %d\n", static_cast<int>( ResourceLoadedCountRef->MyFloat ) );
 
 		// Note that we are done loading.
 		LoadingResources->MyBool = false;
 		//Tools::Write( _T( "Loading done!" ) );
-		LOG.Write( "Loading done!\n" );
+		LOG_WRITE( "Loading done!\n" );
 
 		//Tools::Write( Format( _T( "Load thread done at {0}" ), DateTime::Now ) );
 		//Tools::Write( Format( _T( "Load thread done ... NOW!" ) ).c_str() );
-		LOG.Write( "Load thread done ... NOW!\n" );
+		LOG_WRITE( "Load thread done ... NOW!\n" );
 	}
 }

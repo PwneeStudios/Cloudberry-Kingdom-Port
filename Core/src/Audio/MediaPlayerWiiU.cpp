@@ -29,7 +29,7 @@ extern FSClient *GLOBAL_FSClient;
 #define ERR_CHECK( result ) \
 	if( result != FMOD_OK )															   \
 	{																				   \
-		LOG.Write( "FMOD error! (%d) %s\n", result, FMOD_ErrorString( result ) );	   \
+		LOG_WRITE( "FMOD error! (%d) %s\n", result, FMOD_ErrorString( result ) );	   \
 		exit( -1 );																	   \
 	}
 
@@ -72,7 +72,7 @@ void MediaPlayer::Play( const boost::shared_ptr<Song> &song )
 		song->internal_->Song, true, &CurrentChannel );
 
 	if( result != FMOD_OK )
-		LOG.Write( "Failed to play song.\n" );
+		LOG_WRITE( "Failed to play song.\n" );
 
 	//CurrentChannel->setVolume( Volume );
 	FMOD_Channel_SetVolume( CurrentChannel, Volume );

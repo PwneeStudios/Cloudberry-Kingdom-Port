@@ -52,7 +52,7 @@ bool ReEnableHomeButton = false;
 
 u32 HomeButtonDeniedCallback( void *context )
 {
-	LOG.Write( "HOME BUTTON DENIED!\n" );
+	LOG_WRITE( "HOME BUTTON DENIED!\n" );
 
 	if( !nn::erreula::IsAppearHomeNixSign() )
 	{
@@ -60,7 +60,7 @@ u32 HomeButtonDeniedCallback( void *context )
 		AppearHomeNixSign( nixArg );
 	}
 	else
-		LOG.Write( "ALREADY VISIBLE!\n" );
+		LOG_WRITE( "ALREADY VISIBLE!\n" );
 
 	return 0;
 }
@@ -88,7 +88,7 @@ static void InitTheMEM1Heap()
 	void *startOfMem1 = MEMAllocFromFrmHeapEx( hMEM1, uMEM1Size, 4 );
 	TheMEM1Heap = MEMCreateExpHeap( startOfMem1, uMEM1Size );
 	if( TheMEM1Heap != MEM_HEAP_INVALID_HANDLE )
-		LOG.Write( "Good MEM1 heap\n" );
+		LOG_WRITE( "Good MEM1 heap\n" );
 
 }
 
@@ -133,7 +133,7 @@ extern std::vector< RenderTarget2DInternal * > GlobalRenderTargets;
 
 void FinalReleaseCallback()
 {
-	LOG.Write( "Releasing while video is playing.  Kill the player\n" );
+	LOG_WRITE( "Releasing while video is playing.  Kill the player\n" );
 	ForceKillVideoPlayer();
 
 	StopScheduler();
@@ -141,7 +141,7 @@ void FinalReleaseCallback()
 	FreeToTheMEM1Heap( TheColorBuffer.surface.imagePtr );
 
 	// Free up render targets.
-	LOG.Write( "Freeing %d render targets\n", GlobalRenderTargets.size() );
+	LOG_WRITE( "Freeing %d render targets\n", GlobalRenderTargets.size() );
 	std::vector< RenderTarget2DInternal * >::iterator i;
 	for( i = GlobalRenderTargets.begin(); i != GlobalRenderTargets.end(); ++i )
 	{
@@ -173,7 +173,7 @@ u32 AcquireForegroundCallback( void *context )
 	GX2InitTexturePtrs( &TheColorBufferTexture, TheColorBuffer.surface.imagePtr, 0 );
 
 	// Restore render targets.
-	LOG.Write( "Restoring %d render targets\n", GlobalRenderTargets.size() );
+	LOG_WRITE( "Restoring %d render targets\n", GlobalRenderTargets.size() );
 	std::vector< RenderTarget2DInternal * >::iterator i;
 	for( i = GlobalRenderTargets.begin(); i != GlobalRenderTargets.end(); ++i )
 	{
@@ -244,7 +244,7 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 	GX2InitTexturePtrs( &TheColorBufferTexture, TheColorBuffer.surface.imagePtr, 0 );
 
 	// Error viewer.
-	LOG.Write( "nn::erreula::GetWorkMemorySize() = %d MB\n", nn::erreula::GetWorkMemorySize() / ( 1024 * 1024 ) );
+	LOG_WRITE( "nn::erreula::GetWorkMemorySize() = %d MB\n", nn::erreula::GetWorkMemorySize() / ( 1024 * 1024 ) );
 
 	nn::erreula::CreateArg createArg;
 	u8 *workBuffer = new u8[ nn::erreula::GetWorkMemorySize() ];
@@ -369,7 +369,7 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 
 CoreWiiU::~CoreWiiU()
 {
-	LOG.Write( "SHUTDOWN START\n" );
+	LOG_WRITE( "SHUTDOWN START\n" );
 	
 	nn::act::Finalize();
 	SAVEShutdown();
@@ -403,7 +403,7 @@ CoreWiiU::~CoreWiiU()
 	DEMOGfxShutdown();
 	DEMOTestShutdown();
 	DEMOShutdown();
-	LOG.Write( "SHUTDOWN END\n" );
+	LOG_WRITE( "SHUTDOWN END\n" );
 }
 
 extern bool GLOBAL_VIDEO_OVERRIDE;
@@ -503,7 +503,7 @@ int CoreWiiU::Run()
 					cpArgs.stdIn = standardArgs;
 					cpArgs.jumpTo = SYS_SETTINGS_JUMP_TO_DATA_MANAGE;
 					s32 error = SYSLaunchSettings( &cpArgs );
-					LOG.Write( "SYSLaunchSettings returned %d\n", error );
+					LOG_WRITE( "SYSLaunchSettings returned %d\n", error );
 					/*DEMOStopRunning();*/
 				}
 

@@ -9,6 +9,7 @@
 #include <Core.h>
 #include <Graphics/Video.h>
 #include <Graphics/Texture2D.h>
+#include <Utility/Log.h>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -171,7 +172,7 @@ static s32 VideoOutputThread(s32 intArg, void *ptrArg)
 	// Enabled on the main thread.
 	OSEnableHomeButtonMenu( FALSE );
 
-    OSReport("Video Thread Start\n");
+    LOG_WRITE("Video Thread Start\n");
 
 	bool subtitleTimeStarted = false;
 
@@ -195,7 +196,7 @@ static s32 VideoOutputThread(s32 intArg, void *ptrArg)
                         if ((((vsys_currtime - sys_basetime[i]) - MP4PlayerCorePtr[i]->OutputVideoInfo[MP4PlayerCorePtr[i]->df_v].PTS) > VIDEOSKIP_DELAY))
                         {
                             MP4PlayerCorePtr[i]->FrameSkipFlag = 1;
-                            OSReport("FrameSkip\n");
+                            LOG_WRITE("FrameSkip\n");
                         }
                         else
                         {
@@ -215,7 +216,7 @@ static s32 VideoOutputThread(s32 intArg, void *ptrArg)
 
                         // video frame draw
 #ifdef PRINT_LOG
-                        OSReport("CurrTime:%d, VPTS:%d, VDIFF:%d, thread:%d\n",
+                        LOG_WRITE("CurrTime:%d, VPTS:%d, VDIFF:%d, thread:%d\n",
                             (vsys_currtime - sys_basetime[i]), MP4PlayerCorePtr[i]->OutputVideoInfo[MP4PlayerCorePtr[i]->df_v].PTS, abs((vsys_currtime - sys_basetime[i]) - MP4PlayerCorePtr[i]->OutputVideoInfo[MP4PlayerCorePtr[i]->df_v].PTS), i);
 #endif
 						if( GLOBAL_VIDEO_OVERRIDE )
@@ -238,7 +239,7 @@ static s32 VideoOutputThread(s32 intArg, void *ptrArg)
 
                         if (ret != 0)
                         {
-                            OSReport("VideoDraw Failed.\n");
+                            LOG_WRITE("VideoDraw Failed.\n");
                             vendflag[i] = 1;
                             break;
                         }
@@ -257,13 +258,13 @@ static s32 VideoOutputThread(s32 intArg, void *ptrArg)
 							UpdateElapsedTime( static_cast< float >( endtime - starttime ) / 1000.f , false );
 
 #ifdef PRINT_LOG
-                        OSReport("Time(VideoDraw):%d, thread:%d\n", endtime - starttime, i);
+                        LOG_WRITE("Time(VideoDraw):%d, thread:%d\n", endtime - starttime, i);
 #endif
                     }
                 }
                 if (!vendflag[i] && MP4PlayerCorePtr[i]->vthread_end && (MP4PlayerCorePtr[i]->df_v == MP4PlayerCorePtr[i]->ff_v) && (MP4PlayerCorePtr[i]->OutputVideoInfo[MP4PlayerCorePtr[i]->df_v].Status == 0))
                 {
-                    OSReport("Video[%d] Thread End\n", i);
+                    LOG_WRITE("Video[%d] Thread End\n", i);
                     vendflag[i] = 1;
                 }
             }
@@ -288,7 +289,7 @@ static s32 VideoOutputThread(s32 intArg, void *ptrArg)
 	GLOBAL_VIDEO_OVERRIDE = false;
 	OSMemoryBarrier();
 
-    OSReport("Video Thread Finish\n");
+    LOG_WRITE("Video Thread Finish\n");
     return(0);
 }
 
@@ -304,7 +305,7 @@ static s32 AudioOutputThread(s32 intArg, void *ptrArg)
     s32  i;
     u32  asys_currtime;
 
-    OSReport("Audio Thread Start\n");
+    LOG_WRITE("Audio Thread Start\n");
 
     while( 1 )
     {
@@ -327,7 +328,7 @@ static s32 AudioOutputThread(s32 intArg, void *ptrArg)
                         if (MP4PlayerCorePtr[i]->pre_AudioBuff_Offset != MP4PlayerCorePtr[i]->AudioBuff_Offset)
                         {
 #ifdef PRINT_LOG
-                            OSReport("CurrTime:%d, APTS:%d, ADIFF:%d, thread:%d, df_a:%d, ff_a:%d\n",
+                            LOG_WRITE("CurrTime:%d, APTS:%d, ADIFF:%d, thread:%d, df_a:%d, ff_a:%d\n",
                                 (asys_currtime - sys_basetime[i]), MP4PlayerCorePtr[i]->OutputAudioInfo[MP4PlayerCorePtr[i]->df_a].PTS, abs((asys_currtime - sys_basetime[i]) - MP4PlayerCorePtr[i]->OutputAudioInfo[MP4PlayerCorePtr[i]->df_a].PTS), i, MP4PlayerCorePtr[i]->df_a, MP4PlayerCorePtr[i]->ff_a);
 #endif
                             MP4PlayerCorePtr[i]->pre_AudioBuff_Offset = MP4PlayerCorePtr[i]->AudioBuff_Offset;
@@ -363,7 +364,7 @@ static s32 AudioOutputThread(s32 intArg, void *ptrArg)
                 }
                 if (!aendflag[i] && MP4PlayerCorePtr[i]->athread_end && (MP4PlayerCorePtr[i]->df_a == MP4PlayerCorePtr[i]->ff_a) && (MP4PlayerCorePtr[i]->OutputAudioInfo[MP4PlayerCorePtr[i]->df_a].Status == 0))
                 {
-                    OSReport("Audio[%d] Thread End\n", i);
+                    LOG_WRITE("Audio[%d] Thread End\n", i);
                     aendflag[i] = 1;
                 }
             }
@@ -385,7 +386,7 @@ static s32 AudioOutputThread(s32 intArg, void *ptrArg)
         }
     }
 
-    OSReport("Audio Thread Finish\n");
+    LOG_WRITE("Audio Thread Finish\n");
     return(0);
 }
 
@@ -473,7 +474,7 @@ u32 MediaFileReadData(u8 **pData, u32 *bufLen, s64 offset, u32 length, s32 threa
         MP4PlayerCorePtr[threadnum]->DataBuffPtr = (u8 *)MEMAllocFromDefaultHeapEx(length, 1024);
         if (MP4PlayerCorePtr[threadnum]->DataBuffPtr == NULL)
         {
-            OSReport("Inputbuf Allocete Error\n");
+            LOG_WRITE("Inputbuf Allocete Error\n");
         }
     }
 
@@ -488,7 +489,7 @@ u32 MediaFileReadData(u8 **pData, u32 *bufLen, s64 offset, u32 length, s32 threa
         MP4PlayerCorePtr[threadnum]->DataBuffPtr = (u8 *)MEMAllocFromDefaultHeapEx(length, 1024);
         if (MP4PlayerCorePtr[threadnum]->DataBuffPtr == NULL)
         {
-            OSReport("Inputbuf Allocete Error\n");
+            LOG_WRITE("Inputbuf Allocete Error\n");
         }
         MP4PlayerCorePtr[threadnum]->CurrBuffLength = length;
     }
@@ -576,7 +577,7 @@ u32 MediaFileReadDataV(u8 **pData, u32 *bufLen, s64 offset, u32 length, s32 thre
 
     if (*pData == NULL)
     {
-        OSReport("Inputbuf Allocete Error\n");
+        LOG_WRITE("Inputbuf Allocete Error\n");
     }
 
 
@@ -661,7 +662,7 @@ u32 MediaFileReadDataA(u8 **pData, u32 *bufLen, s64 offset, u32 length, s32 thre
 
     if (*pData == NULL)
     {
-        OSReport("Inputbuf Allocete Error\n");
+        LOG_WRITE("Inputbuf Allocete Error\n");
     }
 
     if ((offset + length) > MP4PlayerCorePtr[threadnum]->InputFileSize)
@@ -785,7 +786,7 @@ s32 cbGetMediaSampleData(MP4DMXFW_UNIT *unit, void *handle)
         MP4PlayerCorePtr[threadnum]->AudioSampleRate = unit->sample->audio_subsample;
         if (MP4PlayerCorePtr[threadnum]->AudioSampleRate == 0)
         {
-            OSReport("audio none.\n");
+            LOG_WRITE("audio none.\n");
         }
     }
     else if (unit->type == MEDIA_SAMPLE)
@@ -963,11 +964,11 @@ static s32 MP4PlayTVorDRC(s32 intArg, void *ptrArg)
     // Add client to FS.
     FSAddClient(GpClient[intArg], FS_RET_NO_ERROR);
 
-    OSReport("\n\n\n### Start operation ###\n");
+    LOG_WRITE("\n\n\n### Start operation ###\n");
 
     // Init command block.
     FSInitCmdBlock(GpCmd[intArg]);
-    OSReport("==> FSInitCmdBlock: Command block initialized.\n");
+    LOG_WRITE("==> FSInitCmdBlock: Command block initialized.\n");
 
 #ifdef INPUTNAME_DEFINED
     status = FSOpenFile(GpClient[intArg], GpCmd[intArg], (const char *)mp4Filename[intArg], "r", &Gfh[intArg], FS_RET_NOT_FOUND);
@@ -976,7 +977,7 @@ static s32 MP4PlayTVorDRC(s32 intArg, void *ptrArg)
 #endif
     if(status < FS_STATUS_OK)
     {
-        OSReport("[ERROR] cannot open mp4 file.\n");
+        LOG_WRITE("[ERROR] cannot open mp4 file.\n");
         OSHalt("OS Halt");
     }
 
@@ -987,7 +988,7 @@ static s32 MP4PlayTVorDRC(s32 intArg, void *ptrArg)
 #endif
     if (status < FS_STATUS_OK)
     {
-        OSReport("[ERROR] cannot get input mp4 file status.\n");
+        LOG_WRITE("[ERROR] cannot get input mp4 file status.\n");
         OSHalt("OS Halt");
     }
 
@@ -1017,7 +1018,7 @@ static s32 MP4PlayTVorDRC(s32 intArg, void *ptrArg)
 
     while ( !EXIT_PLAYBACK )
     {
-        OSReport("MP4Play[%d] Thread Start\n", intArg);
+        LOG_WRITE("MP4Play[%d] Thread Start\n", intArg);
         if (MP4PlayerCorePtr[intArg]->file_input_mode == 0)
         {
 #ifdef INPUTNAME_DEFINED
@@ -1027,7 +1028,7 @@ static s32 MP4PlayTVorDRC(s32 intArg, void *ptrArg)
 #endif
             if(status < FS_STATUS_OK)
             {
-                OSReport("[ERROR] cannot open mp4 file.\n");
+                LOG_WRITE("[ERROR] cannot open mp4 file.\n");
                 OSHalt("OS Halt");
             }
         }
@@ -1061,7 +1062,7 @@ static s32 MP4PlayTVorDRC(s32 intArg, void *ptrArg)
         addr = MEMAllocFromDefaultHeapEx(size/32, 1024);
         if (!addr)
         {
-            OSReport("[ERROR] cannot allocate memory.\n");
+            LOG_WRITE("[ERROR] cannot allocate memory.\n");
             OSHalt("OS Halt");
         }
 
@@ -1077,14 +1078,14 @@ static s32 MP4PlayTVorDRC(s32 intArg, void *ptrArg)
         iMlibRet = MP4DMXFW_Open(ExpHeap, &pMlibHandle, &UseWorkMemSize, intArg );
         if( iMlibRet != MP4DMXFW_RET_SUCCESS )
         {
-            OSReport("MP4DMXOpen Failed. ret = %d\n", iMlibRet );
+            LOG_WRITE("MP4DMXOpen Failed. ret = %d\n", iMlibRet );
             goto ERROR;
         }
 
         iMlibRet = MP4DMXFW_Begin( pMlibHandle, &MP4PlayerCorePtr[intArg]->MP4DMUXParam, intArg );
         if( iMlibRet != MP4DMXFW_RET_SUCCESS )
         {
-            OSReport("MP4DMXFW_Begin Failed. ret = %d\n", iMlibRet );
+            LOG_WRITE("MP4DMXFW_Begin Failed. ret = %d\n", iMlibRet );
             goto ERROR;
         }
 
@@ -1129,14 +1130,14 @@ static s32 MP4PlayTVorDRC(s32 intArg, void *ptrArg)
 #if defined(USE_PROCESS_SWITCHING) && !defined(USE_SINGLE_CORE)
         exc_start_time_stamp[intArg] = 0;
         exc_end_time_stamp[intArg]   = 0;
-        OSReport("MP4Duration[0]:%d\n", MP4DemuxCorePtr[intArg]->MP4Duration);
+        LOG_WRITE("MP4Duration[0]:%d\n", MP4DemuxCorePtr[intArg]->MP4Duration);
         for (i = 0; i < MP4DemuxCorePtr[intArg]->MP4Duration/100; i++)
         {
             exc_end_time_stamp[intArg] = exc_start_time_stamp[intArg] + 100;
             iMlibRet = MP4DMXFW_Execute( pMlibHandle, &MP4PlayerCorePtr[intArg]->MP4DMUXParam, 0, (s64)exc_start_time_stamp[intArg], (s64)exc_end_time_stamp[intArg], intArg );
             if( iMlibRet != MP4DMXFW_RET_SUCCESS )
             {
-                OSReport("MP4DMXFW_Execute Failed. ret = %d\n", iMlibRet );
+                LOG_WRITE("MP4DMXFW_Execute Failed. ret = %d\n", iMlibRet );
                 goto ERROR;
             }
 
@@ -1184,14 +1185,14 @@ static s32 MP4PlayTVorDRC(s32 intArg, void *ptrArg)
                         else if (debounce_[intArg] && debounce)
                         {
                             debounce_[intArg] = 0;
-                            OSReport("\nSwitch To HBM!\n");
+                            LOG_WRITE("\nSwitch To HBM!\n");
                             ok = OSSendAppSwitchRequest(PFID_HomeButtonMenu, (void *)"Pause", 6);
                             if (!ok)
                             {
-                                OSReport("OSSendAppSwitchRequest() failed.\n");
+                                LOG_WRITE("OSSendAppSwitchRequest() failed.\n");
                             }
                             else
-                                OSReport("Sent Request ok.\n\n");
+                                LOG_WRITE("Sent Request ok.\n\n");
                         }
                     }
                 }
@@ -1243,7 +1244,7 @@ static s32 MP4PlayTVorDRC(s32 intArg, void *ptrArg)
 				(u64)exc_end_time_stamp[intArg], intArg );
 			if( iMlibRet != MP4DMXFW_RET_SUCCESS )
 			{
-				OSReport("MP4DMXFW_Execute Failed. ret = %d\n", iMlibRet );
+				LOG_WRITE("MP4DMXFW_Execute Failed. ret = %d\n", iMlibRet );
 				goto ERROR;
 			}
 
@@ -1261,7 +1262,7 @@ ERROR:
         iMlibRet = MP4DMXFW_End( pMlibHandle, intArg );
         if( iMlibRet != MP4DMXFW_RET_SUCCESS )
         {
-            OSReport("MP4DMXFW_End Failed. ret = %d\n", iMlibRet );
+            LOG_WRITE("MP4DMXFW_End Failed. ret = %d\n", iMlibRet );
         }
 
         MP4PlayerCorePtr[intArg]->vthread_end = 1;
@@ -1288,10 +1289,10 @@ ERROR:
         iMlibRet = MP4DMXFW_Close( ExpHeap, pMlibHandle, intArg );
         if( iMlibRet != MP4DMXFW_RET_SUCCESS )
         {
-            OSReport("MP4DMXFW_Close Failed. ret = %d\n", iMlibRet );
+            LOG_WRITE("MP4DMXFW_Close Failed. ret = %d\n", iMlibRet );
         }
 
-        OSReport("MP4Play[%d] Thread End\n", intArg);
+        LOG_WRITE("MP4Play[%d] Thread End\n", intArg);
 
         // memory free
         MediaFileReadFree(intArg);
@@ -1308,7 +1309,7 @@ ERROR:
 
         // file hendle close
         LoopCounter[intArg]++;
-        OSReport("LoopCounter[%d]:%d\n", intArg, LoopCounter[intArg]);
+        LOG_WRITE("LoopCounter[%d]:%d\n", intArg, LoopCounter[intArg]);
         if (MP4PlayerCorePtr[intArg]->file_input_mode == 0)
         {
             FSCloseFile(GpClient[intArg], GpCmd[intArg], Gfh[intArg], FS_RET_NO_ERROR);
@@ -1383,14 +1384,14 @@ ERROR:
             else if (debounce_[intArg] && debounce)
             {
                 debounce_[intArg] = 0;
-                OSReport("\nSwitch To HBM!\n");
+                LOG_WRITE("\nSwitch To HBM!\n");
                 ok = OSSendAppSwitchRequest(PFID_HomeButtonMenu, (void *)"Pause", 6);
                 if (!ok)
                 {
-                    OSReport("OSSendAppSwitchRequest() failed.\n");
+                    LOG_WRITE("OSSendAppSwitchRequest() failed.\n");
                 }
                 else
-                    OSReport("Sent Request ok.\n\n");
+                    LOG_WRITE("Sent Request ok.\n\n");
             }
         }
         // ---------------------------- //
@@ -1468,11 +1469,11 @@ static s32 MP4PlayDRC(s32 intArg, void *ptrArg)
     // Add client to FS.
     FSAddClient(GpClient[intArg], FS_RET_NO_ERROR);
 
-    OSReport("\n\n\n### Start operation ###\n");
+    LOG_WRITE("\n\n\n### Start operation ###\n");
 
     // Init command block.
     FSInitCmdBlock(GpCmd[intArg]);
-    OSReport("==> FSInitCmdBlock: Command block initialized.\n");
+    LOG_WRITE("==> FSInitCmdBlock: Command block initialized.\n");
 
 #ifdef INPUTNAME_DEFINED
     status = FSOpenFile(GpClient[intArg], GpCmd[intArg], (const char *)mp4Filename[intArg], "r", &Gfh[intArg], FS_RET_NOT_FOUND);
@@ -1481,7 +1482,7 @@ static s32 MP4PlayDRC(s32 intArg, void *ptrArg)
 #endif
     if(status < FS_STATUS_OK)
     {
-        OSReport("[ERROR] cannot open mp4 file.\n");
+        LOG_WRITE("[ERROR] cannot open mp4 file.\n");
         OSHalt("OS Halt");
     }
 
@@ -1492,7 +1493,7 @@ static s32 MP4PlayDRC(s32 intArg, void *ptrArg)
 #endif
     if (status < FS_STATUS_OK)
     {
-        OSReport("[ERROR] cannot get input mp4 file status.\n");
+        LOG_WRITE("[ERROR] cannot get input mp4 file status.\n");
         OSHalt("OS Halt");
     }
 
@@ -1522,7 +1523,7 @@ static s32 MP4PlayDRC(s32 intArg, void *ptrArg)
 
     while (1)
     {
-        OSReport("MP4Play[%d] Thread Start\n", intArg);
+        LOG_WRITE("MP4Play[%d] Thread Start\n", intArg);
         if (MP4PlayerCorePtr[intArg]->file_input_mode == 0)
         {
 #ifdef INPUTNAME_DEFINED
@@ -1532,7 +1533,7 @@ static s32 MP4PlayDRC(s32 intArg, void *ptrArg)
 #endif
             if(status < FS_STATUS_OK)
             {
-                OSReport("[ERROR] cannot open mp4 file.\n");
+                LOG_WRITE("[ERROR] cannot open mp4 file.\n");
                 OSHalt("OS Halt");
             }
         }
@@ -1566,7 +1567,7 @@ static s32 MP4PlayDRC(s32 intArg, void *ptrArg)
         addr = MEMAllocFromDefaultHeapEx(size/32, 1024);
         if (!addr)
         {
-            OSReport("[ERROR] cannot allocate memory.\n");
+            LOG_WRITE("[ERROR] cannot allocate memory.\n");
             OSHalt("OS Halt");
         }
 
@@ -1582,14 +1583,14 @@ static s32 MP4PlayDRC(s32 intArg, void *ptrArg)
         iMlibRet = MP4DMXFW_Open(ExpHeap, &pMlibHandle, &UseWorkMemSize, intArg );
         if( iMlibRet != MP4DMXFW_RET_SUCCESS )
         {
-            OSReport("MP4DMXOpen Failed. ret = %d\n", iMlibRet );
+            LOG_WRITE("MP4DMXOpen Failed. ret = %d\n", iMlibRet );
             goto ERROR;
         }
 
         iMlibRet = MP4DMXFW_Begin( pMlibHandle, &MP4PlayerCorePtr[intArg]->MP4DMUXParam, intArg );
         if( iMlibRet != MP4DMXFW_RET_SUCCESS )
         {
-            OSReport("MP4DMXFW_Begin Failed. ret = %d\n", iMlibRet );
+            LOG_WRITE("MP4DMXFW_Begin Failed. ret = %d\n", iMlibRet );
             goto ERROR;
         }
 
@@ -1631,14 +1632,14 @@ static s32 MP4PlayDRC(s32 intArg, void *ptrArg)
 
         exc_start_time_stamp[intArg] = 0;
         exc_end_time_stamp[intArg]   = 0;
-        OSReport("MP4Duration[1]:%d\n", MP4DemuxCorePtr[intArg]->MP4Duration);
+        LOG_WRITE("MP4Duration[1]:%d\n", MP4DemuxCorePtr[intArg]->MP4Duration);
         for (i = 0; i < MP4DemuxCorePtr[intArg]->MP4Duration/100; i++)
         {
             exc_end_time_stamp[intArg] = exc_start_time_stamp[intArg] + 100;
             iMlibRet = MP4DMXFW_Execute( pMlibHandle, &MP4PlayerCorePtr[intArg]->MP4DMUXParam, 0, (s64)exc_start_time_stamp[intArg], (s64)exc_end_time_stamp[intArg], intArg );
             if( iMlibRet != MP4DMXFW_RET_SUCCESS )
             {
-                OSReport("MP4DMXFW_Execute Failed. ret = %d\n", iMlibRet );
+                LOG_WRITE("MP4DMXFW_Execute Failed. ret = %d\n", iMlibRet );
                 goto ERROR;
             }
 
@@ -1686,14 +1687,14 @@ static s32 MP4PlayDRC(s32 intArg, void *ptrArg)
                         else if (debounce_[intArg] && debounce)
                         {
                             debounce_[intArg] = 0;
-                            OSReport("\nSwitch To HBM!\n");
+                            LOG_WRITE("\nSwitch To HBM!\n");
                             ok = OSSendAppSwitchRequest(PFID_HomeButtonMenu, (void *)"Pause", 6);
                             if (!ok)
                             {
-                                OSReport("OSSendAppSwitchRequest() failed.\n");
+                                LOG_WRITE("OSSendAppSwitchRequest() failed.\n");
                             }
                             else
-                                OSReport("Sent Request ok.\n\n");
+                                LOG_WRITE("Sent Request ok.\n\n");
                         }
                     }
                 }
@@ -1730,7 +1731,7 @@ ERROR:
         iMlibRet = MP4DMXFW_End( pMlibHandle, intArg );
         if( iMlibRet != MP4DMXFW_RET_SUCCESS )
         {
-            OSReport("MP4DMXFW_End Failed. ret = %d\n", iMlibRet );
+            LOG_WRITE("MP4DMXFW_End Failed. ret = %d\n", iMlibRet );
         }
 
         MP4PlayerCorePtr[intArg]->vthread_end = 1;
@@ -1757,10 +1758,10 @@ ERROR:
         iMlibRet = MP4DMXFW_Close( ExpHeap, pMlibHandle, intArg );
         if( iMlibRet != MP4DMXFW_RET_SUCCESS )
         {
-            OSReport("MP4DMXFW_Close Failed. ret = %d\n", iMlibRet );
+            LOG_WRITE("MP4DMXFW_Close Failed. ret = %d\n", iMlibRet );
         }
 
-        OSReport("MP4Play[%d] Thread End\n", intArg);
+        LOG_WRITE("MP4Play[%d] Thread End\n", intArg);
 
         // memory free
         MediaFileReadFree(intArg);
@@ -1777,7 +1778,7 @@ ERROR:
 
         // file hendle close
         LoopCounter[intArg]++;
-        OSReport("LoopCounter[%d]:%d\n", intArg, LoopCounter[intArg]);
+        LOG_WRITE("LoopCounter[%d]:%d\n", intArg, LoopCounter[intArg]);
         if (MP4PlayerCorePtr[intArg]->file_input_mode == 1)
         {
             FSCloseFile(GpClient[intArg], GpCmd[intArg], Gfh[intArg], FS_RET_NO_ERROR);
@@ -1852,14 +1853,14 @@ ERROR:
             else if (debounce_[intArg] && debounce)
             {
                 debounce_[intArg] = 0;
-                OSReport("\nSwitch To HBM!\n");
+                LOG_WRITE("\nSwitch To HBM!\n");
                 ok = OSSendAppSwitchRequest(PFID_HomeButtonMenu, (void *)"Pause", 6);
                 if (!ok)
                 {
-                    OSReport("OSSendAppSwitchRequest() failed.\n");
+                    LOG_WRITE("OSSendAppSwitchRequest() failed.\n");
                 }
                 else
-                    OSReport("Sent Request ok.\n\n");
+                    LOG_WRITE("Sent Request ok.\n\n");
             }
         }
         // ---------------------------- //
@@ -2109,7 +2110,7 @@ void VideoPlayer::DrawFrame()
                     if ((((vsys_currtime - sys_basetime[i]) - MP4PlayerCorePtr[i]->OutputVideoInfo[MP4PlayerCorePtr[i]->df_v].PTS) > VIDEOSKIP_DELAY))
                     {
                         MP4PlayerCorePtr[i]->FrameSkipFlag = 1;
-                        OSReport("FrameSkip\n");
+                        LOG_WRITE("FrameSkip\n");
                     }
                     else
                     {
@@ -2122,7 +2123,7 @@ void VideoPlayer::DrawFrame()
                     ret = VideoDraw(MP4PlayerCorePtr[i]->OutputVideoInfo[MP4PlayerCorePtr[i]->df_v].bufp, i);
                     if (ret != 0)
                     {
-                        OSReport("VideoDraw Failed.\n");
+                        LOG_WRITE("VideoDraw Failed.\n");
                         vendflag[i] = 1;
                         break;
                     }
@@ -2138,7 +2139,7 @@ void VideoPlayer::DrawFrame()
             }
             if (!vendflag[i] && MP4PlayerCorePtr[i]->vthread_end && (MP4PlayerCorePtr[i]->df_v == MP4PlayerCorePtr[i]->ff_v) && (MP4PlayerCorePtr[i]->OutputVideoInfo[MP4PlayerCorePtr[i]->df_v].Status == 0))
             {
-                OSReport("Video[%d] Thread End\n", i);
+                LOG_WRITE("Video[%d] Thread End\n", i);
                 vendflag[i] = 1;
             }
         }

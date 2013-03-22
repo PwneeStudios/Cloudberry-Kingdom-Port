@@ -193,12 +193,12 @@ struct FilesystemWiiUInternal
 
 void StateChangeCallback( FSClient *client, FSVolumeState state, void *context )
 {
-	LOG.Write( "StateChangeCallback on 0x%x: 0x%x\n", client, state );
+	LOG_WRITE( "StateChangeCallback on 0x%x: 0x%x\n", client, state );
 
 	if( FSGetVolumeState( client ) != FS_VOLSTATE_READY )
 	{
 		s32 errorCode = FSGetLastErrorCodeForViewer( client );
-		LOG.Write( "Error code: 0x%x\n", errorCode );
+		LOG_WRITE( "Error code: 0x%x\n", errorCode );
 		DisplayError( errorCode );
 	}
 }
@@ -207,7 +207,7 @@ FilesystemWiiU::FilesystemWiiU() :
 	internal_( new FilesystemWiiUInternal )
 {
 	FSInit();
-	LOG.Write( "Filesystem initialized\n" );
+	LOG_WRITE( "Filesystem initialized\n" );
 
 	internal_->Client = reinterpret_cast< FSClient * >( MEMAllocFromDefaultHeap( sizeof( FSClient ) ) );
 	if( !internal_->Client )
@@ -226,10 +226,10 @@ FilesystemWiiU::FilesystemWiiU() :
 	FSSetStateChangeNotification( internal_->Client, &changeParams );
 
 	FSAddClient( internal_->Client, FS_RET_NO_ERROR );
-	LOG.Write( "Client added\n" );
+	LOG_WRITE( "Client added\n" );
 
 	FSInitCmdBlock( internal_->Cmd );
-	LOG.Write( "Command block ready\n" );
+	LOG_WRITE( "Command block ready\n" );
 
 	GLOBAL_FSClient = internal_->Client;
 }
@@ -254,7 +254,7 @@ boost::shared_ptr<File> FilesystemWiiU::Open( const std::string &path, bool writ
 		FSStat stat;
 
 		std::string localPath = ( path[ 0 ] == '/' ? "/vol/content/0010" : "/vol/content/0010/" ) + path;
-		LOG.Write( "Opening %s\n", localPath.c_str() );
+		LOG_WRITE( "Opening %s\n", localPath.c_str() );
 
 		// FIXME: The mutex might not be necessary if the file system supports multithreading.
 		internal_->FileSystemMutex.Lock();

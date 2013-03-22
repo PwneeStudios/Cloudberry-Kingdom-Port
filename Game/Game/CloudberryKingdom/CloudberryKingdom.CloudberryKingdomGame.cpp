@@ -1199,7 +1199,7 @@ float CloudberryKingdomGame::fps = 0;
 				param.cid = 0; // Unused.
 				int ret = cellNetCtlNetStartDialogLoadAsync( &param );
 				if( ret < 0 )
-					LOG.Write( "Failed to start network connection dialog: 0x%x\n", ret );
+					LOG_WRITE( "Failed to start network connection dialog: 0x%x\n", ret );
 			}
 		}
 #endif

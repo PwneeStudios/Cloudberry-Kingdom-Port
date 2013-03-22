@@ -27,7 +27,7 @@ void CloudberryKingdomWrapper::Initialize()
 
 	gt->ElapsedGameTime.TotalSeconds = 0.016f;
 	gt->TotalGameTime = TimeSpan( 0, 0, 0 );
-	LOG.Write( "Initialize done\n" );
+	LOG_WRITE( "Initialize done\n" );
 }
 
 void CloudberryKingdomWrapper::Update()

@@ -28,11 +28,11 @@ bool InitializeSave()
 
 	if( nn::act::IsSlotOccupied( accountSlot ) )
 	{
-		LOG.Write( "Creating account for slot %d with id 0x%X\n", accountSlot, persistentId );
+		LOG_WRITE( "Creating account for slot %d with id 0x%X\n", accountSlot, persistentId );
 
 		if( SAVEInitSaveDir( accountSlot ) != SAVE_STATUS_OK )
 		{
-			LOG.Write( "Failed to create save directory.\n" );
+			LOG_WRITE( "Failed to create save directory.\n" );
 			isInitialized = false;
 			
 			// There was not enough free space to create save data.
@@ -48,10 +48,10 @@ bool InitializeSave()
 	sprintf( LOCAL_ACCOUNT_NAME, "Errorberry" );
 	r = nn::act::GetAccountId( LOCAL_ACCOUNT_NAME );
 	
-	LOG.Write( "Creating global directory\n" );
+	LOG_WRITE( "Creating global directory\n" );
 	if( SAVEInitSaveDir( ACT_SLOT_NO_COMMON ) != SAVE_STATUS_OK )
 	{
-		LOG.Write( "Failed to create common directory.\n" );
+		LOG_WRITE( "Failed to create common directory.\n" );
 		isInitialized = false;
 
 		// There was not enough free space to create save data.

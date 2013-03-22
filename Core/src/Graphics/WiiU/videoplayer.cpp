@@ -22,6 +22,8 @@
 #include "MovieTest.h"
 #include <cassert>
 
+#include <Utility/Log.h>
+
 /*=========================================================================*
             definitions
  *=========================================================================*/
@@ -66,13 +68,13 @@ s32 VideoDraw(u8 *ip, s32 threadnum)
 
     if ((MP4DemuxCorePtr[threadnum]->H264ImageWidth * MP4DemuxCorePtr[threadnum]->H264ImageHeight)*3/2 > VIDEO_MAX_IMAGE_SIZE)
     {
-        OSReport("[VideoDraw Fail] Width:%d, Height:%d\n", MP4DemuxCorePtr[threadnum]->H264ImageWidth, MP4DemuxCorePtr[threadnum]->H264ImageHeight);
+        LOG_WRITE("[VideoDraw Fail] Width:%d, Height:%d\n", MP4DemuxCorePtr[threadnum]->H264ImageWidth, MP4DemuxCorePtr[threadnum]->H264ImageHeight);
         return -1;
     }
 
     if (MP4PlayerCorePtr[threadnum]->OutputFrames == 0)
     {
-        OSReport("Movie size : %d x %d\n", MP4DemuxCorePtr[threadnum]->H264ImageWidth, MP4DemuxCorePtr[threadnum]->H264ImageHeight);
+        LOG_WRITE("Movie size : %d x %d\n", MP4DemuxCorePtr[threadnum]->H264ImageWidth, MP4DemuxCorePtr[threadnum]->H264ImageHeight);
     }
 
     {
@@ -97,7 +99,7 @@ s32 VideoDraw(u8 *ip, s32 threadnum)
 #endif
 #ifdef PRINT_TIME
         endtime = OSTicksToMilliseconds(OSGetTime());
-        OSReport("Time(VideoDraw):%d, thread:%d\n", endtime - starttime, threadnum);
+        LOG_WRITE("Time(VideoDraw):%d, thread:%d\n", endtime - starttime, threadnum);
 #endif
         DEMOGfxDoneRender();
         DEMOGfxBeforeRender();
@@ -134,7 +136,7 @@ s32 video_Output(void *ptr)
     threadnum = *(s32 *)h264decoutput->UserMemory;
     if ((threadnum != 0) && (threadnum != 1))
     {
-        OSReport("video_Output Error : Invalid Thread Number\n");
+        LOG_WRITE("video_Output Error : Invalid Thread Number\n");
         return -1;
     }
 
@@ -167,7 +169,7 @@ s32 set_parameters(s32 memory_size, void *mem_ptr, void **usermem, s32 threadnum
     ret = H264DECInitParam(memory_size, mem_ptr);
     if (ret != 0)
     {
-        OSReport("Error : H264DECInitParam : 0x%x\n", ret);
+        LOG_WRITE("Error : H264DECInitParam : 0x%x\n", ret);
         return ret;
     }
 
@@ -175,7 +177,7 @@ s32 set_parameters(s32 memory_size, void *mem_ptr, void **usermem, s32 threadnum
     ret = H264DECSetParam_FPTR_OUTPUT( mem_ptr, video_Output );
     if (ret != 0)
     {
-        OSReport("Error : H264DECSetParam_FPTR_OUTPUT : 0x%x\n", ret);
+        LOG_WRITE("Error : H264DECSetParam_FPTR_OUTPUT : 0x%x\n", ret);
         return ret;
     }
 
@@ -190,7 +192,7 @@ s32 set_parameters(s32 memory_size, void *mem_ptr, void **usermem, s32 threadnum
     }
     if (ret != 0)
     {
-        OSReport("Error : H264DECSetParam_OUTPUT_PER_FRAME : 0x%x\n", ret);
+        LOG_WRITE("Error : H264DECSetParam_OUTPUT_PER_FRAME : 0x%x\n", ret);
         return ret;
     }
 
@@ -198,7 +200,7 @@ s32 set_parameters(s32 memory_size, void *mem_ptr, void **usermem, s32 threadnum
     ret = H264DECSetParam_USER_MEMORY(mem_ptr, usermem);
     if (ret != 0)
     {
-        OSReport("Error : H264DECSetParam[H264DEC_PARAM_ID_USER_MEMORY] : 0x%x\n", ret);
+        LOG_WRITE("Error : H264DECSetParam[H264DEC_PARAM_ID_USER_MEMORY] : 0x%x\n", ret);
         return ret;
     }
 
@@ -235,7 +237,7 @@ void ReserveVideoPlayerMemory()
         if (H264DECCheckMemSegmentation(ReservedVideoPlayerMemory, codec_mem_size) != 0)
         {
             ngptr[ngptrnum] = ReservedVideoPlayerMemory;
-            OSReport("H264WorkBuffer malloc retry : 0x%x-0x%x\n", (s32)ngptr[ngptrnum], (s32)ngptr[ngptrnum] + codec_mem_size - 1);
+            LOG_WRITE("H264WorkBuffer malloc retry : 0x%x-0x%x\n", (s32)ngptr[ngptrnum], (s32)ngptr[ngptrnum] + codec_mem_size - 1);
             ngptrnum++;
             if (ngptrnum == 16)
             {
@@ -270,7 +272,7 @@ void ReserveVideoPlayerMemory()
         if (H264DECCheckMemSegmentation(ReservedVideoFrames[i], YuvBufSize) != 0)
         {
             ngptr[ngptrnum] = ReservedVideoFrames[i];
-            OSReport("h264decfm malloc retry : 0x%x-0x%x\n", (s32)ngptr[ngptrnum], (s32)ngptr[ngptrnum] + YuvBufSize - 1);
+            LOG_WRITE("h264decfm malloc retry : 0x%x-0x%x\n", (s32)ngptr[ngptrnum], (s32)ngptr[ngptrnum] + YuvBufSize - 1);
             ngptrnum++;
             if (ngptrnum == 16)
             {
@@ -286,7 +288,7 @@ void ReserveVideoPlayerMemory()
         {
             if (ReservedVideoFrames[ i ] == NULL)
             {
-                OSReport("cannot allocate framebuffer\n");
+                LOG_WRITE("cannot allocate framebuffer\n");
                 return;
             }
         }
@@ -320,7 +322,7 @@ s32 VideoOpenH264(s32 threadnum)
 //    rtn = H264DECMemoryRequirement( MP4DemuxCorePtr[threadnum]->H264Profile, 51, MP4DemuxCorePtr[threadnum]->H264ImageWidth, MP4DemuxCorePtr[threadnum]->H264ImageHeight, &codec_mem_size  );
     if (rtn != 0)
     {
-        OSReport("error : H264DECMemoryRequirement : 0x%x\n", rtn);
+        LOG_WRITE("error : H264DECMemoryRequirement : 0x%x\n", rtn);
         return MP4DMXFW_RET_ERROR;
     }
 
@@ -331,7 +333,7 @@ s32 VideoOpenH264(s32 threadnum)
         if (H264DECCheckMemSegmentation(MP4DemuxCorePtr[threadnum]->H264WorkBuffer, codec_mem_size) != 0)
         {
             ngptr[ngptrnum] = MP4DemuxCorePtr[threadnum]->H264WorkBuffer;
-            OSReport("H264WorkBuffer malloc retry : 0x%x-0x%x, threadnum : %d,\n", (s32)ngptr[ngptrnum], (s32)ngptr[ngptrnum] + codec_mem_size - 1, threadnum);
+            LOG_WRITE("H264WorkBuffer malloc retry : 0x%x-0x%x, threadnum : %d,\n", (s32)ngptr[ngptrnum], (s32)ngptr[ngptrnum] + codec_mem_size - 1, threadnum);
             ngptrnum++;
             if (ngptrnum == 16)
             {
@@ -355,7 +357,7 @@ s32 VideoOpenH264(s32 threadnum)
 
     if (MP4DemuxCorePtr[threadnum]->H264WorkBuffer == NULL)
     {
-        OSReport("error : MP4DemuxCorePtr[threadnum]->H264WorkBuffer Alloccate : %d \n", codec_mem_size);
+        LOG_WRITE("error : MP4DemuxCorePtr[threadnum]->H264WorkBuffer Alloccate : %d \n", codec_mem_size);
         return MP4DMXFW_RET_ERROR;
     }
 
@@ -364,14 +366,14 @@ s32 VideoOpenH264(s32 threadnum)
     rtn = set_parameters(codec_mem_size, MP4DemuxCorePtr[threadnum]->H264WorkBuffer, &MP4DemuxCorePtr[threadnum]->UserMem, threadnum);
     if (rtn != 0)
     {
-        OSReport("error : H.264 Video set_parameters : 0x%x\n", rtn);
+        LOG_WRITE("error : H.264 Video set_parameters : 0x%x\n", rtn);
         return MP4DMXFW_RET_ERROR;
     }
 
     rtn = H264DECOpen(MP4DemuxCorePtr[threadnum]->H264WorkBuffer);
     if (rtn != 0)
     {
-        OSReport("error : H264DECOpen : 0x%x\n", rtn);
+        LOG_WRITE("error : H264DECOpen : 0x%x\n", rtn);
         return MP4DMXFW_RET_ERROR;
     }
 
@@ -483,7 +485,7 @@ s32 VideoInit(s32 threadnum)
         if (H264DECCheckMemSegmentation(MP4PlayerCorePtr[threadnum]->h264decfm[i], YuvBufSize) != 0)
         {
             ngptr[ngptrnum] = MP4PlayerCorePtr[threadnum]->h264decfm[i];
-            OSReport("h264decfm malloc retry : 0x%x-0x%x, threadnum : %d,\n", (s32)ngptr[ngptrnum], (s32)ngptr[ngptrnum] + YuvBufSize - 1, threadnum);
+            LOG_WRITE("h264decfm malloc retry : 0x%x-0x%x, threadnum : %d,\n", (s32)ngptr[ngptrnum], (s32)ngptr[ngptrnum] + YuvBufSize - 1, threadnum);
             ngptrnum++;
             if (ngptrnum == 16)
             {
@@ -499,7 +501,7 @@ s32 VideoInit(s32 threadnum)
         {
             if (MP4PlayerCorePtr[threadnum]->h264decfm[i] == NULL)
             {
-                OSReport("cannot allocate framebuffer\n");
+                LOG_WRITE("cannot allocate framebuffer\n");
                 return MP4DMXFW_RET_ERROR;
             }
             MP4PlayerCorePtr[threadnum]->List_h264decfm[i].used = 0;
@@ -553,7 +555,7 @@ void VideoExit(s32 threadnum)
             }
         }
 
-        OSReport("Video Shut down completed\r");
+        LOG_WRITE("Video Shut down completed\r");
     }
     return;
 }
