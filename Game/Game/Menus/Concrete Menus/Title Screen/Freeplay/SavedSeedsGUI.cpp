@@ -563,6 +563,8 @@ else
 			boost::shared_ptr<MenuItem> seeditem = MakeMagic( SeedItem, ( name, *seed, ItemFont ) );
 			seeditem->setGo( boost::make_shared<StartLevelProxy1>( boost::static_pointer_cast<SavedSeedsGUI>( shared_from_this() ), _seed ) );
 			AddItem( seeditem );
+			float w = seeditem->MyText->GetWorldWidth();
+			if (w > 1900) seeditem->ScaleText( 1900.0f / w );
 		}
 	}
 
