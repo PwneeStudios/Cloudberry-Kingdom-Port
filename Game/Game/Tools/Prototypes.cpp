@@ -540,7 +540,7 @@ namespace CloudberryKingdom
 		bob.insert( std::make_pair( BobPhsxTimeship::getInstance(), NewBob ) );
 
 		// Meat
-		std::wstring MeatBoyPath = Path::Combine( Globals::ContentDirectory, std::wstring( L"Objects/meatboy.smo" ) );
+		/*std::wstring MeatBoyPath = Path::Combine( Globals::ContentDirectory, std::wstring( L"Objects/meatboy.smo" ) );
 		NewBob = boost::make_shared<Bob>( MeatBoyPath, Tools::EffectWad, Tools::TextureWad, BobPhsxMeat::getInstance(), true );
 		NewBob->LoadFromFile( MeatBoyPath, Tools::EffectWad, Tools::TextureWad, BobPhsxMeat::getInstance() );
 		NewBob->IsSpriteBased = false;
@@ -555,7 +555,7 @@ namespace CloudberryKingdom
 		NewBob->PlayerObject->QuadList[ 1 ]->SetTexture( std::wstring( L"FallingBlock1" ), Tools::TextureWad );
 
 		BobPhsxMeat::getInstance()->Prototype = NewBob;
-		bob.insert( std::make_pair( BobPhsxMeat::getInstance(), NewBob ) );
+		bob.insert( std::make_pair( BobPhsxMeat::getInstance(), NewBob ) );*/
 
 
 		// Freeplay Heroes
