@@ -4,6 +4,8 @@
  *                                               All Rights Reserved.
  */
 
+#include <Utility/Log.h>
+
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -34,7 +36,7 @@ void gfxInitPad(void)
 	int ret = cellPadInit (CELL_PAD_MAX_PORT_NUM);
 	if(ret != CELL_OK && ret != CELL_PAD_ERROR_ALREADY_INITIALIZED) 
 		{
-        printf ("Initialize error %d\n", ret);
+        LOG_WRITE ("Initialize error %d\n", ret);
         while (1);
 		}
 
@@ -56,7 +58,7 @@ void gfxPadRead(void)
 	ret = cellPadGetInfo2 (&PadInfo);
 	if(ret)
 	{
-		printf ("Error%d : cellPadGetPadInfo\n", ret);
+		LOG_WRITE ("Error%d : cellPadGetPadInfo\n", ret);
 	}
 
 	for (int i = 0; i < CELL_PAD_MAX_PORT_NUM; i++) 
@@ -66,7 +68,7 @@ void gfxPadRead(void)
 		{
 			if(old_status[i]==0) 
 			{
-				printf ("New gamepad %d is connected\n",i);
+				LOG_WRITE ("New gamepad %d is connected\n",i);
 				cellPadSetPortSetting( i, CELL_PAD_SETTING_PRESS_ON );
 			}
 		}
@@ -84,12 +86,12 @@ void gfxPadRead(void)
 		{
 			memcpy(&PadData[i],&PadData2,sizeof(CellPadData));
 
-//			printf ("Pad[%d] data =", i);
+//			LOG_WRITE ("Pad[%d] data =", i);
 //			for (int j = 0; j < 8; j++)
 //			{    
-//				printf (" %2.2x", PadData[i].button[j]);
+//				LOG_WRITE (" %2.2x", PadData[i].button[j]);
 //			}
-//			printf ("\n");
+//			LOG_WRITE ("\n");
 		}
 
 	old_status[i] = PadInfo.port_status[i];

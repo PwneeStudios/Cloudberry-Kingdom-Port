@@ -13,7 +13,9 @@ public:
 
 	void Write( const std::string &text )
 	{
+#ifdef DEBUG
 		printf( text.c_str() );
+#endif
 	}
 };
 
@@ -21,7 +23,7 @@ namespace boost
 {
 	void throw_exception(std::exception const & e)
 	{
-		LOG.Write( e.what() );
+		LOG_WRITE( e.what() );
 	}
 }
 

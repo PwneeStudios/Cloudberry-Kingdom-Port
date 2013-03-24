@@ -130,8 +130,8 @@ CorePS3 &CorePS3::operator = ( const CorePS3 &rhs )
 													   \
 	case CELL_SYSMODULE_ERROR_UNKNOWN:				   \
 	case CELL_SYSMODULE_ERROR_FATAL:				   \
-		LOG.Write( msg );							   \
-		LOG.Write( "!! EXITING PROGRAM !!\n" );		   \
+		LOG_WRITE( msg );							   \
+		LOG_WRITE( "!! EXITING PROGRAM !!\n" );		   \
 		exit( 1 );									   \
 	}												   \
 }
@@ -170,9 +170,9 @@ static void SystemCallback( const uint64_t status, const uint64_t param, void *u
 
 			int ret = cellNetCtlNetStartDialogUnloadAsync( &result );
 			if( ret < 0 )
-				LOG.Write( "Failed to cellNetCtlNetStartDialogUnloadAsync: 0x%x\n", ret );
+				LOG_WRITE( "Failed to cellNetCtlNetStartDialogUnloadAsync: 0x%x\n", ret );
 			else
-				LOG.Write( "cellNetCtlNetStartDialogUnloadAsync result = 0x%x\n", ret );
+				LOG_WRITE( "cellNetCtlNetStartDialogUnloadAsync result = 0x%x\n", ret );
 		}
 		break;
 	case CELL_SYSUTIL_BGMPLAYBACK_PLAY:
@@ -182,7 +182,7 @@ static void SystemCallback( const uint64_t status, const uint64_t param, void *u
 		SetBGMOverride( false );
 		break;
 	default:
-		LOG.Write( "Unknown callback status: 0x%llx\n", status );
+		LOG_WRITE( "Unknown callback status: 0x%llx\n", status );
 	}
 }
 
@@ -241,7 +241,7 @@ CorePS3::CorePS3( GameLoop &game ) :
 	// PS3_PATH_PREFIX = "/dev_hdd0/game/NPEB01312/USRDIR/"; // SCEE
 	// PS3_PATH_PREFIX = "/dev_hdd0/game/NPUB31177/USRDIR/"; // SCEA
 	//PS3_PATH_PREFIX = "/app_home/";
-	LOG.Write( "Running in %s\nContent dir %s\n", dirName, usrdirPath );
+	LOG_WRITE( "Running in %s\nContent dir %s\n", dirName, usrdirPath );
 #ifdef DEBUG
 	PS3_PATH_PREFIX = "/app_home/";
 #endif
@@ -250,7 +250,7 @@ CorePS3::CorePS3( GameLoop &game ) :
 	int ret = cellSysutilRegisterCallback( 1, SystemCallback, NULL );
 	if( ret != CELL_OK )
 	{
-		LOG.Write( "Failed to register system callback: error=0x%x\n", ret );
+		LOG_WRITE( "Failed to register system callback: error=0x%x\n", ret );
 		exit( 1 );
 	}
 
@@ -274,7 +274,7 @@ CorePS3::CorePS3( GameLoop &game ) :
 
 	if( !device )
 	{
-		LOG.Write( "Failed to create device\n" );
+		LOG_WRITE( "Failed to create device\n" );
 		exit( 1 );
 	}
 
@@ -284,15 +284,15 @@ CorePS3::CorePS3( GameLoop &game ) :
 	GLOBAL_WIDTH = width;
 	GLOBAL_HEIGHT = height;
 
-	LOG.Write( "Initializing device, resolution %d x %d\n", width, height );
+	LOG_WRITE( "Initializing device, resolution %d x %d\n", width, height );
 
 	GLfloat aspect = psglGetDeviceAspectRatio( device );
-	LOG.Write( "Aspect ratio %f\n", aspect );
+	LOG_WRITE( "Aspect ratio %f\n", aspect );
 
 	PSGLcontext *context = psglCreateContext();
 	if( !context )
 	{
-		LOG.Write( "Failed to create context\n" );
+		LOG_WRITE( "Failed to create context\n" );
 		exit( -1 );
 	}
 
@@ -390,25 +390,25 @@ int TrophyStatusCallback( SceNpTrophyContext context, SceNpTrophyStatus status, 
 	switch( status )
 	{
 	case SCE_NP_TROPHY_STATUS_NOT_INSTALLED:
-		LOG.Write( "Trophy configuration not installed.\n" );
+		LOG_WRITE( "Trophy configuration not installed.\n" );
 		break;
 	case SCE_NP_TROPHY_STATUS_DATA_CORRUPT:
-		LOG.Write( "Trophy data is corrupt.\n" );
+		LOG_WRITE( "Trophy data is corrupt.\n" );
 		break;
 	case SCE_NP_TROPHY_STATUS_INSTALLED:
-		LOG.Write( "Trophy configuration has been installed.\n" );
+		LOG_WRITE( "Trophy configuration has been installed.\n" );
 		break;
 	case SCE_NP_TROPHY_STATUS_REQUIRES_UPDATE:
-		LOG.Write( "Trophy configuration requires update.\n" );
+		LOG_WRITE( "Trophy configuration requires update.\n" );
 		break;
 	case SCE_NP_TROPHY_STATUS_CHANGES_DETECTED:
-		LOG.Write( "Trophy changes detected.\n" );
+		LOG_WRITE( "Trophy changes detected.\n" );
 		break;
 	case SCE_NP_TROPHY_STATUS_UNKNOWN:
-		LOG.Write( "Trophy status unknown.\n" );
+		LOG_WRITE( "Trophy status unknown.\n" );
 		break;
 	default:
-		LOG.Write( "Trophy status: %d\n", status );
+		LOG_WRITE( "Trophy status: %d\n", status );
 		break;
 	}
 
@@ -447,7 +447,7 @@ void RegisterTrophyContextThread( uint64_t context )
 	int ret = sceNpTrophyRegisterContext( TrophyContext, TrophyHandle, TrophyStatusCallback, NULL, 0 );
 	if( ret < 0 )
 	{
-		LOG.Write( "Couldn't register trophy context: 0x%x\n", ret );
+		LOG_WRITE( "Couldn't register trophy context: 0x%x\n", ret );
 		ContextRegistered = false;
 
 		if( SCE_NP_TROPHY_ERROR_INSUFFICIENT_DISK_SPACE == ret )
@@ -504,11 +504,11 @@ void RegisterTrophyContextThread( uint64_t context )
 	}
 	else
 	{
-		LOG.Write( "Trophy context registered.\n", ret );
+		LOG_WRITE( "Trophy context registered.\n", ret );
 		ContextRegistered = true;
 	}
 
-	LOG.Write( "Trophy configuration done.\n" );
+	LOG_WRITE( "Trophy configuration done.\n" );
 
 	sys_ppu_thread_exit( 0 );
 }
@@ -575,7 +575,7 @@ void ConnectToNPThread( uint64_t context )
 		NPIdObtained = true;
 	}
 	else
-		LOG.Write( "Coldn't get score title context: 0x%x\n", ret );
+		LOG_WRITE( "Coldn't get score title context: 0x%x\n", ret );
 
 	sys_ppu_thread_exit( 0 );
 }
@@ -584,18 +584,18 @@ void ConnectToNP()
 {
 	if( NPIdObtained )
 	{
-		LOG.Write( "Tried to connect to NP multiple times!\n" );
+		LOG_WRITE( "Tried to connect to NP multiple times!\n" );
 		return;
 	}
 
-	LOG.Write( "Connecting to NP!\n" );
+	LOG_WRITE( "Connecting to NP!\n" );
 
 	// Kick off NP connection.
 	sys_ppu_thread_t tid;
 	int ret = sys_ppu_thread_create( &tid, ConnectToNPThread, 0,
 		1001, 16 * 1024, 0, "ConnectToNP" );
 	if( ret != 0 )
-		LOG.Write( "Failed to start ConnectToNP: 0x%x\n", ret );
+		LOG_WRITE( "Failed to start ConnectToNP: 0x%x\n", ret );
 }
 
 ErrorType GLOBAL_NP_DISCONNECT_MESSAGE;
@@ -603,7 +603,7 @@ ErrorType GLOBAL_NP_DISCONNECT_MESSAGE;
 void DisconnectFromNP()
 {
 	DisplayError( GLOBAL_NP_DISCONNECT_MESSAGE );
-	LOG.Write( "Disconnecting from NP\n" );
+	LOG_WRITE( "Disconnecting from NP\n" );
 
 	if( NPIdObtained )
 	{
@@ -615,7 +615,7 @@ void DisconnectFromNP()
 
 void NPManagerCallback( int event, int result, void *arg )
 {
-	LOG.Write( "NP EVENT: %d\tRESULT: %d\n", event, result );
+	LOG_WRITE( "NP EVENT: %d\tRESULT: %d\n", event, result );
 	switch( event )
 	{
 	case SCE_NP_MANAGER_STATUS_OFFLINE:
@@ -709,19 +709,19 @@ int CorePS3::Run()
 	// Initialize NP.
 	int ret = sceNpInit( NP_POOL_SIZE, NPPool );
 	if( ret < 0 )
-		LOG.Write( "Failed to initialize NP: 0x%x\n", ret );
+		LOG_WRITE( "Failed to initialize NP: 0x%x\n", ret );
 
 	sceNpManagerRegisterCallback( NPManagerCallback, NULL );
 
 	// Initialize NP score system.
 	ret = sceNpScoreInit();
 	if( ret < 0 )
-		LOG.Write( "Failed to initialize score system: 0x%x\n", ret );
+		LOG_WRITE( "Failed to initialize score system: 0x%x\n", ret );
 
 	// Initialize trophy system.
 	ret = sceNpTrophyInit( NULL, 0, SYS_MEMORY_CONTAINER_ID_INVALID, 0 );
 	if( ret < 0 )
-		LOG.Write( "Failed to initialize trophy system: 0x%x\n", ret );
+		LOG_WRITE( "Failed to initialize trophy system: 0x%x\n", ret );
 
 	int npState;
 	sceNpManagerGetStatus( &npState );
@@ -734,28 +734,28 @@ int CorePS3::Run()
 	TrophyContext = SCE_NP_TROPHY_INVALID_CONTEXT;
 	ret = sceNpTrophyCreateContext( &TrophyContext, &s_npCommunicationId, &s_npCommunicationSignature, 0 );
 	if( ret < 0 )
-		LOG.Write( "Can't create trophy context: 0x%x\n", ret );
+		LOG_WRITE( "Can't create trophy context: 0x%x\n", ret );
 
 	TrophyHandle = SCE_NP_TROPHY_INVALID_HANDLE;
 	ret = sceNpTrophyCreateHandle( &TrophyHandle );
 	if( ret < 0 )
-		LOG.Write( "Couldn't create trophy handle: 0x%x\n", ret );
+		LOG_WRITE( "Couldn't create trophy handle: 0x%x\n", ret );
 
 	// Kick off trophy synchronization.
 	sys_ppu_thread_t tid;
 	ret = sys_ppu_thread_create( &tid, RegisterTrophyContextThread, 0,
 		1001, 16 * 1024, 0, "RegisterTrophyContextThread" );
 	if( ret != 0 )
-		LOG.Write( "Failed to start RegisterTrophyContextThread: 0x%x\n", ret );
+		LOG_WRITE( "Failed to start RegisterTrophyContextThread: 0x%x\n", ret );
 
 	ret = cellNetCtlInit();
 	if( ret < 0 )
-		LOG.Write( "Failed to cellNetCtlInit: 0x%x\n", ret );
+		LOG_WRITE( "Failed to cellNetCtlInit: 0x%x\n", ret );
 
 	// Enable BGM playback.
 	ret = cellSysutilEnableBgmPlayback();
 	if( ret < 0 )
-		LOG.Write( "Failed to allow BGM playback: 0x%x\n", ret );
+		LOG_WRITE( "Failed to allow BGM playback: 0x%x\n", ret );
 
 	//DisplayError( ErrorType( 0x8002a1a4 ) );
 	game_.Initialize();
@@ -777,7 +777,7 @@ int CorePS3::Run()
 
 			int ret = cellSysutilCheckCallback();
 			if( ret )
-				LOG.Write( "cellSysutilChecCallback() = 0x%x\n", ret );
+				LOG_WRITE( "cellSysutilChecCallback() = 0x%x\n", ret );
 
 			psglSwap();
 			continue;
@@ -833,7 +833,7 @@ int CorePS3::Run()
 
 		int ret = cellSysutilCheckCallback();
 		if( ret )
-			LOG.Write( "cellSysutilChecCallback() = 0x%x\n", ret );
+			LOG_WRITE( "cellSysutilChecCallback() = 0x%x\n", ret );
 
 		psglSwap();
 	}
@@ -846,7 +846,7 @@ int CorePS3::Run()
 	{
 		int ret = cellSysutilCheckCallback();
 		if( ret )
-			LOG.Write( "cellSysutilChecCallback() = 0x%x\n", ret );
+			LOG_WRITE( "cellSysutilChecCallback() = 0x%x\n", ret );
 
 		glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 		psglSwap();

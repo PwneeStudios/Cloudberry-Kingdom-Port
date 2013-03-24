@@ -163,7 +163,7 @@ VideoPlayer::VideoPlayer()
 	// Disable BGM playback.
 	int ret = cellSysutilDisableBgmPlayback();
 	if( ret < 0 )
-		LOG.Write( "Failed to stop BGM playback: 0x%x\n", ret );
+		LOG_WRITE( "Failed to stop BGM playback: 0x%x\n", ret );
 }
 
 void KillVideoPlayer()
@@ -187,7 +187,7 @@ VideoPlayer::~VideoPlayer()
 	// Enable BGM playback.
 	int ret = cellSysutilEnableBgmPlayback();
 	if( ret < 0 )
-		LOG.Write( "Failed to start BGM playback: 0x%x\n", ret );
+		LOG_WRITE( "Failed to start BGM playback: 0x%x\n", ret );
 
 	delete internal_;
 }
@@ -208,7 +208,7 @@ void VideoPlayer::Play( const boost::shared_ptr< Video > &video )
 	internal_->Player->Volume( 2.0f );
 	if( !check )
 	{
-		LOG.Write( "Couldn't play file: %s\n", buffer );
+		LOG_WRITE( "Couldn't play file: %s\n", buffer );
 		delete internal_->Player;
 		internal_->Player = NULL;
 		g_Player = NULL;

@@ -123,7 +123,7 @@ extern std::string PS3_PATH_PREFIX;
 boost::shared_ptr<File> FilesystemPS3::Open( const std::string &path, bool write )
 {
 	std::string localPath = PS3_PATH_PREFIX + ( path[ 0 ] == '/' ? "ContentPS3" : "ContentPS3/" ) + path;
-	LOG.Write( "Opening %s\n", localPath.c_str() );
+	LOG_WRITE( "Opening %s\n", localPath.c_str() );
 
 	return boost::static_pointer_cast<File>( boost::make_shared<FilePS3>( localPath, write ) );
 }

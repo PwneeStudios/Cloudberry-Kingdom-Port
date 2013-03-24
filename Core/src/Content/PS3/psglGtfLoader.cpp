@@ -4,6 +4,8 @@
  *                                               All Rights Reserved.
  */
 
+#include <Utility/Log.h>
+
 #include <stdio.h>
 #include <PSGL/psgl.h>
 #include "gtfloader.h"
@@ -55,7 +57,7 @@ int psglCreateTextureReferenceFromFile(const char *filename, psglTextureReferenc
         else if (!strcmp(ext2,".DDS"))
         {
             //return psglCreateTextureReferenceFromDDSFile(filename,textureReference,bLoadInPlace,bForceSwizzling);
-            printf("DDS loading is not implemented yet.");
+            LOG_WRITE("DDS loading is not implemented yet.");
             return -1;
         }
     }
@@ -103,14 +105,14 @@ int psglCreateTextureReferenceFromGTFFile(const char *filename, psglTextureRefer
     {
         switch (attrib.tex.dimension)
         {
-        case CELL_GCM_TEXTURE_DIMENSION_1: printf("1D texture is not supported"); return -1;
+        case CELL_GCM_TEXTURE_DIMENSION_1: LOG_WRITE("1D texture is not supported"); return -1;
         case CELL_GCM_TEXTURE_DIMENSION_2: target = GL_TEXTURE_2D; break;
         case CELL_GCM_TEXTURE_DIMENSION_3: target = GL_TEXTURE_3D; break;
         default: ;
         }
     }
     if (target == 0) {
-        printf("Invalid target %d", attrib.tex.dimension);
+        LOG_WRITE("Invalid target %d", attrib.tex.dimension);
         return -1;
     }
 
@@ -145,12 +147,12 @@ int psglCreateTextureReferenceFromGTFFile(const char *filename, psglTextureRefer
     case CELL_GCM_TEXTURE_Y16_X16_FLOAT			: glInternalFormat = GL_LUMINANCE_ALPHA16F_ARB; break;
         //case CELL_GCM_TEXTURE_COMPRESSED_B8R8_G8R8	: glInternalFormat = 0; break;
         //case CELL_GCM_TEXTURE_COMPRESSED_R8B8_R8G8	: glInternalFormat = 0; break;
-    default                                     : printf("Invalid GCM format: %d", format ); return -1;
+    default                                     : LOG_WRITE("Invalid GCM format: %d", format ); return -1;
     }
 
     if (glInternalFormat == 0)
     {
-        printf("GL does not have corresponding format for GCM format %d", format );
+        LOG_WRITE("GL does not have corresponding format for GCM format %d", format );
         return -1;
     }
 

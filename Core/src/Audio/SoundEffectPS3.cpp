@@ -79,7 +79,7 @@ void SoundEffect::Load( const std::string &path )
 
 	if( !soundFile->IsOpen() )
 	{
-		LOG.Write( "Failed: %s\n", path.c_str() );
+		LOG_WRITE( "Failed: %s\n", path.c_str() );
 		return;
 	}
 
@@ -160,7 +160,7 @@ void SoundEffect::Load( const std::string &path )
 
 	if( bitsPerSample == 8 )
 	{
-		LOG.Write( "8 bit audio not supported!\n" );
+		LOG_WRITE( "8 bit audio not supported!\n" );
 		return;
 	}
 	else if( bitsPerSample == 16 )
@@ -176,16 +176,16 @@ static void StreamCallback( int streamNumber, void *userData, int callbackType, 
 	switch( callbackType )
 	{
 	case CELL_MS_CALLBACK_MOREDATA:
-		LOG.Write( "More data\n" );
+		LOG_WRITE( "More data\n" );
 		break;
 	case CELL_MS_CALLBACK_CLOSESTREAM:
-		LOG.Write( "Close stream\n" );
+		LOG_WRITE( "Close stream\n" );
 		break;
 	case CELL_MS_CALLBACK_FINISHEDDRY:
-		LOG.Write( "Finished dry\n" );
+		LOG_WRITE( "Finished dry\n" );
 		break;
 	case CELL_MS_CALLBACK_FINISHSTREAM:
-		LOG.Write( "Finish stream\n" );
+		LOG_WRITE( "Finish stream\n" );
 		break;
 	}
 }

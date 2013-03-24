@@ -49,11 +49,11 @@ public:
 		// If there is an error, stop.
 		if( !resource_->IsLoaded() )
 		{
-			LOG.Write( "Failed: %s\n", resource_->GetPath().c_str() );
+			LOG_WRITE( "Failed: %s\n", resource_->GetPath().c_str() );
 			return;
 		}
 
-		LOG.Write( "Loaded: %s\n", resource_->GetPath().c_str() );
+		LOG_WRITE( "Loaded: %s\n", resource_->GetPath().c_str() );
 
 		// Kick off a creation job.
 		if( gpuCreate_ )
@@ -217,7 +217,7 @@ void SchedulerPS3::RunJobASAP( Job *job )
 		reinterpret_cast< uint64_t >( job ), 1001, 16 * 1024, 0, "RunJobASAPThread" );
 
 	if( ret != 0 )
-		LOG.Write( "Load thread failed!" );*/
+		LOG_WRITE( "Load thread failed!" );*/
 }
 
 void SchedulerPS3::CreateResource( ResourceHolder *holder, Resource *resource )

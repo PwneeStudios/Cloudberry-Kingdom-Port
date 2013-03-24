@@ -16,6 +16,7 @@ PlayStation(R)3 Programmer Tool Runtime Library 430.001
     Written by: A. Bowler
 */
 
+#include <Utility/Log.h>
 
 // Commenting this will remove all Sulpha setup/shutdown.
 // Leave this uncommented to be able to connect the Sulpha PC tool audio debugger to the application
@@ -101,7 +102,7 @@ static bool graphicsInitCell(void)
 	CellVideoOutState videoState;
 	ret = cellVideoOutGetState(CELL_VIDEO_OUT_PRIMARY, 0, &videoState);
 	if (ret != CELL_OK){
-		printf("cellVideoOutGetState() failed. (0x%x)\n", ret);
+		LOG_WRITE("cellVideoOutGetState() failed. (0x%x)\n", ret);
 		return false;
 	}
 
@@ -124,13 +125,13 @@ static bool graphicsInitCell(void)
 	// set video out configuration with waitForEvent set to 0 (4th parameter)
 	ret = cellVideoOutConfigure(CELL_VIDEO_OUT_PRIMARY, &videocfg, NULL, 0);
 	if (ret != CELL_OK){
-		printf("cellVideoOutConfigure() failed. (0x%x)\n", ret);
+		LOG_WRITE("cellVideoOutConfigure() failed. (0x%x)\n", ret);
 		return false;
 	}
 
 	ret = cellVideoOutGetState(CELL_VIDEO_OUT_PRIMARY, 0, &videoState);
 	if (ret != CELL_OK){
-		printf("cellVideoOutGetState() failed. (0x%x)\n", ret);
+		LOG_WRITE("cellVideoOutGetState() failed. (0x%x)\n", ret);
 		return false;
 	}
 
@@ -143,7 +144,7 @@ static bool graphicsInitCell(void)
 		  display_aspect_ratio=16.0f/9.0f;
 		  break;
 	  default:
-		  printf("unknown aspect ratio %x\n", videoState.displayMode.aspect);
+		  LOG_WRITE("unknown aspect ratio %x\n", videoState.displayMode.aspect);
 		  display_aspect_ratio=16.0f/9.0f;
 	}
 */
@@ -166,7 +167,7 @@ static int audioInitCell(bool _skipGraphicsInit)
 	s_receivedExitGameRequest = false;
 	int ret = cellSysutilRegisterCallback(0, systemCallback, NULL);
 	if (ret != CELL_OK) {
-		printf( "error: cellSysutilRegisterCallback() = 0x%x\n", ret);
+		LOG_WRITE( "error: cellSysutilRegisterCallback() = 0x%x\n", ret);
 		exit(1);
 	}
 
@@ -187,20 +188,20 @@ static int audioInitCell(bool _skipGraphicsInit)
 	int retSysUtil = cellMSSystemConfigureSysUtilEx(CELL_MS_AUDIOMODESELECT_SUPPORTSLPCM /*| CELL_MS_AUDIOMODESELECT_SUPPORTSDOLBY | CELL_MS_AUDIOMODESELECT_SUPPORTSDTS | CELL_MS_AUDIOMODESELECT_PREFERDOLBY*/ );
 	if( retSysUtil < 0 )
 	{
-		printf("error cellMSSystemConfigureSysUtilEx\n");
+		LOG_WRITE("error cellMSSystemConfigureSysUtilEx\n");
 		return -1;
 	}
 	unsigned int numChans = (retSysUtil & 0x0000000F);
 	unsigned int dolbyOn = (retSysUtil & 0x00000010) >> 4;
 	unsigned int dtsOn = (retSysUtil & 0x00000020) >> 5;
-	printf("Number Of Channels: %u\n", numChans);
-	printf("Dolby enabled: %u\n", dolbyOn);
-	printf("DTS enabled: %u\n", dtsOn);
+	LOG_WRITE("Number Of Channels: %u\n", numChans);
+	LOG_WRITE("Dolby enabled: %u\n", dolbyOn);
+	LOG_WRITE("DTS enabled: %u\n", dtsOn);
 
 	ret = cellAudioInit();
 	if (ret !=CELL_OK)
 	{
-		printf("error cellAudioInit\n");
+		LOG_WRITE("error cellAudioInit\n");
 		return -1;
 	}
 
@@ -218,29 +219,29 @@ static int audioInitCell(bool _skipGraphicsInit)
 	audioParam.nBlock   = BLOCK;
 
 	ret = cellAudioPortOpen(&audioParam, &returnPortNum);
-	printf("cellAudioPortOpen() : %d  port %d\n", ret, returnPortNum);
+	LOG_WRITE("cellAudioPortOpen() : %d  port %d\n", ret, returnPortNum);
 	if (ret != CELL_OK)
 	{
 		cellAudioQuit();
-		printf("Error cellAudioPortOpen()\n");
+		LOG_WRITE("Error cellAudioPortOpen()\n");
 		return -1;
 	}
 	 
 	// get port config.
 	ret = cellAudioGetPortConfig(returnPortNum, &portConfig);
-	printf("cellAudioGetPortConfig() : %d\n", ret);
+	LOG_WRITE("cellAudioGetPortConfig() : %d\n", ret);
 	if (ret != CELL_OK)
 	{
 		cellAudioQuit();
-		printf("Error cellAudioGetPortConfig\n");
+		LOG_WRITE("Error cellAudioGetPortConfig\n");
 		return -1;
 	}
 
-	printf( "cellAudioGetPortConfig:\n" );
-	printf( "\tnChannel: %u\n", portConfig.nChannel );
-	printf( "\tnBlock: %u\n", portConfig.nBlock );
-	printf( "\tportSize: %u\n", portConfig.portSize );
-	printf( "\n" );
+	LOG_WRITE( "cellAudioGetPortConfig:\n" );
+	LOG_WRITE( "\tnChannel: %u\n", portConfig.nChannel );
+	LOG_WRITE( "\tnBlock: %u\n", portConfig.nBlock );
+	LOG_WRITE( "\tportSize: %u\n", portConfig.portSize );
+	LOG_WRITE( "\n" );
 
 	cellMSSystemConfigureLibAudio(&audioParam, &portConfig);
 
@@ -306,17 +307,17 @@ void LoadATRAC(const char *_filename, long &_sampleData, long &_sampleDataSize, 
 	_nSampleFormat = *ptr++;
 	_nSampleChannels = *ptr++;
 
-	printf("Header: ");
+	LOG_WRITE("Header: ");
 	for (i=0;i<3;i++)
 	{
-		printf("%c",*cpt++);
+		LOG_WRITE("%c",*cpt++);
 	}
-	printf("\n");
-	printf("Version: %d\n",*cpt);
+	LOG_WRITE("\n");
+	LOG_WRITE("Version: %d\n",*cpt);
 
-	printf("Sample Format = 0x%x\n", _nSampleFormat);
-	printf("Sample Channels = 0x%x\n", _nSampleChannels);
-	printf("Sample Size: 0x%x\n",*ptr);
+	LOG_WRITE("Sample Format = 0x%x\n", _nSampleFormat);
+	LOG_WRITE("Sample Channels = 0x%x\n", _nSampleChannels);
+	LOG_WRITE("Sample Size: 0x%x\n",*ptr);
 
 	//E Modify start and size to skip the 64 bytes .MSF header
 	_sampleData += 64;
@@ -349,14 +350,14 @@ int InitFile(const char *filename,long *addr, long *size)
 
     if(nFileHandle<0)
     {
-        printf(" ERROR opening file - %s, exiting.\n", filename);
+        LOG_WRITE(" ERROR opening file - %s, exiting.\n", filename);
         while(1){};
     }
 
-	printf("Attempt to allocate 0x%x bytes\n",(int)*size);
+	LOG_WRITE("Attempt to allocate 0x%x bytes\n",(int)*size);
     // Allocate memory for a sample buffer
 	pData = (long)memalign(128,*size);
-	printf("allocated addres: 0x%x\n",(int)pData);
+	LOG_WRITE("allocated addres: 0x%x\n",(int)pData);
 	// Load file.
 	LoadFile(nFileHandle,pData,*size);
 	*addr=pData;
@@ -394,7 +395,7 @@ long InitialiseAudio( const long nStreams, const long nmaxSubs, int &_nPortNumbe
 	uint8_t prios[8] = {1, 0, 0, 0, 0, 0, 0, 0};
 #endif
 
-	printf("Initialising\n");
+	LOG_WRITE("Initialising\n");
 
 // Setup system memory allocation
 
@@ -406,7 +407,7 @@ long InitialiseAudio( const long nStreams, const long nmaxSubs, int &_nPortNumbe
     _nPortNumber = audioInitCell(_bSkipGraphicsInit);
 	if(_nPortNumber < 0)
 	{
-		printf("InitialiseAudio: Failed to find valid port number!\n");
+		LOG_WRITE("InitialiseAudio: Failed to find valid port number!\n");
 		return -1;
 	}
 
@@ -450,12 +451,12 @@ bool InitSulpha(unsigned int _memoryBufferSize, unsigned int _numNames)
 		return false;
 
 	int result = cellMSSulphaInit(s_pSulphaMemory, _memoryBufferSize, _numNames);
-	printf("cellMSSulphaInit returned %d\n", result);
+	LOG_WRITE("cellMSSulphaInit returned %d\n", result);
 
 	// As well as using the Sulpha DECI3 connection, it is also possible to 
 	// write directly to a file using cellMSSulphaFileConnect/Disconnect.
 	result = cellMSSulphaDECI3Start();
-	printf("cellMSSulphaDECI3Start returned %d\n", result);
+	LOG_WRITE("cellMSSulphaDECI3Start returned %d\n", result);
 #endif //USE_SULPHA
 
 	return true;
@@ -512,18 +513,18 @@ int OpenFile( const char* pszFilename, long* pnSize, int nStartOffset )
 int ret;
 int fd;
 uint64_t	pos=0;
-    printf("Open file: %s\n", pszFilename);
+    LOG_WRITE("Open file: %s\n", pszFilename);
 
     ret = cellFsOpen (pszFilename, CELL_FS_O_RDONLY, &fd, NULL, 0);
     if (ret) {
-        printf ("cellFsOpen(%s) returned %d\n", pszFilename, ret);
+        LOG_WRITE ("cellFsOpen(%s) returned %d\n", pszFilename, ret);
 		return(-1);
     }
 
 	ret = cellFsLseek(fd,0,CELL_FS_SEEK_END, &pos);
 	if (ret!=0)
 	{
-		printf("seek to enderror %x\n",ret);
+		LOG_WRITE("seek to enderror %x\n",ret);
 		cellFsClose (fd);
 		return(-2);
 	}
@@ -533,7 +534,7 @@ uint64_t	pos=0;
 	ret = cellFsLseek(fd, nStartOffset ,CELL_FS_SEEK_SET,&pos);
 	if (ret!=0)
 	{
-		printf("seek to start error %x\n",ret);
+		LOG_WRITE("seek to start error %x\n",ret);
 		cellFsClose (fd);
 		return(-2);
 	}
@@ -572,19 +573,19 @@ long LoadFile( const int fd, long ppData, long nReadSize, int nStartOffset, int 
 		ret=cellFsRead(fd, (void*)ppData, loadSize, &nRead);
 		if (ret!=0)
 		{
-			printf("read error %x\n",ret);
+			LOG_WRITE("read error %x\n",ret);
 			cellFsClose (fd);
 			return(-1);
 		}
 
 	    if( (long)nRead != loadSize )		// Reached end of file and more data still required
 	    {
-			printf("Looping..\n");
+			LOG_WRITE("Looping..\n");
 			nRead-=nEndOffset;
 			ret = cellFsLseek(fd,nStartOffset,CELL_FS_SEEK_SET,&pos);	// Seek back to start
 			if (ret!=0)
 			{
-				printf("seek error %x\n",ret);
+				LOG_WRITE("seek error %x\n",ret);
 				cellFsClose (fd);
 				return(-1);
 			}
@@ -610,10 +611,10 @@ long StartMultiStreamUpdateThread(void _thread (uint64_t param))
 	int nRet = sys_ppu_thread_create(&s_MultiStreamPuThread, _thread, NULL, SERVER_PRIO, STACK_SIZE, SYS_PPU_THREAD_CREATE_JOINABLE, "MultiStream PU Thread");
 	if(nRet)
 	{
-		printf("ERROR creating Multistream update thread!!!\n");
+		LOG_WRITE("ERROR creating Multistream update thread!!!\n");
 		return -1;
 	}
-	printf("Multistream thread (%d) created OK.\n", (int)s_MultiStreamPuThread);
+	LOG_WRITE("Multistream thread (%d) created OK.\n", (int)s_MultiStreamPuThread);
     return 0;
 }
 
@@ -634,16 +635,16 @@ void InitSPURS(void)
 	ret = sys_ppu_thread_get_priority(thread_id, &ppu_thr_prio);
 	if(ret != CELL_OK)
 	{
-		printf( " ERROR sys_ppu_thread_get_priority = 0x%x\n", ret ); while(1){};
+		LOG_WRITE( " ERROR sys_ppu_thread_get_priority = 0x%x\n", ret ); while(1){};
 	}
-	printf(" thread_id = %d, ppu_thr_prio = %d\n", (int)thread_id, ppu_thr_prio );
+	LOG_WRITE(" thread_id = %d, ppu_thr_prio = %d\n", (int)thread_id, ppu_thr_prio );
 
 	// Keep the SPURS_SPU_NUM value as low as possible (MultiStream uses a maximum of 1 SPU) to reduce 
 	// priority conflicts when SPURS SPU thread groups are context switched in and out by the PS3 operating system.
 	ret = cellSpursInitialize(&spurs, SPURS_SPU_NUM, SPU_THREAD_GROUP_PRIORITY, ppu_thr_prio-1, false);
 	if(ret != CELL_OK)
 	{
-		printf( "******** ERROR cellSpursInitialize = 0x%x\n", ret );
+		LOG_WRITE( "******** ERROR cellSpursInitialize = 0x%x\n", ret );
 		while(1){};
 	}
 }
@@ -654,60 +655,60 @@ void InitSPURS(void)
 //Load up a generic bunch of modules that are useful for MultiStream samples
 bool LoadModules()
 {
-    printf( "\nLoading libfs\n" );
+    LOG_WRITE( "\nLoading libfs\n" );
 	int ret = cellSysmoduleLoadModule( CELL_SYSMODULE_FS );
 	if ( ret < 0 )
 	{
-		printf( "\nError loading module FS!!!\n" );
+		LOG_WRITE( "\nError loading module FS!!!\n" );
 		return false;
 	}
     
-    printf( "\nLoading libusbd\n" );
+    LOG_WRITE( "\nLoading libusbd\n" );
 	ret = cellSysmoduleLoadModule( CELL_SYSMODULE_USBD );
 	if ( ret < 0 )
 	{
-		printf( "\nError loading module USBD!!!\n" );
+		LOG_WRITE( "\nError loading module USBD!!!\n" );
 		return false;
 	}
     
-    printf( "\nLoading libnet\n" );
+    LOG_WRITE( "\nLoading libnet\n" );
 	ret = cellSysmoduleLoadModule( CELL_SYSMODULE_NET );
 	if ( ret < 0 )
 	{
-		printf( "\nError loading module NET!!!\n" );
+		LOG_WRITE( "\nError loading module NET!!!\n" );
 		return false;
 	}
 
-    printf( "\nLoading libio\n" );
+    LOG_WRITE( "\nLoading libio\n" );
 	ret = cellSysmoduleLoadModule( CELL_SYSMODULE_IO );
 	if ( ret < 0 )
 	{
-		printf( "\nError loading module IO!!!\n" );
+		LOG_WRITE( "\nError loading module IO!!!\n" );
 		while(1){};
 	}
 
-    printf( "\nLoading libaudio\n" );
+    LOG_WRITE( "\nLoading libaudio\n" );
 	ret = cellSysmoduleLoadModule( CELL_SYSMODULE_AUDIO );
 	if ( ret < 0 )
 	{
-		printf( "\nError loading module AUDIO!!!\n" );
+		LOG_WRITE( "\nError loading module AUDIO!!!\n" );
 		return false;
 	}
 
-    printf( "\nLoading libresc\n" );
+    LOG_WRITE( "\nLoading libresc\n" );
 	ret = cellSysmoduleLoadModule( CELL_SYSMODULE_RESC );
 	if ( ret < 0 )
 	{
-		printf( "\nError loading module RESC!!!\n" );
+		LOG_WRITE( "\nError loading module RESC!!!\n" );
 		return false;
 	}
 
 #ifndef MS_THREADED_SAMPLE
-    printf( "\nLoading libspurs\n" );
+    LOG_WRITE( "\nLoading libspurs\n" );
 	ret = cellSysmoduleLoadModule( CELL_SYSMODULE_SPURS );
 	if ( ret < 0 )
 	{
-		printf( "\nError loading module SPURS!!!\n" );
+		LOG_WRITE( "\nError loading module SPURS!!!\n" );
 		return false;
 	}
 #endif
@@ -718,60 +719,60 @@ bool LoadModules()
 //Unload modules
 bool UnloadModules()
 {
-    printf( "\n Unloading libfs\n" );
+    LOG_WRITE( "\n Unloading libfs\n" );
     int ret = cellSysmoduleUnloadModule( CELL_SYSMODULE_FS );
 	if ( ret < 0 )
 	{
-		printf( "\nError unloading module FS!!!\n" );
+		LOG_WRITE( "\nError unloading module FS!!!\n" );
 		return false;
 	}
     
-    printf( "\n Unloading libusbd\n" );
+    LOG_WRITE( "\n Unloading libusbd\n" );
 	ret = cellSysmoduleUnloadModule( CELL_SYSMODULE_USBD );
 	if ( ret < 0 )
 	{
-		printf( "\nError unloading module USBD!!!\n" );
+		LOG_WRITE( "\nError unloading module USBD!!!\n" );
 		return false;
 	}
     
-    printf( "\n Unloading libnet\n" );
+    LOG_WRITE( "\n Unloading libnet\n" );
 	ret = cellSysmoduleUnloadModule( CELL_SYSMODULE_NET );
 	if ( ret < 0 )
 	{
-		printf( "\nError unloading module NET!!!\n" );
+		LOG_WRITE( "\nError unloading module NET!!!\n" );
 		return false;
 	}
 
-    printf( "\n Unloading libio\n" );
+    LOG_WRITE( "\n Unloading libio\n" );
 	ret = cellSysmoduleUnloadModule( CELL_SYSMODULE_IO );
 	if ( ret < 0 )
 	{
-		printf( "\nError unloading module IO!!!\n" );
+		LOG_WRITE( "\nError unloading module IO!!!\n" );
 		while(1){};
 	}
 
-    printf( "\n Unloading libaudio\n" );
+    LOG_WRITE( "\n Unloading libaudio\n" );
 	ret = cellSysmoduleUnloadModule( CELL_SYSMODULE_AUDIO );
 	if ( ret < 0 )
 	{
-		printf( "\nError unloading module AUDIO!!!\n" );
+		LOG_WRITE( "\nError unloading module AUDIO!!!\n" );
 		return false;
 	}
 
-    printf( "\n Unloading libresc\n" );
+    LOG_WRITE( "\n Unloading libresc\n" );
     ret = cellSysmoduleUnloadModule( CELL_SYSMODULE_RESC );
 	if ( ret < 0 )
 	{
-		printf( "\nError unloading module RESC!!!\n" );
+		LOG_WRITE( "\nError unloading module RESC!!!\n" );
 		return false;
 	}
 
 #ifndef MS_THREADED_SAMPLE
-    printf( "\n Unloading libspurs\n" );
+    LOG_WRITE( "\n Unloading libspurs\n" );
 	ret = cellSysmoduleUnloadModule( CELL_SYSMODULE_SPURS );
 	if ( ret < 0 )
 	{
-		printf( "\nError unloading module SPURS!!!\n" );
+		LOG_WRITE( "\nError unloading module SPURS!!!\n" );
 		return false;
 	}
 #endif
@@ -793,12 +794,12 @@ static void systemCallback(const uint64_t status, const uint64_t param, void *us
 	switch (status) 
 	{
 		case CELL_SYSUTIL_REQUEST_EXITGAME:
-			printf("system notification: CELL_SYSUTIL_REQUEST_EXITGAME\n");
+			LOG_WRITE("system notification: CELL_SYSUTIL_REQUEST_EXITGAME\n");
 			s_receivedExitGameRequest = true;
 			break;
 
 		default:
-			//printf("system notification: unknown status\n");
+			//LOG_WRITE("system notification: unknown status\n");
 			break;
 	}
 }

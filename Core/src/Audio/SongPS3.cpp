@@ -15,11 +15,11 @@ float GetMP3Length( const std::string &path )
 
 	if( handle < 0 )
 	{
-		LOG.Write( "Couldn't get length: %s\n", path.c_str() );
+		LOG_WRITE( "Couldn't get length: %s\n", path.c_str() );
 		return 0.f;
 	}
 
-	LOG.Write( "Buffer %d bytes\n", size );
+	LOG_WRITE( "Buffer %d bytes\n", size );
 	long buffer = reinterpret_cast< long >( memalign( 128, size ) );
 	long data = buffer;
 
@@ -36,7 +36,7 @@ float GetMP3Length( const std::string &path )
 		int ret = cellMSMP3GetFrameInfo( reinterpret_cast< void * >( data ), &hdr );
 		if( ret == -1 )
 		{
-			LOG.Write( "Invalid MP3 header\n" );
+			LOG_WRITE( "Invalid MP3 header\n" );
 			time = 0.f;
 			break;
 		}
@@ -49,13 +49,13 @@ float GetMP3Length( const std::string &path )
 		
 		if( tSize == size )
 		{
-			LOG.Write( "MP3 loaded\n" );
-			LOG.Write( "Playback time at %d Hz: %f s\n", hdr.Frequency, time );
+			LOG_WRITE( "MP3 loaded\n" );
+			LOG_WRITE( "Playback time at %d Hz: %f s\n", hdr.Frequency, time );
 			break;
 		}
 		else if( tSize > size )
 		{
-			LOG.Write( "Passed the end of file!\n ");
+			LOG_WRITE( "Passed the end of file!\n ");
 			time = 0.f;
 			break;
 		}

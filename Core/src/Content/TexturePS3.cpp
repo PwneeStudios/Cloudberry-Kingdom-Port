@@ -86,7 +86,7 @@ void TexturePS3::GpuCreate()
 	CellGtfTextureAttribute attrib;
 	if( cellGtfReadTextureAttributeFromMemory( internal_->FileData, 0, &attrib ) )
 	{
-		LOG.Write( "Failed to get attribute\n" );
+		LOG_WRITE( "Failed to get attribute\n" );
 		delete[] internal_->FileData;
 		setLoaded( false );
 		return;
@@ -96,7 +96,7 @@ void TexturePS3::GpuCreate()
 	bool bSwizzled = !( format & CELL_GCM_TEXTURE_LN );
 
 	if( bSwizzled )
-		LOG.Write( "Swizzled!\n" );
+		LOG_WRITE( "Swizzled!\n" );
 
 	uint32_t gtfSize = 0;
 	cellGtfCalculateMemorySize( &attrib, &gtfSize );
@@ -105,7 +105,7 @@ void TexturePS3::GpuCreate()
 	GLenum target = GL_TEXTURE_2D;
 	if( attrib.tex.dimension != CELL_GCM_TEXTURE_DIMENSION_2 )
 	{
-		LOG.Write( "Texture is not 2D!" );
+		LOG_WRITE( "Texture is not 2D!" );
 		delete[] internal_->FileData;
 		setLoaded( false );
 		return;
@@ -143,7 +143,7 @@ void TexturePS3::GpuCreate()
         //case CELL_GCM_TEXTURE_COMPRESSED_R8B8_R8G8	: glInternalFormat = 0; break;
     default                                     :
 		{
-			LOG.Write( "Invalid GCM format: %d", format );
+			LOG_WRITE( "Invalid GCM format: %d", format );
 			delete[] internal_->FileData;
 			setLoaded( false );
 			return;
@@ -152,7 +152,7 @@ void TexturePS3::GpuCreate()
 
 	if( glInternalFormat == 0 )
 	{
-		LOG.Write( "Internal format does not exist for GCM format %d\n", format );
+		LOG_WRITE( "Internal format does not exist for GCM format %d\n", format );
 		delete[] internal_->FileData;
 		setLoaded( false );
 		return;
@@ -164,7 +164,7 @@ void TexturePS3::GpuCreate()
 	static uint32_t gpuUsedMemory = 27 * 1024 * 1024;
 	static uint32_t ppuUsedMemory = 0;
 	const uint32_t GPU_MEMORY_LIMIT = 220 * 1024 * 1024;
-	LOG.Write( "gpu = %d\tppu = %d\n", gpuUsedMemory, ppuUsedMemory );
+	LOG_WRITE( "gpu = %d\tppu = %d\n", gpuUsedMemory, ppuUsedMemory );
 	bool bLoadInPlace = true;
 
 	// Check to see if there is space for the texture on the gpu.

@@ -34,16 +34,16 @@ static void StreamCallback( int streamNumber, void *userData, int callbackType, 
 	switch( callbackType )
 	{
 	case CELL_MS_CALLBACK_MOREDATA:
-		LOG.Write( "More data\n" );
+		LOG_WRITE( "More data\n" );
 		break;
 	case CELL_MS_CALLBACK_CLOSESTREAM:
-		LOG.Write( "Close stream\n" );
+		LOG_WRITE( "Close stream\n" );
 		break;
 	case CELL_MS_CALLBACK_FINISHEDDRY:
-		LOG.Write( "Finished dry\n" );
+		LOG_WRITE( "Finished dry\n" );
 		break;
 	case CELL_MS_CALLBACK_FINISHSTREAM:
-		LOG.Write( "Finish stream\n" );
+		LOG_WRITE( "Finish stream\n" );
 		if( streamNumber == stream )
 		{
 			cellMSStreamClose( streamNumber );
@@ -61,22 +61,22 @@ void MediaPlayer::Initialize()
 
 	if( InitialiseAudio( CELL_MS_MAX_STREAMS, 31, portNum, audioParam, portConfig, 0, true ) )
 	{
-		LOG.Write( "Error: failed to initialize multistream\n" );
+		LOG_WRITE( "Error: failed to initialize multistream\n" );
 		exit( -1 );
 	}
 
 	int sizeNeeded = cellMSMP3GetNeededMemorySize( 256 );
 	mp3Memory = new char[ sizeNeeded ];
-	LOG.Write( "Multistream requires %d KB at 0x%x\n", sizeNeeded, mp3Memory );
+	LOG_WRITE( "Multistream requires %d KB at 0x%x\n", sizeNeeded, mp3Memory );
 
 	int ret = cellMSMP3Init( 256, mp3Memory );
 	if( ret )
 	{
-		LOG.Write( "Error: failed to initialize MP3: 0x%x\n", ret );
+		LOG_WRITE( "Error: failed to initialize MP3: 0x%x\n", ret );
 		exit( -1 );
 	}
 
-	LOG.Write( "Info: MP3 returned: 0x%x\n", ret );
+	LOG_WRITE( "Info: MP3 returned: 0x%x\n", ret );
 
 	float fBusVols[64] = {1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,
 						0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,
@@ -127,7 +127,7 @@ int LoadMP3(const char *filename, long *addr, long *size)
 
     if(nFileHandle<0)
     {
-        printf(" ERROR opening file - %s, exiting.\n", filename);
+        LOG_WRITE(" ERROR opening file - %s, exiting.\n", filename);
         while(1){};
     }
 
@@ -143,8 +143,8 @@ int LoadMP3(const char *filename, long *addr, long *size)
 		ret=cellMSMP3GetFrameInfo((void*)pData,&Hdr);
 		if (ret==-1)
 		{
-			printf("Invalid MP3 header\n");
-			printf("Offset=0x%x\n",offset);
+			LOG_WRITE("Invalid MP3 header\n");
+			LOG_WRITE("Offset=0x%x\n",offset);
 			cellFsClose( nFileHandle );
 			return (-1);	// Invalid MP3 header
 		}
@@ -157,14 +157,14 @@ int LoadMP3(const char *filename, long *addr, long *size)
 
 		if (tSize==(unsigned int)*size)
 		{
-			printf("MP3 File is valid.\n");
-			printf("Total Playback Time at %d Hz = (secs): %f\n",Hdr.Frequency,tTime);
+			LOG_WRITE("MP3 File is valid.\n");
+			LOG_WRITE("Total Playback Time at %d Hz = (secs): %f\n",Hdr.Frequency,tTime);
 			return(nFileHandle);
 		}
 		else if (tSize>(unsigned int)*size)
 		{
-			printf("ERROR: PASSED END OF FILE!\n");
-			printf("%x,%x\n",tSize,(int)*size);
+			LOG_WRITE("ERROR: PASSED END OF FILE!\n");
+			LOG_WRITE("%x,%x\n",tSize,(int)*size);
 			while(1){};
 		}
 	}
