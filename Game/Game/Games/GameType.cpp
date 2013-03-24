@@ -1221,7 +1221,11 @@ namespace CloudberryKingdom
 			// Return and skip further actions, unless the character select is showing
 			if ( !CharacterSelectManager::IsShowing )
 			{
-				MyLevel->IndependentDeltaT = 0;
+				if ( MyLevel != 0 )
+				{
+					MyLevel->IndependentDeltaT = 0;
+				}
+
 				return;
 			}
 		}

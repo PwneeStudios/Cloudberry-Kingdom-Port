@@ -1135,7 +1135,13 @@ namespace CloudberryKingdom
 
 	void LevelSeedData::PostMake_EnableLoad( const boost::shared_ptr<Level> &level )
 	{
+#ifdef CAFE
+		level->CanLoadLevels = false;
+#elif PS3
+		level->CanLoadLevels = false;
+#else
 		level->CanLoadLevels = true;
+#endif
 	}
 
 	void LevelSeedData::PostMake_StandardLoad( const boost::shared_ptr<Level> &level )

@@ -121,15 +121,52 @@ namespace CloudberryKingdom
 		this->_seed = _seed;
 	}
 
+	void VerifyDelete( boost::shared_ptr<SavedSeedsGUI> ssGui )
+	{
+		if ( !ssGui->Active )
+			return;
+
+		ssGui->SlideOutTo = ssGui->SlideInFrom = ssGui->PresetPos_RIGHT;
+
+		int num = ssGui->NumSeedsToDelete();
+		if ( num > 0 )
+		{
+			boost::shared_ptr<VerifyDeleteSeeds> verify = MakeMagic( VerifyDeleteSeeds, ( ssGui->getControl(), num, ssGui->UseBounce ) );
+			verify->OnSelect->Add( boost::make_shared<SavedSeedsGUI::DoDeletionProxy>( boost::static_pointer_cast<SavedSeedsGUI>( ssGui->shared_from_this() ) ) );
+
+			ssGui->SlideOutTo = GUI_Panel::PresetPos_LEFT;
+			ssGui->SlideInFrom = GUI_Panel::PresetPos_LEFT;
+			ssGui->Call( verify, 0 );
+
+			if (ssGui->UseBounce)
+			{
+				ssGui->Hid = true;
+				ssGui->RegularSlideOut( GUI_Panel::PresetPos_RIGHT, 0 );
+			}
+			else
+			{
+				ssGui->Hide( GUI_Panel::PresetPos_LEFT );
+			}
+		}
+		else
+			ssGui->ReturnToCaller();
+	}
+
 	void SavedSeedsGUI::StartLevelProxy1::Apply( const boost::shared_ptr<MenuItem> &_menu )
 	{
 		int n = ssGui->NumSeedsToDelete();
 
 		if (n > 0)
-			ssGui->Back( ssGui->MyMenu );
+		{
+			//ssGui->Back( ssGui->MyMenu );
+			VerifyDelete( ssGui );
+		}
 		else
 			ssGui->StartLevel(_seed);
 	}
+
+	
+
 
 	SavedSeedsGUI::OnAddHelper::OnAddHelper( const boost::shared_ptr<ScrollBar> &bar )
 	{
@@ -448,27 +485,27 @@ else
 
 		SlideOutTo = SlideInFrom = PresetPos_RIGHT;
 
-		int num = NumSeedsToDelete();
-		if ( num > 0 )
-		{
-			boost::shared_ptr<VerifyDeleteSeeds> verify = MakeMagic( VerifyDeleteSeeds, ( getControl(), num, UseBounce ) );
-			verify->OnSelect->Add( boost::make_shared<DoDeletionProxy>( boost::static_pointer_cast<SavedSeedsGUI>( shared_from_this() ) ) );
+		//int num = NumSeedsToDelete();
+		//if ( num > 0 )
+		//{
+		//	boost::shared_ptr<VerifyDeleteSeeds> verify = MakeMagic( VerifyDeleteSeeds, ( getControl(), num, UseBounce ) );
+		//	verify->OnSelect->Add( boost::make_shared<DoDeletionProxy>( boost::static_pointer_cast<SavedSeedsGUI>( shared_from_this() ) ) );
 
-			SlideOutTo = PresetPos_LEFT;
-			SlideInFrom = PresetPos_LEFT;
-			Call( verify, 0 );
+		//	SlideOutTo = PresetPos_LEFT;
+		//	SlideInFrom = PresetPos_LEFT;
+		//	Call( verify, 0 );
 
-			if (UseBounce)
-			{
-				Hid = true;
-				RegularSlideOut(PresetPos_RIGHT, 0);
-			}
-			else
-			{
-				Hide(PresetPos_LEFT);
-			}
-		}
-		else
+		//	if (UseBounce)
+		//	{
+		//		Hid = true;
+		//		RegularSlideOut(PresetPos_RIGHT, 0);
+		//	}
+		//	else
+		//	{
+		//		Hide(PresetPos_LEFT);
+		//	}
+		//}
+		//else
 			ReturnToCaller();
 
 		return true;

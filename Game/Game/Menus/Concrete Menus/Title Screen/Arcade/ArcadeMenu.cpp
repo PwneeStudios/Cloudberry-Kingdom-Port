@@ -7,6 +7,8 @@ namespace CloudberryKingdom
 
 	bool ArcadeItem::IsLocked()
     {
+		if ( MyPrereq != 0 && CloudberryKingdomGame::getIsDemo() ) return true;
+
         return MyPrereq != 0 && !PlayerManager::Awarded( MyPrereq ) && !CloudberryKingdomGame::Unlock_Levels;
     }
 

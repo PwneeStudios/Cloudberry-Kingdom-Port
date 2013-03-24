@@ -426,10 +426,21 @@ namespace CloudberryKingdom
 
         Text->setPos( name_pos[n][index] );
 
-        if (n == 1) Text->setScale( Text->getScale() * .65f );
-        else if (n == 2) Text->setScale( Text->getScale() * .5f );
-        else if (n == 3) Text->setScale( Text->getScale() * .4f );
-        else Text->setScale( Text->getScale() * .4f );
+        //if (n == 1) Text->setScale( Text->getScale() * .65f );
+        //else if (n == 2) Text->setScale( Text->getScale() * .5f );
+        //else if (n == 3) Text->setScale( Text->getScale() * .4f );
+        //else Text->setScale( Text->getScale() * .4f );
+
+		float MaxWidth = 100;
+		if (n == 1) MaxWidth = 900;
+		else if (n == 2) MaxWidth = 700;
+		else if (n == 3) MaxWidth = 700;
+		else MaxWidth = 600;
+
+		float w = Text->GetWorldWidth();
+		if (w > MaxWidth)
+			Text->setScale( Text->getScale() * MaxWidth / w );
+
         return Text;
     }
 

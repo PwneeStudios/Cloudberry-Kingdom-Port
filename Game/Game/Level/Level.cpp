@@ -1954,7 +1954,7 @@ bool Level::dodebug = false;
 		if ( CurMakeData->TopLikeBottom )
 			Stage1SafetyNet( Vector2( MaxLeft - 7500, getMainCamera()->TR.Y - VoidHeight - 215 - Style->LowerSafetyNetOffset + 1000 + Style->UpperSafetyNetOffset ), Vector2(MaxRight + 1500, getMainCamera()->TR.Y - VoidHeight - 65 - Style->LowerSafetyNetOffset + 1000), Vector2(SafetyWidth, 500), 2 * SafetyWidth + ExtraSpace, Style->MyTopType );
 		else if ( CurMakeData->TopLikeBottom_Thin )
-			Stage1SafetyNet( Vector2( MaxLeft - 7500, getMainCamera()->TR.Y - VoidHeight - 215 - Style->LowerSafetyNetOffset + 1000 + Style->UpperSafetyNetOffset ), Vector2(MaxRight + 1500, getMainCamera()->TR.Y - VoidHeight - 65 - Style->LowerSafetyNetOffset + 1000), Vector2(100, 500), 2 * 150 + 50, Style->MyTopType );
+			Stage1SafetyNet( Vector2( MaxLeft - 7500, getMainCamera()->TR.Y - VoidHeight - 415 - Style->LowerSafetyNetOffset + 1000 + Style->UpperSafetyNetOffset ), Vector2(MaxRight + 1500, getMainCamera()->TR.Y - VoidHeight - 565 - Style->LowerSafetyNetOffset + 1000), Vector2(100, 500), 2 * 150 + 50, Style->MyTopType );
 
 		LastSafetyBlock = Stage1SafetyNet( Vector2( MaxLeft, getMainCamera()->BL.Y + VoidHeight + 65 + Style->LowerSafetyNetOffset ), Vector2(MaxRight + 500, getMainCamera()->BL.Y + VoidHeight + 215 + Style->LowerSafetyNetOffset), Vector2(SafetyWidth, 200 + CurMakeData->PieceSeed->ExtraBlockLength), 2*SafetyWidth + ExtraSpace, Style->MyGroundType );
 

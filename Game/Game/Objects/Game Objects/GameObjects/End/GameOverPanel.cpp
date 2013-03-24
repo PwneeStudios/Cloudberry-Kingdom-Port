@@ -317,8 +317,11 @@ namespace CloudberryKingdom
             boost::shared_ptr<ScoreEntry> copy = boost::make_shared<ScoreEntry>( score->GamerTag_Renamed, score->GameId, highscore, highscore, score->Level_Renamed, score->Attempts, score->Time, score->Date );
             copy->GameId += Challenge::LevelMask;
 
-			Leaderboard::WriteToLeaderboard( copy );
-
+			// Write to Leaderboard if not in trial mode
+			if ( !CloudberryKingdomGame::getIsDemo() )
+			{
+				Leaderboard::WriteToLeaderboard( copy );
+			}
 
         //Leaderboard::WriteToLeaderboard(HighScoreEntry);
         //Leaderboard::WriteToLeaderboard(HighLevelEntry);

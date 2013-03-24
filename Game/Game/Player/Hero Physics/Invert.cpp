@@ -77,7 +77,8 @@ namespace CloudberryKingdom
 			normal->BobJumpAccel = 0;
 			normal->BobInitialJumpSpeed = 0;
 			normal->Gravity = 4;
-			normal->BobMaxFallSpeed = -30;
+			//normal->BobMaxFallSpeed = -30;
+			normal->BobMaxFallSpeed = -33;
 		}
 	}
 
@@ -109,8 +110,8 @@ namespace CloudberryKingdom
 
 		// If we are falling (and not falling too fast already),
 		// accelerate if the player is pressing (A).
-		if ( !OnGround && MyBob->CurInput.A_Button && AirTime > 7 && DynamicGreaterThan( getyVel(), BobMaxFallSpeed * 2 ) )
-			setyVel( getyVel() - Gravity );
+		//if ( !OnGround && MyBob->CurInput.A_Button && AirTime > 7 && DynamicGreaterThan( getyVel(), BobMaxFallSpeed * 2 ) )
+		//	setyVel( getyVel() - Gravity );
 	}
 
 	void BobPhsxInvert::UpdateReadyToJump()
@@ -156,7 +157,12 @@ namespace CloudberryKingdom
 		if ( Gravity < 0 )
 			BobPhsxNormal::HitHeadOnSomething( ThingLandedOn );
 		else
+		{
+			if ( boost::dynamic_pointer_cast<FlyingBlob>( ThingLandedOn ) != 0 )
+				MyBob->Count_ButtonA = 0;
+
 			BobPhsxNormal::LandOnSomething( MakeReadyToJump, ThingLandedOn );
+		}
 	}
 
 	void BobPhsxInvert::HitHeadOnSomething( const boost::shared_ptr<ObjectBase> &ThingHit )
