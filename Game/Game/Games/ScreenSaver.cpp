@@ -134,9 +134,16 @@ namespace CloudberryKingdom
 		// Add 'Press (A) to start' text
 		if ( index == 0 )
 		{
-			Tools::CurGameData->WaitThenDo( MandatoryWatchLength_Initial + InitialDarkness - 3, boost::make_shared<MakePressALambda>( ss, ss->ForTrailer ), true );
+			int delay1 = MandatoryWatchLength_Initial + InitialDarkness - 3;
+			int delay2 = getMandatoryWatchLength() + InitialDarkness - 3;
 
-			Tools::CurGameData->WaitThenDo( getMandatoryWatchLength() + InitialDarkness - 3, boost::make_shared<AddListenerLambda>(ss), true );
+#ifdef CAFE
+			delay1 -= 200;
+			delay2 -= 200;
+#endif
+
+			Tools::CurGameData->WaitThenDo( delay1, boost::make_shared<MakePressALambda>( ss, ss->ForTrailer ), true );
+			Tools::CurGameData->WaitThenDo( delay2, boost::make_shared<AddListenerLambda>(ss), true );
 		}
 	}
 

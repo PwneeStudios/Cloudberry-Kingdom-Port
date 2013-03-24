@@ -24,6 +24,7 @@
 #include <cafe/h264.h> // H.264
 #include "MovieTest.h"
 
+#include <Utility/Log.h>
 
 /*=========================================================================*
             definitions
@@ -130,12 +131,12 @@ static void ProcessChangeWait(s32 threadnum, s32 pos)
  *-------------------------------------------------------------------------*/
 void printHeaderInfo(MP4DMXMpoMp4HeaderInf *headerInfo)
 {
-    OSReport("headerInfo->size                = %d\n", headerInfo->size);
-    OSReport("headerInfo->duration            = 0x%016llX\n", headerInfo->duration);
-    OSReport("headerInfo->track_num           = %d\n", headerInfo->track_num);
-    OSReport("headerInfo->major_brand         = %s\n", headerInfo->major_brand);
-    OSReport("headerInfo->minor_version       = 0x%X\n", headerInfo->minor_version);
-    OSReport("headerInfo->compatible_brands   = %s\n", headerInfo->compatible_brands);
+    LOG_WRITE("headerInfo->size                = %d\n", headerInfo->size);
+    LOG_WRITE("headerInfo->duration            = 0x%016llX\n", headerInfo->duration);
+    LOG_WRITE("headerInfo->track_num           = %d\n", headerInfo->track_num);
+    LOG_WRITE("headerInfo->major_brand         = %s\n", headerInfo->major_brand);
+    LOG_WRITE("headerInfo->minor_version       = 0x%X\n", headerInfo->minor_version);
+    LOG_WRITE("headerInfo->compatible_brands   = %s\n", headerInfo->compatible_brands);
 }
 
 
@@ -148,14 +149,14 @@ void printHeaderInfo(MP4DMXMpoMp4HeaderInf *headerInfo)
  *-------------------------------------------------------------------------*/
 void printTrackInfo(MP4DMXMpoMp4TrackInf  *trackInfo)
 {
-    OSReport("trackInfo->track_ID             = %d\n", trackInfo->track_ID);
-    OSReport("trackInfo->timescale            = %d\n", trackInfo->timescale);
-    OSReport("trackInfo->duration             = 0x%016llX\n", trackInfo->duration);
-    OSReport("trackInfo->type                 = %d\n", trackInfo->type);
-    OSReport("trackInfo->supported_flag       = %d\n", trackInfo->supported_flag);
-    OSReport("trackInfo->stts_exist_flag      = %d\n", trackInfo->stts_exist_flag);
-    OSReport("trackInfo->tfra_exist_flag      = %d\n", trackInfo->tfra_exist_flag);
-    OSReport("trackInfo->num_of_entry         = %d\n", trackInfo->num_of_entry);
+    LOG_WRITE("trackInfo->track_ID             = %d\n", trackInfo->track_ID);
+    LOG_WRITE("trackInfo->timescale            = %d\n", trackInfo->timescale);
+    LOG_WRITE("trackInfo->duration             = 0x%016llX\n", trackInfo->duration);
+    LOG_WRITE("trackInfo->type                 = %d\n", trackInfo->type);
+    LOG_WRITE("trackInfo->supported_flag       = %d\n", trackInfo->supported_flag);
+    LOG_WRITE("trackInfo->stts_exist_flag      = %d\n", trackInfo->stts_exist_flag);
+    LOG_WRITE("trackInfo->tfra_exist_flag      = %d\n", trackInfo->tfra_exist_flag);
+    LOG_WRITE("trackInfo->num_of_entry         = %d\n", trackInfo->num_of_entry);
 }
 
 
@@ -170,19 +171,19 @@ void printVideoTrackInfo(MP4DMXMpoMp4VideoTrackInf *mp4VideoTrackInf)
 {
     s8  a, b, c, d;
 
-    OSReport("mp4VideoTrackInf->size          = %d\n", mp4VideoTrackInf->size);
+    LOG_WRITE("mp4VideoTrackInf->size          = %d\n", mp4VideoTrackInf->size);
     a = (s8)((mp4VideoTrackInf->mediatype>>24)&0xFF);
     b = (s8)((mp4VideoTrackInf->mediatype>>16)&0xFF);
     c = (s8)((mp4VideoTrackInf->mediatype>>8)&0xFF);
     d = (s8)(mp4VideoTrackInf->mediatype&0xFF);
-    OSReport("mp4VideoTrackInf->mediatype     = 0x%X(%c%c%c%c)\n", mp4VideoTrackInf->mediatype,a,b,c,d);
-    OSReport("mp4VideoTrackInf->width         = %d\n", mp4VideoTrackInf->width);
-    OSReport("mp4VideoTrackInf->height        = %d\n", mp4VideoTrackInf->height);
-    OSReport("mp4VideoTrackInf->maxbitrate    = %d\n", mp4VideoTrackInf->maxbitrate);
-    OSReport("mp4VideoTrackInf->avgbitrate    = %d\n", mp4VideoTrackInf->avgbitrate);
-    OSReport("mp4VideoTrackInf->framerate     = %d\n", mp4VideoTrackInf->framerate);
-    OSReport("mp4VideoTrackInf->profile       = %d\n", mp4VideoTrackInf->profile);
-    OSReport("mp4VideoTrackInf->level         = %d\n", mp4VideoTrackInf->level);
+    LOG_WRITE("mp4VideoTrackInf->mediatype     = 0x%X(%c%c%c%c)\n", mp4VideoTrackInf->mediatype,a,b,c,d);
+    LOG_WRITE("mp4VideoTrackInf->width         = %d\n", mp4VideoTrackInf->width);
+    LOG_WRITE("mp4VideoTrackInf->height        = %d\n", mp4VideoTrackInf->height);
+    LOG_WRITE("mp4VideoTrackInf->maxbitrate    = %d\n", mp4VideoTrackInf->maxbitrate);
+    LOG_WRITE("mp4VideoTrackInf->avgbitrate    = %d\n", mp4VideoTrackInf->avgbitrate);
+    LOG_WRITE("mp4VideoTrackInf->framerate     = %d\n", mp4VideoTrackInf->framerate);
+    LOG_WRITE("mp4VideoTrackInf->profile       = %d\n", mp4VideoTrackInf->profile);
+    LOG_WRITE("mp4VideoTrackInf->level         = %d\n", mp4VideoTrackInf->level);
 }
 
 
@@ -197,18 +198,18 @@ void printAudioTrackInfo(MP4DMXMpoMp4AudioTrackInf *mp4AudioTrackInf)
 {
     s8      a, b, c, d;
 
-    OSReport("mp4AudioTrackInf->size          = %d\n", mp4AudioTrackInf->size);
+    LOG_WRITE("mp4AudioTrackInf->size          = %d\n", mp4AudioTrackInf->size);
     a = (s8)((mp4AudioTrackInf->mediatype>>24)&0xFF);
     b = (s8)((mp4AudioTrackInf->mediatype>>16)&0xFF);
     c = (s8)((mp4AudioTrackInf->mediatype>>8)&0xFF);
     d = (s8)(mp4AudioTrackInf->mediatype&0xFF);
-    OSReport("mp4AudioTrackInf->mediatype     = 0x%X(%c%c%c%c)\n", mp4AudioTrackInf->mediatype, a,b,c,d);
-    OSReport("mp4AudioTrackInf->channel_count = %d\n", mp4AudioTrackInf->channel_count);
-    OSReport("mp4AudioTrackInf->sample_size   = %d\n", mp4AudioTrackInf->sample_size);
-    OSReport("mp4AudioTrackInf->sample_rate   = %d\n", mp4AudioTrackInf->sample_rate);
-    OSReport("mp4AudioTrackInf->avgbitrate    = %d\n", mp4AudioTrackInf->avgbitrate);
-    OSReport("mp4AudioTrackInf->maxbitrate    = %d\n", mp4AudioTrackInf->maxbitrate);
-    OSReport("mp4AudioTrackInf->channel_mode  = %d\n", mp4AudioTrackInf->channel_mode);
+    LOG_WRITE("mp4AudioTrackInf->mediatype     = 0x%X(%c%c%c%c)\n", mp4AudioTrackInf->mediatype, a,b,c,d);
+    LOG_WRITE("mp4AudioTrackInf->channel_count = %d\n", mp4AudioTrackInf->channel_count);
+    LOG_WRITE("mp4AudioTrackInf->sample_size   = %d\n", mp4AudioTrackInf->sample_size);
+    LOG_WRITE("mp4AudioTrackInf->sample_rate   = %d\n", mp4AudioTrackInf->sample_rate);
+    LOG_WRITE("mp4AudioTrackInf->avgbitrate    = %d\n", mp4AudioTrackInf->avgbitrate);
+    LOG_WRITE("mp4AudioTrackInf->maxbitrate    = %d\n", mp4AudioTrackInf->maxbitrate);
+    LOG_WRITE("mp4AudioTrackInf->channel_mode  = %d\n", mp4AudioTrackInf->channel_mode);
 }
 
 
@@ -611,7 +612,7 @@ s32 MP4DemuxOutput(MP4DMXMpoDATA* data, s32 track_ID, void* handle)
                     ret = H264DECEnd(MP4DemuxCorePtr[threadnum]->H264WorkBuffer);
                     if( ret != 0 )
                     {
-                        OSReport("H264DECEnd Failed. ret = %d\n", ret );
+                        LOG_WRITE("H264DECEnd Failed. ret = %d\n", ret );
                         OSYieldThread();
                         return MP4DMX_RET_ERROR;
                     }
@@ -625,7 +626,7 @@ s32 MP4DemuxOutput(MP4DMXMpoDATA* data, s32 track_ID, void* handle)
                     ret = H264DECBegin(MP4DemuxCorePtr[threadnum]->H264WorkBuffer);
                     if (ret != 0)
                     {
-                        OSReport("H264DECBegin Failed. ret = %d\n", ret );
+                        LOG_WRITE("H264DECBegin Failed. ret = %d\n", ret );
                         OSYieldThread();
                         return MP4DMX_RET_ERROR;
                     }
@@ -639,7 +640,7 @@ s32 MP4DemuxOutput(MP4DMXMpoDATA* data, s32 track_ID, void* handle)
                 ret = H264DECSetBitstream(MP4DemuxCorePtr[threadnum]->H264WorkBuffer, pOutp, j, (s32)MP4DemuxCorePtr[threadnum]->VideoStreamInfo.PTS[MP4DemuxCorePtr[threadnum]->VideoStreamInfo.rpos] + (s32)MP4DemuxCorePtr[threadnum]->VideoStreamInfo.CMP_OFFSET[MP4DemuxCorePtr[threadnum]->VideoStreamInfo.rpos] - (s32)MP4DemuxCorePtr[threadnum]->H264BpicTimeOffset);
                 if (ret != 0)
                 {
-                    OSReport("error : bitstream set : 0x%x\n", ret);
+                    LOG_WRITE("error : bitstream set : 0x%x\n", ret);
                     ret = H264DEC_ERR_INTERNAL;
                     OSYieldThread();
                     return MP4DMX_RET_ERROR;
@@ -741,7 +742,7 @@ s32 MP4DemuxOutput(MP4DMXMpoDATA* data, s32 track_ID, void* handle)
                 ret = AACDECExecute((u8 *)MP4DemuxCorePtr[threadnum]->InputUnitPtr.sample->data_ptr, (s16 *)MP4DemuxCorePtr[threadnum]->AACOutBuffer, (s16 *)MP4DemuxCorePtr[threadnum]->AACOutBuffer + AACDEC_PCM_SAMPLE_SIZE, &aacinfo, MP4DemuxCorePtr[threadnum]->AACWorkBuffer);
                 if(ret != AACDEC_NO_ERR)
                 {
-                    OSReport("AAC Decode Error\n");
+                    LOG_WRITE("AAC Decode Error\n");
                     OSYieldThread();
                     return MP4DMX_RET_ERROR;
                 }
@@ -880,7 +881,7 @@ s32 MP4DemuxOutput(MP4DMXMpoDATA* data, s32 track_ID, void* handle)
         }
     }
 
-//  OSReport("CB, T_ID = %d, time_stamp = %d, chunk_size = %d, unit_size = %d, duration = %d, num_of_samle = %d\n",
+//  LOG_WRITE("CB, T_ID = %d, time_stamp = %d, chunk_size = %d, unit_size = %d, duration = %d, num_of_samle = %d\n",
 //      track_ID, (s32)pSample->time_stamp, (s32)pSample->chunk_size, pSample->unit_size, (s32)pSample->duration, pSample->num_of_sample);
 }
 
@@ -962,7 +963,7 @@ s32 MP4DMXFW_Open(MEMHeapHandle ExpHeap, void **handle, s32 *UseWorkMemSize, s32
     MP4DemuxCorePtr[threadnum]                   = (MP4DemuxCore *)MEMAllocFromDefaultHeapEx(sizeof(MP4DemuxCore), 1024);
     if (MP4DemuxCorePtr[threadnum] == NULL)
     {
-        OSReport("MP4DemuxCore malloc Failed.\n");
+        LOG_WRITE("MP4DemuxCore malloc Failed.\n");
         return MP4DMXFW_RET_ERROR;
     }
 
@@ -978,42 +979,42 @@ s32 MP4DMXFW_Open(MEMHeapHandle ExpHeap, void **handle, s32 *UseWorkMemSize, s32
 
     if (MP4DemuxCorePtr[threadnum]->H264BSBuffer == NULL)
     {
-        OSReport("MP4DemuxCorePtr[threadnum]->H264BSBuffer     malloc ERROR\n");
+        LOG_WRITE("MP4DemuxCorePtr[threadnum]->H264BSBuffer     malloc ERROR\n");
         return MP4DMXFW_RET_ERROR;
     }
     if (MP4DemuxCorePtr[threadnum]->H264HeaderBuffer == NULL)
     {
-        OSReport("MP4DemuxCorePtr[threadnum]->H264HeaderBuffer malloc ERROR\n");
+        LOG_WRITE("MP4DemuxCorePtr[threadnum]->H264HeaderBuffer malloc ERROR\n");
         return MP4DMXFW_RET_ERROR;
     }
     if (MP4DemuxCorePtr[threadnum]->AACOutBuffer == NULL)
     {
-        OSReport("MP4DemuxCorePtr[threadnum]->AACOutBuffer     malloc ERROR\n");
+        LOG_WRITE("MP4DemuxCorePtr[threadnum]->AACOutBuffer     malloc ERROR\n");
         return MP4DMXFW_RET_ERROR;
     }
     if (MP4DemuxCorePtr[threadnum]->AACBSBuffer == NULL)
     {
-        OSReport("MP4DemuxCorePtr[threadnum]->AACBSBuffer      malloc ERROR\n");
+        LOG_WRITE("MP4DemuxCorePtr[threadnum]->AACBSBuffer      malloc ERROR\n");
         return MP4DMXFW_RET_ERROR;
     }
     if (MP4DemuxCorePtr[threadnum]->AACWorkBuffer == NULL)
     {
-        OSReport("MP4DemuxCorePtr[threadnum]->AACWorkBuffer    malloc ERROR\n");
+        LOG_WRITE("MP4DemuxCorePtr[threadnum]->AACWorkBuffer    malloc ERROR\n");
         return MP4DMXFW_RET_ERROR;
     }
     if (MP4DemuxCorePtr[threadnum]->AACFreqConvTmpL == NULL)
     {
-        OSReport("MP4DemuxCorePtr[threadnum]->AACFreqConvTmpL  malloc ERROR\n");
+        LOG_WRITE("MP4DemuxCorePtr[threadnum]->AACFreqConvTmpL  malloc ERROR\n");
         return MP4DMXFW_RET_ERROR;
     }
     if (MP4DemuxCorePtr[threadnum]->AACFreqConvTmpR == NULL)
     {
-        OSReport("MP4DemuxCorePtr[threadnum]->AACFreqConvTmpR  malloc ERROR\n");
+        LOG_WRITE("MP4DemuxCorePtr[threadnum]->AACFreqConvTmpR  malloc ERROR\n");
         return MP4DMXFW_RET_ERROR;
     }
     if (MP4DemuxCorePtr[threadnum]->AACOutRefBuffer == NULL)
     {
-        OSReport("MP4DemuxCorePtr[threadnum]->AACOutRefBuffer  malloc ERROR\n");
+        LOG_WRITE("MP4DemuxCorePtr[threadnum]->AACOutRefBuffer  malloc ERROR\n");
         return MP4DMXFW_RET_ERROR;
     }
 
@@ -1039,7 +1040,7 @@ s32 MP4DMXFW_Open(MEMHeapHandle ExpHeap, void **handle, s32 *UseWorkMemSize, s32
     iMlibRet = AACDECOpen( MP4DemuxCorePtr[threadnum]->AACWorkBuffer );
     if( iMlibRet !=  AACDEC_NO_ERR )
     {
-        OSReport("AACDECOpen Failed. ret = %d\n", iMlibRet );
+        LOG_WRITE("AACDECOpen Failed. ret = %d\n", iMlibRet );
         return MP4DMXFW_RET_ERROR;
     }
 
@@ -1061,7 +1062,7 @@ s32 MP4DMXFW_Open(MEMHeapHandle ExpHeap, void **handle, s32 *UseWorkMemSize, s32
     iMlibRet = MP4DMXOpen( param, handle, (void *)&MP4DemuxCorePtr[threadnum]->gAllocator );
     if( iMlibRet != MP4DMX_RET_SUCCESS )
     {
-        OSReport("MP4DMXOpen Failed. ret = %d\n", iMlibRet );
+        LOG_WRITE("MP4DMXOpen Failed. ret = %d\n", iMlibRet );
         return MP4DMXFW_RET_ERROR;
     }
 
@@ -1108,14 +1109,14 @@ s32 MP4DMXFW_Begin(void *handle, MP4DMXFW_CtrlParam *ctrl_param, s32 threadnum)
     iMlibRet = MP4DMXBegin( handle );
     if( iMlibRet != MP4DMX_RET_SUCCESS )
     {
-        OSReport("MP4DMXBegin Failed. ret = %d\n", iMlibRet );
+        LOG_WRITE("MP4DMXBegin Failed. ret = %d\n", iMlibRet );
         return MP4DMXFW_RET_ERROR;
     }
 
     iMlibRet = MP4DMXFW_ExecuteForHeader(handle, ctrl_param, threadnum);    // MP4 header parsing
     if( iMlibRet != MP4DMX_RET_SUCCESS )
     {
-        OSReport("MP4DMXFW_ExecuteForHeader Failed. ret = %d\n", iMlibRet );
+        LOG_WRITE("MP4DMXFW_ExecuteForHeader Failed. ret = %d\n", iMlibRet );
         return MP4DMXFW_RET_ERROR;
     }
 
@@ -1131,7 +1132,7 @@ s32 MP4DMXFW_Begin(void *handle, MP4DMXFW_CtrlParam *ctrl_param, s32 threadnum)
         iMlibRet = VideoOpenH264(threadnum);
         if( iMlibRet != MP4DMXFW_RET_SUCCESS )
         {
-            OSReport("VideoOpenH264 Failed. ret = %d\n", iMlibRet );
+            LOG_WRITE("VideoOpenH264 Failed. ret = %d\n", iMlibRet );
             return MP4DMXFW_RET_ERROR;
         }
 
@@ -1144,14 +1145,14 @@ s32 MP4DMXFW_Begin(void *handle, MP4DMXFW_CtrlParam *ctrl_param, s32 threadnum)
         iMlibRet = H264DECBegin(MP4DemuxCorePtr[threadnum]->H264WorkBuffer);
         if (iMlibRet != 0)
         {
-            OSReport("H264DECBegin Failed. ret = %d\n", iMlibRet );
+            LOG_WRITE("H264DECBegin Failed. ret = %d\n", iMlibRet );
             return MP4DMXFW_RET_ERROR;
         }
 
         iMlibRet = VideoInit(threadnum);
         if (iMlibRet != 0)
         {
-            OSReport("VideoInit Failed. ret = %d\n", iMlibRet );
+            LOG_WRITE("VideoInit Failed. ret = %d\n", iMlibRet );
             return MP4DMXFW_RET_ERROR;
         }
     }
@@ -1219,7 +1220,7 @@ s32 MP4DMXFW_ExecuteForHeader(void *pMlibHandle, MP4DMXFW_CtrlParam *ctrl_param,
                     next_size = (s32)DIVIDE_HEADSIZE;
                 }
 
-//                OSReport("readfile, offset = 0x%016llX, length = %d\n",  next_offset, next_size);
+//                LOG_WRITE("readfile, offset = 0x%016llX, length = %d\n",  next_offset, next_size);
                 // call the input callback function of the media data
                 MP4DemuxCorePtr[threadnum]->InputUnitPtr.sample->size     = next_size;
                 MP4DemuxCorePtr[threadnum]->InputUnitPtr.type             = MEDIA_HEADER;
@@ -1267,9 +1268,9 @@ s32 MP4DMXFW_ExecuteForHeader(void *pMlibHandle, MP4DMXFW_CtrlParam *ctrl_param,
                 second_flag = 1;
 
                 // ReadHeader
-//                OSReport("begin MP4DMXReadHeader()\n");
+//                LOG_WRITE("begin MP4DMXReadHeader()\n");
                 iMlibRet = MP4DMXReadHeader(pData, &time_stamp, &next_offset, &next_size, pMlibHandle);
-//                OSReport("end MP4DMXReadHeader(), return value = %d, %s\n",  iMlibRet, strRetVal[getReturnValue(iMlibRet)]);
+//                LOG_WRITE("end MP4DMXReadHeader(), return value = %d, %s\n",  iMlibRet, strRetVal[getReturnValue(iMlibRet)]);
 
                 if (iMlibRet==MP4DMX_RET_INPUT_CONTINUE)    // input continue
                 {
@@ -1280,9 +1281,9 @@ s32 MP4DMXFW_ExecuteForHeader(void *pMlibHandle, MP4DMXFW_CtrlParam *ctrl_param,
             case MP4DMX_RET_FIND_HEADER:
             case MP4DMX_RET_NOT_FOUND_BOX:
                 // get the offset of the header data
-//                OSReport("begin MP4DMXFindHeader()\n");
+//                LOG_WRITE("begin MP4DMXFindHeader()\n");
                 iMlibRet = MP4DMXFindHeader(pData,next_size,&next_offset,&next_size, pMlibHandle);
-//                OSReport("end MP4DMXFindHeader(), return value = %d, %s\n", iMlibRet, strRetVal[getReturnValue(iMlibRet)]);
+//                LOG_WRITE("end MP4DMXFindHeader(), return value = %d, %s\n", iMlibRet, strRetVal[getReturnValue(iMlibRet)]);
                 break;
             case MP4DMX_RET_EXECUTE_NORMAL:
             case MP4DMX_RET_EXECUTE_WARNING:
@@ -1467,7 +1468,7 @@ s32 MP4DMXFW_ExecuteForHeader(void *pMlibHandle, MP4DMXFW_CtrlParam *ctrl_param,
 
         if(iMlibRet < MP4DMX_RET_SUCCESS)
         {
-            OSReport("MP4DMXFW_Execute Failed. ret = %d\n", iMlibRet );
+            LOG_WRITE("MP4DMXFW_Execute Failed. ret = %d\n", iMlibRet );
             return MP4DMXFW_RET_ERROR;
         }
     }
@@ -1546,7 +1547,7 @@ s32 MP4DMXFW_Execute(void *pMlibHandle, MP4DMXFW_CtrlParam *ctrl_param, s32 cont
                     next_size = (s32)DIVIDE_HEADSIZE;
                 }
 
-//                OSReport("readfile, offset = 0x%016llX, length = %d\n",  next_offset, next_size);
+//                LOG_WRITE("readfile, offset = 0x%016llX, length = %d\n",  next_offset, next_size);
                 // call the input callback function of the media data
                 MP4DemuxCorePtr[threadnum]->InputUnitPtr.sample->size  = next_size;
                 MP4DemuxCorePtr[threadnum]->InputUnitPtr.type          = MEDIA_HEADER;
@@ -1593,9 +1594,9 @@ s32 MP4DMXFW_Execute(void *pMlibHandle, MP4DMXFW_CtrlParam *ctrl_param, s32 cont
                 second_flag = 1;
 
                 // ReadHeader
-//                OSReport("begin MP4DMXReadHeader()\n");
+//                LOG_WRITE("begin MP4DMXReadHeader()\n");
                 iMlibRet = MP4DMXReadHeader(pData, &time_stamp, &next_offset, &next_size, pMlibHandle);
-//                OSReport("end MP4DMXReadHeader(), return value = %d, %s\n", iMlibRet, strRetVal[getReturnValue(iMlibRet)]);
+//                LOG_WRITE("end MP4DMXReadHeader(), return value = %d, %s\n", iMlibRet, strRetVal[getReturnValue(iMlibRet)]);
 
                 if (iMlibRet==MP4DMX_RET_INPUT_CONTINUE)    // input continue
                 {
@@ -1706,13 +1707,13 @@ s32 MP4DMXFW_Execute(void *pMlibHandle, MP4DMXFW_CtrlParam *ctrl_param, s32 cont
             case MP4DMX_RET_FIND_HEADER:
             case MP4DMX_RET_NOT_FOUND_BOX:
                 // get the offset of the header data
-//                OSReport("begin MP4DMXFindHeader()\n");
+//                LOG_WRITE("begin MP4DMXFindHeader()\n");
                 iMlibRet = MP4DMXFindHeader(pData,next_size,&next_offset,&next_size, pMlibHandle);
-//                OSReport("end MP4DMXFindHeader(), return value = %d, %s\n",  iMlibRet, strRetVal[getReturnValue(iMlibRet)]);
+//                LOG_WRITE("end MP4DMXFindHeader(), return value = %d, %s\n",  iMlibRet, strRetVal[getReturnValue(iMlibRet)]);
                 break;
             case MP4DMX_RET_EXECUTE_NORMAL:
             case MP4DMX_RET_EXECUTE_WARNING:
-//                OSReport("begin MP4DMXExecute()\n");
+//                LOG_WRITE("begin MP4DMXExecute()\n");
                 gMlibHandle[threadnum] = pMlibHandle;
                 iMlibRet = MP4DMXExecute( NULL, control_flag, track_id,seek_direction,
                                 end_time_stamp, &time_stamp, &next_offset, &next_size, pMlibHandle );
@@ -1723,7 +1724,7 @@ s32 MP4DMXFW_Execute(void *pMlibHandle, MP4DMXFW_CtrlParam *ctrl_param, s32 cont
                 {
                     iMlibRet = MP4DMXFW_RET_SUCCESS;
                 }
-//                OSReport("end MP4DMXExecute(), return value = %d, %s\n",  iMlibRet, strRetVal[getReturnValue(iMlibRet)]);
+//                LOG_WRITE("end MP4DMXExecute(), return value = %d, %s\n",  iMlibRet, strRetVal[getReturnValue(iMlibRet)]);
                 break;
             default:
                 return MP4DMXFW_RET_SUCCESS;
@@ -1731,7 +1732,7 @@ s32 MP4DMXFW_Execute(void *pMlibHandle, MP4DMXFW_CtrlParam *ctrl_param, s32 cont
 
         if(iMlibRet <MP4DMX_RET_SUCCESS)
         {
-            OSReport("MP4DMXFW_Execute Failed. ret = %d\n", iMlibRet );
+            LOG_WRITE("MP4DMXFW_Execute Failed. ret = %d\n", iMlibRet );
             return MP4DMXFW_RET_ERROR;
         }
 
@@ -1760,7 +1761,7 @@ s32 MP4DMXFW_End(void *handle, s32 threadnum)
     iMlibRet = MP4DMXEnd( handle );
     if( iMlibRet != MP4DMX_RET_SUCCESS )
     {
-        OSReport("MP4DMXEnd Failed. ret = %d\n", iMlibRet );
+        LOG_WRITE("MP4DMXEnd Failed. ret = %d\n", iMlibRet );
         return MP4DMXFW_RET_ERROR;
     }
 
@@ -1829,7 +1830,7 @@ s32 MP4DMXFW_End(void *handle, s32 threadnum)
                     ret = H264DECSetBitstream(MP4DemuxCorePtr[threadnum]->H264WorkBuffer, pOutp, j, (s32)MP4DemuxCorePtr[threadnum]->VideoStreamInfo.PTS[MP4DemuxCorePtr[threadnum]->VideoStreamInfo.rpos] + (s32)MP4DemuxCorePtr[threadnum]->VideoStreamInfo.CMP_OFFSET[MP4DemuxCorePtr[threadnum]->VideoStreamInfo.rpos] - (s32)MP4DemuxCorePtr[threadnum]->H264BpicTimeOffset);
                     if (ret != 0)
                     {
-                        OSReport("error : bitstream set : 0x%x\n", ret);
+                        LOG_WRITE("error : bitstream set : 0x%x\n", ret);
                         return MP4DMX_RET_ERROR;
                     }
 
@@ -1860,7 +1861,7 @@ s32 MP4DMXFW_End(void *handle, s32 threadnum)
 
                             if(ret != MP4DMXFW_RET_SUCCESS)
                             {
-                                OSReport("Video GetCallBack Error\n");
+                                LOG_WRITE("Video GetCallBack Error\n");
                                 return MP4DMXFW_RET_ERROR;
                             }
                         }
@@ -1900,7 +1901,7 @@ s32 MP4DMXFW_End(void *handle, s32 threadnum)
                     ret = AACDECExecute((u8 *)MP4DemuxCorePtr[threadnum]->AudioStreamInfo.bufp[MP4DemuxCorePtr[threadnum]->AudioStreamInfo.rpos], (s16 *)MP4DemuxCorePtr[threadnum]->AACOutBuffer, (s16 *)MP4DemuxCorePtr[threadnum]->AACOutBuffer + AACDEC_PCM_SAMPLE_SIZE, &aacinfo, MP4DemuxCorePtr[threadnum]->AACWorkBuffer);
                     if(ret != AACDEC_NO_ERR)
                     {
-                        OSReport("AAC Decode Error\n");
+                        LOG_WRITE("AAC Decode Error\n");
                         return MP4DMX_RET_ERROR;
                     }
 
@@ -2026,7 +2027,7 @@ s32 MP4DMXFW_End(void *handle, s32 threadnum)
         iMlibRet = H264DECEnd(MP4DemuxCorePtr[threadnum]->H264WorkBuffer);
         if( iMlibRet != 0 )
         {
-            OSReport("H264DECEnd Failed. ret = %d\n", iMlibRet );
+            LOG_WRITE("H264DECEnd Failed. ret = %d\n", iMlibRet );
             return MP4DMXFW_RET_ERROR;
         }
     }
@@ -2058,7 +2059,7 @@ s32 MP4DMXFW_Close(MEMHeapHandle ExpHeap, void *handle, s32 threadnum)
         iMlibRet = H264DECClose(MP4DemuxCorePtr[threadnum]->H264WorkBuffer);
         if( iMlibRet != 0 )
         {
-            OSReport("H264DECClose Failed. ret = %d\n", iMlibRet );
+            LOG_WRITE("H264DECClose Failed. ret = %d\n", iMlibRet );
             return MP4DMXFW_RET_ERROR;
         }
     }
@@ -2072,7 +2073,7 @@ s32 MP4DMXFW_Close(MEMHeapHandle ExpHeap, void *handle, s32 threadnum)
     iMlibRet = AACDECClose( MP4DemuxCorePtr[threadnum]->AACWorkBuffer );
     if( iMlibRet != AACDEC_NO_ERR )
     {
-        OSReport("AACDECClose Failed. ret = %d\n", iMlibRet );
+        LOG_WRITE("AACDECClose Failed. ret = %d\n", iMlibRet );
         return MP4DMXFW_RET_ERROR;
     }
 
@@ -2085,7 +2086,7 @@ s32 MP4DMXFW_Close(MEMHeapHandle ExpHeap, void *handle, s32 threadnum)
     iMlibRet = MP4DMXClose( handle, (void *)&MP4DemuxCorePtr[threadnum]->gAllocator );
     if( iMlibRet != MP4DMX_RET_SUCCESS )
     {
-        OSReport("MP4DMXClose Failed. ret = %d\n", iMlibRet );
+        LOG_WRITE("MP4DMXClose Failed. ret = %d\n", iMlibRet );
         return MP4DMXFW_RET_ERROR;
     }
 

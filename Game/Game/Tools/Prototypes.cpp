@@ -539,24 +539,6 @@ namespace CloudberryKingdom
 		BobPhsxTimeship::getInstance()->Prototype = NewBob;
 		bob.insert( std::make_pair( BobPhsxTimeship::getInstance(), NewBob ) );
 
-		// Meat
-		//std::wstring MeatBoyPath = Path::Combine( Globals::ContentDirectory, std::wstring( L"Objects/meatboy.smo" ) );
-		//NewBob = boost::make_shared<Bob>( MeatBoyPath, Tools::EffectWad, Tools::TextureWad, BobPhsxMeat::getInstance(), true );
-		//NewBob->LoadFromFile( MeatBoyPath, Tools::EffectWad, Tools::TextureWad, BobPhsxMeat::getInstance() );
-		//NewBob->IsSpriteBased = false;
-		//NewBob->MyObjectType = BobPhsxMeat::getInstance();
-		//NewBob->PlayerObject->ParentQuad->Scale( Vector2( 2.75f, 2.75f ) );
-		//for ( std::vector<boost::shared_ptr<BaseQuad> >::const_iterator quad = NewBob->PlayerObject->QuadList.begin(); quad != NewBob->PlayerObject->QuadList.end(); ++quad )
-		//	( *quad )->MyDrawOrder = ObjectDrawOrder_AFTER_OUTLINE;
-		//NewBob->CanHaveCape = true;
-		//NewBob->CanHaveHat = true;
-		//NewBob->PlayerObject->ParentQuad->MyEffect = Tools::BasicEffect;
-		//NewBob->PlayerObject->QuadList[ 0 ]->SetTexture( std::wstring( L"FallingBlock1" ), Tools::TextureWad );
-		//NewBob->PlayerObject->QuadList[ 1 ]->SetTexture( std::wstring( L"FallingBlock1" ), Tools::TextureWad );
-
-		//BobPhsxMeat::getInstance()->Prototype = NewBob;
-		//bob.insert( std::make_pair( BobPhsxMeat::getInstance(), NewBob ) );
-
 		// Freeplay Heroes
 		//if (!(CloudberryKingdomGame.StartAsFreeplay && CloudberryKingdomGame.UseNewBob))
 			CustomLevel_GUI::FreeplayHeroes = std::vector<boost::shared_ptr<BobPhsx> >( Bob::HeroTypes );

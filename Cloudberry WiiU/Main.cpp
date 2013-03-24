@@ -2,6 +2,7 @@
 #include <CloudberryKingdom.h>
 
 #include <cafe/os.h>
+#include <cafe/mem.h>
 #include <Utility/Log.h>
 
 #include <Content/Filesystem.h>
@@ -13,7 +14,9 @@ public:
 
 	void Write( const std::string &text )
 	{
+#ifdef DEBUG
 		OSReport( text.c_str() );
+#endif
 	}
 };
 
@@ -21,9 +24,10 @@ namespace boost
 {
 	void throw_exception(std::exception const & e)
 	{
-		LOG.Write( e.what() );
+		LOG_WRITE( e.what() );
 	}
 }
+
 
 int main( int argc, char *argv[] )
 {

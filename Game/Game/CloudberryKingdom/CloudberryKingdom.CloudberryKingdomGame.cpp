@@ -62,11 +62,12 @@ extern bool GLOBAL_CONNECTION_STATUS[ 5 ];
 
 enum DisconnectedType
 {
-	DisconnectedType_NONE,
-	DisconnectedType_ALL,
-	DisconnectedType_VPAD,
-	DisconnectedType_KPAD
+	DisconnectedType_NONE = 0,
+	DisconnectedType_VPAD = 1,
+	DisconnectedType_KPAD = 1 << 1,
 };
+
+int WHO_IS_DISCONNECTED;
 
 static bool LAST_CONNECTION_STATUS[ 5 ];
 
@@ -128,6 +129,7 @@ namespace CloudberryKingdom
 	{
 #ifdef CAFE
 		memset( LAST_CONNECTION_STATUS, 0, sizeof( LAST_CONNECTION_STATUS ) );
+		WHO_IS_DISCONNECTED = 0;
 #endif
 
 		TitleGameData_MW::InitializeStatics();
@@ -1360,103 +1362,62 @@ float CloudberryKingdomGame::fps = 0;
 		#ifdef CAFE
 
 		// Check for disconnected controller on CAFE.
-		DisconnectedType DisconnectedControllerCAFE( bool saveState )
+		void DisconnectedControllerCAFE( )
 		{
-			if( !CloudberryKingdomGame::PastPressStart )
-			{
-				return DisconnectedType_NONE;
-			}
+			WHO_IS_DISCONNECTED = 0;
 
 			if( CloudberryKingdomGame::CurrentPresence != Presence_TitleScreen )
 			{
 				if( ( PlayerManager::Players[ 0 ] != 0 ) && PlayerManager::Players[ 0 ]->Exists )
 				{
-					bool vpadConnected = GLOBAL_CONNECTION_STATUS[ 0 ];
-					bool kpadConnected = GLOBAL_CONNECTION_STATUS[ 1 ];
-					bool lastVpadConnected = LAST_CONNECTION_STATUS[ 0 ];
-					bool lastKpadConnected = LAST_CONNECTION_STATUS[ 1 ];
-
-					if( !vpadConnected && !kpadConnected )
-					{
-						if( lastVpadConnected )
-						{
-							return DisconnectedType_VPAD;
-						}
-						else
-						{
-							return DisconnectedType_KPAD;
-						}
-					}
+					if( LAST_CONNECTION_STATUS[ 0 ] && !GLOBAL_CONNECTION_STATUS[ 0 ] && !GLOBAL_CONNECTION_STATUS[ 1 ] )
+						WHO_IS_DISCONNECTED |= DisconnectedType_VPAD;
+					if( LAST_CONNECTION_STATUS[ 1 ] && !GLOBAL_CONNECTION_STATUS[ 1 ] && !GLOBAL_CONNECTION_STATUS[ 0 ] )
+						WHO_IS_DISCONNECTED |= DisconnectedType_KPAD;
 				}
 
-				for( int i = 1; i < 4; ++i )
+				for (int i = 1; i < 4; i++)
 				{
-					if( ( PlayerManager::Players[i] != 0 ) && PlayerManager::Players[i]->Exists && !GLOBAL_CONNECTION_STATUS[ i + 1 ] )
-					{
-						return DisconnectedType_KPAD;
-					}
+					if( ( PlayerManager::Players[i] != 0 )
+						&& PlayerManager::Players[i]->Exists
+						&& !GLOBAL_CONNECTION_STATUS[ i + 1 ] )
+						WHO_IS_DISCONNECTED |= DisconnectedType_KPAD;
 				}
 			}
-
-			int numConnected = 0;
-			for( int i = 0; i < 5; ++i )
+			else
 			{
-				if( GLOBAL_CONNECTION_STATUS[ i ] )
-					++numConnected;
-			}
+				for( int i = 0; i < 5; ++i )
+				{
+					if( GLOBAL_CONNECTION_STATUS[ i ] )
+						return;
+				}
 
-			if( numConnected == 0 )
-			{
-				return DisconnectedType_ALL;
+				if( LAST_CONNECTION_STATUS[ 0 ] && !GLOBAL_CONNECTION_STATUS[ 0 ] )
+					WHO_IS_DISCONNECTED |= DisconnectedType_VPAD;
+				else
+					WHO_IS_DISCONNECTED |= DisconnectedType_KPAD;
 			}
-
-			return DisconnectedType_NONE;
 		}
 
-		DisconnectedType LastDType;
+		int CURRENT_WHO_IS_DISCONNECTED;
 
 		static bool ClearErrorCAFE()
 		{
-			DisconnectedType dType = DisconnectedControllerCAFE( false );
+			DisconnectedControllerCAFE();
 
-			if( dType != LastDType )
+			if( ( CURRENT_WHO_IS_DISCONNECTED & DisconnectedType_VPAD )
+				&& !( WHO_IS_DISCONNECTED & DisconnectedType_VPAD ) )
 			{
-				switch( dType )
-				{
-				case DisconnectedType_VPAD:
-						LastDType = dType;
-						DisplayError( ErrorType( 1650101,
-							NULL, ErrorType::DEFAULT, ClearErrorCAFE, false ) );
-						return true;
-				case DisconnectedType_KPAD:
-				case DisconnectedType_ALL:
-						LastDType = dType;
-						DisplayError( ErrorType( 1520100,
-							NULL, ErrorType::DEFAULT, ClearErrorCAFE, false ) );
-						return true;
-				case DisconnectedType_NONE:
-					return true;
-				}
+				return true;
 			}
 
-			if( dType == DisconnectedType_NONE )
-				memset( LAST_CONNECTION_STATUS, 0, sizeof( LAST_CONNECTION_STATUS ) );
+			if( ( CURRENT_WHO_IS_DISCONNECTED & DisconnectedType_KPAD )
+				&& !( WHO_IS_DISCONNECTED & DisconnectedType_KPAD ) )
+			{
+				return true;
+			}
 
-			return dType == DisconnectedType_NONE;
-		}
-
-		static bool ClearErrorVPAD()
-		{
-			ButtonCheck::UpdateControllerAndKeyboard_StartOfStep();
-
-			return false;
-		}
-
-		static bool ClearErrorKPAD()
-		{
-			ButtonCheck::UpdateControllerAndKeyboard_StartOfStep();
-
-			return false;
+			return WHO_IS_DISCONNECTED == 0;
 		}
 
 #endif
@@ -1721,27 +1682,24 @@ float CloudberryKingdomGame::fps = 0;
 #else
 
 #ifdef CAFE
-		DisconnectedType dType;
-		if( dType = DisconnectedControllerCAFE( true ) )
+		DisconnectedControllerCAFE();
+		if( WHO_IS_DISCONNECTED )
 #else
 		if( DisconnectedController() )
 #endif
 		{
 
 #ifdef CAFE
-			switch( dType )
+			CURRENT_WHO_IS_DISCONNECTED = WHO_IS_DISCONNECTED;
+			if( WHO_IS_DISCONNECTED & DisconnectedType_VPAD )
 			{
-			case DisconnectedType_VPAD:
-					LastDType = dType;
-					DisplayError( ErrorType( 1650101,
-						NULL, ErrorType::DEFAULT, ClearErrorCAFE, false ) );
-					break;
-			case DisconnectedType_KPAD:
-			case DisconnectedType_ALL:
-					LastDType = dType;
-					DisplayError( ErrorType( 1520100,
-						NULL, ErrorType::DEFAULT, ClearErrorCAFE, false ) );
-					break;
+				DisplayError( ErrorType( 1650101,
+					NULL, ErrorType::DEFAULT, ClearErrorCAFE, false ) );
+			}
+			else if( WHO_IS_DISCONNECTED & DisconnectedType_KPAD )
+			{
+				DisplayError( ErrorType( 1520100,
+					NULL, ErrorType::DEFAULT, ClearErrorCAFE, false ) );
 			}
 
 #elif PS3
