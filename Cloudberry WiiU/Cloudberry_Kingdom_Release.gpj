@@ -18,7 +18,6 @@
 	-lnn_util.a
 	-lproc_ui.a
 	-lsysapp.a
-	-stdlib
 Game\Hacks\String.cpp
 Game\Game\Player\Hero Physics\TimeShip.cpp
 Game\Hacks\NET\StringBuilder.cpp
