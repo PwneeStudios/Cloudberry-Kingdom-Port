@@ -18,8 +18,8 @@
 	-lnn_util.a
 	-lproc_ui.a
 	-lsysapp.a
-	-makerpl.args=-x
-	-makerpl.args=Cloudberry_Kingdom.def
+	-preprpl.args=-x
+	-preprpl.args=Cloudberry_Kingdom.def
 customheap.c
 Game\Hacks\String.cpp
 Game\Game\Player\Hero Physics\TimeShip.cpp
