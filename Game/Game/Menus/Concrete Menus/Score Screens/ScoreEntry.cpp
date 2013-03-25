@@ -164,7 +164,8 @@ namespace CloudberryKingdom
 	std::wstring ScoreEntry::ToString( int Length )
 	{
 		std::wstring score = _ToString();
-		std::wstring tag = GamerTag_Renamed;
+		return score;
+		/*std::wstring tag = GamerTag_Renamed;
 
 		int NumDots = Length - score.length() - tag.length();
 		if ( NumDots < 0 )
@@ -172,7 +173,7 @@ namespace CloudberryKingdom
 
 		for ( int i = 0; i < NumDots; i++ )
 			score.append( std::wstring( L"." ) );
-		return score + tag;
+		return score + tag;*/
 	}
 
 	std::wstring ScoreEntry::DottedScore( std::wstring root, int score, int Length, int MinDots )

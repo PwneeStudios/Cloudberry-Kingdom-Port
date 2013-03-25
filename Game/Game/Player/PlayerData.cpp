@@ -400,10 +400,10 @@ namespace CloudberryKingdom
 	std::wstring PlayerData::GetName()
 	{
 #if CAFE
-		if( MyIndex == 0 )
+		/*if( MyIndex == 0 )
 		{
 			return L"";//Utf8ToWstring( GLOBAL_ACCOUNT_NAME ? GLOBAL_ACCOUNT_NAME : "" );
-		}
+		}*/
 #endif
 
 	#if defined(XBOX) || defined(XBOX_SIGNIN)

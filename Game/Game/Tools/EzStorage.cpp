@@ -299,7 +299,7 @@ void SynchronizeAll()
 		SynchronizeAll();
 		Incr();
 		PlayerManager::Players[ 0 ]->ContainerName = std::wstring( L"Gamers" );
-		PlayerManager::Players[ 0 ]->FileName = std::wstring( L"___" ) + ( *player )->GetName();
+		PlayerManager::Players[ 0 ]->FileName = std::wstring( L"___" ) + PlayerManager::Players[ 0 ]->GetName();
 		PlayerManager::Players[ 0 ]->Save();
 		Wait();
 	#endif

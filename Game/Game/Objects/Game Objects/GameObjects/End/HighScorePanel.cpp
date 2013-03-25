@@ -182,7 +182,8 @@ namespace CloudberryKingdom
 		int DesiredLength = 35;
 		float y_spacing = 120;
 		Vector2 pos = Vector2( -973, 322 );
-		for ( std::vector<boost::shared_ptr<ScoreEntry> >::const_iterator score = MyScoreList->Scores.begin(); score != MyScoreList->Scores.end(); ++score )
+		int i = 0;
+		for ( std::vector<boost::shared_ptr<ScoreEntry> >::const_iterator score = MyScoreList->Scores.begin(); score != MyScoreList->Scores.end() && i < 10; ++score, ++i )
 		{
 			Text = boost::make_shared<EzText>( MyScoreList->ScoreString( *score, DesiredLength ), Resources::Font_Grobold42 );
 			SetHeaderProperties( Text );

@@ -4,6 +4,10 @@
 #include <Core\Tools\Set.h>
 #include <Hacks\NET\DateTime.h>
 
+#ifdef CAFE
+#include <cafe/os.h>
+#endif
+
 namespace CloudberryKingdom
 {
 
@@ -21,11 +25,17 @@ namespace CloudberryKingdom
 
 	int ScoreDatabase::CurrentDate()
 	{
+#ifdef CAFE
+		OSTime time = OSGetTime();
+		int minutes = OSTicksToSeconds( time ) / 60;
+		return minutes;
+#else
 		TimeSpan t = ( DateTime::Now() - DateTime( 2000, 1, 1 ) );
 		//int minutes = static_cast<int>( t.getTotalSeconds() / 60.f );
 		int minutes = static_cast<int>( t.getTotalSeconds() / 10.f ); // This is wrong, but works, since we never actually care what units this time is.
 
 		return minutes;
+#endif
 	}
 
 	void ScoreDatabase::Initialize()
