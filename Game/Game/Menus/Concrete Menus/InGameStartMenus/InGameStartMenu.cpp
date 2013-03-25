@@ -5,6 +5,10 @@
 #include "Game/Menus/Concrete Menus/ShopMenu.h"
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+#include <Game/Player/PlayerManager.h>
+
+// FIXME: Tuning parameter for maximum saved seeds.
+#define MAX_SEED_STRINGS 128
 
 namespace CloudberryKingdom
 {
@@ -165,6 +169,18 @@ bool InGameStartMenu::PreventMenu = false;
 
 		if ( MyMenu->getCurItem() == RemoveMe && VerifyRemoveMenu::YesChosen )
 			ReturnToCaller( false );
+		else
+		{
+			if ( ( !Tools::CurLevel->CanLoadLevels && !Tools::CurLevel->CanSaveLevel )
+				|| ( PlayerManager::Players[ 0 ] && PlayerManager::Players[ 0 ]->MySavedSeeds->SeedStrings.size() >= MAX_SEED_STRINGS ) )
+			{
+				boost::shared_ptr<MenuItem> item = MyMenu->FindItemByName( L"SaveLoadSeed" );
+				item->Selectable = false;
+				item->GrayOutOnUnselectable = true;
+				item->GrayOut();
+				MyMenu->SelectItem( 0 );
+			}
+		}
 	}
 
 	void InGameStartMenu::Init()
@@ -247,12 +263,23 @@ bool InGameStartMenu::PreventMenu = false;
 		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( word, ItemFont, CenterItems ) ) );
 		item->Name = std::wstring( L"SaveLoadSeed" );
 		item->setGo( Cast::ToItem( boost::make_shared<GoSaveLoadProxy>( boost::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) ) );
-		if ( !Tools::CurLevel->CanLoadLevels && !Tools::CurLevel->CanSaveLevel )
+		if ( ( !Tools::CurLevel->CanLoadLevels && !Tools::CurLevel->CanSaveLevel )
+			|| ( PlayerManager::Players[ 0 ] && PlayerManager::Players[ 0 ]->MySavedSeeds->SeedStrings.size() >= MAX_SEED_STRINGS ) )
 		{
 			item->Selectable = false;
+			item->GrayOutOnUnselectable = true;
 			item->GrayOut();
 		}
+		
 		AddItem( item );
+		
+		if ( ( !Tools::CurLevel->CanLoadLevels && !Tools::CurLevel->CanSaveLevel )
+			|| ( PlayerManager::Players[ 0 ] && PlayerManager::Players[ 0 ]->MySavedSeeds->SeedStrings.size() >= MAX_SEED_STRINGS ) )
+		{
+			item->Selectable = false;
+			item->GrayOutOnUnselectable = true;
+			item->GrayOut();
+		}
 
 		// Options
 		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Options, ItemFont, CenterItems ) ) );

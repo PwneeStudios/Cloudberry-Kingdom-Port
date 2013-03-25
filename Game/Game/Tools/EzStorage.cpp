@@ -27,7 +27,7 @@
 #define AUTOSAVE_PARAMSFO_TITLE "Cloudberry Kingdom"
 #define AUTOSAVE_PARAMSFO_DETAIL "Cloudberry Kingdom"
 
-#define AUTOSAVE_SIZE (10 * 1024)
+#define AUTOSAVE_SIZE (256 * 1024)
 
 #define ICON0_SIZE (101151)
 static void *ICON0_DATA = NULL;
@@ -617,7 +617,7 @@ void SynchronizeAll()
 			memset( set->setParam->reserved2, 0, sizeof( set->setParam->reserved2 ) );
 		}
 
-		ICON0_DATA = NULL;
+		//ICON0_DATA = NULL;
 		SaveOperationState = OperationState_SaveIcon;
 
 		result->result = CELL_SAVEDATA_CBRESULT_OK_NEXT;
@@ -626,6 +626,11 @@ void SynchronizeAll()
 	/* Load binary from file to memory */
 	int fileAllocLoad(const char *filePath, void **buf, unsigned int *size)
 	{
+		if( *buf )
+			return 0;
+		else
+			*buf = malloc( ICON0_SIZE );
+
 		int ret;
 		int fd;
 		CellFsStat status;
@@ -645,7 +650,7 @@ void SynchronizeAll()
 			return -1;
 		}
 
-		*buf = malloc( (size_t)status.st_size );
+		//*buf = malloc( (size_t)status.st_size );
 		if( *buf == NULL ) {
 			cellFsClose(fd);
 			return -1;
@@ -699,11 +704,11 @@ void SynchronizeAll()
 
 			break;
 		case OperationState_SaveAutosave:
-			if( ICON0_DATA )
+			/*if( ICON0_DATA )
 			{
 				free( ICON0_DATA );
 				ICON0_DATA = NULL;
-			}
+			}*/
 			result->result = _save_done ? CELL_SAVEDATA_CBRESULT_OK_LAST : CELL_SAVEDATA_CBRESULT_OK_NEXT;
 
 			if( _save_done )
@@ -781,7 +786,7 @@ void SynchronizeAll()
 
 		// The first 4 bytes are the length of the buffer.
 		memcpy( _file_buffer, &bufferLength, sizeof( unsigned int ) );
-
+		LOG_WRITE( "Buffer length: %d < %d\n", bufferLength, AUTOSAVE_SIZE );
 		// FIXME: Write checksum here.
 		unsigned int checksum = Checksum( &saveData[ 0 ], bufferLength );
 		memcpy( reinterpret_cast< char * >( _file_buffer ) + sizeof( unsigned int ), &checksum, sizeof( unsigned int ) );

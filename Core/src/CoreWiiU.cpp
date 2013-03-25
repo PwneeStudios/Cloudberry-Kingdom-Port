@@ -199,6 +199,10 @@ extern void InitializeIntermediateTextureHeap();
 // Reserve space for video player.
 extern void ReserveVideoPlayerMemory();
 
+// Initialize and terminate our save file system.  Declared in BinaryWriter.cpp.
+extern void InitSaveFS();
+extern void TerminateSaveFS();
+
 CoreWiiU::CoreWiiU( GameLoop &game ) :
 	running_( false ),
 	game_( game ),
@@ -364,6 +368,7 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 	GamePad::Initialize();
 	MediaPlayer::Initialize();
 
+	InitSaveFS();
 	InitializeErrorSystem();
 }
 
@@ -375,6 +380,7 @@ CoreWiiU::~CoreWiiU()
 	SAVEShutdown();
 
 	ShutdownErrorSystem();
+	TerminateSaveFS();
 
 	MediaPlayer::Shutdown();
 	GamePad::Shutdown();
