@@ -636,23 +636,35 @@ void SynchronizeAll()
 		CellFsStat status;
 		uint64_t readlen;
 
-		*buf = NULL;
+		//*buf = NULL;
 		*size = 0;
 
 		ret = cellFsOpen(filePath, CELL_FS_O_RDONLY, &fd, NULL, 0);
 		if(ret != CELL_FS_SUCCEEDED){
+			free(*buf);
+			*buf = NULL;
 			return -1;
 		}
 
 		ret = cellFsFstat(fd, &status);
 		if(ret != CELL_FS_SUCCEEDED){
 			cellFsClose(fd);
+			free(*buf);
+			*buf = NULL;
 			return -1;
 		}
 
 		//*buf = malloc( (size_t)status.st_size );
 		if( *buf == NULL ) {
 			cellFsClose(fd);
+			return -1;
+		}
+
+		if( status.st_size > ICON0_SIZE )
+		{
+			cellFsClose(fd);
+			free( *buf );
+			*buf = NULL;
 			return -1;
 		}
 
