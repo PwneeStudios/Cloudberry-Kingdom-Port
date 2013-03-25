@@ -63,7 +63,7 @@ namespace CloudberryKingdom
 #if defined(DEBUG)
                 return Data['#'];
 #else
-                return Data[' '];
+				return Data['#'];
 #endif
             }
         }
