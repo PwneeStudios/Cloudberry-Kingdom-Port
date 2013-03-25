@@ -158,7 +158,7 @@ namespace CloudberryKingdom
 		ThingsToSave.push_back( ThingToSave );
 	}
 
-void SynchronizeAll()
+	void SynchronizeAll()
 	{
 		int _max_CampaignLevel = 0, _max_CampaignCoins = 0, _max_CampaignIndex = 0;
 		int _max_LastPlayerLevelUpload = 0;
@@ -338,7 +338,9 @@ void SynchronizeAll()
 		}
 
 		PlayerManager::Players[ 0 ]->Load();
+#ifndef PS3
 		SynchronizeAll();
+#endif
 	}
 
 	void SaveGroup::Incr()
@@ -904,6 +906,8 @@ void SynchronizeAll()
 		LoadFromContainerArgs *args = reinterpret_cast< LoadFromContainerArgs * >( context );
 
 		EzStorage::LoadFromContainer( args->Container, args->FileName, args->LoadLogic, args->Fail );
+
+		SynchronizeAll();
 
 		delete args;
 
