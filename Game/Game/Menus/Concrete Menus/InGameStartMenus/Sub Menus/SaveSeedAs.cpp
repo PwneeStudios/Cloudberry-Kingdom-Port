@@ -74,7 +74,7 @@ namespace CloudberryKingdom
 		boost::shared_ptr<MenuItem> item;
 
 		// Header
-		HeaderText = boost::make_shared<EzText>( Localization::Words_SaveRandomSeedAs, ItemFont );
+		HeaderText = boost::make_shared<EzText>( Localization::Words_SaveRandomSeedAs, ItemFont, true, false );
 		HeaderText->Name = std::wstring( L"Header" );
 		SetHeaderProperties( HeaderText );
 		MyPile->Add( HeaderText );
@@ -180,7 +180,16 @@ namespace CloudberryKingdom
 			MyMenu->setPos( Vector2(-1125.001f, -319.4444f ) );
 
 			boost::shared_ptr<EzText> _t;
-			_t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->setPos( Vector2( 558.3326f, 913.5556f ) ); _t->setScale( 0.8019168f ); }
+			_t = MyPile->FindEzText( L"Header" );
+			if (_t != 0 )
+			{
+				_t->setPos( Vector2( 1130.555f, 813.5558f ) );
+				_t->setScale( 0.8019168f );
+				float w = _t->GetWorldWidth();
+				if ( w > 1900.0f )
+					_t->setScale( _t->getScale() * 1900.0f / w );
+			}			
+			
 			_t = MyPile->FindEzText( L"Start" ); if (_t != 0 ) { _t->setPos( Vector2( 705.5557f, -125.f ) ); _t->setScale( 0.6350001f ); }
 			_t = MyPile->FindEzText( L"Delete" ); if (_t != 0 ) { _t->setPos( Vector2( 2080.556f, 102.7779f ) ); _t->setScale( 0.4135835f ); }
 			_t = MyPile->FindEzText( L"Back" ); if (_t != 0 ) { _t->setPos( Vector2( 2080.554f, -0.0f ) ); _t->setScale( 0.4390834f ); }
