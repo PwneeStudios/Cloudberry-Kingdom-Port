@@ -5,6 +5,8 @@
 #include <Utility/Error.h>
 #include <Hacks/String.h>
 
+#include <Core/Tools/Set.h>
+
 #ifdef PS3
 #include <stdio.h>
 #include <stdlib.h>
@@ -156,6 +158,115 @@ namespace CloudberryKingdom
 		ThingsToSave.push_back( ThingToSave );
 	}
 
+void SynchronizeAll()
+	{
+		int _max_CampaignLevel = 0, _max_CampaignCoins = 0, _max_CampaignIndex = 0;
+		int _max_LastPlayerLevelUpload = 0;
+
+		// Find the maxes
+		for ( int i = 0; i < 4; ++i )
+		{
+			if ( PlayerManager::Players[ i ] == 0 ) continue;
+			const boost::shared_ptr<PlayerData> &p = PlayerManager::Players[ i ];
+
+			_max_CampaignLevel = __max( _max_CampaignLevel, p->CampaignLevel );
+			_max_CampaignCoins = __max( _max_CampaignCoins, p->CampaignCoins );
+			_max_CampaignIndex = __max( _max_CampaignIndex, p->CampaignIndex );
+			_max_LastPlayerLevelUpload = __max( _max_LastPlayerLevelUpload, p->LastPlayerLevelUpload );
+		}
+
+		// Push maxes to everyone
+		for ( int i = 0; i < 4; ++i )
+		{
+			if ( PlayerManager::Players[ i ] == 0 ) continue;
+			const boost::shared_ptr<PlayerData> &p = PlayerManager::Players[ i ];
+
+			p->CampaignLevel = _max_CampaignLevel;
+			p->CampaignCoins = _max_CampaignCoins;
+			p->CampaignIndex = _max_CampaignIndex;
+			p->LastPlayerLevelUpload = _max_LastPlayerLevelUpload;
+		}
+
+		// Make master awardment set
+		Set<int> awardments;
+		for ( int i = 0; i < 4; ++i )
+		{
+			if ( PlayerManager::Players[ i ] == 0 ) continue;
+			const boost::shared_ptr<PlayerData> &p = PlayerManager::Players[ i ];
+
+			for ( std::map<int, bool>::const_iterator guid = p->Awardments_Renamed->dict.begin(); guid != p->Awardments_Renamed->dict.end(); ++guid )
+				awardments.Add( guid->second );
+		}
+
+		// Push awardments to everyone
+		for ( int i = 0; i < 4; ++i )
+		{
+			if ( PlayerManager::Players[ i ] == 0 ) continue;
+			const boost::shared_ptr<PlayerData> &p = PlayerManager::Players[ i ];
+
+			for ( std::map<int, bool>::const_iterator guid = awardments.dict.begin(); guid != awardments.dict.end(); ++guid )
+				p->Awardments_Renamed->Add( guid->second );
+		}
+
+		// Calculate max highscores
+		std::map<int, boost::shared_ptr<ScoreEntry> > MaxHighScores;
+		for ( int i = 0; i < 4; ++i )
+		{
+			if ( PlayerManager::Players[ i ] == 0 ) continue;
+			const boost::shared_ptr<PlayerData> &p = PlayerManager::Players[ i ];
+
+			for ( std::map<int, boost::shared_ptr<ScoreEntry> >::const_iterator
+					HighScore = p->HighScores.begin();
+					HighScore != p->HighScores.end();
+					++HighScore )
+			{
+				if ( Contains( MaxHighScores, HighScore->first ) )
+				{
+					MaxHighScores[ HighScore->first ] = boost::make_shared<ScoreEntry>(
+						std::wstring( L"" ),
+						HighScore->second->GameId,
+						__max( HighScore->second->Value, MaxHighScores[ HighScore->first ]->Value ),
+						__max( HighScore->second->Score, MaxHighScores[ HighScore->first ]->Score ),
+						__max( HighScore->second->Level_Renamed, MaxHighScores[ HighScore->first ]->Level_Renamed ),
+						__min( HighScore->second->Attempts, MaxHighScores[ HighScore->first ]->Attempts ),
+						__min( HighScore->second->Time, MaxHighScores[ HighScore->first ]->Time ),
+						__max( HighScore->second->Date, MaxHighScores[ HighScore->first ]->Date ) );
+				}
+				else
+				{
+					MaxHighScores[ HighScore->first ] = HighScore->second;
+				}
+			}
+		}
+
+		// Push highscores to every player
+		for ( int i = 0; i < 4; ++i )
+		{
+			if ( PlayerManager::Players[ i ] == 0 ) continue;
+			const boost::shared_ptr<PlayerData> &p = PlayerManager::Players[ i ];
+
+			for ( std::map<int, boost::shared_ptr<ScoreEntry> >::const_iterator
+					HighScore = MaxHighScores.begin();
+					HighScore != MaxHighScores.end();
+					++HighScore )
+			{
+				p->HighScores[ HighScore->first ] = boost::make_shared<ScoreEntry>(
+					std::wstring( L"" ),
+					HighScore->second->GameId,
+					HighScore->second->Value,
+					HighScore->second->Score,
+					HighScore->second->Level_Renamed,
+					HighScore->second->Attempts,
+					HighScore->second->Time,
+					HighScore->second->Date );
+			}
+		}
+
+		// Fuck these stats
+		//boost::shared_ptr<PlayerStats> LifetimeStats, GameStats, LevelStats, TempStats;
+		//boost::shared_ptr<PlayerStats> CampaignStats;
+	}
+
 	void SaveGroup::SaveAll()
 	{
 #if PC_VERSION
@@ -176,15 +287,21 @@ namespace CloudberryKingdom
 
 	#if defined(NOT_PC)
 		// Save each player's info
-		std::vector<boost::shared_ptr<PlayerData> > vec = PlayerManager::getLoggedInPlayers();
-		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
-		{
-			Incr();
-			( *player )->ContainerName = std::wstring( L"Gamers" );
-			( *player )->FileName = std::wstring( L"___" ) + ( *player )->GetName();
-			( *player )->Save();
-			Wait();
-		}
+		//std::vector<boost::shared_ptr<PlayerData> > vec = PlayerManager::getLoggedInPlayers();
+		//for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
+		//{
+		//	Incr();
+		//	( *player )->ContainerName = std::wstring( L"Gamers" );
+		//	( *player )->FileName = std::wstring( L"___" ) + ( *player )->GetName();
+		//	( *player )->Save();
+		//	Wait();
+		//}
+		SynchronizeAll();
+		Incr();
+		PlayerManager::Players[ 0 ]->ContainerName = std::wstring( L"Gamers" );
+		PlayerManager::Players[ 0 ]->FileName = std::wstring( L"___" ) + ( *player )->GetName();
+		PlayerManager::Players[ 0 ]->Save();
+		Wait();
 	#endif
 
 	}
@@ -221,6 +338,7 @@ namespace CloudberryKingdom
 		}
 
 		PlayerManager::Players[ 0 ]->Load();
+		SynchronizeAll();
 	}
 
 	void SaveGroup::Incr()
