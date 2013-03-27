@@ -228,8 +228,8 @@ namespace CloudberryKingdom
 	static int MaxRanks;
 
 	// Sony says there is a maximum of 100 friends.
-	static SceNpId FriendIds[ 100 ];
-	static SceNpScorePlayerRankData FriendRanks[ 100 ];
+	static SceNpId FriendIds[ 101 ];
+	static SceNpScorePlayerRankData FriendRanks[ 101 ];
 
 	// Get our own NP id.  Implemented in CorePS3.cpp
 	extern void GetMyNpId( SceNpId &id );
