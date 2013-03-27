@@ -88,14 +88,17 @@ void GamePad::Update()
 	//bool wiiMoteActive = false;
 	bool channel0ThumbsticksWritten = false;
 
+	// We need to re-map the Wii motes so that player 4 overlaps with the GamePad.
+	static const int WIIMOTE_REMAP[] = { 1, 2, 3, 0 };
+
 	// Update Wiimotes.
 	for( int i = 0; i < WPAD_MAX_CONTROLLERS; i++ )
 	{
 		s32 error;
-		kpadReadLength[ i ] = KPADReadEx( i, &kpadStatus[ i ], 1, &error);
+		kpadReadLength[ WIIMOTE_REMAP[ i ] ] = KPADReadEx( i, &kpadStatus[ WIIMOTE_REMAP[ i ] ], 1, &error);
 
-		PAD_STATE[ i ].IsConnected = error != KPAD_READ_ERR_NO_CONTROLLER;
-		GLOBAL_CONNECTION_STATUS[ i + 1 ] = PAD_STATE[ i ].IsConnected;
+		PAD_STATE[ WIIMOTE_REMAP[ i ] ].IsConnected = error != KPAD_READ_ERR_NO_CONTROLLER;
+		GLOBAL_CONNECTION_STATUS[ WIIMOTE_REMAP[ i ] + 1 ] = PAD_STATE[ WIIMOTE_REMAP[ i ] ].IsConnected;
 
 		/*if( kpadIsConnected[ i ] && !PAD_STATE[ i ].IsConnected )
 		{
@@ -106,77 +109,79 @@ void GamePad::Update()
 			ReconnectController( i + 1 );
 		}*/
 
-		kpadIsConnected[ i ] = PAD_STATE[ i ].IsConnected;
+		kpadIsConnected[ WIIMOTE_REMAP[ i ] ] = PAD_STATE[ WIIMOTE_REMAP[ i ] ].IsConnected;
 
-		if( !PAD_STATE[ i ].IsConnected )
+		if( !PAD_STATE[ WIIMOTE_REMAP[ i ] ].IsConnected )
 			continue;
 
 		anythingElseConnected = true;
 
-		if( kpadStatus[ i ].wpad_err == WPAD_ERR_CORRUPTED )
+		if( kpadStatus[ WIIMOTE_REMAP[ i ] ].wpad_err == WPAD_ERR_CORRUPTED )
 			continue;
 		
-		if( kpadStatus[ i ].data_format == WPAD_FMT_CORE
-			|| kpadStatus[ i ].data_format == WPAD_FMT_CORE_ACC
-			|| kpadStatus[ i ].data_format == WPAD_FMT_CORE_ACC_DPD )
+		if( kpadStatus[ WIIMOTE_REMAP[ i ] ].data_format == WPAD_FMT_CORE
+			|| kpadStatus[ WIIMOTE_REMAP[ i ] ].data_format == WPAD_FMT_CORE_ACC
+			|| kpadStatus[ WIIMOTE_REMAP[ i ] ].data_format == WPAD_FMT_CORE_ACC_DPD )
 		{
-			if( kpadStatus[ i ].hold != 0 )
+			if( kpadStatus[ WIIMOTE_REMAP[ i ] ].hold != 0 )
 				vpadActive = false;
 
-			PAD_STATE[ i ].Buttons.A = ( kpadStatus[ i ].hold & KPAD_BUTTON_2 ) ? ButtonState_Pressed : ButtonState_Released;
-			PAD_STATE[ i ].Buttons.B = ( kpadStatus[ i ].hold & KPAD_BUTTON_1 ) ? ButtonState_Pressed : ButtonState_Released;
-			PAD_STATE[ i ].Buttons.X = ( kpadStatus[ i ].hold & KPAD_BUTTON_A ) ? ButtonState_Pressed : ButtonState_Released;
-			PAD_STATE[ i ].Buttons.Y = ( 
+			u32 hold = kpadStatus[ WIIMOTE_REMAP[ i ] ].hold;
+
+			PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.A = ( hold & KPAD_BUTTON_2 ) ? ButtonState_Pressed : ButtonState_Released;
+			PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.B = ( hold & KPAD_BUTTON_1 ) ? ButtonState_Pressed : ButtonState_Released;
+			PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.X = ( hold & KPAD_BUTTON_A ) ? ButtonState_Pressed : ButtonState_Released;
+			PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.Y = ( 
 										//kpadStatus[ i ].hold & KPAD_BUTTON_A ||
-										kpadStatus[ i ].hold & KPAD_BUTTON_MINUS ) ? ButtonState_Pressed : ButtonState_Released;
+										hold & KPAD_BUTTON_MINUS ) ? ButtonState_Pressed : ButtonState_Released;
 
-			PAD_STATE[ i ].Buttons.Start = ( kpadStatus[ i ].hold & KPAD_BUTTON_PLUS ) ? ButtonState_Pressed : ButtonState_Released;
+			PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.Start = ( hold & KPAD_BUTTON_PLUS ) ? ButtonState_Pressed : ButtonState_Released;
 
-			PAD_STATE[ i ].DPad.Down =  ( kpadStatus[ i ].hold & KPAD_BUTTON_LEFT  ) ? ButtonState_Pressed : ButtonState_Released;
-			PAD_STATE[ i ].DPad.Left =  ( kpadStatus[ i ].hold & KPAD_BUTTON_UP    ) ? ButtonState_Pressed : ButtonState_Released;
-			PAD_STATE[ i ].DPad.Right = ( kpadStatus[ i ].hold & KPAD_BUTTON_DOWN  ) ? ButtonState_Pressed : ButtonState_Released;
-			PAD_STATE[ i ].DPad.Up =    ( kpadStatus[ i ].hold & KPAD_BUTTON_RIGHT ) ? ButtonState_Pressed : ButtonState_Released;
+			PAD_STATE[ WIIMOTE_REMAP[ i ] ].DPad.Down =  ( hold & KPAD_BUTTON_LEFT  ) ? ButtonState_Pressed : ButtonState_Released;
+			PAD_STATE[ WIIMOTE_REMAP[ i ] ].DPad.Left =  ( hold & KPAD_BUTTON_UP    ) ? ButtonState_Pressed : ButtonState_Released;
+			PAD_STATE[ WIIMOTE_REMAP[ i ] ].DPad.Right = ( hold & KPAD_BUTTON_DOWN  ) ? ButtonState_Pressed : ButtonState_Released;
+			PAD_STATE[ WIIMOTE_REMAP[ i ] ].DPad.Up =    ( hold & KPAD_BUTTON_RIGHT ) ? ButtonState_Pressed : ButtonState_Released;
 
-			if( PAD_STATE[ i ].Buttons.A || PAD_STATE[ i ].Buttons.B || PAD_STATE[ i ].Buttons.X || PAD_STATE[ i ].Buttons.Y )
+			if( PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.A || PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.B || PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.X || PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.Y )
 			{
-				PAD_STATE[ i ].Type = GamePadState::ControllerType_Mini;
+				PAD_STATE[ WIIMOTE_REMAP[ i ] ].Type = GamePadState::ControllerType_Mini;
 				//if ( i == 1 ) LOG_WRITE( "Controller %d is mini.\n", i );
 			}
 		}
-		else if( kpadStatus[ i ].data_format == WPAD_FMT_URCC )
+		else if( kpadStatus[ WIIMOTE_REMAP[ i ] ].data_format == WPAD_FMT_URCC )
 		{
-			u32 hold = kpadStatus[ i ].ex_status.uc.hold;
-			Vec2 lStick = kpadStatus[ i ].ex_status.uc.lstick;
-			Vec2 rStick = kpadStatus[ i ].ex_status.uc.rstick;
+			u32 hold = kpadStatus[ WIIMOTE_REMAP[ i ] ].ex_status.uc.hold;
+			Vec2 lStick = kpadStatus[ WIIMOTE_REMAP[ i ] ].ex_status.uc.lstick;
+			Vec2 rStick = kpadStatus[ WIIMOTE_REMAP[ i ] ].ex_status.uc.rstick;
 
 			if( hold != 0 )
 			{
 				vpadActive = true;
-				PAD_STATE[ i ].Type = GamePadState::ControllerType_Standard;
+				PAD_STATE[ WIIMOTE_REMAP[ i ] ].Type = GamePadState::ControllerType_Standard;
 				//if ( i == 1 ) LOG_WRITE( "Controller %d is standard.\n", i );
 			}
 
-			PAD_STATE[ i ].Buttons.A = __max( PAD_STATE[ i ].Buttons.A, ( hold & KPAD_UC_BUTTON_A ) ? ButtonState_Pressed : ButtonState_Released );
-			PAD_STATE[ i ].Buttons.B = __max( PAD_STATE[ i ].Buttons.B, ( hold & KPAD_UC_BUTTON_B ) ? ButtonState_Pressed : ButtonState_Released );
-			PAD_STATE[ i ].Buttons.Y = __max( PAD_STATE[ i ].Buttons.Y, ( hold & KPAD_UC_BUTTON_X ) ? ButtonState_Pressed : ButtonState_Released );
-			PAD_STATE[ i ].Buttons.X = __max( PAD_STATE[ i ].Buttons.X, ( hold & KPAD_UC_BUTTON_Y ) ? ButtonState_Pressed : ButtonState_Released );
+			PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.A = __max( PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.A, ( hold & KPAD_UC_BUTTON_A ) ? ButtonState_Pressed : ButtonState_Released );
+			PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.B = __max( PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.B, ( hold & KPAD_UC_BUTTON_B ) ? ButtonState_Pressed : ButtonState_Released );
+			PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.Y = __max( PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.Y, ( hold & KPAD_UC_BUTTON_X ) ? ButtonState_Pressed : ButtonState_Released );
+			PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.X = __max( PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.X, ( hold & KPAD_UC_BUTTON_Y ) ? ButtonState_Pressed : ButtonState_Released );
 
-			PAD_STATE[ i ].Buttons.LeftShoulder = __max( PAD_STATE[ i ].Buttons.LeftShoulder, ( hold & KPAD_UC_BUTTON_L ) ? ButtonState_Pressed : ButtonState_Released );
-			PAD_STATE[ i ].Buttons.RightShoulder = __max( PAD_STATE[ i ].Buttons.RightShoulder, ( hold & KPAD_UC_BUTTON_R ) ? ButtonState_Pressed : ButtonState_Released );
-			PAD_STATE[ i ].Buttons.Start = __max( PAD_STATE[ i ].Buttons.Start, ( hold & KPAD_UC_BUTTON_PLUS ) ? ButtonState_Pressed : ButtonState_Released );
+			PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.LeftShoulder = __max( PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.LeftShoulder, ( hold & KPAD_UC_BUTTON_L ) ? ButtonState_Pressed : ButtonState_Released );
+			PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.RightShoulder = __max( PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.RightShoulder, ( hold & KPAD_UC_BUTTON_R ) ? ButtonState_Pressed : ButtonState_Released );
+			PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.Start = __max( PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.Start, ( hold & KPAD_UC_BUTTON_PLUS ) ? ButtonState_Pressed : ButtonState_Released );
 
-			PAD_STATE[ i ].DPad.Down = __max( PAD_STATE[ i ].DPad.Down, ( hold & KPAD_UC_BUTTON_DOWN ) ? ButtonState_Pressed : ButtonState_Released );
-			PAD_STATE[ i ].DPad.Left = __max( PAD_STATE[ i ].DPad.Left, ( hold & KPAD_UC_BUTTON_LEFT ) ? ButtonState_Pressed : ButtonState_Released );
-			PAD_STATE[ i ].DPad.Right = __max( PAD_STATE[ i ].DPad.Right, ( hold & KPAD_UC_BUTTON_RIGHT ) ? ButtonState_Pressed : ButtonState_Released );
-			PAD_STATE[ i ].DPad.Up = __max( PAD_STATE[ i ].DPad.Up, ( hold & KPAD_UC_BUTTON_UP ) ? ButtonState_Pressed : ButtonState_Released );
+			PAD_STATE[ WIIMOTE_REMAP[ i ] ].DPad.Down = __max( PAD_STATE[ WIIMOTE_REMAP[ i ] ].DPad.Down, ( hold & KPAD_UC_BUTTON_DOWN ) ? ButtonState_Pressed : ButtonState_Released );
+			PAD_STATE[ WIIMOTE_REMAP[ i ] ].DPad.Left = __max( PAD_STATE[ WIIMOTE_REMAP[ i ] ].DPad.Left, ( hold & KPAD_UC_BUTTON_LEFT ) ? ButtonState_Pressed : ButtonState_Released );
+			PAD_STATE[ WIIMOTE_REMAP[ i ] ].DPad.Right = __max( PAD_STATE[ WIIMOTE_REMAP[ i ] ].DPad.Right, ( hold & KPAD_UC_BUTTON_RIGHT ) ? ButtonState_Pressed : ButtonState_Released );
+			PAD_STATE[ WIIMOTE_REMAP[ i ] ].DPad.Up = __max( PAD_STATE[ WIIMOTE_REMAP[ i ] ].DPad.Up, ( hold & KPAD_UC_BUTTON_UP ) ? ButtonState_Pressed : ButtonState_Released );
 
-			PAD_STATE[ i ].Triggers.Left =  ( hold & KPAD_UC_TRIGGER_ZL ) / KPAD_UC_TRIGGER_ZL ? ButtonState_Pressed : ButtonState_Released;
-			PAD_STATE[ i ].Triggers.Right = ( hold & KPAD_UC_TRIGGER_ZR ) / KPAD_UC_TRIGGER_ZR ? ButtonState_Pressed : ButtonState_Released;
+			PAD_STATE[ WIIMOTE_REMAP[ i ] ].Triggers.Left =  ( hold & KPAD_UC_TRIGGER_ZL ) / KPAD_UC_TRIGGER_ZL ? ButtonState_Pressed : ButtonState_Released;
+			PAD_STATE[ WIIMOTE_REMAP[ i ] ].Triggers.Right = ( hold & KPAD_UC_TRIGGER_ZR ) / KPAD_UC_TRIGGER_ZR ? ButtonState_Pressed : ButtonState_Released;
 
-			PAD_STATE[ i ].ThumbSticks.Left = Vector2( lStick.x, lStick.y );
-			PAD_STATE[ i ].ThumbSticks.Right = Vector2( rStick.x, rStick.y );
+			PAD_STATE[ WIIMOTE_REMAP[ i ] ].ThumbSticks.Left = Vector2( lStick.x, lStick.y );
+			PAD_STATE[ WIIMOTE_REMAP[ i ] ].ThumbSticks.Right = Vector2( rStick.x, rStick.y );
 
-			if( 0 == i )
+			if( 0 == WIIMOTE_REMAP[ i ] )
 				channel0ThumbsticksWritten = true;
 		}
 	}
