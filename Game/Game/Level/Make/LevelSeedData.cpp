@@ -1146,7 +1146,7 @@ namespace CloudberryKingdom
 		//return Localization::WordString( DefaultHeroType->Name ) + std::wstring( L"_" ) + StringConverterHelper::toString( getSeed() );
 
             std::wstring hero = HeroName( DefaultHeroType->Name );
-            return hero + std::wstring( L"_" ) + Seed->ToString();
+            return hero + std::wstring( L"_" ) + StringConverterHelper::toString( getSeed() );
 
 	}
 
