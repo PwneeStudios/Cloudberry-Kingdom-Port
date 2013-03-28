@@ -260,6 +260,12 @@ namespace CloudberryKingdom
 
 		Vector2 ShiftSelect = Vector2();
 
+			float item_width = .375f;
+			if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_SPANISH )
+				item_width = .305f;
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_ITALIAN )
+				item_width = .305f;
+
 		// Make the hat select
 		if ( MyMenu->CurIndex == 2 )
 		{
@@ -271,7 +277,7 @@ namespace CloudberryKingdom
 			{
 				int hat_index = IndexOf( ColorSchemeManager::HatInfo, hat->first );
 				boost::shared_ptr<MenuItem> item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( hat->first->Name, Resources::Font_Grobold42, false, true ) ) );
-				item->ScaleText( .375f );
+				item->ScaleText( item_width );
 				item->MyObject = boost::static_pointer_cast<Object>( boost::make_shared<WrappedInt>( hat_index ) );
 
 				//list->MyList->AddItem( item, hat_index );
@@ -291,7 +297,7 @@ namespace CloudberryKingdom
 			{
 				int beard_index = IndexOf( ColorSchemeManager::BeardInfo, beard->first );
 				boost::shared_ptr<MenuItem> item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( beard->first->Name, Resources::Font_Grobold42, false, true ) ) );
-				item->ScaleText( .375f );
+				item->ScaleText( item_width );
 				item->MyObject = boost::static_pointer_cast<Object>( boost::make_shared<WrappedInt>( beard_index ) );
 
 				list->MyList->AddItem( item, item->MyObject );
@@ -317,7 +323,7 @@ namespace CloudberryKingdom
 
 				int clr_index = IndexOf( list, *item );
 				boost::shared_ptr<MenuItem> _item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( data->Name, Resources::Font_Grobold42, false, true ) ) );
-				_item->ScaleText( .375f );
+				_item->ScaleText( item_width );
 				_item->MyObject = boost::static_pointer_cast<Object>( boost::make_shared<WrappedInt>( clr_index ) );
 
 				select->MyList->AddItem( _item, _item->MyObject );

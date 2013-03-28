@@ -208,7 +208,8 @@ namespace CloudberryKingdom
 		VerifyBaseMenu::OnAdd();
 
 		TextBox = MakeMagic( GUI_TextBox, ( Tools::CurLevel->MyLevelSeed->SuggestedName(), Vector2(), Vector2(1.85f,.65f),.95f ) );
-		TextBox->MaxLength = 40;
+		TextBox->setControl( getControl() );
+		TextBox->MaxLength = 36;
 		TextBox->FixedToCamera = false;
 		TextBox->Pos->SetCenter( MyPile->FancyPos );
 		TextBox->Pos->RelVal = Vector2( 830.0f, 277.7778f );

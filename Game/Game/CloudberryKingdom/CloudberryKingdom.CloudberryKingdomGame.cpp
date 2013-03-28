@@ -81,11 +81,53 @@ namespace CloudberryKingdom
 #elif CAFE
 	const bool FinalRelease = true;
 #elif PS3
-	const bool FinalRelease = true;
+	const bool FinalRelease = false;
 #elif XBOX
 	const bool FinalRelease = true;
 #endif
 
+        boost::shared_ptr<EzText> CloudberryKingdomGame::SavingText = 0;
+        int CloudberryKingdomGame::ShowSavingDuration = 0;
+
+        const int ShowSavingLength = 80;
+	    const float ShowSaving_FadeInLength = 6;
+		const float ShowSaving_FadeOutLength = 9;
+
+        void CloudberryKingdomGame::ShowSaving()
+        {
+            //if (PlayerManager.GetNumPlayers() > 2)
+            {
+                if ( ShowSavingDuration > 0)
+                    ShowSavingDuration = static_cast<int>( ShowSavingLength - ShowSaving_FadeInLength );
+                else
+                    ShowSavingDuration = ShowSavingLength;
+
+				SavingText = boost::make_shared<EzText>( Localization::Words_Saving, Resources::Font_Grobold42, false );
+				SavingText->FixedToCamera = true;
+				SavingText->setPos( Vector2(1110, -750) );
+				SavingText->setScale( .37f );
+				StartMenu::SetTextSelected_Red( SavingText );
+            }
+        }
+
+        void CloudberryKingdomGame::DrawSavingText()
+        {
+            if ( ShowSavingDuration > 0 )
+            {
+                ShowSavingDuration--;
+
+                if ( Tools::getCurCamera() != 0 )
+                {
+                    if ( ShowSavingDuration < ShowSaving_FadeOutLength )
+						SavingText->Alpha = 1.0f - (ShowSaving_FadeOutLength - ShowSavingDuration) / ShowSaving_FadeOutLength;
+					else if (ShowSavingDuration > ShowSavingLength - ShowSaving_FadeInLength)
+						SavingText->Alpha = 1.0f - (ShowSaving_FadeInLength - (ShowSavingLength - ShowSavingDuration)) / ShowSaving_FadeInLength;
+
+                    SavingText->Draw( Tools::getCurCamera() );
+					Tools::QDrawer->Flush();
+                }
+            }
+        }
 
 
 #if defined(DEBUG)
@@ -1540,6 +1582,8 @@ float CloudberryKingdomGame::fps = 0;
 
 	void DrawWatermark()
 	{
+		return;
+
 		if ( FinalRelease ) return;
 		if (Tools::QDrawer == 0) return;
 		if (Resources::Font_Grobold42 == 0) return;
@@ -1768,6 +1812,7 @@ float CloudberryKingdomGame::fps = 0;
 		DrawExtra();
 
 		DrawWatermark();
+		DrawSavingText();
 	}
 
 	void CloudberryKingdomGame::DrawExtra()
