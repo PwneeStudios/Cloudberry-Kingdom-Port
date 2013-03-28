@@ -192,14 +192,14 @@ namespace CloudberryKingdom
 			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_ITALIAN )
 			{
 				boost::shared_ptr<MenuItem> _item;
-				_item = MyMenu->FindItemByName( L"list" ); if (_item != 0 ) { _item->setSetPos( Vector2(-2.77784f, 153.1746f ) ); _item->MyText->setScale( 0.375f ); _item->MySelectedText->setScale( 0.375f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+				_item = MyMenu->FindItemByName( L"list" ); if (_item != 0 ) { _item->setSetPos( Vector2(-2.77784f, 153.1746f ) ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 				_item = MyMenu->FindItemByName( L"Done" ); if (_item != 0 ) { _item->setSetPos( Vector2(-324.6669f, 51.66659f ) ); _item->MyText->setScale( 0.5425833f ); _item->MySelectedText->setScale( 0.5425833f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 				_item = MyMenu->FindItemByName( L"Cancel" ); if (_item != 0 ) { _item->setSetPos( Vector2(-330.2227f, -90.55334f ) ); _item->MyText->setScale( 0.4997506f ); _item->MySelectedText->setScale( 0.4997506f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 
 				MyMenu->setPos( Vector2( MyMenu->getPos().X, -484.127f ) );
 
 				boost::shared_ptr<EzText> _t;
-				_t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->setPos( Vector2( 9.920441f, 536.9045f ) ); _t->setScale( 1.f ); }
+				_t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->setPos( Vector2( 9.920441f, 536.9045f ) ); _t->setScale( .785f ); }
 				MyPile->setPos( Vector2( MyMenu->getPos().X, -492.0635f ) );
 			}
 			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_GERMAN )
@@ -231,14 +231,14 @@ namespace CloudberryKingdom
 			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_SPANISH )
 			{
 				boost::shared_ptr<MenuItem> _item;
-				_item = MyMenu->FindItemByName( L"list" ); if (_item != 0 ) { _item->setSetPos( Vector2(-2.77784f, 153.1746f ) ); _item->MyText->setScale( 0.375f ); _item->MySelectedText->setScale( 0.375f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+				_item = MyMenu->FindItemByName( L"list" ); if (_item != 0 ) { _item->setSetPos( Vector2(-2.77784f, 153.1746f ) ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 				_item = MyMenu->FindItemByName( L"Done" ); if (_item != 0 ) { _item->setSetPos( Vector2(-257.4442f, 51.66659f ) ); _item->MyText->setScale( 0.5535835f ); _item->MySelectedText->setScale( 0.5535835f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 				_item = MyMenu->FindItemByName( L"Cancel" ); if (_item != 0 ) { _item->setSetPos( Vector2(-260.2225f, -82.21997f ) ); _item->MyText->setScale( 0.5352504f ); _item->MySelectedText->setScale( 0.5352504f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 
 				MyMenu->setPos( Vector2( MyMenu->getPos().X, -484.127f ) );
 
 				boost::shared_ptr<EzText> _t;
-				_t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->setPos( Vector2( 9.920441f, 536.9045f ) ); _t->setScale( 1.f ); }
+				_t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->setPos( Vector2( 9.920441f, 536.9045f ) ); _t->setScale( .785f ); }
 				MyPile->setPos( Vector2( MyPile->getPos().X, -492.0635f ) );
 			}
 			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_JAPANESE )
@@ -267,6 +267,10 @@ namespace CloudberryKingdom
 				_t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->setPos( Vector2( 9.920441f, 536.9045f ) ); _t->setScale( 1.f ); }
 				MyPile->setPos( Vector2( MyPile->getPos().X, -492.0635f ) );
 			}
+
+			boost::shared_ptr<EzText> __t;
+			__t = MyPile->FindEzText( L"Header" ); if (__t != 0 ) { __t->setScale( __t->getScale() * .875f ); }
+
 	}
 
 	void ListSelectPanel::Back()

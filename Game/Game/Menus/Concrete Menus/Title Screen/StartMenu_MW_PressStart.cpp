@@ -17,7 +17,9 @@ namespace CloudberryKingdom
 		InitializeInstanceFields();
 
 		CkBaseMenu::CkBaseMenu_Construct();
-		
+
+		CloudberryKingdomGame::PastPressStart = false;
+
 		this->Title = Title;
 
 		return boost::static_pointer_cast<StartMenu_MW_PressStart>( shared_from_this() );
@@ -127,6 +129,8 @@ namespace CloudberryKingdom
 
 	void StartMenu_MW_PressStart::OnReturnTo()
 	{
+		CloudberryKingdomGame::PastPressStart = false;
+
 		CkBaseMenu::OnReturnTo();
 	}
 

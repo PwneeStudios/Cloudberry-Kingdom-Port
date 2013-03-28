@@ -36,6 +36,12 @@ namespace CloudberryKingdom
 		static int address;
 #endif
 
+        static boost::shared_ptr<EzText> SavingText;
+        static int ShowSavingDuration;
+
+		static void ShowSaving();
+        void DrawSavingText();
+
 		static void memdebug_DumpStart();
 		static void memdebug_DumpEnd();
 

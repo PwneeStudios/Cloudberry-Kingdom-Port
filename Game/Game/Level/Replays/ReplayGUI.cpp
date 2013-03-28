@@ -911,6 +911,12 @@ namespace CloudberryKingdom
 				MoveUp += 30;
 			}
 
+#if PS3
+			boost::shared_ptr<QuadClass> _q;
+			_q = MyPile->FindQuad( L"Button_LB" ); if (_q != 0 ) { _q->Scale( .8f ); }
+			_q = MyPile->FindQuad( L"Button_RB" ); if (_q != 0 ) { _q->Scale( .8f ); }
+#endif
+
 			MyPile->setPos( Vector2( MyPile->getPos().X, MyPile->getPos().Y + MoveUp ) );
 			boost::shared_ptr<QuadClass> __q;
 			__q = MyPile->FindQuad( L"Backdrop2" ); if (__q != 0 ) { __q->setPos( __q->getPos() + MoveUp_Back ); }

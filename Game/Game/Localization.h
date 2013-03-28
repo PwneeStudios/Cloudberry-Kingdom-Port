@@ -435,6 +435,11 @@ Words_PressToJoin_WiiU,
 Words_Press_WiiU,
 Words_Press_PS3,
 
+Words_Xbox_NoPermissionToBuy,
+Words_Err_MustBeSignedInToLiveToAccess,
+
+Words_Saving,
+
 Words_EnumLength
 		};
 

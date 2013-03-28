@@ -431,7 +431,12 @@ namespace CloudberryKingdom
 
 				Tools::SongWad->Restart( true, false );
 				Tools::SongWad->Pause();
+#ifdef PS3
+				// There is a delay at the beginning of each song on PS3 to avoid static, so we must start the music a little earlier to compensate.
+				lvl->MyGame->WaitThenDo( zoomout_start + zoomout_length + 0, boost::make_shared<StartMusicLambda>() );
+#else
 				lvl->MyGame->WaitThenDo( zoomout_start + zoomout_length + 28, boost::make_shared<StartMusicLambda>() );
+#endif
 			}
 
 			lvl->Bobs[ 0 ]->CapeWind = CoreMath::LerpRestrict( 2.7f, 0.f, wind_t->getVal() ) * Cape::SineWind( Vector2(-1, .15f), .75f + .3f, 4.5f, static_cast<float>( lvl->CurPhsxStep ) );

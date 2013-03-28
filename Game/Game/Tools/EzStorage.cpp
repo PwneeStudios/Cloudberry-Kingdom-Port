@@ -285,6 +285,10 @@ namespace CloudberryKingdom
 			Wait();
 		}
 
+#if PS3
+		CloudberryKingdomGame::ShowSaving();
+#endif
+
 	#if defined(NOT_PC)
 		// Save each player's info
 		//std::vector<boost::shared_ptr<PlayerData> > vec = PlayerManager::getLoggedInPlayers();

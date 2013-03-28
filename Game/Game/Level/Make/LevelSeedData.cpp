@@ -1086,9 +1086,68 @@ namespace CloudberryKingdom
 		Hero->MyCustomPhsxData.Init( vals );
 	}
 
+        std::wstring HeroName( Localization::Words word)
+        {
+            switch ( word )
+            {
+                case Localization::Words_ClassicHero:
+                    return std::wstring( L"cls" );
+                case Localization::Words_Jetman:
+                    return std::wstring( L"jtm" );
+                case Localization::Words_DoubleJump:
+                    return std::wstring( L"dbj" );
+                case Localization::Words_TinyBob:
+                    return std::wstring( L"tny" );
+                case Localization::Words_Wheelie:
+                    return std::wstring( L"whl" );
+                case Localization::Words_Spaceship:
+                    return std::wstring( L"spc" );
+                case Localization::Words_HeroInABox:
+                    return std::wstring( L"box" );
+                case Localization::Words_Bouncy:
+                    return std::wstring( L"bnc" );
+                case Localization::Words_Rocketbox:
+                    return std::wstring( L"rck" );
+                case Localization::Words_FatBob:
+                    return std::wstring( L"hero" );
+                case Localization::Words_PhaseBob:
+                    return std::wstring( L"phs" );
+                case Localization::Words_Viridian:
+                    return std::wstring( L"grv" );
+                case Localization::Words_TimeMaster:
+                    return std::wstring( L"tma" );
+                case Localization::Words_Meatboy:
+                    return std::wstring( L"mtb" );
+                case Localization::Words_JetpackWheelie:
+                    return std::wstring( L"jpw" );
+                case Localization::Words_TinyDoubleJump:
+                    return std::wstring( L"tdj" );
+                case Localization::Words_BoxJetpack:
+                    return std::wstring( L"bjp" );
+                case Localization::Words_DoubleJumpWheelie:
+                    return std::wstring( L"djw" );
+                case Localization::Words_FatBouncy:
+                    return std::wstring( L"fbn" );
+                case Localization::Words_TinyBox:
+                    return std::wstring( L"tnb" );
+                case Localization::Words_PhasingJetpack:
+                    return std::wstring( L"phj" );
+                case Localization::Words_BouncyJetpack:
+                    return std::wstring( L"bcj" );
+                case Localization::Words_FatDoubleJump:
+                    return std::wstring( L"fdj" );
+                default:
+                    return std::wstring( L"hero" );
+            }
+        }
+
 	std::wstring LevelSeedData::SuggestedName()
 	{
-		return Localization::WordString( DefaultHeroType->Name ) + std::wstring( L"_" ) + StringConverterHelper::toString( getSeed() );
+		//return Localization::WordString( DefaultHeroType->Name ) + std::wstring( L"_" ) + StringConverterHelper::toString( getSeed() );
+
+            std::wstring hero = HeroName( DefaultHeroType->Name );
+            return hero + std::wstring( L"_" ) + StringConverterHelper::toString( getSeed() );
+
 	}
 
 	std::wstring LevelSeedData::GetNameFromSeedStr( const std::wstring &seed )

@@ -364,7 +364,11 @@ namespace CloudberryKingdom
 		item->setGo( Cast::ToItem( boost::make_shared<Action_PlayAgainProxy>( boost::static_pointer_cast<GameOverPanel>( shared_from_this() ) ) ) );
 		AddItem( item );
 
+#if PS3
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Leaderboard, ItemFont ) ) );
+#else
 		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_HighScores, ItemFont ) ) );
+#endif
 		item->setGo( Cast::ToItem( boost::make_shared<Action_ShowHighScoresProxy>( boost::static_pointer_cast<GameOverPanel>( shared_from_this() ) ) ) );
 		AddItem( item );
 
