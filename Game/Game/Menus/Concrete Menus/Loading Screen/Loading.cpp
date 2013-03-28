@@ -222,7 +222,7 @@ L"Ubisoft and the Ubisoft logo are trademarks of Ubisoft Entertainment in the US
             BlackQuad->setAlpha( BlackQuad->getAlpha() - .0633f );
         
 #ifdef PS3
-		if ( DrawCount > 180 )
+		if ( DrawCount > 240 )
 #elif CAFE
 		if ( DrawCount > 235 )
 #else

@@ -269,7 +269,5 @@ void SchedulerPS3::WorkerThread()
 
 		job->Do();
 		delete job;
-
-		sys_timer_usleep( 1000 );
 	}
 }

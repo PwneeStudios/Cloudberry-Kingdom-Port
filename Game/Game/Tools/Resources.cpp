@@ -24,6 +24,9 @@
 
 #ifdef PS3
 #include <sys/ppu_thread.h>
+#include <sys/timer.h>
+
+extern bool gTrophyContextRegistered;
 #endif
 
 #ifdef CAFE
@@ -427,6 +430,9 @@ boost::shared_ptr<Thread> Resources::LoadThread = 0;
 		StopScheduler();
 #endif
 
+#ifdef PS3
+		int resourceCounter = 0;
+#endif
         // Set off load calls
 		for ( std::vector<boost::shared_ptr<EzTexture> >::const_iterator Tex = Tools::TextureWad->TextureList.begin();
 			  Tex != Tools::TextureWad->TextureList.end(); ++Tex )
@@ -449,6 +455,16 @@ boost::shared_ptr<Thread> Resources::LoadThread = 0;
 			{
 				( *Tex )->setTex( Tools::GameClass->Content->Load< Texture2D >( ( *Tex )->Path ) );
 			}
+
+#ifdef PS3
+			if( resourceCounter == 2 )
+			{
+				// FIXME: Originally this was a 1 second sleep.
+				while( !gTrophyContextRegistered )
+					sys_timer_usleep( 100000 );
+			}
+			resourceCounter++;
+#endif
 		}
 
 #ifdef CAFE

@@ -1084,6 +1084,8 @@ namespace CloudberryKingdom
 	{
 		result->result = _load_done ? CELL_SAVEDATA_CBRESULT_OK_LAST : CELL_SAVEDATA_CBRESULT_OK_NEXT;
 
+		LOG_WRITE( "FileOperationLoad, _load_done = %d\n", _load_done );
+
 		if( _load_done )
 			return;
 
@@ -1179,6 +1181,9 @@ namespace CloudberryKingdom
 			SYS_MEMORY_CONTAINER_ID_INVALID,
 			NULL
 		);
+
+		LOG_WRITE( "cellSaveDataAutoLoad2 returned 0x%x\n", ret );
+		LOG_WRITE( "_file_buffer = 0x%x\n", _file_buffer );
 
 		if( ret == CELL_SAVEDATA_RET_OK && _file_buffer )
 		{
