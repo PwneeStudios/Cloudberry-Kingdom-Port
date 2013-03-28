@@ -79,7 +79,7 @@ namespace CloudberryKingdom
 #ifdef PC_VERSION
 	const bool FinalRelease = false;
 #elif CAFE
-	const bool FinalRelease = true;
+	const bool FinalRelease = false;
 #elif PS3
 	const bool FinalRelease = true;
 #elif XBOX
@@ -335,12 +335,17 @@ namespace CloudberryKingdom
 		}
 
 		// FIXME: Make this function part of CloudberryKingdomGame.
-		bool IsParentalLevelSatisfied( bool showError )
+		bool IsParentalLevelSatisfied( bool showError, bool &isOffline )
 		{
 #ifdef PS3
-			if( IsOnlineContentRestricted() )
+			OnlineContentStatus status = IsOnlineContentRestricted();
+			isOffline = false;
+
+			if( status )
 			{
-				if( showError )
+				isOffline = status == OnlineContentStatus_DISCONNECTED;
+
+				if( showError && !isOffline )
 				{
 					std::string str = WstringToUtf8( Localization::WordString( Localization::Words_OnlinePermission_PS3 ) );
 					DisplayError( ErrorType( str ) );
@@ -1540,6 +1545,8 @@ float CloudberryKingdomGame::fps = 0;
 
 	void DrawWatermark()
 	{
+		return;
+
 		if ( FinalRelease ) return;
 		if (Tools::QDrawer == 0) return;
 		if (Resources::Font_Grobold42 == 0) return;

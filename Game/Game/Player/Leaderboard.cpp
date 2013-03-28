@@ -73,13 +73,14 @@ namespace CloudberryKingdom
 	}
 #endif
 
-	extern bool IsParentalLevelSatisfied( bool );
+	extern bool IsParentalLevelSatisfied( bool, bool & );
 
 	void Leaderboard::WriteToLeaderboard( boost::shared_ptr<ScoreEntry> score )
 	{
 		if ( !CloudberryKingdomGame::OnlineFunctionalityAvailable() ) return;
 
-		if( !IsParentalLevelSatisfied( false ) ) return;
+		bool isOffline;
+		if( !IsParentalLevelSatisfied( false, isOffline ) ) return;
 
         if ( WritingInProgress ) return;
 

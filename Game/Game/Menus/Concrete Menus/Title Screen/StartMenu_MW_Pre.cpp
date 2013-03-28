@@ -110,16 +110,26 @@ namespace CloudberryKingdom
         Call( MakeMagic( StartMenu_MW, ( Title ) ), 0 );
     }
 
-	extern bool IsParentalLevelSatisfied( bool );
+	extern bool IsParentalLevelSatisfied( bool, bool & );
 
     void StartMenu_MW_Pre::MenuGo_Leaderboards( boost::shared_ptr<MenuItem> item )
     {
 		if ( CloudberryKingdomGame::OnlineFunctionalityAvailable() )
 		{
-			if( IsParentalLevelSatisfied( true ) )
+			bool isOffline;
+			bool isSatisfied = IsParentalLevelSatisfied( false, isOffline );
+			if( isSatisfied && !isOffline )
 			{
 				Challenge::LeaderboardIndex = ArcadeMenu::LeaderboardIndex( 0, 0 );
 				Call( MakeMagic( LeaderboardGUI, ( Title, MenuItem::ActivatingPlayer ) ), 0 );
+			}
+			else if( !isSatisfied && !isOffline )
+			{
+				IsParentalLevelSatisfied( true, isOffline );
+			}
+			else if( isOffline )
+			{
+				CloudberryKingdomGame::ShowError_MustBeSignedInToLiveForLeaderboard();
 			}
 			//Call(new LeaderboardGUI(Title, null, MenuItem.ActivatingPlayer), 0);
 		}

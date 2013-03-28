@@ -87,7 +87,7 @@ int GetParentalControlLevel()
 	return controlLevel;
 }
 
-bool IsOnlineContentRestricted()
+OnlineContentStatus IsOnlineContentRestricted()
 {
 	int isRestricted;
 	int age;
@@ -96,7 +96,7 @@ bool IsOnlineContentRestricted()
 	if( ret < 0 )
 	{
 		LOG_WRITE( "sceNpManagerGetContentRatingFlag failed: 0x%x\n", ret );
-		return true;
+		return OnlineContentStatus_DISCONNECTED;
 	}
 
 	if( age >= ONLINE_AGE_CUTOFF )
@@ -104,7 +104,7 @@ bool IsOnlineContentRestricted()
 		isRestricted = false;
 	}
 
-	return isRestricted;
+	return isRestricted ? OnlineContentStatus_RESTRICTED : OnlineContentStatus_AVAILABLE;
 }
 
 bool IsAsianButtonConfiguration()
