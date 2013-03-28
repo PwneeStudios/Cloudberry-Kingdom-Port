@@ -48,8 +48,10 @@
 #endif
 
 #ifdef PS3
+	#include <algorithm>
 	#include <Utility/NetworkPS3.h>
 	#include <netex/libnetctl.h>
+	#include <vector>
 #endif
 
 #ifdef CAFE
@@ -1339,32 +1341,96 @@ float CloudberryKingdomGame::fps = 0;
 #endif
         }
 
+#ifdef PS3
+		static std::vector< int > gDisconnectedControllers;
+		static int gCurrentlyDisconnectedController = -1;
+
+		bool IsControllerDisconnected( int controller )
+		{
+			return std::find( gDisconnectedControllers.begin(), gDisconnectedControllers.end(), controller ) != gDisconnectedControllers.end();
+		}
+
+		int NewestDisconnectedController()
+		{
+			if( gDisconnectedControllers.size() == 0 )
+				return -1;
+
+			return gDisconnectedControllers.back();
+		}
+
+		void ConnectController( int controller )
+		{
+			std::vector< int >::iterator i = std::remove( gDisconnectedControllers.begin(), gDisconnectedControllers.end(), controller );
+			gDisconnectedControllers.erase( i, gDisconnectedControllers.end() );
+		}
+
+		void DisconnectController( int controller )
+		{
+			ConnectController( controller );
+			gDisconnectedControllers.push_back( controller );
+		}
+
 		static bool ClearError()
 		{
 			ButtonCheck::UpdateControllerAndKeyboard_StartOfStep();
 
-			int numConnected = 0;
-			for( int i = 0; i < 4; ++i )
-			{
-				if( Tools::GamepadState[i].IsConnected )
-					numConnected++;
-			}
+			int latestController = gCurrentlyDisconnectedController;
 
-			if( numConnected == 0 )
-				return false;
-
-			for (int i = 0; i < 4; i++)
+			if( CloudberryKingdomGame::CurrentPresence != Presence_TitleScreen )
 			{
-				if ( ( PlayerManager::Players[i] != 0 ) && PlayerManager::Players[i]->Exists && !Tools::GamepadState[i].IsConnected )
+				for (int i = 0; i < 4; i++)
 				{
-					return false;
+					if( ( PlayerManager::Players[i] != 0 ) && PlayerManager::Players[i]->Exists && !Tools::GamepadState[i].IsConnected )
+					{
+						if( !IsControllerDisconnected( i ) )
+							latestController = i;
+						break;
+					}
+					else
+						ConnectController( i );
 				}
 			}
+			else
+			{
+				int numConnected = 0;
+				for( int i = 0; i < 4; ++i )
+				{
+					if( Tools::GamepadState[i].IsConnected )
+						numConnected++;
+				}
 
-			return true;
+				if( numConnected == 0 )
+				{
+					if( !IsControllerDisconnected( 0 ) )
+						latestController = 0;
+				}
+				else
+					ConnectController( 0 );
+			}
+
+			if( gDisconnectedControllers.size() == 0 )
+				latestController = -1;
+
+			if( latestController == -1 )
+			{
+				gCurrentlyDisconnectedController = -1;
+				return true;
+			}
+			else if( latestController != gCurrentlyDisconnectedController )
+			{
+				DisconnectController( latestController );
+				gCurrentlyDisconnectedController = latestController;
+				DisplayError( ErrorType( WstringToUtf8(
+					Format( Localization::WordString( Localization::Words_Err_PS3_NoGamePadDetected ).c_str(), latestController + 1 ) ),
+					NULL, ErrorType::NONE, ClearError, false ) );
+				return true;
+			}
+
+			return false;
 		}
+#endif
 
-		#ifdef CAFE
+#ifdef CAFE
 
 		// Check for disconnected controller on CAFE.
 		void DisconnectedControllerCAFE( )
@@ -1433,29 +1499,39 @@ float CloudberryKingdomGame::fps = 0;
 			return false;
 #endif
 
+#ifdef PS3
 			if( !PastPressStart )
 				return false;
-
-			int numConnected = 0;
-			for( int i = 0; i < 4; ++i )
-			{
-				if( Tools::GamepadState[i].IsConnected )
-					numConnected++;
-			}
-
-			if( numConnected == 0 )
-				return true;
 
 			if( CurrentPresence != Presence_TitleScreen )
 			{
 				for (int i = 0; i < 4; i++)
 				{
 					if( ( PlayerManager::Players[i] != 0 ) && PlayerManager::Players[i]->Exists && !Tools::GamepadState[i].IsConnected )
+					{
+						DisconnectController( i );
 						return true;
+					}
+				}
+			}
+			else
+			{
+				int numConnected = 0;
+				for( int i = 0; i < 4; ++i )
+				{
+					if( Tools::GamepadState[i].IsConnected )
+						numConnected++;
+				}
+
+				if( numConnected == 0 )
+				{
+					DisconnectController( 0 );
+					return true;
 				}
 			}
 
 			return false;
+#endif
 		}
 
 #if XBOX
@@ -1713,9 +1789,15 @@ float CloudberryKingdomGame::fps = 0;
 
 			// Figure out which gamepad is disconnected.
 
-			int controller = 0;
+			int controller = NewestDisconnectedController();
+			gCurrentlyDisconnectedController = controller;
 
-			int numConnected = 0;
+			printf( "Disconnected controller %d\n", controller );
+			DisplayError( ErrorType( WstringToUtf8(
+				Format( Localization::WordString( Localization::Words_Err_PS3_NoGamePadDetected ).c_str(), controller + 1 ) ),
+				NULL, ErrorType::NONE, ClearError, false ) );
+
+			/*int numConnected = 0;
 			for( int i = 0; i < 4; ++i )
 			{
 				if( Tools::GamepadState[i].IsConnected )
@@ -1740,7 +1822,7 @@ float CloudberryKingdomGame::fps = 0;
 
 			DisplayError( ErrorType( WstringToUtf8(
 				Format( Localization::WordString( Localization::Words_Err_PS3_NoGamePadDetected ).c_str(), controller + 1 ) ),
-				NULL, ErrorType::NONE, ClearError, false ) );
+				NULL, ErrorType::NONE, ClearError, false ) );*/
 #endif
 		}
 #ifdef CAFE
