@@ -197,6 +197,10 @@ void StopScheduler()
 		OSInitSemaphore( &SchedulerPausingSemaphore, 0 );
 
 		SCHEDULER->RunJobASAP( new PauseSchedulerJob );
+
+		// Pump main thread in case a load job is blocking.
+		SCHEDULER->MainThread(); 
+
 		OSWaitSemaphore( &SchedulerPausingSemaphore );
 
 		LOG_WRITE( "Scheduler stopped in PauseSchedulerJob\n" );

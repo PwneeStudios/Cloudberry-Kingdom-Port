@@ -119,9 +119,11 @@ void GamePad::Update()
 		if( kpadStatus[ WIIMOTE_REMAP[ i ] ].wpad_err == WPAD_ERR_CORRUPTED )
 			continue;
 		
-		if( kpadStatus[ WIIMOTE_REMAP[ i ] ].data_format == WPAD_FMT_CORE
+		if( kpadStatus[ WIIMOTE_REMAP[ i ] ].data_format != WPAD_FMT_URCC
+			&& kpadStatus[ WIIMOTE_REMAP[ i ] ].data_format != WPAD_FMT_BALANCE_CHECKER
+			/*kpadStatus[ WIIMOTE_REMAP[ i ] ].data_format == WPAD_FMT_CORE
 			|| kpadStatus[ WIIMOTE_REMAP[ i ] ].data_format == WPAD_FMT_CORE_ACC
-			|| kpadStatus[ WIIMOTE_REMAP[ i ] ].data_format == WPAD_FMT_CORE_ACC_DPD )
+			|| kpadStatus[ WIIMOTE_REMAP[ i ] ].data_format == WPAD_FMT_CORE_ACC_DPD*/ )
 		{
 			if( kpadStatus[ WIIMOTE_REMAP[ i ] ].hold != 0 )
 				vpadActive = false;

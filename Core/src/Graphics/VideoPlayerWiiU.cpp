@@ -25,7 +25,6 @@
 #include "WiiU/MovieTest.h"
 #include "WiiU/videorender.h"
 
-
 #pragma ghs nowarning 111
 
 /*=========================================================================*
