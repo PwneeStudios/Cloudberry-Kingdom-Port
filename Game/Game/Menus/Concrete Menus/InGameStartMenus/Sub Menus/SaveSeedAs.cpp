@@ -177,7 +177,7 @@ namespace CloudberryKingdom
 
 	void SaveSeedAs::SetPosition()
 	{
-			MyMenu->setPos( Vector2(-1125.001f, -319.4444f ) );
+			MyMenu->setPos( Vector2( -1180.001f, -240 ) );
 
 			boost::shared_ptr<EzText> _t;
 			_t = MyPile->FindEzText( L"Header" );
@@ -200,7 +200,7 @@ namespace CloudberryKingdom
 			_q = MyPile->FindQuad( L"Button_B" ); if (_q != 0 ) { _q->setPos( Vector2( 2033.333f, -83.33337f ) ); _q->setSize( Vector2( 45.91659f, 45.91659f ) ); }
 
 			//MyPile->setPos( Vector2(-1125.001f, -319.4444f ) );
-			MyPile->setPos( Vector2(-1175.001f, -220.0f ) );
+			MyPile->setPos( Vector2( -1180.001f, -240 ) );
 	}
 
 	void SaveSeedAs::OnAdd()

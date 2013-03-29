@@ -16,7 +16,7 @@ namespace CloudberryKingdom
 
 		// Scale to fit
 		Vector2 size = text->GetWorldSize();
-		float max = MyGame->getCam()->GetWidth() - 400;
+		float max = MyGame->getCam()->GetWidth() - 1150;
 		if ( size.X > max )
 			text->setScale( text->getScale() * max / size.X );
 

@@ -1,5 +1,7 @@
 #include <global_header.h>
 
+#include <Game\CloudberryKingdom\CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
 
@@ -161,7 +163,14 @@ namespace CloudberryKingdom
         MyPile->Add(q, L"rb");
 
 
-        q = boost::make_shared<QuadClass>(ButtonTexture::getGo() ); q->ScaleXToMatchRatio(130);
+		if ( !CloudberryKingdomGame::AsianButtonSwitch )
+		{
+			q = boost::make_shared<QuadClass>(ButtonTexture::getBack() ); q->ScaleXToMatchRatio(130);
+		}
+		else
+		{
+			q = boost::make_shared<QuadClass>(ButtonTexture::getGo() ); q->ScaleXToMatchRatio(130);
+		}
         MyPile->Add(q, L"jump");
 
         q = boost::make_shared<QuadClass>(ButtonTexture::getGo() ); q->ScaleXToMatchRatio(130);
