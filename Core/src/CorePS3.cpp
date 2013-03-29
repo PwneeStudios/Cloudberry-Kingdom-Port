@@ -740,11 +740,11 @@ void CheckNPDRMFileThread( uint64_t context )
 	{
 		// Good to go.
 	}
-	else
+	/*else
 	{
 		// Error!
 		DisplayError( ErrorType( ret, NPDRMInvalidCompleteCallback, ErrorType::NONE, NULL, true ) );
-	}
+	}*/
 
 	sys_ppu_thread_exit( 0 );
 }
