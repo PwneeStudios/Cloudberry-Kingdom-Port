@@ -230,6 +230,8 @@ CorePS3::CorePS3( GameLoop &game ) :
 	CellGameContentSize size;
 	char dirName[ CELL_GAME_PATH_MAX ];
 	cellGameBootCheck( &type, &attributes, &size, dirName );
+	LOG_WRITE( "cellGameBootCheck: type = %d, attributes = 0x%x, dirName = %s\n", type, attributes, dirName );
+	LOG_WRITE( "CellGameContentSize: hddFreeSizeKB = %d KB, sizeKB = %d KB, sysSizeKB = %d KB\n", size.hddFreeSizeKB, size.sizeKB, size.sysSizeKB );
 
 	char contentInfoPath[ CELL_GAME_PATH_MAX ];
 	char usrdirPath[ CELL_GAME_PATH_MAX ];
@@ -240,7 +242,7 @@ CorePS3::CorePS3( GameLoop &game ) :
 	// game code.  Also the files should be pre-installed on the disk.
 	// PS3_PATH_PREFIX = "/dev_hdd0/game/NPEB01312/USRDIR/"; // SCEE
 	// PS3_PATH_PREFIX = "/dev_hdd0/game/NPUB31177/USRDIR/"; // SCEA
-	PS3_PATH_PREFIX = "/app_home/";
+	// PS3_PATH_PREFIX = "/app_home/";
 	LOG_WRITE( "Running in %s\nContent dir %s\n", dirName, usrdirPath );
 #ifdef DEBUG
 	PS3_PATH_PREFIX = "/app_home/";
@@ -441,6 +443,9 @@ static std::wstring Format( const wchar_t *format, ... )
 
 bool gTrophyContextRegistered = false;
 
+// Space needed for trophy, 
+//extern uint64_t RequiredTrophySpace;
+
 void RegisterTrophyContextThread( uint64_t context )
 {
 	ContextRegistered = false;
@@ -448,13 +453,14 @@ void RegisterTrophyContextThread( uint64_t context )
 	gTrophyContextRegistered = false;
 
 	// Register trophy.
-	int ret = sceNpTrophyRegisterContext( TrophyContext, TrophyHandle, TrophyStatusCallback, NULL, 0 );
+	int ret = sceNpTrophyRegisterContext( TrophyContext, TrophyHandle, TrophyStatusCallback, NULL,
+		SCE_NP_TROPHY_OPTIONS_REGISTER_CONTEXT_SHOW_ERROR_EXIT );
 	if( ret < 0 )
 	{
 		LOG_WRITE( "Couldn't register trophy context: 0x%x\n", ret );
 		ContextRegistered = false;
 
-		if( SCE_NP_TROPHY_ERROR_INSUFFICIENT_DISK_SPACE == ret )
+		/*if( SCE_NP_TROPHY_ERROR_INSUFFICIENT_DISK_SPACE == ret )
 		{
 			uint64_t requiredTrophySpace;
 			ret = sceNpTrophyGetRequiredDiskSpace( TrophyContext, TrophyHandle, &requiredTrophySpace, 0 );
@@ -504,7 +510,7 @@ void RegisterTrophyContextThread( uint64_t context )
 			}
 			else
 				DisplayError( ErrorType( ret, NULL, ErrorType::NONE, NULL, true ) );
-		}
+		}*/
 	}
 	else
 	{
@@ -747,11 +753,12 @@ int CorePS3::Run()
 		LOG_WRITE( "Couldn't create trophy handle: 0x%x\n", ret );
 
 	// Kick off trophy synchronization.
-	sys_ppu_thread_t tid;
+	/*sys_ppu_thread_t tid;
 	ret = sys_ppu_thread_create( &tid, RegisterTrophyContextThread, 0,
 		1001, 16 * 1024, 0, "RegisterTrophyContextThread" );
 	if( ret != 0 )
 		LOG_WRITE( "Failed to start RegisterTrophyContextThread: 0x%x\n", ret );
+	*/
 
 	ret = cellNetCtlInit();
 	if( ret < 0 )

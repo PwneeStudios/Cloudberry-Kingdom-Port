@@ -431,7 +431,7 @@ boost::shared_ptr<Thread> Resources::LoadThread = 0;
 #endif
 
 #ifdef PS3
-		int resourceCounter = 0;
+		//int resourceCounter = 0;
 #endif
         // Set off load calls
 		for ( std::vector<boost::shared_ptr<EzTexture> >::const_iterator Tex = Tools::TextureWad->TextureList.begin();
@@ -457,13 +457,13 @@ boost::shared_ptr<Thread> Resources::LoadThread = 0;
 			}
 
 #ifdef PS3
-			if( resourceCounter == 2 )
+			/*if( resourceCounter == 2 )
 			{
 				// FIXME: Originally this was a 1 second sleep.
 				while( !gTrophyContextRegistered )
 					sys_timer_usleep( 100000 );
 			}
-			resourceCounter++;
+			resourceCounter++;*/
 #endif
 		}
 
