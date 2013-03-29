@@ -21,6 +21,7 @@
 #include <cell/sysmodule.h>
 #include <netex/libnetctl.h>
 #include <np.h>
+#include <np/drm.h>
 #include <PSGL/psgl.h>
 #include <PSGL/psglu.h>
 #include <sys/ppu_thread.h>
@@ -99,6 +100,11 @@ static const SceNpCommunicationSignature s_npCommunicationSignature = {
         0x48,0x92,0xf8,0xcb,0x5d,0x19,0x8d,0x2b,
         0xbf,0x54,0xec,0x78,0x39,0x52,0xde,0xee
     }
+};
+
+// Drm key for checking file access.
+static const SceNpDrmKey s_npDrmKey = {
+	{ 0xb1, 0x28, 0xb8, 0x67, 0x56, 0xd4, 0x68, 0x2b, 0x16, 0x18, 0x33, 0x8b, 0x49, 0x66, 0x44, 0xd9 }
 };
 
 // Private.
@@ -719,6 +725,30 @@ void DebugFrame(float r, float g, float b)
 	//glDisable(GL_SCISSOR_TEST);
 }
 
+void NPDRMInvalidCompleteCallback( bool yes )
+{
+	glFinish();
+	CORE.Exit();
+}
+
+void CheckNPDRMFileThread( uint64_t context )
+{
+	std::string file_path = PS3_PATH_PREFIX + "UNLOCK.EDAT";
+	int ret = sceNpDrmIsAvailable2( &s_npDrmKey, file_path.c_str() );
+	
+	if( ret == 0 )
+	{
+		// Good to go.
+	}
+	else
+	{
+		// Error!
+		DisplayError( ErrorType( ret, NPDRMInvalidCompleteCallback, ErrorType::NONE, NULL, true ) );
+	}
+
+	sys_ppu_thread_exit( 0 );
+}
+
 int CorePS3::Run()
 {
 	running_ = true;
@@ -777,6 +807,11 @@ int CorePS3::Run()
 
 	//DisplayError( ErrorType( 0x8002a1a4 ) );
 	game_.Initialize();
+
+	// Check game NPDRM.
+	sys_ppu_thread_t tid;
+	ret = sys_ppu_thread_create( &tid, CheckNPDRMFileThread,
+		0, 1001, 16 * 1024, 0, "CheckNPDRMFileThread" );
 
 	while( running_ )
 	{		
