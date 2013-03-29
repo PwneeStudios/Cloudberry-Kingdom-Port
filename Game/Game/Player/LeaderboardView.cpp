@@ -448,7 +448,7 @@ if ( ButtonCheck::ControllerInUse )
     boost::shared_ptr<QuadClass> LeaderboardGUI::TL, LeaderboardGUI::Offset_GamerTag, LeaderboardGUI::Offset_Val, LeaderboardGUI::ItemShift;
 	boost::shared_ptr<HsvQuad> LeaderboardGUI::Highlight;
 
-	extern bool IsParentalLevelSatisfied( bool, bool & );
+	extern bool IsParentalLevelSatisfied( bool );
 
     void LeaderboardGUI::MyPhsxStep()
     {
@@ -459,15 +459,12 @@ if ( ButtonCheck::ControllerInUse )
         if ( !CloudberryKingdomGame::OnlineFunctionalityAvailable() )
         {
             ReturnToCaller();
-            //CloudberryKingdomGame::ShowError_MustBeSignedInToLive( Localization::Words_Err_MustBeSignedInToLive );
+            CloudberryKingdomGame::ShowError_MustBeSignedInToLive( Localization::Words_Err_MustBeSignedInToLive );
             return;
         }
 
-		bool isOffline;
-		bool isSatisfied = IsParentalLevelSatisfied( false, isOffline );
-		if( !isSatisfied && !isOffline )
+		if( !IsParentalLevelSatisfied( true ) )
 		{
-			//IsParentalLevelSatisfied( true, isOffline );
 			ReturnToCaller();
 			return;
 		}

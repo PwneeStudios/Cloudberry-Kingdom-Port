@@ -164,9 +164,9 @@ void SetErrorLanguage( ConsoleLanguage language )
 	nn::erreula::ChangeLangError( static_cast< nn::erreula::LangType >( internalLanguage ) );*/
 }
 
-OnlineContentStatus IsOnlineContentRestricted()
+bool IsOnlineContentRestricted()
 {
-	return OnlineContentStatus_AVAILABLE;
+	return false;
 }
 
 bool IsAsianButtonConfiguration()

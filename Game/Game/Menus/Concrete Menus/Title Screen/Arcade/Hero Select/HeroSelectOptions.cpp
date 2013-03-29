@@ -60,7 +60,7 @@ namespace CloudberryKingdom
 		ArcadeBaseMenu::OnAdd();
 	}
 
-	extern bool IsParentalLevelSatisfied( bool, bool & );
+	extern bool IsParentalLevelSatisfied( bool );
 
 	void HeroSelectOptions::BringLeaderboard()
 	{
@@ -92,21 +92,11 @@ namespace CloudberryKingdom
 		{
 			if ( CloudberryKingdomGame::OnlineFunctionalityAvailable() )
 			{
-				bool isOffline;
-				bool isSatisfied = IsParentalLevelSatisfied( false, isOffline );
-				if( isSatisfied && !isOffline )
+				if( IsParentalLevelSatisfied( true ) )
 				{
 					HeroSelect->Call( MakeMagic( LeaderboardGUI, ( 0, MenuItem::ActivatingPlayer ) ), 0 );
 					HeroSelect->Hide();
 					HeroSelect->MyHeroDoll->Hide();
-				}
-				else if( !isSatisfied && !isOffline )
-				{
-					IsParentalLevelSatisfied( true, isOffline );
-				}
-				else if( isOffline )
-				{
-					CloudberryKingdomGame::ShowError_MustBeSignedInToLive( Localization::Words_Err_MustBeSignedInToLive );
 				}
 			}
 			else

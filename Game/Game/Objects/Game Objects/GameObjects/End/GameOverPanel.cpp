@@ -302,7 +302,7 @@ namespace CloudberryKingdom
 	}
 #endif
 
-	extern bool IsParentalLevelSatisfied( bool, bool & );
+	extern bool IsParentalLevelSatisfied( bool );
 
 	void GameOverPanel::AddScore()
 	{
@@ -418,21 +418,11 @@ namespace CloudberryKingdom
 		{
 			if ( CloudberryKingdomGame::OnlineFunctionalityAvailable() )
 			{
-				bool isOffline;
-				bool isSatisfied = IsParentalLevelSatisfied( false, isOffline ) ;
-				if( isSatisfied && !isOffline )
+				if( IsParentalLevelSatisfied( true ) )
 				{
 					Hide( PresetPos_BOTTOM );
 					Call( MakeMagic( LeaderboardGUI, ( 0, MenuItem::ActivatingPlayer ) ), 0 );
 					Hide();
-				}
-				else if( !isSatisfied && !isOffline )
-				{
-					IsParentalLevelSatisfied( true, isOffline );
-				}
-				else if( isOffline )
-				{
-					CloudberryKingdomGame::ShowError_MustBeSignedInToLive( Localization::Words_Err_MustBeSignedInToLive );
 				}
 			}
 			else

@@ -12,7 +12,6 @@
 #include <pthread.h>
 #include <semaphore.h>
 #include <sys/ppu_thread.h>
-#include <sys/timer.h>
 
 #define NUM_THREADS 1
 #define MAIN_QUEUE_SIZE 6
