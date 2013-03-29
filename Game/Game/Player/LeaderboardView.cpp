@@ -459,11 +459,11 @@ if ( ButtonCheck::ControllerInUse )
         if ( !CloudberryKingdomGame::OnlineFunctionalityAvailable() )
         {
             ReturnToCaller();
-            CloudberryKingdomGame::ShowError_MustBeSignedInToLive( Localization::Words_Err_MustBeSignedInToLive );
+            //CloudberryKingdomGame::ShowError_MustBeSignedInToLive( Localization::Words_Err_MustBeSignedInToLive );
             return;
         }
 
-		if( !IsParentalLevelSatisfied( true ) )
+		if( !IsParentalLevelSatisfied( false ) )
 		{
 			ReturnToCaller();
 			return;

@@ -83,7 +83,7 @@ namespace CloudberryKingdom
 #elif CAFE
 	const bool FinalRelease = true;
 #elif PS3
-	const bool FinalRelease = false;
+	const bool FinalRelease = true;
 #elif XBOX
 	const bool FinalRelease = true;
 #endif
@@ -1690,6 +1690,8 @@ float CloudberryKingdomGame::fps = 0;
 
 	void DrawWatermark()
 	{
+		return;
+
 		if ( FinalRelease ) return;
 		if (Tools::QDrawer == 0) return;
 		if (Resources::Font_Grobold42 == 0) return;
