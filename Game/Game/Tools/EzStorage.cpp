@@ -15,6 +15,7 @@
 #include <cell/cell_fs.h>
 #include <sys/ppu_thread.h>
 #include <sysutil/sysutil_savedata.h>
+#include <sysutil/sysutil_gamecontent.h>
 #include <np.h>
 
 #define SCEA
@@ -47,11 +48,16 @@ const char secureFileId[ CELL_SAVEDATA_SECUREFILEID_SIZE ] = {
 	0xa0, 0x68, 0xa4, 0xa5, 0xf0, 0xae, 0xee, 0xaa, 0x6a, 0x23, 0xd7, 0x88, 0x45, 0x8c, 0x84, 0xd5
 };
 
-extern bool ForceGetTrophyContext( SceNpTrophyContext &context, SceNpTrophyHandle &handle );
 extern std::string PS3_PATH_PREFIX;
 
 static bool saveInFlight = false;
 static bool loadInFlight = false;
+
+// Do trophy registration.  Defined in CorePS3.cpp.
+extern void RegisterTrophyContextThread( uint64_t context );
+
+// Get current trophy context and handle.  Defined in CorePS3.cpp.
+extern void ForceGetTrophyContext( SceNpTrophyContext &context, SceNpTrophyHandle &handle );
 
 void WaitForSaveLoad()
 {
@@ -1000,36 +1006,51 @@ namespace CloudberryKingdom
 #ifdef PS3
 	uint64_t RequiredTrophySpace = 0;
 
+	static bool NotEnoughSaveSpace = false;
+	static uint64_t TotalRequiredSpace = 0;
+
 	void CallbackDataStatusLoad( CellSaveDataCBResult *result, CellSaveDataStatGet *get, CellSaveDataStatSet *set )
 	{
+		NotEnoughSaveSpace = false;
+		TotalRequiredSpace = 0;
+
 		// Check if there is any data to load.
 		if( get->isNewData || RequiredTrophySpace > 0 )
 		{
 			LOG_WRITE( "NO SAVE DATA FOUND!\n" );
 
-			int sizeKb = get->sysSizeKB;
+			int sizeKb = 0;
 			if( get->isNewData )
+			{
+				sizeKb += get->sysSizeKB;
 				sizeKb += ( ( AUTOSAVE_SIZE / 1024 ) + ( ICON0_SIZE / 1024 ) );
+			}
 			if( RequiredTrophySpace > 0 )
 				sizeKb += static_cast< int >( RequiredTrophySpace / 1024 );
 
 			int neededKb = get->hddFreeSizeKB - sizeKb;
 
 			LOG_WRITE( "hddFreeSizeKB = %d, sizeKb = %d, neededKb = %d\n", get->hddFreeSizeKB, sizeKb, neededKb );
+			
 			if( neededKb < 0 )
 			{
 				LOG_WRITE( "Not enough space to save! Need %d more KB.\n", -neededKb );
 
-				std::wstring error = Format( Localization::WordString( Localization::Words_Err_PS3_NotEnoughSpace ).c_str(), -neededKb );
-				DisplayError( ErrorType( WstringToUtf8( error ), NULL, ErrorType::NONE, NULL, true ) );
+				TotalRequiredSpace = -neededKb;
+				NotEnoughSaveSpace = true;
+				/*std::wstring error = Format( Localization::WordString( Localization::Words_Err_PS3_NotEnoughSpace ).c_str(), -neededKb );
+				DisplayError( ErrorType( WstringToUtf8( error ), NULL, ErrorType::NONE, NULL, true ) );*/
 
 				result->errNeedSizeKB = -neededKb;
 				result->result = CELL_SAVEDATA_CBRESULT_ERR_NOSPACE;
 				return;
 			}
 
-			result->result = CELL_SAVEDATA_CBRESULT_ERR_NODATA;
-			return;
+			if( get->isNewData )
+			{
+				result->result = CELL_SAVEDATA_CBRESULT_ERR_NODATA;
+				return;
+			}
 		}
 
 		// First check if the data belongs to the current user.
@@ -1087,6 +1108,8 @@ namespace CloudberryKingdom
 	void CallbackFileOperationLoad( CellSaveDataCBResult *result, CellSaveDataFileGet *get, CellSaveDataFileSet *set )
 	{
 		result->result = _load_done ? CELL_SAVEDATA_CBRESULT_OK_LAST : CELL_SAVEDATA_CBRESULT_OK_NEXT;
+
+		LOG_WRITE( "FileOperationLoad, _load_done = %d\n", _load_done );
 
 		if( _load_done )
 			return;
@@ -1152,12 +1175,12 @@ namespace CloudberryKingdom
 
 		// Get the space needed for save data.
 		// FIXME: The trophy initialization function does its own check for available space.
-		/*SceNpTrophyContext context;
+		SceNpTrophyContext context;
 		SceNpTrophyHandle handle;
 		ForceGetTrophyContext( context, handle );
 		if( sceNpTrophyGetRequiredDiskSpace( context, handle, &RequiredTrophySpace, 0 ) < 0 )
-			RequiredTrophySpace = 0;*/
-		RequiredTrophySpace = 0;
+			RequiredTrophySpace = 0;
+		//RequiredTrophySpace = 0;
 
 		char dirName[ CELL_SAVEDATA_PREFIX_SIZE ];
 		CellSaveDataSetBuf setBuf;
@@ -1183,6 +1206,9 @@ namespace CloudberryKingdom
 			SYS_MEMORY_CONTAINER_ID_INVALID,
 			NULL
 		);
+
+		LOG_WRITE( "cellSaveDataAutoLoad2 returned 0x%x\n", ret );
+		LOG_WRITE( "_file_buffer = 0x%x\n", _file_buffer );
 
 		if( ret == CELL_SAVEDATA_RET_OK && _file_buffer )
 		{
@@ -1224,6 +1250,25 @@ namespace CloudberryKingdom
 		{
 			free( _file_buffer );
 			_file_buffer = NULL;
+		}
+
+		static bool trophyRegistrationExecuted = false;
+		if( NotEnoughSaveSpace )
+		{
+			LOG_WRITE( "Before cellGameContentErrorDialog: space = %d KB\n", TotalRequiredSpace );
+			cellGameContentErrorDialog( CELL_GAME_ERRDIALOG_NOSPACE_EXIT, TotalRequiredSpace, NULL );
+			LOG_WRITE( "After cellGameContentErrorDialog\n" );
+		}
+		else if( !trophyRegistrationExecuted )
+		{
+			// This was the first load so we want to register trophies now.
+			trophyRegistrationExecuted = true;
+
+			sys_ppu_thread_t tid;
+			ret = sys_ppu_thread_create( &tid, RegisterTrophyContextThread, 0,
+				1001, 16 * 1024, 0, "RegisterTrophyContextThread" );
+			if( ret != 0 )
+				LOG_WRITE( "Failed to start RegisterTrophyContextThread: 0x%x\n", ret );
 		}
 
 		loadInFlight = false;

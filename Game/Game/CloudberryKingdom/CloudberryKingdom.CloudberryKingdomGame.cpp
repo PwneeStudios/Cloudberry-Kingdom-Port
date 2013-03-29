@@ -48,8 +48,10 @@
 #endif
 
 #ifdef PS3
+	#include <algorithm>
 	#include <Utility/NetworkPS3.h>
 	#include <netex/libnetctl.h>
+	#include <vector>
 #endif
 
 #ifdef CAFE
@@ -81,7 +83,7 @@ namespace CloudberryKingdom
 #elif CAFE
 	const bool FinalRelease = true;
 #elif PS3
-	const bool FinalRelease = false;
+	const bool FinalRelease = true;
 #elif XBOX
 	const bool FinalRelease = true;
 #endif
@@ -1376,32 +1378,128 @@ float CloudberryKingdomGame::fps = 0;
 #endif
         }
 
+#ifdef PS3
+		static std::vector< int > gDisconnectedControllers;
+		static int gCurrentlyDisconnectedController = -1;
+
+		bool IsControllerDisconnected( int controller )
+		{
+			return std::find( gDisconnectedControllers.begin(), gDisconnectedControllers.end(), controller ) != gDisconnectedControllers.end();
+		}
+
+		int NewestDisconnectedController()
+		{
+			if( gDisconnectedControllers.size() == 0 )
+				return -1;
+
+			return gDisconnectedControllers.back();
+		}
+
+		void ConnectController( int controller )
+		{
+			std::vector< int >::iterator i = std::remove( gDisconnectedControllers.begin(), gDisconnectedControllers.end(), controller );
+			gDisconnectedControllers.erase( i, gDisconnectedControllers.end() );
+		}
+
+		void DisconnectController( int controller )
+		{
+			ConnectController( controller );
+			gDisconnectedControllers.push_back( controller );
+		}
+
 		static bool ClearError()
 		{
 			ButtonCheck::UpdateControllerAndKeyboard_StartOfStep();
 
-			int numConnected = 0;
-			for( int i = 0; i < 4; ++i )
-			{
-				if( Tools::GamepadState[i].IsConnected )
-					numConnected++;
-			}
+			// This is the controller whose message is showing up.
+			gCurrentlyDisconnectedController;
 
-			if( numConnected == 0 )
-				return false;
+			// This is the potentially disconnected controller.
+			int latestController = -1;
 
-			for (int i = 0; i < 4; i++)
+			if( CloudberryKingdomGame::CurrentPresence != Presence_TitleScreen )
 			{
-				if ( ( PlayerManager::Players[i] != 0 ) && PlayerManager::Players[i]->Exists && !Tools::GamepadState[i].IsConnected )
+				// Check every controller and make sure all existing players have one.
+				for (int i = 0; i < 4; i++)
 				{
-					return false;
+					if( ( PlayerManager::Players[i] != 0 ) && PlayerManager::Players[i]->Exists && !Tools::GamepadState[i].IsConnected )
+					{
+						// If the controller is not already disconnected, it is new so we should change the displayed error message.
+						if( !IsControllerDisconnected( i ) )
+						{
+							latestController = i;
+							break;
+						}
+					}
+				}
+
+				// Check again and poteintally reconnect controllers.
+				for (int i = 0; i < 4; i++)
+				{
+					if( ( PlayerManager::Players[i] != 0 ) && PlayerManager::Players[i]->Exists && Tools::GamepadState[i].IsConnected )
+					{
+						ConnectController( i );
+					}
 				}
 			}
+			else
+			{
+				int numConnected = 0;
+				for( int i = 0; i < 4; ++i )
+				{
+					if( Tools::GamepadState[i].IsConnected )
+						numConnected++;
+				}
 
-			return true;
+				if( numConnected == 0 )
+				{
+					if( !IsControllerDisconnected( 0 ) )
+						latestController = 0;
+				}
+				else
+					ConnectController( 0 );
+			}
+
+			// At this point we have a few pieces of information.
+			// 1. The state of all controllers with existing players.
+			// 2. The newest disconnected controller.
+
+			// No more disconnected controllers? We can remove the error.
+			if( gDisconnectedControllers.size() == 0 )
+			{
+				gCurrentlyDisconnectedController = -1;
+				return true;
+			}
+			
+			// A new disconnected controller is available and it's not the one
+			// that is currently disconnected.  Remove the error and show a new one.
+			if( latestController >= 0 && latestController != gCurrentlyDisconnectedController )
+			{
+				DisconnectController( latestController );
+				gCurrentlyDisconnectedController = latestController;
+				DisplayError( ErrorType( WstringToUtf8(
+					Format( Localization::WordString( Localization::Words_Err_PS3_NoGamePadDetected ).c_str(), latestController + 1 ) ),
+					NULL, ErrorType::NONE, ClearError, false ) );
+				return true;
+			}
+
+			// If the controller mentioned in the current message is reconnected, we
+			// should clear and show the next message if available.
+			if( !IsControllerDisconnected( gCurrentlyDisconnectedController ) )
+			{
+				gCurrentlyDisconnectedController = NewestDisconnectedController();
+				DisplayError( ErrorType( WstringToUtf8(
+					Format( Localization::WordString( Localization::Words_Err_PS3_NoGamePadDetected ).c_str(), gCurrentlyDisconnectedController + 1 ) ),
+					NULL, ErrorType::NONE, ClearError, false ) );
+				return true;
+			}
+
+			// No changes so we keep the error up.
+			return false;
 		}
+#endif
 
-		#ifdef CAFE
+#ifdef CAFE
 
 		// Check for disconnected controller on CAFE.
 		void DisconnectedControllerCAFE( )
@@ -1470,29 +1568,39 @@ float CloudberryKingdomGame::fps = 0;
 			return false;
 #endif
 
+#ifdef PS3
 			if( !PastPressStart )
 				return false;
-
-			int numConnected = 0;
-			for( int i = 0; i < 4; ++i )
-			{
-				if( Tools::GamepadState[i].IsConnected )
-					numConnected++;
-			}
-
-			if( numConnected == 0 )
-				return true;
 
 			if( CurrentPresence != Presence_TitleScreen )
 			{
 				for (int i = 0; i < 4; i++)
 				{
 					if( ( PlayerManager::Players[i] != 0 ) && PlayerManager::Players[i]->Exists && !Tools::GamepadState[i].IsConnected )
+					{
+						DisconnectController( i );
 						return true;
+					}
+				}
+			}
+			else
+			{
+				int numConnected = 0;
+				for( int i = 0; i < 4; ++i )
+				{
+					if( Tools::GamepadState[i].IsConnected )
+						numConnected++;
+				}
+
+				if( numConnected == 0 )
+				{
+					DisconnectController( 0 );
+					return true;
 				}
 			}
 
 			return false;
+#endif
 		}
 
 #if XBOX
@@ -1750,9 +1858,15 @@ float CloudberryKingdomGame::fps = 0;
 
 			// Figure out which gamepad is disconnected.
 
-			int controller = 0;
+			int controller = NewestDisconnectedController();
+			gCurrentlyDisconnectedController = controller;
 
-			int numConnected = 0;
+			LOG_WRITE( "Disconnected controller %d\n", controller );
+			DisplayError( ErrorType( WstringToUtf8(
+				Format( Localization::WordString( Localization::Words_Err_PS3_NoGamePadDetected ).c_str(), controller + 1 ) ),
+				NULL, ErrorType::NONE, ClearError, false ) );
+
+			/*int numConnected = 0;
 			for( int i = 0; i < 4; ++i )
 			{
 				if( Tools::GamepadState[i].IsConnected )
@@ -1777,7 +1891,7 @@ float CloudberryKingdomGame::fps = 0;
 
 			DisplayError( ErrorType( WstringToUtf8(
 				Format( Localization::WordString( Localization::Words_Err_PS3_NoGamePadDetected ).c_str(), controller + 1 ) ),
-				NULL, ErrorType::NONE, ClearError, false ) );
+				NULL, ErrorType::NONE, ClearError, false ) );*/
 #endif
 		}
 #ifdef CAFE
