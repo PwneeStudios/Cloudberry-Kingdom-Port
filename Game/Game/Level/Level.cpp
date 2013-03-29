@@ -4008,6 +4008,11 @@ int Level::AfterPostDrawLayer = 12;
 
     void Level::CalcObstaclsSeen()
     {
+		if ( !CloudberryKingdomGame::PastPressStart )
+		{
+			return;
+		}
+
 		std::vector<boost::shared_ptr<PlayerData> > vec = PlayerManager::getExistingPlayers();
 		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
             ( *player )->getStats()->ObstaclesSeen = NumObstacles;

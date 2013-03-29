@@ -305,15 +305,23 @@ namespace CloudberryKingdom
 
 	void SaveLoadSeedMenu::Save( const boost::shared_ptr<MenuItem> &_item, const boost::shared_ptr<GUI_Panel> &panel, const boost::shared_ptr<PlayerData> &player )
 	{
-		boost::shared_ptr<SaveSeedAs> SaveAs = MakeMagic( SaveSeedAs, ( panel->getControl(), player ) );
-		panel->Call( SaveAs, 0 );
+		boost::shared_ptr<CkBaseMenu> ckpanel = boost::dynamic_pointer_cast<CkBaseMenu>( panel );
 
-        boost::shared_ptr<CkBaseMenu> ckpanel = boost::dynamic_pointer_cast<CkBaseMenu>( panel );
-        if ( 0 != ckpanel && ckpanel->UseBounce )
-        {
-            ckpanel->Hid = true;
-            ckpanel->RegularSlideOut( PresetPos_RIGHT, 0 );
-        }
+		boost::shared_ptr<SaveSeedAs> SaveAs = MakeMagic( SaveSeedAs, ( panel->getControl(), player ) );
+
+			if ( 0 != ckpanel && ckpanel->UseBounce )
+			{
+				panel->Call( SaveAs, 0 );
+
+				ckpanel->Hid = true;
+				ckpanel->RegularSlideOut( PresetPos_RIGHT, 0 );
+			}
+			else
+			{
+				panel->Call( SaveAs, 17 );
+
+				ckpanel->Hide( PresetPos_LEFT, 20 );
+			}
 	}
 
 	void SaveLoadSeedMenu::Load( const boost::shared_ptr<MenuItem> &_item )
