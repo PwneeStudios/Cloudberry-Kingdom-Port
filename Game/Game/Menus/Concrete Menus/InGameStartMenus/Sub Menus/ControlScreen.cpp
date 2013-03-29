@@ -163,7 +163,7 @@ namespace CloudberryKingdom
         MyPile->Add(q, L"rb");
 
 
-		if ( !CloudberryKingdomGame::AsianButtonSwitch )
+		if ( CloudberryKingdomGame::AsianButtonSwitch )
 		{
 			q = boost::make_shared<QuadClass>(ButtonTexture::getBack() ); q->ScaleXToMatchRatio(130);
 		}
