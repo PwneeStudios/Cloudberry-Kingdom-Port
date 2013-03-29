@@ -293,6 +293,8 @@ namespace CloudberryKingdom
 
 #if PS3
 		CloudberryKingdomGame::ShowSaving();
+#elif CAFE
+		CloudberryKingdomGame::ShowSaving();
 #endif
 
 	#if defined(NOT_PC)
