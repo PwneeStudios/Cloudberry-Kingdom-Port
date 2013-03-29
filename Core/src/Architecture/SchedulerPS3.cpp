@@ -112,6 +112,8 @@ static void *ThreadProc( void *context )
 	return NULL;
 }
 
+static pthread_mutex_t gPauseMutex;
+
 SchedulerPS3::SchedulerPS3() :
 	internal_( new SchedulerInternal )
 {
@@ -134,6 +136,33 @@ SchedulerPS3::SchedulerPS3() :
 		ret = pthread_create( &internal_->Threads[ i ], NULL, ThreadProc, this );
 		assert( !ret );
 	}
+
+	ret = pthread_mutex_init( &gPauseMutex, NULL );
+	assert( !ret );
+}
+
+class PauseSchedulerJob : public Job
+{
+public:
+
+	void Do()
+	{
+		// Try to acquire and release the pause mutex.  The main thread
+		// should be holding it to keep the pause job from finishing.
+		pthread_mutex_lock( &gPauseMutex );
+		pthread_mutex_unlock( &gPauseMutex );
+	}
+};
+
+void PauseScheduler()
+{
+	pthread_mutex_lock( &gPauseMutex );
+	SCHEDULER->RunJobASAP( new PauseSchedulerJob );
+}
+
+void ResumeScheduler()
+{
+	pthread_mutex_unlock( &gPauseMutex );
 }
 
 class ExitSchedulerJob : public Job
@@ -148,6 +177,9 @@ public:
 
 SchedulerPS3::~SchedulerPS3()
 {
+	// Resume scheduler in case it's paused.
+	ResumeScheduler();
+
 	internal_->WorkersRunning = false;
 
 	RunJobASAP( new ExitSchedulerJob );

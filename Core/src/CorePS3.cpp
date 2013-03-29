@@ -142,6 +142,10 @@ extern void SetBGMOverride( bool override );
 // Is the system menu open? Defined in ConsoleInformationPS3.cpp.
 extern bool GLOBAL_SYSTEM_MENU_OPEN;
 
+// Pause and resume the background job system.  Defined in SchedulerPS3.cpp.
+extern void PauseScheduler();
+extern void ResumeScheduler();
+
 static void SystemCallback( const uint64_t status, const uint64_t param, void *userdata )
 {
 	( void )param;
@@ -158,9 +162,11 @@ static void SystemCallback( const uint64_t status, const uint64_t param, void *u
 		break;
 	case CELL_SYSUTIL_SYSTEM_MENU_OPEN:
 		GLOBAL_SYSTEM_MENU_OPEN = true;
+		PauseScheduler();
 		break;
 	case CELL_SYSUTIL_SYSTEM_MENU_CLOSE:
 		GLOBAL_SYSTEM_MENU_OPEN = false;
+		ResumeScheduler();
 		break;
 	case CELL_SYSUTIL_NET_CTL_NETSTART_FINISHED:
 		{
