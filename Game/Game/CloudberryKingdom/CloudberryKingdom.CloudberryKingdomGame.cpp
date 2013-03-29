@@ -1416,20 +1416,35 @@ float CloudberryKingdomGame::fps = 0;
 		{
 			ButtonCheck::UpdateControllerAndKeyboard_StartOfStep();
 
-			int latestController = gCurrentlyDisconnectedController;
+			// This is the controller whose message is showing up.
+			gCurrentlyDisconnectedController;
+
+			// This is the potentially disconnected controller.
+			int latestController = -1;
 
 			if( CloudberryKingdomGame::CurrentPresence != Presence_TitleScreen )
 			{
+				// Check every controller and make sure all existing players have one.
 				for (int i = 0; i < 4; i++)
 				{
 					if( ( PlayerManager::Players[i] != 0 ) && PlayerManager::Players[i]->Exists && !Tools::GamepadState[i].IsConnected )
 					{
+						// If the controller is not already disconnected, it is new so we should change the displayed error message.
 						if( !IsControllerDisconnected( i ) )
+						{
 							latestController = i;
-						break;
+							break;
+						}
 					}
-					else
+				}
+
+				// Check again and poteintally reconnect controllers.
+				for (int i = 0; i < 4; i++)
+				{
+					if( ( PlayerManager::Players[i] != 0 ) && PlayerManager::Players[i]->Exists && Tools::GamepadState[i].IsConnected )
+					{
 						ConnectController( i );
+					}
 				}
 			}
 			else
@@ -1450,15 +1465,20 @@ float CloudberryKingdomGame::fps = 0;
 					ConnectController( 0 );
 			}
 
-			if( gDisconnectedControllers.size() == 0 )
-				latestController = -1;
+			// At this point we have a few pieces of information.
+			// 1. The state of all controllers with existing players.
+			// 2. The newest disconnected controller.
 
-			if( latestController == -1 )
+			// No more disconnected controllers? We can remove the error.
+			if( gDisconnectedControllers.size() == 0 )
 			{
 				gCurrentlyDisconnectedController = -1;
 				return true;
 			}
-			else if( latestController != gCurrentlyDisconnectedController )
+			
+			// A new disconnected controller is available and it's not the one
+			// that is currently disconnected.  Remove the error and show a new one.
+			if( latestController >= 0 && latestController != gCurrentlyDisconnectedController )
 			{
 				DisconnectController( latestController );
 				gCurrentlyDisconnectedController = latestController;
@@ -1468,6 +1488,18 @@ float CloudberryKingdomGame::fps = 0;
 				return true;
 			}
 
+			// If the controller mentioned in the current message is reconnected, we
+			// should clear and show the next message if available.
+			if( !IsControllerDisconnected( gCurrentlyDisconnectedController ) )
+			{
+				gCurrentlyDisconnectedController = NewestDisconnectedController();
+				DisplayError( ErrorType( WstringToUtf8(
+					Format( Localization::WordString( Localization::Words_Err_PS3_NoGamePadDetected ).c_str(), gCurrentlyDisconnectedController + 1 ) ),
+					NULL, ErrorType::NONE, ClearError, false ) );
+				return true;
+			}
+
+			// No changes so we keep the error up.
 			return false;
 		}
 #endif
@@ -1834,7 +1866,7 @@ float CloudberryKingdomGame::fps = 0;
 			int controller = NewestDisconnectedController();
 			gCurrentlyDisconnectedController = controller;
 
-			printf( "Disconnected controller %d\n", controller );
+			LOG_WRITE( "Disconnected controller %d\n", controller );
 			DisplayError( ErrorType( WstringToUtf8(
 				Format( Localization::WordString( Localization::Words_Err_PS3_NoGamePadDetected ).c_str(), controller + 1 ) ),
 				NULL, ErrorType::NONE, ClearError, false ) );
