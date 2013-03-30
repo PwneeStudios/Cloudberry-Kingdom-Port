@@ -111,6 +111,24 @@ namespace CloudberryKingdom
 			_SavePlayerData::ProcessChunk( chunk );
 #endif
 		}
+
+		/*
+            // Cheat: Give all unlocks to player
+            int l[] = { 7777, 9999, 10000, 10100, 11500, 10200, 10400, 10500, 11000, 10300, 11100, 10900, 11200, 11300, 11400, 10001, 10101, 11501, 10201, 10401, 10501, 11001, 10301, 11101, 10901, 11201, 11301, 11401, 10002, 10003 };
+			for ( int i = 0; i < sizeof( l ) / sizeof( int ); ++i )
+			{
+				int id = l[ i ];
+
+				AddHighScore( boost::make_shared<ScoreEntry>( std::wstring( L"" ), id, 100000, 100000, 100000, 100000, 100000, 100000 ) );
+            }
+
+            CampaignIndex = 326;
+            CampaignLevel = 321;
+            CampaignCoins = 10000;
+            Awardments_Renamed->Add( 100 );
+            Awardments_Renamed->Add( 101 );
+            Awardments_Renamed->Add( 102 );
+			*/
 	}
 
 #ifdef PS3
