@@ -154,7 +154,7 @@ namespace CloudberryKingdom
     struct LeaderboardView
     {
 
-		static const int EntriesPerPage = 19;
+		static const int EntriesPerPage = 18;
         int TotalEntries;
 
         bool Loading;
