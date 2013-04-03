@@ -905,8 +905,13 @@ int CorePS3::Run()
 		psglSwap();
 	}*/
 
+	if( TrophyHandle != SCE_NP_TROPHY_INVALID_HANDLE )
+		sceNpTrophyAbortHandle(TrophyHandle);
+
 	KillVideoPlayer();
 	WaitForSaveLoad();
+	while( !gTrophyContextRegistered )
+		sys_ppu_thread_yield();
 
 	return 0;
 }
