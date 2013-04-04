@@ -358,7 +358,6 @@ CorePS3::CorePS3( GameLoop &game ) :
 
 CorePS3::~CorePS3()
 {
-	MediaPlayer::Shutdown();
 	GamePad::Shutdown();
 
 	delete td_;
@@ -909,6 +908,7 @@ int CorePS3::Run()
 		sceNpTrophyAbortHandle(TrophyHandle);
 
 	KillVideoPlayer();
+	MediaPlayer::Shutdown();
 	WaitForSaveLoad();
 	while( !gTrophyContextRegistered )
 		sys_ppu_thread_yield();

@@ -27,6 +27,7 @@ static void MultiStreamUpdateThread( uint64_t param );
 void *songBuffer = NULL;
 long stream = -1;
 float musicVolume;
+extern sys_ppu_thread_t s_MultiStreamPuThread;
 
 
 static void StreamCallback( int streamNumber, void *userData, int callbackType, void *readBuffer, int readSize )
@@ -99,6 +100,9 @@ void MediaPlayer::Initialize()
 void MediaPlayer::Shutdown()
 {
 	receivedExitGameRequest = true;
+	uint64_t ret;
+	sys_ppu_thread_join( s_MultiStreamPuThread, &ret );
+
 	ShutdownMultiStream();
 
 	delete[] mp3Memory;
