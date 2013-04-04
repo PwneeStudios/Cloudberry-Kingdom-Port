@@ -2,6 +2,8 @@
 
 #include <MasterHack.h>
 
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
 
@@ -151,6 +153,30 @@ namespace CloudberryKingdom
 
 	void TitleGameData_MW::PhsxStep()
 	{
+		static int XButtonPressCount = 0;
+
+		// Digital day
+		if ( CloudberryKingdomGame::DigitalDayBuild )
+		{
+			if ( ButtonCheck::State( ControllerButtons_X, -2 ).Down )
+			{	
+				XButtonPressCount++;
+
+				if ( XButtonPressCount > 50 )
+				{
+					// Start at Screen Saver
+					boost::shared_ptr<ScreenSaver> Intro = boost::make_shared<ScreenSaver>();
+					ScreenSaver_Construct( Intro );
+					Intro->Init();
+					return;
+				}
+			}
+			else
+			{
+				XButtonPressCount = 0;
+			}
+		}
+
 		TitleGameData::PhsxStep();
 	}
 

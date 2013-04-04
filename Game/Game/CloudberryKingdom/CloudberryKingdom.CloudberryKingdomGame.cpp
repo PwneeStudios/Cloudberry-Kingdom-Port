@@ -90,6 +90,8 @@ namespace CloudberryKingdom
 	const bool FinalRelease = true;
 #endif
 
+	bool CloudberryKingdomGame::DigitalDayBuild = true;
+	
 	static bool IsCheatTime()
 	{
 #ifdef PS3
@@ -562,7 +564,7 @@ Version CloudberryKingdomGame::GameVersion = Version( 0, 2, 4 );
 #else
         bool CloudberryKingdomGame::AlwaysGiveTutorials = false;
         bool CloudberryKingdomGame::Unlock_Customization = true;
-        bool CloudberryKingdomGame::Unlock_Levels = true && !FinalRelease;
+        bool CloudberryKingdomGame::Unlock_Levels = true && !FinalRelease || CloudberryKingdomGame::DigitalDayBuild;
 #endif
 
         bool FakeDemo = false;

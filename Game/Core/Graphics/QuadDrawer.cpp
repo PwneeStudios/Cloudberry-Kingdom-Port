@@ -971,6 +971,7 @@ namespace CloudberryKingdom
                 Vector2 d = data.Size;
                 Vector2 l = p + Vector2(data.Offset.X, -data.Offset.Y) * scale;
 
+				if (s[j] != '　')
                 if (s[j] != ' ')
                 {
                     Vector2 inv_size = Vector2(1.f) / Vector2( static_cast<float>( font->MyTexture->getTex()->Width ), static_cast<float>( font->MyTexture->getTex()->Height ) );

@@ -50,7 +50,7 @@ namespace CloudberryKingdom
 		static void StaticIntializer_AfterResourcesLoad();
 
 
-
+		static bool DigitalDayBuild;
 
 		static bool ChoseNotToSave;
 		static bool PastPressStart;
