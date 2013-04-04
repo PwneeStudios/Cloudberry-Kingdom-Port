@@ -56,6 +56,9 @@ extern std::string PS3_PATH_PREFIX;
 static bool saveInFlight = false;
 static bool loadInFlight = false;
 
+// Toggle to true when registration is done and not in progress.
+extern bool gTrophyContextRegistered;
+
 // Do trophy registration.  Defined in CorePS3.cpp.
 extern void RegisterTrophyContextThread( uint64_t context );
 
@@ -1269,6 +1272,7 @@ namespace CloudberryKingdom
 			// This was the first load so we want to register trophies now.
 			trophyRegistrationExecuted = true;
 
+			gTrophyContextRegistered = false;
 			sys_ppu_thread_t tid;
 			ret = sys_ppu_thread_create( &tid, RegisterTrophyContextThread, 0,
 				1001, 16 * 1024, 0, "RegisterTrophyContextThread" );

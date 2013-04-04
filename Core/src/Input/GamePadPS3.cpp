@@ -7,11 +7,18 @@
 
 static bool asianButtonConfiguration = false;
 
+// Buffer for making sure disconnect messages don't show up for going from
+// wired to wireless mode.
+static int gBufferedIsConnected[ 4 ];
+const int gBufferingSize = 32;
+
 void GamePad::Initialize()
 {
 	gfxInitPad();
 
 	asianButtonConfiguration = IsAsianButtonConfiguration();
+
+	memset( gBufferedIsConnected, 0, sizeof( gBufferedIsConnected ) );
 }
 
 bool AutoCloseWhenConnected()
@@ -48,10 +55,21 @@ GamePadState GamePad::GetState( PlayerIndex index )
 
 	GamePadState gs;
 
-	if( !gfxPadConnected( i ) )
+	bool isGamepadConnected = gfxPadConnected( i );
+
+	gs.IsConnected = gBufferedIsConnected[ i ] < gBufferingSize;
+
+	if( !isGamepadConnected )
+		++gBufferedIsConnected[ i ];
+	else
+		gBufferedIsConnected[ i ] = 0;
+
+	/*if( !gfxPadConnected( i ) )
+		return gs;*/
+	if( !isGamepadConnected )
 		return gs;
 
-	gs.IsConnected = true;
+	//gs.IsConnected = true;
 
 	gs.DPad.Left = gfxDpadLeft (i ) ? ButtonState_Pressed : ButtonState_Released;
 	gs.DPad.Right = gfxDpadRight( i ) ? ButtonState_Pressed : ButtonState_Released;
