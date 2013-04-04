@@ -1170,7 +1170,7 @@ float CloudberryKingdomGame::fps = 0;
 	#if defined(DEBUG)
 		GodModePhxs();
 	#else
-		if (GodMode)
+		if ( GodMode && IsCheatTime() )
 			GodModePhxs();
 	#endif
 

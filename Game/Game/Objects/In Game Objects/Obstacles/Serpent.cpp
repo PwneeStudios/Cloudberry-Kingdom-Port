@@ -16,7 +16,7 @@ namespace CloudberryKingdom
 
 		AutoGenSingleton = Serpent_AutoGen::getInstance();
 		getCore()->MyType = ObjectType_SERPENT;
-		DeathType = BobDeathType_NONE;
+		DeathType = BobDeathType_SERPENT;
 		getCore()->DrawLayer = 8;
 
 		PhsxCutoff_Playing = Vector2( 200, 4000 );
