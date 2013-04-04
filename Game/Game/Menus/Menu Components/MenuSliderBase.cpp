@@ -296,5 +296,7 @@ namespace CloudberryKingdom
 #endif
 		ShowText = false;
 		Inverted = false;
+
+		DelayCount = 0;
 	}
 }
