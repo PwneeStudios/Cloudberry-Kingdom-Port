@@ -366,7 +366,7 @@ namespace CloudberryKingdom
 		Header->Selectable = false;
 		ItemPos += HeaderPosAdd;
 
-		int NumDeathTypes = BobDeathType_TOTAL;
+		int NumDeathTypes = BobDeathType_LENGTH;
 		for ( int i = 1; i < NumDeathTypes; i++ )
 		{
 			BobDeathType type = static_cast<BobDeathType>( i );

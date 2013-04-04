@@ -136,6 +136,10 @@ namespace CloudberryKingdom
 			//	StartLevel = MaxLevelAttained;
 
 			StartLevel = PlayerManager::MinPlayerTotalCampaignIndex() + 1;
+
+			if ( CloudberryKingdomGame::DigitalDayBuild )
+			{
+			}
 		}
 		else
 		{
