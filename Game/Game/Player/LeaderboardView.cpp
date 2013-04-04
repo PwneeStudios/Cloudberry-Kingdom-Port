@@ -832,27 +832,13 @@ else
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    const int EntriesPerPage = 18;
     int TotalEntries;
 
     bool Loading;
 
     int Index;
     int Start;
-    int End() { return CoreMath::RestrictVal( 0, TotalEntries, Start + EntriesPerPage ); }
+    int End() { return CoreMath::RestrictVal( 0, TotalEntries, Start + LeaderboardView::EntriesPerPage ); }
 
     std::map<int, LeaderboardItem> &LeaderboardView::getItems()
 	{

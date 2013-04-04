@@ -414,7 +414,7 @@ namespace CloudberryKingdom
 
 			for( int i = 0; i < NumRanks; ++i )
 			{
-				int rank = Ranks[ i ].rank;
+				int rank = Ranks[ i ].serialRank;
 				int value = Ranks[ i ].scoreValue;
 				std::wstring name = Utf8ToWstring( Ranks[ i ].onlineName.data );
 
