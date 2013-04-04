@@ -211,7 +211,7 @@ namespace CloudberryKingdom
 				item->Selectable = CloudberryKingdomGame::CanSave();
 				AddItem( item );
 
-				if ( PlayerManager::Players[ 0 ] && PlayerManager::Players[ 0 ]->MySavedSeeds->SeedStrings.size() >= MAX_SEED_STRINGS ) )
+				if ( PlayerManager::Players[ 0 ] && PlayerManager::Players[ 0 ]->MySavedSeeds->SeedStrings.size() >= MAX_SEED_STRINGS )
 				{
 					item->Selectable = false;
 					item->GrayOutOnUnselectable = true;
@@ -982,6 +982,19 @@ bool ScoreScreen::UseZoomIn = true;
 		{
 			if ( !ShouldSkip() )
 			{
+				if ( ( !Tools::CurLevel->CanLoadLevels && !Tools::CurLevel->CanSaveLevel )
+					|| ( PlayerManager::Players[ 0 ] && PlayerManager::Players[ 0 ]->MySavedSeeds->SeedStrings.size() >= MAX_SEED_STRINGS ) )
+				{
+					boost::shared_ptr<MenuItem> item = MyMenu->FindItemByName( L"SaveLoadSeed" );
+					if ( item != 0 )
+					{
+						item->Selectable = false;
+						item->GrayOutOnUnselectable = true;
+						item->GrayOut();
+						MyMenu->SelectItem( 0 );
+					}
+				}
+
 				if ( AsMenu )
 					CkBaseMenu::MyPhsxStep();
 				else
