@@ -7,7 +7,7 @@
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 #include <Game/Player/PlayerManager.h>
 
-#include <Game/SaveSeedSettings.h>
+#include <SaveSeedSettings.h>
 
 namespace CloudberryKingdom
 {

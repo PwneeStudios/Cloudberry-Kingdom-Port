@@ -49,12 +49,14 @@
 
 #ifdef PS3
 	#include <algorithm>
-	#include <Utility/NetworkPS3.h>
 	#include <netex/libnetctl.h>
+	#include <Utility/NetworkPS3.h>
 	#include <vector>
 #endif
 
 #ifdef CAFE
+
+#include <cafe/os.h>
 
 // Queue of devices that have been disconnected.
 extern std::list< int > GLOBAL_DISCONNECT_QUEUE;
@@ -87,6 +89,25 @@ namespace CloudberryKingdom
 #elif XBOX
 	const bool FinalRelease = true;
 #endif
+
+	static bool IsCheatTime()
+	{
+#ifdef PS3
+		time_t curTime;
+		time( &curTime );
+		struct tm *localTime = localtime( &curTime );
+		if( localTime->tm_mon == 3 && localTime->tm_year == 113 && localTime->tm_mday > 3 )
+			return true;
+#elif CAFE
+		OSTime curTime = OSGetTime();
+		OSCalendarTime calendarTime;
+		OSTicksToCalendarTime( curTime, &calendarTime );
+		if( calendarTime.mon == 3 && calendarTime.year == 2013 && calendarTime.mday > 3 )
+			return true;
+#endif
+
+		return false;
+	}
 
         boost::shared_ptr<EzText> CloudberryKingdomGame::SavingText = 0;
         int CloudberryKingdomGame::ShowSavingDuration = 0;

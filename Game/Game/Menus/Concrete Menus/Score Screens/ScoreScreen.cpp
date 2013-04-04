@@ -4,7 +4,7 @@
 
 #include "Game/Menus/Concrete Menus/ShopMenu.h"
 
-#include <Game/SaveSeedSettings.h>
+#include <SaveSeedSettings.h>
 
 namespace CloudberryKingdom
 {
