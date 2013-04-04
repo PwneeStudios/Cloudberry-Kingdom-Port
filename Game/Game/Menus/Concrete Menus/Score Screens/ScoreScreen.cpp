@@ -985,8 +985,8 @@ bool ScoreScreen::UseZoomIn = true;
 				if ( ( !Tools::CurLevel->CanLoadLevels && !Tools::CurLevel->CanSaveLevel )
 					|| ( PlayerManager::Players[ 0 ] && PlayerManager::Players[ 0 ]->MySavedSeeds->SeedStrings.size() >= MAX_SEED_STRINGS ) )
 				{
-					boost::shared_ptr<MenuItem> item = MyMenu->FindItemByName( L"SaveLoadSeed" );
-					if ( item != 0 )
+					boost::shared_ptr<MenuItem> item = MyMenu->FindItemByName( L"Save" );
+					if ( item != 0 && item->Selectable )
 					{
 						item->Selectable = false;
 						item->GrayOutOnUnselectable = true;
