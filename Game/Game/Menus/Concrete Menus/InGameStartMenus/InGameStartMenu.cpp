@@ -7,8 +7,7 @@
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 #include <Game/Player/PlayerManager.h>
 
-// FIXME: Tuning parameter for maximum saved seeds.
-#define MAX_SEED_STRINGS 128
+#include <Game/SaveSeedSettings.h>
 
 namespace CloudberryKingdom
 {

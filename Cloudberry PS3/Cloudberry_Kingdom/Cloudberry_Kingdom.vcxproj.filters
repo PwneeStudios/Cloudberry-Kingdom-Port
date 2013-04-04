@@ -3754,6 +3754,9 @@
     <ClInclude Include="Game\Ratings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Game\SaveSeedSettings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Game\source_files.txt" />

@@ -4,6 +4,8 @@
 
 #include "Game/Menus/Concrete Menus/ShopMenu.h"
 
+#include <Game/SaveSeedSettings.h>
+
 namespace CloudberryKingdom
 {
 		
@@ -208,6 +210,13 @@ namespace CloudberryKingdom
 				item->setGo( boost::make_shared<MenuGo_SaveProxy>( boost::static_pointer_cast<ScoreScreen>( shared_from_this() ) ) );
 				item->Selectable = CloudberryKingdomGame::CanSave();
 				AddItem( item );
+
+				if ( PlayerManager::Players[ 0 ] && PlayerManager::Players[ 0 ]->MySavedSeeds->SeedStrings.size() >= MAX_SEED_STRINGS ) )
+				{
+					item->Selectable = false;
+					item->GrayOutOnUnselectable = true;
+					item->GrayOut();
+				}
 			}
 
 			boost::shared_ptr<MenuItem> back;
