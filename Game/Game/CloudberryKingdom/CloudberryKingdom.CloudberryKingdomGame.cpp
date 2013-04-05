@@ -85,7 +85,7 @@ namespace CloudberryKingdom
 #elif CAFE
 	const bool FinalRelease = true;
 #elif PS3
-	const bool FinalRelease = true;
+	const bool FinalRelease = false;
 #elif XBOX
 	const bool FinalRelease = true;
 #endif

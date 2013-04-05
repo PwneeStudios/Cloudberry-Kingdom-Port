@@ -441,7 +441,7 @@ namespace CloudberryKingdom
 		std::wstring CoinPrefix = std::wstring( L"{pCoin_Blue,100,?}" );
 
 		// Watch the computer
-		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( CoinPrefix + std::wstring( L"x" ) + StringConverterHelper::toString( Cost_Watch * CostMultiplier ), ItemFont ) ) );
+		boost::shared_ptr<MenuItem> WatchItem = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( CoinPrefix + std::wstring( L"x" ) + StringConverterHelper::toString( Cost_Watch * CostMultiplier ), ItemFont ) ) );
 		item->Name = std::wstring( L"WatchComputer" );
 		Item_WatchComputer = item;
 		item->SetIcon( ObjectIcon::RobotIcon->Clone() );
@@ -499,6 +499,13 @@ namespace CloudberryKingdom
 		Item_SlowMo = item;
 
         // Fade if not usable
+		if ( WatchItem != 0 && Bank() < Cost_Watch * CostMultiplier )
+		{
+			WatchItem->setGo( 0 );
+			WatchItem->MyText->Alpha = .6f;
+			WatchItem->MySelectedText->Alpha = .6f;
+		}
+
         if ( PathItem != 0 && PathItem->getGo() == 0 )
         {
             PathItem->MyText->Alpha = .6f;
