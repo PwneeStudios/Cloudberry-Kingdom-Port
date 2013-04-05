@@ -163,6 +163,7 @@ namespace CloudberryKingdom
         MyPile->Add(q, L"rb");
 
 
+#if PS3
 		if ( CloudberryKingdomGame::AsianButtonSwitch )
 		{
 			q = boost::make_shared<QuadClass>(ButtonTexture::getBack() ); q->ScaleXToMatchRatio(130);
@@ -171,6 +172,9 @@ namespace CloudberryKingdom
 		{
 			q = boost::make_shared<QuadClass>(ButtonTexture::getGo() ); q->ScaleXToMatchRatio(130);
 		}
+#else
+		q = boost::make_shared<QuadClass>(ButtonTexture::getGo() ); q->ScaleXToMatchRatio(130);
+#endif
         MyPile->Add(q, L"jump");
 
         q = boost::make_shared<QuadClass>(ButtonTexture::getGo() ); q->ScaleXToMatchRatio(130);
