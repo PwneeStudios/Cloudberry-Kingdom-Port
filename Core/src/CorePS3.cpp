@@ -254,7 +254,7 @@ CorePS3::CorePS3( GameLoop &game ) :
 	// game code.  Also the files should be pre-installed on the disk.
 	// PS3_PATH_PREFIX = "/dev_hdd0/game/NPEB01312/USRDIR/"; // SCEE
 	// PS3_PATH_PREFIX = "/dev_hdd0/game/NPUB31177/USRDIR/"; // SCEA
-	//PS3_PATH_PREFIX = "/app_home/";
+	PS3_PATH_PREFIX = "/app_home/";
 	LOG_WRITE( "Running in %s\nContent dir %s\n", dirName, usrdirPath );
 #ifdef DEBUG
 	PS3_PATH_PREFIX = "/app_home/";
@@ -747,9 +747,6 @@ void CheckNPDRMFileThread( uint64_t context )
 	sys_ppu_thread_exit( 0 );
 }
 
-// Kick off saves on exit to make sure we save everything. Defined in EzStorage.cpp.
-extern void SaveAllOnExit();
-
 int CorePS3::Run()
 {
 	running_ = true;
@@ -891,8 +888,6 @@ int CorePS3::Run()
 
 		psglSwap();
 	}
-
-	SaveAllOnExit();
 
 	// Close the dialog box if it is still open.
 	/*if( ErrorDialogOpen ) 
