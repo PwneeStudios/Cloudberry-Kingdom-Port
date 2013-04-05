@@ -152,6 +152,9 @@ extern bool GLOBAL_SYSTEM_MENU_OPEN;
 extern void PauseScheduler();
 extern void ResumeScheduler();
 
+// Kick off saves on exit to make sure we save everything. Defined in EzStorage.cpp.
+extern void SaveAllOnExit();
+
 static void SystemCallback( const uint64_t status, const uint64_t param, void *userdata )
 {
 	( void )param;
@@ -160,6 +163,7 @@ static void SystemCallback( const uint64_t status, const uint64_t param, void *u
 	switch( status )
 	{
 	case CELL_SYSUTIL_REQUEST_EXITGAME:
+		SaveAllOnExit();
 		glFinish();
 		CORE.Exit();
 		break;
