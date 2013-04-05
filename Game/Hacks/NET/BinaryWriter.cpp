@@ -132,12 +132,17 @@ void MemoryBinaryWriter::Write( unsigned char c )
 #ifdef CAFE
 
 static FSClient gClient;
-static FSCmdBlock gCmd;
+const int gNumCmds = 16;
+static int gCurCmd = 0;
+static FSCmdBlock gCmds[ gNumCmds ];
 
 void InitSaveFS()
 {
 	FSAddClient( &gClient, FS_RET_NO_ERROR );
-	FSInitCmdBlock( &gCmd );
+
+	gCurCmd = 0;
+	for( int i = 0; i < gNumCmds; ++i )
+		FSInitCmdBlock( &gCmds[ i ] );
 }
 
 void TerminateSaveFS()
@@ -147,8 +152,8 @@ void TerminateSaveFS()
 
 struct SaveWriterWiiUInternal
 {
-	/*FSClient Client;
-	FSCmdBlock Cmd;*/
+	/*FSClient Client;*/
+	FSCmdBlock *Cmd;
 	FSFileHandle FileHandle;
 
 	u8 AccountSlot;
@@ -180,6 +185,8 @@ SaveWriterWiiU::SaveWriterWiiU( const std::string &path, bool global )
 
 	/*FSAddClient( &internal_->Client, FS_RET_NO_ERROR );
 	FSInitCmdBlock( &internal_->Cmd );*/
+	internal_->Cmd = &gCmds[ gCurCmd ];
+	gCurCmd = ( gCurCmd + 1 ) % gNumCmds;
 
 	FSStateChangeParams stateChangeParams = {
 		.userCallback = stateChangeCallback,
@@ -191,7 +198,7 @@ SaveWriterWiiU::SaveWriterWiiU( const std::string &path, bool global )
 	/*internal_->OpenStatus = SAVEOpenFile( &internal_->Client, &internal_->Cmd,
 		global ? ACT_SLOT_NO_COMMON : internal_->AccountSlot,
 		path.c_str(), "w", &internal_->Fh, FS_RET_ALL_ERROR );*/
-	internal_->OpenStatus = SAVEOpenFile( &gClient, &gCmd,
+	internal_->OpenStatus = SAVEOpenFile( &gClient, internal_->Cmd,
 		global ? ACT_SLOT_NO_COMMON : internal_->AccountSlot,
 		path.c_str(), "w", &internal_->Fh, FS_RET_ALL_ERROR );
 
@@ -205,6 +212,7 @@ SaveWriterWiiU::SaveWriterWiiU( const std::string &path, bool global )
 
 void FlushCallback( FSClient *client, FSCmdBlock *block, FSStatus result, void *context )
 {
+	LOG_WRITE( "COMMITED\n" );
 }
 
 SaveWriterWiiU::~SaveWriterWiiU()
@@ -220,7 +228,7 @@ SaveWriterWiiU::~SaveWriterWiiU()
 		/*FSCloseFile( &internal_->Client, &internal_->Cmd, internal_->Fh, FS_RET_NO_ERROR );
 	
 		SAVEFlushQuota( &internal_->Client, &internal_->Cmd, internal_->AccountSlot, FS_RET_NO_ERROR );*/
-		FSCloseFile( &gClient, &gCmd, internal_->Fh, FS_RET_NO_ERROR );
+		FSCloseFile( &gClient, internal_->Cmd, internal_->Fh, FS_RET_NO_ERROR );
 	
 		//SAVEFlushQuota( &gClient, &gCmd, internal_->AccountSlot, FS_RET_NO_ERROR );
 
@@ -231,7 +239,7 @@ SaveWriterWiiU::~SaveWriterWiiU()
 		asyncParams.userContext = NULL;
 		asyncParams.ioMsgQueue = NULL;
 		
-		SAVEFlushQuotaAsync( &gClient, &gCmd, internal_->AccountSlot, FS_RET_NO_ERROR, &asyncParams );
+		SAVEFlushQuotaAsync( &gClient, internal_->Cmd, internal_->AccountSlot, FS_RET_NO_ERROR, &asyncParams );
 	}
 
 	//FSDelClient( &internal_->Client, FS_RET_NO_ERROR );
@@ -260,7 +268,7 @@ void SaveWriterWiiU::Write( const unsigned char *buffer, int offset, int length 
 
 	/*FSStatus stat = FSWriteFile( &internal_->Client, &internal_->Cmd, buf, length,
 		sizeof( unsigned char ), internal_->Fh, 0, FS_RET_ALL_ERROR );*/
-	FSStatus stat = FSWriteFile( &gClient, &gCmd, buf, length,
+	FSStatus stat = FSWriteFile( &gClient, internal_->Cmd, buf, length,
 		sizeof( unsigned char ), internal_->Fh, 0, FS_RET_ALL_ERROR );
 
 	if( buf != internal_->AlignedBuffer )
@@ -278,7 +286,7 @@ void SaveWriterWiiU::Write( int i )
 	memcpy( internal_->AlignedBuffer, &i, sizeof( int ) );
 	/*FSStatus stat = FSWriteFile( &internal_->Client, &internal_->Cmd, internal_->AlignedBuffer, sizeof( int ), 1,
 		internal_->Fh, 0, FS_RET_NO_ERROR );*/
-	FSStatus stat = FSWriteFile( &gClient, &gCmd, internal_->AlignedBuffer, sizeof( int ), 1,
+	FSStatus stat = FSWriteFile( &gClient, internal_->Cmd, internal_->AlignedBuffer, sizeof( int ), 1,
 		internal_->Fh, 0, FS_RET_NO_ERROR );
 }
 
@@ -293,7 +301,7 @@ void SaveWriterWiiU::Write( unsigned int i )
 	memcpy( internal_->AlignedBuffer, &i, sizeof( unsigned int ) );
 	/*FSWriteFile( &internal_->Client, &internal_->Cmd, internal_->AlignedBuffer, sizeof( unsigned int ), 1,
 		internal_->Fh, 0, FS_RET_NO_ERROR );*/
-	FSWriteFile( &gClient, &gCmd, internal_->AlignedBuffer, sizeof( unsigned int ), 1,
+	FSWriteFile( &gClient, internal_->Cmd, internal_->AlignedBuffer, sizeof( unsigned int ), 1,
 		internal_->Fh, 0, FS_RET_NO_ERROR );
 }
 
@@ -308,7 +316,7 @@ void SaveWriterWiiU::Write( unsigned long long i )
 	memcpy( internal_->AlignedBuffer, &i, sizeof( unsigned long long ) );
 	/*FSWriteFile( &internal_->Client, &internal_->Cmd, internal_->AlignedBuffer, sizeof( unsigned long long ), 1,
 		internal_->Fh, 0, FS_RET_NO_ERROR );*/
-	FSWriteFile( &gClient, &gCmd, internal_->AlignedBuffer, sizeof( unsigned long long ), 1,
+	FSWriteFile( &gClient, internal_->Cmd, internal_->AlignedBuffer, sizeof( unsigned long long ), 1,
 		internal_->Fh, 0, FS_RET_NO_ERROR );
 }
 
@@ -347,7 +355,7 @@ void SaveWriterWiiU::Write( float v )
 	memcpy( internal_->AlignedBuffer, &v, sizeof( float ) );
 	/*FSWriteFile( &internal_->Client, &internal_->Cmd, internal_->AlignedBuffer, sizeof( float ), 1,
 		internal_->Fh, 0, FS_RET_NO_ERROR );*/
-	FSWriteFile( &gClient, &gCmd, internal_->AlignedBuffer, sizeof( float ), 1,
+	FSWriteFile( &gClient, internal_->Cmd, internal_->AlignedBuffer, sizeof( float ), 1,
 		internal_->Fh, 0, FS_RET_NO_ERROR );
 }
 
@@ -361,7 +369,7 @@ void SaveWriterWiiU::Write( unsigned char c )
 
 	unsigned char *buf = reinterpret_cast< unsigned char * >( internal_->AlignedBuffer );
 	buf[ 0 ] = c;
-	FSWriteFile( &gClient, &gCmd, buf, sizeof( unsigned char ), 1,
+	FSWriteFile( &gClient, internal_->Cmd, buf, sizeof( unsigned char ), 1,
 		internal_->Fh, 0, FS_RET_NO_ERROR );
 }
 
