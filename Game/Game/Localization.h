@@ -440,6 +440,9 @@ Words_Err_MustBeSignedInToLiveToAccess,
 
 Words_Saving,
 
+Words_Err_CanNotSaveLevel_NoSpace_Header,
+Words_Err_CanNotSaveLevel_NoSpace,
+
 Words_EnumLength
 		};
 

@@ -978,28 +978,38 @@ else
 
         void LeaderboardView::ViewGamer()
         {
-			// FIXME
-            //lock (Items)
 			MyLeaderboard->ItemMutex.Lock();
             {
-                if ( getItems().size() > 0)
-                {
-                    if ( Contains( getItems(), Index ) )
-                    {
-                        OnlineGamer gamer = getItems()[Index].Player;
-                        if ( gamer.Id > 0 && MenuItem::ActivatingPlayer >= 0 && MenuItem::ActivatingPlayer <= 3 ) 
-                        {
-							// Show the gamer card!
-#if XBOX
-                            CloudberryKingdomGame.ShowGamerCard((PlayerIndex)MenuItem::ActivatingPlayer, gamer);
-#elif PS3
+				if ( MyLeaderboard->MySortType == LeaderboardType_FriendsScores )
+				{
+					if ( MyLeaderboard->FriendItems.size() > 0 && Index - 1 < MyLeaderboard->FriendItems.size() )
+					{
+						OnlineGamer gamer = MyLeaderboard->FriendItems[ Index - 1 ].Player;
+						if ( gamer != 0 && MenuItem::ActivatingPlayer >= 0 && MenuItem::ActivatingPlayer <= 3 )
+						{
 							int ret = sceNpProfileCallGui( &gamer.NPID, ProfileResultHandler, NULL, 0 );
 							if( ret < 0 )
 								LOG_WRITE( "sceNpProfileCallGui error: 0x%x\n", ret );
-#endif
-                        }
-                    }
-                }
+						}
+					}
+				}
+				else
+				{
+					if ( getItems().size() > 0)
+					{
+						if ( Contains( getItems(), Index ) )
+						{
+							OnlineGamer gamer = getItems()[Index].Player;
+							if ( gamer.Id > 0 && MenuItem::ActivatingPlayer >= 0 && MenuItem::ActivatingPlayer <= 3 ) 
+							{
+								// Show the gamer card!
+								int ret = sceNpProfileCallGui( &gamer.NPID, ProfileResultHandler, NULL, 0 );
+								if( ret < 0 )
+									LOG_WRITE( "sceNpProfileCallGui error: 0x%x\n", ret );
+							}
+						}
+					}
+				}
             }
 			MyLeaderboard->ItemMutex.Unlock();
         }

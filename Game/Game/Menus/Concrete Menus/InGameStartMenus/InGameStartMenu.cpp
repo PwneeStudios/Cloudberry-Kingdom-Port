@@ -178,6 +178,8 @@ bool InGameStartMenu::PreventMenu = false;
 				item->GrayOutOnUnselectable = true;
 				item->GrayOut();
 				MyMenu->SelectItem( 0 );
+
+				CloudberryKingdomGame::ChangeSaveGoFunc( item );
 			}
 		}
 	}
@@ -268,6 +270,8 @@ bool InGameStartMenu::PreventMenu = false;
 			item->Selectable = false;
 			item->GrayOutOnUnselectable = true;
 			item->GrayOut();
+
+			CloudberryKingdomGame::ChangeSaveGoFunc( item );
 		}
 		
 		AddItem( item );
@@ -278,6 +282,8 @@ bool InGameStartMenu::PreventMenu = false;
 			item->Selectable = false;
 			item->GrayOutOnUnselectable = true;
 			item->GrayOut();
+
+			CloudberryKingdomGame::ChangeSaveGoFunc( item );
 		}
 
 		// Options

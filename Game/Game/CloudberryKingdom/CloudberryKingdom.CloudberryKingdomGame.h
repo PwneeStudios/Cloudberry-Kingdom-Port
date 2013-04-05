@@ -58,6 +58,9 @@ namespace CloudberryKingdom
 
 		static bool CanSave( PlayerIndex index );
 
+        static void ChangeSaveGoFunc( boost::shared_ptr<MenuItem> item );
+        static void ShowError_CanNotSaveLevel_NoSpace();
+
 		static void ShowError_CanNotSaveNoDevice();
 
 		static bool ProfilesAvailable();

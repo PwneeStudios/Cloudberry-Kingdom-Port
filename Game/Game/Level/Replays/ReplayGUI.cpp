@@ -946,18 +946,34 @@ namespace CloudberryKingdom
 			Toggle->SubstituteText( Localization::Words_Single );
 	}
 
+    void ReplayGUI::SetPlayWord( Localization::Words word )
+    {
+        if ( PlayWord == word ) return;
+
+        Play->SubstituteText( word );
+        PlayWord = word;
+    }
+
 	void ReplayGUI::SetPlayText()
 	{
-		if ( StepControl )
-			Play->SubstituteText( Localization::Words_Step );
-		else
-		{
-			if ( PauseSelected )
-				Play->SubstituteText( Localization::Words_Play );
-			else
-				Play->SubstituteText( Localization::Words_Pause );
-		}
-	}
+        // If the replay is over, play button should say "Play"
+        if ( ReplayIsOver() && MyGame != 0 && MyGame->MyLevel != 0 && !MyGame->MyLevel->getSetToReset() )
+        {
+            SetPlayWord( Localization::Words_Play );
+        }
+        else
+        {
+            if ( StepControl )
+                SetPlayWord( Localization::Words_Step );
+            else
+            {
+                if ( PauseSelected )
+                    SetPlayWord( Localization::Words_Play );
+                else
+                    SetPlayWord( Localization::Words_Pause );
+            }
+        }
+    }
 
 	void ReplayGUI::SetSpeed()
 	{
@@ -1015,6 +1031,8 @@ namespace CloudberryKingdom
 				// Reset
 				ResetReplay( level );
 				setPauseGame( false );
+
+				SetPlayText();
 			}
 		}
 
@@ -1025,6 +1043,8 @@ namespace CloudberryKingdom
 			{
 				ResetReplay( level );
 				setPauseGame( false );
+
+				SetPlayText();
 			}
 		}
 		else
@@ -1037,12 +1057,16 @@ namespace CloudberryKingdom
 					level->MySwarmBundle->SetSwarm( level, SwarmIndex - 1 );
 				ResetReplay( level );
 				setPauseGame( false );
+
+				SetPlayText();
 			}
 			if ( SwarmIndex < level->MySwarmBundle->getNumSwarms() - 1 && ButtonCheck::State(ControllerButtons_RS, -1).Pressed )
 			{
 				level->MySwarmBundle->SetSwarm( level, SwarmIndex + 1 );
 				ResetReplay( level );
 				setPauseGame( false );
+
+				SetPlayText();
 			}
 		}
 
@@ -1166,6 +1190,8 @@ namespace CloudberryKingdom
 			setPauseGame( PauseSelected );
 		}
 
+		SetPlayText();
+
 		ProcessInput();
 	}
 
@@ -1188,7 +1214,10 @@ namespace CloudberryKingdom
 		if ( level->ReplayPaused )
 		{
 			if ( ReplayIsOver() )
+			{
 				BigEnd->Show = true;
+				SetPlayText();
+			}
 		}
 		else
 		{
@@ -1216,6 +1245,8 @@ namespace CloudberryKingdom
 
 	void ReplayGUI::InitializeInstanceFields()
 	{
+		PlayWord = Localization::Words_None;
+
 		Type = static_cast<ReplayGUIType>( 0 );
 		SkipPhsxStep = false;
 

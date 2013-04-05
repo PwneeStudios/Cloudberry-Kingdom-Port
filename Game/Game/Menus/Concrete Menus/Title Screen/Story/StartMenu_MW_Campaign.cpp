@@ -62,7 +62,7 @@ namespace CloudberryKingdom
 
             // Update level text
             int Level = PlayerManager::MinPlayerTotalCampaignLevel() + 1;
-            bool ShowLevel = Level > 1;
+            bool ShowLevel = Level > 1 && Level < 321;
 
 			//bool ShowLevel = false;
 

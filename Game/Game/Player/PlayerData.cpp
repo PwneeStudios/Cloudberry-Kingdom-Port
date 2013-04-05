@@ -97,6 +97,10 @@ namespace CloudberryKingdom
 
 	void PlayerData::Deserialize( std::vector<unsigned char> Data )
 	{
+		// Clear everything before loading
+		if ( MySavedSeeds != 0 ) MySavedSeeds->SeedStrings.clear();
+		HighScores.clear();
+
 		boost::shared_ptr<Chunks> chunks = Chunks::Get( Data );
 		chunks->StartGettingChunks();
 		while( chunks->HasChunk() )

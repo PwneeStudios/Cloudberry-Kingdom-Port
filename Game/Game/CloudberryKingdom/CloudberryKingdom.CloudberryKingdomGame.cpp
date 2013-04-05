@@ -90,7 +90,7 @@ namespace CloudberryKingdom
 	const bool FinalRelease = true;
 #endif
 
-	bool CloudberryKingdomGame::DigitalDayBuild = true;
+	bool CloudberryKingdomGame::DigitalDayBuild = false;
 	
 	static bool IsCheatTime()
 	{
@@ -389,6 +389,32 @@ namespace CloudberryKingdom
 			return true;
 		}
 
+		struct ChangeSaveGoFuncHelper : public Lambda_1< boost::shared_ptr<MenuItem> >
+		{
+			void Apply( const boost::shared_ptr<MenuItem> &item )
+			{
+				CloudberryKingdomGame::ShowError_CanNotSaveLevel_NoSpace();
+			}
+		};
+
+        void CloudberryKingdomGame::ChangeSaveGoFunc( boost::shared_ptr<MenuItem> item )
+        {
+			if ( !CloudberryKingdomGame::CanSave() )
+			{
+				item->Selectable = false;
+			}
+			else
+			{
+				item->Selectable = true;
+				item->setGo( boost::make_shared<ChangeSaveGoFuncHelper>() );
+			}
+        }
+
+        void CloudberryKingdomGame::ShowError_CanNotSaveLevel_NoSpace()
+        {
+            ShowError( Localization::Words_Err_CanNotSaveLevel_NoSpace_Header, Localization::Words_Err_CanNotSaveLevel_NoSpace, Localization::Words_Err_Ok );
+        }
+
 		void CloudberryKingdomGame::ShowError_CanNotSaveNoDevice()
 		{
 			//ShowError(Localization::Words_Err_StorageDeviceRequired, Localization::Words_Err_NoSaveDevice, Localization::Words_Err_Ok, null);
@@ -564,7 +590,7 @@ Version CloudberryKingdomGame::GameVersion = Version( 0, 2, 4 );
 #else
         bool CloudberryKingdomGame::AlwaysGiveTutorials = false;
         bool CloudberryKingdomGame::Unlock_Customization = true;
-        bool CloudberryKingdomGame::Unlock_Levels = true && !FinalRelease || CloudberryKingdomGame::DigitalDayBuild;
+        bool CloudberryKingdomGame::Unlock_Levels = !FinalRelease || CloudberryKingdomGame::DigitalDayBuild;
 #endif
 
         bool FakeDemo = false;

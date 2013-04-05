@@ -66,7 +66,7 @@ namespace CloudberryKingdom
 		MyCharacterSelect->MyHeroLevel->ShowHeroLevel = true;
 
 		// Check for back.
-		if ( CanGoBack && ButtonCheck::State( ControllerButtons_B, MyCharacterSelect->PlayerIndex ).Pressed )
+		if ( CanGoBack && CharacterSelectManager::Active && ButtonCheck::State( ControllerButtons_B, MyCharacterSelect->PlayerIndex ).Pressed )
 		{
 			ReturnToCaller();
 		}

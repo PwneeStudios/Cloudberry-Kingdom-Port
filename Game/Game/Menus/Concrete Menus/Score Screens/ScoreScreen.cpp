@@ -216,6 +216,8 @@ namespace CloudberryKingdom
 					item->Selectable = false;
 					item->GrayOutOnUnselectable = true;
 					item->GrayOut();
+
+					CloudberryKingdomGame::ChangeSaveGoFunc( item );
 				}
 			}
 
@@ -992,6 +994,8 @@ bool ScoreScreen::UseZoomIn = true;
 						item->GrayOutOnUnselectable = true;
 						item->GrayOut();
 						MyMenu->SelectItem( 0 );
+
+						CloudberryKingdomGame::ChangeSaveGoFunc( item );
 					}
 				}
 

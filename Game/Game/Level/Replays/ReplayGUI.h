@@ -44,6 +44,9 @@ namespace CloudberryKingdom
 
 		void SetToggleText();
 
+    Localization::Words PlayWord;
+    void SetPlayWord( Localization::Words word );
+
 		void SetPlayText();
 
 		void SetSpeed();

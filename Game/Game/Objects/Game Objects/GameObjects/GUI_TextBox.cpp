@@ -235,39 +235,52 @@ namespace CloudberryKingdom
 
 	void GUI_TextBox::GamepadInteract()
 	{
+        int control = getControl();
+        if (control < 0 || control > 3)
+        {
+            control = -1;
+        }
+        else
+        {
+            if ( !PlayerManager::Players[ control ] || !PlayerManager::Players[ control ]->Exists )
+            {
+                control = -1;
+            }
+        }
+
 		if ( getLength() == 0 )
 		{
-			if ( ButtonCheck::State( ControllerButtons_A, -1 ).Pressed )
+			if ( ButtonCheck::State( ControllerButtons_A, control ).Pressed )
 				if ( getLength() < MaxLength )
 					setText( getText() + L'A' );
 			return;
 		}
 
 		wchar_t c = getText()[ getLength() - 1 ];
-		if ( ButtonCheck::State( ControllerButtons_A, -1 ).Pressed )
+		if ( ButtonCheck::State( ControllerButtons_A, control ).Pressed )
 			if ( getLength() < MaxLength )
 			{
 				setText( getText() + c );
 				Recenter();
 			}
-		if ( ButtonCheck::State( ControllerButtons_X, -1 ).Pressed )
+		if ( ButtonCheck::State( ControllerButtons_X, control ).Pressed )
 		{
 			Backspace();
 			return;
 		}
-		if ( ButtonCheck::State( ControllerButtons_Y, -1 ).Pressed )
+		if ( ButtonCheck::State( ControllerButtons_Y, control ).Pressed )
 		{
 			Cancel();
 			return;
 		}
-		if ( ButtonCheck::State( ControllerButtons_START, -1 ).Pressed )
+		if ( ButtonCheck::State( ControllerButtons_START, control ).Pressed )
 		{
 			Enter();
 			return;
 		}
-		if ( ButtonCheck::State( ControllerButtons_B, -1 ).Pressed) { Cancel(); return; }
+		if ( ButtonCheck::State( ControllerButtons_B, control ).Pressed) { Cancel(); return; }
 
-		Vector2 dir = ButtonCheck::GetDir( -1 );
+		Vector2 dir = ButtonCheck::GetDir( control );
 
 		if ( Tools::TheGame->DrawCount % 7 == 0 && fabs( dir.Y ) > .5f )
 		{
