@@ -453,7 +453,7 @@ static std::wstring Format( const wchar_t *format, ... )
 	return std::wstring( buffer );
 }
 
-bool gTrophyContextRegistered = false;
+bool gTrophyContextRegistered = true;
 
 // Space needed for trophy, 
 //extern uint64_t RequiredTrophySpace;
@@ -461,8 +461,6 @@ bool gTrophyContextRegistered = false;
 void RegisterTrophyContextThread( uint64_t context )
 {
 	ContextRegistered = false;
-
-	gTrophyContextRegistered = false;
 
 	// Register trophy.
 	int ret = sceNpTrophyRegisterContext( TrophyContext, TrophyHandle, TrophyStatusCallback, NULL,
@@ -910,8 +908,19 @@ int CorePS3::Run()
 
 	KillVideoPlayer();
 	WaitForSaveLoad();
+
 	while( !gTrophyContextRegistered )
+	{
+		glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+
+		int ret = cellSysutilCheckCallback();
+		if( ret )
+			LOG_WRITE( "cellSysutilChecCallback() = 0x%x\n", ret );
+
+		psglSwap();
+
 		sys_ppu_thread_yield();
+	}
 
 	return 0;
 }

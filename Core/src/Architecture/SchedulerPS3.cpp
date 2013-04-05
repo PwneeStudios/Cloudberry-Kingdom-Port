@@ -155,8 +155,11 @@ public:
 
 void PauseScheduler()
 {
-	pthread_mutex_lock( &gPauseMutex );
-	SCHEDULER->RunJobASAP( new PauseSchedulerJob );
+	// If the mutex is already locked it is likely the scheduler is already paused.
+	if( pthread_mutex_trylock( &gPauseMutex ) == 0 )
+	{
+		SCHEDULER->RunJobASAP( new PauseSchedulerJob );
+	}
 }
 
 void ResumeScheduler()

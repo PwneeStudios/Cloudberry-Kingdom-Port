@@ -18,6 +18,8 @@
 
 #include <sysutil/sysutil_bgmplayback.h>
 
+#include <stdio.h>
+
 extern bool StartTimeSet;
 extern clock_t StartTime;
 
@@ -207,7 +209,7 @@ void VideoPlayer::Play( const boost::shared_ptr< Video > &video )
 	bool check = internal_->Player->Play( buffer, false );
 
 	if( video->Path.find( "LogoSalad" ) != std::string::npos )
-		internal_->Player->Volume( 1.0f );
+		internal_->Player->Volume( 0.6f );
 	else
 		internal_->Player->Volume( 2.0f );
 
