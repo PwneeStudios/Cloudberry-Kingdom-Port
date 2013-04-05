@@ -988,7 +988,7 @@ bool ScoreScreen::UseZoomIn = true;
 					|| ( PlayerManager::Players[ 0 ] && PlayerManager::Players[ 0 ]->MySavedSeeds->SeedStrings.size() >= MAX_SEED_STRINGS ) )
 				{
 					boost::shared_ptr<MenuItem> item = MyMenu->FindItemByName( L"Save" );
-					if ( item != 0 && item->Selectable )
+					if ( item != 0 && !item->GrayOutOnUnselectable )
 					{
 						item->Selectable = false;
 						item->GrayOutOnUnselectable = true;
