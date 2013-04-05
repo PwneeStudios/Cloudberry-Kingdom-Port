@@ -528,8 +528,5 @@ boost::shared_ptr<Thread> Resources::LoadThread = 0;
 		//Tools::Write( Format( _T( "Load thread done at {0}" ), DateTime::Now ) );
 		//Tools::Write( Format( _T( "Load thread done ... NOW!" ) ).c_str() );
 		LOG_WRITE( "Load thread done ... NOW!\n" );
-
-		// FIXME: remove this
-		printf( "LOAD THREAD IS DONE\n" );
 	}
 }
