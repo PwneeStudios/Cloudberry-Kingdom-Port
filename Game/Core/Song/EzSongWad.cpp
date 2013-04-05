@@ -4,6 +4,7 @@
 #include "Hacks/String.h"
 
 #include <Audio/MediaPlayer.h>
+#include <Utility/Log.h>
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 

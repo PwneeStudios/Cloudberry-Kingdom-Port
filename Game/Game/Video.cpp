@@ -223,7 +223,9 @@ namespace CloudberryKingdom
 		}
 		else if( MovieName == L"Credits" )
 		{
-			CurrentVideo->Path = "ContentPS3/Movies/Credits.mp4";
+			// FIXME: PUT CREDITS BACK.
+			CurrentVideo->Path = "ContentPS3/Movies/LogoSalad.mp4";
+			//CurrentVideo->Path = "ContentPS3/Movies/Credits.mp4";
 		}
 		else if( MovieName == L"LogoSalad" )
 		{
