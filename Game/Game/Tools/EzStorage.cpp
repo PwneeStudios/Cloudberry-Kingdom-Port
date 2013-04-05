@@ -56,9 +56,6 @@ extern std::string PS3_PATH_PREFIX;
 static bool saveInFlight = false;
 static bool loadInFlight = false;
 
-// Toggle to true when registration is done and not in progress.
-extern bool gTrophyContextRegistered;
-
 // Do trophy registration.  Defined in CorePS3.cpp.
 extern void RegisterTrophyContextThread( uint64_t context );
 
@@ -207,7 +204,7 @@ namespace CloudberryKingdom
 			const boost::shared_ptr<PlayerData> &p = PlayerManager::Players[ i ];
 
 			for ( std::map<int, bool>::const_iterator guid = p->Awardments_Renamed->dict.begin(); guid != p->Awardments_Renamed->dict.end(); ++guid )
-				awardments.Add( guid->second );
+				awardments.Add( guid->first );
 		}
 
 		// Push awardments to everyone
@@ -217,7 +214,7 @@ namespace CloudberryKingdom
 			const boost::shared_ptr<PlayerData> &p = PlayerManager::Players[ i ];
 
 			for ( std::map<int, bool>::const_iterator guid = awardments.dict.begin(); guid != awardments.dict.end(); ++guid )
-				p->Awardments_Renamed->Add( guid->second );
+				p->Awardments_Renamed->Add( guid->first );
 		}
 
 		// Calculate max highscores
@@ -1272,7 +1269,6 @@ namespace CloudberryKingdom
 			// This was the first load so we want to register trophies now.
 			trophyRegistrationExecuted = true;
 
-			gTrophyContextRegistered = false;
 			sys_ppu_thread_t tid;
 			ret = sys_ppu_thread_create( &tid, RegisterTrophyContextThread, 0,
 				1001, 16 * 1024, 0, "RegisterTrophyContextThread" );

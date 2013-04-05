@@ -143,6 +143,11 @@ namespace CloudberryKingdom
 
                 if ( Tools::getCurCamera() != 0 )
                 {
+					if ( Tools::getCurCamera()->getZoom().X != .001f )
+					{
+						Tools::getCurCamera()->SetToDefaultZoom();
+					}					
+
                     if ( ShowSavingDuration < ShowSaving_FadeOutLength )
 						SavingText->Alpha = 1.0f - (ShowSaving_FadeOutLength - ShowSavingDuration) / ShowSaving_FadeOutLength;
 					else if (ShowSavingDuration > ShowSavingLength - ShowSaving_FadeInLength)

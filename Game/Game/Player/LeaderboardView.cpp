@@ -985,7 +985,7 @@ else
 					if ( MyLeaderboard->FriendItems.size() > 0 && Index - 1 < MyLeaderboard->FriendItems.size() )
 					{
 						OnlineGamer gamer = MyLeaderboard->FriendItems[ Index - 1 ].Player;
-						if ( gamer != 0 && MenuItem::ActivatingPlayer >= 0 && MenuItem::ActivatingPlayer <= 3 )
+						if ( gamer.Id != 0 && MenuItem::ActivatingPlayer >= 0 && MenuItem::ActivatingPlayer <= 3 )
 						{
 							int ret = sceNpProfileCallGui( &gamer.NPID, ProfileResultHandler, NULL, 0 );
 							if( ret < 0 )

@@ -162,7 +162,8 @@ namespace CloudberryKingdom
 
 	void CustomHero_GUI::ReleaseBody()
 	{
-		MyGame->ForceTargetZoom = .0007f;
+		//MyGame->ForceTargetZoom = .0007f;
+		MyGame->ForceTargetZoom = 0;
 		CkBaseMenu::ReleaseBody();
 	}
 
