@@ -65,9 +65,21 @@ extern void ForceGetTrophyContext( SceNpTrophyContext &context, SceNpTrophyHandl
 void WaitForSaveLoad()
 {
 	while( loadInFlight )
+	{
+		int ret = cellSysutilCheckCallback();
+		if( ret )
+			LOG_WRITE( "cellSysutilCheckCallback() = 0x%x\n", ret );
+
 		sys_ppu_thread_yield();
+	}
 	while( saveInFlight )
+	{
+		int ret = cellSysutilCheckCallback();
+		if( ret )
+			LOG_WRITE( "cellSysutilCheckCallback() = 0x%x\n", ret );
+
 		sys_ppu_thread_yield();
+	}
 }
 
 void SaveAllOnExit()
