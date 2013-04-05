@@ -978,6 +978,7 @@ else
 
         void LeaderboardView::ViewGamer()
         {
+#ifdef PS3
 			MyLeaderboard->ItemMutex.Lock();
             {
 				if ( MyLeaderboard->MySortType == LeaderboardType_FriendsScores )
@@ -1012,6 +1013,7 @@ else
 				}
             }
 			MyLeaderboard->ItemMutex.Unlock();
+#endif
         }
 
         void LeaderboardView::SetType( LeaderboardType type )
