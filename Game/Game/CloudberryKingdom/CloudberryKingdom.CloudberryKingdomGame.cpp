@@ -85,7 +85,7 @@ namespace CloudberryKingdom
 #elif CAFE
 	const bool FinalRelease = true;
 #elif PS3
-	const bool FinalRelease = false;
+	const bool FinalRelease = true;
 #elif XBOX
 	const bool FinalRelease = true;
 #endif
@@ -595,7 +595,7 @@ Version CloudberryKingdomGame::GameVersion = Version( 0, 2, 4 );
 #else
         bool CloudberryKingdomGame::AlwaysGiveTutorials = false;
         bool CloudberryKingdomGame::Unlock_Customization = true;
-        bool CloudberryKingdomGame::Unlock_Levels = !FinalRelease || CloudberryKingdomGame::DigitalDayBuild;
+        bool CloudberryKingdomGame::Unlock_Levels = false;//!FinalRelease || CloudberryKingdomGame::DigitalDayBuild;
 #endif
 
         bool FakeDemo = false;
