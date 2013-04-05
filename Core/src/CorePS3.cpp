@@ -747,6 +747,9 @@ void CheckNPDRMFileThread( uint64_t context )
 	sys_ppu_thread_exit( 0 );
 }
 
+// Kick off saves on exit to make sure we save everything. Defined in EzStorage.cpp.
+extern void SaveAllOnExit();
+
 int CorePS3::Run()
 {
 	running_ = true;
@@ -888,6 +891,8 @@ int CorePS3::Run()
 
 		psglSwap();
 	}
+
+	SaveAllOnExit();
 
 	// Close the dialog box if it is still open.
 	/*if( ErrorDialogOpen ) 

@@ -70,6 +70,11 @@ void WaitForSaveLoad()
 		sys_ppu_thread_yield();
 }
 
+void SaveAllOnExit()
+{
+	CloudberryKingdom::SaveGroup::SaveAll();
+}
+
 #endif
 
 #if defined( CAFE ) || defined( PS3 )
