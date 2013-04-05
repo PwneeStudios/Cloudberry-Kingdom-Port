@@ -72,7 +72,10 @@ void WaitForSaveLoad()
 
 void SaveAllOnExit()
 {
-	CloudberryKingdom::SaveGroup::SaveAll();
+	if( CloudberryKingdom::CloudberryKingdomGame::CurrentPresence == CloudberryKingdom::Presence_Campaign )
+	{
+		CloudberryKingdom::SaveGroup::SaveAll();
+	}
 }
 
 #endif
