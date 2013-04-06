@@ -86,7 +86,6 @@ void SaveAllOnExit()
 {
 	if( CloudberryKingdom::CloudberryKingdomGame::CurrentPresence == CloudberryKingdom::Presence_Campaign )
 	{
-		printf( "saveallonexit hello!" );
 		CloudberryKingdom::SaveGroup::SaveAll();
 	}
 }

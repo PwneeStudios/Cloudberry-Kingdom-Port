@@ -62,7 +62,10 @@ namespace CloudberryKingdom
 
             // Update level text
             int Level = PlayerManager::MinPlayerTotalCampaignLevel() + 1;
-            bool ShowLevel = Level > 1 && Level < 321;
+
+			bool ShowLevel = Level > 1;
+            bool ShowContinue = Level > 1 && Level < 321;
+
 
 			//bool ShowLevel = false;
 
@@ -73,14 +76,14 @@ namespace CloudberryKingdom
 			boost::shared_ptr<MenuItem> __item = MyMenu->FindItemByName( L"Continue" );
 			if ( __item != 0 )
 			{
-				if ( ShowLevel )
+				if ( ShowContinue )
 				{
 					__item->Selectable = true;
 					__item->Show = true;
 				}
 				else
 				{
-					Level = 1;
+					if (Level == 0) Level = 1;
 					__item->Selectable = false;
 					__item->Show = false;
 					MyMenu->SelectItem(1);

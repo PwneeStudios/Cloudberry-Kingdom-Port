@@ -406,12 +406,19 @@ namespace CloudberryKingdom
         {
 			if ( !CloudberryKingdomGame::CanSave() )
 			{
-				item->Selectable = false;
+				//item->Selectable = false;
+				item->setGo( 0 );
+
+                item->MyText->MyFloatColor.W = .5f;
+                item->MySelectedText->MyFloatColor.W = .5f;
 			}
 			else
 			{
 				item->Selectable = true;
 				item->setGo( boost::make_shared<ChangeSaveGoFuncHelper>() );
+
+                item->MyText->MyFloatColor.W = .5f;
+                item->MySelectedText->MyFloatColor.W = .5f;
 			}
         }
 
