@@ -2,6 +2,10 @@
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
+#if PS3
+#include <Utility/ConsoleInformation.h>
+#endif
+
 namespace CloudberryKingdom
 {
 
@@ -175,13 +179,35 @@ L"Ubisoft and the Ubisoft logo are trademarks of Ubisoft Entertainment in the US
 
 		if ( !CloudberryKingdomGame::HideLogos )
 			MyPile->Add( Legal );
+
+#if PS3
+        boost::shared_ptr<EzText> loading = boost::make_shared<EzText>( Localization::WordString( Localization::Words_Loading ) + L"...",
+			Resources::Font_Grobold42, true, true );
+
+		loading->Name = L"Loading";
+		loading->Show = false;
+        loading->MyFloatColor = ColorHelper::Gray( .9f );
+
+		MyPile->Add( loading );
+#endif
 	}
 
 	void InitialLoadingScreen::PhsxStep()
 	{
+#if PS3
+		// Skip this ('pause') if XMB is up.
+		if ( !IsSystemMenuVisible() )
+#endif
 		LogoCount++;
 
 		float LoadingPercent;
+
+#if PS3
+		if ( !CloudberryKingdomGame::CaveDoneLoading )
+		{
+
+		}
+#endif
 
 		LoadingPercent = 100 * ResourceCount->MyFloat / TotalResources;
 		MyProgressBar->SetPercent( LoadingPercent );
@@ -200,6 +226,10 @@ L"Ubisoft and the Ubisoft logo are trademarks of Ubisoft Entertainment in the US
 		{
             if ( ReadyToFade )
             {
+#if PS3
+				// Skip this ('pause') if XMB is up.
+				if ( !IsSystemMenuVisible() )
+#endif
 				BlackQuad->setAlpha( BlackQuad->getAlpha() + .0223f );
 				if ( BlackQuad->getAlpha() >= 1 )
 					DoneCount++;
@@ -207,7 +237,24 @@ L"Ubisoft and the Ubisoft logo are trademarks of Ubisoft Entertainment in the US
 		}
 
 		if ( !Resources::LoadingResources->MyBool && ReadyToFade && BlackQuad->getAlpha() >= 1 && DoneCount > 25 )
+		{
+#if PS3
+			if ( CloudberryKingdomGame::CaveDoneLoading )
+			{
+				IsDone = true;
+			}
+			else
+			{
+				boost::shared_ptr<EzText> _t = MyPile->FindEzText( L"Loading" );
+				if (_t != 0 )
+				{
+					_t->Show = true;
+				}
+			}
+#endif
+
 			IsDone = true;
+		}
 
 		//IsDone = false;
 	}
@@ -217,10 +264,16 @@ L"Ubisoft and the Ubisoft logo are trademarks of Ubisoft Entertainment in the US
         Legal->setScale( .25f );
         Legal->setPos( Vector2(-1500, -500) );
 
-        DrawCount++;
-        if ( !ReadyToFade && DrawCount > 2 )
-            BlackQuad->setAlpha( BlackQuad->getAlpha() - .0633f );
-        
+#if PS3
+		// Skip this ('pause') if XMB is up.
+		if ( !IsSystemMenuVisible() )
+#endif
+		{
+			DrawCount++;
+			if ( !ReadyToFade && DrawCount > 2 )
+				BlackQuad->setAlpha( BlackQuad->getAlpha() - .0633f );
+		}
+
 #ifdef PS3
 		if ( DrawCount > 240 )
 #elif CAFE

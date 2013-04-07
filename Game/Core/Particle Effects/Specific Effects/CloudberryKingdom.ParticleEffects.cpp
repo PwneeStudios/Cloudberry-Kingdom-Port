@@ -738,10 +738,28 @@ boost::shared_ptr<Particle> ParticleEffects::PopTemplate = 0;
 		if ( level->NoParticles )
 			return;
 
+#if CAFE
+            // Spritely
+            for ( int j = 0; j < 10; j++)
+            {
+                boost::shared_ptr<Particle> p = level->ParticleEmitters[5]->GetNewParticle( ParticleEffects::DieTemplate );
+                //var p = level->MainEmitter->GetNewboost::make_shared<Particle>( ParticleEffects->DieTemplate );
+
+                p->Data.Position = pos;
+                p->MyQuad.setMyTexture( Tools::TextureWad->FindByName( L"Sparkle" ) );
+                p->Data.Velocity = Tools::GlobalRnd->RndDir() * ( Tools::GlobalRnd->RndFloat( 7, 9 ));
+                p->Size *= 3.0f;
+				p->AngleSpeed = .05f;
+                p->SizeSpeed = Vector2( -1.5f );
+                p->Life = ( int )( p->Life * 1.25f );
+                p->ColorVel.W /= 1.25f;
+            }
+#else
 		boost::shared_ptr<CloudberryKingdom::Particle> p = level->MainEmitter->GetNewParticle( PopTemplate );
 		p->Data.Position = pos;
 		p->SetSize( size );
 		p->MyQuad.setMyTexture( tex );
+#endif
 	}
 
 	void ParticleEffects::Init_Pop()

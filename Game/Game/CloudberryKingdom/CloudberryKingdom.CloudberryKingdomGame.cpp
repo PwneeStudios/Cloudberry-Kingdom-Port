@@ -113,6 +113,10 @@ namespace CloudberryKingdom
 
 		bool CloudberryKingdomGame::CampaignProgressMade = false;
 
+#if PS3
+		bool CloudberryKingdomGame::CaveDoneLoading = false;
+#endif
+
         boost::shared_ptr<EzText> CloudberryKingdomGame::SavingText = 0;
         int CloudberryKingdomGame::ShowSavingDuration = 0;
 

@@ -404,6 +404,21 @@ boost::shared_ptr<Thread> Resources::LoadThread = 0;
 	};
 #endif
 
+#ifdef PS3
+	
+	class CaveDoneJob : public Job
+	{
+
+	public:
+
+		void Do()
+		{
+			CloudberryKingdomGame::CaveDoneLoading = true;
+		}
+
+	};
+#endif
+
 	void Resources::_LoadThread()
 	{
 		hf_Mutex = boost::make_shared<Mutex>();

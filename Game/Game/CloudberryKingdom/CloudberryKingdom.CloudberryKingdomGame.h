@@ -32,6 +32,10 @@ namespace CloudberryKingdom
 	{
 
 		static bool CampaignProgressMade;
+		
+#if PS3
+		static bool CaveDoneLoading;
+#endif
 
 #if defined(DEBUG)
 		static int _count;

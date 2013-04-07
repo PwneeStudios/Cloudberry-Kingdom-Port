@@ -274,6 +274,10 @@ namespace CloudberryKingdom
 					item_width = .32f;
 				custom_arrows = true;
 			}
+			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_RUSSIAN )
+			{
+				item_width = .34f;
+			}
 
 		// Make the hat select
 		if ( MyMenu->CurIndex == 2 )
