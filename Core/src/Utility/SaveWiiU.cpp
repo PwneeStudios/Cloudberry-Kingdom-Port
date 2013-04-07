@@ -12,6 +12,9 @@ bool isInitialized = false;
 char *GLOBAL_ACCOUNT_NAME = NULL;
 static char LOCAL_ACCOUNT_NAME[ ACT_ACCOUNT_ID_SIZE ];
 
+// Show saving message.  Defined in CloudberryKingdomGame.cpp.
+extern void GlobalShowSaving();
+
 bool InitializeSave()
 {
 	if( initializeCalled )
@@ -23,22 +26,41 @@ bool InitializeSave()
 	SAVEInit();
 	nn::act::Initialize();
 
+	FSClient client;
+	FSCmdBlock cmd;
+
+	FSAddClient( &client, FS_RET_NO_ERROR );
+	FSInitCmdBlock( &cmd );
+
 	u8 accountSlot = nn::act::GetSlotNo();
 	u32 persistentId = nn::act::GetPersistentIdEx( accountSlot );
-
 	if( nn::act::IsSlotOccupied( accountSlot ) )
 	{
-		LOG_WRITE( "Creating account for slot %d with id 0x%X\n", accountSlot, persistentId );
+		// First try to stat the directory to see if it exists.
+		FSStat dirStat;
+		FSStatus status = SAVEGetStat( &client, &cmd, accountSlot, ".", &dirStat, FS_RET_ALL_ERROR );
 
-		if( SAVEInitSaveDir( accountSlot ) != SAVE_STATUS_OK )
+		if( status != FS_STATUS_OK )
 		{
-			LOG_WRITE( "Failed to create save directory.\n" );
-			isInitialized = false;
-			
-			// There was not enough free space to create save data.
-			DisplayError( 1550100 );
+			LOG_WRITE( "Creating account for slot %d with id 0x%X\n", accountSlot, persistentId );
 
-			return false;
+			if( SAVEInitSaveDir( accountSlot ) != SAVE_STATUS_OK )
+			{
+				LOG_WRITE( "Failed to create save directory.\n" );
+				isInitialized = false;
+			
+				// There was not enough free space to create save data.
+				DisplayError( 1550100 );
+
+				FSDelClient( &client, FS_RET_NO_ERROR );
+				return false;
+			}
+			else
+				GlobalShowSaving();
+		}
+		else
+		{
+			LOG_WRITE( "Directory for slot %d already exists\n", accountSlot );
 		}
 	}
 
@@ -48,18 +70,35 @@ bool InitializeSave()
 	sprintf( LOCAL_ACCOUNT_NAME, "Errorberry" );
 	r = nn::act::GetAccountId( LOCAL_ACCOUNT_NAME );
 	
-	LOG_WRITE( "Creating global directory\n" );
-	if( SAVEInitSaveDir( ACT_SLOT_NO_COMMON ) != SAVE_STATUS_OK )
+	// First try to stat the directory to see if it exists.
+	FSStat dirStat;
+	FSStatus status = SAVEGetStat( &client, &cmd, ACT_SLOT_NO_COMMON, ".", &dirStat, FS_RET_ALL_ERROR );
+
+	if( status != FS_STATUS_OK )
 	{
-		LOG_WRITE( "Failed to create common directory.\n" );
-		isInitialized = false;
+		LOG_WRITE( "Creating global directory\n" );
+		if( SAVEInitSaveDir( ACT_SLOT_NO_COMMON ) != SAVE_STATUS_OK )
+		{
+			LOG_WRITE( "Failed to create common directory.\n" );
+			isInitialized = false;
 
-		// There was not enough free space to create save data.
-		DisplayError( ErrorType( 1550100 ) );
-
-		return false;
+			// There was not enough free space to create save data.
+			DisplayError( ErrorType( 1550100 ) );
+		
+			FSDelClient( &client, FS_RET_NO_ERROR );
+			return false;
+		}
+		else
+			GlobalShowSaving();
+	}
+	else
+	{
+		LOG_WRITE( "Common directory alerady exists.\n" );
 	}
 
 	isInitialized = true;
+	
+	FSDelClient( &client, FS_RET_NO_ERROR );
+	
 	return true;
 }
