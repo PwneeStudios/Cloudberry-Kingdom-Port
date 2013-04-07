@@ -74,7 +74,7 @@ namespace CloudberryKingdom
 			Text = Format( Localization::WordString( Localization::Words_DeleteSeeds ).c_str(), ToString( NumSeeds ).c_str() );
 		else
 			Text = Format( Localization::WordString( Localization::Words_DeleteSeedsPlural ).c_str(), ToString( NumSeeds ).c_str() );
-		boost::shared_ptr<EzText> HeaderText = boost::make_shared<EzText>( Text, ItemFont, static_cast<std::wstring>( std::wstring( L"Header" ) , true, true ) );
+		boost::shared_ptr<EzText> HeaderText = boost::make_shared<EzText>( Text, ItemFont, true, true );
 		SetHeaderProperties( HeaderText );
 		MyPile->Add( HeaderText, std::wstring( L"Header" ) );
 		HeaderText->setPos( HeaderPos );

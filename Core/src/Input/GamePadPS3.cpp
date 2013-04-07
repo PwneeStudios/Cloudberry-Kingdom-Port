@@ -10,7 +10,7 @@ static bool asianButtonConfiguration = false;
 // Buffer for making sure disconnect messages don't show up for going from
 // wired to wireless mode.
 static int gBufferedIsConnected[ 4 ];
-const int gBufferingSize = 32;
+const int gBufferingSize = 80;//32;
 
 void GamePad::Initialize()
 {

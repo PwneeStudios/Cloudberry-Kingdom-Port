@@ -31,6 +31,8 @@ namespace CloudberryKingdom
 	struct CloudberryKingdomGame : public boost::enable_shared_from_this<CloudberryKingdomGame>
 	{
 
+		static bool CampaignProgressMade;
+
 #if defined(DEBUG)
 		static int _count;
 		static int address;

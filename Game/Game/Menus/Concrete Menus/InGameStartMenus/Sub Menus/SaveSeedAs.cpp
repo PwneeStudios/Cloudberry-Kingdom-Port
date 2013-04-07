@@ -55,7 +55,11 @@ namespace CloudberryKingdom
 		EnableBounce();
 
 		this->setControl( Control );
-		this->Player = Player;
+		
+		// Note: we ALWAYS use player 1, since all save data is shared.
+		//this->Player = Player;
+		this->Player = PlayerManager::Players[ 0 ];
+		
 		FixedToCamera = true;
 
 		Constructor();
@@ -124,7 +128,6 @@ namespace CloudberryKingdom
 		// Save the seed
 		if ( TextBox->getText().length() > 0 )
 		{
-//C# TO C++ CONVERTER TODO TASK: There is no native C++ equivalent to 'ToString':
 			Player->MySavedSeeds->SaveSeed( Tools::CurLevel->MyLevelSeed->ToString(), TextBox->getText() );
 
 			// Success!

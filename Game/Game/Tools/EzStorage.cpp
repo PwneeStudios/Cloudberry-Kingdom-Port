@@ -305,6 +305,8 @@ namespace CloudberryKingdom
 
 		if ( !CloudberryKingdomGame::CanSave() ) return;
 
+		CloudberryKingdomGame::CampaignProgressMade = false;
+
 		for ( std::vector<boost::shared_ptr<SaveLoad> >::const_iterator ThingToSave = ThingsToSave.begin(); ThingToSave != ThingsToSave.end(); ++ThingToSave )
 		{
 			//if (!(ThingToSave is ScoreList)) Tools::Write("!");

@@ -111,6 +111,8 @@ namespace CloudberryKingdom
 		return false;
 	}
 
+		bool CloudberryKingdomGame::CampaignProgressMade = false;
+
         boost::shared_ptr<EzText> CloudberryKingdomGame::SavingText = 0;
         int CloudberryKingdomGame::ShowSavingDuration = 0;
 

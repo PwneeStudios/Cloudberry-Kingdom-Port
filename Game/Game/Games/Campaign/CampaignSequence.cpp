@@ -166,6 +166,12 @@ namespace CloudberryKingdom
 
     bool CampaignSequence::OnLevelBegin( const boost::shared_ptr<Level> &level )
     {
+		if ( CloudberryKingdomGame::CampaignProgressMade )
+		{
+			SaveGroup::SaveAll();
+			CloudberryKingdomGame::CampaignProgressMade = false;
+		}
+
 		HelpMenu::CostMultiplier = 1;
 
 		if ( level->MyLevelSeed != 0 )
@@ -426,7 +432,7 @@ namespace CloudberryKingdom
 	{
 		MarkProgress( level );
 
-		SaveGroup::SaveAll();
+		//SaveGroup::SaveAll();
 
         // Check for end of chapter
 		for ( std::map<int, int>::const_iterator key = instance->ChapterEnd.begin(); key != instance->ChapterEnd.end(); key++ )
@@ -445,9 +451,15 @@ namespace CloudberryKingdom
 		std::vector<boost::shared_ptr<PlayerData> > vec = PlayerManager::getExistingPlayers();
 		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
 		{
-			( *player )->CampaignLevel = __max( ( *player )->CampaignLevel, level->MyLevelSeed->LevelNum );
+			if ( ( *player )->CampaignLevel < level->MyLevelSeed->LevelNum  ||
+				 ( *player )->CampaignIndex < level->MyLevelSeed->LevelIndex )
+			{
+				CloudberryKingdomGame::CampaignProgressMade = true;
+			}
 
-            ( *player )->CampaignIndex = __max( ( *player )->CampaignIndex, level->MyLevelSeed->LevelIndex );
+			( *player )->CampaignLevel = __max( ( *player )->CampaignLevel, level->MyLevelSeed->LevelNum );
+			( *player )->CampaignIndex = __max( ( *player )->CampaignIndex, level->MyLevelSeed->LevelIndex );
+
             ( *player )->Changed = true;
 		}
 	}
