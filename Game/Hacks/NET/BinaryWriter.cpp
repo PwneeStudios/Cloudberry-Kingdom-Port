@@ -129,7 +129,7 @@ void MemoryBinaryWriter::Write( unsigned char c )
 	buffer_.push_back( c );
 }
 
-#ifdef CAFE
+#ifdef CAFE_ORIGINAL
 
 static FSClient gClient;
 const int gNumCmds = 16;
@@ -371,6 +371,264 @@ void SaveWriterWiiU::Write( unsigned char c )
 	buf[ 0 ] = c;
 	FSWriteFile( &gClient, internal_->Cmd, buf, sizeof( unsigned char ), 1,
 		internal_->Fh, 0, FS_RET_NO_ERROR );
+}
+
+#endif
+
+#ifdef CAFE
+
+static FSClient gClient;
+const int gNumCmds = 16;
+static int gCurCmd = 0;
+static FSCmdBlock gCmds[ gNumCmds ];
+
+void InitSaveFS()
+{
+	FSAddClient( &gClient, FS_RET_NO_ERROR );
+
+	gCurCmd = 0;
+	for( int i = 0; i < gNumCmds; ++i )
+		FSInitCmdBlock( &gCmds[ i ] );
+}
+
+void TerminateSaveFS()
+{
+	FSDelClient( &gClient, FS_RET_NO_ERROR );
+}
+
+struct SaveWriterWiiUInternal
+{
+	/*FSClient Client;*/
+	FSCmdBlock *Cmd;
+	FSFileHandle FileHandle;
+
+	u8 AccountSlot;
+	u32 PersistentID;
+
+	FSStatus OpenStatus;
+	FSFileHandle Fh;
+	bool IsOpen;
+
+	char *AlignedBuffer;
+	char *WriteCursor;
+};
+
+// FIXME: Max file save size is 256KB.
+const int ALIGNED_BUFFER_SIZE = 256 * 1024;
+
+static void stateChangeCallback( FSClient *pClient, FSVolumeState state, void *pContext )
+{
+	FSError lastError = FSGetLastError( pClient );
+	LOG_WRITE( "Volume state of client 0X%08X changed to %d\n", pClient, state );
+	LOG_WRITE( "Last error: %d\n", lastError );
+}
+
+SaveWriterWiiU::SaveWriterWiiU( const std::string &path, bool global )
+	: internal_( new SaveWriterWiiUInternal )
+{
+	memset( internal_, 0, sizeof( SaveWriterWiiUInternal ) );
+
+	internal_->AccountSlot = nn::act::GetSlotNo();
+	internal_->PersistentID = nn::act::GetPersistentIdEx( internal_->AccountSlot );
+
+	/*FSAddClient( &internal_->Client, FS_RET_NO_ERROR );
+	FSInitCmdBlock( &internal_->Cmd );*/
+	internal_->Cmd = &gCmds[ gCurCmd ];
+	gCurCmd = ( gCurCmd + 1 ) % gNumCmds;
+
+	FSStateChangeParams stateChangeParams = {
+		.userCallback = stateChangeCallback,
+		.userContext = NULL,
+		.ioMsgQueue = NULL
+	};
+
+	internal_->IsOpen = false;
+	/*internal_->OpenStatus = SAVEOpenFile( &internal_->Client, &internal_->Cmd,
+		global ? ACT_SLOT_NO_COMMON : internal_->AccountSlot,
+		path.c_str(), "w", &internal_->Fh, FS_RET_ALL_ERROR );*/
+	internal_->OpenStatus = SAVEOpenFile( &gClient, internal_->Cmd,
+		global ? ACT_SLOT_NO_COMMON : internal_->AccountSlot,
+		path.c_str(), "w", &internal_->Fh, FS_RET_ALL_ERROR );
+
+	if( internal_->OpenStatus == FS_STATUS_OK && internal_->Fh > 0 )
+	{
+		internal_->IsOpen = true;
+
+		internal_->AlignedBuffer = reinterpret_cast< char * >(
+			MEMAllocFromDefaultHeapEx( ALIGNED_BUFFER_SIZE, FS_IO_BUFFER_ALIGN )
+		);
+
+		internal_->WriteCursor = internal_->AlignedBuffer;
+	}
+}
+
+void FlushCallback( FSClient *client, FSCmdBlock *block, FSStatus result, void *context )
+{
+	LOG_WRITE( "COMMITED\n" );
+}
+
+SaveWriterWiiU::~SaveWriterWiiU()
+{
+	if( internal_->IsOpen )
+	{
+		internal_->IsOpen = false;
+		/*FSCloseFile( &internal_->Client, &internal_->Cmd, internal_->Fh, FS_RET_NO_ERROR );
+	
+		SAVEFlushQuota( &internal_->Client, &internal_->Cmd, internal_->AccountSlot, FS_RET_NO_ERROR );*/
+		int size = internal_->WriteCursor - internal_->AlignedBuffer;
+		FSWriteFile( &gClient, internal_->Cmd, internal_->AlignedBuffer, size, 1,
+			internal_->Fh, 0, FS_RET_NO_ERROR );
+
+		FSCloseFile( &gClient, internal_->Cmd, internal_->Fh, FS_RET_NO_ERROR );
+	
+		//SAVEFlushQuota( &gClient, &gCmd, internal_->AccountSlot, FS_RET_NO_ERROR );
+
+		FSAsyncParams asyncParams;
+		memset( &asyncParams, 0, sizeof( asyncParams ) );
+		
+		asyncParams.userCallback = FlushCallback;
+		asyncParams.userContext = NULL;
+		asyncParams.ioMsgQueue = NULL;
+		
+		SAVEFlushQuotaAsync( &gClient, internal_->Cmd, internal_->AccountSlot, FS_RET_NO_ERROR, &asyncParams );
+	}
+
+	if( internal_->AlignedBuffer )
+	{
+		MEMFreeToDefaultHeap( internal_->AlignedBuffer );
+	}
+	//FSDelClient( &internal_->Client, FS_RET_NO_ERROR );
+
+	delete internal_;
+}
+
+bool SaveWriterWiiU::IsOpen()
+{
+	return internal_->IsOpen;
+}
+
+void SaveWriterWiiU::Write( const unsigned char *buffer, int offset, int length )
+{
+	if( !internal_->IsOpen )
+	{
+		LOG_WRITE( "Write failed\n" );
+		return;
+	}
+
+	memcpy( internal_->WriteCursor, buffer + offset, length );
+	internal_->WriteCursor += length;
+	/*
+	void *buf = internal_->AlignedBuffer;
+	if( length > ALIGNED_BUFFER_SIZE )
+		buf = MEMAllocFromDefaultHeapEx( length, FS_IO_BUFFER_ALIGN );
+
+	memcpy( buf, buffer + offset, length );
+
+	FSStatus stat = FSWriteFile( &gClient, internal_->Cmd, buf, length,
+		sizeof( unsigned char ), internal_->Fh, 0, FS_RET_ALL_ERROR );
+
+	if( buf != internal_->AlignedBuffer )
+		MEMFreeToDefaultHeap( buf );*/
+}
+
+void SaveWriterWiiU::Write( int i )
+{
+	if( !internal_->IsOpen )
+	{
+		LOG_WRITE( "Write failed\n" );
+		return;
+	}
+
+	memcpy( internal_->WriteCursor, &i, sizeof( int ) );
+	internal_->WriteCursor += sizeof( int );
+	/*memcpy( internal_->AlignedBuffer, &i, sizeof( int ) );
+	FSStatus stat = FSWriteFile( &gClient, internal_->Cmd, internal_->AlignedBuffer, sizeof( int ), 1,
+		internal_->Fh, 0, FS_RET_NO_ERROR );*/
+}
+
+void SaveWriterWiiU::Write( unsigned int i )
+{
+	if( !internal_->IsOpen )
+	{
+		LOG_WRITE( "Write failed\n" );
+		return;
+	}
+
+	memcpy( internal_->WriteCursor, &i, sizeof( unsigned int ) );
+	internal_->WriteCursor += sizeof( unsigned int );
+	/*memcpy( internal_->AlignedBuffer, &i, sizeof( unsigned int ) );
+	FSWriteFile( &gClient, internal_->Cmd, internal_->AlignedBuffer, sizeof( unsigned int ), 1,
+		internal_->Fh, 0, FS_RET_NO_ERROR );*/
+}
+
+void SaveWriterWiiU::Write( unsigned long long i )
+{
+	if( !internal_->IsOpen )
+	{
+		LOG_WRITE( "Write failed\n" );
+		return;
+	}
+
+	memcpy( internal_->WriteCursor, &i, sizeof( unsigned long long ) );
+	internal_->WriteCursor += sizeof( unsigned long long );
+	/*memcpy( internal_->AlignedBuffer, &i, sizeof( unsigned long long ) );
+	FSWriteFile( &gClient, internal_->Cmd, internal_->AlignedBuffer, sizeof( unsigned long long ), 1,
+		internal_->Fh, 0, FS_RET_NO_ERROR );*/
+}
+
+void SaveWriterWiiU::Write( const Vector2 &v )
+{
+	Write( v.X );
+	Write( v.Y );
+}
+
+void SaveWriterWiiU::Write( const std::wstring &s )
+{
+	if( !internal_->IsOpen )
+	{
+		LOG_WRITE( "Write failed\n" );
+		return;
+	}
+
+	std::string bytes( WstringToUtf8( s ) );
+
+	size_t length = bytes.length();
+	for( length; length >= 128u; length >>= 7 )
+		Write( static_cast<unsigned char>( length | 128u ) );
+	Write( static_cast<unsigned char>( length ) );
+
+	Write( reinterpret_cast< const unsigned char * >( bytes.c_str() ), 0, bytes.length() );
+}
+
+void SaveWriterWiiU::Write( float v )
+{
+	if( !internal_->IsOpen )
+	{
+		LOG_WRITE( "Write failed\n" );
+		return;
+	}
+
+	memcpy( internal_->WriteCursor, &v, sizeof( float ) );
+	internal_->WriteCursor += sizeof( float );
+	/*memcpy( internal_->AlignedBuffer, &v, sizeof( float ) );
+	FSWriteFile( &gClient, internal_->Cmd, internal_->AlignedBuffer, sizeof( float ), 1,
+		internal_->Fh, 0, FS_RET_NO_ERROR );*/
+}
+
+void SaveWriterWiiU::Write( unsigned char c )
+{
+	if( !internal_->IsOpen )
+	{
+		LOG_WRITE( "Write failed\n" );
+		return;
+	}
+
+	*internal_->WriteCursor = static_cast< char >( c );
+	++internal_->WriteCursor;
+	/*unsigned char *buf = reinterpret_cast< unsigned char * >( internal_->AlignedBuffer );
+	buf[ 0 ] = c;
+	FSWriteFile( &gClient, internal_->Cmd, buf, sizeof( unsigned char ), 1,
+		internal_->Fh, 0, FS_RET_NO_ERROR );*/
 }
 
 #endif
