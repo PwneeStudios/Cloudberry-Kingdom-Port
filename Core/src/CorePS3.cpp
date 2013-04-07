@@ -163,7 +163,7 @@ static void SystemCallback( const uint64_t status, const uint64_t param, void *u
 	switch( status )
 	{
 	case CELL_SYSUTIL_REQUEST_EXITGAME:
-		SaveAllOnExit();
+		//SaveAllOnExit();
 		glFinish();
 		CORE.Exit();
 		break;
