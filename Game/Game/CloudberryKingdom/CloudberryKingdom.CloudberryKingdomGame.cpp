@@ -75,6 +75,11 @@ int WHO_IS_DISCONNECTED;
 
 static bool LAST_CONNECTION_STATUS[ 5 ];
 
+void GlobalShowSaving()
+{
+	CloudberryKingdom::CloudberryKingdomGame::ShowSaving();
+}
+
 #endif
 
 namespace CloudberryKingdom
