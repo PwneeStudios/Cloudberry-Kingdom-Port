@@ -294,6 +294,20 @@ void GamePad::Update()
 			PAD_STATE[ i ].Buttons.RightStick = ( status[ i ].button & PAD_BUTTON_START ) ? ButtonState_Pressed : ButtonState_Released;
 			PAD_STATE[ i ].Buttons.Back = ( status[ i ].button & PAD_BUTTON_START ) ? ButtonState_Pressed : ButtonState_Released;
 			PAD_STATE[ i ].Buttons.BigButton = ( status[ i ].button & PAD_BUTTON_MENU ) ? ButtonState_Pressed : ButtonState_Released;*/
+	
+			const float threshold = 0.1f * 0.1f;
+
+			float x = vpadStatus.lStick.x;
+			float y = vpadStatus.lStick.y;
+			float magnitude = x * x + y * y;
+			if( magnitude > threshold )
+				PAD_STATE[ i ].ThumbSticks.Left = Vector2( vpadStatus.lStick.x, vpadStatus.lStick.y );
+			
+			x = vpadStatus.rStick.x;
+			y = vpadStatus.rStick.y;
+			magnitude = x * x + y * y;
+			if( magnitude > threshold )
+				PAD_STATE[ i ].ThumbSticks.Right = Vector2( vpadStatus.rStick.x, vpadStatus.rStick.y );
 
 			if( i == 0 && !channel0ThumbsticksWritten )
 			{
