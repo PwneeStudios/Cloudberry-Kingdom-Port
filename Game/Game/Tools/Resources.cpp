@@ -452,6 +452,16 @@ boost::shared_ptr<Thread> Resources::LoadThread = 0;
 			}
 #endif
 
+#ifdef PS3
+			if( ( *Tex )->Path.find( L"CopyRight" ) != std::wstring::npos )
+			{
+				boost::shared_ptr<Texture2D> t2d = boost::make_shared<Texture2D>(boost::shared_ptr<GraphicsDevice>(), 1, 1);
+				LOG_WRITE( "Force load: %s\n", WstringToUtf8( ( *Tex )->Path ).c_str() );
+				t2d->texture_ = CONTENT->ForceLoadTexture( WstringToUtf8( ( *Tex )->Path ) + ".gtf" );
+				( *Tex )->setTex( t2d );
+				continue;
+			}
+#endif
 			// If texture hasn't been loaded yet, load it
 			if ( ( *Tex )->getTex() == 0 && !(*Tex)->FromCode )
 			{
