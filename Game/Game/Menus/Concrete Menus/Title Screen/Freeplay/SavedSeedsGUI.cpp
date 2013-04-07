@@ -371,7 +371,12 @@ namespace CloudberryKingdom
 		MyPile = boost::make_shared<DrawPile>();
 
 		// Get the activating player
-		player = MenuItem::GetActivatingPlayerData();
+		//player = MenuItem::GetActivatingPlayerData();
+		player = PlayerManager::Players[ 0 ];
+		if ( player == 0 )
+		{
+			player = MenuItem::GetActivatingPlayerData();
+		}
 
 		// Set slide in and out parameters
 		ReturnToCallerDelay = 6;

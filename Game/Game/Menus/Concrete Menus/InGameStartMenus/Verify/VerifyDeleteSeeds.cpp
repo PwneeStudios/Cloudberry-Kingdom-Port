@@ -74,9 +74,9 @@ namespace CloudberryKingdom
 			Text = Format( Localization::WordString( Localization::Words_DeleteSeeds ).c_str(), ToString( NumSeeds ).c_str() );
 		else
 			Text = Format( Localization::WordString( Localization::Words_DeleteSeedsPlural ).c_str(), ToString( NumSeeds ).c_str() );
-		boost::shared_ptr<EzText> HeaderText = boost::make_shared<EzText>( Text, ItemFont, static_cast<std::wstring>( std::wstring( L"Header" ) ) );
+		boost::shared_ptr<EzText> HeaderText = boost::make_shared<EzText>( Text, ItemFont, static_cast<std::wstring>( std::wstring( L"Header" ) , true, true ) );
 		SetHeaderProperties( HeaderText );
-		MyPile->Add( HeaderText );
+		MyPile->Add( HeaderText, std::wstring( L"Header" ) );
 		HeaderText->setPos( HeaderPos );
 
 
@@ -93,6 +93,15 @@ namespace CloudberryKingdom
 		item->SelectSound.reset();
 
 		MyMenu->OnX = MyMenu->OnB = boost::make_shared<VerifyDeleteOnXLambda>( boost::static_pointer_cast<VerifyDeleteSeeds>( shared_from_this() ) );
+
+		// SetPos()
+		boost::shared_ptr<EzText> _t;
+		_t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->setPos( Vector2( 0, 350 ) ); _t->setScale( 0.96f ); }
+
+		boost::shared_ptr<QuadClass> _q;
+		_q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2( 0.f, 0.f ) ); _q->setSize( Vector2( 1500.f, 902.2556f ) ); }
+
+		MyPile->setPos( Vector2( 0.f, 0.f ) );
 
 		// Select the first item in the menu to start
 		MyMenu->SelectItem( 0 );

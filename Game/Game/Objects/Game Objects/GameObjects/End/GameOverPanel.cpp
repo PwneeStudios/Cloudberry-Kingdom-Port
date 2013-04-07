@@ -238,24 +238,40 @@ namespace CloudberryKingdom
 
 	void GameOverPanel::SetPos()
 	{
-            //MenuItem _item;
-            //_item = MyMenu.FindItemByName(""); if (_item != null) { _item.SetPos = new Vector2(-808f, 110f); _item.MyText.Scale = 0.7743f; _item.MySelectedText.Scale = 0.7743f; _item.SelectIconOffset = new Vector2(0f, 0f); }
-            //_item = MyMenu.FindItemByName(""); if (_item != null) { _item.SetPos = new Vector2(-808f, -68.33099f); _item.MyText.Scale = 0.7743f; _item.MySelectedText.Scale = 0.7743f; _item.SelectIconOffset = new Vector2(0f, 0f); }
-            //_item = MyMenu.FindItemByName(""); if (_item != null) { _item.SetPos = new Vector2(-808f, -246.662f); _item.MyText.Scale = 0.7743f; _item.MySelectedText.Scale = 0.7743f; _item.SelectIconOffset = new Vector2(0f, 0f); }
+			if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_ITALIAN )
+			{
+				boost::shared_ptr<MenuItem> _item;
+				_item = MyMenu->FindItemByName( L"PlayAgain" ); if (_item != 0 ) { _item->setSetPos( Vector2(-808.f, 110.f ) ); _item->MyText->setScale( 0.5419669f ); _item->MySelectedText->setScale( 0.5419669f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+				_item = MyMenu->FindItemByName( L"Leaderboard" ); if (_item != 0 ) { _item->setSetPos( Vector2(-808.f, -48.88657f ) ); _item->MyText->setScale( 0.5419669f ); _item->MySelectedText->setScale( 0.5419669f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+				_item = MyMenu->FindItemByName( L"Done" ); if (_item != 0 ) { _item->setSetPos( Vector2(-808.f, -207.7731f ) ); _item->MyText->setScale( 0.5419669f ); _item->MySelectedText->setScale( 0.5419669f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 
-            MyMenu->setPos( Vector2( 400.f, -240.f ) );
+				MyMenu->setPos( Vector2( 552.7777f, -259.4444f ) );
 
-            boost::shared_ptr<EzText> _t;
-            _t = MyPile->FindEzText( L"Header" ); if (_t != 0) { _t->setPos( Vector2(-675.6388f, 575.4443f) ); _t->setScale( 1.f ); }
-            _t = MyPile->FindEzText( L"Level" ); if (_t != 0) { _t->setPos( Vector2(-857.3064f, 384.5554f) ); _t->setScale( 0.999f ); }
-            _t = MyPile->FindEzText( L"LevelVal" ); if (_t != 0) { _t->setPos( Vector2(-26.75146f, 376.2222f) ); _t->setScale( 0.999f ); }
-            _t = MyPile->FindEzText( L"Score" ); if (_t != 0) { _t->setPos( Vector2(-871.1947f, 159.f) ); _t->setScale( 0.999f ); }
-            _t = MyPile->FindEzText( L"ScoreVal" ); if (_t != 0) { _t->setPos( Vector2(-12.86145f, 150.6666f) ); _t->setScale( 0.999f ); }
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->setPos( Vector2(-675.6388f, 575.4443f ) ); _t->setScale( 1.f ); }
+				_t = MyPile->FindEzText( L"Level" ); if (_t != 0 ) { _t->setPos( Vector2(-882.3064f, 406.7777f ) ); _t->setScale( 0.891417f ); }
+				_t = MyPile->FindEzText( L"LevelVal" ); if (_t != 0 ) { _t->setPos( Vector2( 189.915f, 401.2222f ) ); _t->setScale( 0.891417f ); }
+				_t = MyPile->FindEzText( L"Score" ); if (_t != 0 ) { _t->setPos( Vector2(-885.0834f, 161.7779f ) ); _t->setScale( 0.891417f ); }
+				_t = MyPile->FindEzText( L"ScoreVal" ); if (_t != 0 ) { _t->setPos( Vector2( 201.0272f, 153.4444f ) ); _t->setScale( 0.891417f ); }
 
-            QuadClass _q;
-            //_q = MyPile->FindQuad( L"" ); if (_q != null) { _q->setPos( Vector2(22.2233f, 10.55567f); _q.Size = Vector2(1440f, 900f) ); }
+				boost::shared_ptr<QuadClass> _q;
+				_q = MyPile->FindQuad( L"" ); if (_q != 0 ) { _q->setPos( Vector2( 22.2233f, 10.55567f ) ); _q->setSize( Vector2( 1440.f, 900.f ) ); }
 
-            MyPile->setPos( Vector2(0.f, 0.f) );
+				MyPile->setPos( Vector2( 0.f, 0.f ) );
+			}
+			else
+			{
+				MyMenu->setPos( Vector2( 400.f, -240.f ) );
+
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->setPos( Vector2(-675.6388f, 575.4443f ) ); _t->setScale( 1.f ); }
+				_t = MyPile->FindEzText( L"Level" ); if (_t != 0 ) { _t->setPos( Vector2(-857.3064f, 384.5554f ) ); _t->setScale( 0.999f ); }
+				_t = MyPile->FindEzText( L"LevelVal" ); if (_t != 0 ) { _t->setPos( Vector2(-26.75146f, 376.2222f ) ); _t->setScale( 0.999f ); }
+				_t = MyPile->FindEzText( L"Score" ); if (_t != 0 ) { _t->setPos( Vector2(-871.1947f, 159.f ) ); _t->setScale( 0.999f ); }
+				_t = MyPile->FindEzText( L"ScoreVal" ); if (_t != 0 ) { _t->setPos( Vector2(-12.86145f, 150.6666f ) ); _t->setScale( 0.999f ); }
+
+				MyPile->setPos( Vector2( 0.f, 0.f ) );
+			}
 	}
 
 #if defined(PC_VERSION)
@@ -361,6 +377,7 @@ namespace CloudberryKingdom
 		FontScale *= .89f * 1.16f;
 
 		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_PlayAgain, ItemFont ) ) );
+		item->Name = std::wstring( L"PlayAgain" );
 		item->setGo( Cast::ToItem( boost::make_shared<Action_PlayAgainProxy>( boost::static_pointer_cast<GameOverPanel>( shared_from_this() ) ) ) );
 		AddItem( item );
 
@@ -369,10 +386,12 @@ namespace CloudberryKingdom
 #else
 		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_HighScores, ItemFont ) ) );
 #endif
+		item->Name = std::wstring( L"Leaderboard" );
 		item->setGo( Cast::ToItem( boost::make_shared<Action_ShowHighScoresProxy>( boost::static_pointer_cast<GameOverPanel>( shared_from_this() ) ) ) );
 		AddItem( item );
 
 		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Done, ItemFont ) ) );
+		item->Name = std::wstring( L"Done" );
 		item->setGo( Cast::ToItem( boost::make_shared<Action_DoneProxy>( boost::static_pointer_cast<GameOverPanel>( shared_from_this() ) ) ) );
 		AddItem( item );
 	}

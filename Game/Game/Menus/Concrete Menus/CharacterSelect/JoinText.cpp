@@ -200,22 +200,25 @@ namespace CloudberryKingdom
 		// Use this if statement if you want keyboard to control all characters (For debugging)
 		//if (ButtonCheck.State(ControllerButtons.A, -2).Pressed)
 
-#ifdef CAFE
-		if ( ButtonCheck::State( ControllerButtons_A, getControl() ).Pressed || 
-			 ButtonCheck::State( ControllerButtons_X, getControl() ).Pressed )
-#else
-		if ( ButtonCheck::State( ControllerButtons_A, getControl() ).Pressed )
-#endif
+		if ( CharacterSelectManager::Active )
 		{
-	#if defined(XBOX) || defined(XBOX_SIGNIN)
-			if ( MyCharacterSelect->getPlayer()->getMyGamer() != 0 )
-				Call( MakeMagic( SimpleMenu, ( getControl(), MyCharacterSelect ) ) );
-			else
-				Call( MakeMagic( SignInMenu, ( getControl(), MyCharacterSelect ) ) );
-	#else
-			GUI_Panel::Call( MakeMagic( SimpleMenu, ( getControl(), MyCharacterSelect ) ) );
-	#endif
-			Hide();
+#ifdef CAFE
+			if ( ButtonCheck::State( ControllerButtons_A, getControl() ).Pressed || 
+				 ButtonCheck::State( ControllerButtons_X, getControl() ).Pressed )
+#else
+			if ( ButtonCheck::State( ControllerButtons_A, getControl() ).Pressed )
+#endif
+			{
+#if defined(XBOX) || defined(XBOX_SIGNIN)
+				if ( MyCharacterSelect->getPlayer()->getMyGamer() != 0 )
+					Call( MakeMagic( SimpleMenu, ( getControl(), MyCharacterSelect ) ) );
+				else
+					Call( MakeMagic( SignInMenu, ( getControl(), MyCharacterSelect ) ) );
+#else
+				GUI_Panel::Call( MakeMagic( SimpleMenu, ( getControl(), MyCharacterSelect ) ) );
+#endif
+				Hide();
+			}
 		}
 	}
 }

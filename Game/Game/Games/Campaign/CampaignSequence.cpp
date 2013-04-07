@@ -426,6 +426,8 @@ namespace CloudberryKingdom
 	{
 		MarkProgress( level );
 
+		SaveGroup::SaveAll();
+
         // Check for end of chapter
 		for ( std::map<int, int>::const_iterator key = instance->ChapterEnd.begin(); key != instance->ChapterEnd.end(); key++ )
 		{

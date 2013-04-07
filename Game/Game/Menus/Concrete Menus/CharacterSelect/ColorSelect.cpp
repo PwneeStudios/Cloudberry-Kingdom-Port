@@ -179,7 +179,7 @@ namespace CloudberryKingdom
 			else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_FRENCH )
 			{
 				boost::shared_ptr<MenuItem> _item;
-				_item = MyMenu->FindItemByName( L"list" ); if (_item != 0 ) { _item->setSetPos( Vector2(-2.77784f, 153.1746f ) ); _item->MyText->setScale( 0.375f ); _item->MySelectedText->setScale( 0.375f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+				_item = MyMenu->FindItemByName( L"list" ); if (_item != 0 ) { _item->setSetPos( Vector2(-2.77784f, 153.1746f ) ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 				_item = MyMenu->FindItemByName( L"Done" ); if (_item != 0 ) { _item->setSetPos( Vector2(-324.6669f, 51.66659f ) ); _item->MyText->setScale( 0.5425833f ); _item->MySelectedText->setScale( 0.5425833f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 				_item = MyMenu->FindItemByName( L"Cancel" ); if (_item != 0 ) { _item->setSetPos( Vector2(-330.2227f, -90.55334f ) ); _item->MyText->setScale( 0.4997506f ); _item->MySelectedText->setScale( 0.4997506f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 

@@ -174,12 +174,13 @@ bool InGameStartMenu::PreventMenu = false;
 				|| ( PlayerManager::Players[ 0 ] && PlayerManager::Players[ 0 ]->MySavedSeeds->SeedStrings.size() >= MAX_SEED_STRINGS ) )
 			{
 				boost::shared_ptr<MenuItem> item = MyMenu->FindItemByName( L"SaveLoadSeed" );
-				item->Selectable = false;
-				item->GrayOutOnUnselectable = true;
-				item->GrayOut();
-				MyMenu->SelectItem( 0 );
 
-				CloudberryKingdomGame::ChangeSaveGoFunc( item );
+				if ( item != 0 )
+				{
+					MyMenu->SelectItem( 0 );
+
+					CloudberryKingdomGame::ChangeSaveGoFunc( item );
+				}
 			}
 		}
 	}
@@ -264,17 +265,16 @@ bool InGameStartMenu::PreventMenu = false;
 		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( word, ItemFont, CenterItems ) ) );
 		item->Name = std::wstring( L"SaveLoadSeed" );
 		item->setGo( Cast::ToItem( boost::make_shared<GoSaveLoadProxy>( boost::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) ) );
+		
+		AddItem( item );
+		
 		if ( ( !Tools::CurLevel->CanLoadLevels && !Tools::CurLevel->CanSaveLevel )
 			|| ( PlayerManager::Players[ 0 ] && PlayerManager::Players[ 0 ]->MySavedSeeds->SeedStrings.size() >= MAX_SEED_STRINGS ) )
 		{
-			item->Selectable = false;
-			item->GrayOutOnUnselectable = true;
-			item->GrayOut();
-
 			CloudberryKingdomGame::ChangeSaveGoFunc( item );
 		}
 		
-		AddItem( item );
+		
 		
 		if ( ( !Tools::CurLevel->CanLoadLevels && !Tools::CurLevel->CanSaveLevel )
 			|| ( PlayerManager::Players[ 0 ] && PlayerManager::Players[ 0 ]->MySavedSeeds->SeedStrings.size() >= MAX_SEED_STRINGS ) )

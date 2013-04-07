@@ -416,6 +416,12 @@ namespace CloudberryKingdom
 				}
 				else
 				{
+						Vector2 Size = Menu::DefaultMenuInfo::MenuArrow_Size * .6f;
+						LeftArrow_Selected->Base.e1 = Vector2(Size.X, 0);
+						LeftArrow_Selected->Base.e2 = Vector2(0, Size.Y);
+						RightArrow_Selected->Base.e1 = Vector2(Size.X, 0);
+						RightArrow_Selected->Base.e2 = Vector2(0, Size.Y);
+
 					RightArrow_Selected->Base.Origin = ItemPos + Vector2( 2*Width + RightArrow_Selected->Base.e1.X, 0 ) + RightArrowOffset;
 					LeftArrow_Selected->Base.Origin = ItemPos - Vector2( LeftArrow_Selected->Base.e1.X, 0 ) + LeftArrowOffset;
 				}

@@ -213,10 +213,6 @@ namespace CloudberryKingdom
 
 				if ( PlayerManager::Players[ 0 ] && PlayerManager::Players[ 0 ]->MySavedSeeds->SeedStrings.size() >= MAX_SEED_STRINGS )
 				{
-					item->Selectable = false;
-					item->GrayOutOnUnselectable = true;
-					item->GrayOut();
-
 					CloudberryKingdomGame::ChangeSaveGoFunc( item );
 				}
 			}
@@ -988,11 +984,8 @@ bool ScoreScreen::UseZoomIn = true;
 					|| ( PlayerManager::Players[ 0 ] && PlayerManager::Players[ 0 ]->MySavedSeeds->SeedStrings.size() >= MAX_SEED_STRINGS ) )
 				{
 					boost::shared_ptr<MenuItem> item = MyMenu->FindItemByName( L"Save" );
-					if ( item != 0 && !item->GrayOutOnUnselectable )
+					if ( item != 0 && item->MyText->MyFloatColor.W > .9f )
 					{
-						item->Selectable = false;
-						item->GrayOutOnUnselectable = true;
-						item->GrayOut();
 						MyMenu->SelectItem( 0 );
 
 						CloudberryKingdomGame::ChangeSaveGoFunc( item );
