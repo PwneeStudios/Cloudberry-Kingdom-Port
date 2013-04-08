@@ -59,6 +59,9 @@ static bool loadInFlight = false;
 // Do trophy registration.  Defined in CorePS3.cpp.
 extern void RegisterTrophyContextThread( uint64_t context );
 
+// Has the context been registered?  Defined in CorePS3.cpp.
+extern bool gTrophyContextRegistered;
+
 // Get current trophy context and handle.  Defined in CorePS3.cpp.
 extern void ForceGetTrophyContext( SceNpTrophyContext &context, SceNpTrophyHandle &handle );
 
@@ -1290,6 +1293,8 @@ namespace CloudberryKingdom
 		{
 			// This was the first load so we want to register trophies now.
 			trophyRegistrationExecuted = true;
+
+			gTrophyContextRegistered = false;
 
 			sys_ppu_thread_t tid;
 			ret = sys_ppu_thread_create( &tid, RegisterTrophyContextThread, 0,
