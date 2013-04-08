@@ -448,7 +448,7 @@ boost::shared_ptr<Thread> Resources::LoadThread = 0;
 
 #ifdef PS3
 		//int resourceCounter = 0;
-		//sys_timer_sleep( 3 );
+		sys_timer_sleep( 1 );
 #endif
         // Set off load calls
 		for ( std::vector<boost::shared_ptr<EzTexture> >::const_iterator Tex = Tools::TextureWad->TextureList.begin();
