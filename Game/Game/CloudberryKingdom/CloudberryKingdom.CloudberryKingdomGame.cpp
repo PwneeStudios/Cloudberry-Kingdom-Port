@@ -1712,18 +1712,35 @@ float CloudberryKingdomGame::fps = 0;
         bool CloudberryKingdomGame::CustomMusicPlaying = false;
         void CloudberryKingdomGame::UpdateCustomMusic()
         {
+			static int CustomMusicNotPlaying_Count = 0;
+
 			if( IsCustomMusicPlaying() )
 			{
 				CustomMusicPlaying = true;
+				CustomMusicNotPlaying_Count = 0;
 			}
 			else
 			{
 				if( CustomMusicPlaying )
+#if PS3
+				// Don't restart music yet if XBM is up
+				if ( !IsSystemMenuVisible() )
+#endif
 				{
-					if( Tools::SongWad )
-						Tools::SongWad->Restart( true, false );
+					//printf( "XMB is down and BGM is off.\n" );
 
-					CustomMusicPlaying = false;
+					CustomMusicNotPlaying_Count++;
+
+					if ( CustomMusicNotPlaying_Count > 40 )
+					{
+						//printf( "Starting game music.\n" );
+
+						if( Tools::SongWad )
+							Tools::SongWad->Restart( true, false );
+
+						CustomMusicPlaying = false;
+						CustomMusicNotPlaying_Count = 0;
+					}
 				}
 			}
 //#if XDK

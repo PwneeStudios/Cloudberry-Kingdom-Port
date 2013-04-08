@@ -335,9 +335,27 @@ void MediaPlayer::SetVolume( float volume )
 
 	if( stream >= 0 )
 	{
-		float volume = 0;
-		if( !IsCustomMusicPlaying() )
-			volume = musicVolume;
+		static float last_set_volume = 0;
+
+		float volume;
+
+		if( IsCustomMusicPlaying() )
+		{
+			volume = 0;
+		}
+		else
+		{
+			if ( IsSystemMenuVisible() )
+			{
+				volume = last_set_volume;
+			}
+			else
+			{
+				volume = musicVolume;
+			}
+		}
+
+		last_set_volume = volume;
 
 		cellMSCoreSetVolume1(stream, CELL_MS_DRY, CELL_MS_SPEAKER_FL, CELL_MS_CHANNEL_0, volume);
 		cellMSCoreSetVolume1(stream, CELL_MS_DRY, CELL_MS_SPEAKER_FR, CELL_MS_CHANNEL_0, volume);

@@ -365,6 +365,13 @@ namespace CloudberryKingdom
 	{
 		( void )context;
 
+//#ifdef PS3
+//		printf( "Starting sleep." );
+//		sys_timer_sleep( 1 );
+//		printf( "Ending sleep." );
+//#endif
+
+
 		Resources::_LoadThread();
 
 		sys_ppu_thread_exit( 0 );
@@ -448,7 +455,7 @@ boost::shared_ptr<Thread> Resources::LoadThread = 0;
 
 #ifdef PS3
 		//int resourceCounter = 0;
-		sys_timer_sleep( 1 );
+		//sys_timer_sleep( 1 );
 #endif
         // Set off load calls
 		for ( std::vector<boost::shared_ptr<EzTexture> >::const_iterator Tex = Tools::TextureWad->TextureList.begin();
