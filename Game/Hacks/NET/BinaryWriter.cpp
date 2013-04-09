@@ -476,6 +476,7 @@ SaveWriterWiiU::~SaveWriterWiiU()
 	
 		SAVEFlushQuota( &internal_->Client, &internal_->Cmd, internal_->AccountSlot, FS_RET_NO_ERROR );*/
 		int size = internal_->WriteCursor - internal_->AlignedBuffer;
+		LOG_WRITE( "Size written %d bytes\n", size );
 		FSWriteFile( &gClient, internal_->Cmd, internal_->AlignedBuffer, size, 1,
 			internal_->Fh, 0, FS_RET_NO_ERROR );
 

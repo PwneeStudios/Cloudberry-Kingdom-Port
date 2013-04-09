@@ -285,10 +285,66 @@ CorePS3::CorePS3( GameLoop &game ) :
 
 	psglInit( &initOpts );
 
-	static PSGLdevice *device = NULL;
-	device = psglCreateDeviceAuto( GL_ARGB_SCE, GL_NONE,
-		GL_MULTISAMPLING_NONE_SCE/*GL_MULTISAMPLING_4X_SQUARE_ROTATED_SCE*/ );
+	// Pick video resolution.
+	struct dstResType { int w, h; uint32_t resId; uint32_t aspect; };
+	const dstResType dstRes[] = {
+		{ 720, 480, CELL_VIDEO_OUT_RESOLUTION_480, CELL_VIDEO_OUT_ASPECT_AUTO },
+		{ 720, 576, CELL_VIDEO_OUT_RESOLUTION_576, CELL_VIDEO_OUT_ASPECT_AUTO },
+		//{ 720, 480, CELL_VIDEO_OUT_RESOLUTION_480, CELL_VIDEO_OUT_ASPECT_4_3 },
+		//{ 720, 480, CELL_VIDEO_OUT_RESOLUTION_480, CELL_VIDEO_OUT_ASPECT_16_9 },
+		//{ 720, 576, CELL_VIDEO_OUT_RESOLUTION_576, CELL_VIDEO_OUT_ASPECT_4_3 },
+		//{ 720, 576, CELL_VIDEO_OUT_RESOLUTION_576, CELL_VIDEO_OUT_ASPECT_16_9 },
+		{ 1280, 720, CELL_VIDEO_OUT_RESOLUTION_720, CELL_VIDEO_OUT_ASPECT_AUTO },
+		{ 1920, 1080, CELL_VIDEO_OUT_RESOLUTION_1080, CELL_VIDEO_OUT_ASPECT_AUTO },
+	};
+	const int numDstRes = 4;
 
+	PSGLdeviceParameters parameters = {
+		enable: PSGL_DEVICE_PARAMETERS_COLOR_FORMAT | PSGL_DEVICE_PARAMETERS_DEPTH_FORMAT
+				| PSGL_DEVICE_PARAMETERS_MULTISAMPLING_MODE,
+//				| PSGL_DEVICE_PARAMETERS_RESC_RATIO_MODE,
+		colorFormat: GL_ARGB_SCE,
+		depthFormat: GL_NONE,
+		multisamplingMode: GL_MULTISAMPLING_NONE_SCE,
+//		rescRatioMode: RESC_RATIO_MODE_LETTERBOX,
+	};
+
+	// Pick best resolution.
+	for( int i = numDstRes - 1; i >= 0; --i )
+	{
+		if( cellVideoOutGetResolutionAvailability( CELL_VIDEO_OUT_PRIMARY,
+			dstRes[ i ].resId, dstRes[ i ].aspect, 0 ) )
+		{
+			LOG_WRITE( "Best supported resolution is %dx%d\n", dstRes[ i ].w, dstRes[ i ].h );
+
+			switch( dstRes[ i ].resId )
+			{
+			case CELL_VIDEO_OUT_RESOLUTION_480:
+			case CELL_VIDEO_OUT_RESOLUTION_576:
+				parameters.enable |= PSGL_DEVICE_PARAMETERS_RESC_RATIO_MODE;
+				parameters.rescRatioMode = RESC_RATIO_MODE_LETTERBOX;
+
+				parameters.enable |= PSGL_DEVICE_PARAMETERS_WIDTH_HEIGHT;
+				parameters.width = dstRes[ i ].w;
+				parameters.height = dstRes[ i ].h;
+
+				parameters.enable |= PSGL_DEVICE_PARAMETERS_RESC_RENDER_WIDTH_HEIGHT;
+				parameters.renderWidth = dstRes[ i ].w;
+				parameters.renderHeight = dstRes[ i ].h;
+
+				parameters.multisamplingMode = GL_MULTISAMPLING_2X_DIAGONAL_CENTERED_SCE;
+
+				break;
+			}
+
+			break;
+		}
+	}
+
+	static PSGLdevice *device = NULL;
+	device = psglCreateDeviceExtended( &parameters );
+	/*device = psglCreateDeviceAuto( GL_ARGB_SCE, GL_NONE,
+		GL_MULTISAMPLING_NONE_SCE );*/
 
 	if( !device )
 	{
