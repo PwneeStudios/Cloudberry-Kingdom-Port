@@ -295,19 +295,19 @@ CorePS3::CorePS3( GameLoop &game ) :
 		//{ 720, 576, CELL_VIDEO_OUT_RESOLUTION_576, CELL_VIDEO_OUT_ASPECT_4_3 },
 		//{ 720, 576, CELL_VIDEO_OUT_RESOLUTION_576, CELL_VIDEO_OUT_ASPECT_16_9 },
 		{ 1280, 720, CELL_VIDEO_OUT_RESOLUTION_720, CELL_VIDEO_OUT_ASPECT_AUTO },
-		{ 1920, 1080, CELL_VIDEO_OUT_RESOLUTION_1080, CELL_VIDEO_OUT_ASPECT_AUTO },
+		{ 1280, 1080, CELL_VIDEO_OUT_RESOLUTION_1080, CELL_VIDEO_OUT_ASPECT_AUTO },
 	};
 	const int numDstRes = 4;
 
-	PSGLdeviceParameters parameters = {
-		enable: PSGL_DEVICE_PARAMETERS_COLOR_FORMAT | PSGL_DEVICE_PARAMETERS_DEPTH_FORMAT
-				| PSGL_DEVICE_PARAMETERS_MULTISAMPLING_MODE,
+	PSGLdeviceParameters parameters;
+	memset( &parameters, 0, sizeof( parameters ) );
+	parameters.enable = PSGL_DEVICE_PARAMETERS_COLOR_FORMAT | PSGL_DEVICE_PARAMETERS_DEPTH_FORMAT
+				| PSGL_DEVICE_PARAMETERS_MULTISAMPLING_MODE;
 //				| PSGL_DEVICE_PARAMETERS_RESC_RATIO_MODE,
-		colorFormat: GL_ARGB_SCE,
-		depthFormat: GL_NONE,
-		multisamplingMode: GL_MULTISAMPLING_NONE_SCE,
+	parameters.colorFormat = GL_ARGB_SCE;
+	parameters.depthFormat = GL_NONE;
+	parameters.multisamplingMode = GL_MULTISAMPLING_NONE_SCE;
 //		rescRatioMode: RESC_RATIO_MODE_LETTERBOX,
-	};
 
 	// Pick best resolution.
 	for( int i = numDstRes - 1; i >= 0; --i )
@@ -333,7 +333,12 @@ CorePS3::CorePS3( GameLoop &game ) :
 				parameters.renderHeight = dstRes[ i ].h;
 
 				parameters.multisamplingMode = GL_MULTISAMPLING_2X_DIAGONAL_CENTERED_SCE;
-
+				break;
+			case CELL_VIDEO_OUT_RESOLUTION_1080:
+			case CELL_VIDEO_OUT_RESOLUTION_720:
+				parameters.enable |= PSGL_DEVICE_PARAMETERS_WIDTH_HEIGHT;
+				parameters.width = dstRes[ i ].w;
+				parameters.height = dstRes[ i ].h;
 				break;
 			}
 
