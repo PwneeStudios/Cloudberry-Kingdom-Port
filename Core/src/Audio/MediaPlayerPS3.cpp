@@ -257,8 +257,9 @@ public:
 
 void MediaPlayer::Play( const boost::shared_ptr<Song> &song )
 {
-	if( IsCustomMusicPlaying() )
-		return;
+	// Don't do this. Just let the song play, even if BGM is playing.
+	//if( IsCustomMusicPlaying() )
+	//	return;
 
 	if( PlayJobInProgress )
 		return;
