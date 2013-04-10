@@ -1712,53 +1712,8 @@ float CloudberryKingdomGame::fps = 0;
         bool CloudberryKingdomGame::CustomMusicPlaying = false;
         void CloudberryKingdomGame::UpdateCustomMusic()
         {
-			static int CustomMusicNotPlaying_Count = 0;
-
-			if( IsCustomMusicPlaying() )
-			{
-				CustomMusicPlaying = true;
-				CustomMusicNotPlaying_Count = 0;
-			}
-			else
-			{
-				if( CustomMusicPlaying )
-#if PS3
-				// Don't restart music yet if XBM is up
-				if ( !IsSystemMenuVisible() )
-#endif
-				{
-					//printf( "XMB is down and BGM is off.\n" );
-
-					CustomMusicNotPlaying_Count++;
-
-					if ( CustomMusicNotPlaying_Count > 40 )
-					{
-						//printf( "Starting game music.\n" );
-
-						if( Tools::SongWad )
-							Tools::SongWad->Restart( true, false );
-
-						CustomMusicPlaying = false;
-						CustomMusicNotPlaying_Count = 0;
-					}
-				}
-			}
-//#if XDK
-//            if (!MediaPlayer.GameHasControl)
-//            {
-//                CustomMusicPlaying = true;
-//            }
-//            else
-//            {
-//                if (CustomMusicPlaying)
-//                {
-//                    if (Tools::SongWad != null)
-//                        Tools::SongWad.Restart(true, false);
-//
-//                    CustomMusicPlaying = false;
-//                }
-//            }
-//#endif
+			// Do nothing.
+			// We are simply setting MediaPlayer::Volume to 0 when BGM is active.
         }
 
         /// <summary>
