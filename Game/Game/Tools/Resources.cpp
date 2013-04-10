@@ -27,7 +27,7 @@
 #include <sys/timer.h>
 #include <stdio.h>
 
-extern bool gTrophyContextRegistered;
+//extern bool gTrophyContextRegistered;
 #endif
 
 #ifdef CAFE
