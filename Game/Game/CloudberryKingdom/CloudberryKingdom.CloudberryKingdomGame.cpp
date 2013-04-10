@@ -1712,6 +1712,11 @@ float CloudberryKingdomGame::fps = 0;
         bool CloudberryKingdomGame::CustomMusicPlaying = false;
         void CloudberryKingdomGame::UpdateCustomMusic()
         {
+			if ( Tools::MusicVolume != 0 && Tools::MusicVolume->SetCallback != 0 )
+			{
+				Tools::MusicVolume->SetCallback->Apply();
+			}
+
 			// Do nothing.
 			// We are simply setting MediaPlayer::Volume to 0 when BGM is active.
         }
