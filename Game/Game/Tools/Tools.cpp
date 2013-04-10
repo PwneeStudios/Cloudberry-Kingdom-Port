@@ -17,6 +17,8 @@
 
 #include <Game\Video.h>
 
+#include <Utility/ConsoleInformation.h>
+
 namespace CloudberryKingdom
 {
 
@@ -842,6 +844,17 @@ namespace CloudberryKingdom
 
 		if ( Tools::SongWad != 0 && Tools::SongWad->Paused )
 			NewVolume = 0;
+
+		if( IsCustomMusicPlaying() )
+		{
+			NewVolume = 0;
+		}
+		else if ( IsSystemMenuVisible() )
+		{
+			//NewVolume = 0;
+		}
+
+
 		if ( NewVolume != CurVolume )
 		{
 			/*MediaPlayer::Volume = NewVolume;
