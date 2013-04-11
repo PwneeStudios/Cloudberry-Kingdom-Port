@@ -238,7 +238,7 @@ namespace CloudberryKingdom
 
         void Awardments::CheckForAward_HeroRush2_Level(int Level)
         {
-            if (Level >= 50)
+            if (Level >= 49)
                 GiveAward(Awardments::Award_HeroRush2Level);
         }
 
@@ -256,7 +256,7 @@ namespace CloudberryKingdom
 
         void Awardments::CheckForAward_Invisible(int Level)
         {
-            if (Level < 20) return;
+            if (Level < 19) return;
 
             if (PlayerManager::TotallyInvisible)
                 GiveAward(Award_Invisible);
