@@ -242,15 +242,15 @@ public:
 	// From Job.
 	void Do()
 	{
-		if( !IsCustomMusicPlaying() )
-		{
+		/*if( !IsCustomMusicPlaying() )
+		{*/
 			long addr, size;
 			int fd = LoadMP3( path_.c_str(), &addr, &size );
 			cellFsClose( fd );
 
 			stream = cellMSStreamOpen();
 			stream = TriggerStream( stream, addr, addr, size, size, 44100, 2 );
-		}
+		//}
 		PlayJobInProgress = false;
 	}
 };

@@ -1094,8 +1094,8 @@ else
         {
 			// Check for cheat
 			if ( i == 1 && Contains( getItems(), 1 ) &&
-				getItems()[ 1 ].Val		 == std::wstring( L"229125" ) &&
-				getItems()[ 1 ].GamerTag == std::wstring( L"Q-FLb1tpuj-US-EN" ) )
+				getItems()[ 1 ].Val		 == std::wstring( L"66575" ) &&
+				getItems()[ 1 ].GamerTag == std::wstring( L"Q-40diAHyr-US-EN" ) )
 			{
 				static int XButtonCount = 0;
 
