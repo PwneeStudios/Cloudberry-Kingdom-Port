@@ -134,6 +134,10 @@ SchedulerPS3::SchedulerPS3() :
 	{
 		ret = pthread_create( &internal_->Threads[ i ], NULL, ThreadProc, this );
 		assert( !ret );
+
+		sched_param priorityParam;
+		priorityParam.sched_priority = 1001;
+		pthread_setschedparam( internal_->Threads[ i ], SCHED_FIFO, &priorityParam ); 
 	}
 
 	ret = pthread_mutex_init( &gPauseMutex, NULL );
