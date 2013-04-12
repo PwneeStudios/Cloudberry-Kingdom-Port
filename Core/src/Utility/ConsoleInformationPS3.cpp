@@ -62,6 +62,7 @@ ConsoleLanguage GetConsoleLanguage()
 	case CELL_SYSUTIL_LANG_DUTCH:
 		return ConsoleLanguage_DUTCH;
 	case CELL_SYSUTIL_LANG_PORTUGUESE_PT:	// FIXME: Should these be the same languages?
+		return ConsoleLanguage_ENGLISH;		// RESOLUTION: They should not be the same language as per TRC R033. (Github #645)
 	case CELL_SYSUTIL_LANG_PORTUGUESE_BR:
 		return ConsoleLanguage_PORTUGUESE;
 	case CELL_SYSUTIL_LANG_RUSSIAN:
