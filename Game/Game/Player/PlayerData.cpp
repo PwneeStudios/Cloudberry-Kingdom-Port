@@ -123,7 +123,7 @@ namespace CloudberryKingdom
 			{
 				int id = l[ i ];
 
-				AddHighScore( boost::make_shared<ScoreEntry>( std::wstring( L"" ), id, 100000, 100000, 100000, 100000, 100000, 100000 ) );
+				AddHighScore( boost::make_shared<ScoreEntry>( std::wstring( L"" ), id, 150, 100000, 150, 100000, 100000, 100000 ) );
             }
 
             CampaignIndex = 326;
