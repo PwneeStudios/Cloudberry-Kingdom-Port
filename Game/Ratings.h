@@ -10,11 +10,11 @@
 
 #ifdef ESRB
 	#define ONLINE_AGE_CUTOFF 13 // ESRB (America)
-#elif PEGI
+#elif defined( PEGI )
 	#define ONLINE_AGE_CUTOFF 7  // PEGI (Europe, but not UK)
-#elif USK
+#elif defined( USK )
 	#define ONLINE_AGE_CUTOFF 6  // USK  (UK)
-#elif OFLC
+#elif defined( OFLC )
 	#define ONLINE_AGE_CUTOFF 0  // OFLC (Australia)
 #else
 	// Nothing. This will cause a compile error because ONLINE_AGE_CUTOFF is not defined.
