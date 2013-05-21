@@ -55,6 +55,7 @@ extern std::string PS3_PATH_PREFIX;
 
 static bool saveInFlight = false;
 static bool loadInFlight = false;
+static bool SavingDisabled = false;
 
 // Do trophy registration.  Defined in CorePS3.cpp.
 extern void RegisterTrophyContextThread( uint64_t context );
@@ -588,11 +589,18 @@ namespace CloudberryKingdom
 		args->FileName = FileName;
 		args->SaveLogic = SaveLogic;
 		args->Fail = Fail;
+		
+		if( !SavingDisabled )
+		{
+			ret = sys_ppu_thread_create( &tid, SaveToContainerThread, reinterpret_cast< uint64_t >( args ), 1001, 16 * 1024, 0, "SaveToContainerThread" );
 
-		ret = sys_ppu_thread_create( &tid, SaveToContainerThread, reinterpret_cast< uint64_t >( args ), 1001, 16 * 1024, 0, "SaveToContainerThread" );
-
-		if( ret != 0 )
+			if( ret != 0 )
+				Fail->Apply();
+		}
+		else
+		{
 			Fail->Apply();
+		}
 #else
 		SaveToContainer( container, FileName, SaveLogic, Fail );
 #endif
@@ -625,7 +633,7 @@ namespace CloudberryKingdom
 
 	void CallbackDataStatusSave( CellSaveDataCBResult *result, CellSaveDataStatGet *get, CellSaveDataStatSet *set )
 	{
-		set->reCreateMode = CELL_SAVEDATA_RECREATE_YES;
+		set->reCreateMode = CELL_SAVEDATA_RECREATE_YES_RESET_OWNER;
 		set->setParam = &get->getParam;
 		set->indicator = NULL;
 
@@ -1086,6 +1094,7 @@ namespace CloudberryKingdom
 		// First check if the data belongs to the current user.
 		if( get->bind & CELL_SAVEDATA_BINDSTAT_ERR_OWNER )
 		{
+			SavingDisabled = true;
 			LOG_WRITE( "WRONG OWNER!\n" );
 			DisplayError( ErrorType( WstringToUtf8( Localization::WordString( Localization::Words_Err_PS3_SaveDataNotUsed ) ) ) );
 			result->result = CELL_SAVEDATA_CBRESULT_ERR_FAILURE;
