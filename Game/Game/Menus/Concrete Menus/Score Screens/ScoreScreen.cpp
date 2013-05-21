@@ -217,7 +217,10 @@ namespace CloudberryKingdom
 				AddItem( item );
 
 				if ( ( PlayerManager::Players[ 0 ] && PlayerManager::Players[ 0 ]->MySavedSeeds->SeedStrings.size() >= MAX_SEED_STRINGS )
-					|| SavingDisabled )
+#ifdef PS3
+					|| SavingDisabled
+#endif
+					)
 				{
 					CloudberryKingdomGame::ChangeSaveGoFunc( item );
 				}
@@ -988,7 +991,10 @@ bool ScoreScreen::UseZoomIn = true;
 			{
 				if ( ( !Tools::CurLevel->CanLoadLevels && !Tools::CurLevel->CanSaveLevel )
 					|| ( PlayerManager::Players[ 0 ] && PlayerManager::Players[ 0 ]->MySavedSeeds->SeedStrings.size() >= MAX_SEED_STRINGS )
-					|| SavingDisabled )
+#ifdef PS3
+					|| SavingDisabled
+#endif
+					)
 				{
 					boost::shared_ptr<MenuItem> item = MyMenu->FindItemByName( L"Save" );
 					if ( item != 0 && item->MyText->MyFloatColor.W > .9f )

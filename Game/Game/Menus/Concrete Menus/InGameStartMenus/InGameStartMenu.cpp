@@ -282,7 +282,10 @@ bool InGameStartMenu::PreventMenu = false;
 		
 		if ( ( !Tools::CurLevel->CanLoadLevels && !Tools::CurLevel->CanSaveLevel )
 			|| ( PlayerManager::Players[ 0 ] && PlayerManager::Players[ 0 ]->MySavedSeeds->SeedStrings.size() >= MAX_SEED_STRINGS )
-			|| SavingDisabled )
+#ifdef PS3
+			|| SavingDisabled
+#endif
+			)
 		{
 			item->Selectable = false;
 			item->GrayOutOnUnselectable = true;

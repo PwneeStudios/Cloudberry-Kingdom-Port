@@ -380,9 +380,11 @@ namespace CloudberryKingdom
         {
             if (CloudberryKingdomGame::getIsDemo()) return;
 
+#ifdef PS3
 			// Check if saving is disabled due to save file ownership.
 			if( SavingDisabled )
 				return;
+#endif
 
             if (award == 0) return;
 
