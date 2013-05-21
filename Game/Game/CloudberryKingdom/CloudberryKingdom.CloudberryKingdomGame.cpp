@@ -82,6 +82,11 @@ void GlobalShowSaving()
 
 #endif
 
+#ifdef PS3
+// Is the saving system disabled? Defined in EzStorage.cpp.
+extern bool SavingDisabled;
+#endif
+
 namespace CloudberryKingdom
 {
 
@@ -393,6 +398,11 @@ namespace CloudberryKingdom
 
 			if ( !PastPressStart ) return false;
 
+#ifdef PS3
+			if( SavingDisabled )
+				return false;
+#endif
+
 			return true;
 		}
 
@@ -401,6 +411,10 @@ namespace CloudberryKingdom
 			if ( !CanSave() ) return false;
 
 			// Check if saving is ready
+#ifdef PS3
+			if( SavingDisabled )
+				return false;
+#endif
 
 			return true;
 		}

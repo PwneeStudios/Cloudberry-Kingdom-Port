@@ -13,6 +13,9 @@
 #include <sys/ppu_thread.h>
 #include <TrophyPS3.h>
 #include <Utility/Log.h>
+
+// Is the saving disabled due to ownership? Defined in EzStorage.cpp.
+extern bool SavingDisabled;
 #endif
 
 namespace CloudberryKingdom
@@ -376,6 +379,10 @@ namespace CloudberryKingdom
         void Awardments::GiveAward( const boost::shared_ptr<Awardment> &award, const boost::shared_ptr<PlayerData> player)
         {
             if (CloudberryKingdomGame::getIsDemo()) return;
+
+			// Check if saving is disabled due to save file ownership.
+			if( SavingDisabled )
+				return;
 
             if (award == 0) return;
 

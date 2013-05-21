@@ -9,6 +9,11 @@
 
 #include <SaveSeedSettings.h>
 
+#ifdef PS3
+// Saving is disabled due to save ownership. Defined in EzStorage.cpp.
+extern bool SavingDisabled;
+#endif
+
 namespace CloudberryKingdom
 {
 
@@ -275,9 +280,9 @@ bool InGameStartMenu::PreventMenu = false;
 		}
 		
 		
-		
 		if ( ( !Tools::CurLevel->CanLoadLevels && !Tools::CurLevel->CanSaveLevel )
-			|| ( PlayerManager::Players[ 0 ] && PlayerManager::Players[ 0 ]->MySavedSeeds->SeedStrings.size() >= MAX_SEED_STRINGS ) )
+			|| ( PlayerManager::Players[ 0 ] && PlayerManager::Players[ 0 ]->MySavedSeeds->SeedStrings.size() >= MAX_SEED_STRINGS )
+			|| SavingDisabled )
 		{
 			item->Selectable = false;
 			item->GrayOutOnUnselectable = true;

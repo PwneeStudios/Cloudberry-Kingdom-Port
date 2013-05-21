@@ -6,6 +6,11 @@
 
 #include <SaveSeedSettings.h>
 
+#ifdef PS3
+// Saving is disabled due to save ownership. Defined in EzStorage.cpp.
+extern bool SavingDisabled;
+#endif
+
 namespace CloudberryKingdom
 {
 		
@@ -211,7 +216,8 @@ namespace CloudberryKingdom
 				item->Selectable = CloudberryKingdomGame::CanSave();
 				AddItem( item );
 
-				if ( PlayerManager::Players[ 0 ] && PlayerManager::Players[ 0 ]->MySavedSeeds->SeedStrings.size() >= MAX_SEED_STRINGS )
+				if ( ( PlayerManager::Players[ 0 ] && PlayerManager::Players[ 0 ]->MySavedSeeds->SeedStrings.size() >= MAX_SEED_STRINGS )
+					|| SavingDisabled )
 				{
 					CloudberryKingdomGame::ChangeSaveGoFunc( item );
 				}
@@ -981,7 +987,8 @@ bool ScoreScreen::UseZoomIn = true;
 			if ( !ShouldSkip() )
 			{
 				if ( ( !Tools::CurLevel->CanLoadLevels && !Tools::CurLevel->CanSaveLevel )
-					|| ( PlayerManager::Players[ 0 ] && PlayerManager::Players[ 0 ]->MySavedSeeds->SeedStrings.size() >= MAX_SEED_STRINGS ) )
+					|| ( PlayerManager::Players[ 0 ] && PlayerManager::Players[ 0 ]->MySavedSeeds->SeedStrings.size() >= MAX_SEED_STRINGS )
+					|| SavingDisabled )
 				{
 					boost::shared_ptr<MenuItem> item = MyMenu->FindItemByName( L"Save" );
 					if ( item != 0 && item->MyText->MyFloatColor.W > .9f )

@@ -18,8 +18,8 @@
 #include <sysutil/sysutil_gamecontent.h>
 #include <np.h>
 
-#define SCEA
-//#define SCEE
+//#define SCEA
+#define SCEE
 
 #if	  defined(SCEA)
 	#define AUTOSAVEDATA_DIRNAME "NPUB31177-AUTO"
@@ -55,7 +55,7 @@ extern std::string PS3_PATH_PREFIX;
 
 static bool saveInFlight = false;
 static bool loadInFlight = false;
-static bool SavingDisabled = false;
+bool SavingDisabled = false;
 
 // Do trophy registration.  Defined in CorePS3.cpp.
 extern void RegisterTrophyContextThread( uint64_t context );
