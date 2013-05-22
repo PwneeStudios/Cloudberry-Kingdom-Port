@@ -100,7 +100,7 @@ namespace CloudberryKingdom
 	const bool FinalRelease = true;
 #endif
 
-	bool CloudberryKingdomGame::DigitalDayBuild = false;
+	bool CloudberryKingdomGame::DigitalDayBuild = true;
 	
 	static bool IsCheatTime()
 	{
