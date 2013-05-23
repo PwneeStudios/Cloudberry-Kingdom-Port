@@ -4,6 +4,14 @@
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
+#ifdef CAFE
+#include <cafe.h>
+
+// Should the version number be displayed?  Defined in GamePadWiiU.cpp.
+extern bool GLOBAL_SHOW_VERSION;
+
+#endif
+
 namespace CloudberryKingdom
 {
 
@@ -151,18 +159,46 @@ namespace CloudberryKingdom
 		MyLevel->getMainCamera()->MyZone = CamZone;
 	}
 
+	int WatermarkCounter = 0;
+	int ShowCounter = 0;
+
+	bool WatermarkDisabledBySoftwareReset = false;
+
 	void TitleGameData_MW::PhsxStep()
 	{
-		static int XButtonPressCount = 0;
+		if( CloudberryKingdomGame::CurrentPresence == Presence_TitleScreen
+			&& !CharacterSelectManager::IsShowing
+			&& !WatermarkDisabledBySoftwareReset )
+		{
+			if( WatermarkCounter <= 0 )
+			{
+#ifdef CAFE
+				if( GLOBAL_SHOW_VERSION )
+					ShowCounter++;
+
+				if( ShowCounter >= 60 )
+				{
+					WatermarkCounter = 180;
+					ShowCounter = 0;
+				}
+#endif
+			}
+		}
+
+		/*static int XButtonPressCount = 0;
 
 		// Digital day
 		if ( CloudberryKingdomGame::DigitalDayBuild )
 		{
-			if ( ButtonCheck::State( ControllerButtons_X, -2 ).Down )
+			bool a = ButtonCheck::State( ControllerButtons_B, -2 ).Down;
+			bool b = ButtonCheck::State( ControllerButtons_BACK, -2 ).Down;
+			bool c = ButtonCheck::GetDir( -2 ).Y < 0.5f;
+
+			if ( a && b && c )
 			{	
 				XButtonPressCount++;
 
-				if ( XButtonPressCount > 50 )
+				if ( XButtonPressCount > 180 )
 				{
 					// Start at Screen Saver
 					boost::shared_ptr<ScreenSaver> Intro = boost::make_shared<ScreenSaver>();
@@ -175,7 +211,7 @@ namespace CloudberryKingdom
 			{
 				XButtonPressCount = 0;
 			}
-		}
+		}*/
 
 		TitleGameData::PhsxStep();
 	}

@@ -1124,12 +1124,49 @@ namespace CloudberryKingdom
 				SoftPause = true;
 	}
 
+	// Defined in TitleGame_MW.cpp.
+	extern bool WatermarkDisabledBySoftwareReset;
+
 	void GameData::PhsxStep()
 	{
 		boost::shared_ptr<GameData> SaveMeJesus = shared_from_this();
 
 		if ( Loading || Tools::ShowLoadingScreen )
 			return;
+
+		static int XButtonPressCount = 0;
+
+		// Digital day
+		if ( CloudberryKingdomGame::DigitalDayBuild )
+		{
+			bool a = ButtonCheck::State( ControllerButtons_B, -2 ).Down;
+			bool b = ButtonCheck::State( ControllerButtons_BACK, -2 ).Down;
+			bool c = ButtonCheck::GetDir( -2 ).Y < 0.5f;
+
+#ifdef CAFE
+			//OSReport( "A: %d -: %d DPAD: %f\n", a, b, ButtonCheck::GetDir( -2 ).Y );
+#endif
+
+			if ( a && b && c )
+			{	
+				XButtonPressCount++;
+
+				if ( XButtonPressCount > 180 )
+				{
+					WatermarkDisabledBySoftwareReset = true;
+
+					// Start at Screen Saver
+					boost::shared_ptr<ScreenSaver> Intro = boost::make_shared<ScreenSaver>();
+					ScreenSaver_Construct( Intro );
+					Intro->Init();
+					return;
+				}
+			}
+			else
+			{
+				XButtonPressCount = 0;
+			}
+		}
 
 		// Update the socre and coin score multiplier
 		CalculateScoreMultiplier();

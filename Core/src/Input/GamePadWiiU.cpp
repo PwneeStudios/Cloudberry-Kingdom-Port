@@ -29,6 +29,8 @@ bool kpadIsURCC[ WPAD_MAX_CONTROLLERS ];
 // 1-4  - WiiMote.
 bool GLOBAL_CONNECTION_STATUS[ 5 ];
 
+bool GLOBAL_SHOW_VERSION = false;
+
 static void ConnectCallback( s32 chan, s32 reason )
 {
 	if( reason >= 0 )
@@ -72,6 +74,8 @@ void GamePad::Initialize()
 
 void GamePad::Update()
 {
+	bool versionComboDown = false;
+
 	// Save controller types
 	GamePadState::ControllerType SaveType[4];
 	for ( int i = 0; i < 4; ++i ) SaveType[ i ] = PAD_STATE[ i ].Type;
@@ -138,6 +142,8 @@ void GamePad::Update()
 										hold & KPAD_BUTTON_MINUS ) ? ButtonState_Pressed : ButtonState_Released;
 
 			PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.Start = ( hold & KPAD_BUTTON_PLUS ) ? ButtonState_Pressed : ButtonState_Released;
+			
+			PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.Back = ( hold & KPAD_BUTTON_MINUS ) ? ButtonState_Pressed : ButtonState_Released;
 
 			PAD_STATE[ WIIMOTE_REMAP[ i ] ].DPad.Down =  ( hold & KPAD_BUTTON_LEFT  ) ? ButtonState_Pressed : ButtonState_Released;
 			PAD_STATE[ WIIMOTE_REMAP[ i ] ].DPad.Left =  ( hold & KPAD_BUTTON_UP    ) ? ButtonState_Pressed : ButtonState_Released;
@@ -149,6 +155,8 @@ void GamePad::Update()
 				PAD_STATE[ WIIMOTE_REMAP[ i ] ].Type = GamePadState::ControllerType_Mini;
 				//if ( i == 1 ) LOG_WRITE( "Controller %d is mini.\n", i );
 			}
+
+			versionComboDown |= ( hold & ( KPAD_BUTTON_1 | KPAD_BUTTON_2 | KPAD_BUTTON_PLUS ) ) == ( KPAD_BUTTON_1 | KPAD_BUTTON_2 | KPAD_BUTTON_PLUS );
 		}
 		else if( kpadStatus[ WIIMOTE_REMAP[ i ] ].data_format == WPAD_FMT_URCC )
 		{
@@ -171,6 +179,7 @@ void GamePad::Update()
 			PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.LeftShoulder = __max( PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.LeftShoulder, ( hold & KPAD_UC_BUTTON_L ) ? ButtonState_Pressed : ButtonState_Released );
 			PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.RightShoulder = __max( PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.RightShoulder, ( hold & KPAD_UC_BUTTON_R ) ? ButtonState_Pressed : ButtonState_Released );
 			PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.Start = __max( PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.Start, ( hold & KPAD_UC_BUTTON_PLUS ) ? ButtonState_Pressed : ButtonState_Released );
+			PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.Back = __max( PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.Back, ( hold & KPAD_BUTTON_MINUS ) ? ButtonState_Pressed : ButtonState_Released );
 
 			PAD_STATE[ WIIMOTE_REMAP[ i ] ].DPad.Down = __max( PAD_STATE[ WIIMOTE_REMAP[ i ] ].DPad.Down, ( hold & KPAD_UC_BUTTON_DOWN ) ? ButtonState_Pressed : ButtonState_Released );
 			PAD_STATE[ WIIMOTE_REMAP[ i ] ].DPad.Left = __max( PAD_STATE[ WIIMOTE_REMAP[ i ] ].DPad.Left, ( hold & KPAD_UC_BUTTON_LEFT ) ? ButtonState_Pressed : ButtonState_Released );
@@ -185,6 +194,8 @@ void GamePad::Update()
 
 			if( 0 == WIIMOTE_REMAP[ i ] )
 				channel0ThumbsticksWritten = true;
+
+			versionComboDown |= ( hold & ( KPAD_UC_BUTTON_A | KPAD_UC_BUTTON_B | KPAD_UC_BUTTON_PLUS ) ) == ( KPAD_UC_BUTTON_A | KPAD_UC_BUTTON_B | KPAD_UC_BUTTON_PLUS );
 		}
 	}
 
@@ -219,6 +230,7 @@ void GamePad::Update()
 		PAD_STATE[ i ].Buttons.LeftShoulder = __max( PAD_STATE[ i ].Buttons.LeftShoulder, ( status[ i ].button & PAD_BUTTON_L ) ? ButtonState_Pressed : ButtonState_Released );
 		PAD_STATE[ i ].Buttons.RightShoulder = __max( PAD_STATE[ i ].Buttons.RightShoulder, ( status[ i ].button & PAD_BUTTON_R ) ? ButtonState_Pressed : ButtonState_Released );
 		PAD_STATE[ i ].Buttons.Start = __max( PAD_STATE[ i ].Buttons.Start, ( status[ i ].button & PAD_BUTTON_START ) ? ButtonState_Pressed : ButtonState_Released );
+		//PAD_STATE[ i ].Buttons.Back = __max( PAD_STATE[ i ].Buttons.Back, ( status[ i ].button & PAD_BUTTON_MINUS ) ? ButtonState_Pressed : ButtonState_Released );
 
 		PAD_STATE[ i ].DPad.Down = __max( PAD_STATE[ i ].DPad.Down, ( status[ i ].button & PAD_BUTTON_DOWN ) ? ButtonState_Pressed : ButtonState_Released );
 		PAD_STATE[ i ].DPad.Left = __max( PAD_STATE[ i ].DPad.Left, ( status[ i ].button & PAD_BUTTON_LEFT ) ? ButtonState_Pressed : ButtonState_Released );
@@ -282,6 +294,8 @@ void GamePad::Update()
 			PAD_STATE[ i ].Buttons.LeftShoulder = __max( PAD_STATE[ i ].Buttons.LeftShoulder, vpadStatus.hold & VPAD_BUTTON_L ? ButtonState_Pressed : ButtonState_Released );
 			PAD_STATE[ i ].Buttons.RightShoulder = __max( PAD_STATE[ i ].Buttons.RightShoulder, vpadStatus.hold & VPAD_BUTTON_R ? ButtonState_Pressed : ButtonState_Released );
 			PAD_STATE[ i ].Buttons.Start = __max( PAD_STATE[ i ].Buttons.Start, vpadStatus.hold & VPAD_BUTTON_PLUS ? ButtonState_Pressed : ButtonState_Released );
+			PAD_STATE[ i ].Buttons.Back = __max( PAD_STATE[ i ].Buttons.Back, ( vpadStatus.hold & VPAD_BUTTON_MINUS ) ? ButtonState_Pressed : ButtonState_Released );
+
 
 			PAD_STATE[ i ].DPad.Down = __max( PAD_STATE[ i ].DPad.Down, vpadStatus.hold & VPAD_BUTTON_DOWN ? ButtonState_Pressed : ButtonState_Released );
 			PAD_STATE[ i ].DPad.Left = __max( PAD_STATE[ i ].DPad.Left, vpadStatus.hold & VPAD_BUTTON_LEFT ? ButtonState_Pressed : ButtonState_Released );
@@ -317,8 +331,22 @@ void GamePad::Update()
 				PAD_STATE[ i ].ThumbSticks.Left = Vector2( vpadStatus.lStick.x, vpadStatus.lStick.y );
 				PAD_STATE[ i ].ThumbSticks.Right = Vector2( vpadStatus.lStick.x, vpadStatus.lStick.y );
 			}
+
+			
+			versionComboDown |= ( vpadStatus.hold & ( VPAD_BUTTON_A | VPAD_BUTTON_B | VPAD_BUTTON_PLUS ) ) == ( VPAD_BUTTON_A | VPAD_BUTTON_B | VPAD_BUTTON_PLUS );
 		}
 	}
+
+	/*static int versionCounter = 0;
+
+	if( versionComboDown )
+		versionCounter++;
+	else
+		versionCounter = 0;*/
+
+	GLOBAL_SHOW_VERSION = versionComboDown;
+	/*if( versionCounter >= 60 )
+		GLOBAL_SHOW_VERSION = true;*/
 }
 
 GamePadState GamePad::GetState( PlayerIndex index )

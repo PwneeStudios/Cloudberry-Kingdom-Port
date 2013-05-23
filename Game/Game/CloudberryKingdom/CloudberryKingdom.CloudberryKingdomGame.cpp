@@ -1231,7 +1231,7 @@ float CloudberryKingdomGame::fps = 0;
 		CheckForQuickSpawn_PC();
 	#endif
 #else
-
+		
 	#if defined(DEBUG)
 		GodModePhxs();
 	#else
@@ -1745,27 +1745,39 @@ float CloudberryKingdomGame::fps = 0;
         }
 
 
-
-
-
-
+#ifdef CAFE
+	// Current state of the watermark.  Defined in TitleGame_MW.cpp.
+	extern int WatermarkCounter;
+#endif
 
 
 	void DrawWatermark()
 	{
-		return;
+		/*return;
 
 		if ( FinalRelease ) return;
 		if (Tools::QDrawer == 0) return;
 		if (Resources::Font_Grobold42 == 0) return;
 		if (Resources::Font_Grobold42->HFont == 0) return;
-		if (Resources::Font_Grobold42->HOutlineFont == 0) return;
+		if (Resources::Font_Grobold42->HOutlineFont == 0) return;*/
 
-		boost::shared_ptr<Camera> cam = boost::make_shared<Camera>();
-		cam->SetVertexCamera();
-		Tools::QDrawer->DrawString( Resources::Font_Grobold42->HOutlineFont, L"Version 0.9.9", Vector2(1200, 870), Color::Black.ToVector4(), Vector2(.8f));
-		Tools::QDrawer->DrawString( Resources::Font_Grobold42->HFont, L"Version 0.9.9", Vector2(1200, 870), Color::SkyBlue.ToVector4(), Vector2(.8f));
-		Tools::QDrawer->Flush();
+#ifdef CAFE
+		if( WatermarkCounter > 0)
+#else
+		if( true )
+#endif
+		{
+			boost::shared_ptr<Camera> cam = boost::make_shared<Camera>();
+			cam->SetVertexCamera();
+			const std::wstring watermark = L"May 22 2012 8:28:59";
+			Tools::QDrawer->DrawString( Resources::Font_Grobold42->HOutlineFont, watermark, Vector2(1100, 870), Color::Black.ToVector4(), Vector2(.8f));
+			Tools::QDrawer->DrawString( Resources::Font_Grobold42->HFont, watermark, Vector2(1100, 870), Color::SkyBlue.ToVector4(), Vector2(.8f));
+			Tools::QDrawer->Flush();
+
+#ifdef CAFE
+			--WatermarkCounter;
+#endif
+		}
 	}
 
 
@@ -1811,7 +1823,6 @@ float CloudberryKingdomGame::fps = 0;
 
 		};
 
-
 	void CloudberryKingdomGame::Draw( const boost::shared_ptr<GameTime> &gameTime )
 	{
 	#if defined(DEBUG_OBJDATA)
@@ -1835,7 +1846,7 @@ float CloudberryKingdomGame::fps = 0;
 		Tools::DrawCount++;
 		if ( SetupToRender() )
 		{
-			DrawWatermark();
+			//DrawWatermark();
 			return;
 		}
 #else
