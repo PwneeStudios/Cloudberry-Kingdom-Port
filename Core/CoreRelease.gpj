@@ -5,9 +5,6 @@
 src\Utility\SaveWiiU.cpp
 src\Utility\ErrorWiiU.cpp
 src\Utility\ConsoleInformationWiiU.cpp
-src\Graphics\WiiU\audioplayer.cpp
-src\Graphics\WiiU\mp4dmx_api.cpp
-src\Graphics\WiiU\videoplayer.cpp
 src\Graphics\WiiU\videorender.cpp
 src\Graphics\VideoWiiU.cpp
 src\Graphics\VideoPlayerWiiU.cpp

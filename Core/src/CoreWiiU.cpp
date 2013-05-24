@@ -228,7 +228,7 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 	DEMOGfxInit( 2, gfxArgs );
 	DEMODRCInit( 2, drcArgs );
 
-	ReserveVideoPlayerMemory();
+	//ReserveVideoPlayerMemory();
 	InitializeIntermediateTextureHeap();
 	//DEMOSetReleaseCallback( ForegroundReleaseCallback );
 
