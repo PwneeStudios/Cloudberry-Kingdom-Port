@@ -245,7 +245,7 @@ typedef struct __MP4DemuxCore__ {
 
     // MP4Demux
     MP4DMX_CB_HANDLE MP4Dmx_CBHandle;
-    MP4DMXMpoOutputFuntcion  MP4Dmx_OutputFunc;
+    MP4DMXMpoOutputFunction  MP4Dmx_OutputFunc;
     u8      MP4Dmx_OutAudioFlag;
     u8      MP4Dmx_OutVideoFlag;
     MP4DMXFW_UNIT    InputUnitPtr;
