@@ -31,6 +31,7 @@ bool GLOBAL_CONNECTION_STATUS[ 5 ];
 
 bool GLOBAL_SHOW_VERSION = false;
 bool GLOBAL_PLAYER0_DOWN = false;
+bool GLOBAL_PLAYER0_MINI_B = false;
 
 static void ConnectCallback( s32 chan, s32 reason )
 {
@@ -77,6 +78,7 @@ void GamePad::Update()
 {
 	bool versionComboDown = false;
 	GLOBAL_PLAYER0_DOWN = false;
+	GLOBAL_PLAYER0_MINI_B = false;
 
 	// Save controller types
 	GamePadState::ControllerType SaveType[4];
@@ -152,7 +154,10 @@ void GamePad::Update()
 			PAD_STATE[ WIIMOTE_REMAP[ i ] ].DPad.Right = ( hold & KPAD_BUTTON_DOWN  ) ? ButtonState_Pressed : ButtonState_Released;
 			PAD_STATE[ WIIMOTE_REMAP[ i ] ].DPad.Up =    ( hold & KPAD_BUTTON_RIGHT ) ? ButtonState_Pressed : ButtonState_Released;
 
-			if( PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.A || PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.B || PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.X || PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.Y )
+			if( WIIMOTE_REMAP[ i ] == 0 )
+				GLOBAL_PLAYER0_MINI_B = ( hold & KPAD_BUTTON_B ) ? ButtonState_Pressed : ButtonState_Released;
+
+			if( GLOBAL_PLAYER0_MINI_B || PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.A || PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.B || PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.X || PAD_STATE[ WIIMOTE_REMAP[ i ] ].Buttons.Y )
 			{
 				PAD_STATE[ WIIMOTE_REMAP[ i ] ].Type = GamePadState::ControllerType_Mini;
 				//if ( i == 1 ) LOG_WRITE( "Controller %d is mini.\n", i );

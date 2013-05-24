@@ -80,6 +80,11 @@ void GlobalShowSaving()
 	CloudberryKingdom::CloudberryKingdomGame::ShowSaving();
 }
 
+// Force reset the game after the demo has ended.  Defined in CoreWiiU.cpp.
+extern bool DemoEndResetOverride;
+
+int IdleCounter = 0;
+
 #endif
 
 #ifdef PS3
@@ -1189,10 +1194,23 @@ float CloudberryKingdomGame::fps = 0;
         }
     }
 
+	
 	void CloudberryKingdomGame::PhsxStep()
 	{
 		DoToDoList();
 
+		if( IdleCounter > 60 * 60 * 5 )
+		{
+			DemoEndResetOverride = true;
+			IdleCounter = 0;
+		}
+
+		IdleCounter++;
+
+		if( ButtonCheck::AnyKey() )
+		{
+			IdleCounter = 0;
+		}
 //#if WINDOWS
 //		// Load a test level.
 //		if ( !FinalRelease && KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_D5 ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_D5 ) )

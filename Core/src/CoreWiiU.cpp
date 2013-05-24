@@ -51,6 +51,9 @@ extern FSClient *GLOBAL_FSClient;
 bool ReEnableHomeButton = false;
 bool DemoEndResetOverride = false;
 
+// Idle timeout counter. Defined in CloudberryKingdom.CloudberryKingdomGame.cpp.
+extern int IdleCounter;
+
 u32 HomeButtonDeniedCallback( void *context )
 {
 	LOG_WRITE( "HOME BUTTON DENIED!\n" );
@@ -510,6 +513,24 @@ int CoreWiiU::Run()
 		nn::erreula::State viewerState = nn::erreula::GetStateErrorViewer();
 		if( viewerState != nn::erreula::cState_Blank )
 		{
+			if( currentErrorCode == 0xDEADBEEF )
+			{
+				IdleCounter += 1;
+
+				if( IdleCounter > 60 * 60 * 1 )
+				{
+					DemoEndResetOverride = true;
+					IdleCounter = 0;
+
+					if( nn::erreula::GetStateErrorViewer() == nn::erreula::cState_Display )
+					{
+						nn::erreula::DisappearErrorViewer();
+						FMOD_WiiU_SetMute( FALSE );
+						//viewerVisible = false;
+					}
+				}
+			}
+
 			if( nn::erreula::IsDecideSelectButtonError() )
 			{
 				// Exit and jump to data management!
@@ -528,6 +549,7 @@ int CoreWiiU::Run()
 				else if( currentErrorCode == 0xDEADBEEF )
 				{
 					DemoEndResetOverride = true;
+					IdleCounter = 0;
 				}
 
 				if( nn::erreula::GetStateErrorViewer() == nn::erreula::cState_Display )
@@ -548,6 +570,18 @@ int CoreWiiU::Run()
 					currentErrorCode = 0;
 				}
 			}
+
+			/*if( HideErrorViewer )
+			{
+				HideErrorViewer = false;
+
+				if( nn::erreula::GetStateErrorViewer() == nn::erreula::cState_Display )
+				{
+					nn::erreula::DisappearErrorViewer();
+					FMOD_WiiU_SetMute( FALSE );
+					//viewerVisible = false;
+				}
+			}*/
 			/*else if( currentErrorCode == 1650101 )
 			{
 				if( vpadConnected || anythingElseConnected )

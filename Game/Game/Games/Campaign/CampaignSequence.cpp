@@ -187,7 +187,7 @@ namespace CloudberryKingdom
 					}
 				}
 
-				if( Num == 51 )
+				if( Num == 61 )
 				{
 					DisplayError( ErrorType( 0xDEADBEEF ) );
 				}

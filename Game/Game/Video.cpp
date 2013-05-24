@@ -22,6 +22,9 @@ void SetElapsedVideoTime( float time )
 	CloudberryKingdom::MainVideo::Elapsed = time;
 }
 
+// Idle timeout counter. Defined in CloudberryKingdom.CloudberryKingdomGame.cpp.
+extern int IdleCounter;
+
 #ifdef PS3
 	bool StartTimeSet;
 	clock_t StartTime;
@@ -401,6 +404,8 @@ bool MainVideo::Paused = false;
 			Finish();
 			return false;
 		}
+
+		IdleCounter = 0;
 
 		Tools::EffectWad->SetCameraPosition( Vector4( 0.f, 0.f, .001f, .001f ) );
 

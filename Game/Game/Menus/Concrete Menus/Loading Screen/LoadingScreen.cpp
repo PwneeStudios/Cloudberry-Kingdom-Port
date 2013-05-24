@@ -4,6 +4,9 @@
 
 #include <MasterHack.h>
 
+// Idle timeout counter. Defined in CloudberryKingdom.CloudberryKingdomGame.cpp.
+extern int IdleCounter;
+
 namespace CloudberryKingdom
 {
 
@@ -172,6 +175,8 @@ namespace CloudberryKingdom
 
 	void LoadingScreen::Draw( const boost::shared_ptr<Camera> &cam )
 	{
+		IdleCounter = 0;
+
 		DrawCount++;
 
 		Tools::Device->Clear( Color::Black );

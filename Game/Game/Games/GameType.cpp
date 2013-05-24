@@ -6,14 +6,22 @@
 #include <Core\Tools\Set.h>
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+#include <Input/GamePad.h>
+#include <Input/GamePadState.h>
+#include <Input/InputEnums.h>
 
 #include <MasterHack.h>
+
+#ifdef CAFE
+#include <cafe.h>
+#endif
 
 // Force reset the game after the demo has ended.  Defined in CoreWiiU.cpp.
 extern bool DemoEndResetOverride;
 
-// Is player 0 holding the down button? Defined in GamePadWiiU.cpp.
+// Is player 0 holding the down or B button? Defined in GamePadWiiU.cpp.
 extern bool GLOBAL_PLAYER0_DOWN;
+extern bool GLOBAL_PLAYER0_MINI_B;
 
 namespace CloudberryKingdom
 {
@@ -1145,12 +1153,22 @@ namespace CloudberryKingdom
 		// Digital day
 		if ( CloudberryKingdomGame::DigitalDayBuild )
 		{
-			bool a = ButtonCheck::State( ControllerButtons_B, 0 ).Down;
+			bool a = false;
+			bool usingB = false;
+			if( GamePad::GetState( static_cast< PlayerIndex >( 0 ) ).Type == GamePadState::ControllerType_Mini )
+			{
+				a = GLOBAL_PLAYER0_MINI_B;
+				usingB = true;
+			}
+			else
+			{
+				a = ButtonCheck::State( ControllerButtons_B, 0 ).Down;
+			}
 			bool b = ButtonCheck::State( ControllerButtons_BACK, 0 ).Down;
 			bool c = GLOBAL_PLAYER0_DOWN;//ButtonCheck::GetDir( 0 ).Y < -0.5f;
-
+			
 #ifdef CAFE
-			//OSReport( "A: %d -: %d DPAD: %f\n", a, b, ButtonCheck::GetDir( -2 ).Y );
+			//OSReport( "B: %d -: %d DPAD: %d usingB: %d\n", a, b, c, usingB );
 #endif
 			if( DemoEndResetOverride )
 			{

@@ -5,6 +5,10 @@
 #include <Hacks/String.h>
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
+// Idle timeout counter. Defined in CloudberryKingdom.CloudberryKingdomGame.cpp.
+extern int IdleCounter;
+
+
 namespace CloudberryKingdom
 {
 
@@ -390,6 +394,8 @@ namespace CloudberryKingdom
 
 	void ScreenSaver::BackgroundPhsx()
 	{
+		IdleCounter = 0;
+
 		StringWorldGameData::BackgroundPhsx();
 
 		if ( Tools::TheGame->LoadingScreen_Renamed != 0 && !Tools::TheGame->LoadingScreen_Renamed->IsDone )
