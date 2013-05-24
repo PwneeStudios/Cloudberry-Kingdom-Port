@@ -397,6 +397,8 @@ namespace CloudberryKingdom
 		bool CloudberryKingdomGame::PastPressStart = false;
 		bool CloudberryKingdomGame::CanSave()
 		{
+			return false;
+
 			if ( getIsDemo() ) return false;
 
 			if ( ChoseNotToSave ) return false;
@@ -632,7 +634,7 @@ Version CloudberryKingdomGame::GameVersion = Version( 0, 2, 4 );
 #else
         bool CloudberryKingdomGame::AlwaysGiveTutorials = false;
         bool CloudberryKingdomGame::Unlock_Customization = true;
-        bool CloudberryKingdomGame::Unlock_Levels = false;//!FinalRelease || CloudberryKingdomGame::DigitalDayBuild;
+        bool CloudberryKingdomGame::Unlock_Levels = true;//!FinalRelease || CloudberryKingdomGame::DigitalDayBuild;
 #endif
 
         bool FakeDemo = false;
@@ -1787,9 +1789,9 @@ float CloudberryKingdomGame::fps = 0;
 		{
 			boost::shared_ptr<Camera> cam = boost::make_shared<Camera>();
 			cam->SetVertexCamera();
-			const std::wstring watermark = L"May 22 2012 8:28:59";
-			Tools::QDrawer->DrawString( Resources::Font_Grobold42->HOutlineFont, watermark, Vector2(1100, 870), Color::Black.ToVector4(), Vector2(.8f));
-			Tools::QDrawer->DrawString( Resources::Font_Grobold42->HFont, watermark, Vector2(1100, 870), Color::SkyBlue.ToVector4(), Vector2(.8f));
+			const std::wstring watermark = L"May 23 2013 23:58:33";
+			Tools::QDrawer->DrawString( Resources::Font_Grobold42->HOutlineFont, watermark, Vector2(1090, 870), Color::Black.ToVector4(), Vector2(.8f));
+			Tools::QDrawer->DrawString( Resources::Font_Grobold42->HFont, watermark, Vector2(1090, 870), Color::SkyBlue.ToVector4(), Vector2(.8f));
 			Tools::QDrawer->Flush();
 
 #ifdef CAFE

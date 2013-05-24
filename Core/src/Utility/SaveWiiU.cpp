@@ -17,6 +17,9 @@ extern void GlobalShowSaving();
 
 bool InitializeSave()
 {
+	nn::act::Initialize();
+	return false;
+
 	if( initializeCalled )
 		return isInitialized;
 

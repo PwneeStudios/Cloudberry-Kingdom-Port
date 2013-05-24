@@ -34,12 +34,12 @@ namespace CloudberryKingdom
 	void CampaignChapterItem::UpdateLock()
 	{
         Locked = false;
-        if (!CloudberryKingdomGame::Unlock_Levels)
-        {
+        /*if (!CloudberryKingdomGame::Unlock_Levels)
+        {*/
 			int level = PlayerManager::MinPlayerTotalCampaignLevel();
 			if ( Contains( CampaignSequence::getInstance()->ChapterEnd, (Chapter - 1) ) )
 				Locked = level < CampaignSequence::getInstance()->ChapterEnd[ Chapter - 1 ];
-        }
+        //}
 	}
 
 	void CampaignChapterItem::InitializeInstanceFields()

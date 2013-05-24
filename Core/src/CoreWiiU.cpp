@@ -381,7 +381,7 @@ CoreWiiU::~CoreWiiU()
 	LOG_WRITE( "SHUTDOWN START\n" );
 	
 	nn::act::Finalize();
-	SAVEShutdown();
+	//SAVEShutdown();
 
 	ShutdownErrorSystem();
 	TerminateSaveFS();
