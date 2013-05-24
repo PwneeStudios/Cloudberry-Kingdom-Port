@@ -128,6 +128,8 @@ namespace CloudberryKingdom
 
 	void MainVideo::StartVideo( const std::wstring &MovieName, bool CanSkipVideo, float LengthUntilCanSkip )
 	{
+		return;
+
 #if DEBUG
 		CanSkipVideo = true;
 #endif

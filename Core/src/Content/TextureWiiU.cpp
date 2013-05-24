@@ -9,6 +9,7 @@
 #include <cafe/mem.h>
 #include <Utility/Log.h>
 
+
 TextureWiiU::TextureWiiU() :
 	internal_( new TextureInternal )
 {
@@ -31,6 +32,7 @@ static bool HeapAvailable = false;
 
 void InitializeIntermediateTextureHeap()
 {
+	LOG_WRITE( "Initialize intermediate texture heap\n" );
 	const u32 heapSize = 128 * 1024 * 1024;
 	void *heapBase = MEMAllocFromDefaultHeap( heapSize );
 	IntermediateTextureHeap = MEMCreateExpHeapEx( heapBase, heapSize, MEM_HEAP_OPT_THREAD_SAFE );
@@ -44,6 +46,7 @@ void InitializeIntermediateTextureHeap()
 
 void FreeIntermediateTextureHeap()
 {
+	LOG_WRITE( "Free intermediate texture heap\n" );
 	HeapAvailable = false;
 	OSMemoryBarrier();
 
@@ -55,6 +58,9 @@ void FreeIntermediateTextureHeap()
 
 void TextureWiiU::Load()
 {
+	FSCmdBlock CommandBlock;
+	FSInitCmdBlock( &CommandBlock );
+
 	u32 len;
 
 	std::string path = GetPath();
@@ -74,10 +80,16 @@ void TextureWiiU::Load()
 		FSFileHandle fh;
 		FSStat stat;
 
-		FSOpenFile( GLOBAL_FSClient, CommandBlock, localPath.c_str(), "r", &fh, FS_RET_NO_ERROR );
+		LOG_WRITE( "Loading texture %s\n", localPath.c_str() );
+
+		FSOpenFile( GLOBAL_FSClient, &CommandBlock, localPath.c_str(), "r", &fh, FS_RET_NO_ERROR );
+
+		LOG_WRITE( "Intermeidate step after open\n" );
 
 		memset( &stat, 0, sizeof( FSStat ) );
-		FSGetStatFile( GLOBAL_FSClient, CommandBlock, fh, &stat, FS_RET_NO_ERROR );
+		FSGetStatFile( GLOBAL_FSClient, &CommandBlock, fh, &stat, FS_RET_NO_ERROR );
+
+		LOG_WRITE( "Intermediate step after stat\n" );
 
 		internal_->Buffer = NULL;
 		while( internal_->Buffer == NULL )
@@ -88,9 +100,13 @@ void TextureWiiU::Load()
 
 			OSYieldThread();
 		}
+		
+		LOG_WRITE( "Intermeidate step, buffer = %x\n", internal_->Buffer );
 
-		FSReadFile( GLOBAL_FSClient, CommandBlock, internal_->Buffer, stat.size, 1, fh, 0, FS_RET_NO_ERROR );
-		FSCloseFile( GLOBAL_FSClient, CommandBlock, fh, FS_RET_NO_ERROR );
+		FSReadFile( GLOBAL_FSClient, &CommandBlock, internal_->Buffer, stat.size, 1, fh, 0, FS_RET_NO_ERROR );
+
+		LOG_WRITE( "Intermediate step, before close\n" );
+		FSCloseFile( GLOBAL_FSClient, &CommandBlock, fh, FS_RET_NO_ERROR );
 
 		setLoaded( true );
 	}

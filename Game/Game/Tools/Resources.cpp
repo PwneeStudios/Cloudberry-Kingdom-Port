@@ -448,9 +448,9 @@ boost::shared_ptr<Thread> Resources::LoadThread = 0;
 		Fireball::PreInit();
 
 #ifdef CAFE
-		SchedulerPausedForLogo = true;
-		OSMemoryBarrier();
-		StopScheduler();
+		//SchedulerPausedForLogo = true;
+		//OSMemoryBarrier();
+		//StopScheduler();
 #endif
 
 #ifdef PS3
