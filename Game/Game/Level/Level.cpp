@@ -1134,6 +1134,8 @@ namespace CloudberryKingdom
 		if ( Watching )
 			return;
 
+		if (MyGame != 0) MyGame->WatchComputerEvent();
+
 		Tools::setPhsxSpeed( 1 );
 
 		// Consider the reset free if the players are close to the start

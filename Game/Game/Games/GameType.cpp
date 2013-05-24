@@ -548,6 +548,12 @@ namespace CloudberryKingdom
 			OnLevelRetry->Apply();
 	}
 
+	void GameData::WatchComputerEvent()
+	{
+		if ( OnWatchComputer != 0 )
+			OnWatchComputer->Apply();
+	}
+
 	void GameData::ReturnToEvent()
 	{
 		if ( OnReturnTo != 0 )
@@ -699,6 +705,7 @@ namespace CloudberryKingdom
 		OnCheckpointGrab.reset();
 		OnCoinGrab.reset();
 		OnLevelRetry.reset();
+		OnWatchComputer.reset();
 		OnReturnTo.reset();
 
 		CurToDo.clear();
@@ -1772,6 +1779,7 @@ namespace CloudberryKingdom
 		OnCoinGrab = boost::make_shared<Multicaster_1<boost::shared_ptr<ObjectBase> > >();
 		OnCompleteLevel = boost::make_shared<Multicaster_1<boost::shared_ptr<Level> > >();
 		OnLevelRetry = boost::make_shared<Multicaster>();
+		OnWatchComputer = boost::make_shared<Multicaster>();
 		OnReturnTo = boost::make_shared<Multicaster>();
 		OnReturnTo_OneOff = boost::make_shared<Multicaster>();
 		ToDoOnReset = std::vector<boost::shared_ptr<Lambda> >();

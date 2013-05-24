@@ -536,9 +536,9 @@ namespace CloudberryKingdom
 		HideInteractingBobOnDoorClose = true;
 		NearCount = 0;
 		NoNote = false;
-		_DelayToShowNote_First = 60;
-		_DelayToShowNote_Second = 75;
-		_DelayToShowNote_Nth = 180;
+		_DelayToShowNote_First = 30;
+		_DelayToShowNote_Second = 55;
+		_DelayToShowNote_Nth = 80;
 		UsedOnce = false;
 		AutoOpen = false;
 	}

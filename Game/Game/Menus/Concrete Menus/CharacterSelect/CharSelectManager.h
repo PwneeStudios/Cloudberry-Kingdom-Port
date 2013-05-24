@@ -109,6 +109,8 @@ namespace CloudberryKingdom
 
 		static void Cleanup();
 
+		static void SuddenCleanup();
+
 		static bool AllExited();
 
 		static bool FakeHide;

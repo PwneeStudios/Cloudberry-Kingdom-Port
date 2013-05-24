@@ -211,8 +211,7 @@ namespace CloudberryKingdom
 	}
 
 	HelpMenu::HelpMenu() :
-		DelayExit( 0 ),
-		Cost_Watch( 0 ), Cost_Path( 0 ), Cost_Slow( 0 )
+		DelayExit( 0 )
 	{
 	}
 
@@ -259,9 +258,45 @@ namespace CloudberryKingdom
 		return CkBaseMenu::MenuReturnToCaller( menu );
 	}
 
+
+
+
+
+		CostGrowthTypes HelpMenu::CostGrowthType = CostGrowthTypes_None;
+		int HelpMenu::Cost_Multiplier_Watch = 1, HelpMenu::Cost_Multiplier_Path = 1, HelpMenu::Cost_Multiplier_Slow = 1;
+
+		void HelpMenu::SetCostGrowthType(CostGrowthTypes type)
+		{
+			CostGrowthType = type;
+
+			Cost_Multiplier_Watch = 1;
+			Cost_Multiplier_Path = 1;
+			Cost_Multiplier_Slow = 1;
+		}
+
+		int HelpMenu::CurrentCostTo_Watch()
+		{
+			return Cost_Watch * CostMultiplier * Cost_Multiplier_Watch;
+		}
+
+		int HelpMenu::CurrentCostTo_Slow()
+		{
+			return Cost_Slow * CostMultiplier * Cost_Multiplier_Slow;
+		}
+
+		int HelpMenu::CurrentCostTo_Path()
+		{
+			return Cost_Path * CostMultiplier * Cost_Multiplier_Path;
+		}
+
+
+		int HelpMenu::Cost_Watch = 5, HelpMenu::Cost_Path = 40, HelpMenu::Cost_Slow = 20;
+
+
+
 	bool HelpMenu::Allowed_WatchComputer()
 	{
-		return MyGame->MyLevel->WatchComputerEnabled() && Bank() >= Cost_Watch * CostMultiplier;
+		return MyGame->MyLevel->WatchComputerEnabled() && Bank() >= CurrentCostTo_Watch();
 	}
 
 	void HelpMenu::WatchComputer()
@@ -269,7 +304,10 @@ namespace CloudberryKingdom
 		if ( !Allowed_WatchComputer() )
 			return;
 
-		Buy( Cost_Watch * CostMultiplier );
+		Buy( CurrentCostTo_Watch() );
+
+		if ( CostGrowthType == CostGrowthTypes_DoublePerBuy )
+			Cost_Multiplier_Watch *= 2;
 
 		ReturnToCaller();
 		MyGame->WaitThenDo( DelayExit - 10, boost::make_shared<WatchComputerHelper>( boost::static_pointer_cast<HelpMenu>( shared_from_this() ) ) );
@@ -285,7 +323,7 @@ namespace CloudberryKingdom
 	#if defined(DEBUG)
 		return MyGame->MyLevel->WatchComputerEnabled();
 	#else
-		return MyGame->MyLevel->CanWatchComputer && Bank() >= Cost_Path * CostMultiplier;
+		return MyGame->MyLevel->CanWatchComputer && Bank() >= CurrentCostTo_Path();
 	#endif
 	}
 
@@ -311,7 +349,10 @@ namespace CloudberryKingdom
 		if ( !Allowed_ShowPath() )
 			return;
 
-		Buy( Cost_Path * CostMultiplier );
+		Buy( CurrentCostTo_Path() );
+
+		if ( CostGrowthType == CostGrowthTypes_DoublePerBuy )
+			Cost_Multiplier_Path *= 2;
 
 		ReturnToCaller();
 		MyGame->WaitThenDo( DelayExit - 10, boost::make_shared<Toggle_ShowPathSetter>( boost::static_pointer_cast<HelpMenu>( shared_from_this() ), true ) );
@@ -324,7 +365,7 @@ namespace CloudberryKingdom
 
 	bool HelpMenu::Allowed_SlowMo()
 	{
-		return true && Bank() >= Cost_Slow * CostMultiplier;
+		return true && Bank() >= CurrentCostTo_Slow();
 	}
 
 	void HelpMenu::Toggle_SlowMo( bool state )
@@ -347,7 +388,10 @@ namespace CloudberryKingdom
 		if ( !Allowed_SlowMo() )
 			return;
 
-		Buy( Cost_Slow * CostMultiplier );
+		Buy( CurrentCostTo_Slow() );
+
+		if ( CostGrowthType == CostGrowthTypes_DoublePerBuy )
+			Cost_Multiplier_Slow *= 2;
 
 		Toggle_SlowMo( true );
 		ReturnToCaller();
@@ -441,7 +485,7 @@ namespace CloudberryKingdom
 		std::wstring CoinPrefix = std::wstring( L"{pCoin_Blue,100,?}" );
 
 		// Watch the computer
-		boost::shared_ptr<MenuItem> WatchItem = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( CoinPrefix + std::wstring( L"x" ) + StringConverterHelper::toString( Cost_Watch * CostMultiplier ), ItemFont ) ) );
+		boost::shared_ptr<MenuItem> WatchItem = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( CoinPrefix + std::wstring( L"x" ) + StringConverterHelper::toString( CurrentCostTo_Watch() ), ItemFont ) ) );
 		item->Name = std::wstring( L"WatchComputer" );
 		Item_WatchComputer = item;
 		item->SetIcon( ObjectIcon::RobotIcon->Clone() );
@@ -462,8 +506,8 @@ namespace CloudberryKingdom
 		}
 		else
 		{
-            PathItem = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( CoinPrefix + std::wstring( L"x" ) + StringConverterHelper::toString( Cost_Path * CostMultiplier ), ItemFont ) ) );
-            if (Bank() >= Cost_Path * CostMultiplier)
+            PathItem = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( CoinPrefix + std::wstring( L"x" ) + StringConverterHelper::toString( CurrentCostTo_Path() ), ItemFont ) ) );
+            if ( Bank() >= CurrentCostTo_Path() )
                 item->setGo( Cast::ToItem( boost::make_shared<ShowPathProxy>( boost::static_pointer_cast<HelpMenu>( shared_from_this() ) ) ) );
             else
                 item->setGo( 0 );
@@ -485,8 +529,8 @@ namespace CloudberryKingdom
 		}
 		else
 		{
-            SlowItem = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( CoinPrefix + std::wstring( L"x" ) + StringConverterHelper::toString( Cost_Slow * CostMultiplier ), ItemFont ) ) );
-            if (Bank() >= Cost_Slow * CostMultiplier)
+            SlowItem = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( CoinPrefix + std::wstring( L"x" ) + StringConverterHelper::toString( CurrentCostTo_Slow() ), ItemFont ) ) );
+            if (Bank() >= CurrentCostTo_Slow() )
                 item->setGo( Cast::ToItem( boost::make_shared<SlowMoProxy>( boost::static_pointer_cast<HelpMenu>( shared_from_this() ) ) ) );
             else
                 item->setGo( 0 );
@@ -499,7 +543,7 @@ namespace CloudberryKingdom
 		Item_SlowMo = item;
 
         // Fade if not usable
-		if ( WatchItem != 0 && Bank() < Cost_Watch * CostMultiplier )
+		if ( WatchItem != 0 && Bank() < CurrentCostTo_Watch() )
 		{
 			WatchItem->setGo( 0 );
 			WatchItem->MyText->Alpha = .6f;

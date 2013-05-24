@@ -569,6 +569,15 @@ namespace CloudberryKingdom
 		void LevelRetryEvent();
 
 		/// <summary>
+		/// Event handler. Activates when the player chooses to watch the computer.
+		/// </summary>
+		boost::shared_ptr<Multicaster> OnWatchComputer;
+		/// <summary>
+		/// Call this when a coin is grabbed to activate the coin grabbed event handler.
+		/// </summary>
+		void WatchComputerEvent();
+
+		/// <summary>
 		/// Event handler. Activates when this game is returned to from another game.
 		/// </summary>
 		boost::shared_ptr<Multicaster> OnReturnTo;

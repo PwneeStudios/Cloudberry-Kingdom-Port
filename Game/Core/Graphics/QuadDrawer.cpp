@@ -54,18 +54,30 @@ namespace CloudberryKingdom
             Offset = Offset_;
         }
 
-        GlyphData HackFont::GetData( wchar_t c )
+        GlyphData HackFont::GetData( wchar_t c, bool MakeMonospaced )
         {
+			GlyphData data;
+
             if ( Contains<int, GlyphData>( Data, c ) )
-                return Data[c];
+			{
+                data = Data[c];
+			}
             else
             {
-#if defined(DEBUG)
-                return Data['#'];
-#else
-				return Data['#'];
-#endif
+                data = Data['#'];
             }
+
+			if ( MakeMonospaced )
+			{
+				if ( c == ',' )
+					data.Size.X = 40;
+				else if ( c == '.' )
+					data.Size.X = 40;
+				else
+					data.Size.X = 60;
+			}
+
+			return data;
         }
 
         HackFont::HackFont(std::string name)
@@ -926,7 +938,12 @@ namespace CloudberryKingdom
 			QUAD_DRAWER->Draw( sq );
 		}
 
-        void QuadDrawer::DrawString(boost::shared_ptr<HackSpriteFont> spritefont, std::wstring s, Vector2 position, Vector4 color, Vector2 scale)
+		void QuadDrawer::DrawString(boost::shared_ptr<HackSpriteFont> spritefont, std::wstring s, Vector2 position, Vector4 color, Vector2 scale)
+		{
+			DrawString(spritefont, s, position, color, scale, false);
+		}
+
+        void QuadDrawer::DrawString(boost::shared_ptr<HackSpriteFont> spritefont, std::wstring s, Vector2 position, Vector4 color, Vector2 scale, bool MakeMonospaced)
         {
             boost::shared_ptr<HackFont> font = spritefont->font;
 
@@ -953,7 +970,7 @@ namespace CloudberryKingdom
 	        {
 				if ( i + 10 > N ) Flush();
 
-                GlyphData data = font->GetData( s[j] );
+                GlyphData data = font->GetData( s[j], MakeMonospaced );
 
 				// Correct for initial offset
 				if (j == 0)
@@ -1001,7 +1018,15 @@ namespace CloudberryKingdom
         {
         }
 
-        Vector2 QuadDrawer::MeasureString(boost::shared_ptr<HackSpriteFont> spritefont, std::wstring s)
+        void QuadDrawer::DrawString(boost::shared_ptr<HackSpriteFont> spritefont, boost::shared_ptr<StringBuilder> s, Vector2 position, Vector4 color, Vector2 scale, bool MakeMonospaced)
+        {
+        }
+
+		Vector2 QuadDrawer::MeasureString(boost::shared_ptr<HackSpriteFont> spritefont, std::wstring s)
+		{
+			return MeasureString( spritefont, s, false );
+		}
+        Vector2 QuadDrawer::MeasureString(boost::shared_ptr<HackSpriteFont> spritefont, std::wstring s, bool MakeMonospaced)
         {
             boost::shared_ptr<HackFont> font = spritefont->font;
 
@@ -1011,7 +1036,7 @@ namespace CloudberryKingdom
 
 	        for( int j = 0; j < static_cast<int>( s.length() ); ++j )
 	        {
-                GlyphData data = font->GetData( s[j] );
+                GlyphData data = font->GetData( s[j], MakeMonospaced );
                 Vector2 dim = data.Size;
 
 		        size.X += dim.X + (float)( font->CharSpacing - 18 );
@@ -1028,7 +1053,11 @@ namespace CloudberryKingdom
             return size;
         }
 
-        Vector2 QuadDrawer::MeasureString(boost::shared_ptr<HackSpriteFont> spritefont, boost::shared_ptr<StringBuilder> s)
+		Vector2 QuadDrawer::MeasureString(boost::shared_ptr<HackSpriteFont> spritefont, boost::shared_ptr<StringBuilder> s)
+		{
+			return MeasureString( spritefont, s, false );
+		}
+        Vector2 QuadDrawer::MeasureString(boost::shared_ptr<HackSpriteFont> spritefont, boost::shared_ptr<StringBuilder> s, bool MakeMonospaced)
         {
             boost::shared_ptr<HackFont> font = spritefont->font;
 
@@ -1038,7 +1067,7 @@ namespace CloudberryKingdom
 
 	        for( int j = 0; j < s->getLength(); ++j )
 	        {
-                GlyphData data = font->GetData( s->buffer[j] );
+                GlyphData data = font->GetData( s->buffer[j], MakeMonospaced );
                 Vector2 dim = data.Size;
 
 		        size.X += dim.X + (float)( font->CharSpacing - 18 );

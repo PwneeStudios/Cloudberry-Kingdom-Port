@@ -98,7 +98,10 @@ namespace CloudberryKingdom
 
 	void GUI_Panel::ReturnToCaller()
 	{
-		ButtonCheck::PreventInput();
+		if (PreventInputOnReturnToCaller)
+		{
+			ButtonCheck::PreventInput();
+		}
 
 		if ( NoBackIfNoCaller && Caller == 0 )
 			return;
@@ -170,6 +173,7 @@ namespace CloudberryKingdom
 
 	GUI_Panel::GUI_Panel() :
 		NoBackIfNoCaller( false ),
+		PreventInputOnReturnToCaller( true ),
 		_Control( 0 ),
 		Active( false ),
 		ReturnToCallerDelay( 0 ),
@@ -193,6 +197,7 @@ namespace CloudberryKingdom
 
 	GUI_Panel::GUI_Panel( bool CallBaseConstructor ) :
 		NoBackIfNoCaller( false ),
+		PreventInputOnReturnToCaller( true ),
 		_Control( 0 ),
 		Active( false ),
 		ReturnToCallerDelay( 0 ),
@@ -550,6 +555,7 @@ namespace CloudberryKingdom
 		ReturnToCallerDelay = 0;
 		CallDelay = 0;
 		NoBackIfNoCaller = false;
+		PreventInputOnReturnToCaller = true;
 		ReleaseWhenDone = false;
 		ReleaseWhenDoneScaling = false;
 		Hid = true;

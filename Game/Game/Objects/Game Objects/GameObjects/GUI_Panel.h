@@ -160,6 +160,12 @@ namespace CloudberryKingdom
 		bool NoBackIfNoCaller;
 
 		/// <summary>
+		/// When true: When the panel is done and returns to its caller, it will prevent input for one frame,
+		/// so that the parent panel does not receive input on this same frame.
+		/// </summary>
+		bool PreventInputOnReturnToCaller;
+
+		/// <summary>
 		/// Hide the panel and return to its parent.
 		/// </summary>
 		virtual void ReturnToCaller();

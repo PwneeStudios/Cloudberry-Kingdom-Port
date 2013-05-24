@@ -216,30 +216,30 @@ boost::shared_ptr<Set<boost::shared_ptr<Hat> > > CharacterSelectManager::Availab
 		if ( Backdrop != 0 ) Backdrop->Release();
 	}
 
-     /*   public static void SuddenCleanup()
+    void CharacterSelectManager::SuddenCleanup()
+    {
+        CharacterSelectManager::IsShowing = false;
+        CharacterSelectManager::FakeHide = false;
+
+        for ( int i = 0; i < 4; i++ )
         {
-            IsShowing = false;
-            FakeHide = false;
-
-            for (int i = 0; i < 4; i++)
+            if ( CharacterSelectManager::CharSelect[i] != 0 )
             {
-                if (CharSelect[i] != null)
-                {
-                    CharSelect[i].Release();
-                    CharSelect[i] = null;
-                }
+                CharacterSelectManager::CharSelect[i]->Release();
+                CharacterSelectManager::CharSelect[i].reset();
             }
+        }
 
-            var game = Tools.CurGameData;
+        boost::shared_ptr<GameData> game = Tools::CurGameData;
 
-            game.KillToDo("StartCharSelect");
+        game->KillToDo( std::wstring( L"StartCharSelect" ) );
 
-            game.RemoveGameObjects(GameObject.Tag.CharSelect);
-            if (Backdrop != null) Backdrop.Release();
+        game->RemoveGameObjects( GameObject::Tag_CHAR_SELECT );
+        if ( CharacterSelectManager::Backdrop != 0 ) CharacterSelectManager::Backdrop->Release();
 
-            OnDone = null;
-            CharacterSelectManager.ParentPanel = null;
-        }*/
+        CharacterSelectManager::OnDone.reset();
+        CharacterSelectManager::ParentPanel.reset();
+    }
 
 	bool CharacterSelectManager::AllExited()
 	{

@@ -47,7 +47,7 @@ namespace CloudberryKingdom
 
 		boost::shared_ptr<EzTexture> MyTexture;
 
-        GlyphData GetData( wchar_t c );
+        GlyphData GetData( wchar_t c, bool MakeMonospaced );
 
         float CharSpacing;
 
@@ -177,9 +177,13 @@ namespace CloudberryKingdom
 
 		void DrawPic(Vector2 pos, Vector2 pos2, boost::shared_ptr<EzTexture> texture, Color color);
 		void DrawString(boost::shared_ptr<HackSpriteFont> spritefont, std::wstring s, Vector2 position, Vector4 color, Vector2 scale);
+		void DrawString(boost::shared_ptr<HackSpriteFont> spritefont, std::wstring s, Vector2 position, Vector4 color, Vector2 scale, bool MakeMonospaced);
 		void DrawString(boost::shared_ptr<HackSpriteFont> spritefont, boost::shared_ptr<StringBuilder> s, Vector2 position, Vector4 color, Vector2 scale);
+		void DrawString(boost::shared_ptr<HackSpriteFont> spritefont, boost::shared_ptr<StringBuilder> s, Vector2 position, Vector4 color, Vector2 scale, bool MakeMonospaced);
 		Vector2 MeasureString(boost::shared_ptr<HackSpriteFont> spritefont, std::wstring s);
+		Vector2 MeasureString(boost::shared_ptr<HackSpriteFont> spritefont, std::wstring s, bool MakeMonospaced);
 		Vector2 MeasureString(boost::shared_ptr<HackSpriteFont> spritefont, boost::shared_ptr<StringBuilder> s);
+		Vector2 MeasureString(boost::shared_ptr<HackSpriteFont> spritefont, boost::shared_ptr<StringBuilder> s, bool MakeMonospaced);
 
 		void DrawCircleDot( Vector2 pos );
 

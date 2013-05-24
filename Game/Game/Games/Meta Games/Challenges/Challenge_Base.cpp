@@ -127,6 +127,7 @@ namespace CloudberryKingdom
         CloudberryKingdomGame::PromptForDeviceIfNoneSelected();
 
 		HelpMenu::CostMultiplier = 1;
+		HelpMenu::SetCostGrowthType( CostGrowthTypes_None );
 
         CurrentId = GameId_Level;
         CurrentScore = 0;

@@ -6,6 +6,8 @@
 namespace CloudberryKingdom
 {
 
+	enum CostGrowthTypes { CostGrowthTypes_None, CostGrowthTypes_DoublePerBuy };
+
 	struct HelpMenu : public CkBaseMenu
 	{
 
@@ -217,8 +219,17 @@ namespace CloudberryKingdom
 		virtual bool MenuReturnToCaller( const boost::shared_ptr<Menu> &menu );
 
 	
+		static CostGrowthTypes CostGrowthType;
+		static int Cost_Multiplier_Watch, Cost_Multiplier_Path, Cost_Multiplier_Slow;
+
+		static void SetCostGrowthType(CostGrowthTypes type);
+
+		static int CurrentCostTo_Watch();
+		static int CurrentCostTo_Slow();
+		static int CurrentCostTo_Path();
+
 		static int CostMultiplier;
-		int Cost_Watch, Cost_Path, Cost_Slow;
+		static int Cost_Watch, Cost_Path, Cost_Slow;
 		bool Allowed_WatchComputer();
 
 		void WatchComputer();

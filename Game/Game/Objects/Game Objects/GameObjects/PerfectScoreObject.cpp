@@ -69,6 +69,7 @@ namespace CloudberryKingdom
 
 		MyGame->OnCoinGrab->Add( boost::make_shared<OnCoinGrabProxy>( boost::static_pointer_cast<PerfectScoreObject>( shared_from_this() ) ) );
 		MyGame->OnLevelRetry->Add( boost::make_shared<OnLevelRetryProxy>( boost::static_pointer_cast<PerfectScoreObject>( shared_from_this() ) ) );
+		MyGame->OnWatchComputer->Add( boost::make_shared<OnLevelRetryProxy>( boost::static_pointer_cast<PerfectScoreObject>( shared_from_this() ) ) );
 
 		OnAdd_GUI();
 	}

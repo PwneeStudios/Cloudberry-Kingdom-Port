@@ -350,6 +350,11 @@ namespace CloudberryKingdom
 			piece->MyUpgrades1->Get( Upgrade_SPEED ) = CoreMath::Lerp(piece->MyUpgrades1->Get( Upgrade_SPEED ), 10.0f, s);
 		}
 
+		if ( boost::dynamic_pointer_cast< BobPhsxInvert >( hero ) != 0 )
+		{
+			piece->MyUpgrades1->Get( Upgrade_BOUNCY_BLOCK ) /= 4.5f;
+		}
+
 		piece->StandardClose();
 	}
 

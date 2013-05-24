@@ -136,6 +136,7 @@ namespace CloudberryKingdom
 		Challenge::Start( StartLevel );
 
 		PlayerManager::setCoinsSpent( -100 );
+		HelpMenu::SetCostGrowthType( CostGrowthTypes_DoublePerBuy );
 
 		i = StartIndex = StartLevel;
 
