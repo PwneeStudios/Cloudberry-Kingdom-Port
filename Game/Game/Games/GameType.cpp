@@ -9,6 +9,12 @@
 
 #include <MasterHack.h>
 
+// Force reset the game after the demo has ended.  Defined in CoreWiiU.cpp.
+extern bool DemoEndResetOverride;
+
+// Is player 0 holding the down button? Defined in GamePadWiiU.cpp.
+extern bool GLOBAL_PLAYER0_DOWN;
+
 namespace CloudberryKingdom
 {
 
@@ -1139,13 +1145,21 @@ namespace CloudberryKingdom
 		// Digital day
 		if ( CloudberryKingdomGame::DigitalDayBuild )
 		{
-			bool a = ButtonCheck::State( ControllerButtons_B, -2 ).Down;
-			bool b = ButtonCheck::State( ControllerButtons_BACK, -2 ).Down;
-			bool c = ButtonCheck::GetDir( -2 ).Y < 0.5f;
+			bool a = ButtonCheck::State( ControllerButtons_B, 0 ).Down;
+			bool b = ButtonCheck::State( ControllerButtons_BACK, 0 ).Down;
+			bool c = GLOBAL_PLAYER0_DOWN;//ButtonCheck::GetDir( 0 ).Y < -0.5f;
 
 #ifdef CAFE
 			//OSReport( "A: %d -: %d DPAD: %f\n", a, b, ButtonCheck::GetDir( -2 ).Y );
 #endif
+			if( DemoEndResetOverride )
+			{
+				a = true;
+				b = true;
+				c = true;
+				XButtonPressCount = 181;
+				DemoEndResetOverride = false;
+			}
 
 			if ( a && b && c )
 			{	
@@ -1153,7 +1167,31 @@ namespace CloudberryKingdom
 
 				if ( XButtonPressCount > 180 )
 				{
+					Tools::SongWad->Stop();
+
 					WatermarkDisabledBySoftwareReset = true;
+
+					CharacterSelectManager::IsShowing = false;
+					CharacterSelectManager::FakeHide = false;
+
+					for ( int i = 0; i < 4; i++ )
+					{
+						if ( CharacterSelectManager::CharSelect[i] != 0 )
+						{
+							CharacterSelectManager::CharSelect[i]->Release();
+							CharacterSelectManager::CharSelect[i].reset();
+						}
+					}
+
+					boost::shared_ptr<GameData> game = Tools::CurGameData;
+
+					game->KillToDo( std::wstring( L"StartCharSelect" ) );
+
+					game->RemoveGameObjects( GameObject::Tag_CHAR_SELECT );
+					if ( CharacterSelectManager::Backdrop != 0 ) CharacterSelectManager::Backdrop->Release();
+
+					CharacterSelectManager::OnDone.reset();
+					CharacterSelectManager::ParentPanel.reset();
 
 					// Start at Screen Saver
 					boost::shared_ptr<ScreenSaver> Intro = boost::make_shared<ScreenSaver>();

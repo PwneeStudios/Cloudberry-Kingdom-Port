@@ -49,6 +49,7 @@ CoreWiiU &CoreWiiU::operator = ( const CoreWiiU &rhs )
 static u8 *ErrorViewerWorkArea = NULL;
 extern FSClient *GLOBAL_FSClient;
 bool ReEnableHomeButton = false;
+bool DemoEndResetOverride = false;
 
 u32 HomeButtonDeniedCallback( void *context )
 {
@@ -455,7 +456,19 @@ int CoreWiiU::Run()
 				nn::erreula::AppearArg appearArg;
 				appearArg.setControllerType( nn::erreula::cControllerType_Remo0 );
 				appearArg.setScreenType( nn::erreula::cScreenType_Dual );
-				appearArg.setErrorCode( currentErrorCode );
+
+				if( currentErrorCode != 0xDEADBEEF )
+				{
+					appearArg.setErrorCode( currentErrorCode );
+				}
+				else
+				{
+					appearArg.setErrorType( nn::erreula::cErrorType_TextBtn );
+					appearArg.setButtonString( L"OK!" );
+					appearArg.setMainTextString( L"You have reached the end of the demo! Thank you for playing!" );
+					appearArg.setTitleString( L"You Win!" );
+				}                              
+				
 				nn::erreula::AppearErrorViewer( appearArg );
 				//viewerVisible = true;
 			}
@@ -511,6 +524,10 @@ int CoreWiiU::Run()
 					s32 error = SYSLaunchSettings( &cpArgs );
 					LOG_WRITE( "SYSLaunchSettings returned %d\n", error );
 					/*DEMOStopRunning();*/
+				}
+				else if( currentErrorCode == 0xDEADBEEF )
+				{
+					DemoEndResetOverride = true;
 				}
 
 				if( nn::erreula::GetStateErrorViewer() == nn::erreula::cState_Display )

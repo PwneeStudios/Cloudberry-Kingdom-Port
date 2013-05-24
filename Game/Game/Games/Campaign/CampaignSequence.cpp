@@ -8,7 +8,7 @@
 #include <Hacks/String.h>
 #include <Core\Tools\Set.h>
 #include "Hacks/List.h"
-
+#include <Utility/Error.h>
 #include <Game\Video.h>
 
 namespace CloudberryKingdom
@@ -185,6 +185,11 @@ namespace CloudberryKingdom
 					{
 						HelpMenu::CostMultiplier = __max( kv->first + 1, HelpMenu::CostMultiplier );
 					}
+				}
+
+				if( Num == 51 )
+				{
+					DisplayError( ErrorType( 0xDEADBEEF ) );
 				}
 			}
 		}

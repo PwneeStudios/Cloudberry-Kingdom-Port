@@ -68,12 +68,14 @@ void MediaPlayer::Play( const boost::shared_ptr<Song> &song )
 	FMOD_RESULT result;
 	/*result = FMODSystem->playSound( CurrentChannel ? FMOD_CHANNEL_REUSE : FMOD_CHANNEL_FREE,
 		song->internal_->Song, true, &CurrentChannel );*/
+	
 	result = FMOD_System_PlaySound( FMODSystem, CurrentChannel ? FMOD_CHANNEL_REUSE : FMOD_CHANNEL_REUSE,
 		song->internal_->Song, true, &CurrentChannel );
 
 	if( result != FMOD_OK )
+	{
 		LOG_WRITE( "Failed to play song.\n" );
-
+	}
 	//CurrentChannel->setVolume( Volume );
 	FMOD_Channel_SetVolume( CurrentChannel, Volume );
 	FMOD_WiiU_SetControllerSpeaker( CurrentChannel, FMOD_WIIU_CONTROLLER_TV | FMOD_WIIU_CONTROLLER_DRC );
