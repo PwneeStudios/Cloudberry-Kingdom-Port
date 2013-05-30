@@ -9,6 +9,10 @@
 #include <np.h>
 #include <sys/ppu_thread.h>
 #include <Utility/NetworkPS3.h>
+
+#include <locale.h>
+#include <sstream>
+#include <iomanip>
 #endif
 
 namespace CloudberryKingdom
@@ -493,6 +497,22 @@ namespace CloudberryKingdom
 	{
 	}
 
+#ifdef PS3
+	class CommaNumpunct : public ::std::numpunct< wchar_t >
+	{
+	protected:
+		virtual wchar_t do_thousands_sep() const
+		{
+			return L',';
+		}
+
+		virtual ::std::string do_grouping() const
+		{
+			return "\03";
+		}
+	};
+#endif
+
     LeaderboardItem::LeaderboardItem( OnlineGamer Player, int Val, int Rank )
     {
         this->Player = Player;
@@ -508,7 +528,18 @@ namespace CloudberryKingdom
         else
         {
             this->GamerTag = Player.GamerTag;
+
+#ifdef PS3
+			static CommaNumpunct commaNumpunct;
+			static std::locale commaLocale( std::locale(), &commaNumpunct );
+
+			std::wstringstream wss;
+			wss.imbue( commaLocale );
+			wss << Val;
+			this->Val = wss.str();
+#else
             this->Val = ToString( Val );
+#endif
 
             float width = Tools::QDrawer->MeasureString( Resources::Font_Grobold42->HFont, GamerTag ).X;
             if ( width > 850.0f )
@@ -542,11 +573,11 @@ namespace CloudberryKingdom
         {
             Tools::QDrawer->DrawString( Resources::Font_Grobold42->HOutlineFont, Rank, Pos, ocolor, Size );
             Tools::QDrawer->DrawString( Resources::Font_Grobold42->HOutlineFont, GamerTag, Pos + GamerTag_Offset, ocolor, scale * Size );
-            Tools::QDrawer->DrawString( Resources::Font_Grobold42->HOutlineFont, Val, Pos + Val_Offset, ocolor, Size );
+            Tools::QDrawer->DrawString( Resources::Font_Grobold42->HOutlineFont, Val, Pos + Val_Offset, ocolor, Size, true );
         }
 
         Tools::QDrawer->DrawString( Resources::Font_Grobold42->HFont, Rank, Pos, color, Size );
         Tools::QDrawer->DrawString( Resources::Font_Grobold42->HFont, GamerTag, Pos + GamerTag_Offset, color, scale * Size );
-        Tools::QDrawer->DrawString( Resources::Font_Grobold42->HFont, Val, Pos + Val_Offset, color, Size );
+        Tools::QDrawer->DrawString( Resources::Font_Grobold42->HFont, Val, Pos + Val_Offset, color, Size, true );
     }
 }

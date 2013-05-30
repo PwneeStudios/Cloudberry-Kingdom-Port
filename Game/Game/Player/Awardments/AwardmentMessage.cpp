@@ -109,6 +109,7 @@ namespace CloudberryKingdom
 
 		if ( ShouldDie() )
 		{
+			PreventInputOnReturnToCaller = false;
 			ReturnToCaller( false );
 			setPauseLevel( false );
 		}
