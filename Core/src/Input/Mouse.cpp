@@ -1,13 +1,13 @@
 #include <Input/Mouse.h>
 
-#if defined( CAFE ) || defined( PS3 )
+#if defined( CAFE ) || defined( PS3 ) || defined( VITA )
 #else
 	#include <GL/glfw.h>
 #endif
 
 void Mouse::SetPosition( int x, int y )
 {
-#if defined( CAFE ) || defined( PS3 )
+#if defined( CAFE ) || defined( PS3 ) || defined( VITA )
 #else
 	glfwSetMousePos( x, y );
 #endif
@@ -17,7 +17,7 @@ MouseState Mouse::GetState()
 {
 	MouseState ms;
 
-#if defined( CAFE ) || defined( PS3 )
+#if defined( CAFE ) || defined( PS3 ) || defined( VITA )
 #else
 	glfwGetMousePos( &ms.X, &ms.Y );
 	ms.ScrollWheelValue = glfwGetMouseWheel();

@@ -1,7 +1,7 @@
 #ifndef PWNEE_ASSERT
 #define PWNEE_ASSERT
 
-#if defined( CAFE ) || defined( PS3 )
+#if defined( CAFE ) || defined( PS3 ) || defined( VITA )
 
 	#include <cassert>
 

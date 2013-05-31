@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Cloudberry_Vita", "Cloudberry_Vita.vcxproj", "{E60776B6-A66C-4743-BA01-056A0B4D4640}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|PSVita = Debug|PSVita
+		Release|PSVita = Release|PSVita
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E60776B6-A66C-4743-BA01-056A0B4D4640}.Debug|PSVita.ActiveCfg = Debug|PSVita
+		{E60776B6-A66C-4743-BA01-056A0B4D4640}.Debug|PSVita.Build.0 = Debug|PSVita
+		{E60776B6-A66C-4743-BA01-056A0B4D4640}.Release|PSVita.ActiveCfg = Release|PSVita
+		{E60776B6-A66C-4743-BA01-056A0B4D4640}.Release|PSVita.Build.0 = Release|PSVita
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -8,6 +8,8 @@ std::wstring FormatWithSeparators( int i )
 	//wss.imbue( std::locale( "en_US.UTF-8" ) );
 #ifdef PS3
 	wss.imbue( std::locale( "C" ) );
+#elif defined( VITA )
+	// FIXME: Something should probably go here.
 #else
 	wss.imbue( std::locale( "" ) ); // This should using the local culture's version of number formating. Test it?
 #endif

@@ -570,7 +570,7 @@ namespace boost{
 // When BOOST_NO_STD_TYPEINFO is defined, we can just import
 // the global definition into std namespace:
 // FIXME: PLEASE!
-#ifdef PS3
+#if defined( PS3 ) || defined( VITA )
 	#undef BOOST_NO_STD_TYPEINFO
 #endif
 #if defined(BOOST_NO_STD_TYPEINFO) && defined(__cplusplus)

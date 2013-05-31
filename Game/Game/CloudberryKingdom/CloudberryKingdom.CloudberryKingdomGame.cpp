@@ -98,6 +98,8 @@ namespace CloudberryKingdom
 	const bool FinalRelease = true;
 #elif XBOX
 	const bool FinalRelease = true;
+#elif VITA
+	const bool FinalRelease = false;
 #endif
 
 	bool CloudberryKingdomGame::DigitalDayBuild = false;

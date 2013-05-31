@@ -1,7 +1,7 @@
 #include <Input/Keyboard.h>
 #include <Input/KeyboardState.h>
 
-#if defined( CAFE ) || defined( PS3 )
+#if defined( CAFE ) || defined( PS3 ) || defined( VITA )
 #else
 
 #include <GL/glfw.h>
@@ -273,7 +273,7 @@ KeyboardState Keyboard::currentState_;
 
 void Keyboard::Update()
 {
-#if defined( CAFE ) || defined( PS3 )
+#if defined( CAFE ) || defined( PS3 ) || defined( VITA )
 #else
 	for( int i = 0; i < 256; ++i )
 		currentState_.keyState_[ i ] = XnaToGlfw[ i ] ? glfwGetKey( XnaToGlfw[ i ] ) == GLFW_PRESS : false;

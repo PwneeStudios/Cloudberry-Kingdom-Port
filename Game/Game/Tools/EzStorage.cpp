@@ -18,8 +18,8 @@
 #include <sysutil/sysutil_gamecontent.h>
 #include <np.h>
 
-//#define SCEA
-#define SCEE
+#define SCEA
+//#define SCEE
 
 #if	  defined(SCEA)
 	#define AUTOSAVEDATA_DIRNAME "NPUB31177-AUTO"
@@ -94,6 +94,10 @@ void SaveAllOnExit()
 	}
 }
 
+#endif
+
+#if defined( VITA )
+#include <Utility/Save.h>
 #endif
 
 #if defined( CAFE ) || defined( PS3 )

@@ -1,0 +1,3602 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;cc;s;asm</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="boost_shared_ptr\boost\config\abi\borland_prefix.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\abi\borland_suffix.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\abi\msvc_prefix.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\abi\msvc_suffix.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\compiler\borland.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\compiler\clang.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\compiler\codegear.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\compiler\comeau.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\compiler\common_edg.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\compiler\compaq_cxx.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\compiler\cray.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\compiler\digitalmars.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\compiler\gcc.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\compiler\gcc_xml.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\compiler\greenhills.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\compiler\hp_acc.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\compiler\intel.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\compiler\kai.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\compiler\metrowerks.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\compiler\mpw.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\compiler\nvcc.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\compiler\pathscale.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\compiler\pgi.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\compiler\sgi_mipspro.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\compiler\sunpro_cc.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\compiler\vacpp.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\compiler\visualc.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\no_tr1\cmath.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\no_tr1\complex.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\no_tr1\functional.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\no_tr1\memory.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\no_tr1\utility.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\platform\aix.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\platform\amigaos.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\platform\beos.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\platform\bsd.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\platform\cray.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\platform\cygwin.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\platform\hpux.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\platform\irix.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\platform\linux.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\platform\macos.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\platform\qnxnto.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\platform\solaris.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\platform\symbian.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\platform\vms.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\platform\vxworks.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\platform\win32.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\stdlib\dinkumware.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\stdlib\libcomo.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\stdlib\libcpp.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\stdlib\libstdcpp3.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\stdlib\modena.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\stdlib\msl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\stdlib\roguewave.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\stdlib\sgi.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\stdlib\stlport.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\stdlib\vacpp.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\abi_prefix.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\abi_suffix.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\auto_link.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\posix_features.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\requires_threads.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\select_compiler_config.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\select_platform_config.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\select_stdlib_config.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\suffix.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\user.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config\warning_disable.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\detail\interlocked.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\detail\lightweight_mutex.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\detail\sp_typeinfo.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\detail\workaround.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\exception\detail\attribute_noreturn.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\exception\exception.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\aux_\config\adl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\aux_\config\arrays.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\aux_\config\ctps.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\aux_\config\dtp.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\aux_\config\eti.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\aux_\config\gcc.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\aux_\config\integral.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\aux_\config\intel.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\aux_\config\lambda.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\aux_\config\msvc.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\aux_\config\nttp.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\aux_\config\overload_resolution.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\aux_\config\preprocessor.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\aux_\config\static_constant.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\aux_\config\ttp.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\aux_\config\workaround.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\aux_\preprocessor\def_params_tail.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\aux_\preprocessor\enum.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\aux_\preprocessor\filter_params.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\aux_\preprocessor\params.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\aux_\preprocessor\sub.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\aux_\preprocessor\tuple.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\aux_\adl_barrier.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\aux_\arity.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\aux_\integral_wrapper.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\aux_\lambda_arity_param.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\aux_\lambda_support.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\aux_\na.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\aux_\na_fwd.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\aux_\na_spec.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\aux_\nttp_decl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\aux_\static_cast.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\aux_\template_arity_fwd.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\aux_\value_wknd.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\aux_\yes_no.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\limits\arity.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\bool.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\bool_fwd.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\if.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\int.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\int_fwd.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\integral_c.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\integral_c_fwd.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\integral_c_tag.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\lambda_fwd.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\size_t.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\size_t_fwd.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\mpl\void_fwd.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\arithmetic\add.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\arithmetic\dec.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\arithmetic\inc.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\arithmetic\sub.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\array\data.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\array\elem.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\array\size.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\config\config.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\control\detail\dmc\while.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\control\detail\edg\while.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\control\detail\msvc\while.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\control\detail\while.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\control\expr_iif.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\control\if.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\control\iif.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\control\while.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\debug\error.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\detail\dmc\auto_rec.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\detail\auto_rec.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\detail\check.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\detail\is_binary.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\facilities\empty.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\facilities\identity.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\facilities\overload.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\iteration\detail\bounds\lower1.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\iteration\detail\bounds\lower2.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\iteration\detail\bounds\lower3.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\iteration\detail\bounds\lower4.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\iteration\detail\bounds\lower5.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\iteration\detail\bounds\upper1.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\iteration\detail\bounds\upper2.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\iteration\detail\bounds\upper3.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\iteration\detail\bounds\upper4.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\iteration\detail\bounds\upper5.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\iteration\detail\iter\forward1.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\iteration\detail\iter\forward2.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\iteration\detail\iter\forward3.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\iteration\detail\iter\forward4.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\iteration\detail\iter\forward5.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\iteration\detail\iter\reverse1.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\iteration\detail\iter\reverse2.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\iteration\detail\iter\reverse3.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\iteration\detail\iter\reverse4.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\iteration\detail\iter\reverse5.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\iteration\detail\finish.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\iteration\detail\local.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\iteration\detail\rlocal.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\iteration\detail\self.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\iteration\detail\start.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\iteration\iterate.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\iteration\local.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\iteration\self.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\list\detail\dmc\fold_left.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\list\detail\edg\fold_left.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\list\detail\edg\fold_right.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\list\detail\fold_left.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\list\detail\fold_right.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\list\adt.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\list\append.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\list\fold_left.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\list\fold_right.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\list\for_each_i.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\list\reverse.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\list\transform.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\logical\and.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\logical\bitand.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\logical\bool.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\logical\compl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\punctuation\comma.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\punctuation\comma_if.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\repetition\detail\dmc\for.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\repetition\detail\edg\for.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\repetition\detail\msvc\for.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\repetition\detail\for.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\repetition\enum_params.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\repetition\for.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\repetition\repeat.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\slot\detail\counter.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\slot\detail\def.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\slot\detail\shared.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\slot\detail\slot1.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\slot\detail\slot2.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\slot\detail\slot3.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\slot\detail\slot4.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\slot\detail\slot5.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\slot\slot.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\tuple\eat.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\tuple\elem.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\tuple\rem.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\tuple\to_list.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\variadic\elem.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\variadic\size.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\cat.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\comma_if.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\empty.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\enum_params.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\identity.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\inc.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\iterate.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\preprocessor\repeat.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\detail\atomic_count.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\detail\atomic_count_gcc.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\detail\atomic_count_gcc_x86.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\detail\atomic_count_pthreads.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\detail\atomic_count_sync.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\detail\atomic_count_win32.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\detail\lightweight_mutex.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\detail\lwm_nop.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\detail\lwm_pthreads.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\detail\lwm_win32_cs.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\detail\operator_bool.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\detail\quick_allocator.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\detail\shared_count.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\detail\shared_ptr_nmt.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\detail\sp_convertible.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\detail\sp_counted_base.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\detail\sp_counted_base_acc_ia64.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\detail\sp_counted_base_cw_ppc.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\detail\sp_counted_base_gcc_ia64.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\detail\sp_counted_base_gcc_mips.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\detail\sp_counted_base_gcc_ppc.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\detail\sp_counted_base_gcc_sparc.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\detail\sp_counted_base_gcc_x86.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\detail\sp_counted_base_nt.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\detail\sp_counted_base_pt.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\detail\sp_counted_base_spin.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\detail\sp_counted_base_sync.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\detail\sp_counted_base_vacpp_ppc.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\detail\sp_counted_base_w32.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\detail\sp_counted_impl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\detail\sp_has_sync.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\detail\spinlock.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\detail\spinlock_gcc_arm.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\detail\spinlock_nt.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\detail\spinlock_pool.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\detail\spinlock_pt.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\detail\spinlock_sync.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\detail\spinlock_w32.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\detail\yield_k.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\bad_weak_ptr.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\enable_shared_from_this.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\make_shared.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\shared_ptr.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\smart_ptr\weak_ptr.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\detail\bool_trait_def.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\detail\bool_trait_undef.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\detail\cv_traits_impl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\detail\false_result.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\detail\ice_and.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\detail\ice_eq.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\detail\ice_not.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\detail\ice_or.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\detail\is_function_ptr_helper.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\detail\is_function_ptr_tester.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\detail\is_mem_fun_pointer_impl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\detail\is_mem_fun_pointer_tester.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\detail\size_t_trait_def.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\detail\size_t_trait_undef.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\detail\template_arity_spec.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\detail\type_trait_def.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\detail\type_trait_undef.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\detail\wrap.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\detail\yes_no_type.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\msvc\remove_bounds.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\msvc\remove_cv.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\msvc\remove_reference.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\msvc\typeof.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\add_reference.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\add_rvalue_reference.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\alignment_of.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\broken_compiler_spec.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\config.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\ice.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\integral_constant.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\intrinsics.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\is_abstract.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\is_arithmetic.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\is_array.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\is_class.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\is_const.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\is_convertible.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\is_enum.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\is_float.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\is_function.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\is_integral.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\is_lvalue_reference.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\is_member_function_pointer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\is_member_pointer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\is_pod.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\is_pointer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\is_polymorphic.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\is_reference.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\is_rvalue_reference.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\is_same.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\is_scalar.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\is_union.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\is_void.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\is_volatile.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\remove_bounds.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\remove_cv.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\remove_reference.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type_traits\type_with_alignment.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\assert.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\checked_delete.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\config.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\current_function.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\enable_shared_from_this.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\make_shared.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\memory_order.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\non_type.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\shared_ptr.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\static_assert.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\throw_exception.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\type.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boost_shared_ptr\boost\version.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Architecture\Job.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Architecture\Scheduler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Architecture\Singleton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Audio\AudioEnums.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Audio\MediaPlayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Audio\Song.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Audio\SoundEffect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Content\File.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Content\Filesystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Content\Font.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Content\Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Content\ResourcePtr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Content\Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Content\Sound.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Content\Wad.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Datastructures\Freelist.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Graphics\Color.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Graphics\Effect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Graphics\EffectPass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Graphics\EffectParameter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Graphics\EffectTechnique.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Graphics\QuadDrawer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Graphics\TextDrawer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Graphics\Types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Graphics\Video.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Graphics\VideoPlayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Graphics\Texture2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Graphics\RenderTarget2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Graphics\QuadDrawerPc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Graphics\QuadDrawerPS3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Graphics\QuadDrawerWiiU.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Input\GamePad.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Input\GamePadButtons.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Input\GamePadDPad.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Input\GamePadState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Input\GamePadTriggers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Input\GamePadThumbSticks.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Input\Input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Input\InputEnums.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Input\Keyboard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Input\KeyboardState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Input\Mouse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Input\MouseState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Math\Vectors.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Utility\ConsoleInformation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Utility\Error.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Utility\Limits.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Utility\Log.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Utility\Mutex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Utility\Save.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Core.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\ForwardDeclarations.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\GameLoop.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\PwneeAssert.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Animation\AnimationData_Integer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Animation\AnimationData_Vector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Animation\AnimQueue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Animation\SpriteAnim.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Effects\EzEffect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Effects\EzEffectWad.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Graphics\Draw\Object\ObjectBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Graphics\Draw\Object\ObjectClass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Graphics\Draw\Quads\BaseQuad.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Graphics\Draw\Quads\ObjectVector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Graphics\Draw\Quads\PieceQuad.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Graphics\Draw\Quads\Quad.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Graphics\Draw\Quads\QuadClass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Graphics\Draw\Simple\BasePoint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Graphics\Draw\Simple\SimpleBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Graphics\Draw\Simple\SimpleObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Graphics\Draw\Simple\SimpleQuad.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Graphics\Draw\Simple\SimpleVector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Graphics\Draw\DrawPile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Graphics\MainRender.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Graphics\QuadDrawer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Graphics\VertexFormat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Input\ButtonCheck.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Lambdas\Lambda.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Lambdas\Lambda_1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Lambdas\Lambda_2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Lambdas\LambdaFunc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Lambdas\LambdaFunc_1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Lambdas\LambdaFunc_2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Lambdas\Multicaster.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Lambdas\Multicaster_1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Lambdas\Multicaster_2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Particle Effects\Specific Effects\CloudberryKingdom.ParticleEffects.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Particle Effects\Particle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Particle Effects\ParticleEmitter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Song\EzSong.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Song\EzSongWad.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Sound\EzSound.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Sound\EzSoundWad.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Text\EzFont.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Text\EzText.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Texture\EzTexture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Texture\EzTextureWad.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Texture\PackedTexture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Texture\TextureOrAnim.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Tools\ColorHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Tools\CoreMath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Tools\Random.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Tools\Set.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Chunk.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\FancyColor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\FancyVector2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\PhsxData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\ResolutionGroup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\Version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core\WriteReadTools.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\CloudberryKingdom\CloudberryKingdom.CloudberryKingdomGame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Collision Detection\AABox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Collision Detection\Circle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Collision Detection\FloatRectangle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Collision Detection\Line.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Collision Detection\Phsx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Games\Campaign\CampaignSequence.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Games\Campaign\FadeIn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Games\Campaign\LevelSequence.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Games\Meta Games\Arcade Games\Escalate\Escalation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Games\Meta Games\Arcade Games\Escalate\Escalation_Tutorial.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Games\Meta Games\Arcade Games\Rush\Hero Rush\HeroRush.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Games\Meta Games\Arcade Games\Rush\Hero Rush\HeroRush_Tutorial.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Games\Meta Games\Arcade Games\Rush\Hero Rush 2\HeroRush2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Games\Meta Games\Arcade Games\Rush\Hero Rush 2\HeroRush2_Tutorial.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Games\Meta Games\Arcade Games\Rush\Time Crisis\TimeCrisis.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Games\Meta Games\Arcade Games\Rush\Time Crisis\TimeCrisis_Tutorial.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Games\Meta Games\Arcade Games\Rush\CoinMod.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Games\Meta Games\Arcade Games\Rush\Rush.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Games\Meta Games\Arcade Games\HeroFactory_Escalation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Games\Meta Games\Challenges\_Regular.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Games\Meta Games\Challenges\Challenge_Base.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Games\Meta Games\StringWorlds\LevelConnector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Games\Meta Games\StringWorlds\StringWorld.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Games\Meta Games\StringWorlds\StringWorld_Endurance.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Games\Meta Games\StringWorlds\StringWorld_Timed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Games\ActionGame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Games\CampaignHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Games\GameType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Games\NormalGame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Games\ScreenSaver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Games\ToDoItem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Games\TutorialHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Level\Make\MakePiece\MakeSingle\MakeFinalDoor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Level\Make\MakePiece\MakeSingle\MakeFinalDoor_Float.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Level\Make\MakePiece\MakeVertical\MakeDarkBottom.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Level\Make\MakePiece\MakeVertical\MakeFinalDoor_Vertical.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Level\Make\MakePiece\MakeThing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Level\Make\Parameters\StyleData\BigData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Level\Make\Parameters\StyleData\DownData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Level\Make\Parameters\StyleData\OneScreenData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Level\Make\Parameters\StyleData\SingleData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Level\Make\Parameters\StyleData\StyleData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Level\Make\Parameters\StyleData\UpData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Level\Make\Parameters\LevelGenData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Level\Make\Parameters\Param.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Level\Make\Parameters\PresetDifficulties.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Level\Make\Parameters\RandomDifficulty.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Level\Make\Parameters\Upgrades.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Level\Make\Tools\Tunnel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Level\Make\ComputerRecording.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Level\Make\DifficultyGroups.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Level\Make\DifficultyHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Level\Make\Generators.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Level\Make\LevelSeedData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Level\Make\LockableBool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Level\Make\PieceSeedData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Level\Replays\Recording.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Level\Replays\ReplayGUI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Level\Replays\SwarmBundle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Level\Replays\SwarmRecord.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Level\ClosingCircle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Level\Level.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Level\LevelPiece.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\CharacterSelect\ArrowMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\CharacterSelect\Backdrop.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\CharacterSelect\CharacterSelect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\CharacterSelect\CharSelectManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\CharacterSelect\ColorSelect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\CharacterSelect\CustomizeMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\CharacterSelect\Doll.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\CharacterSelect\GamerTag.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\CharacterSelect\HeroLevel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\CharacterSelect\JoinText.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\CharacterSelect\SignInChoiceMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\CharacterSelect\SimpleMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\CharacterSelect\Waiting.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Help\HelpBlurb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Help\HelpMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Help\HintBlurb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Help\HintGiver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\InGameStartMenus\Sub Menus\ControlScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\InGameStartMenus\Sub Menus\CustomControls.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\InGameStartMenus\Sub Menus\LoadSeedAs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\InGameStartMenus\Sub Menus\SaveLoadSeedMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\InGameStartMenus\Sub Menus\SaveSeedAs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\InGameStartMenus\Verify\AlertBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\InGameStartMenus\Verify\VerifyBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\InGameStartMenus\Verify\VerifyDeleteSeeds.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\InGameStartMenus\Verify\VerifyQuitLevel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\InGameStartMenus\Verify\VerifyRemove.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\InGameStartMenus\InGameStartMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Loading Screen\ILoadingScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Loading Screen\Loading.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Loading Screen\LoadingScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Score Screens\ScoreDatabase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Score Screens\ScoreEntry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Score Screens\ScoreList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Score Screens\ScoreScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Score Screens\StatsScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Title Screen\Arcade\Hero Select\HeroDoll.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Title Screen\Arcade\Hero Select\HeroSelectOptions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Title Screen\Arcade\Hero Select\StartMenu_MW_HeroSelect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Title Screen\Arcade\ArcadeMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Title Screen\Arcade\StartLevelMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Title Screen\Arcade\StartMenu_MW_Arcade.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Title Screen\Freeplay\CustomHero_GUI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Title Screen\Freeplay\CustomLevel_GUI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Title Screen\Freeplay\CustomUpgrades_GUI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Title Screen\Freeplay\LengthSlider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Title Screen\Freeplay\PhsxSlider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Title Screen\Freeplay\SavedSeedsGUI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Title Screen\Story\StartMenu_MW_Campaign.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Title Screen\Story\StartMenu_MW_Cinematics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Title Screen\Sub Menus\SoundMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Title Screen\Sub Menus\VerifyQuitGame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Title Screen\StartMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Title Screen\StartMenu_MW.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Backpanel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Black.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_CustomLevel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Exit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Options.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Pre.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_PressStart.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Simple.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Title Screen\TitleGame_MW.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\Title Screen\TitleGameBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Concrete Menus\ShopMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Menu Components\MenuItem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Menu Components\MenuList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Menu Components\MenuListAll.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Menu Components\MenuListExpand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Menu Components\MenuScrollBar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Menu Components\MenuSlider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Menu Components\MenuSliderBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Menu Components\MenuSliderNoSlide.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Menu Components\MenuToggle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Menu Components\ScrollBar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\CkBaseMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\LongMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\Menu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Menus\MiniMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Bob\Bob.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Bob\BobInput.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Bob\BobLink.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Door\Door.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Door\PressNote.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Game Objects\GameObjects\End\GameOverPanel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Game Objects\GameObjects\End\HighScorePanel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Game Objects\GameObjects\ChapterTitle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Game Objects\GameObjects\Cheer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Game Objects\GameObjects\CoinScoreMultiplierObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Game Objects\GameObjects\DoorIcon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Game Objects\GameObjects\ExplodeBobs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Game Objects\GameObjects\GUI_Blobs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Game Objects\GameObjects\GUI_Level.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Game Objects\GameObjects\GUI_Lives.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Game Objects\GameObjects\GUI_LivesLeft.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Game Objects\GameObjects\GUI_Multiplier.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Game Objects\GameObjects\GUI_NextLife.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Game Objects\GameObjects\GUI_Panel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Game Objects\GameObjects\GUI_Score.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Game Objects\GameObjects\GUI_Text.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Game Objects\GameObjects\GUI_TextBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Game Objects\GameObjects\GUI_Timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Game Objects\GameObjects\GUI_Timer_Base.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Game Objects\GameObjects\GUI_Timer_Simple.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Game Objects\GameObjects\Guide.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Game Objects\GameObjects\LevelTitle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Game Objects\GameObjects\Listener.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Game Objects\GameObjects\MultiplierUp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Game Objects\GameObjects\NewHero.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Game Objects\GameObjects\PerfectScoreObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Game Objects\GameObjects\Region.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Game Objects\GameObjects\Rumble.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Game Objects\GameObjects\SlowMo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Game Objects\GameObjects\SuperCheer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Game Objects\GameObjects\TimerWarning.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Game Objects\GameObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Game Objects\Template_GameObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\BaseClasses\_BoxDeath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\BaseClasses\_CircleDeath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\BaseClasses\_Death.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\BaseClasses\_LineDeath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\BaseClasses\_Obstacle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Blocks\Block.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Blocks\BouncyBlock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Blocks\BouncyBlock__Auto.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Blocks\Ceiling__Auto.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Blocks\Conveyor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Blocks\Conveyor__Auto.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Blocks\FallingBlock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Blocks\FallingBlock__Auto.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Blocks\GhostBlock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Blocks\GhostBlock__Auto.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Blocks\Lava.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Blocks\Lava_Castle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Blocks\MovingBlock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Blocks\MovingBlock__Auto.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Blocks\MovingPlatform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Blocks\NormalBlock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Blocks\NormalBlock__Auto.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Blocks\NormalBlockDraw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Blocks\Pendulum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Blocks\Pendulum__Auto.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Blocks\Wall.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Grab\Checkpoint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Grab\Coin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Grab\Coin__Auto.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Grab\MakeData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Obstacles\BlockEmitter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Obstacles\BlockEmitter__Auto.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Obstacles\Boulder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Obstacles\Boulder__Auto.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Obstacles\Cloud.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Obstacles\Cloud__Auto.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Obstacles\CloudberryKingdom.Fireball.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Obstacles\CloudberryKingdom.Firesnake.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Obstacles\Fireball__Auto.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Obstacles\Firesnake__Auto.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Obstacles\FireSpinner.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Obstacles\FireSpinner__Auto.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Obstacles\FlyingBlob.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Obstacles\FlyingBlob__Auto.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Obstacles\Laser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Obstacles\Laser__Auto.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Obstacles\LavaDrip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Obstacles\LavaDrip__Auto.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Obstacles\Serpent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Obstacles\Serpent__Auto.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Obstacles\Spike.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Obstacles\Spike__Auto.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Obstacles\SpikeyGuy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Obstacles\SpikeyGuy__Auto.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Obstacles\SpikeyLine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\In Game Objects\Obstacles\SpikeyLine__Auto.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Special\Arrow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Special\CameraZone.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Special\TextFloat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Special\TextList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Special\ZoneTrigger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\AutoGen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\IBounded.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\Icon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\IPrepareToDraw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Objects\ObjectBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Player\Awardments\Awardment.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Player\Awardments\AwardmentMessage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Player\Hero Physics\Base.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Player\Hero Physics\Big.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Player\Hero Physics\BobPhsxCharSelect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Player\Hero Physics\BobPhsxRandom.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Player\Hero Physics\Bouncy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Player\Hero Physics\Box.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Player\Hero Physics\Double.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Player\Hero Physics\Invert.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Player\Hero Physics\Jetman.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Player\Hero Physics\Meat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Player\Hero Physics\Normal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Player\Hero Physics\Rocketbox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Player\Hero Physics\Scale.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Player\Hero Physics\Small.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Player\Hero Physics\Spaceship.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Player\Hero Physics\Time.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Player\Hero Physics\TimeShip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Player\Hero Physics\Wheel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Player\Buyable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Player\Cape.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Player\ClrTextFx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Player\ColorScheme.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Player\ColorSchemeManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Player\Leaderboard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Player\LeaderboardView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Player\PlayerData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Player\PlayerManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Player\SavedSeeds.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Player\Stats.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Tilesets\Backgrounds\_Code\_code_Castle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Tilesets\Backgrounds\_Code\_code_Cave.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Tilesets\Backgrounds\_Code\_code_Cloud.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Tilesets\Backgrounds\_Code\_code_Forest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Tilesets\Backgrounds\_Code\_code_Hills.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Tilesets\Backgrounds\_Code\_code_Sea.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Tilesets\Backgrounds\_Code\CloudberryKingdom.Background.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Tilesets\Backgrounds\Background.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Tilesets\Backgrounds\BackgroundCollection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Tilesets\Backgrounds\BackgroundFloater.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Tilesets\Backgrounds\BackgroundFloater_Stationary.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Tilesets\Backgrounds\BackgroundFloaterList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Tilesets\Tilesets\CloudberryKingdom.TileSets.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Tilesets\BlockGroup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Tilesets\SpriteInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Tilesets\TileSet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Tilesets\TileSetInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Tools\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Tools\CkColorHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Tools\EzReader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Tools\EzStorage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Tools\Globals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Tools\IntVector2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Tools\Oscillate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Tools\Prototypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Tools\Recycler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Tools\Resources.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Tools\Tools.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Tools\Unset.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Tools\WrappedFloat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Localization.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game\Video.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\NET\BinaryReader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\NET\BinaryWriter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\NET\DateTime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\NET\Directory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\NET\File.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\NET\FileStream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\NET\IAsyncResult.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\NET\Path.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\NET\Random.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\NET\Stopwatch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\NET\Stream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\NET\StreamReader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\NET\StreamWriter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\NET\StringBuilder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\NET\Thread.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\NET\TimeSpan.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\NET\Tuple.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\XNA\ContentManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\XNA\DisplayMode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\XNA\Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\XNA\GameServiceContainer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\XNA\GameTime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\XNA\GraphicsDevice.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\XNA\GraphicsDeviceManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\XNA\PreparingDeviceSettingsEventArgs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\XNA\PresentationParameters.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\XNA\Rectangle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\XNA\SamplerState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\XNA\SignedInEventArgs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\XNA\SignedInGamer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\XNA\SpriteBatch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\XNA\SpriteFont.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\XNA\StorageContainer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\XNA\StorageDevice.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\XNA\Viewport.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\Clipboard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\Compare.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\Dict.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\FileReader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\FileWriter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\List.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\Parse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\Queue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Hacks\String.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\MainClass\XboxPC\CloudberryKingdom.XnaGameClass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\ResourceList\Resources_Art.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\ResourceList\Resources_Music.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\ResourceList\Resources_Sound.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\BoostBin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\CloudberryKingdom.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\enums.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\forward_declarations.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\global_header.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\MasterHack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Ratings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\SaveSeedSettings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\stringconverter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="boost_shared_ptr\libs\smart_ptr\src\sp_collector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="boost_shared_ptr\libs\smart_ptr\src\sp_debug_hooks.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\src\Content\File.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\src\Content\Filesystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\src\Content\Font.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\src\Content\Wad.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\src\Graphics\Color.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\src\Graphics\TextDrawer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\src\Graphics\Texture2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\src\Input\Input.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\src\Input\Keyboard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\src\Input\Mouse.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\src\Utility\Log.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\src\Core.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\src\PwneeAssert.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Animation\AnimationData_Integer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Animation\AnimationData_Vector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Animation\AnimQueue.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Animation\SpriteAnim.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Effects\EzEffect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Effects\EzEffectWad.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Graphics\Draw\Object\ObjectBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Graphics\Draw\Object\ObjectClass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Graphics\Draw\Quads\BaseQuad.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Graphics\Draw\Quads\ObjectVector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Graphics\Draw\Quads\PieceQuad.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Graphics\Draw\Quads\Quad.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Graphics\Draw\Quads\QuadClass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Graphics\Draw\Simple\BasePoint.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Graphics\Draw\Simple\SimpleBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Graphics\Draw\Simple\SimpleObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Graphics\Draw\Simple\SimpleQuad.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Graphics\Draw\Simple\SimpleVector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Graphics\Draw\DrawPile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Graphics\MainRender.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Graphics\QuadDrawer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Graphics\VertexFormat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Input\ButtonCheck.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Particle Effects\Specific Effects\CloudberryKingdom.ParticleEffects.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Particle Effects\Particle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Particle Effects\ParticleEmitter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Song\EzSong.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Song\EzSongWad.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Sound\EzSound.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Sound\EzSoundWad.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Text\EzFont.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Text\EzText.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Texture\EzTexture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Texture\EzTextureWad.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Texture\PackedTexture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Texture\TextureOrAnim.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Tools\ColorHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Tools\CoreMath.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Tools\Random.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Chunk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\FancyColor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\FancyVector2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\PhsxData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\ResolutionGroup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\Version.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core\WriteReadTools.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\CloudberryKingdom\CloudberryKingdom.CloudberryKingdomGame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Collision Detection\AABox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Collision Detection\Circle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Collision Detection\FloatRectangle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Collision Detection\Line.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Collision Detection\Phsx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Games\Campaign\CampaignSequence.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Games\Campaign\FadeIn.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Games\Campaign\LevelSequence.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Games\Meta Games\Arcade Games\Escalate\Escalation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Games\Meta Games\Arcade Games\Escalate\Escalation_Tutorial.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Games\Meta Games\Arcade Games\Rush\Hero Rush\HeroRush.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Games\Meta Games\Arcade Games\Rush\Hero Rush\HeroRush_Tutorial.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Games\Meta Games\Arcade Games\Rush\Hero Rush 2\HeroRush2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Games\Meta Games\Arcade Games\Rush\Hero Rush 2\HeroRush2_Tutorial.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Games\Meta Games\Arcade Games\Rush\Time Crisis\TimeCrisis.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Games\Meta Games\Arcade Games\Rush\Time Crisis\TimeCrisis_Tutorial.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Games\Meta Games\Arcade Games\Rush\CoinMod.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Games\Meta Games\Arcade Games\Rush\Rush.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Games\Meta Games\Arcade Games\HeroFactory_Escalation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Games\Meta Games\Challenges\_Regular.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Games\Meta Games\Challenges\Challenge_Base.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Games\Meta Games\StringWorlds\LevelConnector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Games\Meta Games\StringWorlds\StringWorld.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Games\Meta Games\StringWorlds\StringWorld_Endurance.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Games\Meta Games\StringWorlds\StringWorld_Timed.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Games\ActionGame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Games\CampaignHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Games\GameType.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Games\NormalGame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Games\ScreenSaver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Games\ToDoItem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Games\TutorialHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Level\Make\MakePiece\MakeSingle\MakeFinalDoor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Level\Make\MakePiece\MakeSingle\MakeFinalDoor_Float.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Level\Make\MakePiece\MakeVertical\MakeDarkBottom.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Level\Make\MakePiece\MakeVertical\MakeFinalDoor_Vertical.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Level\Make\Parameters\StyleData\BigData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Level\Make\Parameters\StyleData\DownData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Level\Make\Parameters\StyleData\OneScreenData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Level\Make\Parameters\StyleData\SingleData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Level\Make\Parameters\StyleData\StyleData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Level\Make\Parameters\StyleData\UpData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Level\Make\Parameters\LevelGenData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Level\Make\Parameters\Param.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Level\Make\Parameters\PresetDifficulties.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Level\Make\Parameters\RandomDifficulty.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Level\Make\Parameters\Upgrades.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Level\Make\Tools\Tunnel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Level\Make\ComputerRecording.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Level\Make\DifficultyGroups.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Level\Make\DifficultyHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Level\Make\Generators.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Level\Make\LevelSeedData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Level\Make\LockableBool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Level\Make\PieceSeedData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Level\Replays\Recording.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Level\Replays\ReplayGUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Level\Replays\SwarmBundle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Level\Replays\SwarmRecord.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Level\ClosingCircle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Level\Level.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Level\LevelPiece.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\CharacterSelect\ArrowMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\CharacterSelect\Backdrop.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\CharacterSelect\CharacterSelect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\CharacterSelect\CharSelectManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\CharacterSelect\ColorSelect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\CharacterSelect\CustomizeMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\CharacterSelect\Doll.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\CharacterSelect\GamerTag.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\CharacterSelect\HeroLevel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\CharacterSelect\JoinText.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\CharacterSelect\SignInChoiceMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\CharacterSelect\SimpleMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\CharacterSelect\Waiting.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Help\HelpBlurb.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Help\HelpMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Help\HintBlurb.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Help\HintGiver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\InGameStartMenus\Sub Menus\ControlScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\InGameStartMenus\Sub Menus\CustomControls.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\InGameStartMenus\Sub Menus\LoadSeedAs.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\InGameStartMenus\Sub Menus\SaveLoadSeedMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\InGameStartMenus\Sub Menus\SaveSeedAs.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\InGameStartMenus\Verify\AlertBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\InGameStartMenus\Verify\VerifyBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\InGameStartMenus\Verify\VerifyDeleteSeeds.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\InGameStartMenus\Verify\VerifyQuitLevel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\InGameStartMenus\Verify\VerifyRemove.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\InGameStartMenus\InGameStartMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Loading Screen\Loading.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Loading Screen\LoadingScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Score Screens\ScoreDatabase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Score Screens\ScoreEntry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Score Screens\ScoreList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Score Screens\ScoreScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Score Screens\StatsScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Title Screen\Arcade\Hero Select\HeroDoll.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Title Screen\Arcade\Hero Select\HeroSelectOptions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Title Screen\Arcade\Hero Select\StartMenu_MW_HeroSelect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Title Screen\Arcade\ArcadeMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Title Screen\Arcade\StartLevelMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Title Screen\Arcade\StartMenu_MW_Arcade.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Title Screen\Freeplay\CustomHero_GUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Title Screen\Freeplay\CustomLevel_GUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Title Screen\Freeplay\CustomUpgrades_GUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Title Screen\Freeplay\LengthSlider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Title Screen\Freeplay\PhsxSlider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Title Screen\Freeplay\SavedSeedsGUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Title Screen\Story\StartMenu_MW_Campaign.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Title Screen\Story\StartMenu_MW_Cinematics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Title Screen\Sub Menus\SoundMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Title Screen\Sub Menus\VerifyQuitGame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Title Screen\StartMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Title Screen\StartMenu_MW.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Backpanel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Black.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_CustomLevel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Exit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Options.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Pre.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_PressStart.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Simple.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Title Screen\TitleGame_MW.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Title Screen\TitleGameBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\ShopMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Menu Components\MenuItem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Menu Components\MenuList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Menu Components\MenuListAll.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Menu Components\MenuListExpand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Menu Components\MenuScrollBar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Menu Components\MenuSlider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Menu Components\MenuSliderBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Menu Components\MenuSliderNoSlide.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Menu Components\MenuToggle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Menu Components\ScrollBar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\CkBaseMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\LongMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Menu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\MiniMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Bob\Bob.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Bob\BobInput.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Bob\BobLink.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Door\Door.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Door\PressNote.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Game Objects\GameObjects\End\GameOverPanel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Game Objects\GameObjects\End\HighScorePanel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Game Objects\GameObjects\ChapterTitle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Game Objects\GameObjects\Cheer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Game Objects\GameObjects\CoinScoreMultiplierObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Game Objects\GameObjects\DoorIcon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Game Objects\GameObjects\ExplodeBobs.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Game Objects\GameObjects\GUI_Blobs.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Game Objects\GameObjects\GUI_Level.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Game Objects\GameObjects\GUI_Lives.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Game Objects\GameObjects\GUI_LivesLeft.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Game Objects\GameObjects\GUI_Multiplier.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Game Objects\GameObjects\GUI_NextLife.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Game Objects\GameObjects\GUI_Panel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Game Objects\GameObjects\GUI_Score.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Game Objects\GameObjects\GUI_Text.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Game Objects\GameObjects\GUI_TextBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Game Objects\GameObjects\GUI_Timer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Game Objects\GameObjects\GUI_Timer_Base.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Game Objects\GameObjects\GUI_Timer_Simple.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Game Objects\GameObjects\Guide.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Game Objects\GameObjects\LevelTitle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Game Objects\GameObjects\Listener.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Game Objects\GameObjects\MultiplierUp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Game Objects\GameObjects\NewHero.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Game Objects\GameObjects\PerfectScoreObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Game Objects\GameObjects\Region.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Game Objects\GameObjects\Rumble.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Game Objects\GameObjects\SlowMo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Game Objects\GameObjects\SuperCheer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Game Objects\GameObjects\TimerWarning.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Game Objects\GameObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Game Objects\Template_GameObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\BaseClasses\_BoxDeath.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\BaseClasses\_CircleDeath.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\BaseClasses\_Death.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\BaseClasses\_LineDeath.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\BaseClasses\_Obstacle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Blocks\Block.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Blocks\BouncyBlock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Blocks\BouncyBlock__Auto.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Blocks\Ceiling__Auto.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Blocks\Conveyor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Blocks\Conveyor__Auto.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Blocks\FallingBlock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Blocks\FallingBlock__Auto.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Blocks\GhostBlock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Blocks\GhostBlock__Auto.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Blocks\Lava.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Blocks\Lava_Castle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Blocks\MovingBlock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Blocks\MovingBlock__Auto.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Blocks\MovingPlatform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Blocks\NormalBlock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Blocks\NormalBlock__Auto.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Blocks\NormalBlockDraw.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Blocks\Pendulum.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Blocks\Pendulum__Auto.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Blocks\Wall.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Grab\Checkpoint.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Grab\Coin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Grab\Coin__Auto.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Grab\MakeData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Obstacles\BlockEmitter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Obstacles\BlockEmitter__Auto.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Obstacles\Boulder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Obstacles\Boulder__Auto.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Obstacles\Cloud.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Obstacles\Cloud__Auto.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Obstacles\CloudberryKingdom.Fireball.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Obstacles\CloudberryKingdom.Firesnake.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Obstacles\Fireball__Auto.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Obstacles\Firesnake__Auto.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Obstacles\FireSpinner.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Obstacles\FireSpinner__Auto.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Obstacles\FlyingBlob.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Obstacles\FlyingBlob__Auto.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Obstacles\Laser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Obstacles\Laser__Auto.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Obstacles\LavaDrip.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Obstacles\LavaDrip__Auto.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Obstacles\Serpent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Obstacles\Serpent__Auto.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Obstacles\Spike.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Obstacles\Spike__Auto.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Obstacles\SpikeyGuy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Obstacles\SpikeyGuy__Auto.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Obstacles\SpikeyLine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\In Game Objects\Obstacles\SpikeyLine__Auto.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Special\Arrow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Special\CameraZone.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Special\TextFloat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Special\TextList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Special\ZoneTrigger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\AutoGen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Icon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\ObjectBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Player\Awardments\Awardment.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Player\Awardments\AwardmentMessage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Player\Hero Physics\Base.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Player\Hero Physics\Big.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Player\Hero Physics\BobPhsxCharSelect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Player\Hero Physics\BobPhsxRandom.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Player\Hero Physics\Bouncy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Player\Hero Physics\Box.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Player\Hero Physics\Double.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Player\Hero Physics\Invert.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Player\Hero Physics\Jetman.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Player\Hero Physics\Meat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Player\Hero Physics\Normal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Player\Hero Physics\Rocketbox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Player\Hero Physics\Scale.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Player\Hero Physics\Small.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Player\Hero Physics\Spaceship.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Player\Hero Physics\Time.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Player\Hero Physics\TimeShip.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Player\Hero Physics\Wheel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Player\Cape.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Player\ClrTextFx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Player\ColorScheme.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Player\ColorSchemeManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Player\Leaderboard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Player\LeaderboardView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Player\PlayerData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Player\PlayerManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Player\SavedSeeds.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Player\Stats.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Tilesets\Backgrounds\_Code\_code_Castle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Tilesets\Backgrounds\_Code\_code_Cave.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Tilesets\Backgrounds\_Code\_code_Cloud.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Tilesets\Backgrounds\_Code\_code_Forest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Tilesets\Backgrounds\_Code\_code_Hills.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Tilesets\Backgrounds\_Code\_code_Sea.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Tilesets\Backgrounds\_Code\CloudberryKingdom.Background.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Tilesets\Backgrounds\Background.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Tilesets\Backgrounds\BackgroundCollection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Tilesets\Backgrounds\BackgroundFloater.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Tilesets\Backgrounds\BackgroundFloater_Stationary.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Tilesets\Backgrounds\BackgroundFloaterList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Tilesets\Tilesets\CloudberryKingdom.TileSets.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Tilesets\BlockGroup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Tilesets\SpriteInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Tilesets\TileSet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Tilesets\TileSetInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Tools\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Tools\CkColorHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Tools\EzReader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Tools\EzStorage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Tools\Globals.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Tools\IntVector2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Tools\Oscillate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Tools\Prototypes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Tools\Recycler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Tools\Resources.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Tools\Tools.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Tools\Unset.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Tools\WrappedFloat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Localization.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Video.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Hacks\NET\BinaryReader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Hacks\NET\BinaryWriter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Hacks\NET\StringBuilder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Hacks\XNA\ContentManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Hacks\XNA\GraphicsDevice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Hacks\XNA\GraphicsDeviceManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Hacks\XNA\SpriteBatch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Hacks\XNA\SpriteFont.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Hacks\FileReader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Hacks\String.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\MainClass\XboxPC\CloudberryKingdom.XnaGameClass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\CloudberryKingdom.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\global_header.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\MasterHack.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

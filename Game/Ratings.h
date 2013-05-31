@@ -3,8 +3,8 @@
 
 #ifdef PS3
 
-//#define ESRB	// (America)
-#define PEGI  // (Europe, but not UK)
+#define ESRB	// (America)
+//#define PEGI  // (Europe, but not UK)
 //#define USK   // (UK)
 //#define OFLC	// (Australia)
 
