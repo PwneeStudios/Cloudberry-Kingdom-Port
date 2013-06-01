@@ -10,17 +10,23 @@
 #include <Utility/ConsoleInformation.h>
 
 #ifdef PS3
-#include <Content/Texture.h>
-#include <PSGL/psgl.h>
-#include <PSGL/psglu.h>
+	#include <Content/Texture.h>
+	#include <PSGL/psgl.h>
+	#include <PSGL/psglu.h>
 
-#include "../../Core/src/Content/PS3/psglGtfLoader.h"
-#include <Content/TexturePS3Internal.h>
+	#include "../../Core/src/Content/PS3/psglGtfLoader.h"
+	#include <Content/TexturePS3Internal.h>
 
+	extern std::string PS3_PATH_PREFIX;
+	extern ErrorType GLOBAL_NP_DISCONNECT_MESSAGE;
+#endif
 
-extern std::string PS3_PATH_PREFIX;
-extern ErrorType GLOBAL_NP_DISCONNECT_MESSAGE;
+#ifdef VITA
+	#include <Content/Texture.h>
+	#include <Content/TextureVitaInternal.h>
 
+	extern std::string VITA_PATH_PREFIX;
+	extern ErrorType GLOBAL_NP_DISCONNECT_MESSAGE;
 #endif
 
 namespace CloudberryKingdom

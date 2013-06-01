@@ -12,6 +12,8 @@
 	#include "TextureWiiU.h"
 #elif PS3
 	#include "TexturePS3.h"
+#elif VITA
+	#include "TextureVita.h"
 #else
 	#include "TexturePc.h"
 #endif
@@ -29,6 +31,9 @@ class Texture : public Resource
 #elif PS3
 public:
 	TexturePS3 impl_;
+#elif VITA
+public:
+	TextureVita impl_;
 #else
 	TexturePc impl_;
 #endif

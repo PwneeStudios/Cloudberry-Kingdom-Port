@@ -18,6 +18,14 @@
 extern bool SavingDisabled;
 #endif
 
+#ifdef VITA
+#include <TrophyVita.h>
+#include <Utility/Log.h>
+
+// Is the saving disabled due to ownership? Defined in EzStorage.cpp.
+extern bool SavingDisabled;
+#endif
+
 namespace CloudberryKingdom
 {
 

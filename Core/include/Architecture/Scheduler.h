@@ -12,6 +12,8 @@
 	#include "SchedulerWiiU.h"
 #elif PS3
 	#include "SchedulerPS3.h"
+#elif VITA
+	#include "SchedulerVita.h"
 #else
 	#include "SchedulerPc.h"
 #endif
@@ -24,6 +26,8 @@ class Scheduler
 	SchedulerWiiU impl_;
 #elif PS3
 	SchedulerPS3 impl_;
+#elif VITA
+	SchedulerVita impl_;
 #else
 	SchedulerPc impl_;
 #endif

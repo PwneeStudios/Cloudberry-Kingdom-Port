@@ -10,6 +10,8 @@
 	#include "QuadDrawerWiiU.h"
 #elif PS3
 	#include "QuadDrawerPS3.h"
+#elif VITA
+	#include "QuadDrawerVita.h"
 #else
 	#include "QuadDrawerPc.h"
 #endif
@@ -25,6 +27,8 @@ class QuadDrawer
 	QuadDrawerWiiU impl_;
 #elif PS3
 	QuadDrawerPS3 impl_;
+#elif VITA
+	QuadDrawerVita impl_;
 #else
 	QuadDrawerPc impl_;
 #endif

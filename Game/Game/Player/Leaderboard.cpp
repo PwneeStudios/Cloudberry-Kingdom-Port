@@ -6,13 +6,21 @@
 #include <Utility/Log.h>
 
 #ifdef PS3
-#include <np.h>
-#include <sys/ppu_thread.h>
-#include <Utility/NetworkPS3.h>
+	#include <np.h>
+	#include <sys/ppu_thread.h>
+	#include <Utility/NetworkPS3.h>
 
-#include <locale.h>
-#include <sstream>
-#include <iomanip>
+	#include <locale.h>
+	#include <sstream>
+	#include <iomanip>
+#endif
+
+#ifdef VITA
+	#include <np.h>
+	#include <Utility/NetworkVita.h>
+
+	#include <sstream>
+	#include <iomanip>
 #endif
 
 namespace CloudberryKingdom

@@ -54,6 +54,12 @@
 	#include <vector>
 #endif
 
+#ifdef VITA
+	#include <algorithm>
+	#include <Utility/NetworkVita.h>
+	#include <vector>
+#endif
+
 #ifdef CAFE
 
 #include <cafe/os.h>

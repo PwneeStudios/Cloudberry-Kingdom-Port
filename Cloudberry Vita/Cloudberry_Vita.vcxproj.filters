@@ -1109,15 +1109,6 @@
     <ClInclude Include="Core\include\Graphics\RenderTarget2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\include\Graphics\QuadDrawerPc.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\include\Graphics\QuadDrawerPS3.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\include\Graphics\QuadDrawerWiiU.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Core\include\Input\GamePad.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -2456,6 +2447,36 @@
     <ClInclude Include="Game\stringconverter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Core\include\CoreVita.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Architecture\SchedulerVita.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Content\FilesystemVita.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Content\TextureVita.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Content\TextureVitaInternal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Graphics\QuadDrawerVita.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Utility\NetworkVita.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\src\Audio\SongInternalVita.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\src\Graphics\EffectInternalVita.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\TrophyVita.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="boost_shared_ptr\libs\smart_ptr\src\sp_collector.cpp">
@@ -3596,6 +3617,60 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game\MasterHack.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\src\Architecture\SchedulerVita.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\src\Audio\MediaPlayerVita.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\src\Audio\SongVita.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\src\Audio\SoundEffectVita.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\src\Content\FilesystemVita.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\src\Content\TextureVita.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\src\Graphics\EffectParameterVita.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\src\Graphics\EffectPassVita.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\src\Graphics\EffectVita.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\src\Graphics\QuadDrawerVita.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\src\Graphics\RenderTarget2DVita.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\src\Graphics\VideoPlayerVita.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\src\Input\GamePadVita.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\src\Utility\ConsoleInformationVita.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\src\Utility\ErrorVita.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\src\Utility\MutexVita.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\src\Utility\SaveVita.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\src\CoreVita.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -13,6 +13,8 @@
 	#include "FilesystemWiiU.h"
 #elif PS3
 	#include "FilesystemPS3.h"
+#elif VITA
+	#include "FilesystemVita.h"
 #else
 	#include "FilesystemPc.h"
 #endif
@@ -30,6 +32,8 @@ class Filesystem : public Singleton< Filesystem >
 	FilesystemWiiU impl_;
 #elif PS3
 	FilesystemPS3 impl_;
+#elif VITA
+	FilesystemVita impl_;
 #else
 	FilesystemPc impl_;
 #endif
