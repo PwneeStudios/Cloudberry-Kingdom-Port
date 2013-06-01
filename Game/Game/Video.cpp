@@ -25,6 +25,9 @@ void SetElapsedVideoTime( float time )
 #ifdef PS3
 	bool StartTimeSet;
 	clock_t StartTime;
+#elif VITA
+	bool StartTimeSet;
+	clock_t StartTime;
 #elif CAFE
 	#include <cafe/os.h>
 

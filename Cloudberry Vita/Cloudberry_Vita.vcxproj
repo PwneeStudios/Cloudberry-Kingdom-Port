@@ -1271,6 +1271,7 @@
     <ClCompile Include="Game\Hacks\XNA\SpriteFont.cpp" />
     <ClCompile Include="Game\MainClass\XboxPC\CloudberryKingdom.XnaGameClass.cpp" />
     <ClCompile Include="Game\MasterHack.cpp" />
+    <ClCompile Include="VitaMain.cpp" />
   </ItemGroup>
   <Import Condition="'$(ConfigurationType)' == 'Makefile' and Exists('$(VCTargetsPath)\Platforms\$(Platform)\SCE.Makefile.$(Platform).targets')" Project="$(VCTargetsPath)\Platforms\$(Platform)\SCE.Makefile.$(Platform).targets" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

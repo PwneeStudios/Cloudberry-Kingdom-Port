@@ -621,6 +621,14 @@ Version CloudberryKingdomGame::GameVersion = Version( 0, 2, 4 );
 		bool CloudberryKingdomGame::SimpleLeaderboards = false;
 		bool CloudberryKingdomGame::FakeAwardments = false;
 		float CloudberryKingdomGame::GuiSqueeze = 1.0f;
+#elif VITA
+		bool CloudberryKingdomGame::HideLogos = false;
+		bool CloudberryKingdomGame::LockCampaign = false;
+		bool CloudberryKingdomGame::SimpleMainMenu = true;
+		MainMenuTypes CloudberryKingdomGame::MainMenuType = MainMenuTypes_PS3;
+		bool CloudberryKingdomGame::SimpleLeaderboards = false;
+		bool CloudberryKingdomGame::FakeAwardments = false;
+		float CloudberryKingdomGame::GuiSqueeze = 1.0f;
 #endif
 
 

@@ -3673,5 +3673,8 @@
     <ClCompile Include="Core\src\CoreVita.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="VitaMain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

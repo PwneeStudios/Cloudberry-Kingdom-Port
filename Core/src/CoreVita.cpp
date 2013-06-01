@@ -301,7 +301,9 @@ bool IsNPAvailable()
 
 void ConnectToNPThread( uint64_t context )
 {
-	int ret = sceNpManagerGetNpId( &NPId );
+	LOG_WRITE( "stub: fix me! ConnectToNPThread" );
+
+	//int ret = sceNpManagerGetNpId( &NPId );
 	//switch( ret )
 	//{
 	//case SCE_NP_ERROR_NOT_INITIALIZED:
@@ -316,20 +318,22 @@ void ConnectToNPThread( uint64_t context )
 	//	break;
 	//}
 
-	ret = sceNpScoreCreateTitleCtx( &s_npCommunicationId, &s_npCommunicationPassphrase, &NPId );
-	if( ret > 0 )
-	{
-		ScoreTitleContext = ret;
-		NPIdObtained = true;
-	}
-	else
-		LOG_WRITE( "Coldn't get score title context: 0x%x\n", ret );
+	//ret = sceNpScoreCreateTitleCtx( &s_npCommunicationId, &s_npCommunicationPassphrase, &NPId );
+	//if( ret > 0 )
+	//{
+	//	ScoreTitleContext = ret;
+	//	NPIdObtained = true;
+	//}
+	//else
+	//	LOG_WRITE( "Coldn't get score title context: 0x%x\n", ret );
 
 	//sys_ppu_thread_exit( 0 );
 }
 
 void ConnectToNP()
 {
+	LOG_WRITE( "stub: fix me! ConnectToNP" );
+
 	if( NPIdObtained )
 	{
 		LOG_WRITE( "Tried to connect to NP multiple times!\n" );
@@ -350,19 +354,23 @@ ErrorType GLOBAL_NP_DISCONNECT_MESSAGE;
 
 void DisconnectFromNP()
 {
-	DisplayError( GLOBAL_NP_DISCONNECT_MESSAGE );
-	LOG_WRITE( "Disconnecting from NP\n" );
+	LOG_WRITE( "stub: fix me! DisconnectFromNP" );
 
-	if( NPIdObtained )
-	{
-		sceNpScoreDestroyTitleCtx( ScoreTitleContext );
-	}
+	//DisplayError( GLOBAL_NP_DISCONNECT_MESSAGE );
+	//LOG_WRITE( "Disconnecting from NP\n" );
+
+	//if( NPIdObtained )
+	//{
+	//	sceNpScoreDestroyTitleCtx( ScoreTitleContext );
+	//}
 
 	NPIdObtained = false;
 }
 
 void NPManagerCallback( int event, int result, void *arg )
 {
+	LOG_WRITE( "stub: fix me! NPManagerCallback" );
+
 	LOG_WRITE( "NP EVENT: %d\tRESULT: %d\n", event, result );
 	//switch( event )
 	//{
@@ -390,6 +398,8 @@ static ErrorType CurrentError( 0 );
 
 void ErrorDialogCallback( int buttonType, void *userData )
 {
+	LOG_WRITE( "stub: fix me! ErrorDialogCallback" );
+
 	//ErrorType::CompleteCallback complete = CurrentError.GetComplete();
 
 	//switch( buttonType )
@@ -417,6 +427,8 @@ static uint8_t NPPool[ NP_POOL_SIZE ];
 
 void DebugFrame(float r, float g, float b)
 {
+	LOG_WRITE( "stub: fix me! DebugFrame" );
+
 	static int count = 0;
 	
 	/*glEnable(GL_SCISSOR_TEST);
@@ -452,12 +464,16 @@ void DebugFrame(float r, float g, float b)
 
 void NPDRMInvalidCompleteCallback( bool yes )
 {
+	LOG_WRITE( "stub: fix me! NPDRMInvalidCompleteCallback" );
+
 	//glFinish();
 	CORE.Exit();
 }
 
 void CheckNPDRMFileThread( uint64_t context )
 {
+	LOG_WRITE( "stub: fix me! CheckNPDRMFileThread" );
+
 	//std::string file_path = VITA_PATH_PREFIX + "UNLOCK.EDAT";
 	//int ret = sceNpDrmIsAvailable2( &s_npDrmKey, file_path.c_str() );
 	//

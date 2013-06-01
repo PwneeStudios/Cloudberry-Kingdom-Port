@@ -26,15 +26,17 @@ int GetParentalControlLevel()
 
 bool IsOnlineContentRestricted()
 {
+	LOG_WRITE( "stub: fix me! IsOnlineContentRestricted" );
+
 	int isRestricted;
 	int age;
 
-	int ret = sceNpManagerGetContentRatingFlag( &isRestricted, &age );
-	if( ret < 0 )
-	{
-		LOG_WRITE( "sceNpManagerGetContentRatingFlag failed: 0x%x\n", ret );
-		return true;
-	}
+	//int ret = sceNpManagerGetContentRatingFlag( &isRestricted, &age );
+	//if( ret < 0 )
+	//{
+	//	LOG_WRITE( "sceNpManagerGetContentRatingFlag failed: 0x%x\n", ret );
+	//	return true;
+	//}
 
 	//if( age >= ONLINE_AGE_CUTOFF )
 	//{
