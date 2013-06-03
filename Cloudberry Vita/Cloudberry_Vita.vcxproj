@@ -40,6 +40,9 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
+    <Link>
+      <AdditionalDependencies>-lSceDbg_stub;-lSceGxm_stub;-lSceDisplay_stub;-lSceCtrl_stub;-lSceRazorCapture_stub_weak;-lSceSysmodule_stub;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">
     <ClCompile>
@@ -1272,6 +1275,32 @@
     <ClCompile Include="Game\MainClass\XboxPC\CloudberryKingdom.XnaGameClass.cpp" />
     <ClCompile Include="Game\MasterHack.cpp" />
     <ClCompile Include="VitaMain.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="Shaders\basic_f.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_fp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Fragment Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Shaders\basic_v.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_vp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Vertex Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Shaders\clear_f.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_fp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Fragment Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Shaders\clear_v.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_vp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Vertex Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
   </ItemGroup>
   <Import Condition="'$(ConfigurationType)' == 'Makefile' and Exists('$(VCTargetsPath)\Platforms\$(Platform)\SCE.Makefile.$(Platform).targets')" Project="$(VCTargetsPath)\Platforms\$(Platform)\SCE.Makefile.$(Platform).targets" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -3677,4 +3677,10 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="Shaders\clear_f.cg" />
+    <CustomBuild Include="Shaders\basic_v.cg" />
+    <CustomBuild Include="Shaders\clear_v.cg" />
+    <CustomBuild Include="Shaders\basic_f.cg" />
+  </ItemGroup>
 </Project>

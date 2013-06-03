@@ -5,6 +5,7 @@
 #include <stdio.h>
 
 #include <Utility/Log.h>
+#include <libdbg.h>
 
 class OSLog : public LogListener
 {

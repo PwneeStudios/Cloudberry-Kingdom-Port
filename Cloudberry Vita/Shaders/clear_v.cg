@@ -1,0 +1,12 @@
+﻿/* SCE CONFIDENTIAL
+ * PlayStation(R)Vita Programmer Tool Runtime Library Release 02.000.081
+ * Copyright (C) 2010 Sony Computer Entertainment Inc.
+ * All Rights Reserved.
+ */
+
+float4 main(
+	float2 aPosition
+	) : POSITION
+{
+	return float4(aPosition, 1.f, 1.f);
+}
