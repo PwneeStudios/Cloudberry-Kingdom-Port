@@ -1,0 +1,14 @@
+/*
+ * Take a color and a texture coordinate.  Spit out the color.
+ */
+varying float2 v_position	: TEXCOORD0;
+varying float2 v_texcoord	: TEXCOORD1;
+varying float4 v_color		: TEXCOORD2;
+
+uniform sampler2D u_texture	: TEXUNIT0;
+
+float4 main()
+{
+	return v_color * tex2D( u_texture, v_texcoord ).r;
+}
+

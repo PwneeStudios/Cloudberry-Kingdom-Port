@@ -1,0 +1,27 @@
+/*
+ * Take a color and a texture coordinate.  Spit out the color.
+ */
+varying float2 v_position	: TEXCOORD0;
+varying float2 v_texcoord	: TEXCOORD1;
+varying float4 v_color		: TEXCOORD2;
+
+uniform sampler2D u_texture		: TEXUNIT0;
+uniform sampler2D u_backTexture	: TEXUNIT1;
+uniform sampler2D u_maskTexture	: TEXUNIT2;
+
+float4 main()
+{
+	float4 texColor = tex2D( u_texture, v_texcoord );
+	float mask = tex2D( u_maskTexture, v_texcoord ).a;
+
+	float2 coordinates = ( float2( v_position.x, -v_position.y ) + float2( 1, 1 ) ) / 2;
+	float4 backColor = tex2D( u_backTexture, coordinates );
+	
+	float4 outColor = v_color * texColor;
+	
+	if( mask > 0 )
+		outColor = ( 1 - outColor.a ) * backColor + outColor.a * outColor;
+	
+    return outColor;
+}
+

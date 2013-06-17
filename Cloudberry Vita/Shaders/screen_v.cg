@@ -1,0 +1,23 @@
+/*
+ * Take screen-space coordinates and transform them into clip
+ * space.  Pass the texture coordinates and the color to the
+ * pixel shader.
+ */
+float2 a_position;
+float2 a_texcoord;
+float4 a_color;
+
+out float4 gl_Position			: POSITION;
+out float2 v_texcoord	: TEXCOORD1;
+out float4 v_color		: TEXCOORD2;
+
+void main()
+{
+	float2 clipSpace = 2.0f * a_position / float2( 1280.0f, 720.0f ) - 1.0f;
+	clipSpace.y = -clipSpace.y;
+    gl_Position = float4( clipSpace, 0, 1 );
+	
+	v_texcoord = a_texcoord;
+    v_color = a_color;
+}
+
