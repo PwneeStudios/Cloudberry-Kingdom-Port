@@ -19,13 +19,21 @@ std::wstring FormatWithSeparators( int i )
 std::wstring Utf8ToWstring( const std::string& str )
 {
 #ifdef PS3
-#endif
+	wchar_t utf16[ 512 ];
+	size_t inSize = str.size();
+	size_t outSize = sizeof( utf16 );
+	if( l10n_convert_str( l10n_get_converter( L10N_UTF8, L10N_UTF16 ), str.c_str(), &inSize, utf16, &outSize ) != ConversionOK )
+		return L"";
+
+	return std::wstring( utf16, utf16 + outSize );
+#else
 	std::wstring result;
 	result.reserve( str.length() );
 	for( std::string::const_iterator i = str.begin(); i != str.end(); ++i )
 		result.push_back( static_cast<wchar_t>( *i ) );
 
 	return result;
+#endif
 	/*std::wstring_convert<std::codecvt_utf8<wchar_t> > myconv;
 	return myconv.from_bytes( str );*/
 }
