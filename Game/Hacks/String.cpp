@@ -2,6 +2,10 @@
 
 #include <string>
 
+#ifdef VITA
+#include <ces.h>
+#endif
+
 std::wstring FormatWithSeparators( int i )
 {
 	std::wstringstream wss;
@@ -54,6 +58,24 @@ std::string WstringToUtf8( const std::wstring& str )
 		return "";
 
 	return std::string( utf8, utf8 + outSize );
+#elif VITA
+	SceCesUcsContext ctx;
+	sceCesUcsContextInit( &ctx );
+
+	sceCesSetUcsPolicyDetectBom( &ctx, SCE_CES_DETECT_DISABLE );
+	sceCesSetUcsPolicyOutputBom( &ctx, SCE_CES_OUTPUT_TOP_CUT );
+
+	uint8_t utf8[ 512 ];
+	memset( utf8, 0, sizeof( utf8 ) );
+	uint32_t utf16Len, utf8Len;
+	
+	int ret = sceCesUtf16StrToUtf8Str( &ctx, reinterpret_cast< const uint16_t * >( str.data() ),
+		str.size(), &utf16Len, utf8, sizeof( utf8 ), &utf8Len );
+
+	if( ret != 0 )
+		return "";
+
+	return std::string( utf8, utf8 + utf8Len );
 #else
 	std::string result;
 	result.reserve( str.length() );

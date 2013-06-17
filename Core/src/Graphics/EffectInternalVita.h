@@ -6,16 +6,16 @@
 #include <map>
 #include <string>
 
+#include <gxm.h>
+
 class EffectParameter;
 
 struct EffectInternal
 {
-	
 	std::map<std::string, boost::shared_ptr<EffectParameter> > Parameters;
 
-	//CGprogram VertexProgram;
-	//CGprogram FragmentProgram;
-
+	SceGxmVertexProgram		*VertexProgram;
+	SceGxmFragmentProgram	*FragmentProgram;
 };
 
 #endif

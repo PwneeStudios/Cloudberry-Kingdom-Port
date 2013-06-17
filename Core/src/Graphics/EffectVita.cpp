@@ -2,12 +2,173 @@
 
 #include <cassert>
 #include <fstream>
+#include <gxm.h>
+#include <libdbg.h>
 #include <map>
 #include <sstream>
 #include <Utility/Log.h>
 #include <vector>
 
 #include "EffectInternalVita.h"
+
+extern const SceGxmProgram _binary_clear_v_gxp_start;
+extern const SceGxmProgram _binary_clear_f_gxp_start;
+extern const SceGxmProgram _binary_basic_v_gxp_start;
+extern const SceGxmProgram _binary_basic_f_gxp_start;
+
+extern const SceGxmProgram _binary_BasicEffect_v_gxp_start;
+extern const SceGxmProgram _binary_BasicEffect_f_gxp_start;
+
+extern const SceGxmProgram _binary_BwEffect_v_gxp_start;
+extern const SceGxmProgram _binary_BwEffect_f_gxp_start;
+
+extern const SceGxmProgram _binary_Circle_v_gxp_start;
+extern const SceGxmProgram _binary_Circle_f_gxp_start;
+
+extern const SceGxmProgram _binary_FireballEffect_v_gxp_start;
+extern const SceGxmProgram _binary_FireballEffect_f_gxp_start;
+
+extern const SceGxmProgram _binary_Hsl_v_gxp_start;
+extern const SceGxmProgram _binary_Hsl_f_gxp_start;
+
+extern const SceGxmProgram _binary_Hsl_Green_v_gxp_start;
+extern const SceGxmProgram _binary_Hsl_Green_f_gxp_start;
+
+extern const SceGxmProgram _binary_Lava_v_gxp_start;
+extern const SceGxmProgram _binary_Lava_f_gxp_start;
+
+extern const SceGxmProgram _binary_LightMap_v_gxp_start;
+extern const SceGxmProgram _binary_LightMap_f_gxp_start;
+
+extern const SceGxmProgram _binary_LightSource_v_gxp_start;
+extern const SceGxmProgram _binary_LightSource_f_gxp_start;
+
+extern const SceGxmProgram _binary_NoTexture_v_gxp_start;
+extern const SceGxmProgram _binary_NoTexture_f_gxp_start;
+
+extern const SceGxmProgram _binary_Paint_v_gxp_start;
+extern const SceGxmProgram _binary_Paint_f_gxp_start;
+
+extern const SceGxmProgram _binary_Paint_SpriteBatch_v_gxp_start;
+extern const SceGxmProgram _binary_Paint_SpriteBatch_f_gxp_start;
+
+extern const SceGxmProgram _binary_screen_v_gxp_start;
+extern const SceGxmProgram _binary_screen_f_gxp_start;
+
+extern const SceGxmProgram _binary_Shell_v_gxp_start;
+extern const SceGxmProgram _binary_Shell_f_gxp_start;
+
+extern const SceGxmProgram _binary_Text_NoOutline_v_gxp_start;
+extern const SceGxmProgram _binary_Text_NoOutline_f_gxp_start;
+
+extern const SceGxmProgram _binary_TextThickOutline_v_gxp_start;
+extern const SceGxmProgram _binary_TextThickOutline_f_gxp_start;
+
+extern const SceGxmProgram _binary_Text_ThinOutline_v_gxp_start;
+extern const SceGxmProgram _binary_Text_ThinOutline_f_gxp_start;
+
+extern const SceGxmProgram _binary_Window_v_gxp_start;
+extern const SceGxmProgram _binary_Window_f_gxp_start;
+
+static SceGxmShaderPatcher *shaderPatcher = NULL;
+
+#define UNUSED( x )		( void )( x )
+
+static void *patcherHostAlloc(void *userData, uint32_t size)
+{
+	UNUSED(userData);
+	return malloc(size);
+}
+
+static void patcherHostFree(void *userData, void *mem)
+{
+	UNUSED(userData);
+	free(mem);
+}
+
+// Memory allocation stuff defined in CoreVita.cpp.
+extern void *graphicsAlloc(SceKernelMemBlockType type, uint32_t size, uint32_t alignment, uint32_t attribs, SceUID *uid);
+extern void graphicsFree(SceUID uid);
+extern void *vertexUsseAlloc(uint32_t size, SceUID *uid, uint32_t *usseOffset);
+extern void vertexUsseFree(SceUID uid);
+extern void *fragmentUsseAlloc(uint32_t size, SceUID *uid, uint32_t *usseOffset);
+extern void fragmentUsseFree(SceUID uid);
+
+void InitializePatcher()
+{
+	// set buffer sizes for this sample
+	const uint32_t patcherBufferSize		= 64*1024;
+	const uint32_t patcherVertexUsseSize	= 64*1024;
+	const uint32_t patcherFragmentUsseSize	= 64*1024;
+
+	// allocate memory for buffers and USSE code
+	SceUID patcherBufferUid;
+	void *patcherBuffer = graphicsAlloc(
+		SCE_KERNEL_MEMBLOCK_TYPE_USER_RWDATA_UNCACHE,
+		patcherBufferSize,
+		4,
+		SCE_GXM_MEMORY_ATTRIB_READ | SCE_GXM_MEMORY_ATTRIB_WRITE,
+		&patcherBufferUid);
+	SceUID patcherVertexUsseUid;
+	uint32_t patcherVertexUsseOffset;
+	void *patcherVertexUsse = vertexUsseAlloc(
+		patcherVertexUsseSize,
+		&patcherVertexUsseUid,
+		&patcherVertexUsseOffset);
+	SceUID patcherFragmentUsseUid;
+	uint32_t patcherFragmentUsseOffset;
+	void *patcherFragmentUsse = fragmentUsseAlloc(
+		patcherFragmentUsseSize,
+		&patcherFragmentUsseUid,
+		&patcherFragmentUsseOffset);
+
+	// create a shader patcher
+	SceGxmShaderPatcherParams patcherParams;
+	memset(&patcherParams, 0, sizeof(SceGxmShaderPatcherParams));
+	patcherParams.userData					= NULL;
+	patcherParams.hostAllocCallback			= &patcherHostAlloc;
+	patcherParams.hostFreeCallback			= &patcherHostFree;
+	patcherParams.bufferAllocCallback		= NULL;
+	patcherParams.bufferFreeCallback		= NULL;
+	patcherParams.bufferMem					= patcherBuffer;
+	patcherParams.bufferMemSize				= patcherBufferSize;
+	patcherParams.vertexUsseAllocCallback	= NULL;
+	patcherParams.vertexUsseFreeCallback	= NULL;
+	patcherParams.vertexUsseMem				= patcherVertexUsse;
+	patcherParams.vertexUsseMemSize			= patcherVertexUsseSize;
+	patcherParams.vertexUsseOffset			= patcherVertexUsseOffset;
+	patcherParams.fragmentUsseAllocCallback	= NULL;
+	patcherParams.fragmentUsseFreeCallback	= NULL;
+	patcherParams.fragmentUsseMem			= patcherFragmentUsse;
+	patcherParams.fragmentUsseMemSize		= patcherFragmentUsseSize;
+	patcherParams.fragmentUsseOffset		= patcherFragmentUsseOffset;
+
+	int err = sceGxmShaderPatcherCreate(&patcherParams, &shaderPatcher);
+	SCE_DBG_ASSERT(err == SCE_OK);
+}
+
+void RegisterProgramWithPatcher( const SceGxmProgram *program, SceGxmShaderPatcherId *id )
+{
+	int err = sceGxmShaderPatcherRegisterProgram( shaderPatcher, program, id );
+	SCE_DBG_ASSERT( err == SCE_OK );
+}
+
+void CreateVertexProgram( SceGxmShaderPatcherId programId, const SceGxmVertexAttribute *attributes, uint32_t attributeCount, const SceGxmVertexStream *streams, uint32_t streamCount, SceGxmVertexProgram **vertexProgram )
+{
+	int err = sceGxmShaderPatcherCreateVertexProgram( shaderPatcher, programId, attributes, attributeCount, streams, streamCount, vertexProgram );
+	SCE_DBG_ASSERT( err == SCE_OK );
+}
+
+void CreateFragmentProgram( SceGxmShaderPatcherId programId, SceGxmOutputRegisterFormat outputFormat, SceGxmMultisampleMode multisampleMode, const SceGxmBlendInfo *blendInfo, const SceGxmProgram *vertexProgram, SceGxmFragmentProgram **fragmentProgram )
+{
+	int err = sceGxmShaderPatcherCreateFragmentProgram( shaderPatcher, programId, outputFormat, multisampleMode, blendInfo, vertexProgram, fragmentProgram );
+	SCE_DBG_ASSERT( err == SCE_OK );
+}
+
+void CleanUpPatcher()
+{
+	sceGxmShaderPatcherDestroy( shaderPatcher );
+}
 
 void Effect::Apply()
 {
@@ -41,6 +202,85 @@ char *LoadShaderFromSDATA( const std::string &path )
 
 void Effect::Load( const std::string &name )
 {
+	const SceGxmProgram *vertexProgramGxp		= NULL;
+	const SceGxmProgram *fragmentProgramGxp	= NULL;
+
+	if( name == "Shaders/BasicEffect" )
+	{
+		vertexProgramGxp	= &_binary_BasicEffect_v_gxp_start;
+		fragmentProgramGxp	= &_binary_BasicEffect_f_gxp_start;
+	}
+	else if( name == "Shaders/NoTexture" )
+	{
+		vertexProgramGxp	= &_binary_NoTexture_v_gxp_start;
+		fragmentProgramGxp	= &_binary_NoTexture_f_gxp_start;
+	}
+	else if( name == "Shaders/Circle" )
+	{
+		vertexProgramGxp	= &_binary_Circle_v_gxp_start;
+		fragmentProgramGxp	= &_binary_Circle_f_gxp_start;
+	}
+	else if( name == "Shaders/Shell" )
+	{
+		vertexProgramGxp	= &_binary_Shell_v_gxp_start;
+		fragmentProgramGxp	= &_binary_Shell_f_gxp_start;
+	}
+	else if( name == "Shaders/FireballEffect" )
+	{
+		vertexProgramGxp	= &_binary_FireballEffect_v_gxp_start;
+		fragmentProgramGxp	= &_binary_FireballEffect_f_gxp_start;
+	}
+	else if( name == "Shaders/LightMap" )
+	{
+		vertexProgramGxp	= &_binary_LightMap_v_gxp_start;
+		fragmentProgramGxp	= &_binary_LightMap_f_gxp_start;
+	}
+	else if( name == "Shaders/LightSource" )
+	{
+		vertexProgramGxp	= &_binary_LightSource_v_gxp_start;
+		fragmentProgramGxp	= &_binary_LightSource_f_gxp_start;
+	}
+	else if( name == "Shaders/Hsl_Green" )
+	{
+		vertexProgramGxp	= &_binary_Hsl_Green_v_gxp_start;
+		fragmentProgramGxp	= &_binary_Hsl_Green_f_gxp_start;
+	}
+	else if( name == "Shaders/Hsl" )
+	{
+		vertexProgramGxp	= &_binary_Hsl_v_gxp_start;
+		fragmentProgramGxp	= &_binary_Hsl_f_gxp_start;
+	}
+	else if( name == "Shaders/Window" )
+	{
+		vertexProgramGxp	= &_binary_Window_v_gxp_start;
+		fragmentProgramGxp	= &_binary_Window_f_gxp_start;
+	}
+
+	assert( vertexProgramGxp && fragmentProgramGxp );
+
+	SceGxmShaderPatcherId vertexProgramId, fragmentProgramId;
+	RegisterProgramWithPatcher( vertexProgramGxp, &vertexProgramId );
+	RegisterProgramWithPatcher( fragmentProgramGxp, &fragmentProgramId );
+
+	const SceGxmProgramParameter *positionParameter = sceGxmProgramFindParameterByName( vertexProgramGxp, "a_position" );
+	const SceGxmProgramParameter *texcoordParameter = sceGxmProgramFindParameterByName( vertexProgramGxp, "a_texcoord" );
+	const SceGxmProgramParameter *colorParameter = sceGxmProgramFindParameterByName( vertexProgramGxp, "a_color" );
+
+	SceGxmVertexAttribute vertexAttributes[] = {
+		{ 0, 0, SCE_GXM_ATTRIBUTE_FORMAT_F32, 2, sceGxmProgramParameterGetResourceIndex( positionParameter ) },
+		{ 0, sizeof( float ) * 2, SCE_GXM_ATTRIBUTE_FORMAT_F32, 2, sceGxmProgramParameterGetResourceIndex( texcoordParameter ) },
+		{ 0, sizeof( float ) * 4, SCE_GXM_ATTRIBUTE_FORMAT_F32, 4, sceGxmProgramParameterGetResourceIndex( colorParameter ) }
+	};
+
+	SceGxmVertexStream vertexStreams[] = {
+		{ sizeof( float ) * 8, SCE_GXM_INDEX_SOURCE_INDEX_16BIT }
+	};
+
+	SceGxmVertexProgram *vertexProgram;
+	SceGxmFragmentProgram *fragmentProgram;
+
+	CreateVertexProgram( vertexProgramId, vertexAttributes, 3, vertexStreams, 1, &vertexProgram );
+	CreateFragmentProgram( fragmentProgramId, SCE_GXM_OUTPUT_REGISTER_FORMAT_UCHAR4, SCE_GXM_MULTISAMPLE_NONE, NULL, vertexProgramGxp, &fragmentProgram );
 }
 
 boost::shared_ptr<EffectParameter> Effect::Parameters( const std::string &name )

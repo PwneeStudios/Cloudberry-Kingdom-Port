@@ -41,7 +41,7 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>-lSceDbg_stub;-lSceGxm_stub;-lSceDisplay_stub;-lSceCtrl_stub;-lSceRazorCapture_stub_weak;-lSceSysmodule_stub;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>-lSceDbg_stub;-lSceGxm_stub;-lSceDisplay_stub;-lSceCtrl_stub;-lSceRazorCapture_stub_weak;-lSceSysmodule_stub;-lSceCes;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">
@@ -1300,6 +1300,332 @@
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_vp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Vertex Shader: "%(FullPath)"</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="Shaders\BasicEffect_f.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_fp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Fragment Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_fp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">Compiling Fragment Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Shaders\BasicEffect_v.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_vp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Vertex Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_vp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">Compiling Vertex Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Shaders\BwEffect_f.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_fp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Fragment Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_fp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">Compiling Fragment Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Shaders\BwEffect_v.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_vp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Vertex Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_vp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">Compiling Vertex Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Shaders\Circle_f.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_fp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Fragment Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_fp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">Compiling Fragment Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Shaders\Circle_v.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_vp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Vertex Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_vp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">Compiling Vertex Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Shaders\FireballEffect_f.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_fp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Fragment Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_fp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">Compiling Fragment Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Shaders\FireballEffect_v.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_vp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Vertex Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_vp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">Compiling Vertex Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Shaders\Hsl_f.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_fp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Fragment Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_fp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">Compiling Fragment Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Shaders\Hsl_Green_f.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_fp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Fragment Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_fp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">Compiling Fragment Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Shaders\Hsl_Green_v.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_vp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Vertex Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_vp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">Compiling Vertex Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Shaders\Hsl_v.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_vp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Vertex Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_vp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">Compiling Vertex Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Shaders\Lava_f.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_fp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Fragment Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_fp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">Compiling Fragment Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Shaders\Lava_v.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_vp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Vertex Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_vp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">Compiling Vertex Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Shaders\LightMap_f.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_fp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Fragment Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_fp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">Compiling Fragment Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Shaders\LightMap_v.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_vp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Vertex Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_vp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">Compiling Vertex Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Shaders\LightSource_f.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_fp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Fragment Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_fp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">Compiling Fragment Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Shaders\LightSource_v.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_vp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Vertex Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_vp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">Compiling Vertex Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Shaders\NoTexture_f.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_fp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Fragment Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_fp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">Compiling Fragment Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Shaders\NoTexture_v.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_vp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Vertex Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_vp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">Compiling Vertex Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Shaders\Paint_f.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_fp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Fragment Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_fp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">Compiling Fragment Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Shaders\Paint_SpriteBatch_f.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_fp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Fragment Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_fp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">Compiling Fragment Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Shaders\Paint_SpriteBatch_v.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_vp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Vertex Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_vp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">Compiling Vertex Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Shaders\Paint_v.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_vp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Vertex Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_vp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">Compiling Vertex Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Shaders\screen_f.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_fp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Fragment Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_fp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">Compiling Fragment Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Shaders\screen_v.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_vp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Vertex Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_vp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">Compiling Vertex Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Shaders\Shell_f.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_fp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Fragment Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_fp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">Compiling Fragment Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Shaders\Shell_v.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_vp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Vertex Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_vp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">Compiling Vertex Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Shaders\Text_NoOutline_f.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_fp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Fragment Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_fp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">Compiling Fragment Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Shaders\Text_NoOutline_v.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_vp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Vertex Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_vp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">Compiling Vertex Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Shaders\Text_ThickOutline_f.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_fp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Fragment Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_fp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">Compiling Fragment Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Shaders\Text_ThickOutline_v.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_vp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Vertex Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_vp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">Compiling Vertex Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Shaders\Text_ThinOutline_f.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_fp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Fragment Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_fp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">Compiling Fragment Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Shaders\Text_ThinOutline_v.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_vp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Vertex Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_vp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">Compiling Vertex Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Shaders\Window_f.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_fp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Fragment Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_fp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">Compiling Fragment Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Shaders\Window_v.cg">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_vp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">Compiling Vertex Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">"$(SCE_PSP2_SDK_DIR)/host_tools/bin/psp2cgc.exe" --cache --profile sce_vp_psp2 "%(RootDir)%(Directory)\%(Filename).cg" -o "$(IntDir)%(Filename).gxp"&amp;&amp;"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/psp2bin.exe" "$(IntDir)%(Filename).gxp" -b2e PSP2,_binary_%(Filename)_gxp_start,_binary_%(Filename)_gxp_size,4 -o "$(IntDir)%(Filename)_gxp.obj"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">Compiling Vertex Shader: "%(FullPath)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">$(IntDir)%(Filename)_gxp.obj;%(Outputs)</Outputs>
     </CustomBuild>
   </ItemGroup>
   <Import Condition="'$(ConfigurationType)' == 'Makefile' and Exists('$(VCTargetsPath)\Platforms\$(Platform)\SCE.Makefile.$(Platform).targets')" Project="$(VCTargetsPath)\Platforms\$(Platform)\SCE.Makefile.$(Platform).targets" />

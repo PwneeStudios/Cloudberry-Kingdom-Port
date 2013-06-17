@@ -56,9 +56,10 @@ template<> boost::shared_ptr<SpriteFont> ContentManager::Load<SpriteFont>( const
 template<> boost::shared_ptr<Effect> ContentManager::Load<Effect>( const std::wstring &name )
 {
 	DebugFrame(0, 1, 1);
-	LOG_WRITE( "Loading effect: %s\n", WstringToUtf8( name ).c_str() );
+	std::string utf8Name = WstringToUtf8( name );
+	LOG_WRITE( "Loading effect: %s\n", utf8Name.c_str() );
 	boost::shared_ptr<Effect> effect = boost::make_shared<Effect>();
-	effect->Load( WstringToUtf8( name ) );
+	effect->Load( utf8Name );
 	return effect;
 }
 
