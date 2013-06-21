@@ -13,6 +13,7 @@
 #include <locale.h>
 #include <sstream>
 #include <iomanip>
+#include <stdio.h>
 #endif
 
 namespace CloudberryKingdom
@@ -420,7 +421,10 @@ namespace CloudberryKingdom
 			{
 				int rank = Ranks[ i ].serialRank;
 				int value = Ranks[ i ].scoreValue;
-				std::wstring name = Utf8ToWstring( Ranks[ i ].onlineName.data );
+				//std::wstring name = Utf8ToWstring( Ranks[ i ].onlineName.data );
+				// FIX for SCEA submission in case they dont waive R175.
+				std::wstring name = Utf8ToWstring( Ranks[ i ].npId.handle.data );
+				//printf( "%s -> %s\n", Ranks[ i ].onlineName.data, Ranks[ i ].npId.handle.data );
 
 				OnlineGamer gamer;
 				gamer.Id = rank;
