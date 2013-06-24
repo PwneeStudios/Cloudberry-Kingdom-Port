@@ -797,11 +797,11 @@ static uint8_t NPPool[ NP_POOL_SIZE ];
 
 void DebugFrame(float r, float g, float b)
 {
-	LOG_WRITE( "stub: fix me! DebugFrame" );
-
 	static int count = 0;
-	
-	/*glEnable(GL_SCISSOR_TEST);
+
+	/*LOG_WRITE( "stub: fix me! DebugFrame" );
+
+	glEnable(GL_SCISSOR_TEST);
 	glViewport(0, 0, GLOBAL_WIDTH, GLOBAL_HEIGHT);
 
 	for( int i = 0; i < 2; ++i )

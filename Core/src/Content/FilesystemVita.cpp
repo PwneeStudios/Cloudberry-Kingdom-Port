@@ -28,7 +28,8 @@ public:
 	FileVita( const std::string &path, bool write )
 		: file_( NULL )
 	{
-		file_ = fopen( path.c_str(), "rb" );
+		std::string absolutePath = "app0:/" + path;
+		file_ = fopen( absolutePath.c_str(), "rb" );
 
 		if( !file_ )
 			return;

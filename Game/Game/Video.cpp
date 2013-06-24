@@ -285,7 +285,11 @@ namespace CloudberryKingdom
 		}
 #endif
 		
+#ifdef VITA
+		Duration = 0;
+#else
 		Duration = CurrentVideo->Duration.TotalSeconds;
+#endif
 		Elapsed = 0;
 
 #ifdef CAFE

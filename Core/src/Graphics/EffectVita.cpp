@@ -61,8 +61,8 @@ extern const SceGxmProgram _binary_Shell_f_gxp_start;
 extern const SceGxmProgram _binary_Text_NoOutline_v_gxp_start;
 extern const SceGxmProgram _binary_Text_NoOutline_f_gxp_start;
 
-extern const SceGxmProgram _binary_TextThickOutline_v_gxp_start;
-extern const SceGxmProgram _binary_TextThickOutline_f_gxp_start;
+extern const SceGxmProgram _binary_Text_ThickOutline_v_gxp_start;
+extern const SceGxmProgram _binary_Text_ThickOutline_f_gxp_start;
 
 extern const SceGxmProgram _binary_Text_ThinOutline_v_gxp_start;
 extern const SceGxmProgram _binary_Text_ThinOutline_f_gxp_start;
@@ -255,6 +255,21 @@ void Effect::Load( const std::string &name )
 		vertexProgramGxp	= &_binary_Window_v_gxp_start;
 		fragmentProgramGxp	= &_binary_Window_f_gxp_start;
 	}
+	else if( name == "Shaders/Text_NoOutline" )
+	{
+		vertexProgramGxp	= &_binary_Text_NoOutline_v_gxp_start;
+		fragmentProgramGxp	= &_binary_Text_NoOutline_f_gxp_start;
+	}
+	else if( name == "Shaders/Text_ThickOutline" )
+	{
+		vertexProgramGxp	= &_binary_Text_ThickOutline_v_gxp_start;
+		fragmentProgramGxp	= &_binary_Text_ThickOutline_f_gxp_start;
+	}
+	else if( name == "Shaders/Text_ThinOutline" )
+	{
+		vertexProgramGxp	= &_binary_Text_ThinOutline_v_gxp_start;
+		fragmentProgramGxp	= &_binary_Text_ThinOutline_f_gxp_start;
+	}
 
 	assert( vertexProgramGxp && fragmentProgramGxp );
 
@@ -281,6 +296,32 @@ void Effect::Load( const std::string &name )
 
 	CreateVertexProgram( vertexProgramId, vertexAttributes, 3, vertexStreams, 1, &vertexProgram );
 	CreateFragmentProgram( fragmentProgramId, SCE_GXM_OUTPUT_REGISTER_FORMAT_UCHAR4, SCE_GXM_MULTISAMPLE_NONE, NULL, vertexProgramGxp, &fragmentProgram );
+
+	uint32_t numParameters = sceGxmProgramGetParameterCount( vertexProgramGxp );
+
+	for( uint32_t i = 0; i < numParameters; ++i )
+	{
+		const SceGxmProgramParameter *param = sceGxmProgramGetParameter( vertexProgramGxp, i );
+		const char *paramName = sceGxmProgramParameterGetName( param );
+		SceGxmParameterType paramType = sceGxmProgramParameterGetType( param );
+		uint32_t componentCount = sceGxmProgramParameterGetComponentCount( param );
+
+		internal_->Parameters[ paramName ] = boost::make_shared< EffectParameter >( *this, i );
+	}
+
+	numParameters = sceGxmProgramGetParameterCount( fragmentProgramGxp );
+
+	for( uint32_t i = 0; i < numParameters; ++i )
+	{
+		const SceGxmProgramParameter *param = sceGxmProgramGetParameter( vertexProgramGxp, i );
+		const char *paramName = sceGxmProgramParameterGetName( param );
+		SceGxmParameterType paramType = sceGxmProgramParameterGetType( param );
+		uint32_t componentCount = sceGxmProgramParameterGetComponentCount( param );
+
+		internal_->Parameters[ paramName ] = boost::make_shared< EffectParameter >( *this, i );
+	}
+
+	internal_->Parameters[ "SecretDefaultParameter" ] = boost::make_shared< EffectParameter >( *this, 0 );
 }
 
 boost::shared_ptr<EffectParameter> Effect::Parameters( const std::string &name )
