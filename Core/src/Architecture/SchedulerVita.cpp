@@ -240,10 +240,23 @@ void SchedulerVita::RunJobASAP( Job *job )
 
 void SchedulerVita::CreateResource( ResourceHolder *holder, Resource *resource )
 {
-	ResourceLoaderJob *job = new ResourceLoaderJob( holder, resource, true );
+	resource->Load();
+
+	// If there is an error, stop.
+	if( !resource->IsLoaded() )
+	{
+		LOG_WRITE( "Failed: %s\n", resource->GetPath().c_str() );
+		return;
+	}
+
+	LOG_WRITE( "Loaded: %s\n", resource->GetPath().c_str() );
+
+	resource->GpuCreate();
+	holder->SetResource( resource );
+	//ResourceLoaderJob *job = new ResourceLoaderJob( holder, resource, true );
 
 	//pthread_mutex_lock( &internal_->JobQueueMutex );
-	internal_->JobQueue.push_back( job );
+	//internal_->JobQueue.push_back( job );
 	//pthread_mutex_unlock( &internal_->JobQueueMutex );
 	//sem_post( &internal_->JobQueueSemaphore );
 }

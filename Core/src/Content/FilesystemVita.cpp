@@ -123,7 +123,11 @@ extern std::string VITA_PATH_PREFIX;
 
 boost::shared_ptr<File> FilesystemVita::Open( const std::string &path, bool write )
 {
-	std::string localPath = VITA_PATH_PREFIX + ( path[ 0 ] == '/' ? "ContentVita" : "ContentVita/" ) + path;
+	std::string localPath;
+	if( strncmp( path.c_str(), "ContentVita", 11 ) == 0 )
+		localPath = VITA_PATH_PREFIX + path;
+	else
+		localPath = VITA_PATH_PREFIX + ( path[ 0 ] == '/' ? "ContentVita" : "ContentVita/" ) + path;
 	LOG_WRITE( "Opening %s\n", localPath.c_str() );
 
 	return boost::static_pointer_cast<File>( boost::make_shared<FileVita>( localPath, write ) );

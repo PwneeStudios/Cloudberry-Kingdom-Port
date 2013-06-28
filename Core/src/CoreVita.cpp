@@ -207,7 +207,7 @@ void graphicsFree(SceUID uid);
 SceUID vdmRingBufferUid, vertexRingBufferUid, fragmentRingBufferUid, fragmentUsseRingBufferUid;
 void *vdmRingBuffer, *vertexRingBuffer, *fragmentRingBuffer, *fragmentUsseRingBuffer;
 uint32_t fragmentUsseRingBufferOffset;
-SceGxmContext *context = NULL;
+SceGxmContext *GraphicsContext = NULL;
 	
 SceGxmRenderTarget *renderTarget;
 void *displayBufferData[ DISPLAY_BUFFER_COUNT ];
@@ -299,7 +299,7 @@ CoreVita::CoreVita( GameLoop &game ) :
 	contextParams.fragmentUsseRingBufferMemSize	= SCE_GXM_DEFAULT_FRAGMENT_USSE_RING_BUFFER_SIZE;
 	contextParams.fragmentUsseRingBufferOffset	= fragmentUsseRingBufferOffset;
 
-	err = sceGxmCreateContext( &contextParams, &context );
+	err = sceGxmCreateContext( &contextParams, &GraphicsContext );
 	SCE_DBG_ASSERT( err == SCE_OK );
 
 	SceGxmRenderTargetParams renderTargetParams;
@@ -523,7 +523,7 @@ CoreVita::CoreVita( GameLoop &game ) :
 
 	scheduler_ = new Scheduler;
 
-	content_ = new Wad( VITA_PATH_PREFIX + "ContentPS3/" );
+	content_ = new Wad( VITA_PATH_PREFIX + "ContentVita/" );
 
 	qd_ = new QuadDrawer;
 
@@ -550,7 +550,7 @@ CoreVita::~CoreVita()
 	// Need to shut down media player last as scheduler could still play a song.
 	MediaPlayer::Shutdown();
 
-	sceGxmFinish( context );
+	sceGxmFinish( GraphicsContext );
 }
 
 static SceNpTrophyContext TrophyContext;
@@ -558,24 +558,24 @@ static SceNpTrophyHandle TrophyHandle;
 static bool ContextRegistered;
 extern std::list< ErrorType > GLOBAL_ERROR_QUEUE;
 
-bool GetTrophyContext( SceNpTrophyContext &context, SceNpTrophyHandle &handle )
+bool GetTrophyContext( SceNpTrophyContext &GraphicsContext, SceNpTrophyHandle &handle )
 {
 	if( !ContextRegistered )
 		return false;
 
-	context = TrophyContext;
+	GraphicsContext = TrophyContext;
 	handle = TrophyHandle;
 
 	return true;
 }
 
-void ForceGetTrophyContext( SceNpTrophyContext &context, SceNpTrophyHandle &handle )
+void ForceGetTrophyContext( SceNpTrophyContext &GraphicsContext, SceNpTrophyHandle &handle )
 {
-	context = TrophyContext;
+	GraphicsContext = TrophyContext;
 	handle = TrophyHandle;
 }
 
-//int TrophyStatusCallback( SceNpTrophyContext context, SceNpTrophyStatus status, int completed, int total, void *arg )
+//int TrophyStatusCallback( SceNpTrophyContext GraphicsContext, SceNpTrophyStatus status, int completed, int total, void *arg )
 //{
 //	int ret = 0;
 //
@@ -637,7 +637,7 @@ bool gTrophyContextRegistered = true;
 // Space needed for trophy, 
 //extern uint64_t RequiredTrophySpace;
 
-void RegisterTrophyContextThread( uint64_t context )
+void RegisterTrophyContextThread( uint64_t GraphicsContext )
 {
 	ContextRegistered = false;
 
@@ -669,7 +669,7 @@ bool IsNPAvailable()
 	return NPIdObtained;
 }
 
-void ConnectToNPThread( uint64_t context )
+void ConnectToNPThread( uint64_t GraphicsContext )
 {
 	LOG_WRITE( "stub: fix me! ConnectToNPThread" );
 
@@ -695,7 +695,7 @@ void ConnectToNPThread( uint64_t context )
 	//	NPIdObtained = true;
 	//}
 	//else
-	//	LOG_WRITE( "Coldn't get score title context: 0x%x\n", ret );
+	//	LOG_WRITE( "Coldn't get score title GraphicsContext: 0x%x\n", ret );
 
 	//sys_ppu_thread_exit( 0 );
 }
@@ -840,7 +840,7 @@ void NPDRMInvalidCompleteCallback( bool yes )
 	CORE.Exit();
 }
 
-void CheckNPDRMFileThread( uint64_t context )
+void CheckNPDRMFileThread( uint64_t GraphicsContext )
 {
 	LOG_WRITE( "stub: fix me! CheckNPDRMFileThread" );
 
@@ -879,10 +879,6 @@ int CoreVita::Run()
 		GamePad::Update();
 
 		scheduler_->MainThread();
-
-		game_.Update();
-
-		qd_->Flush();
 
 		// check control data
 		sceCtrlPeekBufferPositive(0, &ctrlData, 1);
@@ -943,7 +939,7 @@ int CoreVita::Run()
 
 		// start rendering to the main render target
 		sceGxmBeginScene(
-			context,
+			GraphicsContext,
 			0,
 			renderTarget,
 			NULL,
@@ -952,29 +948,33 @@ int CoreVita::Run()
 			&displaySurface[backBufferIndex],
 			&depthSurface);
 
+		game_.Update();
+
+		qd_->Flush();
+
 		// set clear shaders
-		sceGxmSetVertexProgram(context, clearVertexProgram);
-		sceGxmSetFragmentProgram(context, clearFragmentProgram);
+		sceGxmSetVertexProgram(GraphicsContext, clearVertexProgram);
+		sceGxmSetFragmentProgram(GraphicsContext, clearFragmentProgram);
 
 		// draw the clear triangle
-		sceGxmSetVertexStream(context, 0, clearVertices);
-		sceGxmDraw(context, SCE_GXM_PRIMITIVE_TRIANGLES, SCE_GXM_INDEX_FORMAT_U16, clearIndices, 3);
+		sceGxmSetVertexStream(GraphicsContext, 0, clearVertices);
+		sceGxmDraw(GraphicsContext, SCE_GXM_PRIMITIVE_TRIANGLES, SCE_GXM_INDEX_FORMAT_U16, clearIndices, 3);
 
 		// render the rotating triangle
-		sceGxmSetVertexProgram(context, basicVertexProgram);
-		sceGxmSetFragmentProgram(context, basicFragmentProgram);
+		sceGxmSetVertexProgram(GraphicsContext, basicVertexProgram);
+		sceGxmSetFragmentProgram(GraphicsContext, basicFragmentProgram);
 
 		// set the vertex program constants
 		void *vertexDefaultBuffer;
-		sceGxmReserveVertexDefaultUniformBuffer(context, &vertexDefaultBuffer);
+		sceGxmReserveVertexDefaultUniformBuffer(GraphicsContext, &vertexDefaultBuffer);
 		sceGxmSetUniformDataF(vertexDefaultBuffer, wvpParam, 0, 16, wvpData);
 
 		// draw the spinning triangle
-		sceGxmSetVertexStream(context, 0, basicVertices);
-		sceGxmDraw(context, SCE_GXM_PRIMITIVE_TRIANGLES, SCE_GXM_INDEX_FORMAT_U16, basicIndices, 3);
+		sceGxmSetVertexStream(GraphicsContext, 0, basicVertices);
+		sceGxmDraw(GraphicsContext, SCE_GXM_PRIMITIVE_TRIANGLES, SCE_GXM_INDEX_FORMAT_U16, basicIndices, 3);
 
 		// end the scene on the main render target, submitting rendering work to the GPU
-		sceGxmEndScene(context, NULL, NULL);
+		sceGxmEndScene(GraphicsContext, NULL, NULL);
 
 		// PA heartbeat to notify end of frame
 		sceGxmPadHeartbeat(&displaySurface[backBufferIndex], displayBufferSync[backBufferIndex]);

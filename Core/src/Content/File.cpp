@@ -30,6 +30,19 @@ bool File::ReadAsString( const std::string &path, std::string &str )
 	delete buf;
 
 	return true;
+#elif VITA
+	std::string localPath = "app0:/" + path;
+	ifstream file( localPath.c_str(), ios::in );
+
+	if( !file )
+		return false;
+
+	file.seekg( 0, ios::end );
+	str.reserve( static_cast< unsigned int >( file.tellg() ) );
+	file.seekg( 0, ios::beg );
+
+	str.assign( ( istreambuf_iterator< char >( file ) ), istreambuf_iterator< char >() );
+	return true;
 #else
 	ifstream file( path.c_str(), ios::in );
 

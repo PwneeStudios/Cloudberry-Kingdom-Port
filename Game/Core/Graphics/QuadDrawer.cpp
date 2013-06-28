@@ -91,6 +91,8 @@ namespace CloudberryKingdom
 			string path = PS3_PATH_PREFIX + "ContentPS3/Fonts/" + name + ".fnt";
 #elif CAFE
 			string path = "Fonts/" + name + ".fnt";
+#elif VITA
+			string path = "ContentVita/Fonts/" + name + ".fnt";
 #else
 			string path = "Content/Fonts/" + name + ".fnt";
 #endif

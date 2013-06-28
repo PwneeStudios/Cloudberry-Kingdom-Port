@@ -170,11 +170,17 @@ void CleanUpPatcher()
 	sceGxmShaderPatcherDestroy( shaderPatcher );
 }
 
+// Pointer to global graphics context. Declared in CoreVita.cpp.
+extern SceGxmContext *GraphicsContext;
+
 void Effect::Apply()
 {
-	//cgGLBindProgram( internal_->VertexProgram );
-	//cgGLBindProgram( internal_->FragmentProgram );
+	sceGxmSetVertexProgram( GraphicsContext, internal_->VertexProgram );
+	sceGxmSetFragmentProgram( GraphicsContext, internal_->FragmentProgram );
 
+	//void *vertexDefaultBuffer;
+	//sceGxmReserveVertexDefaultUniformBuffer( GraphicsContext, &vertexDefaultBuffer );
+	
 	std::map<std::string, boost::shared_ptr<EffectParameter> >::iterator i;
 	for( i = internal_->Parameters.begin(); i != internal_->Parameters.end(); ++i )
 		i->second->Apply();
@@ -322,6 +328,12 @@ void Effect::Load( const std::string &name )
 	}
 
 	internal_->Parameters[ "SecretDefaultParameter" ] = boost::make_shared< EffectParameter >( *this, 0 );
+
+	DefaultTechnique = boost::make_shared<EffectTechnique>(
+		boost::shared_ptr<EffectPass>( new EffectPass( *this, 0 ) )
+	);
+
+	CurrentTechnique = DefaultTechnique;
 }
 
 boost::shared_ptr<EffectParameter> Effect::Parameters( const std::string &name )
