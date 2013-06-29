@@ -173,24 +173,41 @@ void CleanUpPatcher()
 // Pointer to global graphics context. Declared in CoreVita.cpp.
 extern SceGxmContext *GraphicsContext;
 
+float *							ParameterData;
+int								ParameterNumComponents;
+const SceGxmProgramParameter *	Parameter;
+
 void Effect::Apply()
 {
 	sceGxmSetVertexProgram( GraphicsContext, internal_->VertexProgram );
 	sceGxmSetFragmentProgram( GraphicsContext, internal_->FragmentProgram );
 
-	//void *vertexDefaultBuffer;
-	//sceGxmReserveVertexDefaultUniformBuffer( GraphicsContext, &vertexDefaultBuffer );
+	void *vertexDefaultBuffer;
+	sceGxmReserveVertexDefaultUniformBuffer( GraphicsContext, &vertexDefaultBuffer );
 	
 	std::map<std::string, boost::shared_ptr<EffectParameter> >::iterator i;
 	for( i = internal_->Parameters.begin(); i != internal_->Parameters.end(); ++i )
+	{
 		i->second->Apply();
+
+		if( !Parameter )
+			continue;
+
+		sceGxmSetUniformDataF(
+			vertexDefaultBuffer,
+			Parameter,
+			0,
+			ParameterNumComponents,
+			ParameterData
+		);
+	}
 }
 
 Effect::Effect() :
 	internal_( new EffectInternal )
 {
-	//internal_->FragmentProgram = 0;
-	//internal_->VertexProgram = 0;
+	internal_->FragmentProgram = 0;
+	internal_->VertexProgram = 0;
 }
 
 Effect::~Effect()
@@ -208,7 +225,7 @@ char *LoadShaderFromSDATA( const std::string &path )
 
 void Effect::Load( const std::string &name )
 {
-	const SceGxmProgram *vertexProgramGxp		= NULL;
+	const SceGxmProgram *vertexProgramGxp	= NULL;
 	const SceGxmProgram *fragmentProgramGxp	= NULL;
 
 	if( name == "Shaders/BasicEffect" )
@@ -287,15 +304,28 @@ void Effect::Load( const std::string &name )
 	const SceGxmProgramParameter *texcoordParameter = sceGxmProgramFindParameterByName( vertexProgramGxp, "a_texcoord" );
 	const SceGxmProgramParameter *colorParameter = sceGxmProgramFindParameterByName( vertexProgramGxp, "a_color" );
 
-	SceGxmVertexAttribute vertexAttributes[] = {
-		{ 0, 0, SCE_GXM_ATTRIBUTE_FORMAT_F32, 2, sceGxmProgramParameterGetResourceIndex( positionParameter ) },
-		{ 0, sizeof( float ) * 2, SCE_GXM_ATTRIBUTE_FORMAT_F32, 2, sceGxmProgramParameterGetResourceIndex( texcoordParameter ) },
-		{ 0, sizeof( float ) * 4, SCE_GXM_ATTRIBUTE_FORMAT_F32, 4, sceGxmProgramParameterGetResourceIndex( colorParameter ) }
-	};
+	SceGxmVertexAttribute vertexAttributes[3];
+	vertexAttributes[ 0 ].streamIndex = 0;
+	vertexAttributes[ 0 ].offset = 0;
+	vertexAttributes[ 0 ].format = SCE_GXM_ATTRIBUTE_FORMAT_F32;
+	vertexAttributes[ 0 ].componentCount = 2;
+	vertexAttributes[ 0 ].regIndex = sceGxmProgramParameterGetResourceIndex( positionParameter );
 
-	SceGxmVertexStream vertexStreams[] = {
-		{ sizeof( float ) * 8, SCE_GXM_INDEX_SOURCE_INDEX_16BIT }
-	};
+	vertexAttributes[ 1 ].streamIndex = 0;
+	vertexAttributes[ 1 ].offset = sizeof( float ) * 2;
+	vertexAttributes[ 1 ].format = SCE_GXM_ATTRIBUTE_FORMAT_F32;
+	vertexAttributes[ 1 ].componentCount = 2;
+	vertexAttributes[ 1 ].regIndex = sceGxmProgramParameterGetResourceIndex( texcoordParameter );
+
+	vertexAttributes[ 2 ].streamIndex = 0;
+	vertexAttributes[ 2 ].offset = sizeof( float ) * 4;
+	vertexAttributes[ 2 ].format = SCE_GXM_ATTRIBUTE_FORMAT_F32;
+	vertexAttributes[ 2 ].componentCount = 4;
+	vertexAttributes[ 2 ].regIndex = sceGxmProgramParameterGetResourceIndex( colorParameter );
+
+	SceGxmVertexStream vertexStreams[1];
+	vertexStreams[ 0 ].stride = sizeof( float ) * 8;
+	vertexStreams[ 0 ].indexSource = SCE_GXM_INDEX_FORMAT_U16;
 
 	SceGxmVertexProgram *vertexProgram;
 	SceGxmFragmentProgram *fragmentProgram;
@@ -311,23 +341,39 @@ void Effect::Load( const std::string &name )
 		const char *paramName = sceGxmProgramParameterGetName( param );
 		SceGxmParameterType paramType = sceGxmProgramParameterGetType( param );
 		uint32_t componentCount = sceGxmProgramParameterGetComponentCount( param );
+		SceGxmParameterCategory paramCategory = sceGxmProgramParameterGetCategory( param );
 
-		internal_->Parameters[ paramName ] = boost::make_shared< EffectParameter >( *this, i );
+		if( paramCategory == SCE_GXM_PARAMETER_CATEGORY_ATTRIBUTE )
+			continue;
+
+		internal_->Parameters[ paramName ] = boost::make_shared< EffectParameter >( *this,
+			reinterpret_cast< int >( param )
+		);
 	}
 
 	numParameters = sceGxmProgramGetParameterCount( fragmentProgramGxp );
 
 	for( uint32_t i = 0; i < numParameters; ++i )
 	{
-		const SceGxmProgramParameter *param = sceGxmProgramGetParameter( vertexProgramGxp, i );
+		const SceGxmProgramParameter *param = sceGxmProgramGetParameter( fragmentProgramGxp, i );
 		const char *paramName = sceGxmProgramParameterGetName( param );
 		SceGxmParameterType paramType = sceGxmProgramParameterGetType( param );
 		uint32_t componentCount = sceGxmProgramParameterGetComponentCount( param );
+		SceGxmParameterCategory paramCategory = sceGxmProgramParameterGetCategory( param );
 
-		internal_->Parameters[ paramName ] = boost::make_shared< EffectParameter >( *this, i );
+		if( paramCategory == SCE_GXM_PARAMETER_CATEGORY_ATTRIBUTE
+			|| paramCategory == SCE_GXM_PARAMETER_CATEGORY_SAMPLER )
+			continue;
+
+		internal_->Parameters[ paramName ] = boost::make_shared< EffectParameter >( *this,
+			reinterpret_cast< int >( param )
+		);
 	}
 
 	internal_->Parameters[ "SecretDefaultParameter" ] = boost::make_shared< EffectParameter >( *this, 0 );
+
+	internal_->VertexProgram = vertexProgram;
+	internal_->FragmentProgram = fragmentProgram;
 
 	DefaultTechnique = boost::make_shared<EffectTechnique>(
 		boost::shared_ptr<EffectPass>( new EffectPass( *this, 0 ) )

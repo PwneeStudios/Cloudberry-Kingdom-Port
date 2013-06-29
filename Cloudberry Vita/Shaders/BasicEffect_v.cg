@@ -3,9 +3,9 @@
  * space.  Pass the texture coordinates and the color to the
  * pixel shader.
  */
-float2 a_position;
-float2 a_texcoord;
-float4 a_color;
+in float2 a_position;
+in float2 a_texcoord;
+in float4 a_color;
 
 out float4 gl_Position	: POSITION;
 out float2 v_position	: TEXCOORD0;

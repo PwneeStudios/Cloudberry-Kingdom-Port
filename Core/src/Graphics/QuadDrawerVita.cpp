@@ -231,21 +231,21 @@ void QuadDrawerVita::Flush()
 		else if( batch.Map == internal_->RightFrame )
 		{
 			internal_->RightFrameMask->Activate( *internal_->ExtraTextureParameter2.get() );
-		}
+		}*/
 		
-		batch.Map->Activate( *internal_->TextureParameter.get() );*/
+		batch.Map->Activate( 0 );
 
 		internal_->CurrentEffect->CurrentTechnique->Passes[ 0 ]->Apply();
 
 		sceGxmSetVertexStream( GraphicsContext, 0, internal_->Vertices );
 		
-		/*sceGxmDraw(
+		sceGxmDraw(
 			GraphicsContext,
 			SCE_GXM_PRIMITIVE_TRIANGLES,
 			SCE_GXM_INDEX_FORMAT_U16,
 			internal_->Indices + batch.Offset,
 			batch.NumElements
-		);*/
+		);
 		//glDrawArrays( GL_QUADS, batch.Offset, batch.NumElements );
 	}
 

@@ -92,8 +92,12 @@ void TextureVita::GpuDestroy()
 		;//psglDestroyTextureReference( &internal_->Ref );
 }
 
+// Pointer to global graphics context. Declared in CoreVita.cpp.
+extern SceGxmContext *GraphicsContext;
+
 void TextureVita::Activate( unsigned int sampler )
 {
+	sceGxmSetFragmentTexture( GraphicsContext, sampler, &internal_->Texture );
 }
 
 void TextureVita::Activate( EffectParameter &parameter )
