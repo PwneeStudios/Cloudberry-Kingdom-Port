@@ -173,10 +173,6 @@ void CleanUpPatcher()
 // Pointer to global graphics context. Declared in CoreVita.cpp.
 extern SceGxmContext *GraphicsContext;
 
-float *							ParameterData;
-int								ParameterNumComponents;
-const SceGxmProgramParameter *	Parameter;
-
 void Effect::Apply()
 {
 	sceGxmSetVertexProgram( GraphicsContext, internal_->VertexProgram );
@@ -190,15 +186,15 @@ void Effect::Apply()
 	{
 		i->second->Apply();
 
-		if( !Parameter )
+		if( !i->second->internal_->Parameter )
 			continue;
 
 		sceGxmSetUniformDataF(
 			vertexDefaultBuffer,
-			Parameter,
+			i->second->internal_->Parameter,
 			0,
-			ParameterNumComponents,
-			ParameterData
+			i->second->internal_->NumComponents,
+			i->second->internal_->Data
 		);
 	}
 }
@@ -304,27 +300,34 @@ void Effect::Load( const std::string &name )
 	const SceGxmProgramParameter *texcoordParameter = sceGxmProgramFindParameterByName( vertexProgramGxp, "a_texcoord" );
 	const SceGxmProgramParameter *colorParameter = sceGxmProgramFindParameterByName( vertexProgramGxp, "a_color" );
 
+	struct QuadVert
+	{
+		Vector2 Position;
+		Vector2 TexCoord;
+		Vector4 Color;
+	};
+
 	SceGxmVertexAttribute vertexAttributes[3];
 	vertexAttributes[ 0 ].streamIndex = 0;
-	vertexAttributes[ 0 ].offset = 0;
+	vertexAttributes[ 0 ].offset = offsetof( QuadVert, Position );
 	vertexAttributes[ 0 ].format = SCE_GXM_ATTRIBUTE_FORMAT_F32;
 	vertexAttributes[ 0 ].componentCount = 2;
 	vertexAttributes[ 0 ].regIndex = sceGxmProgramParameterGetResourceIndex( positionParameter );
 
 	vertexAttributes[ 1 ].streamIndex = 0;
-	vertexAttributes[ 1 ].offset = sizeof( float ) * 2;
+	vertexAttributes[ 1 ].offset = offsetof( QuadVert, TexCoord );
 	vertexAttributes[ 1 ].format = SCE_GXM_ATTRIBUTE_FORMAT_F32;
 	vertexAttributes[ 1 ].componentCount = 2;
 	vertexAttributes[ 1 ].regIndex = sceGxmProgramParameterGetResourceIndex( texcoordParameter );
 
 	vertexAttributes[ 2 ].streamIndex = 0;
-	vertexAttributes[ 2 ].offset = sizeof( float ) * 4;
+	vertexAttributes[ 2 ].offset = offsetof( QuadVert, Color );
 	vertexAttributes[ 2 ].format = SCE_GXM_ATTRIBUTE_FORMAT_F32;
 	vertexAttributes[ 2 ].componentCount = 4;
 	vertexAttributes[ 2 ].regIndex = sceGxmProgramParameterGetResourceIndex( colorParameter );
 
 	SceGxmVertexStream vertexStreams[1];
-	vertexStreams[ 0 ].stride = sizeof( float ) * 8;
+	vertexStreams[ 0 ].stride = sizeof( QuadVert );
 	vertexStreams[ 0 ].indexSource = SCE_GXM_INDEX_FORMAT_U16;
 
 	SceGxmVertexProgram *vertexProgram;

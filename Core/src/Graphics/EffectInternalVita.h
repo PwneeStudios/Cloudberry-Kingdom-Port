@@ -18,4 +18,24 @@ struct EffectInternal
 	SceGxmFragmentProgram	*FragmentProgram;
 };
 
+enum ParamType
+{
+	ParamType_None,
+	ParamType_Vector4,
+	ParamType_Matrix,
+	ParamType_Texture,
+	ParamType_Vector2,
+	ParamType_Float,
+	ParamType_Int
+};
+
+struct EffectParameterInternal
+{
+	ParamType PType;
+
+	float							Data[ sizeof( Matrix ) ];
+	int								NumComponents;
+	const SceGxmProgramParameter *	Parameter;
+};
+
 #endif

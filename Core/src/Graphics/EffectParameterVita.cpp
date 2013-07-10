@@ -5,26 +5,6 @@
 
 #include "EffectInternalVita.h"
 
-enum ParamType
-{
-	ParamType_None,
-	ParamType_Vector4,
-	ParamType_Matrix,
-	ParamType_Texture,
-	ParamType_Vector2,
-	ParamType_Float,
-	ParamType_Int
-};
-
-struct EffectParameterInternal
-{
-	ParamType PType;
-
-	float							Data[ sizeof( Matrix ) ];
-	int								NumComponents;
-	const SceGxmProgramParameter *	Parameter;
-};
-
 EffectParameter::EffectParameter( const Effect &effect, int id ) :
 	internal_( new EffectParameterInternal )
 {
@@ -83,15 +63,8 @@ float EffectParameter::GetValueSingle()
 	return internal_->Data[ 0 ];
 }
 
-extern float *							ParameterData;
-extern int								ParameterNumComponents;
-extern const SceGxmProgramParameter *	Parameter;
-
 void EffectParameter::Apply()
 {
-	ParameterData			= internal_->Data;
-	ParameterNumComponents	= internal_->NumComponents;
-	Parameter				= internal_->Parameter;
 	//if( internal_->Parameter == 0 )
 	//	return;
 

@@ -19,6 +19,8 @@
 #include <np.h>
 #include <sceconst.h>
 #include <libdbg.h>
+#include <libperf.h>
+#include <libsysmodule.h>
 #include <kernel.h>
 #include <display.h>
 #include <ctrl.h>
@@ -244,6 +246,27 @@ CoreVita::CoreVita( GameLoop &game ) :
 	scheduler_( 0 )
 {
 	int err = SCE_OK;
+
+#define ENABLE_RAZOR_HUD
+#define ENABLE_RAZOR_CAPTURE
+
+#ifdef ENABLE_RAZOR_HUD
+    // Initialize the Razor HUD system.
+    // This should be done before the call to sceGxmInitialize().
+    err = sceSysmoduleLoadModule( SCE_SYSMODULE_RAZOR_HUD );
+    SCE_DBG_ASSERT(err == SCE_OK);
+#endif
+
+#ifdef ENABLE_RAZOR_CAPTURE
+    // Initialize the Razor capture system.
+    // This should be done before the call to sceGxmInitialize().
+    err = sceSysmoduleLoadModule( SCE_SYSMODULE_RAZOR_CAPTURE );
+    SCE_DBG_ASSERT(err == SCE_OK);
+
+    // Trigger a capture after 100 frames.
+    //sceRazorCaptureSetTrigger( 100, "host0:shadow_mapping.sgx" );
+#endif
+
 
 	SceGxmInitializeParams initializeParams;
 	memset( &initializeParams, 0, sizeof( SceGxmInitializeParams ) );
@@ -940,25 +963,28 @@ int CoreVita::Run()
 		// start rendering to the main render target
 		sceGxmBeginScene(
 			GraphicsContext,
-			0,
+			SCE_GXM_SCENE_FRAGMENT_SET_DEPENDENCY | SCE_GXM_SCENE_VERTEX_WAIT_FOR_DEPENDENCY,
 			renderTarget,
 			NULL,
 			NULL,
 			displayBufferSync[backBufferIndex],
 			&displaySurface[backBufferIndex],
-			&depthSurface);
-
-		game_.Update();
-
-		qd_->Flush();
+			&depthSurface
+		);
 
 		// set clear shaders
-		sceGxmSetVertexProgram(GraphicsContext, clearVertexProgram);
-		sceGxmSetFragmentProgram(GraphicsContext, clearFragmentProgram);
+		sceGxmSetVertexProgram( GraphicsContext, clearVertexProgram );
+		sceGxmSetFragmentProgram( GraphicsContext, clearFragmentProgram );
 
 		// draw the clear triangle
-		sceGxmSetVertexStream(GraphicsContext, 0, clearVertices);
-		sceGxmDraw(GraphicsContext, SCE_GXM_PRIMITIVE_TRIANGLES, SCE_GXM_INDEX_FORMAT_U16, clearIndices, 3);
+		sceGxmSetVertexStream( GraphicsContext, 0, clearVertices );
+		sceGxmDraw( GraphicsContext, SCE_GXM_PRIMITIVE_TRIANGLES, SCE_GXM_INDEX_FORMAT_U16, clearIndices, 3 );
+
+		{
+			game_.Update();
+
+			qd_->Flush();
+		}
 
 		// render the rotating triangle
 		sceGxmSetVertexProgram(GraphicsContext, basicVertexProgram);
@@ -974,10 +1000,10 @@ int CoreVita::Run()
 		sceGxmDraw(GraphicsContext, SCE_GXM_PRIMITIVE_TRIANGLES, SCE_GXM_INDEX_FORMAT_U16, basicIndices, 3);
 
 		// end the scene on the main render target, submitting rendering work to the GPU
-		sceGxmEndScene(GraphicsContext, NULL, NULL);
+		sceGxmEndScene( GraphicsContext, NULL, NULL );
 
 		// PA heartbeat to notify end of frame
-		sceGxmPadHeartbeat(&displaySurface[backBufferIndex], displayBufferSync[backBufferIndex]);
+		sceGxmPadHeartbeat( &displaySurface[backBufferIndex], displayBufferSync[backBufferIndex] );
 
 		/* -----------------------------------------------------------------
 			13. Flip operation
