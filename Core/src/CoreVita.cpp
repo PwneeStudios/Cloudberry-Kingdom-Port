@@ -986,6 +986,7 @@ int CoreVita::Run()
 			qd_->Flush();
 		}
 
+		/*
 		// render the rotating triangle
 		sceGxmSetVertexProgram(GraphicsContext, basicVertexProgram);
 		sceGxmSetFragmentProgram(GraphicsContext, basicFragmentProgram);
@@ -998,6 +999,7 @@ int CoreVita::Run()
 		// draw the spinning triangle
 		sceGxmSetVertexStream(GraphicsContext, 0, basicVertices);
 		sceGxmDraw(GraphicsContext, SCE_GXM_PRIMITIVE_TRIANGLES, SCE_GXM_INDEX_FORMAT_U16, basicIndices, 3);
+		*/
 
 		// end the scene on the main render target, submitting rendering work to the GPU
 		sceGxmEndScene( GraphicsContext, NULL, NULL );

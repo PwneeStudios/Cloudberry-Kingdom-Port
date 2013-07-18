@@ -77,6 +77,12 @@ struct DrawBuffer
 			)
 		);
 	}
+
+	~DrawBuffer()
+	{
+		graphicsFree( AllocationIDVertices );
+		graphicsFree( AllocationIDIndices );
+	}
 };
 
 struct QuadDrawerInternal
@@ -124,7 +130,10 @@ struct QuadDrawerInternal
 QuadDrawerVita::QuadDrawerVita() :
 	internal_( new QuadDrawerInternal )
 {
-	internal_->Vertices = reinterpret_cast< QuadVert * >(
+	internal_->Vertices = internal_->DrawBuffers[ internal_->CurrentBuffer ].Vertices;
+	internal_->Indices = internal_->DrawBuffers[ internal_->CurrentBuffer ].Indices;
+
+	/*internal_->Vertices = reinterpret_cast< QuadVert * >(
 		graphicsAlloc(
 			SCE_KERNEL_MEMBLOCK_TYPE_USER_RWDATA_UNCACHE,
 			MAX_QUADS * 4 * sizeof( QuadVert ),
@@ -142,7 +151,7 @@ QuadDrawerVita::QuadDrawerVita() :
 			SCE_GXM_MEMORY_ATTRIB_READ,
 			&internal_->AllocationIDIndices
 		)
-	);
+	);*/
 
 	internal_->MiddleFrame = CONTENT->Load< Texture >( "Art/Environments/Castle/Background/v2/Castle_Window_Center_Frame.png" );
 	internal_->LeftFrame = CONTENT->Load< Texture >( "Art/Environments/Castle/Background/v2/Castle_Window_Left_Frame.png" );
@@ -157,8 +166,8 @@ QuadDrawerVita::QuadDrawerVita() :
 
 QuadDrawerVita::~QuadDrawerVita()
 {
-	graphicsFree( internal_->AllocationIDVertices );
-	graphicsFree( internal_->AllocationIDIndices );
+	/*graphicsFree( internal_->AllocationIDVertices );
+	graphicsFree( internal_->AllocationIDIndices );*/
 
 	delete internal_;
 }
@@ -268,25 +277,46 @@ void QuadDrawerVita::Flush()
 
 		internal_->CurrentEffect->CurrentTechnique->Passes[ 0 ]->Apply();
 
-		/*sceGxmSetFrontDepthFunc( GraphicsContext, SCE_GXM_DEPTH_FUNC_ALWAYS );
-		sceGxmSetBackDepthFunc( GraphicsContext, SCE_GXM_DEPTH_FUNC_ALWAYS );*/
+		sceGxmSetFrontDepthFunc( GraphicsContext, SCE_GXM_DEPTH_FUNC_ALWAYS );
+		sceGxmSetBackDepthFunc( GraphicsContext, SCE_GXM_DEPTH_FUNC_ALWAYS );
+
+		sceGxmSetFrontPolygonMode( GraphicsContext, SCE_GXM_POLYGON_MODE_TRIANGLE_LINE );
+		sceGxmSetBackPolygonMode( GraphicsContext, SCE_GXM_POLYGON_MODE_TRIANGLE_LINE );
 
 		sceGxmSetVertexStream( GraphicsContext, 0, internal_->Vertices );
 
-		int err = sceGxmDraw(
-			GraphicsContext,
-			SCE_GXM_PRIMITIVE_TRIANGLES,
-			SCE_GXM_INDEX_FORMAT_U16,
-			internal_->Indices + batch.Offset,
-			batch.NumElements
-		);
-		SCE_DBG_ASSERT( err == SCE_OK );
-	}
+		/*if( batch.NumElements == 1740 )
+		{*/
+			int err = sceGxmDraw(
+				GraphicsContext,
+				SCE_GXM_PRIMITIVE_TRIANGLES,
+				SCE_GXM_INDEX_FORMAT_U16,
+				internal_->Indices + batch.Offset,
+				batch.NumElements
+			);
+			SCE_DBG_ASSERT( err == SCE_OK );
 
-	/*int err = sceGxmMidSceneFlush( GraphicsContext, SCE_GXM_MIDSCENE_PRESERVE_DEFAULT_UNIFORM_BUFFERS, NULL, NULL );
-	SCE_DBG_ASSERT( err == SCE_OK );*/
+			/*int k = 0;
+			for( int i = 0; i < 100000; ++i )
+			{
+				int j = 0;
+				j++;
+				k += j;
+			}*/
+		//}
+
+			/*err = sceGxmMidSceneFlush( GraphicsContext, SCE_GXM_MIDSCENE_PRESERVE_DEFAULT_UNIFORM_BUFFERS, NULL, NULL );
+			SCE_DBG_ASSERT( err == SCE_OK );*/
+
+			//sceGxmWaitEvent();
+		//}
+	}
 
 	internal_->Batches.clear();
 	internal_->NumElements = 0;
 	internal_->NumVertices = 0;
+
+	internal_->CurrentBuffer = ( internal_->CurrentBuffer + 1 ) % 2;
+	internal_->Vertices = internal_->DrawBuffers[ internal_->CurrentBuffer ].Vertices;
+	internal_->Indices = internal_->DrawBuffers[ internal_->CurrentBuffer ].Indices;
 }

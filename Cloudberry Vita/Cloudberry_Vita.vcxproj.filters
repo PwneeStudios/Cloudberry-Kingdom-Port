@@ -3718,5 +3718,7 @@
     <CustomBuild Include="Shaders\Circle_v.cg" />
     <CustomBuild Include="Shaders\BwEffect_v.cg" />
     <CustomBuild Include="Shaders\BasicEffect_v.cg" />
+    <CustomBuild Include="Shaders\SuperBasicEffect_f.cg" />
+    <CustomBuild Include="Shaders\SuperBasicEffect_v.cg" />
   </ItemGroup>
 </Project>

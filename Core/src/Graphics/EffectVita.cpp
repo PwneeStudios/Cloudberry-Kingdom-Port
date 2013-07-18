@@ -16,6 +16,9 @@ extern const SceGxmProgram _binary_clear_f_gxp_start;
 extern const SceGxmProgram _binary_basic_v_gxp_start;
 extern const SceGxmProgram _binary_basic_f_gxp_start;
 
+extern const SceGxmProgram _binary_SuperBasicEffect_v_gxp_start;
+extern const SceGxmProgram _binary_SuperBasicEffect_f_gxp_start;
+
 extern const SceGxmProgram _binary_BasicEffect_v_gxp_start;
 extern const SceGxmProgram _binary_BasicEffect_f_gxp_start;
 
@@ -224,7 +227,10 @@ void Effect::Load( const std::string &name )
 	const SceGxmProgram *vertexProgramGxp	= NULL;
 	const SceGxmProgram *fragmentProgramGxp	= NULL;
 
-	if( name == "Shaders/BasicEffect" )
+	vertexProgramGxp	= &_binary_SuperBasicEffect_v_gxp_start;
+	fragmentProgramGxp	= &_binary_SuperBasicEffect_f_gxp_start;
+
+	/*if( name == "Shaders/BasicEffect" )
 	{
 		vertexProgramGxp	= &_binary_BasicEffect_v_gxp_start;
 		fragmentProgramGxp	= &_binary_BasicEffect_f_gxp_start;
@@ -288,7 +294,7 @@ void Effect::Load( const std::string &name )
 	{
 		vertexProgramGxp	= &_binary_Text_ThinOutline_v_gxp_start;
 		fragmentProgramGxp	= &_binary_Text_ThinOutline_f_gxp_start;
-	}
+	}*/
 
 	assert( vertexProgramGxp && fragmentProgramGxp );
 
