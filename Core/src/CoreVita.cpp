@@ -878,6 +878,27 @@ void CheckNPDRMFileThread( uint64_t GraphicsContext )
 	//sys_ppu_thread_exit( 0 );
 }
 
+static uint32_t backBufferIndex = 0;
+static uint32_t frontBufferIndex = 0;
+
+void BeginScene()
+{
+	sceGxmBeginScene(
+		GraphicsContext,
+		SCE_GXM_SCENE_FRAGMENT_SET_DEPENDENCY | SCE_GXM_SCENE_VERTEX_WAIT_FOR_DEPENDENCY,
+		renderTarget,
+		NULL,
+		NULL,
+		displayBufferSync[backBufferIndex],
+		&displaySurface[backBufferIndex],
+		&depthSurface
+	);
+}
+
+void EndScene()
+{
+}
+
 int CoreVita::Run()
 {
 	running_ = true;
@@ -892,8 +913,6 @@ int CoreVita::Run()
 	printf("## api_libgxm/basic: INIT SUCCEEDED ##\n");
 
 	// loop until exit
-	uint32_t backBufferIndex = 0;
-	uint32_t frontBufferIndex = 0;
 	float rotationAngle = 0.0f;
 	bool quit = false;
 
@@ -961,16 +980,7 @@ int CoreVita::Run()
 		   ----------------------------------------------------------------- */
 
 		// start rendering to the main render target
-		sceGxmBeginScene(
-			GraphicsContext,
-			SCE_GXM_SCENE_FRAGMENT_SET_DEPENDENCY | SCE_GXM_SCENE_VERTEX_WAIT_FOR_DEPENDENCY,
-			renderTarget,
-			NULL,
-			NULL,
-			displayBufferSync[backBufferIndex],
-			&displaySurface[backBufferIndex],
-			&depthSurface
-		);
+		BeginScene();
 
 		// set clear shaders
 		sceGxmSetVertexProgram( GraphicsContext, clearVertexProgram );

@@ -22,6 +22,8 @@ extern void graphicsFree(SceUID uid);
 /// Maximum number of displayable quads.
 #define MAX_QUADS 1024
 
+#define MAX_RING_QUADS 2048
+
 struct QuadVert
 {
 	Vector2 Position;
@@ -85,6 +87,48 @@ struct DrawBuffer
 	}
 };
 
+template< typename T >
+class RingBuffer
+{
+	unsigned int	numElements_;
+	unsigned int	numUsed_;
+	T *				data_;
+
+public:
+	RingBuffer( unsigned int numElements )
+		: numElements_( numElements )
+		, numUsed_( 0 )
+		, data_( NULL )
+	{
+		data_ = new T[ numElements_ ];
+	}
+
+	~RingBuffer()
+	{
+		delete[] data_;
+	}
+
+	bool CanAllocate( unsigned int n )
+	{
+		return numUsed_ + n <= numElements_;
+	}
+
+	T *Allocate( unsigned int n )
+	{
+		T *data = data_ + numUsed_;
+		numUsed_ += n;
+		return data;
+	}
+
+	void Reset()
+	{
+		numUsed_ = 0;
+	}
+};
+
+RingBuffer< QuadVert > *		QuadDrawerVertexRingBuffer;
+RingBuffer< unsigned short > *	QuadDrawerIndexRingBuffer;
+
 struct QuadDrawerInternal
 {
 	unsigned int	QuadBuffer;
@@ -132,6 +176,9 @@ QuadDrawerVita::QuadDrawerVita() :
 {
 	internal_->Vertices = internal_->DrawBuffers[ internal_->CurrentBuffer ].Vertices;
 	internal_->Indices = internal_->DrawBuffers[ internal_->CurrentBuffer ].Indices;
+
+	QuadDrawerVertexRingBuffer	= new RingBuffer< QuadVert >( MAX_RING_QUADS * 4 );
+	QuadDrawerIndexRingBuffer	= new RingBuffer< unsigned short >( MAX_RING_QUADS * 2 * 3 );
 
 	/*internal_->Vertices = reinterpret_cast< QuadVert * >(
 		graphicsAlloc(
@@ -277,16 +324,18 @@ void QuadDrawerVita::Flush()
 
 		internal_->CurrentEffect->CurrentTechnique->Passes[ 0 ]->Apply();
 
+		sceGxmSetFrontDepthWriteEnable( GraphicsContext, SCE_GXM_DEPTH_WRITE_DISABLED );
 		sceGxmSetFrontDepthFunc( GraphicsContext, SCE_GXM_DEPTH_FUNC_ALWAYS );
+		sceGxmSetBackDepthWriteEnable( GraphicsContext, SCE_GXM_DEPTH_WRITE_DISABLED );
 		sceGxmSetBackDepthFunc( GraphicsContext, SCE_GXM_DEPTH_FUNC_ALWAYS );
 
-		sceGxmSetFrontPolygonMode( GraphicsContext, SCE_GXM_POLYGON_MODE_TRIANGLE_LINE );
-		sceGxmSetBackPolygonMode( GraphicsContext, SCE_GXM_POLYGON_MODE_TRIANGLE_LINE );
+		//sceGxmSetFrontPolygonMode( GraphicsContext, SCE_GXM_POLYGON_MODE_TRIANGLE_LINE );
+		//sceGxmSetBackPolygonMode( GraphicsContext, SCE_GXM_POLYGON_MODE_TRIANGLE_LINE );
 
 		sceGxmSetVertexStream( GraphicsContext, 0, internal_->Vertices );
 
-		/*if( batch.NumElements == 1740 )
-		{*/
+		if( batch.NumElements == 1740 )
+		{
 			int err = sceGxmDraw(
 				GraphicsContext,
 				SCE_GXM_PRIMITIVE_TRIANGLES,
@@ -303,7 +352,7 @@ void QuadDrawerVita::Flush()
 				j++;
 				k += j;
 			}*/
-		//}
+		}
 
 			/*err = sceGxmMidSceneFlush( GraphicsContext, SCE_GXM_MIDSCENE_PRESERVE_DEFAULT_UNIFORM_BUFFERS, NULL, NULL );
 			SCE_DBG_ASSERT( err == SCE_OK );*/
