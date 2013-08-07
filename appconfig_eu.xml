@@ -1,0 +1,625 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wup-master-info tool-version="0.1" format-version="2012-01" language="en" tool="appconfig">
+  <submission-info>
+    <article></article>
+    <release-date>
+      <release-year></release-year>
+      <release-month></release-month>
+      <release-day></release-day>
+    </release-date>
+    <submit-date>
+      <submit-year></submit-year>
+      <submit-month></submit-month>
+      <submit-day></submit-day>
+    </submit-date>
+    <submit-version></submit-version>
+    <submit-reason></submit-reason>
+    <memo></memo>
+    <changed-content></changed-content>
+    <changed-content-detail></changed-content-detail>
+  </submission-info>
+  <company-info>
+    <customer-info enable="True">
+      <customer-id1>
+        <company-name></company-name>
+        <department-name></department-name>
+        <user-name></user-name>
+        <user-read-name></user-read-name>
+        <tel></tel>
+        <fax></fax>
+        <e-mail></e-mail>
+        <ntsc-warioworld-user-id></ntsc-warioworld-user-id>
+      </customer-id1>
+    </customer-info>
+    <customer-info enable="False">
+      <customer-id2>
+        <company-name></company-name>
+        <department-name></department-name>
+        <user-name></user-name>
+        <user-read-name></user-read-name>
+        <tel></tel>
+        <fax></fax>
+        <e-mail></e-mail>
+        <ntsc-warioworld-user-id></ntsc-warioworld-user-id>
+      </customer-id2>
+    </customer-info>
+  </company-info>
+  <disc>
+    <disc-version>0</disc-version>
+    <media-platform>WUP</media-platform>
+    <media-size>0</media-size>
+    <num-partition>1</num-partition>
+    <crc16>
+      <header-crc16></header-crc16>
+      <data-crc16></data-crc16>
+      <masterinfo-crc16></masterinfo-crc16>
+    </crc16>
+  </disc>
+  <partition-list>
+    <partition guid="02fa2939-edcd-468d-95bd-a7399f3c48c0" name="p01">
+      <title-version>0x0000</title-version>
+      <content-platform>WUP</content-platform>
+      <form-code>P</form-code>
+      <initial-code>WCKP</initial-code>
+      <product-code>WUP-P-WCKP</product-code>
+      <company-code>0041</company-code>
+      <unique-id>0x0000131A</unique-id>
+      <mastering-date></mastering-date>
+      <variation>0x00</variation>
+      <category-id>0x00</category-id>
+      <title-id>0x0005000010131A00</title-id>
+      <group-id>0x0000131A</group-id>
+      <boss-id>0x0000000000000000</boss-id>
+      <app-file-name>Cloudberry_Kingdom</app-file-name>
+      <cmd-flags>0</cmd-flags>
+      <app-type>0x80000000</app-type>
+      <logo-type>2</logo-type>
+      <app-launch-type>0x00000000</app-launch-type>
+      <invisible-flag>0x00000000</invisible-flag>
+      <no-managed-flag>0x00000000</no-managed-flag>
+      <no-event-log>0x00000000</no-event-log>
+      <no-icon-database>0x00000000</no-icon-database>
+      <launching-flag>0x00000004</launching-flag>
+      <install-flag>0x00000000</install-flag>
+      <closing-msg>2</closing-msg>
+      <remaster-version>0</remaster-version>
+      <app-size>0x0000000000000000</app-size>
+      <max-mem-size>0x40000000</max-mem-size>
+      <max-mem-codesize>0x0E000000</max-mem-codesize>
+      <os-version>0x000500101000800A</os-version>
+      <join-game-id>0x00000000</join-game-id>
+      <join-game-mode-mask>0x0000000000000000</join-game-mode-mask>
+      <bg-daemon-enable>1</bg-daemon-enable>
+      <olv-accesskey>3270870504</olv-accesskey>
+      <wood-tin>0</wood-tin>
+      <e-manual>1</e-manual>
+      <e-manual-version>0</e-manual-version>
+      <save>
+        <save-type>both</save-type>
+        <common-save-size>0x0000000000080000</common-save-size>
+        <account-save-size>0x0000000000080000</account-save-size>
+        <no-rollback>0</no-rollback>
+      </save>
+      <boss>
+        <boss-data-type>none</boss-data-type>
+        <common-boss-size>0x0000000000000000</common-boss-size>
+        <account-boss-size>0x0000000000000000</account-boss-size>
+      </boss>
+      <build-type>NODEBUG</build-type>
+      <sdk-version>20811</sdk-version>
+      <revision>43273</revision>
+      <region>0x00000004</region>
+      <parental-control>
+        <cero>128</cero>
+        <esrb>128</esrb>
+        <bbfc>192</bbfc>
+        <usk>6</usk>
+        <pegi-gen>7</pegi-gen>
+        <pegi-fin>192</pegi-fin>
+        <pegi-prt>6</pegi-prt>
+        <pegi-bbfc>7</pegi-bbfc>
+        <cob>0</cob>
+        <grb>128</grb>
+        <cgsrr>128</cgsrr>
+        <oflc>0</oflc>
+        <pc-reserved0>192</pc-reserved0>
+        <pc-reserved1>192</pc-reserved1>
+        <pc-reserved2>192</pc-reserved2>
+        <pc-reserved3>192</pc-reserved3>
+      </parental-control>
+      <ex-dev>
+        <ext-dev-nunchaku>0</ext-dev-nunchaku>
+        <ext-dev-classic>0</ext-dev-classic>
+        <ext-dev-urcc>0</ext-dev-urcc>
+        <ext-dev-board>0</ext-dev-board>
+        <ext-dev-usb-keyboard>0</ext-dev-usb-keyboard>
+        <ext-dev-wiiremote>1</ext-dev-wiiremote>
+        <ext-dev-motionplus>1</ext-dev-motionplus>
+        <ext-dev-etc>0</ext-dev-etc>
+        <ext-dev-etc-name></ext-dev-etc-name>
+      </ex-dev>
+      <storage-access>
+        <ext-disc-read>0</ext-disc-read>
+        <ext-sd-card-read>0</ext-sd-card-read>
+        <ext-sd-card-write>0</ext-sd-card-write>
+      </storage-access>
+      <os-mask></os-mask>
+      <codegen-size>0x00000000</codegen-size>
+      <codegen-core>0x00000001</codegen-core>
+      <etc-info>
+        <eula-version>0</eula-version>
+        <drc-use>1</drc-use>
+        <network-use>0</network-use>
+        <online-account-use>0</online-account-use>
+        <direct-boot>0</direct-boot>
+        <aoc-use>0</aoc-use>
+        <jit-use>0</jit-use>
+      </etc-info>
+      <capability enable="True">
+        <p0>0x000000000000FF00</p0>
+        <p1>0x0000000000000007</p1>
+        <p2>0xFFFFFFFFFFFFFFFF</p2>
+        <p3>0x0000000000000001</p3>
+        <p4>0x00000FFFFFF0FFFF</p4>
+        <p5>0x0000000000000011</p5>
+        <p6>0x0000000000000000</p6>
+        <p7>0x0000000000000003</p7>
+        <p8>0x0000000000000003</p8>
+        <p9>0x0000000000000001</p9>
+        <p10>0x0000000000000001</p10>
+        <p11>0x0000000000000001</p11>
+        <p12>0x0000000000000003</p12>
+        <p13>0x0000000000000001</p13>
+        <p14>0x0000000000000001</p14>
+      </capability>
+      <capability-default enable="True">
+        <p0>0x000000000000FF00</p0>
+        <p1>0x0000000000000007</p1>
+        <p2>0xFFFFFFFFFFFFFFFF</p2>
+        <p3>0x0000000000000001</p3>
+        <p4>0x00000FFFFFFFFFFF</p4>
+        <p5>0x0000000000000011</p5>
+        <p6>0x0000000000000000</p6>
+        <p7>0x0000000000000003</p7>
+        <p8>0x0000000000000003</p8>
+        <p9>0x0000000000000001</p9>
+        <p10>0x0000000000000001</p10>
+        <p11>0x0000000000000001</p11>
+        <p12>0x0000000000000003</p12>
+        <p13>0x0000000000000001</p13>
+        <p14>0x0000000000000001</p14>
+      </capability-default>
+      <reserved-flag0>0x00010001</reserved-flag0>
+      <reserved-flag1>0x00000000</reserved-flag1>
+      <reserved-flag2>0x00000000</reserved-flag2>
+      <reserved-flag3>0x00000000</reserved-flag3>
+      <reserved-flag4>0x00000000</reserved-flag4>
+      <reserved-flag5>0x00000000</reserved-flag5>
+      <reserved-flag6>0x00000000</reserved-flag6>
+      <reserved-flag7>0x00000000</reserved-flag7>
+      <longname>
+        <longname-ja>Cloudberry Kingdom</longname-ja>
+        <longname-en>Cloudberry Kingdom</longname-en>
+        <longname-fr>Cloudberry Kingdom</longname-fr>
+        <longname-de>Cloudberry Kingdom</longname-de>
+        <longname-it>Cloudberry Kingdom</longname-it>
+        <longname-es>Cloudberry Kingdom</longname-es>
+        <longname-zhs>Cloudberry Kingdom</longname-zhs>
+        <longname-ko>Cloudberry Kingdom</longname-ko>
+        <longname-nl>Cloudberry Kingdom</longname-nl>
+        <longname-pt>Cloudberry Kingdom</longname-pt>
+        <longname-ru>Cloudberry Kingdom</longname-ru>
+        <longname-zht>Cloudberry Kingdom</longname-zht>
+      </longname>
+      <shortname>
+        <shortname-ja>Cloudberry Kingdom</shortname-ja>
+        <shortname-en>Cloudberry Kingdom</shortname-en>
+        <shortname-fr>Cloudberry Kingdom</shortname-fr>
+        <shortname-de>Cloudberry Kingdom</shortname-de>
+        <shortname-it>Cloudberry Kingdom</shortname-it>
+        <shortname-es>Cloudberry Kingdom</shortname-es>
+        <shortname-zhs>Cloudberry Kingdom</shortname-zhs>
+        <shortname-ko>Cloudberry Kingdom</shortname-ko>
+        <shortname-nl>Cloudberry Kingdom</shortname-nl>
+        <shortname-pt>Cloudberry Kingdom</shortname-pt>
+        <shortname-ru>Cloudberry Kingdom</shortname-ru>
+        <shortname-zht>Cloudberry Kingdom</shortname-zht>
+      </shortname>
+      <publisher>
+        <publisher-ja>Ubisoft</publisher-ja>
+        <publisher-en>Ubisoft</publisher-en>
+        <publisher-fr>Ubisoft</publisher-fr>
+        <publisher-de>Ubisoft</publisher-de>
+        <publisher-it>Ubisoft</publisher-it>
+        <publisher-es>Ubisoft</publisher-es>
+        <publisher-zhs>Ubisoft</publisher-zhs>
+        <publisher-ko>Ubisoft</publisher-ko>
+        <publisher-nl>Ubisoft</publisher-nl>
+        <publisher-pt>Ubisoft</publisher-pt>
+        <publisher-ru>Ubisoft</publisher-ru>
+        <publisher-zht>Ubisoft</publisher-zht>
+      </publisher>
+      <add-on-unique-id0>0x00000000</add-on-unique-id0>
+      <add-on-unique-id1>0x00000000</add-on-unique-id1>
+      <add-on-unique-id2>0x00000000</add-on-unique-id2>
+      <add-on-unique-id3>0x00000000</add-on-unique-id3>
+      <add-on-unique-id4>0x00000000</add-on-unique-id4>
+      <add-on-unique-id5>0x00000000</add-on-unique-id5>
+      <add-on-unique-id6>0x00000000</add-on-unique-id6>
+      <add-on-unique-id7>0x00000000</add-on-unique-id7>
+      <add-on-unique-id8>0x00000000</add-on-unique-id8>
+      <add-on-unique-id9>0x00000000</add-on-unique-id9>
+      <add-on-unique-id10>0x00000000</add-on-unique-id10>
+      <add-on-unique-id11>0x00000000</add-on-unique-id11>
+      <add-on-unique-id12>0x00000000</add-on-unique-id12>
+      <add-on-unique-id13>0x00000000</add-on-unique-id13>
+      <add-on-unique-id14>0x00000000</add-on-unique-id14>
+      <add-on-unique-id15>0x00000000</add-on-unique-id15>
+      <add-on-unique-id16>0x00000000</add-on-unique-id16>
+      <add-on-unique-id17>0x00000000</add-on-unique-id17>
+      <add-on-unique-id18>0x00000000</add-on-unique-id18>
+      <add-on-unique-id19>0x00000000</add-on-unique-id19>
+      <add-on-unique-id20>0x00000000</add-on-unique-id20>
+      <add-on-unique-id21>0x00000000</add-on-unique-id21>
+      <add-on-unique-id22>0x00000000</add-on-unique-id22>
+      <add-on-unique-id23>0x00000000</add-on-unique-id23>
+      <add-on-unique-id24>0x00000000</add-on-unique-id24>
+      <add-on-unique-id25>0x00000000</add-on-unique-id25>
+      <add-on-unique-id26>0x00000000</add-on-unique-id26>
+      <add-on-unique-id27>0x00000000</add-on-unique-id27>
+      <add-on-unique-id28>0x00000000</add-on-unique-id28>
+      <add-on-unique-id29>0x00000000</add-on-unique-id29>
+      <add-on-unique-id30>0x00000000</add-on-unique-id30>
+      <add-on-unique-id31>0x00000000</add-on-unique-id31>
+      <sdk-info>
+        <sdk-path>c:\Pwnee\cafe_sdk\</sdk-path>
+        <middleware-list></middleware-list>
+        <api-list></api-list>
+      </sdk-info>
+      <ddf>
+        <Input>
+          <DiscHeaderBaseFileName>$CAFE_ROOT/system/bin/tool/mastering/resource/discheader_base.bin</DiscHeaderBaseFileName>
+          <VolumeHeaderBaseFileName>$CAFE_ROOT/system/bin/tool/mastering/resource/volheader_base.bin</VolumeHeaderBaseFileName>
+        </Input>
+        <Output>
+          <LayoutFileName>Cloudberry_Kingdom.dlf</LayoutFileName>
+          <OutputDirectory>C:\Pwnee\Port\Cloudberry_Kingdom</OutputDirectory>
+          <AppName>Cloudberry_Kingdom</AppName>
+          <Mode>WU</Mode>
+        </Output>
+        <DiscID>
+          <GameType>GM</GameType>
+          <TitleId>0x0005000010131A00</TitleId>
+          <GroupId>0x0000131A</GroupId>
+          <DiskNumber>0</DiskNumber>
+          <GameVersion>0</GameVersion>
+          <TotalDisk>1</TotalDisk>
+        </DiscID>
+        <FST>
+          <VolumeAddress readonly="False">0x00018000</VolumeAddress>
+          <VolumeSize readonly="False">0x000A2740</VolumeSize>
+          <FSTBlockSize>32</FSTBlockSize>
+          <RemoveEmptyDirectory>False</RemoveEmptyDirectory>
+        </FST>
+        <SectionList>
+          <Section readonly="True">
+            <Name readonly="True">ROOT</Name>
+            <LayoutValue readonly="True">0</LayoutValue>
+            <Size readonly="True">0x00000000</Size>
+          </Section>
+          <Section readonly="True">
+            <Name readonly="True">APPXML</Name>
+            <LayoutValue readonly="True">-100000</LayoutValue>
+            <Size readonly="True">0x00000001</Size>
+          </Section>
+          <Section readonly="True">
+            <Name readonly="True">COSXML</Name>
+            <LayoutValue readonly="True">-99999</LayoutValue>
+            <Size readonly="True">0x00000001</Size>
+          </Section>
+          <Section readonly="True">
+            <Name readonly="True">METAXML</Name>
+            <LayoutValue readonly="True">-99998</LayoutValue>
+            <Size readonly="True">0x00000004</Size>
+          </Section>
+          <Section readonly="True">
+            <Name readonly="True">METATGA</Name>
+            <LayoutValue readonly="True">-99997</LayoutValue>
+            <Size readonly="True">0x00000160</Size>
+          </Section>
+          <Section readonly="True">
+            <Name readonly="True">BOOTMOVIE</Name>
+            <LayoutValue readonly="True">-99996</LayoutValue>
+            <Size readonly="True">0x00000020</Size>
+          </Section>
+          <Section readonly="True">
+            <Name readonly="True">BOOTLOGO</Name>
+            <LayoutValue readonly="True">-99995</LayoutValue>
+            <Size readonly="True">0x00000020</Size>
+          </Section>
+          <Section readonly="True">
+            <Name readonly="True">MANUAL</Name>
+            <LayoutValue readonly="True">-99994</LayoutValue>
+            <Size>0x00000220</Size>
+          </Section>
+          <Section readonly="True">
+            <Name readonly="True">CODEMAIN</Name>
+            <LayoutValue readonly="True">-99993</LayoutValue>
+            <Size readonly="True"></Size>
+          </Section>
+          <Section readonly="True">
+            <Name readonly="True">PRELOADTXT</Name>
+            <LayoutValue readonly="True">-99992</LayoutValue>
+            <Size readonly="True"></Size>
+          </Section>
+          <Section>
+            <Name>CODEREL0000</Name>
+            <LayoutValue>-99991</LayoutValue>
+            <Size readonly="True"></Size>
+          </Section>
+          <Section>
+            <Name>CODEREL0001</Name>
+            <LayoutValue>-99990</LayoutValue>
+            <Size readonly="True"></Size>
+          </Section>
+          <Section>
+            <Name>CONTENT</Name>
+            <LayoutValue>100000</LayoutValue>
+            <Size readonly="True"></Size>
+          </Section>
+        </SectionList>
+        <SectionLbaOrigin>
+          <Lba>
+            <Address readonly="True">0x00000000</Address>
+            <LayoutType>+</LayoutType>
+            <SectionList>
+              <Section>
+                <SectionName readonly="True">ROOT</SectionName>
+              </Section>
+            </SectionList>
+          </Lba>
+        </SectionLbaOrigin>
+        <SectionAssign>
+          <Assign>
+            <FileName readonly="True"></FileName>
+            <SectionName readonly="True">ROOT</SectionName>
+            <Permission readonly="True">0x000</Permission>
+          </Assign>
+          <Assign>
+            <FileName readonly="True">code/app.xml</FileName>
+            <SectionName readonly="True">APPXML</SectionName>
+            <Permission readonly="True">0x000</Permission>
+          </Assign>
+          <Assign>
+            <FileName readonly="True">code/cos.xml</FileName>
+            <SectionName readonly="True">COSXML</SectionName>
+            <Permission readonly="True">0x000</Permission>
+          </Assign>
+          <Assign>
+            <FileName readonly="True">meta/meta.xml</FileName>
+            <SectionName readonly="True">METAXML</SectionName>
+            <Permission readonly="True">0x040</Permission>
+          </Assign>
+          <Assign>
+            <FileName readonly="True">meta/</FileName>
+            <SectionName readonly="True">METATGA</SectionName>
+            <Permission readonly="True">0x040</Permission>
+          </Assign>
+          <Assign>
+            <FileName readonly="True">meta/iconTex.tga</FileName>
+            <SectionName readonly="True">METATGA</SectionName>
+            <Permission readonly="True">0x040</Permission>
+          </Assign>
+          <Assign>
+            <FileName readonly="True">meta/bootTvTex.tga</FileName>
+            <SectionName readonly="True">METATGA</SectionName>
+            <Permission readonly="True">0x040</Permission>
+          </Assign>
+          <Assign>
+            <FileName readonly="True">meta/bootDrcTex.tga</FileName>
+            <SectionName readonly="True">METATGA</SectionName>
+            <Permission readonly="True">0x040</Permission>
+          </Assign>
+          <Assign>
+            <FileName readonly="True">meta/bootSound.btsnd</FileName>
+            <SectionName readonly="True">METATGA</SectionName>
+            <Permission readonly="True">0x040</Permission>
+          </Assign>
+          <Assign>
+            <FileName readonly="True">meta/bootMovie.h264</FileName>
+            <SectionName readonly="True">BOOTMOVIE</SectionName>
+            <Permission readonly="True">0x040</Permission>
+          </Assign>
+          <Assign>
+            <FileName readonly="True">meta/bootLogoTex.tga</FileName>
+            <SectionName readonly="True">BOOTLOGO</SectionName>
+            <Permission readonly="True">0x040</Permission>
+          </Assign>
+          <Assign>
+            <FileName readonly="True">meta/Manual.bfma</FileName>
+            <SectionName readonly="True">MANUAL</SectionName>
+            <Permission readonly="True">0x040</Permission>
+          </Assign>
+          <Assign>
+            <FileName readonly="True">code/</FileName>
+            <SectionName readonly="True">CODEMAIN</SectionName>
+            <Permission readonly="True">0x000</Permission>
+          </Assign>
+          <Assign>
+            <FileName>code/rpx_name.rpx</FileName>
+            <SectionName readonly="True">CODEMAIN</SectionName>
+            <Permission readonly="True">0x000</Permission>
+          </Assign>
+          <Assign>
+            <FileName readonly="True">code/preload.txt</FileName>
+            <SectionName readonly="True">PRELOADTXT</SectionName>
+            <Permission readonly="True">0x000</Permission>
+          </Assign>
+          <Assign>
+            <FileName>code/rpl_name1.rpl</FileName>
+            <SectionName>CODEREL0000</SectionName>
+            <Permission readonly="True">0x000</Permission>
+          </Assign>
+          <Assign>
+            <FileName>code/rpl_name2.rpl</FileName>
+            <SectionName>CODEREL0001</SectionName>
+            <Permission readonly="True">0x000</Permission>
+          </Assign>
+          <Assign>
+            <FileName>content/*</FileName>
+            <SectionName>CONTENT</SectionName>
+            <Permission readonly="True">0x400</Permission>
+          </Assign>
+        </SectionAssign>
+        <SectionParam>
+          <Param>
+            <SectionName readonly="True">ROOT</SectionName>
+            <OwnerId readonly="True">0x0000000000000000</OwnerId>
+            <GroupId readonly="True">0x00000000</GroupId>
+            <HashMode readonly="True">0x00</HashMode>
+          </Param>
+          <Param>
+            <SectionName readonly="True">APPXML</SectionName>
+            <OwnerId readonly="True">0x0000000000000000</OwnerId>
+            <GroupId readonly="True">0x00000000</GroupId>
+            <HashMode readonly="True">0x01</HashMode>
+          </Param>
+          <Param>
+            <SectionName readonly="True">COSXML</SectionName>
+            <OwnerId readonly="True">0x0000000000000000</OwnerId>
+            <GroupId readonly="True">0x00000000</GroupId>
+            <HashMode readonly="True">0x01</HashMode>
+          </Param>
+          <Param>
+            <SectionName readonly="True">METAXML</SectionName>
+            <OwnerId readonly="True">0x0000000000000000</OwnerId>
+            <GroupId readonly="True">0x00000400</GroupId>
+            <HashMode readonly="True">0x02</HashMode>
+          </Param>
+          <Param>
+            <SectionName readonly="True">METATGA</SectionName>
+            <OwnerId readonly="True">0x0000000000000000</OwnerId>
+            <GroupId readonly="True">0x00000400</GroupId>
+            <HashMode readonly="True">0x02</HashMode>
+          </Param>
+          <Param>
+            <SectionName readonly="True">BOOTMOVIE</SectionName>
+            <OwnerId readonly="True">0x0000000000000000</OwnerId>
+            <GroupId readonly="True">0x00000400</GroupId>
+            <HashMode readonly="True">0x02</HashMode>
+          </Param>
+          <Param>
+            <SectionName readonly="True">BOOTLOGO</SectionName>
+            <OwnerId readonly="True">0x0000000000000000</OwnerId>
+            <GroupId readonly="True">0x00000400</GroupId>
+            <HashMode readonly="True">0x02</HashMode>
+          </Param>
+          <Param>
+            <SectionName readonly="True">MANUAL</SectionName>
+            <OwnerId readonly="True">0x0000000000000000</OwnerId>
+            <GroupId readonly="True">0x00000400</GroupId>
+            <HashMode readonly="True">0x02</HashMode>
+          </Param>
+          <Param>
+            <SectionName readonly="True">CODEMAIN</SectionName>
+            <OwnerId readonly="True">0x0000000000000000</OwnerId>
+            <GroupId readonly="True">0x00000000</GroupId>
+            <HashMode readonly="True">0x01</HashMode>
+          </Param>
+          <Param>
+            <SectionName readonly="True">PRELOADTXT</SectionName>
+            <OwnerId readonly="True">0x0000000000000000</OwnerId>
+            <GroupId readonly="True">0x00000000</GroupId>
+            <HashMode readonly="True">0x02</HashMode>
+          </Param>
+          <Param>
+            <SectionName>CODEREL0000</SectionName>
+            <OwnerId readonly="True">0x0000000000000000</OwnerId>
+            <GroupId readonly="True">0x00000000</GroupId>
+            <HashMode readonly="True">0x01</HashMode>
+          </Param>
+          <Param>
+            <SectionName>CODEREL0001</SectionName>
+            <OwnerId readonly="True">0x0000000000000000</OwnerId>
+            <GroupId readonly="True">0x00000000</GroupId>
+            <HashMode readonly="True">0x01</HashMode>
+          </Param>
+          <Param>
+            <SectionName>CONTENT</SectionName>
+            <OwnerId readonly="True"></OwnerId>
+            <GroupId readonly="True"></GroupId>
+            <HashMode readonly="True">0x02</HashMode>
+          </Param>
+        </SectionParam>
+        <FileLayout>
+          <Layout readonly="True">
+            <FileName>code/*</FileName>
+            <LayoutValue>-2147483648</LayoutValue>
+            <Priority></Priority>
+          </Layout>
+          <Layout>
+            <FileName>content/*</FileName>
+            <LayoutValue>1</LayoutValue>
+            <Priority></Priority>
+          </Layout>
+        </FileLayout>
+        <PathList>
+          <Path>
+            <LocalPath>$(CAFE_CODE_DIR)\preload.txt</LocalPath>
+            <FstDirectory>code</FstDirectory>
+          </Path>
+        </PathList>
+        <LayoutOff></LayoutOff>
+      </ddf>
+      <emanual-info>
+        <product-code>WUP-P-WCKP</product-code>
+        <language-list>
+          <language>
+            <code>EUR_en</code>
+            <region>EUR</region>
+            <name>English</name>
+          </language>
+          <language>
+            <code>EUR_fr</code>
+            <region>EUR</region>
+            <name>Français</name>
+          </language>
+        </language-list>
+      </emanual-info>
+      <fst-info>
+        <section-list></section-list>
+        <file-list></file-list>
+      </fst-info>
+      <export-info>
+        <output-directory>
+          <code-directory>C:\Pwnee\Port\Cloudberry_Kingdom</code-directory>
+          <meta-directory>C:\Pwnee\Port\Cloudberry_Kingdom\CKMeta</meta-directory>
+        </output-directory>
+        <output-file>
+          <ddf-file></ddf-file>
+        </output-file>
+        <file-hash>
+          <app-xml>0x248E91B3518D389EA37DA489B0986E0F</app-xml>
+          <cos-xml>0xEA79F84619AAAC1D1223A55D909E8EB3</cos-xml>
+          <meta-xml>0xB95C89D007772DDED37E6CA5A39144B7</meta-xml>
+          <ddf>0x399A9FE7098B7805793D3E4CBEC40DCB</ddf>
+        </file-hash>
+      </export-info>
+      <publish-info>
+        <title-key></title-key>
+      </publish-info>
+      <build-info-list></build-info-list>
+      <appconfig-create-version>1.0.15.1584</appconfig-create-version>
+      <appconfig-export-version>1.0.28.2105</appconfig-export-version>
+      <makedlf-version></makedlf-version>
+      <makemaster-version></makemaster-version>
+      <mastereditor-version></mastereditor-version>
+      <mastering-info>
+        <download-size></download-size>
+        <footprint></footprint>
+      </mastering-info>
+    </partition>
+  </partition-list>
+  <error-info></error-info>
+  <error-list></error-list>
+</wup-master-info>
