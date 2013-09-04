@@ -106,8 +106,8 @@
         <account-boss-size>0x0000000000000000</account-boss-size>
       </boss>
       <build-type>NODEBUG</build-type>
-      <sdk-version>20910</sdk-version>
-      <revision>49663</revision>
+      <sdk-version>20811</sdk-version>
+      <revision>43273</revision>
       <region>0x00000001</region>
       <parental-control>
         <cero>0</cero>
@@ -143,7 +143,7 @@
         <ext-sd-card-read>0</ext-sd-card-read>
         <ext-sd-card-write>0</ext-sd-card-write>
       </storage-access>
-      <os-mask>0x0000000000000000000000000000000000000000000000000000000000000000</os-mask>
+      <os-mask></os-mask>
       <codegen-size>0x00000000</codegen-size>
       <codegen-core>0x00000001</codegen-core>
       <etc-info>
@@ -160,7 +160,7 @@
         <p1>0x0000000000000007</p1>
         <p2>0xFFFFFFFFFFFFFFFF</p2>
         <p3>0x0000000000000001</p3>
-        <p4>0x0000000030B03001</p4>
+        <p4>0x00000FFFFFF0FFFF</p4>
         <p5>0x0000000000000011</p5>
         <p6>0x0000000000000000</p6>
         <p7>0x0000000000000003</p7>
@@ -177,7 +177,7 @@
         <p1>0x0000000000000007</p1>
         <p2>0xFFFFFFFFFFFFFFFF</p2>
         <p3>0x0000000000000001</p3>
-        <p4>0x0000000030BB3001</p4>
+        <p4>0x00000FFFFFFFFFFF</p4>
         <p5>0x0000000000000011</p5>
         <p6>0x0000000000000000</p6>
         <p7>0x0000000000000003</p7>
@@ -599,9 +599,9 @@
           <ddf-file></ddf-file>
         </output-file>
         <file-hash>
-          <app-xml>0x6A3144F92F110ACD7ABB01ACC9CE281A</app-xml>
-          <cos-xml>0xAC019D8CEC93C891A496BDDB0B0EF34E</cos-xml>
-          <meta-xml>0xB7E4B76EDA1C0F3B8F2C12E61D10391F</meta-xml>
+          <app-xml>0x3A5036A6E6D1D86923EF6AF381F122AE</app-xml>
+          <cos-xml>0xEA79F84619AAAC1D1223A55D909E8EB3</cos-xml>
+          <meta-xml>0x978BF9D7EC69C0CB11A2626BDDD0A0FC</meta-xml>
           <ddf>0x23D2EAECE732D54F5EFA9A22FA518383</ddf>
         </file-hash>
       </export-info>
