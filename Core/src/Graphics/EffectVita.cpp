@@ -336,11 +336,20 @@ void Effect::Load( const std::string &name )
 	vertexStreams[ 0 ].stride = sizeof( QuadVert );
 	vertexStreams[ 0 ].indexSource = SCE_GXM_INDEX_FORMAT_U16;
 
-	SceGxmVertexProgram *vertexProgram;
-	SceGxmFragmentProgram *fragmentProgram;
+	SceGxmVertexProgram *	vertexProgram;
+	SceGxmFragmentProgram *	fragmentProgram;
+
+	SceGxmBlendInfo blendInfo;
+	blendInfo.colorMask	= SCE_GXM_COLOR_MASK_ALL;
+	blendInfo.colorFunc	= SCE_GXM_BLEND_FUNC_ADD;
+	blendInfo.alphaFunc	= SCE_GXM_BLEND_FUNC_ADD;
+	blendInfo.colorSrc	= SCE_GXM_BLEND_FACTOR_SRC_ALPHA;
+	blendInfo.colorDst	= SCE_GXM_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA;
+	blendInfo.alphaSrc	= SCE_GXM_BLEND_FACTOR_ONE;
+	blendInfo.alphaDst	= SCE_GXM_BLEND_FACTOR_ZERO;
 
 	CreateVertexProgram( vertexProgramId, vertexAttributes, 3, vertexStreams, 1, &vertexProgram );
-	CreateFragmentProgram( fragmentProgramId, SCE_GXM_OUTPUT_REGISTER_FORMAT_UCHAR4, SCE_GXM_MULTISAMPLE_NONE, NULL, vertexProgramGxp, &fragmentProgram );
+	CreateFragmentProgram( fragmentProgramId, SCE_GXM_OUTPUT_REGISTER_FORMAT_UCHAR4, SCE_GXM_MULTISAMPLE_NONE, &blendInfo, vertexProgramGxp, &fragmentProgram );
 
 	uint32_t numParameters = sceGxmProgramGetParameterCount( vertexProgramGxp );
 

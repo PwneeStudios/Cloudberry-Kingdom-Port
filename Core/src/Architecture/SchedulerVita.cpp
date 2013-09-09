@@ -10,6 +10,7 @@
 
 #include <iostream>
 
+#include <kernel.h>
 //#include <pthread.h>
 //#include <semaphore.h>
 //#include <sys/ppu_thread.h>
@@ -93,23 +94,33 @@ public:
 struct SchedulerInternal
 {
 	//pthread_t Threads[ NUM_THREADS ];
-	bool WorkersRunning;
+	SceUID				ThreadID;
+	bool				WorkersRunning;
 
-	std::list< Job * > JobQueue;
-	//pthread_mutex_t JobQueueMutex;
+	std::list< Job * >	JobQueue;
+	SceUID				JobQueueMutex;
+	SceUID				JobQueueSemaphore;
 	//sem_t JobQueueSemaphore;
 
-	std::list< Job * > MainThreadJobQueue;
+	std::list< Job * >	MainThreadJobQueue;
 	//pthread_mutex_t MainThreadJobQueueMutex;
 	//sem_t MainThreadSemaphore;
 };
 
-static void *ThreadProc( void *context )
+/*static void *ThreadProc( void *context )
 {
 	SchedulerVita *scheduler = reinterpret_cast< SchedulerVita * >( context );
 	scheduler->WorkerThread();
 
 	return NULL;
+}*/
+
+static SceInt32 ThreadProc( SceSize argSize, void *pArgBlock )
+{
+	SchedulerVita *scheduler = reinterpret_cast< SchedulerVita * >( pArgBlock );
+	scheduler->WorkerThread();
+
+	return 0;
 }
 
 //static pthread_mutex_t gPauseMutex;
@@ -119,6 +130,36 @@ SchedulerVita::SchedulerVita() :
 {
 	internal_->WorkersRunning = true;
 
+	internal_->ThreadID = sceKernelCreateThread(
+		"Scheduler Thread",
+		ThreadProc,
+		SCE_KERNEL_DEFAULT_PRIORITY_USER,
+		64 * 1024,
+		0,
+		SCE_KERNEL_CPU_MASK_USER_2,
+		NULL
+	);
+
+	internal_->JobQueueMutex = sceKernelCreateMutex(
+		"JobQueueMutex",
+		SCE_KERNEL_MUTEX_ATTR_TH_FIFO,
+		0,
+		NULL
+	);
+
+	internal_->JobQueueSemaphore = sceKernelCreateSema(
+		"JobQueueSemaphore",
+		SCE_KERNEL_SEMA_ATTR_TH_FIFO,
+		0,
+		0xFFFF,
+		NULL
+	);
+
+	sceKernelStartThread(
+		internal_->ThreadID,
+		sizeof( this ),
+		this
+	);
 	//int ret = pthread_mutex_init( &internal_->JobQueueMutex, NULL );
 	//assert( !ret );
 
@@ -178,7 +219,7 @@ public:
 
 	void Do()
 	{
-		//pthread_exit( NULL );
+		sceKernelExitThread( 0 );
 	}
 };
 
@@ -194,6 +235,12 @@ SchedulerVita::~SchedulerVita()
 	std::list< Job * >::iterator i;
 	for( i = internal_->JobQueue.begin(); i != internal_->JobQueue.end(); ++i )
 		delete *i;
+
+	sceKernelDeleteThread( internal_->ThreadID );
+
+	sceKernelDeleteMutex( internal_->JobQueueMutex );
+
+	sceKernelDeleteSema( internal_->JobQueueSemaphore );
 
 	delete internal_;
 }
@@ -216,10 +263,11 @@ void SchedulerVita::MainThread()
 
 void SchedulerVita::RunJob( Job *job )
 {
-	//pthread_mutex_lock( &internal_->JobQueueMutex );
+	sceKernelLockMutex( internal_->JobQueueMutex, 1, NULL );
 	internal_->JobQueue.push_back( job );
-	//pthread_mutex_unlock( &internal_->JobQueueMutex );
-	//sem_post( &internal_->JobQueueSemaphore );
+	sceKernelUnlockMutex( internal_->JobQueueMutex, 1 );
+
+	sceKernelSignalSema( internal_->JobQueueSemaphore, 1 );
 }
 
 static void RunJobASAPThread( /*uint64_t*/ long long context )
@@ -232,10 +280,11 @@ static void RunJobASAPThread( /*uint64_t*/ long long context )
 
 void SchedulerVita::RunJobASAP( Job *job )
 {
-	//pthread_mutex_lock( &internal_->JobQueueMutex );
+	sceKernelLockMutex( internal_->JobQueueMutex, 1, NULL );
 	internal_->JobQueue.push_front( job );
-	//pthread_mutex_unlock( &internal_->JobQueueMutex );
-	//sem_post( &internal_->JobQueueSemaphore );
+	sceKernelUnlockMutex( internal_->JobQueueMutex, 1 );
+
+	sceKernelSignalSema( internal_->JobQueueSemaphore, 1 );
 }
 
 void SchedulerVita::CreateResource( ResourceHolder *holder, Resource *resource )
@@ -276,16 +325,16 @@ void SchedulerVita::WorkerThread()
 {
 	while( internal_->WorkersRunning )
 	{
-		//sem_wait( &internal_->JobQueueSemaphore );
+		sceKernelWaitSema( internal_->JobQueueSemaphore, 1, NULL );
 
 		Job *job = NULL;
-		//pthread_mutex_lock( &internal_->JobQueueMutex );
+		sceKernelLockMutex( internal_->JobQueueMutex, 1, NULL );
 		if( !internal_->JobQueue.empty() )
 		{
 			job = internal_->JobQueue.front();
 			internal_->JobQueue.pop_front();
 		}
-		//pthread_mutex_unlock( &internal_->JobQueueMutex );
+		sceKernelUnlockMutex( internal_->JobQueueMutex, 1 );
 
 		if( !job )
 			continue;

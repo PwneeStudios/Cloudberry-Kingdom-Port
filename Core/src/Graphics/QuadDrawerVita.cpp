@@ -334,8 +334,8 @@ void QuadDrawerVita::Flush()
 
 		sceGxmSetVertexStream( GraphicsContext, 0, internal_->Vertices );
 
-		if( batch.NumElements == 1740 )
-		{
+		//if( batch.NumElements == 1740 )
+		//{
 			int err = sceGxmDraw(
 				GraphicsContext,
 				SCE_GXM_PRIMITIVE_TRIANGLES,
@@ -352,7 +352,7 @@ void QuadDrawerVita::Flush()
 				j++;
 				k += j;
 			}*/
-		}
+		//}
 
 			/*err = sceGxmMidSceneFlush( GraphicsContext, SCE_GXM_MIDSCENE_PRESERVE_DEFAULT_UNIFORM_BUFFERS, NULL, NULL );
 			SCE_DBG_ASSERT( err == SCE_OK );*/
