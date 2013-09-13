@@ -40,7 +40,7 @@ struct RenderBatch
 
 typedef std::vector< RenderBatch > BatchList;
 
-struct DrawBuffer
+class DrawBuffer
 {
 	unsigned int		NumElements;
 	unsigned int		NumVertices;
@@ -51,6 +51,12 @@ struct DrawBuffer
 	unsigned short *	Indices;
 	SceUID				AllocationIDIndices;
 
+	unsigned int		allocatedElements_;
+	unsigned int		allocatedVertices_;
+	QuadVert *			currentQuadVert_;
+	unsigned short *	currentIndex_;
+
+public:
 	DrawBuffer()
 		: NumElements( 0 )
 		, NumVertices( 0 )
@@ -58,6 +64,10 @@ struct DrawBuffer
 		, AllocationIDVertices( 0 )
 		, Indices( NULL )
 		, AllocationIDIndices( 0 )
+		, allocatedElements_( 0 )
+		, allocatedVertices_( 0 )
+		, currentQuadVert_( 0 )
+		, currentIndex_( 0 )
 	{
 		Vertices = reinterpret_cast< QuadVert * >(
 			graphicsAlloc(
@@ -78,12 +88,47 @@ struct DrawBuffer
 				&AllocationIDIndices
 			)
 		);
+
+		currentQuadVert_	= Vertices;
+		currentIndex_		= Indices;
 	}
 
 	~DrawBuffer()
 	{
 		graphicsFree( AllocationIDVertices );
 		graphicsFree( AllocationIDIndices );
+	}
+
+	bool Allocate( unsigned int numVertices, unsigned int numIndices,
+		QuadVert * &vertices, unsigned short * &indices )
+	{
+		if( allocatedElements_ + numIndices > NumElements
+			|| allocatedVertices_ + numVertices > NumVertices )
+		{
+			vertices	= NULL;
+			indices		= NULL;
+
+			return false;
+		}
+
+		vertices		= currentQuadVert_;
+		currentIndex_	= currentIndex_;
+
+		allocatedElements_	+= numIndices;
+		allocatedVertices_	+= numVertices;
+		currentIndex_		+= numIndices;
+		currentQuadVert_	+= numVertices;
+
+		return true;
+	}
+
+	void Reset()
+	{
+		allocatedElements_ = 0;
+		allocatedVertices_ = 0;
+		
+		currentQuadVert_	= Vertices;
+		currentIndex_		= Indices;
 	}
 };
 
@@ -140,6 +185,7 @@ struct QuadDrawerInternal
 	SceUID			AllocationIDIndices;
 
 	DrawBuffer		DrawBuffers[ 2 ];
+	DrawBuffer		CurrentDrawBuffer;
 	unsigned int	CurrentBuffer;
 
 	boost::shared_ptr<Effect>			CurrentEffect;
@@ -174,8 +220,8 @@ struct QuadDrawerInternal
 QuadDrawerVita::QuadDrawerVita() :
 	internal_( new QuadDrawerInternal )
 {
-	internal_->Vertices = internal_->DrawBuffers[ internal_->CurrentBuffer ].Vertices;
-	internal_->Indices = internal_->DrawBuffers[ internal_->CurrentBuffer ].Indices;
+	/*internal_->Vertices = internal_->DrawBuffers[ internal_->CurrentBuffer ].Vertices;
+	internal_->Indices = internal_->DrawBuffers[ internal_->CurrentBuffer ].Indices;*/
 
 	QuadDrawerVertexRingBuffer	= new RingBuffer< QuadVert >( MAX_RING_QUADS * 4 );
 	QuadDrawerIndexRingBuffer	= new RingBuffer< unsigned short >( MAX_RING_QUADS * 2 * 3 );
@@ -241,6 +287,18 @@ void QuadDrawerVita::Draw( const SimpleQuad &quad )
 {
 	if( internal_->NumElements >= MAX_QUADS * 6 )
 		return;
+
+	QuadVert *		vertexBase;
+	unsigned short *indexBase;
+
+	if( !internal_->CurrentDrawBuffer.Allocate( 4, 6, vertexBase, indexBase ) )
+	{
+		int err = sceGxmMidSceneFlush( GraphicsContext, SCE_GXM_MIDSCENE_PRESERVE_DEFAULT_UNIFORM_BUFFERS, NULL, NULL );
+		SCE_DBG_ASSERT( err == SCE_OK );
+
+		sceGxmWaitEvent();
+		internal_->CurrentDrawBuffer.Reset();
+	}
 
 	RenderBatch rb;
 	rb.Map = quad.Diffuse;
@@ -354,10 +412,10 @@ void QuadDrawerVita::Flush()
 			}*/
 		//}
 
-			/*err = sceGxmMidSceneFlush( GraphicsContext, SCE_GXM_MIDSCENE_PRESERVE_DEFAULT_UNIFORM_BUFFERS, NULL, NULL );
-			SCE_DBG_ASSERT( err == SCE_OK );*/
+			err = sceGxmMidSceneFlush( GraphicsContext, SCE_GXM_MIDSCENE_PRESERVE_DEFAULT_UNIFORM_BUFFERS, NULL, NULL );
+			SCE_DBG_ASSERT( err == SCE_OK );
 
-			//sceGxmWaitEvent();
+			sceGxmWaitEvent();
 		//}
 	}
 
