@@ -198,7 +198,7 @@
       <reserved-flag6>0x00000000</reserved-flag6>
       <reserved-flag7>0x00000000</reserved-flag7>
       <longname>
-        <longname-ja>Cloudberry Kingdom</longname-ja>
+        <longname-ja>クラウドベリーキングダム</longname-ja>
         <longname-en>Cloudberry Kingdom</longname-en>
         <longname-fr>Cloudberry Kingdom</longname-fr>
         <longname-de>Cloudberry Kingdom</longname-de>
@@ -212,7 +212,7 @@
         <longname-zht>Cloudberry Kingdom</longname-zht>
       </longname>
       <shortname>
-        <shortname-ja>Cloudberry Kingdom</shortname-ja>
+        <shortname-ja>クラウドベリーキングダム</shortname-ja>
         <shortname-en>Cloudberry Kingdom</shortname-en>
         <shortname-fr>Cloudberry Kingdom</shortname-fr>
         <shortname-de>Cloudberry Kingdom</shortname-de>
@@ -601,7 +601,7 @@
         <file-hash>
           <app-xml>0x3A5036A6E6D1D86923EF6AF381F122AE</app-xml>
           <cos-xml>0xEA79F84619AAAC1D1223A55D909E8EB3</cos-xml>
-          <meta-xml>0x978BF9D7EC69C0CB11A2626BDDD0A0FC</meta-xml>
+          <meta-xml>0xB1C82D3075D822DF0724AE31531C4C64</meta-xml>
           <ddf>0x23D2EAECE732D54F5EFA9A22FA518383</ddf>
         </file-hash>
       </export-info>
