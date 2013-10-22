@@ -19,8 +19,11 @@
 extern void *graphicsAlloc(SceKernelMemBlockType type, uint32_t size, uint32_t alignment, uint32_t attribs, SceUID *uid);
 extern void graphicsFree(SceUID uid);
 
+// Pointer to global graphics context. Declared in CoreVita.cpp.
+extern SceGxmContext *GraphicsContext;
+
 /// Maximum number of displayable quads.
-#define MAX_QUADS 1024
+#define MAX_QUADS 2048
 
 #define MAX_RING_QUADS 2048
 
@@ -31,28 +34,29 @@ struct QuadVert
 	Vector4 Color;
 };
 
-struct RenderBatch
+/*struct RenderBatch
 {
 	unsigned int Offset;
 	unsigned int NumElements;
 	ResourcePtr< Texture > Map;
 };
 
-typedef std::vector< RenderBatch > BatchList;
+typedef std::vector< RenderBatch > BatchList;*/
 
 class DrawBuffer
 {
 	unsigned int		NumElements;
 	unsigned int		NumVertices;
 
-	QuadVert *			Vertices;
-	SceUID				AllocationIDVertices;
+	QuadVert *			vertices_;
+	SceUID				allocationIdVertices_;
 
-	unsigned short *	Indices;
-	SceUID				AllocationIDIndices;
+	unsigned short *	indices_;
+	SceUID				allocationIdIndices_;
 
-	unsigned int		allocatedElements_;
-	unsigned int		allocatedVertices_;
+	unsigned int		maxQuads_;
+	unsigned int		allocatedQuads_;
+
 	QuadVert *			currentQuadVert_;
 	unsigned short *	currentIndex_;
 
@@ -60,123 +64,81 @@ public:
 	DrawBuffer()
 		: NumElements( 0 )
 		, NumVertices( 0 )
-		, Vertices( NULL )
-		, AllocationIDVertices( 0 )
-		, Indices( NULL )
-		, AllocationIDIndices( 0 )
-		, allocatedElements_( 0 )
-		, allocatedVertices_( 0 )
+		, vertices_( NULL )
+		, allocationIdVertices_( 0 )
+		, indices_( NULL )
+		, allocationIdIndices_( 0 )
+		, maxQuads_( MAX_QUADS )
+		, allocatedQuads_( 0 )
 		, currentQuadVert_( 0 )
 		, currentIndex_( 0 )
 	{
-		Vertices = reinterpret_cast< QuadVert * >(
+		vertices_ = reinterpret_cast< QuadVert * >(
 			graphicsAlloc(
 				SCE_KERNEL_MEMBLOCK_TYPE_USER_RWDATA_UNCACHE,
-				MAX_QUADS * 4 * sizeof( QuadVert ),
+				maxQuads_ * 4 * sizeof( QuadVert ),
 				4,
 				SCE_GXM_MEMORY_ATTRIB_READ,
-				&AllocationIDVertices
+				&allocationIdVertices_
 			)
 		);
 
-		Indices = reinterpret_cast< unsigned short * >(
+		indices_ = reinterpret_cast< unsigned short * >(
 			graphicsAlloc(
 				SCE_KERNEL_MEMBLOCK_TYPE_USER_RWDATA_UNCACHE,
-				MAX_QUADS * 6 * sizeof( unsigned short ),
+				maxQuads_ * 6 * sizeof( unsigned short ),
 				4,
 				SCE_GXM_MEMORY_ATTRIB_READ,
-				&AllocationIDIndices
+				&allocationIdIndices_
 			)
 		);
 
-		currentQuadVert_	= Vertices;
-		currentIndex_		= Indices;
+		currentQuadVert_	= vertices_;
+		currentIndex_		= indices_;
 	}
 
 	~DrawBuffer()
 	{
-		graphicsFree( AllocationIDVertices );
-		graphicsFree( AllocationIDIndices );
+		graphicsFree( allocationIdVertices_ );
+		graphicsFree( allocationIdIndices_ );
 	}
 
-	bool Allocate( unsigned int numVertices, unsigned int numIndices,
-		QuadVert * &vertices, unsigned short * &indices )
+	void GetBase( QuadVert * &vertices, unsigned short * &indices )
 	{
-		if( allocatedElements_ + numIndices > NumElements
-			|| allocatedVertices_ + numVertices > NumVertices )
-		{
-			vertices	= NULL;
-			indices		= NULL;
+		vertices = vertices_;
+		indices = indices_;
+	}
 
+	bool Allocate( unsigned int numQuads, QuadVert * &vertices, unsigned short * &indices )
+	{
+		if( allocatedQuads_ + numQuads > maxQuads_ )
+		{
 			return false;
 		}
 
 		vertices		= currentQuadVert_;
-		currentIndex_	= currentIndex_;
+		indices			= currentIndex_;
 
-		allocatedElements_	+= numIndices;
-		allocatedVertices_	+= numVertices;
-		currentIndex_		+= numIndices;
-		currentQuadVert_	+= numVertices;
+		currentIndex_		+= 6 * numQuads;
+		currentQuadVert_	+= 4 * numQuads;
+
+		allocatedQuads_ += numQuads;
 
 		return true;
 	}
 
 	void Reset()
 	{
-		allocatedElements_ = 0;
-		allocatedVertices_ = 0;
-		
-		currentQuadVert_	= Vertices;
-		currentIndex_		= Indices;
+		allocatedQuads_ = 0;
+
+		currentQuadVert_	= vertices_;
+		currentIndex_		= indices_;
 	}
 };
-
-template< typename T >
-class RingBuffer
-{
-	unsigned int	numElements_;
-	unsigned int	numUsed_;
-	T *				data_;
-
-public:
-	RingBuffer( unsigned int numElements )
-		: numElements_( numElements )
-		, numUsed_( 0 )
-		, data_( NULL )
-	{
-		data_ = new T[ numElements_ ];
-	}
-
-	~RingBuffer()
-	{
-		delete[] data_;
-	}
-
-	bool CanAllocate( unsigned int n )
-	{
-		return numUsed_ + n <= numElements_;
-	}
-
-	T *Allocate( unsigned int n )
-	{
-		T *data = data_ + numUsed_;
-		numUsed_ += n;
-		return data;
-	}
-
-	void Reset()
-	{
-		numUsed_ = 0;
-	}
-};
-
-RingBuffer< QuadVert > *		QuadDrawerVertexRingBuffer;
-RingBuffer< unsigned short > *	QuadDrawerIndexRingBuffer;
 
 struct QuadDrawerInternal
 {
-	unsigned int	QuadBuffer;
+	/*unsigned int	QuadBuffer;
 	unsigned int	NumElements;
 	unsigned int	NumVertices;
 	QuadVert *		Vertices;
@@ -186,7 +148,13 @@ struct QuadDrawerInternal
 
 	DrawBuffer		DrawBuffers[ 2 ];
 	DrawBuffer		CurrentDrawBuffer;
-	unsigned int	CurrentBuffer;
+	unsigned int	CurrentBuffer;*/
+
+	DrawBuffer				CurrentDrawBuffer;
+	QuadVert *				BaseVertex;
+	unsigned short *		BaseIndex;
+	unsigned int			BatchSize;
+	ResourcePtr< Texture >	CurrentTexture;
 
 	boost::shared_ptr<Effect>			CurrentEffect;
 	boost::shared_ptr<EffectParameter>	TextureParameter;
@@ -203,7 +171,7 @@ struct QuadDrawerInternal
 
 	ResourcePtr< Texture > CastleBackground;
 	
-	BatchList Batches;
+	/*BatchList Batches;
 
 	QuadDrawerInternal()
 		: NumElements( 0 )
@@ -213,6 +181,14 @@ struct QuadDrawerInternal
 		, CurrentBuffer( 0 )
 	{
 
+	}*/
+
+	QuadDrawerInternal()
+		: BaseVertex( NULL )
+		, BaseIndex( NULL )
+		, BatchSize( 0 )
+	{
+		CurrentDrawBuffer.GetBase( BaseVertex, BaseIndex );
 	}
 };
 
@@ -223,8 +199,8 @@ QuadDrawerVita::QuadDrawerVita() :
 	/*internal_->Vertices = internal_->DrawBuffers[ internal_->CurrentBuffer ].Vertices;
 	internal_->Indices = internal_->DrawBuffers[ internal_->CurrentBuffer ].Indices;*/
 
-	QuadDrawerVertexRingBuffer	= new RingBuffer< QuadVert >( MAX_RING_QUADS * 4 );
-	QuadDrawerIndexRingBuffer	= new RingBuffer< unsigned short >( MAX_RING_QUADS * 2 * 3 );
+	/*QuadDrawerVertexRingBuffer	= new RingBuffer< QuadVert >( MAX_RING_QUADS * 4 );
+	QuadDrawerIndexRingBuffer	= new RingBuffer< unsigned short >( MAX_RING_QUADS * 2 * 3 );*/
 
 	/*internal_->Vertices = reinterpret_cast< QuadVert * >(
 		graphicsAlloc(
@@ -285,7 +261,58 @@ boost::shared_ptr<Effect> QuadDrawerVita::GetEffect()
 
 void QuadDrawerVita::Draw( const SimpleQuad &quad )
 {
-	if( internal_->NumElements >= MAX_QUADS * 6 )
+	QuadVert *		vertexBase;
+	unsigned short *indexBase;
+
+	// Allocate a new quad.  If there is no space, flush the renderer and reset the
+	// ring buffer.
+	if( !internal_->CurrentDrawBuffer.Allocate( 1, vertexBase, indexBase ) )
+	{
+		Flush();
+
+		int err = sceGxmMidSceneFlush( GraphicsContext, SCE_GXM_MIDSCENE_PRESERVE_DEFAULT_UNIFORM_BUFFERS, NULL, NULL );
+		SCE_DBG_ASSERT( err == SCE_OK );
+
+		sceGxmWaitEvent();
+
+		internal_->CurrentDrawBuffer.Reset();
+		internal_->CurrentDrawBuffer.Allocate( 1, vertexBase, indexBase );
+	}
+
+	for( int i = 0; i < 4; ++i )
+	{
+		vertexBase[ i ].Position	= quad.V[ i ];
+		vertexBase[ i ].TexCoord	= quad.T[ i ];
+		vertexBase[ i ].Color		= quad.Color;
+	}
+
+	unsigned short baseIndex = 4 * internal_->BatchSize;
+	indexBase[ 0 ] = baseIndex + 0;
+	indexBase[ 1 ] = baseIndex + 1;
+	indexBase[ 2 ] = baseIndex + 2;
+			 
+	indexBase[ 3 ] = baseIndex + 0;
+	indexBase[ 4 ] = baseIndex + 2;
+	indexBase[ 5 ] = baseIndex + 3;
+
+	// If the texture has changed, flush the renderer and set a new texture.
+	if( !( internal_->CurrentTexture == quad.Diffuse ) )
+	{
+		Flush();
+		internal_->CurrentTexture = quad.Diffuse;
+	}
+
+	// If this is a new batch, such as after a flush, set up the base pointers.
+	if( internal_->BatchSize == 0 )
+	{
+		internal_->BaseVertex = vertexBase;
+		internal_->BaseIndex = indexBase;
+	}
+
+	// Add new quad to batch.
+	++internal_->BatchSize;
+
+	/*if( internal_->NumElements >= MAX_QUADS * 6 )
 		return;
 
 	QuadVert *		vertexBase;
@@ -343,15 +370,55 @@ void QuadDrawerVita::Draw( const SimpleQuad &quad )
 	}
 
 	internal_->NumElements += 6;
-	internal_->NumVertices += 4;
-}
+	internal_->NumVertices += 4;*/
 
-// Pointer to global graphics context. Declared in CoreVita.cpp.
-extern SceGxmContext *GraphicsContext;
+	
+}
 
 void QuadDrawerVita::Flush()
 {
-	if( internal_->NumElements == 0 )
+	if( internal_->BatchSize == 0 )
+		return;
+
+	internal_->TextureParameter->SetValue( 0 );
+	internal_->ExtraTextureParameter1->SetValue( 1 );
+	internal_->ExtraTextureParameter2->SetValue( 2 );
+
+	/*if( internal_->CurrentTexture == internal_->LeftFrame )
+	{
+		internal_->LeftFrameMask->Activate( *internal_->ExtraTextureParameter2.get() );
+	}
+	else if( internal_->CurrentTexture == internal_->MiddleFrame )
+	{
+		internal_->MiddleFrameMask->Activate( *internal_->ExtraTextureParameter2.get() );
+	}
+	else if( internal_->CurrentTexture == internal_->RightFrame )
+	{
+		internal_->RightFrameMask->Activate( *internal_->ExtraTextureParameter2.get() );
+	}*/
+
+	internal_->CurrentTexture->Activate( 0 );
+
+	internal_->CurrentEffect->CurrentTechnique->Passes[ 0 ]->Apply();
+
+	sceGxmSetFrontDepthWriteEnable( GraphicsContext, SCE_GXM_DEPTH_WRITE_DISABLED );
+	sceGxmSetFrontDepthFunc( GraphicsContext, SCE_GXM_DEPTH_FUNC_ALWAYS );
+	sceGxmSetBackDepthWriteEnable( GraphicsContext, SCE_GXM_DEPTH_WRITE_DISABLED );
+	sceGxmSetBackDepthFunc( GraphicsContext, SCE_GXM_DEPTH_FUNC_ALWAYS );
+
+	sceGxmSetVertexStream( GraphicsContext, 0, internal_->BaseVertex );
+
+	int err = sceGxmDraw(
+		GraphicsContext,
+		SCE_GXM_PRIMITIVE_TRIANGLES,
+		SCE_GXM_INDEX_FORMAT_U16,
+		internal_->BaseIndex,
+		internal_->BatchSize * 6
+	);
+	SCE_DBG_ASSERT( err == SCE_OK );
+
+	internal_->BatchSize = 0;
+	/*if( internal_->NumElements == 0 )
 		return;
 
 	internal_->TextureParameter->SetValue( 0 );
@@ -363,7 +430,7 @@ void QuadDrawerVita::Flush()
 	BatchList::iterator i;
 	for( i = internal_->Batches.begin(); i != internal_->Batches.end(); ++i )
 	{
-		RenderBatch &batch = *i;
+		RenderBatch &batch = *i;*/
 
 		/*if( batch.Map == internal_->LeftFrame )
 		{
@@ -378,7 +445,7 @@ void QuadDrawerVita::Flush()
 			internal_->RightFrameMask->Activate( *internal_->ExtraTextureParameter2.get() );
 		}*/
 		
-		batch.Map->Activate( 0 );
+		/*batch.Map->Activate( 0 );
 
 		internal_->CurrentEffect->CurrentTechnique->Passes[ 0 ]->Apply();
 
@@ -401,7 +468,7 @@ void QuadDrawerVita::Flush()
 				internal_->Indices + batch.Offset,
 				batch.NumElements
 			);
-			SCE_DBG_ASSERT( err == SCE_OK );
+			SCE_DBG_ASSERT( err == SCE_OK );*/
 
 			/*int k = 0;
 			for( int i = 0; i < 100000; ++i )
@@ -412,7 +479,7 @@ void QuadDrawerVita::Flush()
 			}*/
 		//}
 
-			err = sceGxmMidSceneFlush( GraphicsContext, SCE_GXM_MIDSCENE_PRESERVE_DEFAULT_UNIFORM_BUFFERS, NULL, NULL );
+			/*err = sceGxmMidSceneFlush( GraphicsContext, SCE_GXM_MIDSCENE_PRESERVE_DEFAULT_UNIFORM_BUFFERS, NULL, NULL );
 			SCE_DBG_ASSERT( err == SCE_OK );
 
 			sceGxmWaitEvent();
@@ -423,7 +490,7 @@ void QuadDrawerVita::Flush()
 	internal_->NumElements = 0;
 	internal_->NumVertices = 0;
 
-	internal_->CurrentBuffer = ( internal_->CurrentBuffer + 1 ) % 2;
-	internal_->Vertices = internal_->DrawBuffers[ internal_->CurrentBuffer ].Vertices;
-	internal_->Indices = internal_->DrawBuffers[ internal_->CurrentBuffer ].Indices;
+	internal_->CurrentBuffer = ( internal_->CurrentBuffer + 1 ) % 2;*/
+	//internal_->Vertices = internal_->DrawBuffers[ internal_->CurrentBuffer ].Vertices;
+	//internal_->Indices = internal_->DrawBuffers[ internal_->CurrentBuffer ].Indices;
 }
