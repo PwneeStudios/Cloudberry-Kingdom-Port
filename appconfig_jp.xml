@@ -92,7 +92,7 @@
       <bg-daemon-enable>1</bg-daemon-enable>
       <olv-accesskey>2635414056</olv-accesskey>
       <wood-tin>0</wood-tin>
-      <e-manual>0</e-manual>
+      <e-manual>1</e-manual>
       <e-manual-version>0</e-manual-version>
       <save>
         <save-type>both</save-type>
@@ -140,6 +140,7 @@
       </ex-dev>
       <storage-access>
         <ext-disc-read>0</ext-disc-read>
+        <ext-disc-motor-stop>0</ext-disc-motor-stop>
         <ext-sd-card-read>0</ext-sd-card-read>
         <ext-sd-card-write>0</ext-sd-card-write>
       </storage-access>
@@ -297,7 +298,7 @@
         </DiscID>
         <FST>
           <VolumeAddress readonly="False">0x00018000</VolumeAddress>
-          <VolumeSize readonly="False">0x000A2740</VolumeSize>
+          <VolumeSize readonly="False">0x000A2700</VolumeSize>
           <FSTBlockSize>32</FSTBlockSize>
           <RemoveEmptyDirectory>False</RemoveEmptyDirectory>
         </FST>
@@ -572,17 +573,12 @@
         <LayoutOff></LayoutOff>
       </ddf>
       <emanual-info>
-        <product-code>WUP-P-WCKP</product-code>
+        <product-code>WUP-P-WCKJ</product-code>
         <language-list>
           <language>
-            <code>EUR_en</code>
-            <region>EUR</region>
-            <name>English</name>
-          </language>
-          <language>
-            <code>EUR_fr</code>
-            <region>EUR</region>
-            <name>Français</name>
+            <code>JPN_ja</code>
+            <region>JPN</region>
+            <name>日本語</name>
           </language>
         </language-list>
       </emanual-info>
@@ -601,8 +597,8 @@
         <file-hash>
           <app-xml>0x3A5036A6E6D1D86923EF6AF381F122AE</app-xml>
           <cos-xml>0xEA79F84619AAAC1D1223A55D909E8EB3</cos-xml>
-          <meta-xml>0xB1C82D3075D822DF0724AE31531C4C64</meta-xml>
-          <ddf>0x23D2EAECE732D54F5EFA9A22FA518383</ddf>
+          <meta-xml>0x4B4265F364DD6C9DBEAC2493C93DB00C</meta-xml>
+          <ddf>0x3A9D83FABC1F21E5D01293225C6C5531</ddf>
         </file-hash>
       </export-info>
       <publish-info>
@@ -610,7 +606,7 @@
       </publish-info>
       <build-info-list></build-info-list>
       <appconfig-create-version>1.0.15.1584</appconfig-create-version>
-      <appconfig-export-version>1.0.28.2105</appconfig-export-version>
+      <appconfig-export-version>1.2.7.4857</appconfig-export-version>
       <makedlf-version></makedlf-version>
       <makemaster-version></makemaster-version>
       <mastereditor-version></mastereditor-version>
