@@ -763,6 +763,7 @@
     <ClInclude Include="ResourceList\Resources_Art.h" />
     <ClInclude Include="ResourceList\Resources_Music.h" />
     <ClInclude Include="ResourceList\Resources_Sound.h" />
+    <ClInclude Include="small_header.h" />
     <ClInclude Include="stringconverter.h" />
     <ClInclude Include="Hacks\Clipboard.h" />
     <ClInclude Include="Hacks\XNA\ContentManager.h" />

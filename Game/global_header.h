@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef SUPER_GLOBAL_HEADER_H
 #define SUPER_GLOBAL_HEADER_H
 

@@ -2378,5 +2378,8 @@
     <ClInclude Include="BoostBin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="small_header.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
