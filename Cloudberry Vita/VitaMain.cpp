@@ -7,6 +7,8 @@
 #include <Utility/Log.h>
 #include <libdbg.h>
 
+unsigned int sceLibcHeapSize = 128 * 1024 * 1024;
+
 class OSLog : public LogListener
 {
 	

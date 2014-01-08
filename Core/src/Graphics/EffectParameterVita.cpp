@@ -1,36 +1,17 @@
 #include <Graphics/EffectParameter.h>
 
 #include <Graphics/Effect.h>
+#include <gxm.h>
 
 #include "EffectInternalVita.h"
-
-enum ParamType
-{
-	ParamType_None,
-	ParamType_Vector4,
-	ParamType_Matrix,
-	ParamType_Texture,
-	ParamType_Vector2,
-	ParamType_Float,
-	ParamType_Int
-};
-
-struct EffectParameterInternal
-{
-	ParamType PType;
-	Vector4 CachedVector4;
-	Matrix CachedMatrix;
-	Vector2 CachedVector2;
-	float CachedSingle;
-	int CachedInt;
-};
 
 EffectParameter::EffectParameter( const Effect &effect, int id ) :
 	internal_( new EffectParameterInternal )
 {
-	internal_->PType = ParamType_None;
-	internal_->CachedSingle = 0;
-	internal_->CachedInt = 0;
+	internal_->Parameter		= reinterpret_cast< const SceGxmProgramParameter * >( id );
+
+	internal_->PType			= ParamType_None;
+	internal_->NumComponents	= 0;
 }
 
 EffectParameter::~EffectParameter()
@@ -41,13 +22,15 @@ EffectParameter::~EffectParameter()
 void EffectParameter::SetValue( const Vector4 &v )
 {
 	internal_->PType = ParamType_Vector4;
-	internal_->CachedVector4 = v;
+	memcpy( internal_->Data, &v, sizeof( Vector4 ) );
+	internal_->NumComponents = 4;
 }
 
 void EffectParameter::SetValue( const Matrix &m )
 {
 	internal_->PType = ParamType_Matrix;
-	internal_->CachedMatrix = m;
+	memcpy( internal_->Data, &m, sizeof( Matrix ) );
+	internal_->NumComponents = 16;
 }
 
 void EffectParameter::SetValue( const boost::shared_ptr<struct Texture2D> &t )
@@ -57,24 +40,27 @@ void EffectParameter::SetValue( const boost::shared_ptr<struct Texture2D> &t )
 void EffectParameter::SetValue( const Vector2 &v )
 {
 	internal_->PType = ParamType_Vector2;
-	internal_->CachedVector2 = v;
+	memcpy( internal_->Data, &v, sizeof( Vector2 ) );
+	internal_->NumComponents = 2;
 }
 
 void EffectParameter::SetValue( float v )
 {
 	internal_->PType = ParamType_Float;
-	internal_->CachedSingle = v;
+	internal_->Data[ 0 ] = v;
+	internal_->NumComponents = 1;
 }
 
 void EffectParameter::SetValue( int v )
 {
 	internal_->PType = ParamType_Int;
-	internal_->CachedInt = v;
+	memcpy( internal_->Data, &v, sizeof( int ) );
+	internal_->NumComponents = 1;
 }
 
 float EffectParameter::GetValueSingle()
 {
-	return internal_->CachedSingle;
+	return internal_->Data[ 0 ];
 }
 
 void EffectParameter::Apply()

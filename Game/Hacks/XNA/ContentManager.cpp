@@ -37,8 +37,8 @@ template<> boost::shared_ptr<Texture2D> ContentManager::Load<Texture2D>( const s
 	boost::shared_ptr<Texture2D> t2d = boost::make_shared<Texture2D>(boost::shared_ptr<GraphicsDevice>(), 1, 1);
 	DebugFrame(0, 0, 1);
 #if defined(DEBUG)
-	//t2d->texture_ = CONTENT->Load<Texture>( "Art/default.png" ); // WARNING: Fast load
-	t2d->texture_ = CONTENT->Load<Texture>( WstringToUtf8( name ) + ".png" );
+	t2d->texture_ = CONTENT->Load<Texture>( "Art/default.png" ); // WARNING: Fast load
+	//t2d->texture_ = CONTENT->Load<Texture>( WstringToUtf8( name ) + ".png" );
 #else
 	//t2d->texture_ = CONTENT->Load<Texture>( "Art/default.png" ); // WARNING: Fast load
 	t2d->texture_ = CONTENT->Load<Texture>( WstringToUtf8( name ) + ".png" );
@@ -56,9 +56,10 @@ template<> boost::shared_ptr<SpriteFont> ContentManager::Load<SpriteFont>( const
 template<> boost::shared_ptr<Effect> ContentManager::Load<Effect>( const std::wstring &name )
 {
 	DebugFrame(0, 1, 1);
-	LOG_WRITE( "Loading effect: %s\n", WstringToUtf8( name ).c_str() );
+	std::string utf8Name = WstringToUtf8( name );
+	LOG_WRITE( "Loading effect: %s\n", utf8Name.c_str() );
 	boost::shared_ptr<Effect> effect = boost::make_shared<Effect>();
-	effect->Load( WstringToUtf8( name ) );
+	effect->Load( utf8Name );
 	return effect;
 }
 

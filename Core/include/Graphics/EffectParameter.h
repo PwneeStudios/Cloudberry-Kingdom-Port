@@ -12,6 +12,9 @@ class Effect;
 
 class EffectParameter
 {
+#ifdef VITA
+	friend class Effect;
+#endif
 
 	struct EffectParameterInternal *internal_;
 

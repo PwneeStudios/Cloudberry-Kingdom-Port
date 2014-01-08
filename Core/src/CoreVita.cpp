@@ -19,6 +19,8 @@
 #include <np.h>
 #include <sceconst.h>
 #include <libdbg.h>
+#include <libperf.h>
+#include <libsysmodule.h>
 #include <kernel.h>
 #include <display.h>
 #include <ctrl.h>
@@ -180,40 +182,34 @@ struct BasicVertex {
 // Callback function for displaying a buffer
 static void displayCallback(const void *callbackData);
 
-// Callback function to allocate memory for the shader patcher
-static void *patcherHostAlloc(void *userData, uint32_t size);
-
-// Callback function to allocate memory for the shader patcher
-static void patcherHostFree(void *userData, void *mem);
-
 // Helper function to allocate memory and map it for the GPU
-static void *graphicsAlloc(SceKernelMemBlockType type, uint32_t size, uint32_t alignment, uint32_t attribs, SceUID *uid);
+void *graphicsAlloc(SceKernelMemBlockType type, uint32_t size, uint32_t alignment, uint32_t attribs, SceUID *uid);
 
 // Helper function to free memory mapped to the GPU
-static void graphicsFree(SceUID uid);
+void graphicsFree(SceUID uid);
 
 // Helper function to allocate memory and map it as vertex USSE code for the GPU
-static void *vertexUsseAlloc(uint32_t size, SceUID *uid, uint32_t *usseOffset);
+void *vertexUsseAlloc(uint32_t size, SceUID *uid, uint32_t *usseOffset);
 
 // Helper function to free memory mapped as vertex USSE code for the GPU
-static void vertexUsseFree(SceUID uid);
+void vertexUsseFree(SceUID uid);
 
 // Helper function to allocate memory and map it as fragment USSE code for the GPU
-static void *fragmentUsseAlloc(uint32_t size, SceUID *uid, uint32_t *usseOffset);
+void *fragmentUsseAlloc(uint32_t size, SceUID *uid, uint32_t *usseOffset);
 
 // Helper function to free memory mapped as fragment USSE code for the GPU
-static void fragmentUsseFree(SceUID uid);
+void fragmentUsseFree(SceUID uid);
 
 // Helper function to allocate memory and map it for the GPU
-static void *graphicsAlloc(SceKernelMemBlockType type, uint32_t size, uint32_t alignment, uint32_t attribs, SceUID *uid);
+void *graphicsAlloc(SceKernelMemBlockType type, uint32_t size, uint32_t alignment, uint32_t attribs, SceUID *uid);
 
 // Helper function to free memory mapped to the GPU
-static void graphicsFree(SceUID uid);
+void graphicsFree(SceUID uid);
 
 SceUID vdmRingBufferUid, vertexRingBufferUid, fragmentRingBufferUid, fragmentUsseRingBufferUid;
 void *vdmRingBuffer, *vertexRingBuffer, *fragmentRingBuffer, *fragmentUsseRingBuffer;
 uint32_t fragmentUsseRingBufferOffset;
-SceGxmContext *context = NULL;
+SceGxmContext *GraphicsContext = NULL;
 	
 SceGxmRenderTarget *renderTarget;
 void *displayBufferData[ DISPLAY_BUFFER_COUNT ];
@@ -235,6 +231,13 @@ uint16_t *basicIndices;
 
 SceGxmProgramParameter *wvpParam;
 
+// Patcher stuff. Defined in EffectVita.cpp.
+extern void InitializePatcher();
+extern void RegisterProgramWithPatcher( const SceGxmProgram *program, SceGxmShaderPatcherId *id );
+extern void CreateVertexProgram( SceGxmShaderPatcherId programId, const SceGxmVertexAttribute *attributes, uint32_t attributeCount, const SceGxmVertexStream *streams, uint32_t streamCount, SceGxmVertexProgram **vertexProgram );
+extern void CreateFragmentProgram( SceGxmShaderPatcherId programId, SceGxmOutputRegisterFormat outputFormat, SceGxmMultisampleMode multisampleMode, const SceGxmBlendInfo *blendInfo, const SceGxmProgram *vertexProgram, SceGxmFragmentProgram **fragmentProgram );
+extern void CleanUpPatcher();
+
 CoreVita::CoreVita( GameLoop &game ) :
 	running_( false ),
 	game_( game ),
@@ -243,6 +246,27 @@ CoreVita::CoreVita( GameLoop &game ) :
 	scheduler_( 0 )
 {
 	int err = SCE_OK;
+
+#define ENABLE_RAZOR_HUD
+#define ENABLE_RAZOR_CAPTURE
+
+#ifdef ENABLE_RAZOR_HUD
+    // Initialize the Razor HUD system.
+    // This should be done before the call to sceGxmInitialize().
+    err = sceSysmoduleLoadModule( SCE_SYSMODULE_RAZOR_HUD );
+    SCE_DBG_ASSERT(err == SCE_OK);
+#endif
+
+#ifdef ENABLE_RAZOR_CAPTURE
+    // Initialize the Razor capture system.
+    // This should be done before the call to sceGxmInitialize().
+    err = sceSysmoduleLoadModule( SCE_SYSMODULE_RAZOR_CAPTURE );
+    SCE_DBG_ASSERT(err == SCE_OK);
+
+    // Trigger a capture after 100 frames.
+    //sceRazorCaptureSetTrigger( 100, "host0:shadow_mapping.sgx" );
+#endif
+
 
 	SceGxmInitializeParams initializeParams;
 	memset( &initializeParams, 0, sizeof( SceGxmInitializeParams ) );
@@ -298,7 +322,7 @@ CoreVita::CoreVita( GameLoop &game ) :
 	contextParams.fragmentUsseRingBufferMemSize	= SCE_GXM_DEFAULT_FRAGMENT_USSE_RING_BUFFER_SIZE;
 	contextParams.fragmentUsseRingBufferOffset	= fragmentUsseRingBufferOffset;
 
-	err = sceGxmCreateContext( &contextParams, &context );
+	err = sceGxmCreateContext( &contextParams, &GraphicsContext );
 	SCE_DBG_ASSERT( err == SCE_OK );
 
 	SceGxmRenderTargetParams renderTargetParams;
@@ -392,56 +416,7 @@ CoreVita::CoreVita( GameLoop &game ) :
 	);
 	SCE_DBG_ASSERT( err == SCE_OK );
 
-	// set buffer sizes for this sample
-	const uint32_t patcherBufferSize		= 64*1024;
-	const uint32_t patcherVertexUsseSize	= 64*1024;
-	const uint32_t patcherFragmentUsseSize	= 64*1024;
-
-	// allocate memory for buffers and USSE code
-	SceUID patcherBufferUid;
-	void *patcherBuffer = graphicsAlloc(
-		SCE_KERNEL_MEMBLOCK_TYPE_USER_RWDATA_UNCACHE,
-		patcherBufferSize,
-		4,
-		SCE_GXM_MEMORY_ATTRIB_READ | SCE_GXM_MEMORY_ATTRIB_WRITE,
-		&patcherBufferUid);
-	SceUID patcherVertexUsseUid;
-	uint32_t patcherVertexUsseOffset;
-	void *patcherVertexUsse = vertexUsseAlloc(
-		patcherVertexUsseSize,
-		&patcherVertexUsseUid,
-		&patcherVertexUsseOffset);
-	SceUID patcherFragmentUsseUid;
-	uint32_t patcherFragmentUsseOffset;
-	void *patcherFragmentUsse = fragmentUsseAlloc(
-		patcherFragmentUsseSize,
-		&patcherFragmentUsseUid,
-		&patcherFragmentUsseOffset);
-
-	// create a shader patcher
-	SceGxmShaderPatcherParams patcherParams;
-	memset(&patcherParams, 0, sizeof(SceGxmShaderPatcherParams));
-	patcherParams.userData					= NULL;
-	patcherParams.hostAllocCallback			= &patcherHostAlloc;
-	patcherParams.hostFreeCallback			= &patcherHostFree;
-	patcherParams.bufferAllocCallback		= NULL;
-	patcherParams.bufferFreeCallback		= NULL;
-	patcherParams.bufferMem					= patcherBuffer;
-	patcherParams.bufferMemSize				= patcherBufferSize;
-	patcherParams.vertexUsseAllocCallback	= NULL;
-	patcherParams.vertexUsseFreeCallback	= NULL;
-	patcherParams.vertexUsseMem				= patcherVertexUsse;
-	patcherParams.vertexUsseMemSize			= patcherVertexUsseSize;
-	patcherParams.vertexUsseOffset			= patcherVertexUsseOffset;
-	patcherParams.fragmentUsseAllocCallback	= NULL;
-	patcherParams.fragmentUsseFreeCallback	= NULL;
-	patcherParams.fragmentUsseMem			= patcherFragmentUsse;
-	patcherParams.fragmentUsseMemSize		= patcherFragmentUsseSize;
-	patcherParams.fragmentUsseOffset		= patcherFragmentUsseOffset;
-
-	SceGxmShaderPatcher *shaderPatcher = NULL;
-	err = sceGxmShaderPatcherCreate(&patcherParams, &shaderPatcher);
-	SCE_DBG_ASSERT(err == SCE_OK);
+	InitializePatcher();
 
 	// use embedded GXP files
 	const SceGxmProgram *const clearVertexProgramGxp	= &_binary_clear_v_gxp_start;
@@ -454,14 +429,10 @@ CoreVita::CoreVita( GameLoop &game ) :
 	SceGxmShaderPatcherId clearFragmentProgramId;
 	SceGxmShaderPatcherId basicVertexProgramId;
 	SceGxmShaderPatcherId basicFragmentProgramId;
-	err = sceGxmShaderPatcherRegisterProgram(shaderPatcher, clearVertexProgramGxp, &clearVertexProgramId);
-	SCE_DBG_ASSERT(err == SCE_OK);
-	err = sceGxmShaderPatcherRegisterProgram(shaderPatcher, clearFragmentProgramGxp, &clearFragmentProgramId);
-	SCE_DBG_ASSERT(err == SCE_OK);
-	err = sceGxmShaderPatcherRegisterProgram(shaderPatcher, basicVertexProgramGxp, &basicVertexProgramId);
-	SCE_DBG_ASSERT(err == SCE_OK);
-	err = sceGxmShaderPatcherRegisterProgram(shaderPatcher, basicFragmentProgramGxp, &basicFragmentProgramId);
-	SCE_DBG_ASSERT(err == SCE_OK);
+	RegisterProgramWithPatcher( clearVertexProgramGxp, &clearVertexProgramId );
+	RegisterProgramWithPatcher( clearFragmentProgramGxp, &clearFragmentProgramId );
+	RegisterProgramWithPatcher( basicVertexProgramGxp, &basicVertexProgramId );
+	RegisterProgramWithPatcher( basicFragmentProgramGxp, &basicFragmentProgramId );
 
 	// get attributes by name to create vertex format bindings
 	const SceGxmProgramParameter *paramClearPositionAttribute = sceGxmProgramFindParameterByName(clearVertexProgramGxp, "aPosition");
@@ -479,24 +450,8 @@ CoreVita::CoreVita( GameLoop &game ) :
 	clearVertexStreams[0].indexSource = SCE_GXM_INDEX_SOURCE_INDEX_16BIT;
 
 	// create sclear programs
-	err = sceGxmShaderPatcherCreateVertexProgram(
-		shaderPatcher,
-		clearVertexProgramId,
-		clearVertexAttributes,
-		1,
-		clearVertexStreams,
-		1,
-		&clearVertexProgram);
-	SCE_DBG_ASSERT(err == SCE_OK);
-	err = sceGxmShaderPatcherCreateFragmentProgram(
-		shaderPatcher,
-		clearFragmentProgramId,
-		SCE_GXM_OUTPUT_REGISTER_FORMAT_UCHAR4,
-		MSAA_MODE,
-		NULL,
-		clearVertexProgramGxp,
-		&clearFragmentProgram);
-	SCE_DBG_ASSERT(err == SCE_OK);
+	CreateVertexProgram( clearVertexProgramId, clearVertexAttributes, 1, clearVertexStreams, 1, &clearVertexProgram );
+	CreateFragmentProgram( clearFragmentProgramId, SCE_GXM_OUTPUT_REGISTER_FORMAT_UCHAR4, MSAA_MODE, NULL, clearVertexProgramGxp, &clearFragmentProgram );
 
 	// create the clear triangle vertex/index data
 	SceUID clearVerticesUid;
@@ -549,25 +504,9 @@ CoreVita::CoreVita( GameLoop &game ) :
 	basicVertexStreams[0].indexSource = SCE_GXM_INDEX_SOURCE_INDEX_16BIT;
 
 	// create shaded triangle shaders
-	err = sceGxmShaderPatcherCreateVertexProgram(
-		shaderPatcher,
-		basicVertexProgramId,
-		basicVertexAttributes,
-		2,
-		basicVertexStreams,
-		1,
-		&basicVertexProgram);
-	SCE_DBG_ASSERT(err == SCE_OK);
-	err = sceGxmShaderPatcherCreateFragmentProgram(
-		shaderPatcher,
-		basicFragmentProgramId,
-		SCE_GXM_OUTPUT_REGISTER_FORMAT_UCHAR4,
-		MSAA_MODE,
-		NULL,
-		basicVertexProgramGxp,
-		&basicFragmentProgram);
-	SCE_DBG_ASSERT(err == SCE_OK);
-
+	CreateVertexProgram( basicVertexProgramId, basicVertexAttributes, 2, basicVertexStreams, 1, &basicVertexProgram );
+	CreateFragmentProgram( basicFragmentProgramId, SCE_GXM_OUTPUT_REGISTER_FORMAT_UCHAR4, MSAA_MODE, NULL, basicVertexProgramGxp, &basicFragmentProgram );
+	
 	// find vertex uniforms by name and cache parameter information
 	wvpParam = const_cast< SceGxmProgramParameter * >( sceGxmProgramFindParameterByName(basicVertexProgramGxp, "wvp") );
 	SCE_DBG_ASSERT(wvpParam && (sceGxmProgramParameterGetCategory(wvpParam) == SCE_GXM_PARAMETER_CATEGORY_UNIFORM));
@@ -605,6 +544,16 @@ CoreVita::CoreVita( GameLoop &game ) :
 	basicIndices[1] = 1;
 	basicIndices[2] = 2;
 
+	scheduler_ = new Scheduler;
+
+	content_ = new Wad( VITA_PATH_PREFIX + "ContentVita/" );
+
+	qd_ = new QuadDrawer;
+
+	td_ = new TextDrawer;
+
+	GamePad::Initialize();
+	MediaPlayer::Initialize();
 }
 
 CoreVita::~CoreVita()
@@ -619,10 +568,12 @@ CoreVita::~CoreVita()
 
 	delete scheduler_;
 
+	CleanUpPatcher();
+
 	// Need to shut down media player last as scheduler could still play a song.
 	MediaPlayer::Shutdown();
 
-	sceGxmFinish( context );
+	sceGxmFinish( GraphicsContext );
 }
 
 static SceNpTrophyContext TrophyContext;
@@ -630,24 +581,24 @@ static SceNpTrophyHandle TrophyHandle;
 static bool ContextRegistered;
 extern std::list< ErrorType > GLOBAL_ERROR_QUEUE;
 
-bool GetTrophyContext( SceNpTrophyContext &context, SceNpTrophyHandle &handle )
+bool GetTrophyContext( SceNpTrophyContext &GraphicsContext, SceNpTrophyHandle &handle )
 {
 	if( !ContextRegistered )
 		return false;
 
-	context = TrophyContext;
+	GraphicsContext = TrophyContext;
 	handle = TrophyHandle;
 
 	return true;
 }
 
-void ForceGetTrophyContext( SceNpTrophyContext &context, SceNpTrophyHandle &handle )
+void ForceGetTrophyContext( SceNpTrophyContext &GraphicsContext, SceNpTrophyHandle &handle )
 {
-	context = TrophyContext;
+	GraphicsContext = TrophyContext;
 	handle = TrophyHandle;
 }
 
-//int TrophyStatusCallback( SceNpTrophyContext context, SceNpTrophyStatus status, int completed, int total, void *arg )
+//int TrophyStatusCallback( SceNpTrophyContext GraphicsContext, SceNpTrophyStatus status, int completed, int total, void *arg )
 //{
 //	int ret = 0;
 //
@@ -709,7 +660,7 @@ bool gTrophyContextRegistered = true;
 // Space needed for trophy, 
 //extern uint64_t RequiredTrophySpace;
 
-void RegisterTrophyContextThread( uint64_t context )
+void RegisterTrophyContextThread( uint64_t GraphicsContext )
 {
 	ContextRegistered = false;
 
@@ -741,7 +692,7 @@ bool IsNPAvailable()
 	return NPIdObtained;
 }
 
-void ConnectToNPThread( uint64_t context )
+void ConnectToNPThread( uint64_t GraphicsContext )
 {
 	LOG_WRITE( "stub: fix me! ConnectToNPThread" );
 
@@ -767,7 +718,7 @@ void ConnectToNPThread( uint64_t context )
 	//	NPIdObtained = true;
 	//}
 	//else
-	//	LOG_WRITE( "Coldn't get score title context: 0x%x\n", ret );
+	//	LOG_WRITE( "Coldn't get score title GraphicsContext: 0x%x\n", ret );
 
 	//sys_ppu_thread_exit( 0 );
 }
@@ -869,11 +820,11 @@ static uint8_t NPPool[ NP_POOL_SIZE ];
 
 void DebugFrame(float r, float g, float b)
 {
-	LOG_WRITE( "stub: fix me! DebugFrame" );
-
 	static int count = 0;
-	
-	/*glEnable(GL_SCISSOR_TEST);
+
+	/*LOG_WRITE( "stub: fix me! DebugFrame" );
+
+	glEnable(GL_SCISSOR_TEST);
 	glViewport(0, 0, GLOBAL_WIDTH, GLOBAL_HEIGHT);
 
 	for( int i = 0; i < 2; ++i )
@@ -912,7 +863,7 @@ void NPDRMInvalidCompleteCallback( bool yes )
 	CORE.Exit();
 }
 
-void CheckNPDRMFileThread( uint64_t context )
+void CheckNPDRMFileThread( uint64_t GraphicsContext )
 {
 	LOG_WRITE( "stub: fix me! CheckNPDRMFileThread" );
 
@@ -927,6 +878,27 @@ void CheckNPDRMFileThread( uint64_t context )
 	//sys_ppu_thread_exit( 0 );
 }
 
+static uint32_t backBufferIndex = 0;
+static uint32_t frontBufferIndex = 0;
+
+void BeginScene()
+{
+	sceGxmBeginScene(
+		GraphicsContext,
+		SCE_GXM_SCENE_FRAGMENT_SET_DEPENDENCY | SCE_GXM_SCENE_VERTEX_WAIT_FOR_DEPENDENCY,
+		renderTarget,
+		NULL,
+		NULL,
+		displayBufferSync[backBufferIndex],
+		&displaySurface[backBufferIndex],
+		&depthSurface
+	);
+}
+
+void EndScene()
+{
+}
+
 int CoreVita::Run()
 {
 	running_ = true;
@@ -935,17 +907,21 @@ int CoreVita::Run()
 	SceCtrlData ctrlData;
 	memset(&ctrlData, 0, sizeof(ctrlData));
 
+	game_.Initialize();
+
 	// message for SDK sample auto test
 	printf("## api_libgxm/basic: INIT SUCCEEDED ##\n");
 
 	// loop until exit
-	uint32_t backBufferIndex = 0;
-	uint32_t frontBufferIndex = 0;
 	float rotationAngle = 0.0f;
 	bool quit = false;
 
 	while( running_ )
 	{
+		GamePad::Update();
+
+		scheduler_->MainThread();
+
 		// check control data
 		sceCtrlPeekBufferPositive(0, &ctrlData, 1);
 
@@ -1004,42 +980,42 @@ int CoreVita::Run()
 		   ----------------------------------------------------------------- */
 
 		// start rendering to the main render target
-		sceGxmBeginScene(
-			context,
-			0,
-			renderTarget,
-			NULL,
-			NULL,
-			displayBufferSync[backBufferIndex],
-			&displaySurface[backBufferIndex],
-			&depthSurface);
+		BeginScene();
 
 		// set clear shaders
-		sceGxmSetVertexProgram(context, clearVertexProgram);
-		sceGxmSetFragmentProgram(context, clearFragmentProgram);
+		sceGxmSetVertexProgram( GraphicsContext, clearVertexProgram );
+		sceGxmSetFragmentProgram( GraphicsContext, clearFragmentProgram );
 
 		// draw the clear triangle
-		sceGxmSetVertexStream(context, 0, clearVertices);
-		sceGxmDraw(context, SCE_GXM_PRIMITIVE_TRIANGLES, SCE_GXM_INDEX_FORMAT_U16, clearIndices, 3);
+		sceGxmSetVertexStream( GraphicsContext, 0, clearVertices );
+		sceGxmDraw( GraphicsContext, SCE_GXM_PRIMITIVE_TRIANGLES, SCE_GXM_INDEX_FORMAT_U16, clearIndices, 3 );
 
+		{
+			game_.Update();
+
+			qd_->Flush();
+		}
+
+		/*
 		// render the rotating triangle
-		sceGxmSetVertexProgram(context, basicVertexProgram);
-		sceGxmSetFragmentProgram(context, basicFragmentProgram);
+		sceGxmSetVertexProgram(GraphicsContext, basicVertexProgram);
+		sceGxmSetFragmentProgram(GraphicsContext, basicFragmentProgram);
 
 		// set the vertex program constants
 		void *vertexDefaultBuffer;
-		sceGxmReserveVertexDefaultUniformBuffer(context, &vertexDefaultBuffer);
+		sceGxmReserveVertexDefaultUniformBuffer(GraphicsContext, &vertexDefaultBuffer);
 		sceGxmSetUniformDataF(vertexDefaultBuffer, wvpParam, 0, 16, wvpData);
 
 		// draw the spinning triangle
-		sceGxmSetVertexStream(context, 0, basicVertices);
-		sceGxmDraw(context, SCE_GXM_PRIMITIVE_TRIANGLES, SCE_GXM_INDEX_FORMAT_U16, basicIndices, 3);
+		sceGxmSetVertexStream(GraphicsContext, 0, basicVertices);
+		sceGxmDraw(GraphicsContext, SCE_GXM_PRIMITIVE_TRIANGLES, SCE_GXM_INDEX_FORMAT_U16, basicIndices, 3);
+		*/
 
 		// end the scene on the main render target, submitting rendering work to the GPU
-		sceGxmEndScene(context, NULL, NULL);
+		sceGxmEndScene( GraphicsContext, NULL, NULL );
 
 		// PA heartbeat to notify end of frame
-		sceGxmPadHeartbeat(&displaySurface[backBufferIndex], displayBufferSync[backBufferIndex]);
+		sceGxmPadHeartbeat( &displaySurface[backBufferIndex], displayBufferSync[backBufferIndex] );
 
 		/* -----------------------------------------------------------------
 			13. Flip operation
@@ -1108,19 +1084,7 @@ void displayCallback(const void *callbackData)
 	SCE_DBG_ASSERT(err == SCE_OK);
 }
 
-static void *patcherHostAlloc(void *userData, uint32_t size)
-{
-	UNUSED(userData);
-	return malloc(size);
-}
-
-static void patcherHostFree(void *userData, void *mem)
-{
-	UNUSED(userData);
-	free(mem);
-}
-
-static void *graphicsAlloc(SceKernelMemBlockType type, uint32_t size, uint32_t alignment, uint32_t attribs, SceUID *uid)
+void *graphicsAlloc(SceKernelMemBlockType type, uint32_t size, uint32_t alignment, uint32_t attribs, SceUID *uid)
 {
 	int err = SCE_OK;
 	UNUSED(err);
@@ -1161,7 +1125,7 @@ static void *graphicsAlloc(SceKernelMemBlockType type, uint32_t size, uint32_t a
 	return mem;
 }
 
-static void graphicsFree(SceUID uid)
+void graphicsFree(SceUID uid)
 {
 	int err = SCE_OK;
 	UNUSED(err);
@@ -1180,7 +1144,7 @@ static void graphicsFree(SceUID uid)
 	SCE_DBG_ASSERT(err == SCE_OK);
 }
 
-static void *vertexUsseAlloc(uint32_t size, SceUID *uid, uint32_t *usseOffset)
+void *vertexUsseAlloc(uint32_t size, SceUID *uid, uint32_t *usseOffset)
 {
 	int err = SCE_OK;
 	UNUSED(err);
@@ -1205,7 +1169,7 @@ static void *vertexUsseAlloc(uint32_t size, SceUID *uid, uint32_t *usseOffset)
 	return mem;
 }
 
-static void vertexUsseFree(SceUID uid)
+void vertexUsseFree(SceUID uid)
 {
 	int err = SCE_OK;
 	UNUSED(err);
@@ -1224,7 +1188,7 @@ static void vertexUsseFree(SceUID uid)
 	SCE_DBG_ASSERT(err == SCE_OK);
 }
 
-static void *fragmentUsseAlloc(uint32_t size, SceUID *uid, uint32_t *usseOffset)
+void *fragmentUsseAlloc(uint32_t size, SceUID *uid, uint32_t *usseOffset)
 {
 	int err = SCE_OK;
 	UNUSED(err);
@@ -1249,7 +1213,7 @@ static void *fragmentUsseAlloc(uint32_t size, SceUID *uid, uint32_t *usseOffset)
 	return mem;
 }
 
-static void fragmentUsseFree(SceUID uid)
+void fragmentUsseFree(SceUID uid)
 {
 	int err = SCE_OK;
 	UNUSED(err);

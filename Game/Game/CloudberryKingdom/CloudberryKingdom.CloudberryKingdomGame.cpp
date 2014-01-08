@@ -2153,9 +2153,9 @@ float CloudberryKingdomGame::fps = 0;
 				Fireball::FlameTexture->_Tex = Tools::TextureWad->TextureList[0]->_Tex;
 #else
 				// Compute fireballs textures
-				MyGraphicsDevice->BlendState = GfxBlendState_Additive;
-				Fireball::DrawFireballTexture( MyGraphicsDevice, Tools::EffectWad );
-				Fireball::DrawEmitterTexture( MyGraphicsDevice, Tools::EffectWad );
+				//MyGraphicsDevice->BlendState = GfxBlendState_Additive;
+				//Fireball::DrawFireballTexture( MyGraphicsDevice, Tools::EffectWad );
+				//Fireball::DrawEmitterTexture( MyGraphicsDevice, Tools::EffectWad );
 
 				MyGraphicsDevice->BlendState = GfxBlendState_AlphaBlend;
 #endif

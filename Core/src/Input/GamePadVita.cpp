@@ -4,6 +4,8 @@
 #include <Utility/Error.h>
 #include <Utility/Log.h>
 
+#include <ctrl.h>
+
 static bool asianButtonConfiguration = false;
 
 // Buffer for making sure disconnect messages don't show up for going from
@@ -11,9 +13,13 @@ static bool asianButtonConfiguration = false;
 static int gBufferedIsConnected[ 4 ];
 const int gBufferingSize = 80;//32;
 
+static SceCtrlData gCtrlData;
+
 void GamePad::Initialize()
 {
-	//gfxInitPad();
+	sceCtrlSetSamplingMode( SCE_CTRL_MODE_DIGITALANALOG );
+
+	memset( &gCtrlData, 0, sizeof( SceCtrlData ) );
 
 	asianButtonConfiguration = IsAsianButtonConfiguration();
 
@@ -35,7 +41,6 @@ bool AutoCloseWhenConnected()
 	return numConnected != 0;
 }
 
-
 void GamePad::Update()
 {
 	//gfxPadRead();
@@ -46,6 +51,8 @@ void GamePad::Update()
 		//if( gfxPadConnected( i ) )
 		//	++numConnected;
 	}
+
+	sceCtrlPeekBufferPositive( 0, &gCtrlData, 1 );
 }
 
 GamePadState GamePad::GetState( PlayerIndex index )
@@ -54,10 +61,48 @@ GamePadState GamePad::GetState( PlayerIndex index )
 
 	GamePadState gs;
 
+	memset( &gs, 0, sizeof( gs ) );
+
+	if( index != PlayerIndex_One )
+		return gs;
+
 	//bool isGamepadConnected = gfxPadConnected( i );
 
-	gs.IsConnected = gBufferedIsConnected[ i ] < gBufferingSize;
+	gs.IsConnected = true;
 
+#define CHECK( x ) ( ( x ) != 0 ? ButtonState_Pressed : ButtonState_Released )
+
+	gs.DPad.Left = CHECK( gCtrlData.buttons & SCE_CTRL_LEFT );
+	gs.DPad.Right = CHECK( gCtrlData.buttons & SCE_CTRL_RIGHT );
+	gs.DPad.Up = CHECK( gCtrlData.buttons & SCE_CTRL_UP );
+	gs.DPad.Down = CHECK( gCtrlData.buttons & SCE_CTRL_DOWN );
+
+	if( !asianButtonConfiguration )
+	{
+		gs.Buttons.A = CHECK( gCtrlData.buttons & SCE_CTRL_CROSS );
+		gs.Buttons.B = CHECK( gCtrlData.buttons & SCE_CTRL_CIRCLE );
+	}
+	else
+	{
+		gs.Buttons.B = CHECK( gCtrlData.buttons & SCE_CTRL_CROSS );
+		gs.Buttons.A = CHECK( gCtrlData.buttons & SCE_CTRL_CIRCLE );
+	}
+
+	gs.Buttons.X = CHECK( gCtrlData.buttons & SCE_CTRL_SQUARE );
+	gs.Buttons.Y = CHECK( gCtrlData.buttons & SCE_CTRL_TRIANGLE );
+	gs.Buttons.Back = CHECK( gCtrlData.buttons & SCE_CTRL_SELECT );
+	gs.Buttons.Start = CHECK( gCtrlData.buttons & SCE_CTRL_START );
+
+	gs.Buttons.LeftShoulder = CHECK( gCtrlData.buttons & SCE_CTRL_L );
+	gs.Buttons.RightShoulder = CHECK( gCtrlData.buttons & SCE_CTRL_R );
+
+#undef CHECK
+
+	gs.ThumbSticks.Left.X = 2.f * ( gCtrlData.lx / 255.f ) - 1.f;
+	gs.ThumbSticks.Left.Y = -2.f * ( gCtrlData.ly / 255.f ) + 1.f;
+	
+	gs.ThumbSticks.Right.X = 2.f * ( gCtrlData.rx / 255.f ) - 1.f;
+	gs.ThumbSticks.Right.Y = -2.f * ( gCtrlData.ry / 255.f ) + 1.f;
 	//if( !isGamepadConnected )
 	//	++gBufferedIsConnected[ i ];
 	//else

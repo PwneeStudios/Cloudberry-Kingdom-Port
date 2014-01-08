@@ -4,6 +4,11 @@
 
 #include <Content/TextureVitaInternal.h>
 
+#include <gxt.h>
+
+extern void *graphicsAlloc(SceKernelMemBlockType type, uint32_t size, uint32_t alignment, uint32_t attribs, SceUID *uid);
+extern void graphicsFree(SceUID uid);
+
 struct RenderTarget2DInternal
 {
 	int Width;
@@ -23,6 +28,11 @@ RenderTarget2D::RenderTarget2D( const boost::shared_ptr<GraphicsDevice> &device,
 	internal_->Height = height;
 
 	internal_->RTTexture = new Texture();
+
+	TextureVitaInternal *texInt = internal_->RTTexture->impl_.internal_;
+
+	//texInt->TextureData = graphicsAlloc(
+	//	SCE_KERNEL_MEMBLOCK_TYPE_USER_CDRAM_RWDATA,
 
 	// ...
 

@@ -1,0 +1,24 @@
+/*
+ * Take a color and a texture coordinate.  Spit out the color.
+ */
+varying float2 v_position	: TEXCOORD0;
+varying float2 v_texcoord	: TEXCOORD1;
+varying float4 v_color		: TEXCOORD2;
+
+uniform sampler2D u_texture	: TEXUNIT0;
+
+float4 main()
+{
+    float d = (v_texcoord.x - .5) * (v_texcoord.x - .5) + (v_texcoord.y - .5) * (v_texcoord.y - .5);
+    float4 baseColor = tex2D( u_texture, v_texcoord );
+    
+    float4 Output = v_color;
+	
+	Output.a *= clamp( 5*(.25 - d), 0, 1 );
+
+	// Premultiply the alpha
+	Output.rgb *= Output.a;
+	        
+    return Output;
+}
+
