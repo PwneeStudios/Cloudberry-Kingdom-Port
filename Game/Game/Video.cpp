@@ -274,7 +274,8 @@ namespace CloudberryKingdom
 		}
 		else if( MovieName == L"LogoSalad" )
 		{
-			CurrentVideo->Duration.TotalSeconds = 0 /* minutes */ * 60 + 10 /* seconds */ + 4 /* thirtieths */ / 30.0f;
+			// TODO: This was changed to accomodate the Japanese logo screen.
+			CurrentVideo->Duration.TotalSeconds = 0 /* minutes */ * 60 + 18 /* seconds */ + 0 /* thirtieths */ / 30.0f;
 		}
 		else if( MovieName == L"LogoSalad_ESRB" )
 		{

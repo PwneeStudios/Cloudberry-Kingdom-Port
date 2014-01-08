@@ -216,8 +216,23 @@ namespace CloudberryKingdom
 
 	void CustomHero_GUI::TestingPhsx()
 	{
-		if ( ButtonCheck::State( ControllerButtons_B, -1 ).Pressed )
-			EndTest();
+		if ( CloudberryKingdomGame::AsianButtonSwitch )
+		{
+			if ( ButtonCheck::State( ControllerButtons_A, -1 ).Pressed ||
+				 ButtonCheck::State( ControllerButtons_BACK, -1 ).Pressed ||
+				 ButtonCheck::State( ControllerButtons_X, -1 ).Pressed ||
+				 ButtonCheck::State( ControllerButtons_Y, -1 ).Pressed )
+			{
+				 EndTest();
+			}
+		}
+		else
+		{
+			if ( ButtonCheck::State( ControllerButtons_B, -1 ).Pressed )
+			{
+				EndTest();
+			}
+		}
 	}
 
 	void CustomHero_GUI::EndTest()

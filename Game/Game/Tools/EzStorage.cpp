@@ -18,13 +18,16 @@
 #include <sysutil/sysutil_gamecontent.h>
 #include <np.h>
 
-#define SCEA
+//#define SCEA
 //#define SCEE
+#define SCEJA
 
 #if	  defined(SCEA)
 	#define AUTOSAVEDATA_DIRNAME "NPUB31177-AUTO"
 #elif defined(SCEE)
 	#define AUTOSAVEDATA_DIRNAME "NPEB01312-AUTO"
+#elif defined(SCEJA)
+	#define AUTOSAVEDATA_DIRNAME "NPJB00457-AUTO"
 #endif
 
 #define AUTOSAVE_FILENAME "SYS-DATA"
