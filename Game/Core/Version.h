@@ -1,4 +1,4 @@
-﻿#ifndef VERSION
+#ifndef VERSION
 #define VERSION
 
 namespace CloudberryKingdom

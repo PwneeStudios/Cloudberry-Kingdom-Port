@@ -1,7 +1,7 @@
 #ifndef LEADERBOARD
 #define LEADERBOARD
 
-#include <global_header.h>
+#include <small_header.h>
 //#include <Game/Player/LeaderboardView.h>
 
 #include <Utility/Mutex.h>

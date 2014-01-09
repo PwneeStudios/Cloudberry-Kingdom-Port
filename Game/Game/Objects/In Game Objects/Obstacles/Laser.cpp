@@ -1,4 +1,20 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Objects/In Game Objects/Obstacles/Laser.h"
+
+#include "Core/Tools/CoreMath.h"
+#include "Game/Objects/ObjectBase.h"
+#include "Game/Tilesets/TileSet.h"
+#include "Game/Objects/IBounded.h"
+#include "Game/Objects/Bob/Bob.h"
+#include "Game/Objects/In Game Objects/BaseClasses/_LineDeath.h"
+#include "Game/Objects/In Game Objects/Obstacles/Laser__Auto.h"
+#include "Game/Tilesets/SpriteInfo.h"
+#include "Game/Tools/Recycler.h"
+#include "Game/Tools/Tools.h"
+#include "Game/Tilesets/TileSetInfo.h"
+
+#include "Core/Texture/TextureOrAnim.h"
+#include "Game/Level/Level.h"
 
 namespace CloudberryKingdom
 {

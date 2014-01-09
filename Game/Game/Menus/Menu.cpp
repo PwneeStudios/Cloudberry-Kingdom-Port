@@ -1,4 +1,20 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Menus/Menu.h"
+
+#include "Core/FancyVector2.h"
+#include "Core/Graphics/Draw/Quads/PieceQuad.h"
+#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+#include "Core/Input/ButtonCheck.h"
+#include "Core/Sound/EzSound.h"
+#include "Core/Texture/EzTexture.h"
+#include "Game/Menus/Menu Components/MenuItem.h"
+#include "Game/Tools/Tools.h"
+
+#include "Core/Text/EzText.h"
+#include "Game/Tools/Camera.h"
+#include "Game/Games/GameType.h"
+#include "Game/Level/Level.h"
 
 #include "Hacks/List.h"
 #include "Hacks/Compare.h"

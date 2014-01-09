@@ -1,7 +1,13 @@
 #ifndef TIMECRISIS_TUTORIAL
 #define TIMECRISIS_TUTORIAL
 
-#include <global_header.h>
+#include <small_header.h>
+
+#include "Game/Games/Meta Games/Arcade Games/Rush/Hero Rush/HeroRush_Tutorial.h"
+//#include "Game/Games/Meta Games/Arcade Games/Rush/Time Crisis/TimeCrisis.h"
+//#include "Game/Objects/Game Objects/GameObjects/GUI_Text.h"
+//#include "Game/Objects/Game Objects/GameObjects/Listener.h"
+
 
 namespace CloudberryKingdom
 {

@@ -1,7 +1,14 @@
-﻿#ifndef BACKGROUNDFLOATER_STATIONARY
+#ifndef BACKGROUNDFLOATER_STATIONARY
 #define BACKGROUNDFLOATER_STATIONARY
 
-#include <global_header.h>
+#include <small_header.h>
+
+#include "Game/Tilesets/Backgrounds/BackgroundFloater.h"
+//#include "Game/Tilesets/Backgrounds/BackgroundFloaterList.h"
+//#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+//#include "Game/Level/Level.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

@@ -1,7 +1,10 @@
-﻿#ifndef STARTMENU_MW_EXIT
+#ifndef STARTMENU_MW_EXIT
 #define STARTMENU_MW_EXIT
 
-#include <global_header.h>
+#include <small_header.h>
+
+#include "Game/Menus/Concrete Menus/Title Screen/Sub Menus/VerifyQuitGame.h"
+
 
 namespace CloudberryKingdom
 {

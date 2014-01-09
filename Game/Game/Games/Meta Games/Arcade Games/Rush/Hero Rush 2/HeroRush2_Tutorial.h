@@ -1,7 +1,14 @@
 #ifndef HERORUSH2_TUTORIAL
 #define HERORUSH2_TUTORIAL
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Game/Localization.h"
+#include "Game/Games/Meta Games/Arcade Games/Rush/Hero Rush/HeroRush_Tutorial.h"
+//#include "Game/Games/Meta Games/Arcade Games/Rush/Hero Rush 2/HeroRush2.h"
+//#include "Game/Objects/Game Objects/GameObjects/GUI_Text.h"
+//#include "Game/Objects/Game Objects/GameObjects/Listener.h"
+
 
 namespace CloudberryKingdom
 {

@@ -1,7 +1,10 @@
-﻿#ifndef FANCYCOLOR
+#ifndef FANCYCOLOR
 #define FANCYCOLOR
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/FancyVector2.h"
+
 
 namespace CloudberryKingdom
 {

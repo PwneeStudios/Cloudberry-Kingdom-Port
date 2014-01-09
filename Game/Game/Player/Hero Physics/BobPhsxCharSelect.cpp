@@ -1,4 +1,10 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Player/Hero Physics/BobPhsxCharSelect.h"
+
+#include "Game/Player/Hero Physics/Normal.h"
+
+#include "Game/Objects/Bob/Bob.h"
+
 namespace CloudberryKingdom
 {
 

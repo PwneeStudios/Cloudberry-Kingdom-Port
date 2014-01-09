@@ -1,5 +1,13 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Player/ClrTextFx.h"
 
+#include "Core/Effects/EzEffect.h"
+#include "Game/Localization.h"
+#include "Core/Texture/EzTexture.h"
+#include "Game/Objects/Bob/Bob.h"
+#include "Game/Tools/Tools.h"
+
+#include "Core/Texture/EzTextureWad.h"
 
 namespace CloudberryKingdom
 {

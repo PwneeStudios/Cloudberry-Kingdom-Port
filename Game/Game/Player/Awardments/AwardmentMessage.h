@@ -1,7 +1,16 @@
-﻿#ifndef AWARDMENTMESSAGE
+#ifndef AWARDMENTMESSAGE
 #define AWARDMENTMESSAGE
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/DrawPile.h"
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+//#include "Game/Localization.h"
+//#include "Core/Text/EzText.h"
+#include "Game/Menus/CkBaseMenu.h"
+//#include "Game/Player/Awardments/Awardment.h"
+//#include "Game/Tools/Resources.h"
+
 
 namespace CloudberryKingdom
 {

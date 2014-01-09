@@ -1,7 +1,37 @@
-﻿#ifndef RECYCLER
+#ifndef RECYCLER
 #define RECYCLER
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Game/Objects/ObjectBase.h"
+//#include "Game/Objects/Door/Door.h"
+//#include "Game/Objects/In Game Objects/Blocks/BouncyBlock.h"
+//#include "Game/Objects/In Game Objects/Blocks/Conveyor.h"
+//#include "Game/Objects/In Game Objects/Blocks/FallingBlock.h"
+//#include "Game/Objects/In Game Objects/Blocks/GhostBlock.h"
+//#include "Game/Objects/In Game Objects/Blocks/Lava_Castle.h"
+//#include "Game/Objects/In Game Objects/Blocks/MovingBlock.h"
+//#include "Game/Objects/In Game Objects/Blocks/MovingPlatform.h"
+//#include "Game/Objects/In Game Objects/Blocks/NormalBlock.h"
+//#include "Game/Objects/In Game Objects/Blocks/Pendulum.h"
+//#include "Game/Objects/In Game Objects/Grab/Checkpoint.h"
+//#include "Game/Objects/In Game Objects/Grab/Coin.h"
+//#include "Game/Objects/In Game Objects/Obstacles/BlockEmitter.h"
+//#include "Game/Objects/In Game Objects/Obstacles/Boulder.h"
+//#include "Game/Objects/In Game Objects/Obstacles/Cloud.h"
+//#include "Game/Objects/In Game Objects/Obstacles/CloudberryKingdom.Fireball.h"
+//#include "Game/Objects/In Game Objects/Obstacles/CloudberryKingdom.Firesnake.h"
+//#include "Game/Objects/In Game Objects/Obstacles/FireSpinner.h"
+//#include "Game/Objects/In Game Objects/Obstacles/FlyingBlob.h"
+//#include "Game/Objects/In Game Objects/Obstacles/Laser.h"
+//#include "Game/Objects/In Game Objects/Obstacles/LavaDrip.h"
+//#include "Game/Objects/In Game Objects/Obstacles/Serpent.h"
+//#include "Game/Objects/In Game Objects/Obstacles/Spike.h"
+//#include "Game/Objects/In Game Objects/Obstacles/SpikeyGuy.h"
+//#include "Game/Objects/In Game Objects/Obstacles/SpikeyLine.h"
+//#include "Game/Objects/Special/CameraZone.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

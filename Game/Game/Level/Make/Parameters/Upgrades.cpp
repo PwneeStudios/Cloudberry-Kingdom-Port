@@ -1,4 +1,12 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Level/Make/Parameters/Upgrades.h"
+
+#include "Game/Level/Make/DifficultyHelper.h"
+#include "Game/Level/Make/Parameters/LevelGenData.h"
+#include "Game/Level/Make/Parameters/StyleData/StyleData.h"
+#include "Game/Objects/AutoGen.h"
+#include "Game/Tools/Tools.h"
+
 
 #include "Hacks/List.h"
 

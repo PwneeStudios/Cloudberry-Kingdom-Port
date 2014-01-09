@@ -1,7 +1,12 @@
-﻿#ifndef FLOATRECTANGLE
+#ifndef FLOATRECTANGLE
 #define FLOATRECTANGLE
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/WriteReadTools.h"
+//#include "Game/Tools/Tools.h"
+#include "Hacks/XNA/Rectangle.h"
+
 namespace CloudberryKingdom
 {
 	struct FloatRectangle

@@ -1,4 +1,18 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Player/ColorSchemeManager.h"
+
+#include "Core/Effects/EzEffect.h"
+#include "Core/Graphics/Draw/Object/ObjectClass.h"
+#include "Game/Localization.h"
+#include "Core/Tools/ColorHelper.h"
+#include "Game/Player/Buyable.h"
+#include "Game/Player/ClrTextFx.h"
+#include "Game/Player/ColorScheme.h"
+#include "Game/Objects/Bob/Bob.h"
+#include "Game/Objects/In Game Objects/Obstacles/CloudberryKingdom.Fireball.h"
+#include "Game/Tools/Tools.h"
+
+#include "Core/Texture/EzTextureWad.h"
 
 #include "Hacks/List.h"
 

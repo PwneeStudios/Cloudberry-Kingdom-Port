@@ -1,7 +1,12 @@
-﻿#ifndef MENUSLIDERNOSLIDE
+#ifndef MENUSLIDERNOSLIDE
 #define MENUSLIDERNOSLIDE
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Input/ButtonCheck.h"
+//#include "Core/Text/EzText.h"
+#include "Game/Menus/Menu Components/MenuSliderBase.h"
+
 
 namespace CloudberryKingdom
 {

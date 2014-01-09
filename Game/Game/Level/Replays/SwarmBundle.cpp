@@ -1,4 +1,17 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Level/Replays/SwarmBundle.h"
+
+#include "Core/Animation/SpriteAnim.h"
+#include "Core/Tools/CoreMath.h"
+#include "Game/Level/Replays/SwarmRecord.h"
+#include "Game/Objects/Bob/Bob.h"
+#include "Game/Objects/Bob/BobLink.h"
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+#include "Game/Level/Level.h"
+
+#include "Game/Player/Hero Physics/Base.h"
+#include "Game/Games/GameType.h"
+#include "Game/Level/Replays/Recording.h"
 
 #include "Hacks/List.h"
 

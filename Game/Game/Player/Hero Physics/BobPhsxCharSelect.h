@@ -1,7 +1,10 @@
-﻿#ifndef BOBPHSXCHARSELECT
+#ifndef BOBPHSXCHARSELECT
 #define BOBPHSXCHARSELECT
 
-#include <global_header.h>
+#include <small_header.h>
+
+#include "Game/Player/Hero Physics/Normal.h"
+
 namespace CloudberryKingdom
 {
 

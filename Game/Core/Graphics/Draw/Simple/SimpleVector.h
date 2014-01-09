@@ -1,7 +1,12 @@
-﻿#ifndef SIMPLEVECTOR
+#ifndef SIMPLEVECTOR
 #define SIMPLEVECTOR
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Animation/AnimationData_Vector.h"
+//#include "Core/Graphics/VertexFormat.h"
+//#include "Game/Tools/Tools.h"
+
 
 #include "Core/Graphics/VertexFormat.h"
 

@@ -1,4 +1,8 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Menus/Concrete Menus/Title Screen/StartMenu_MW_Options.h"
+
+#include "Game/Menus/Concrete Menus/Title Screen/Sub Menus/SoundMenu.h"
+
 
 namespace CloudberryKingdom
 {

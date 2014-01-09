@@ -1,4 +1,10 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Core/Graphics/Draw/Simple/SimpleVector.h"
+
+#include "Core/Animation/AnimationData_Vector.h"
+#include "Core/Graphics/VertexFormat.h"
+#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

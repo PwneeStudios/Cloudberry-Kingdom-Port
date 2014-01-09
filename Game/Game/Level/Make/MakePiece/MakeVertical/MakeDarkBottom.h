@@ -1,7 +1,13 @@
-﻿#ifndef MAKEDARKBOTTOM
+#ifndef MAKEDARKBOTTOM
 #define MAKEDARKBOTTOM
 
-#include <global_header.h>
+#include <small_header.h>
+
+#include "Game/Level/Make/MakePiece/MakeVertical/MakeFinalDoor_Vertical.h"
+//#include "Game/Objects/Game Objects/GameObjects/Region.h"
+//#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+//#include "Game/Level/Level.h"
+
 
 namespace CloudberryKingdom
 {

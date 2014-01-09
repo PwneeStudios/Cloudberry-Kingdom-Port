@@ -1,4 +1,12 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Objects/In Game Objects/Blocks/Lava_Castle.h"
+
+#include "Game/Objects/ObjectBase.h"
+#include "Game/Objects/In Game Objects/Blocks/Lava.h"
+#include "Game/Tools/Tools.h"
+
+#include "Game/Collision Detection/AABox.h"
+#include "Game/Collision Detection/FloatRectangle.h"
 
 namespace CloudberryKingdom
 {

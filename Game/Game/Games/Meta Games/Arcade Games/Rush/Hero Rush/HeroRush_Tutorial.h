@@ -1,7 +1,25 @@
 #ifndef HERORUSH_TUTORIAL
 #define HERORUSH_TUTORIAL
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Game/Localization.h"
+//#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+//#include "Game/Objects/ObjectBase.h"
+#include "Game/Objects/Game Objects/GameObject.h"
+//#include "Game/Games/TutorialHelper.h"
+//#include "Game/Games/Meta Games/Arcade Games/Rush/Hero Rush/HeroRush.h"
+//#include "Game/Games/Meta Games/StringWorlds/LevelConnector.h"
+//#include "Game/Player/PlayerManager.h"
+//#include "Game/Objects/Bob/Bob.h"
+//#include "Game/Objects/Door/Door.h"
+//#include "Game/Objects/Game Objects/GameObjects/GUI_Text.h"
+//#include "Game/Objects/Game Objects/GameObjects/GUI_Score.h"
+//#include "Game/Objects/Game Objects/GameObjects/Listener.h"
+//#include "Game/Objects/Special/Arrow.h"
+//#include "Game/Tools/Recycler.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

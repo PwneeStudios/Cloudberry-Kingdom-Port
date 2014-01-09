@@ -1,7 +1,10 @@
-﻿#ifndef FIRESPINNER__AUTO
+#ifndef FIRESPINNER__AUTO
 #define FIRESPINNER__AUTO
 
-#include <global_header.h>
+#include <small_header.h>
+
+#include "Game/Objects/AutoGen.h"
+
 
 namespace CloudberryKingdom
 {

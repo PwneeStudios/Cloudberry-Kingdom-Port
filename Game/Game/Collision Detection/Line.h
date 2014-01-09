@@ -1,4 +1,4 @@
-﻿#ifndef LINE
+#ifndef LINE
 #define LINE
 
 namespace CloudberryKingdom

@@ -1,7 +1,18 @@
-﻿#ifndef SPIKEYLINE__AUTO
+#ifndef SPIKEYLINE__AUTO
 #define SPIKEYLINE__AUTO
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Game/Objects/ObjectBase.h"
+//#include "Game/Level/Make/DifficultyHelper.h"
+//#include "Game/Level/Make/PieceSeedData.h"
+#include "Game/Level/Make/Parameters/Param.h"
+#include "Game/Objects/AutoGen.h"
+//#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+//#include "Game/Level/Level.h"
+//#include "Game/Objects/In Game Objects/Obstacles/SpikeyLine.h"
+//#include "Game/Tools/Recycler.h"
+
 
 namespace CloudberryKingdom
 {

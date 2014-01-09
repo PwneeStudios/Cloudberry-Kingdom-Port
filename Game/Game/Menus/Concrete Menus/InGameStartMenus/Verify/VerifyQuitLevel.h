@@ -1,7 +1,17 @@
 #ifndef VERIFYQUITLEVEL
 #define VERIFYQUITLEVEL
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+//#include "Game/Localization.h"
+//#include "Core/Text/EzText.h"
+#include "Game/Menus/Concrete Menus/InGameStartMenus/Verify/VerifyBase.h"
+//#include "Game/Games/Meta Games/Challenges/Challenge_Base.h"
+//#include "Game/Menus/Menu.h"
+//#include "Game/Menus/Menu Components/MenuItem.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

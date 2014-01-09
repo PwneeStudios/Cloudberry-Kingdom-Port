@@ -1,7 +1,9 @@
-﻿#ifndef WRAPPEDFLOAT
+#ifndef WRAPPEDFLOAT
 #define WRAPPEDFLOAT
 
-#include <global_header.h>
+#include <small_header.h>
+
+
 
 namespace CloudberryKingdom
 {

@@ -1,7 +1,7 @@
 ﻿#ifndef _CODE_CAVE
 #define _CODE_CAVE
 
-#include <global_header.h>
+#include <small_header.h>
 
 namespace CloudberryKingdom
 {

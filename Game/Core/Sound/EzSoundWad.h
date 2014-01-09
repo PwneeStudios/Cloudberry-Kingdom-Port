@@ -1,7 +1,11 @@
-﻿#ifndef EZSOUNDWAD
+#ifndef EZSOUNDWAD
 #define EZSOUNDWAD
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Sound/EzSound.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

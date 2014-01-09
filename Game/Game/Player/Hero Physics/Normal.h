@@ -1,7 +1,29 @@
-﻿#ifndef NORMAL
+#ifndef NORMAL
 #define NORMAL
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Animation/SpriteAnim.h"
+//#include "Core/Graphics/Draw/Object/ObjectClass.h"
+//#include "Game/Localization.h"
+//#include "Core/Particle Effects/Specific Effects/CloudberryKingdom.ParticleEffects.h"
+//#include "Core/Sound/EzSound.h"
+//#include "Core/Tools/CoreMath.h"
+//#include "Game/Objects/ObjectBase.h"
+//#include "Game/Objects/In Game Objects/Blocks/Block.h"
+//#include "Game/Level/Make/PieceSeedData.h"
+//#include "Game/Level/Make/Parameters/LevelGenData.h"
+#include "Game/Player/Hero Physics/Base.h"
+//#include "Game/Objects/Icon.h"
+//#include "Game/Objects/Bob/Bob.h"
+//#include "Game/Objects/In Game Objects/Blocks/BouncyBlock.h"
+//#include "Game/Objects/In Game Objects/Obstacles/CloudberryKingdom.Fireball.h"
+//#include "Game/Objects/In Game Objects/Obstacles/FlyingBlob.h"
+//#include "Game/Player/Cape.h"
+//#include "Game/Tools/Camera.h"
+//#include "Game/Tools/Recycler.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

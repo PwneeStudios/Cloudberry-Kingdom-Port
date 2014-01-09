@@ -1,4 +1,13 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Core/WriteReadTools.h"
+
+#include "Core/PhsxData.h"
+#include "Core/Animation/AnimationData_Integer.h"
+#include "Core/Animation/AnimationData_Vector.h"
+#include "Core/Graphics/VertexFormat.h"
+#include "Core/Texture/EzTexture.h"
+#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

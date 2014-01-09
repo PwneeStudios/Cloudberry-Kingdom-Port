@@ -1,7 +1,47 @@
 #ifndef CUSTOMHERO_GUI
 #define CUSTOMHERO_GUI
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/DrawPile.h"
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+//#include "Game/Localization.h"
+//#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+//#include "Core/Input/ButtonCheck.h"
+//#include "Core/Particle Effects/Specific Effects/CloudberryKingdom.ParticleEffects.h"
+//#include "Core/Text/EzText.h"
+//#include "Game/Objects/In Game Objects/Blocks/Block.h"
+#include "Game/Menus/CkBaseMenu.h"
+//#include "Game/Menus/Menu.h"
+//#include "Game/Menus/Menu Components/MenuItem.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/StartMenu.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/StartMenu_MW_Backpanel.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/Freeplay/CustomLevel_GUI.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/StartMenu_MW_CustomLevel.h"
+#include "Game/Player/Hero Physics/Base.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/Freeplay/CustomUpgrades_GUI.h"
+//#include "Game/Menus/Menu Components/MenuList.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/Freeplay/PhsxSlider.h"
+//#include "Game/Objects/Bob/Bob.h"
+//#include "Game/Objects/In Game Objects/Blocks/NormalBlock.h"
+//#include "Game/Player/Hero Physics/Normal.h"
+//#include "Game/Player/Hero Physics/Big.h"
+//#include "Game/Player/Hero Physics/Bouncy.h"
+//#include "Game/Player/Hero Physics/Box.h"
+//#include "Game/Player/Hero Physics/Double.h"
+//#include "Game/Player/Hero Physics/Invert.h"
+//#include "Game/Player/Hero Physics/Jetman.h"
+//#include "Game/Player/Hero Physics/Meat.h"
+//#include "Game/Player/Hero Physics/Rocketbox.h"
+//#include "Game/Player/Hero Physics/Scale.h"
+//#include "Game/Player/Hero Physics/Small.h"
+//#include "Game/Player/Hero Physics/Spaceship.h"
+//#include "Game/Player/Hero Physics/Wheel.h"
+//#include "Game/Tools/CkColorHelper.h"
+//#include "Game/Tools/Recycler.h"
+//#include "Game/Tools/Resources.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

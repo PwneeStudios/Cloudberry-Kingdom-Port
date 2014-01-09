@@ -1,5 +1,14 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Games/Campaign/FadeIn.h"
 
+#include "Game/Objects/Game Objects/GameObject.h"
+#include "Game/Games/Meta Games/StringWorlds/LevelConnector.h"
+#include "Game/Objects/Bob/Bob.h"
+#include "Game/Objects/Door/Door.h"
+
+#include "Game/Games/GameType.h"
+#include "Game/Level/Level.h"
+#include "Game/Level/Make/LevelSeedData.h"
 
 namespace CloudberryKingdom
 {

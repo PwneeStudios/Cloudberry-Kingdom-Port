@@ -1,7 +1,27 @@
 #ifndef CHECKPOINT
 #define CHECKPOINT
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/Simple/BasePoint.h"
+//#include "Core/Graphics/Draw/Simple/SimpleObject.h"
+//#include "Core/Graphics/Draw/Simple/SimpleQuad.h"
+//#include "Core/Particle Effects/Particle.h"
+//#include "Core/Sound/EzSound.h"
+//#include "Core/Texture/TextureOrAnim.h"
+//#include "Game/Collision Detection/AABox.h"
+//#include "Game/Collision Detection/Phsx.h"
+#include "Game/Objects/ObjectBase.h"
+#include "Game/Tilesets/TileSet.h"
+//#include "Game/Level/LevelPiece.h"
+//#include "Game/Objects/Bob/Bob.h"
+//#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+//#include "Game/Level/Level.h"
+//#include "Game/Tools/Prototypes.h"
+//#include "Game/Tools/Recycler.h"
+//#include "Game/Tools/Tools.h"
+//#include "Game/Tilesets/TileSetInfo.h"
+
 
 namespace CloudberryKingdom
 {

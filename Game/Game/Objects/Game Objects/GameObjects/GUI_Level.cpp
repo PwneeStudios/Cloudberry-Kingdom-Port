@@ -1,4 +1,17 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Objects/Game Objects/GameObjects/GUI_Level.h"
+
+#include "Core/Graphics/Draw/DrawPile.h"
+#include "Game/Localization.h"
+#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+#include "Core/Text/EzFont.h"
+#include "Core/Text/EzText.h"
+#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+#include "Game/Level/Level.h"
+#include "Game/Tools/Resources.h"
+#include "Game/Tools/Tools.h"
+
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
 namespace CloudberryKingdom

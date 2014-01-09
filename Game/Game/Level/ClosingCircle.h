@@ -1,7 +1,13 @@
 #ifndef CLOSINGCIRCLE
 #define CLOSINGCIRCLE
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/FancyVector2.h"
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+//#include "Game/Tools/Camera.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

@@ -1,4 +1,26 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Objects/In Game Objects/Grab/Coin.h"
+
+#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include "Core/Particle Effects/Specific Effects/CloudberryKingdom.ParticleEffects.h"
+#include "Core/Sound/EzSound.h"
+#include "Game/Collision Detection/AABox.h"
+#include "Game/Collision Detection/Phsx.h"
+#include "Game/Objects/ObjectBase.h"
+#include "Game/Tilesets/TileSet.h"
+#include "Game/Games/GameType.h"
+#include "Game/Objects/Bob/Bob.h"
+#include "Game/Objects/Special/TextFloat.h"
+#include "Game/Tilesets/SpriteInfo.h"
+#include "Game/Tools/Recycler.h"
+#include "Game/Tools/Tools.h"
+#include "Game/Tilesets/TileSetInfo.h"
+
+#include "Game/Collision Detection/FloatRectangle.h"
+#include "Core/Texture/TextureOrAnim.h"
+#include "Game/Level/Level.h"
+#include "Game/Tools/Camera.h"
+#include "Game/Player/Stats.h"
 
 namespace CloudberryKingdom
 {

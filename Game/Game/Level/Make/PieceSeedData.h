@@ -1,7 +1,27 @@
 #ifndef PIECESEEDDATA
 #define PIECESEEDDATA
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Tools/Random.h"
+//#include "Game/Level/Make/LockableBool.h"
+//#include "Game/Level/Make/LevelSeedData.h"
+//#include "Game/Level/Make/Parameters/LevelGenData.h"
+//#include "Game/Level/Make/Parameters/RandomDifficulty.h"
+//#include "Game/Level/Make/Parameters/Upgrades.h"
+//#include "Game/Level/Make/Parameters/StyleData/StyleData.h"
+//#include "Game/Level/Make/Parameters/StyleData/BigData.h"
+//#include "Game/Level/Make/Parameters/StyleData/UpData.h"
+//#include "Game/Level/Make/Parameters/StyleData/DownData.h"
+//#include "Game/Level/Make/Parameters/StyleData/OneScreenData.h"
+//#include "Game/Level/Make/Parameters/StyleData/SingleData.h"
+//#include "Game/Objects/AutoGen.h"
+//#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+//#include "Game/Level/Level.h"
+//#include "Game/Objects/In Game Objects/Grab/Coin__Auto.h"
+//#include "Game/Objects/In Game Objects/Obstacles/BlockEmitter__Auto.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

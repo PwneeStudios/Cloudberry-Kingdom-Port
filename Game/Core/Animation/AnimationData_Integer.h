@@ -1,7 +1,12 @@
-﻿#ifndef ANIMATIONDATA_INTEGER
+#ifndef ANIMATIONDATA_INTEGER
 #define ANIMATIONDATA_INTEGER
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/WriteReadTools.h"
+//#include "Core/Texture/EzTexture.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

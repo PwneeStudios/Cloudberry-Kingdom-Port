@@ -1,4 +1,21 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Objects/In Game Objects/Obstacles/SpikeyGuy__Auto.h"
+
+#include "Core/Tools/CoreMath.h"
+#include "Game/Objects/ObjectBase.h"
+#include "Game/Objects/In Game Objects/Blocks/Block.h"
+#include "Game/Level/Make/DifficultyHelper.h"
+#include "Game/Level/Make/PieceSeedData.h"
+#include "Game/Level/Make/Parameters/Param.h"
+#include "Game/Objects/AutoGen.h"
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+#include "Game/Level/Level.h"
+#include "Game/Objects/In Game Objects/Obstacles/SpikeyGuy.h"
+#include "Game/Tools/Recycler.h"
+#include "Game/Level/Make/Parameters/Upgrades.h"
+#include "Core/Tools/Random.h"
+#include "Game/Collision Detection/AABox.h"
+#include "Game/Collision Detection/FloatRectangle.h"
 
 namespace CloudberryKingdom
 {

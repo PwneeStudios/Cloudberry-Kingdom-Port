@@ -1,4 +1,15 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Objects/Special/Arrow.h"
+
+#include "Core/Graphics/Draw/Simple/SimpleObject.h"
+#include "Core/Tools/CoreMath.h"
+#include "Game/Objects/Game Objects/GameObject.h"
+#include "Game/Tools/Prototypes.h"
+#include "Game/Tools/Tools.h"
+
+#include "Core/Tools/Random.h"
+#include "Game/Level/Level.h"
+#include "Game/Tools/Camera.h"
 
 namespace CloudberryKingdom
 {

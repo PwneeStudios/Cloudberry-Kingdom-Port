@@ -103,4 +103,17 @@ inline boost::shared_ptr<Object> MakeSmartObject( boost::shared_ptr<T> ptr )
 	return boost::static_pointer_cast<Object>( ptr );
 }
 
+#include "Core/Lambdas/Lambda.h"
+#include "Core/Lambdas/Lambda_1.h"
+#include "Core/Lambdas/Lambda_2.h"
+#include "Core/Lambdas/LambdaFunc.h"
+#include "Core/Lambdas/LambdaFunc_1.h"
+#include "Core/Lambdas/LambdaFunc_2.h"
+#include "Core/Lambdas/Multicaster.h"
+#include "Core/Lambdas/Multicaster_1.h"
+#include "Core/Lambdas/Multicaster_2.h"
+
+#include <Graphics/Color.h>
+#include <Math/Vectors.h>
+
 #endif

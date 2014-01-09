@@ -1,4 +1,11 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Objects/Game Objects/GameObjects/SuperCheer.h"
+
+#include "Game/Objects/Game Objects/GameObject.h"
+#include "Game/Games/GameType.h"
+#include "Game/Objects/Game Objects/GameObjects/Cheer.h"
+
+#include "Game/Tools/Recycler.h"
 
 namespace CloudberryKingdom
 {

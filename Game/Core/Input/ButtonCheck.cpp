@@ -1,4 +1,13 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Core/Input/ButtonCheck.h"
+
+#include "Core/ResolutionGroup.h"
+#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+#include "Game/Player/PlayerManager.h"
+#include "Game/Objects/Bob/Bob.h"
+#include "Game/Tools/Tools.h"
+#include "Game/Level/Level.h"
+#include "Game/Player/PlayerData.h"
 
 #include <Input/Keyboard.h>
 #include <Input/Mouse.h>

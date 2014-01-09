@@ -1,5 +1,21 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Core/Graphics/Draw/Quads/QuadClass.h"
 
+#include "Core/FancyVector2.h"
+#include "Core/WriteReadTools.h"
+#include "Core/Graphics/Draw/Quads/Quad.h"
+#include "Core/Graphics/Draw/Simple/BasePoint.h"
+#include "Core/Graphics/Draw/Simple/SimpleQuad.h"
+#include "Core/Input/ButtonCheck.h"
+#include "Core/Texture/EzTexture.h"
+#include "Core/Texture/TextureOrAnim.h"
+#include "Core/Tools/ColorHelper.h"
+#include "Core/Tools/CoreMath.h"
+#include "Game/Tilesets/SpriteInfo.h"
+#include "Game/Tools/Camera.h"
+#include "Game/Tools/Tools.h"
+
+#include "Core/Texture/EzTextureWad.h"
 #include "Hacks/String.h"
 
 namespace CloudberryKingdom

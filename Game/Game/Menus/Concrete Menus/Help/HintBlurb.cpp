@@ -1,4 +1,15 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Menus/Concrete Menus/Help/HintBlurb.h"
+
+#include "Core/Graphics/Draw/DrawPile.h"
+#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include "Game/Localization.h"
+#include "Core/Input/ButtonCheck.h"
+#include "Core/Text/EzText.h"
+#include "Game/Objects/Game Objects/GameObject.h"
+#include "Game/Menus/CkBaseMenu.h"
+
+#include "Game/Games/GameType.h"
 
 namespace CloudberryKingdom
 {

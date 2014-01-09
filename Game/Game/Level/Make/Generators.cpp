@@ -1,4 +1,30 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Level/Make/Generators.h"
+
+#include "Game/Objects/AutoGen.h"
+#include "Game/Objects/In Game Objects/Blocks/BouncyBlock__Auto.h"
+#include "Game/Objects/In Game Objects/Blocks/Ceiling__Auto.h"
+#include "Game/Objects/In Game Objects/Blocks/Conveyor__Auto.h"
+#include "Game/Objects/In Game Objects/Blocks/FallingBlock__Auto.h"
+#include "Game/Objects/In Game Objects/Blocks/GhostBlock__Auto.h"
+#include "Game/Objects/In Game Objects/Blocks/MovingBlock__Auto.h"
+#include "Game/Objects/In Game Objects/Blocks/NormalBlock__Auto.h"
+#include "Game/Objects/In Game Objects/Blocks/Pendulum__Auto.h"
+#include "Game/Objects/In Game Objects/Grab/Coin__Auto.h"
+#include "Game/Objects/In Game Objects/Obstacles/BlockEmitter__Auto.h"
+#include "Game/Objects/In Game Objects/Obstacles/Boulder__Auto.h"
+#include "Game/Objects/In Game Objects/Obstacles/Cloud__Auto.h"
+#include "Game/Objects/In Game Objects/Obstacles/Fireball__Auto.h"
+#include "Game/Objects/In Game Objects/Obstacles/Firesnake__Auto.h"
+#include "Game/Objects/In Game Objects/Obstacles/FireSpinner__Auto.h"
+#include "Game/Objects/In Game Objects/Obstacles/FlyingBlob__Auto.h"
+#include "Game/Objects/In Game Objects/Obstacles/Laser__Auto.h"
+#include "Game/Objects/In Game Objects/Obstacles/LavaDrip__Auto.h"
+#include "Game/Objects/In Game Objects/Obstacles/Serpent__Auto.h"
+#include "Game/Objects/In Game Objects/Obstacles/SpikeyGuy__Auto.h"
+#include "Game/Objects/In Game Objects/Obstacles/SpikeyLine__Auto.h"
+#include "Game/Objects/In Game Objects/Obstacles/Spike__Auto.h"
+
 
 #include "Hacks/List.h"
 

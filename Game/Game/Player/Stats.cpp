@@ -1,4 +1,10 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Player/Stats.h"
+
+#include "Core/Chunk.h"
+#include "Game/Objects/Bob/Bob.h"
+#include "Game/Tools/Tools.h"
+
 
 #include "Hacks/String.h"
 

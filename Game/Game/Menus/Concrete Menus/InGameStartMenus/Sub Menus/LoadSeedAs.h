@@ -1,7 +1,15 @@
 #ifndef LOADSEEDAS
 #define LOADSEEDAS
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Game/Localization.h"
+//#include "Game/Menus/Concrete Menus/InGameStartMenus/Sub Menus/SaveSeedAs.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/Freeplay/SavedSeedsGUI.h"
+//#include "Game/Player/PlayerData.h"
+//#include "Game/Tools/Resources.h"
+//#include "Game/Tools/Tools.h"
+#include "Game/Menus/Concrete Menus/InGameStartMenus/Verify/VerifyBase.h"
 
 namespace CloudberryKingdom
 {

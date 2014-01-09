@@ -1,4 +1,4 @@
-﻿#ifndef INTVECTOR2
+#ifndef INTVECTOR2
 #define INTVECTOR2
 
 namespace CloudberryKingdom

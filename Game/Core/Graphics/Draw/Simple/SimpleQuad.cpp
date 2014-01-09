@@ -1,5 +1,18 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Core/Graphics/Draw/Simple/SimpleQuad.h"
 
+#include "Core/Animation/AnimationData_Integer.h"
+#include "Core/Effects/EzEffect.h"
+#include "Core/Graphics/Draw/Quads/Quad.h"
+#include "Core/Graphics/Draw/Simple/BasePoint.h"
+#include "Core/Graphics/Draw/Simple/SimpleVector.h"
+#include "Core/Texture/EzTexture.h"
+#include "Core/Texture/TextureOrAnim.h"
+#include "Core/Tools/ColorHelper.h"
+#include "Game/Tools/Tools.h"
+
+#include "Game/Level/Level.h"
+#include "Core/Texture/EzTextureWad.h"
 #include <Hacks\Dict.h>
 
 namespace CloudberryKingdom

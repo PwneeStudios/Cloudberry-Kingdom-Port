@@ -1,7 +1,18 @@
-﻿#ifndef MENU
+#ifndef MENU
 #define MENU
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/FancyVector2.h"
+//#include "Core/Graphics/Draw/Quads/PieceQuad.h"
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+//#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+//#include "Core/Input/ButtonCheck.h"
+//#include "Core/Sound/EzSound.h"
+//#include "Core/Texture/EzTexture.h"
+//#include "Game/Menus/Menu Components/MenuItem.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

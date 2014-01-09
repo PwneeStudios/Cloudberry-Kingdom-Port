@@ -1,4 +1,15 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Objects/In Game Objects/BaseClasses/_BoxDeath.h"
+
+#include "Game/Collision Detection/AABox.h"
+#include "Game/Collision Detection/Phsx.h"
+#include "Game/Objects/ObjectBase.h"
+#include "Game/Objects/Bob/Bob.h"
+#include "Game/Objects/In Game Objects/BaseClasses/_Death.h"
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+#include "Game/Level/Level.h"
+
+#include "Game/Tools/Recycler.h"
 
 namespace CloudberryKingdom
 {

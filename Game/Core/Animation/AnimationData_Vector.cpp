@@ -1,4 +1,8 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Core/Animation/AnimationData_Vector.h"
+
+#include "Core/WriteReadTools.h"
+
 
 #include <Hacks/List.h>
 

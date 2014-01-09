@@ -1,4 +1,13 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Objects/In Game Objects/Grab/Coin__Auto.h"
+
+#include "Game/Level/Level.h"
+#include "Core/Tools/Random.h"
+#include "Game/Tools/Recycler.h"
+#include "Game/Objects/In Game Objects/Grab/Coin.h"
+#include "Game/Objects/Bob/Bob.h"
+#include "Game/Collision Detection/AABox.h"
+#include "Game/Tools/Camera.h"
 
 #include "Hacks/List.h"
 

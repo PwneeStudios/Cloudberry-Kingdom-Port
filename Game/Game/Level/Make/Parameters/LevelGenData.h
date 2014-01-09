@@ -1,7 +1,10 @@
-﻿#ifndef LEVELGENDATA
+#ifndef LEVELGENDATA
 #define LEVELGENDATA
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

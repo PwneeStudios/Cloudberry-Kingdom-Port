@@ -1,4 +1,33 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Objects/In Game Objects/Obstacles/CloudberryKingdom.Fireball.h"
+
+#include "Core/PhsxData.h"
+#include "Core/Effects/EzEffect.h"
+#include "Core/Effects/EzEffectWad.h"
+#include "Core/Graphics/Draw/Quads/Quad.h"
+#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include "Core/Particle Effects/Particle.h"
+#include "Core/Particle Effects/ParticleEmitter.h"
+#include "Core/Particle Effects/Specific Effects/CloudberryKingdom.ParticleEffects.h"
+#include "Core/Sound/EzSound.h"
+#include "Core/Texture/EzTexture.h"
+#include "Core/Tools/Random.h"
+#include "Game/Objects/ObjectBase.h"
+#include "Game/Tilesets/TileSet.h"
+#include "Game/Objects/Bob/Bob.h"
+#include "Game/Objects/In Game Objects/BaseClasses/_CircleDeath.h"
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+#include "Game/Level/Level.h"
+#include "Game/Objects/In Game Objects/Obstacles/Fireball__Auto.h"
+#include "Game/Tilesets/SpriteInfo.h"
+#include "Game/Tools/Recycler.h"
+#include "Game/Tools/Tools.h"
+#include "Game/Tilesets/TileSetInfo.h"
+
+#include "Core/Texture/EzTextureWad.h"
+#include "Core/Sound/EzSoundWad.h"
+#include "Game/Tools/Camera.h"
+#include "Game/Collision Detection/Circle.h"
 
 #include "Hacks/Queue.h"
 

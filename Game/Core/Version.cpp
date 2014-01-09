@@ -1,4 +1,7 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Core/Version.h"
+
+
 
 namespace CloudberryKingdom
 {

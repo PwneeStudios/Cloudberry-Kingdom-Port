@@ -1,7 +1,23 @@
 #ifndef SIMPLEMENU
 #define SIMPLEMENU
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/DrawPile.h"
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+//#include "Game/Localization.h"
+//#include "Core/Input/ButtonCheck.h"
+//#include "Core/Text/EzText.h"
+#include "Game/Menus/CkBaseMenu.h"
+//#include "Game/Menus/Menu.h"
+//#include "Game/Menus/Concrete Menus/CharacterSelect/ArrowMenu.h"
+//#include "Game/Menus/Concrete Menus/CharacterSelect/CharacterSelect.h"
+//#include "Game/Menus/Concrete Menus/CharacterSelect/CustomizeMenu.h"
+//#include "Game/Menus/Concrete Menus/CharacterSelect/Waiting.h"
+//#include "Game/Menus/Menu Components/MenuItem.h"
+//#include "Game/Player/ColorSchemeManager.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

@@ -1,4 +1,11 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Objects/In Game Objects/Blocks/NormalBlockDraw.h"
+
+#include "Core/Graphics/Draw/Quads/PieceQuad.h"
+#include "Game/Objects/In Game Objects/Blocks/Block.h"
+#include "Game/Collision Detection/AABox.h"
+#include "Game/Collision Detection/FloatRectangle.h"
+#include "Game/Tilesets/TileSet.h"
 
 namespace CloudberryKingdom
 {

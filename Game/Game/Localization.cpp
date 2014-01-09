@@ -1,4 +1,11 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Localization.h"
+
+#include "Core/Graphics/QuadDrawer.h"
+#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+#include "Game/Tools/Resources.h"
+#include "Game/Tools/Tools.h"
+
 
 #include "Hacks/String.h"
 #include "Hacks/Parse.h"
@@ -8,6 +15,10 @@
 #include "Hacks/FileReader.h"
 #include <Utility/Error.h>
 #include <Utility/ConsoleInformation.h>
+
+#include "Core/Texture/EzTexture.h"
+#include "Core/Text/EzFont.h"
+#include <Utility/Mutex.h>
 
 #ifdef PS3
 	#include <Content/Texture.h>

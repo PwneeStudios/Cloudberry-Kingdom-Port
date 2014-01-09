@@ -1,4 +1,13 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Core/Graphics/Draw/Quads/PieceQuad.h"
+
+#include "Core/Effects/EzEffect.h"
+#include "Core/Graphics/Draw/Simple/BasePoint.h"
+#include "Core/Graphics/Draw/Simple/SimpleQuad.h"
+#include "Core/Texture/EzTexture.h"
+#include "Game/Tilesets/BlockGroup.h"
+#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

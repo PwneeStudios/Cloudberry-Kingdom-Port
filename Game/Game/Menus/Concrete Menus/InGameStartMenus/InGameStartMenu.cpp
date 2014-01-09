@@ -1,4 +1,32 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Menus/Concrete Menus/InGameStartMenus/InGameStartMenu.h"
+
+#include "Core/Graphics/Draw/DrawPile.h"
+#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include "Game/Localization.h"
+#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+#include "Core/Text/EzText.h"
+#include "Game/Objects/Game Objects/GameObject.h"
+#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
+#include "Game/Menus/CkBaseMenu.h"
+#include "Game/Menus/Menu.h"
+#include "Game/Player/PlayerManager.h"
+#include "Game/Menus/Menu Components/MenuItem.h"
+#include "Game/Menus/Concrete Menus/InGameStartMenus/Sub Menus/ControlScreen.h"
+#include "Game/Menus/Concrete Menus/InGameStartMenus/Sub Menus/SaveLoadSeedMenu.h"
+#include "Game/Menus/Concrete Menus/InGameStartMenus/Verify/VerifyQuitLevel.h"
+#include "Game/Menus/Concrete Menus/InGameStartMenus/Verify/VerifyRemove.h"
+#include "Game/Menus/Concrete Menus/Score Screens/StatsScreen.h"
+#include "Game/Menus/Concrete Menus/Title Screen/Sub Menus/SoundMenu.h"
+#include "Game/Objects/Game Objects/GameObjects/Listener.h"
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+#include "Game/Level/Level.h"
+#include "Game/Player/PlayerData.h"
+#include "Game/Player/Stats.h"
+#include "Game/Tools/Tools.h"
+
+#include "Game/Player/SavedSeeds.h"
+#include "Game/Games/GameType.h"
 
 #include <Core\Tools\Set.h>
 

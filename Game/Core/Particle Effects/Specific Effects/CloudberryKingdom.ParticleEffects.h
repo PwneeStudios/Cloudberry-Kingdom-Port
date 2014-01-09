@@ -1,7 +1,20 @@
-﻿#ifndef CLOUDBERRYKINGDOM_PARTICLEEFFECTS
+#ifndef CLOUDBERRYKINGDOM_PARTICLEEFFECTS
 #define CLOUDBERRYKINGDOM_PARTICLEEFFECTS
 
-#include <global_header.h>
+#include <small_header.h>
+
+#include "Core/PhsxData.h"
+//#include "Game/Localization.h"
+//#include "Core/Particle Effects/Particle.h"
+//#include "Core/Particle Effects/ParticleEmitter.h"
+//#include "Core/Sound/EzSound.h"
+//#include "Core/Texture/EzTexture.h"
+//#include "Core/Tools/CoreMath.h"
+//#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+//#include "Game/Level/Level.h"
+//#include "Game/Objects/In Game Objects/Obstacles/CloudberryKingdom.Fireball.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

@@ -1,7 +1,12 @@
-﻿#ifndef TUTORIALHELPER
+#ifndef TUTORIALHELPER
 #define TUTORIALHELPER
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Game/Localization.h"
+//#include "Game/Games/GameType.h"
+//#include "Game/Objects/Game Objects/GameObjects/GUI_Text.h"
+
 
 namespace CloudberryKingdom
 {

@@ -1,7 +1,33 @@
 #ifndef SOUNDMENU
 #define SOUNDMENU
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/ResolutionGroup.h"
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include "Game/Localization.h"
+//#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/StartMenu_MW_Pre.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/StartMenu_MW_Simple.h"
+//#include "Core/Input/ButtonCheck.h"
+//#include "Core/Text/EzText.h"
+//#include "Game/Objects/Game Objects/GameObject.h"
+//#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
+#include "Game/Menus/Concrete Menus/InGameStartMenus/Verify/VerifyBase.h"
+//#include "Game/Games/GameType.h"
+//#include "Game/Menus/Menu.h"
+//#include "Game/Tools/EzStorage.h"
+#include "Game/Player/PlayerManager.h"
+//#include "Game/Menus/Menu Components/MenuItem.h"
+//#include "Game/Menus/Concrete Menus/InGameStartMenus/Sub Menus/ControlScreen.h"
+//#include "Game/Menus/Concrete Menus/InGameStartMenus/Sub Menus/CustomControls.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/StartMenu_MW_Backpanel.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/StartMenu_MW_PressStart.h"
+//#include "Game/Menus/Menu Components/MenuList.h"
+//#include "Game/Menus/Menu Components/MenuSlider.h"
+//#include "Game/Menus/Menu Components/MenuToggle.h"
+#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

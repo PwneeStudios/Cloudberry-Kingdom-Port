@@ -1,11 +1,17 @@
-﻿#ifndef OBJECTVECTOR
+#ifndef OBJECTVECTOR
 #define OBJECTVECTOR
 
 #include "Core/Lambdas/Lambda_1.h"
 #include "Core/Animation/AnimationData_Vector.h"
 #include "Core/Animation/AnimationData_Integer.h"
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/WriteReadTools.h"
+//#include "Core/Animation/AnimationData_Vector.h"
+//#include "Core/Graphics/Draw/Object/ObjectClass.h"
+//#include "Core/Graphics/Draw/Quads/BaseQuad.h"
+
 
 #include "Hacks/NET/BinaryWriter.h"
 #include "Hacks/NET/BinaryReader.h"

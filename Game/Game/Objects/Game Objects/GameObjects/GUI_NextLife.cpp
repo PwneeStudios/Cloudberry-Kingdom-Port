@@ -1,4 +1,31 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Objects/Game Objects/GameObjects/GUI_NextLife.h"
+
+#include "Core/Graphics/Draw/DrawPile.h"
+#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include "Game/Localization.h"
+#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+#include "Core/Particle Effects/Specific Effects/CloudberryKingdom.ParticleEffects.h"
+#include "Core/Text/EzFont.h"
+#include "Core/Text/EzText.h"
+#include "Core/Tools/CoreMath.h"
+#include "Game/Objects/ObjectBase.h"
+#include "Game/Objects/Game Objects/GameObject.h"
+#include "Game/Objects/Game Objects/GameObjects/GUI_Lives.h"
+#include "Game/Objects/Game Objects/GameObjects/GUI_LivesLeft.h"
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+#include "Game/Level/Level.h"
+#include "Game/Objects/In Game Objects/Grab/Coin.h"
+#include "Game/Objects/Special/TextFloat.h"
+#include "Game/Tools/CkColorHelper.h"
+#include "Game/Tools/Resources.h"
+#include "Game/Tools/Tools.h"
+
+#include "Game/Games/GameType.h"
+#include "Core/Sound/EzSound.h"
+#include "Core/Sound/EzSoundWad.h"
+#include "Game/Tools/Camera.h"
+
 #include <Utility\ConsoleInformation.h>
 #include <Hacks/String.h>
 

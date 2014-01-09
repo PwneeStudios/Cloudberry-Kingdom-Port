@@ -1,4 +1,17 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Objects/Game Objects/GameObjects/GUI_TextBox.h"
+
+#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include "Game/Localization.h"
+#include "Core/Input/ButtonCheck.h"
+#include "Core/Text/EzFont.h"
+#include "Core/Text/EzText.h"
+#include "Game/Player/PlayerManager.h"
+#include "Game/Objects/Game Objects/GameObjects/GUI_Text.h"
+#include "Game/Tools/Resources.h"
+#include "Game/Tools/Tools.h"
+
+#include "Game/Player/PlayerData.h"
 
 #include <Hacks/Queue.h>
 #include <Hacks\List.h>

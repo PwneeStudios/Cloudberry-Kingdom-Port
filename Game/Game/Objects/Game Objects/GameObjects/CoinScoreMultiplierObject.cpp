@@ -1,4 +1,10 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Objects/Game Objects/GameObjects/CoinScoreMultiplierObject.h"
+
+#include "Game/Objects/ObjectBase.h"
+#include "Game/Objects/Game Objects/GameObject.h"
+
+#include "Game/Games/GameType.h"
 
 namespace CloudberryKingdom
 {

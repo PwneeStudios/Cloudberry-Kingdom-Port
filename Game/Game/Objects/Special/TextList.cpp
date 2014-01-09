@@ -1,4 +1,11 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Objects/Special/TextList.h"
+
+#include "Core/Text/EzText.h"
+#include "Game/Objects/ObjectBase.h"
+#include "Game/Tools/Camera.h"
+#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

@@ -1,7 +1,29 @@
-﻿#ifndef INVERT
+#ifndef INVERT
 #define INVERT
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Game/Localization.h"
+//#include "Game/Collision Detection/AABox.h"
+//#include "Game/Collision Detection/Phsx.h"
+//#include "Game/Objects/ObjectBase.h"
+//#include "Game/Objects/In Game Objects/Blocks/Block.h"
+//#include "Game/Level/Make/PieceSeedData.h"
+//#include "Game/Level/Make/Parameters/LevelGenData.h"
+//#include "Game/Level/Make/Parameters/StyleData/StyleData.h"
+//#include "Game/Player/Hero Physics/Base.h"
+//#include "Game/Objects/Icon.h"
+//#include "Game/Objects/Bob/Bob.h"
+//#include "Game/Objects/In Game Objects/Blocks/Ceiling__Auto.h"
+//#include "Game/Objects/In Game Objects/Blocks/GhostBlock__Auto.h"
+//#include "Game/Objects/In Game Objects/Blocks/MovingBlock__Auto.h"
+//#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+//#include "Game/Level/Level.h"
+//#include "Game/Objects/In Game Objects/Obstacles/BlockEmitter__Auto.h"
+//#include "Game/Objects/In Game Objects/Obstacles/FlyingBlob.h"
+#include "Game/Player/Hero Physics/Normal.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

@@ -1,7 +1,14 @@
 #ifndef STARTMENU_MW_CUSTOMLEVEL
 #define STARTMENU_MW_CUSTOMLEVEL
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Game/Menus/Menu Components/MenuItem.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/StartMenu.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/StartMenu_MW_Backpanel.h"
+#include "Game/Menus/Concrete Menus/Title Screen/Freeplay/CustomLevel_GUI.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/TitleGame_MW.h"
+
 
 namespace CloudberryKingdom
 {

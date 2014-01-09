@@ -1,4 +1,4 @@
-﻿#ifndef ILOADINGSCREEN
+#ifndef ILOADINGSCREEN
 #define ILOADINGSCREEN
 
 namespace CloudberryKingdom

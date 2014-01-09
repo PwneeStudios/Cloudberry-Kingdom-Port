@@ -1,4 +1,28 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Player/PlayerData.h"
+
+#include "Core/Chunk.h"
+#include "Core/Tools/Set.h"
+#include "Game/Localization.h"
+#include "Core/Text/EzText.h"
+#include "Game/Games/Meta Games/Arcade Games/Escalate/Escalation.h"
+#include "Game/Games/Meta Games/Arcade Games/Rush/Hero Rush/HeroRush.h"
+#include "Game/Games/Meta Games/Arcade Games/Rush/Hero Rush 2/HeroRush2.h"
+#include "Game/Games/Meta Games/Arcade Games/Rush/Time Crisis/TimeCrisis.h"
+#include "Game/Tools/EzStorage.h"
+#include "Game/Player/PlayerManager.h"
+#include "Game/Menus/Concrete Menus/Score Screens/ScoreDatabase.h"
+#include "Game/Menus/Concrete Menus/Score Screens/ScoreEntry.h"
+#include "Game/Menus/Concrete Menus/Title Screen/Arcade/ArcadeMenu.h"
+#include "Game/Player/ColorScheme.h"
+#include "Game/Player/ColorSchemeManager.h"
+#include "Game/Player/SavedSeeds.h"
+#include "Game/Player/Stats.h"
+#include "Game/Tools/Tools.h"
+#include "Game/Tools/Unset.h"
+
+#include "Game/Player/ClrTextFx.h"
+#include "Game/Tools/WrappedFloat.h"
 
 #include "Hacks/List.h"
 #include <Core/Tools/Set.h>

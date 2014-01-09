@@ -1,4 +1,10 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Core/FancyVector2.h"
+
+#include "Core/Animation/AnimationData_Vector.h"
+#include "Game/Objects/ObjectBase.h"
+#include "Game/Tools/Tools.h"
+#include "Game/Games/GameType.h"
 
 namespace CloudberryKingdom
 {

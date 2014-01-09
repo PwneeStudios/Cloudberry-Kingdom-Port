@@ -1,7 +1,7 @@
 ﻿#ifndef CLOUDBERRYKINGDOM_BACKGROUND
 #define CLOUDBERRYKINGDOM_BACKGROUND
 
-#include <global_header.h>
+#include <small_header.h>
 
 namespace CloudberryKingdom
 {

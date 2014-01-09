@@ -1,7 +1,21 @@
-﻿#ifndef ROCKETBOX
+#ifndef ROCKETBOX
 #define ROCKETBOX
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/Quads/Quad.h"
+//#include "Game/Localization.h"
+//#include "Core/Particle Effects/Specific Effects/CloudberryKingdom.ParticleEffects.h"
+//#include "Core/Tools/ColorHelper.h"
+//#include "Core/Tools/CoreMath.h"
+//#include "Game/Collision Detection/Phsx.h"
+//#include "Game/Objects/In Game Objects/Blocks/Block.h"
+//#include "Game/Player/Hero Physics/Base.h"
+//#include "Game/Objects/Icon.h"
+//#include "Game/Objects/Bob/Bob.h"
+#include "Game/Player/Hero Physics/Box.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

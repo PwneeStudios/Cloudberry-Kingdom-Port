@@ -1,4 +1,8 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Core/Tools/CoreMath.h"
+
+#include "Core/Graphics/Draw/Simple/BasePoint.h"
+
 
 #include <cmath>
 #include <Hacks\String.h>

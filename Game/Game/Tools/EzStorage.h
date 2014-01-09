@@ -1,7 +1,17 @@
-﻿#ifndef EZSTORAGE
+#ifndef EZSTORAGE
 #define EZSTORAGE
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Tools/Set.h"
+//#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+//#include "Game/Games/Campaign/CampaignSequence.h"
+//#include "Game/Player/PlayerManager.h"
+//#include "Game/Menus/Concrete Menus/Score Screens/ScoreDatabase.h"
+//#include "Game/Menus/Concrete Menus/Score Screens/ScoreEntry.h"
+//#include "Game/Player/PlayerData.h"
+//#include "Game/Tools/Tools.h"
+
 
 #include "Hacks/NET/TimeSpan.h"
 

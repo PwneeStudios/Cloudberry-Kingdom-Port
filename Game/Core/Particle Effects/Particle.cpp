@@ -1,4 +1,13 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Core/Particle Effects/Particle.h"
+
+#include "Core/PhsxData.h"
+#include "Core/Graphics/Draw/Simple/BasePoint.h"
+#include "Core/Graphics/Draw/Simple/SimpleQuad.h"
+#include "Game/Tools/Camera.h"
+#include "Game/Tools/Recycler.h"
+#include "Game/Tools/Tools.h"
+#include "Game/Level/Level.h"
 
 namespace CloudberryKingdom
 {

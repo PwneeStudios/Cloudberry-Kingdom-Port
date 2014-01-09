@@ -1,4 +1,10 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Objects/Game Objects/Template_GameObject.h"
+
+#include "Game/Objects/Game Objects/GameObject.h"
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+#include "Game/Level/Level.h"
+
 
 namespace CloudberryKingdom
 {

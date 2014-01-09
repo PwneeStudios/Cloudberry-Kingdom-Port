@@ -1,4 +1,17 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Objects/In Game Objects/Obstacles/BlockEmitter.h"
+
+#include "Core/PhsxData.h"
+#include "Core/Tools/CoreMath.h"
+#include "Game/Objects/ObjectBase.h"
+#include "Game/Level/Make/PieceSeedData.h"
+#include "Game/Objects/In Game Objects/Blocks/MovingPlatform.h"
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+#include "Game/Level/Level.h"
+#include "Game/Objects/In Game Objects/Obstacles/BlockEmitter__Auto.h"
+#include "Game/Tools/Recycler.h"
+
+#include "Game/Tools/Camera.h"
 
 #include "Hacks/List.h"
 

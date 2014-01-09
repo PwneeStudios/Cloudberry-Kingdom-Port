@@ -1,7 +1,11 @@
-﻿#ifndef EZEFFECTWAD
+#ifndef EZEFFECTWAD
 #define EZEFFECTWAD
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Effects/EzEffect.h"
+//#include "Game/Tools/Tools.h"
+
 
 #include "Graphics/Effect.h"
 #include "Graphics/EffectParameter.h"

@@ -1,7 +1,18 @@
 #ifndef MENULISTEXPAND
 #define MENULISTEXPAND
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/DrawPile.h"
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+//#include "Core/Tools/ColorHelper.h"
+#include "Game/Menus/CkBaseMenu.h"
+//#include "Game/Menus/Menu.h"
+//#include "Game/Menus/Menu Components/MenuItem.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/StartMenu.h"
+//#include "Game/Menus/Menu Components/MenuList.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

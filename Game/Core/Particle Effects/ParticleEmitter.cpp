@@ -1,6 +1,15 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Core/Particle Effects/ParticleEmitter.h"
+
+#include "Core/Particle Effects/Particle.h"
+#include "Core/Texture/EzTexture.h"
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+#include "Game/Level/Level.h"
+#include "Game/Tools/Recycler.h"
+#include "Game/Tools/Tools.h"
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+#include "Core/Texture/EzTextureWad.h"
 
 namespace CloudberryKingdom
 {

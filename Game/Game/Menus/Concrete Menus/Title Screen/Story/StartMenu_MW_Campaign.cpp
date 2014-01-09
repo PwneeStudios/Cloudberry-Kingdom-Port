@@ -1,4 +1,25 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Menus/Concrete Menus/Title Screen/Story/StartMenu_MW_Campaign.h"
+
+#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include "Game/Localization.h"
+#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+#include "Core/Input/ButtonCheck.h"
+#include "Core/Text/EzText.h"
+#include "Game/Games/Campaign/CampaignSequence.h"
+#include "Game/Player/PlayerManager.h"
+#include "Game/Menus/Menu Components/MenuItem.h"
+#include "Game/Menus/Concrete Menus/Title Screen/StartMenu.h"
+#include "Game/Menus/Concrete Menus/Title Screen/StartMenu_MW_Backpanel.h"
+#include "Game/Menus/Concrete Menus/Title Screen/TitleGame_MW.h"
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+#include "Game/Level/Level.h"
+#include "Game/Tools/Resources.h"
+#include "Game/Tools/Tools.h"
+
+#include "Game/Player/PlayerData.h"
+#include "Game/Menus/Menu.h"
+#include "Core/Song/EzSongWad.h"
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 #include "Game/Menus/Concrete Menus/ShopMenu.h"

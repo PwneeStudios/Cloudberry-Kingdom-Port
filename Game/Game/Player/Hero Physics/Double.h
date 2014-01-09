@@ -1,7 +1,16 @@
-﻿#ifndef DOUBLE
+#ifndef DOUBLE
 #define DOUBLE
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/Object/ObjectClass.h"
+//#include "Game/Localization.h"
+//#include "Game/Player/Hero Physics/Base.h"
+//#include "Game/Objects/Icon.h"
+//#include "Game/Player/Cape.h"
+#include "Game/Player/Hero Physics/Normal.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

@@ -1,7 +1,22 @@
 #ifndef STATSSCREEN
 #define STATSSCREEN
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/DrawPile.h"
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+//#include "Game/Localization.h"
+//#include "Core/Text/EzText.h"
+#include "Game/Menus/CkBaseMenu.h"
+//#include "Game/Menus/LongMenu.h"
+//#include "Game/Player/PlayerManager.h"
+//#include "Game/Menus/Menu Components/MenuItem.h"
+//#include "Game/Menus/Menu Components/ScrollBar.h"
+//#include "Game/Objects/Bob/Bob.h"
+//#include "Game/Player/Stats.h"
+//#include "Game/Tools/Resources.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

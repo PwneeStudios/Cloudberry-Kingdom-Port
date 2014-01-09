@@ -1,7 +1,13 @@
 #ifndef LOCALIZATION
 #define LOCALIZATION
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/QuadDrawer.h"
+//#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+//#include "Game/Tools/Resources.h"
+//#include "Game/Tools/Tools.h"
+
 
 #include "Hacks/XNA/ContentManager.h"
 

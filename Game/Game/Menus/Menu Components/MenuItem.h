@@ -1,7 +1,23 @@
-﻿#ifndef MENUITEM
+#ifndef MENUITEM
 #define MENUITEM
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/FancyVector2.h"
+#include "Game/Localization.h"
+#include "Game/Tools/Oscillate.h"
+//#include "Core/Input/ButtonCheck.h"
+//#include "Core/Sound/EzSound.h"
+//#include "Core/Text/EzFont.h"
+//#include "Core/Text/EzText.h"
+//#include "Game/Menus/Menu.h"
+//#include "Game/Player/PlayerManager.h"
+//#include "Game/Objects/Icon.h"
+//#include "Game/Player/PlayerData.h"
+//#include "Game/Tools/Camera.h"
+//#include "Game/Tools/Resources.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

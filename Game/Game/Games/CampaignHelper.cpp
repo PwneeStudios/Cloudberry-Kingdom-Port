@@ -1,4 +1,9 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Games/CampaignHelper.h"
+
+#include "Game/Localization.h"
+#include "Core/Text/EzText.h"
+
 
 #include <Hacks/List.h>
 #include <Hacks/String.h>

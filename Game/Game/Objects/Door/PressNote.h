@@ -1,7 +1,18 @@
-﻿#ifndef PRESSNOTE
+#ifndef PRESSNOTE
 #define PRESSNOTE
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+//#include "Game/Localization.h"
+//#include "Core/Input/ButtonCheck.h"
+//#include "Core/Text/EzText.h"
+//#include "Core/Tools/ColorHelper.h"
+//#include "Game/Objects/Door/Door.h"
+#include "Game/Objects/Game Objects/GameObjects/GUI_Text.h"
+//#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+//#include "Game/Level/Level.h"
+
 
 namespace CloudberryKingdom
 {

@@ -1,7 +1,26 @@
 #ifndef STARTMENU
 #define STARTMENU
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/DrawPile.h"
+//#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+//#include "Core/Input/ButtonCheck.h"
+//#include "Core/Text/EzText.h"
+//#include "Core/Tools/ColorHelper.h"
+//#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
+#include "Game/Menus/CkBaseMenu.h"
+//#include "Game/Games/ScreenSaver.h"
+//#include "Game/Menus/Menu.h"
+//#include "Game/Menus/Concrete Menus/CharacterSelect/CharSelectManager.h"
+//#include "Game/Menus/Menu Components/MenuItem.h"
+//#include "Game/Menus/Concrete Menus/InGameStartMenus/Sub Menus/ControlScreen.h"
+//#include "Game/Menus/Concrete Menus/Score Screens/StatsScreen.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/Sub Menus/VerifyQuitGame.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/Sub Menus/SoundMenu.h"
+//#include "Game/Player/Stats.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

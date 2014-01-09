@@ -1,7 +1,14 @@
 #ifndef VERIFYDELETESEEDS
 #define VERIFYDELETESEEDS
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+//#include "Game/Localization.h"
+//#include "Core/Text/EzText.h"
+#include "Game/Menus/Concrete Menus/InGameStartMenus/Verify/VerifyBase.h"
+//#include "Game/Menus/Menu Components/MenuItem.h"
+
 
 namespace CloudberryKingdom
 {

@@ -2,7 +2,14 @@
 #define TIMERWARNING
 
 #define _USE_MATH_DEFINES
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+//#include "Core/Tools/CoreMath.h"
+#include "Game/Objects/Game Objects/GameObject.h"
+//#include "Game/Objects/Game Objects/GameObjects/GUI_Timer.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

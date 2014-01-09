@@ -1,7 +1,12 @@
-﻿#ifndef SIMPLEBOX
+#ifndef SIMPLEBOX
 #define SIMPLEBOX
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/Object/ObjectBox.h"
+//#include "Core/Graphics/Draw/Simple/BasePoint.h"
+#include "Core/Graphics/Draw/Simple/SimpleVector.h"
+
 
 namespace CloudberryKingdom
 {

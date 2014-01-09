@@ -1,7 +1,33 @@
 #ifndef SAVEDSEEDSGUI
 #define SAVEDSEEDSGUI
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/FancyVector2.h"
+//#include "Core/Graphics/Draw/DrawPile.h"
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+//#include "Game/Localization.h"
+//#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+//#include "Core/Input/ButtonCheck.h"
+//#include "Core/Text/EzFont.h"
+//#include "Core/Text/EzText.h"
+//#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
+#include "Game/Menus/CkBaseMenu.h"
+//#include "Game/Games/NormalGame.h"
+//#include "Game/Games/Meta Games/Challenges/Challenge_Base.h"
+//#include "Game/Level/Make/LockableBool.h"
+//#include "Game/Level/Make/LevelSeedData.h"
+//#include "Game/Menus/Menu.h"
+//#include "Game/Menus/LongMenu.h"
+//#include "Game/Tools/EzStorage.h"
+#include "Game/Menus/Menu Components/MenuItem.h"
+//#include "Game/Menus/Concrete Menus/InGameStartMenus/Verify/VerifyDeleteSeeds.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/Freeplay/CustomLevel_GUI.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/TitleGameBase.h"
+//#include "Game/Menus/Menu Components/ScrollBar.h"
+//#include "Game/Player/PlayerData.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

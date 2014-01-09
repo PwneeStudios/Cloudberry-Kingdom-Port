@@ -1,7 +1,24 @@
 #ifndef HIGHSCOREPANEL
 #define HIGHSCOREPANEL
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/DrawPile.h"
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+//#include "Game/Localization.h"
+//#include "Core/Input/ButtonCheck.h"
+//#include "Core/Text/EzText.h"
+#include "Game/Menus/CkBaseMenu.h"
+//#include "Game/Menus/Menu.h"
+//#include "Game/Menus/Menu Components/MenuItem.h"
+//#include "Game/Menus/Concrete Menus/Score Screens/ScoreDatabase.h"
+//#include "Game/Menus/Concrete Menus/Score Screens/ScoreEntry.h"
+//#include "Game/Menus/Concrete Menus/Score Screens/ScoreList.h"
+//#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+//#include "Game/Level/Level.h"
+//#include "Game/Tools/Resources.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

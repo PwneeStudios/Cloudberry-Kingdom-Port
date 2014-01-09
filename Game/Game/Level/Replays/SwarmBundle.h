@@ -1,7 +1,16 @@
-﻿#ifndef SWARMBUNDLE
+#ifndef SWARMBUNDLE
 #define SWARMBUNDLE
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Animation/SpriteAnim.h"
+//#include "Core/Tools/CoreMath.h"
+//#include "Game/Level/Replays/SwarmRecord.h"
+//#include "Game/Objects/Bob/Bob.h"
+//#include "Game/Objects/Bob/BobLink.h"
+//#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+//#include "Game/Level/Level.h"
+
 
 namespace CloudberryKingdom
 {

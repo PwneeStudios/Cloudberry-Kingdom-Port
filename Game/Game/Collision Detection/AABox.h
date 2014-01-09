@@ -1,4 +1,4 @@
-﻿#ifndef AABOX
+#ifndef AABOX
 #define AABOX
 
 namespace CloudberryKingdom

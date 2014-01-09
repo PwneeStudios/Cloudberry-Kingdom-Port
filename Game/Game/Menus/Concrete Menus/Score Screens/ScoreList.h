@@ -1,7 +1,11 @@
 #ifndef SCORELIST
 #define SCORELIST
 
-#include <global_header.h>
+#include <small_header.h>
+
+#include "Game/Localization.h"
+#include "Game/Menus/Concrete Menus/Score Screens/ScoreEntry.h"
+
 
 namespace CloudberryKingdom
 {

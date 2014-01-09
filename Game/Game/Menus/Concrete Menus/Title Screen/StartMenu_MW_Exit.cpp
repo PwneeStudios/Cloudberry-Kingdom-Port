@@ -1,4 +1,8 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Menus/Concrete Menus/Title Screen/StartMenu_MW_Exit.h"
+
+#include "Game/Menus/Concrete Menus/Title Screen/Sub Menus/VerifyQuitGame.h"
+
 
 namespace CloudberryKingdom
 {

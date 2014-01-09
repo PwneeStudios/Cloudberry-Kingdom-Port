@@ -1,7 +1,46 @@
-﻿#ifndef TILESET
+#ifndef TILESET
 #define TILESET
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Animation/AnimationData_Integer.h"
+//#include "Core/Graphics/Draw/Quads/PieceQuad.h"
+#include "Game/Localization.h"
+//#include "Game/Tilesets/Backgrounds/Background.h"
+//#include "Core/Tools/ColorHelper.h"
+//#include "Core/Tools/Random.h"
+//#include "Game/Tilesets/TileSet.h"
+//#include "Game/Objects/In Game Objects/Blocks/Block.h"
+//#include "Game/Objects/In Game Objects/Blocks/Wall.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/Freeplay/CustomLevel_GUI.h"
+//#include "Game/Objects/AutoGen.h"
+//#include "Game/Objects/Door/Door.h"
+//#include "Game/Objects/In Game Objects/Blocks/BouncyBlock.h"
+//#include "Game/Objects/In Game Objects/Blocks/FallingBlock.h"
+//#include "Game/Objects/In Game Objects/Blocks/GhostBlock.h"
+//#include "Game/Objects/In Game Objects/Blocks/MovingBlock.h"
+//#include "Game/Objects/In Game Objects/Blocks/MovingPlatform.h"
+//#include "Game/Objects/In Game Objects/Blocks/Pendulum.h"
+//#include "Game/Objects/In Game Objects/Grab/Checkpoint.h"
+//#include "Game/Objects/In Game Objects/Grab/Coin.h"
+//#include "Game/Objects/In Game Objects/Obstacles/Boulder.h"
+//#include "Game/Objects/In Game Objects/Obstacles/Cloud.h"
+//#include "Game/Objects/In Game Objects/Obstacles/CloudberryKingdom.Fireball.h"
+//#include "Game/Objects/In Game Objects/Obstacles/CloudberryKingdom.Firesnake.h"
+//#include "Game/Objects/In Game Objects/Obstacles/FireSpinner.h"
+//#include "Game/Objects/In Game Objects/Obstacles/FlyingBlob.h"
+//#include "Game/Objects/In Game Objects/Obstacles/Laser.h"
+//#include "Game/Objects/In Game Objects/Obstacles/LavaDrip.h"
+//#include "Game/Objects/In Game Objects/Obstacles/Serpent.h"
+//#include "Game/Objects/In Game Objects/Obstacles/Spike.h"
+//#include "Game/Objects/In Game Objects/Obstacles/SpikeyGuy.h"
+//#include "Game/Objects/In Game Objects/Obstacles/SpikeyLine.h"
+//#include "Game/Tilesets/BlockGroup.h"
+//#include "Game/Tilesets/SpriteInfo.h"
+//#include "Game/Tools/Globals.h"
+//#include "Game/Tools/Tools.h"
+//#include "Game/Tilesets/TileSetInfo.h"
+
 
 namespace CloudberryKingdom
 {

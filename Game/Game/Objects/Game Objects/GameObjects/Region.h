@@ -1,7 +1,16 @@
 #ifndef REGION
 #define REGION
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/DrawPile.h"
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+//#include "Game/Collision Detection/AABox.h"
+//#include "Game/Collision Detection/Phsx.h"
+#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
+//#include "Game/Objects/Bob/Bob.h"
+//#include "Game/Objects/Door/Door.h"
+
 
 namespace CloudberryKingdom
 {

@@ -1,7 +1,13 @@
-﻿#ifndef LONGMENU
+#ifndef LONGMENU
 #define LONGMENU
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Input/ButtonCheck.h"
+#include "Game/Menus/Menu.h"
+//#include "Game/Menus/Menu Components/MenuItem.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

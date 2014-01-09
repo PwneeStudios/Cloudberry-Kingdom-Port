@@ -1,4 +1,12 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Level/ClosingCircle.h"
+
+#include "Core/FancyVector2.h"
+#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include "Game/Tools/Camera.h"
+#include "Game/Tools/Tools.h"
+
+#include "Core/Texture/EzTextureWad.h"
 
 namespace CloudberryKingdom
 {

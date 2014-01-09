@@ -1,8 +1,21 @@
-﻿#ifndef SPIKE__AUTO
+#ifndef SPIKE__AUTO
 #define SPIKE__AUTO
 
 #define _USE_MATH_DEFINES
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Tools/Random.h"
+//#include "Game/Objects/In Game Objects/Blocks/Block.h"
+//#include "Game/Level/Make/DifficultyHelper.h"
+//#include "Game/Level/Make/PieceSeedData.h"
+#include "Game/Level/Make/Parameters/Param.h"
+#include "Game/Objects/AutoGen.h"
+//#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+//#include "Game/Level/Level.h"
+//#include "Game/Objects/In Game Objects/Obstacles/Spike.h"
+//#include "Game/Tools/Recycler.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

@@ -7,7 +7,7 @@
 //
 //	This struct is used to replace some conversions to or from strings.
 //----------------------------------------------------------------------------------------
-#include <global_header.h>
+#include <small_header.h>
 
 #include <sstream>
 

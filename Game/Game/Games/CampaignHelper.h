@@ -1,7 +1,11 @@
 #ifndef CAMPAIGNHELPER
 #define CAMPAIGNHELPER
 
-#include <global_header.h>
+#include <small_header.h>
+
+#include "Game/Localization.h"
+//#include "Core/Text/EzText.h"
+
 
 namespace CloudberryKingdom
 {

@@ -1,9 +1,16 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Core/Song/EzSong.h"
+
+#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+#include "Game/Tools/Tools.h"
+
 
 #include <Audio/MediaPlayer.h>
 #include <Audio/Song.h>
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
+#include "Core/Song/EzSongWad.h"
 
 namespace CloudberryKingdom
 {

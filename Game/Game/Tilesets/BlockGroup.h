@@ -1,7 +1,12 @@
-﻿#ifndef BLOCKGROUP
+#ifndef BLOCKGROUP
 #define BLOCKGROUP
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/Quads/PieceQuad.h"
+//#include "Core/Tools/Random.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

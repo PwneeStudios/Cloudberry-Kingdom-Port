@@ -1,7 +1,11 @@
-﻿#ifndef UPDATA
+#ifndef UPDATA
 #define UPDATA
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Tools/Random.h"
+#include "Game/Level/Make/Parameters/StyleData/StyleData.h"
+
 
 namespace CloudberryKingdom
 {

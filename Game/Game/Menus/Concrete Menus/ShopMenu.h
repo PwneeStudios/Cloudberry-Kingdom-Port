@@ -1,7 +1,8 @@
 #ifndef SHOP_MENU_H
 #define SHOP_MENU_H
 
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Menus/Concrete Menus/InGameStartMenus/Verify/VerifyBase.h"
 
 namespace CloudberryKingdom
 {

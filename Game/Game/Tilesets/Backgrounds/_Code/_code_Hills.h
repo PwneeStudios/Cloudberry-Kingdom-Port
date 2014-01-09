@@ -1,7 +1,7 @@
 ﻿#ifndef _CODE_HILLS
 #define _CODE_HILLS
 
-#include <global_header.h>
+#include <small_header.h>
 
 namespace CloudberryKingdom
 {

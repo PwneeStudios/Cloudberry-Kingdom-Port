@@ -1,7 +1,14 @@
 #ifndef LISTENER
 #define LISTENER
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Input/ButtonCheck.h"
+#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
+//#include "Game/Player/PlayerManager.h"
+//#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+//#include "Game/Level/Level.h"
+
 
 namespace CloudberryKingdom
 {

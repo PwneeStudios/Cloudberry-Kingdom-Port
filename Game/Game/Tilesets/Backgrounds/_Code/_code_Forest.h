@@ -1,7 +1,7 @@
 ﻿#ifndef _CODE_FOREST
 #define _CODE_FOREST
 
-#include <global_header.h>
+#include <small_header.h>
 
 namespace CloudberryKingdom
 {

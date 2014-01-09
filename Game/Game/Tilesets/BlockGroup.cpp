@@ -1,4 +1,10 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Tilesets/BlockGroup.h"
+
+#include "Core/Graphics/Draw/Quads/PieceQuad.h"
+#include "Core/Tools/Random.h"
+#include "Game/Tools/Tools.h"
+
 
 #include <Hacks\List.h>
 #include <Hacks\Dict.h>

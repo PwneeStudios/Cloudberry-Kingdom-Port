@@ -1,7 +1,13 @@
 #ifndef LEVELCONNECTOR
 #define LEVELCONNECTOR
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Game/Level/Make/LockableBool.h"
+//#include "Game/Level/Make/LevelSeedData.h"
+//#include "Game/Objects/Door/Door.h"
+
+#include "Game/Objects/ObjectBase.h"
 
 namespace CloudberryKingdom
 {

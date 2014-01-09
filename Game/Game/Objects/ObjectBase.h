@@ -1,7 +1,25 @@
-﻿#ifndef OBJECTBASE
+#ifndef OBJECTBASE
 #define OBJECTBASE
 
-#include <global_header.h>
+#include <small_header.h>
+
+#include "Core/PhsxData.h"
+//#include "Core/WriteReadTools.h"
+//#include "Core/Tools/Random.h"
+//#include "Game/Collision Detection/AABox.h"
+//#include "Game/Tilesets/TileSet.h"
+//#include "Game/Objects/In Game Objects/Blocks/Block.h"
+//#include "Game/Games/GameType.h"
+//#include "Game/Objects/AutoGen.h"
+//#include "Game/Objects/Bob/Bob.h"
+//#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+//#include "Game/Level/Level.h"
+//#include "Game/Player/PlayerData.h"
+//#include "Game/Tools/Camera.h"
+//#include "Game/Tools/Recycler.h"
+#include "Game/Tools/Tools.h"
+//#include "Game/Tilesets/TileSetInfo.h"
+
 
 #include <Core/Lambdas/Lambda.h>
 

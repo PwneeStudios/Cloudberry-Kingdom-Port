@@ -1,4 +1,10 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Collision Detection/AABox.h"
+
+#include "Core/Graphics/QuadDrawer.h"
+#include "Game/Collision Detection/FloatRectangle.h"
+#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

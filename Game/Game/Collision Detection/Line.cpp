@@ -1,4 +1,8 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Collision Detection/Line.h"
+
+#include "Core/Tools/CoreMath.h"
+
 
 namespace CloudberryKingdom
 {

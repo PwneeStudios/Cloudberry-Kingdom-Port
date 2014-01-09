@@ -1,4 +1,13 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Level/Make/MakePiece/MakeVertical/MakeDarkBottom.h"
+
+#include "Game/Level/Make/MakePiece/MakeVertical/MakeFinalDoor_Vertical.h"
+#include "Game/Objects/Game Objects/GameObjects/Region.h"
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+#include "Game/Level/Level.h"
+
+#include "Game/Objects/Door/Door.h"
+#include "Game/Objects/Special/CameraZone.h"
 
 namespace CloudberryKingdom
 {

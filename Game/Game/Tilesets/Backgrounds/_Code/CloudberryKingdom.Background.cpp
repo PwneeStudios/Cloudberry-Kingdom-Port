@@ -1,4 +1,4 @@
-﻿#include <global_header.h>
+﻿#include <small_header.h>
 
 #include "Hacks/Queue.h"
 
@@ -8,6 +8,13 @@
 #include "Game/Tilesets/Backgrounds/BackgroundFloater.h"
 #include "Game/Tilesets/Backgrounds/BackgroundFloaterList.h"
 #include "Game/Tilesets/Backgrounds/BackgroundFloater_Stationary.h"
+
+#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include "Core/Texture/EzTextureWad.h"
+#include "Game/Level/Level.h"
+#include "Game/Collision Detection/FloatRectangle.h"
+#include "Core/Tools/ColorHelper.h"
+#include "Game/Tools/Camera.h"
 
 namespace CloudberryKingdom
 {

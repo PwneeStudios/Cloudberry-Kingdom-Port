@@ -1,4 +1,24 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Games/Meta Games/StringWorlds/StringWorld.h"
+
+#include "Game/Objects/ObjectBase.h"
+#include "Game/Objects/Game Objects/GameObject.h"
+#include "Game/Games/GameType.h"
+#include "Game/Games/ActionGame.h"
+#include "Game/Games/Meta Games/Challenges/Challenge_Base.h"
+#include "Game/Games/Meta Games/StringWorlds/LevelConnector.h"
+#include "Game/Level/Make/LockableBool.h"
+#include "Game/Level/Make/LevelSeedData.h"
+#include "Game/Player/PlayerManager.h"
+#include "Game/Objects/Bob/Bob.h"
+#include "Game/Objects/Door/Door.h"
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+#include "Game/Level/Level.h"
+#include "Game/Tools/Camera.h"
+#include "Game/Tools/Recycler.h"
+#include "Game/Tools/Tools.h"
+
+#include "Core/Song/EzSongWad.h"
 
 namespace CloudberryKingdom
 {

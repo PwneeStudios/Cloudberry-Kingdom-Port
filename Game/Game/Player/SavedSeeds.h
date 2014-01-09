@@ -1,7 +1,12 @@
 #ifndef SAVEDSEEDS
 #define SAVEDSEEDS
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Chunk.h"
+//#include "Game/Tools/EzStorage.h"
+//#include "Game/Player/Awardments/Awardment.h"
+
 
 namespace CloudberryKingdom
 {

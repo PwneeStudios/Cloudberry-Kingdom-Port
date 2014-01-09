@@ -1,4 +1,17 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Objects/Game Objects/GameObjects/Cheer.h"
+
+#include "Core/Graphics/Draw/DrawPile.h"
+#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include "Game/Objects/Game Objects/GameObject.h"
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+#include "Game/Level/Level.h"
+
+#include "Game/Games/GameType.h"
+#include "Game/Tools/Recycler.h"
+
+#include "Core/FancyVector2.h"
+#include "Game/Tools/Camera.h"
 
 namespace CloudberryKingdom
 {

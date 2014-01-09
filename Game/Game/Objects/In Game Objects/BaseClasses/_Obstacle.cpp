@@ -1,4 +1,12 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Objects/In Game Objects/BaseClasses/_Obstacle.h"
+
+#include "Game/Objects/ObjectBase.h"
+#include "Game/Objects/AutoGen.h"
+#include "Game/Tools/Tools.h"
+
+#include "Game/Level/Level.h"
+#include "Game/Tools/Camera.h"
 
 namespace CloudberryKingdom
 {

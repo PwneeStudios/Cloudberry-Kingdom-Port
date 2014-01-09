@@ -1,7 +1,15 @@
-﻿#ifndef PARTICLE
+#ifndef PARTICLE
 #define PARTICLE
 
-#include <global_header.h>
+#include <small_header.h>
+
+#include "Core/PhsxData.h"
+//#include "Core/Graphics/Draw/Simple/BasePoint.h"
+//#include "Core/Graphics/Draw/Simple/SimpleQuad.h"
+//#include "Game/Tools/Camera.h"
+//#include "Game/Tools/Recycler.h"
+//#include "Game/Tools/Tools.h"
+
 
 #include "Core/PhsxData.h"
 #include "Core/Graphics/Draw/Simple/SimpleQuad.h"

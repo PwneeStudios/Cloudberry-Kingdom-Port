@@ -1,7 +1,19 @@
-﻿#ifndef TITLEGAME_MW
+#ifndef TITLEGAME_MW
 #define TITLEGAME_MW
 
-#include <global_header.h>
+#include <small_header.h>
+
+#include "Game/Games/GameType.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/StartMenu_MW_Backpanel.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/StartMenu_MW_PressStart.h"
+#include "Game/Menus/Concrete Menus/Title Screen/TitleGameBase.h"
+//#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+//#include "Game/Level/Level.h"
+//#include "Game/Objects/Special/CameraZone.h"
+//#include "Game/Tools/Camera.h"
+//#include "Game/Tools/Recycler.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

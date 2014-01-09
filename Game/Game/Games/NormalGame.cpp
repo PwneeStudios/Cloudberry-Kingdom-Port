@@ -1,4 +1,16 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Games/NormalGame.h"
+
+#include "Core/Sound/EzSound.h"
+#include "Game/Games/GameType.h"
+#include "Game/Level/Make/LockableBool.h"
+#include "Game/Level/Make/LevelSeedData.h"
+#include "Game/Objects/Bob/Bob.h"
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+#include "Game/Level/Level.h"
+#include "Game/Tools/Tools.h"
+
+#include "Core/Sound/EzSoundWad.h"
 
 #include <MasterHack.h>
 

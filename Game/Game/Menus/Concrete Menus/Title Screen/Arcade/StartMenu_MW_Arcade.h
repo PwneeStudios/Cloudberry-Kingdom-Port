@@ -1,7 +1,25 @@
 #ifndef STARTMENU_MW_ARCADE
 #define STARTMENU_MW_ARCADE
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+//#include "Game/Localization.h"
+//#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+//#include "Core/Text/EzText.h"
+//#include "Game/Games/Meta Games/Challenges/Challenge_Base.h"
+//#include "Game/Games/Meta Games/Arcade Games/Escalate/Escalation.h"
+//#include "Game/Games/Meta Games/Arcade Games/Rush/Time Crisis/TimeCrisis.h"
+//#include "Game/Player/PlayerManager.h"
+//#include "Game/Menus/Menu Components/MenuItem.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/StartMenu.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/StartMenu_MW_Backpanel.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/TitleGame_MW.h"
+#include "Game/Menus/Concrete Menus/Title Screen/Arcade/ArcadeMenu.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/Arcade/StartLevelMenu.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/Arcade/Hero Select/StartMenu_MW_HeroSelect.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

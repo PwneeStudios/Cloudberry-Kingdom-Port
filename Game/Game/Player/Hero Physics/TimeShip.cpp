@@ -1,4 +1,9 @@
-#include <global_header.h>
+#include <small_header.h>
+
+#include "TimeShip.h"
+#include "Game/Tools/Tools.h"
+#include "Game/Level/Make/Parameters/StyleData/StyleData.h"
+#include "Game/Objects/Icon.h"
 
 #include <MasterHack.h>
 

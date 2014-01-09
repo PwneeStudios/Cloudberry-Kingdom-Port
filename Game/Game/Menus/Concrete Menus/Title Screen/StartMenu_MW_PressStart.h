@@ -1,7 +1,22 @@
 #ifndef STARTMENU_MW_PRESSSTART
 #define STARTMENU_MW_PRESSSTART
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/DrawPile.h"
+//#include "Game/Localization.h"
+//#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/StartMenu_MW_Pre.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/StartMenu_MW_Simple.h"
+//#include "Core/Input/ButtonCheck.h"
+//#include "Core/Text/EzText.h"
+//#include "Core/Tools/CoreMath.h"
+#include "Game/Menus/CkBaseMenu.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/StartMenu_MW_Backpanel.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/TitleGame_MW.h"
+//#include "Game/Tools/Resources.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

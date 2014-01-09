@@ -1,4 +1,21 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Menus/Concrete Menus/Title Screen/Arcade/Hero Select/HeroDoll.h"
+
+#include "Core/PhsxData.h"
+#include "Core/Graphics/Draw/DrawPile.h"
+#include "Game/Menus/CkBaseMenu.h"
+#include "Game/Player/PlayerManager.h"
+#include "Game/Player/Hero Physics/Base.h"
+#include "Game/Objects/Bob/Bob.h"
+#include "Game/Player/Cape.h"
+#include "Game/Player/PlayerData.h"
+#include "Game/Player/Hero Physics/Normal.h"
+#include "Game/Player/Hero Physics/BobPhsxCharSelect.h"
+#include "Game/Tools/Camera.h"
+#include "Game/Tools/Tools.h"
+
+#include "Game/Level/Level.h"
+#include "Game/Games/GameType.h"
 
 #include "Hacks/List.h"
 

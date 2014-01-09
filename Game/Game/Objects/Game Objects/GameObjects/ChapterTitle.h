@@ -1,7 +1,15 @@
 #ifndef CHAPTERTITLE
 #define CHAPTERTITLE
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/DrawPile.h"
+#include "Game/Localization.h"
+//#include "Core/Text/EzText.h"
+#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
+//#include "Game/Tools/Resources.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

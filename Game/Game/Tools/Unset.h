@@ -1,4 +1,4 @@
-﻿#ifndef UNSET
+#ifndef UNSET
 #define UNSET
 
 namespace CloudberryKingdom

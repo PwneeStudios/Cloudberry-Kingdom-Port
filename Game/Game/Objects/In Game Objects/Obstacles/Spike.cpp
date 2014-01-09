@@ -1,4 +1,30 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Objects/In Game Objects/Obstacles/Spike.h"
+
+#include "Core/Effects/EzEffectWad.h"
+#include "Core/Graphics/Draw/Object/ObjectClass.h"
+#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include "Core/Graphics/Draw/Simple/SimpleObject.h"
+#include "Core/Texture/EzTextureWad.h"
+#include "Core/Tools/CoreMath.h"
+#include "Game/Collision Detection/AABox.h"
+#include "Game/Collision Detection/Phsx.h"
+#include "Game/Objects/ObjectBase.h"
+#include "Game/Tilesets/TileSet.h"
+#include "Game/Objects/Bob/Bob.h"
+#include "Game/Objects/In Game Objects/BaseClasses/_BoxDeath.h"
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+#include "Game/Level/Level.h"
+#include "Game/Objects/In Game Objects/Obstacles/Spike__Auto.h"
+#include "Game/Tilesets/SpriteInfo.h"
+#include "Game/Tools/Prototypes.h"
+#include "Game/Tools/Recycler.h"
+#include "Game/Tools/Tools.h"
+#include "Game/Tilesets/TileSetInfo.h"
+
+#include "Game/Collision Detection/FloatRectangle.h"
+#include "Game/Tools/Camera.h"
+#include "Core/Tools/Random.h"
 
 #include <MasterHack.h>
 

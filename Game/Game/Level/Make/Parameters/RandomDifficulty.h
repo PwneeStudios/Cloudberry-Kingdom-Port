@@ -1,7 +1,17 @@
 #ifndef RANDOMDIFFICULTY
 #define RANDOMDIFFICULTY
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Game/Tilesets/TileSet.h"
+//#include "Game/Level/Make/PieceSeedData.h"
+//#include "Game/Level/Make/Parameters/Upgrades.h"
+//#include "Game/Objects/AutoGen.h"
+//#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+//#include "Game/Level/Level.h"
+#include "Game/Tools/Tools.h"
+//#include "Game/Tilesets/TileSetInfo.h"
+
 
 namespace CloudberryKingdom
 {

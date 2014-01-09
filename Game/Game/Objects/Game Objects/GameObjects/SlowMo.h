@@ -1,7 +1,14 @@
 #ifndef SLOWMO
 #define SLOWMO
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Game/Objects/Game Objects/GameObject.h"
+#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
+//#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+//#include "Game/Level/Level.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

@@ -1,7 +1,12 @@
-﻿#ifndef OBJECTBOX
+#ifndef OBJECTBOX
 #define OBJECTBOX
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/QuadDrawer.h"
+//#include "Core/Graphics/Draw/Object/ObjectClass.h"
+//#include "Core/Graphics/Draw/Quads/ObjectVector.h"
+
 
 #include "Hacks/NET/BinaryWriter.h"
 #include "Hacks/NET/BinaryReader.h"

@@ -1,7 +1,14 @@
 #ifndef GAMEOBJECT
 #define GAMEOBJECT
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Tools/Set.h"
+#include "Game/Objects/ObjectBase.h"
+//#include "Game/Games/GameType.h"
+//#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+//#include "Game/Level/Level.h"
+
 
 #include "Core/Lambdas/Lambda.h"
 #include "Core/Lambdas/Multicaster.h"

@@ -1,7 +1,12 @@
 #ifndef STATS
 #define STATS
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Chunk.h"
+//#include "Game/Objects/Bob/Bob.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

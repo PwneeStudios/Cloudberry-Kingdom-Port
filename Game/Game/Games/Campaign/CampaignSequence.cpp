@@ -1,7 +1,38 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Games/Campaign/CampaignSequence.h"
+
+#include "Game/Localization.h"
+#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+#include "Game/Tilesets/Backgrounds/Background.h"
+#include "Core/Text/EzText.h"
+#include "Core/Tools/CoreMath.h"
+#include "Game/Objects/ObjectBase.h"
+#include "Game/Games/GameType.h"
+#include "Game/Games/ActionGame.h"
+#include "Game/Games/Campaign/LevelSequence.h"
+#include "Game/Games/Meta Games/Challenges/Challenge_Base.h"
+#include "Game/Level/Make/LockableBool.h"
+#include "Game/Level/Make/LevelSeedData.h"
+#include "Game/Tools/EzStorage.h"
+#include "Game/Player/PlayerManager.h"
+#include "Game/Objects/Game Objects/GameObjects/GUI_Level.h"
+#include "Game/Objects/Game Objects/GameObjects/LevelTitle.h"
+#include "Game/Objects/Game Objects/GameObjects/PerfectScoreObject.h"
+#include "Game/Menus/Concrete Menus/Help/HelpMenu.h"
+#include "Game/Menus/Concrete Menus/Help/HintGiver.h"
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+#include "Game/Level/Level.h"
+#include "Game/Player/PlayerData.h"
+#include "Game/Player/Awardments/Awardment.h"
+#include "Game/Tools/Tools.h"
+
 
 #include "Game/Tilesets/Backgrounds/_Code/CloudberryKingdom.Background.h"
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
+#include "Game/Player/Stats.h"
+#include "Game/Games/Meta Games/StringWorlds/StringWorld.h"
+#include "Core/Song/EzSongWad.h"
 
 #include <Hacks/Parse.h>
 #include <Hacks/FileReader.h>

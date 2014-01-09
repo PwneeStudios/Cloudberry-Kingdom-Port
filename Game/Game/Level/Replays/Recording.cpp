@@ -1,4 +1,22 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Level/Replays/Recording.h"
+
+#include "Core/Animation/SpriteAnim.h"
+#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include "Core/Particle Effects/Specific Effects/CloudberryKingdom.ParticleEffects.h"
+#include "Core/Tools/CoreMath.h"
+#include "Game/Level/Make/ComputerRecording.h"
+#include "Game/Objects/Bob/Bob.h"
+#include "Game/Objects/Bob/BobLink.h"
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+#include "Game/Level/Level.h"
+#include "Game/Player/Hero Physics/Spaceship.h"
+#include "Game/Tools/Globals.h"
+#include "Game/Tools/Tools.h"
+
+#include "Game/Games/GameType.h"
+#include "Core/Texture/EzTexture.h"
+#include "Core/Texture/EzTextureWad.h"
 
 #include "Hacks/NET/Path.h"
 #include "Hacks/NET/Directory.h"

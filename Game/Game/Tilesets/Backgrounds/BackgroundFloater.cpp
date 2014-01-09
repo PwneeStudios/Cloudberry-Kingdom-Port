@@ -1,4 +1,15 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Tilesets/Backgrounds/BackgroundFloater.h"
+
+#include "Core/FancyVector2.h"
+#include "Core/PhsxData.h"
+#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include "Game/Tilesets/Backgrounds/Background.h"
+#include "Game/Tilesets/Backgrounds/BackgroundFloaterList.h"
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+#include "Game/Level/Level.h"
+#include "Game/Tools/Tools.h"
+
 
 #include "Game/Tilesets/Backgrounds/_Code/CloudberryKingdom.Background.h"
 #include "Game/Tilesets/Backgrounds/Background.h"
@@ -6,6 +17,8 @@
 #include "Game/Tilesets/Backgrounds/BackgroundFloater.h"
 #include "Game/Tilesets/Backgrounds/BackgroundFloaterList.h"
 #include "Game/Tilesets/Backgrounds/BackgroundFloater_Stationary.h"
+
+#include "Game/Tools/Camera.h"
 
 namespace CloudberryKingdom
 {

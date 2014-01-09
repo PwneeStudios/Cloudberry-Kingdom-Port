@@ -1,7 +1,22 @@
-﻿#ifndef WALL
+#ifndef WALL
 #define WALL
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+//#include "Core/Tools/CoreMath.h"
+//#include "Game/Collision Detection/AABox.h"
+//#include "Game/Objects/ObjectBase.h"
+#include "Game/Tilesets/TileSet.h"
+#include "Game/Objects/In Game Objects/Blocks/Block.h"
+//#include "Game/Level/Make/PieceSeedData.h"
+//#include "Game/Objects/Bob/Bob.h"
+//#include "Game/Objects/In Game Objects/Obstacles/Spike.h"
+//#include "Game/Tilesets/SpriteInfo.h"
+//#include "Game/Tools/Recycler.h"
+//#include "Game/Tools/Tools.h"
+//#include "Game/Tilesets/TileSetInfo.h"
+
 
 namespace CloudberryKingdom
 {

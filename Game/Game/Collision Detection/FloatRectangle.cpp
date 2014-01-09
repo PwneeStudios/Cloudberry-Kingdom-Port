@@ -1,4 +1,9 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Collision Detection/FloatRectangle.h"
+
+#include "Core/WriteReadTools.h"
+#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

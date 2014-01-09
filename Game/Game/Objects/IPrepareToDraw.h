@@ -1,4 +1,4 @@
-﻿#ifndef IPREPARETODRAW
+#ifndef IPREPARETODRAW
 #define IPREPARETODRAW
 
 namespace CloudberryKingdom

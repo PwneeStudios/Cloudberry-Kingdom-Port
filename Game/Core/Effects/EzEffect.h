@@ -1,7 +1,11 @@
-﻿#ifndef EZEFFECT
+#ifndef EZEFFECT
 #define EZEFFECT
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Effects/EzEffectWad.h"
+//#include "Core/Texture/EzTexture.h"
+
 
 #include "Graphics/Effect.h"
 #include "Graphics/EffectTechnique.h"

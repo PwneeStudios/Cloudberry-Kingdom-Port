@@ -1,4 +1,9 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Core/Effects/EzEffect.h"
+
+#include "Core/Effects/EzEffectWad.h"
+#include "Core/Texture/EzTexture.h"
+
 
 namespace CloudberryKingdom
 {

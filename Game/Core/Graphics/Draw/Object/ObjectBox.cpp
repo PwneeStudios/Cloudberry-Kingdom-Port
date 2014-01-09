@@ -1,4 +1,10 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Core/Graphics/Draw/Object/ObjectBox.h"
+
+#include "Core/Graphics/QuadDrawer.h"
+#include "Core/Graphics/Draw/Object/ObjectClass.h"
+#include "Core/Graphics/Draw/Quads/ObjectVector.h"
+
 
 namespace CloudberryKingdom
 {

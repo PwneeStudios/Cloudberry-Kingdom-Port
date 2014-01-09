@@ -1,7 +1,39 @@
-﻿#ifndef HERORUSH
+#ifndef HERORUSH
 #define HERORUSH
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Game/Localization.h"
+//#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+//#include "Core/Tools/CoreMath.h"
+//#include "Game/Objects/ObjectBase.h"
+//#include "Game/Tilesets/TileSet.h"
+//#include "Game/Games/GameType.h"
+//#include "Game/Games/Meta Games/Arcade Games/Rush/CoinMod.h"
+#include "Game/Games/Meta Games/Arcade Games/Rush/Rush.h"
+//#include "Game/Games/Meta Games/Arcade Games/Rush/Hero Rush/HeroRush_Tutorial.h"
+//#include "Game/Games/Meta Games/Challenges/_Regular.h"
+//#include "Game/Level/Make/LockableBool.h"
+//#include "Game/Level/Make/LevelSeedData.h"
+//#include "Game/Level/Make/PieceSeedData.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/Arcade/ArcadeMenu.h"
+//#include "Game/Player/Hero Physics/Base.h"
+//#include "Game/Objects/Game Objects/GameObjects/DoorIcon.h"
+//#include "Game/Objects/Game Objects/GameObjects/MultiplierUp.h"
+//#include "Game/Objects/Game Objects/GameObjects/SuperCheer.h"
+//#include "Game/Player/Hero Physics/Normal.h"
+//#include "Game/Player/Hero Physics/Big.h"
+//#include "Game/Player/Hero Physics/Bouncy.h"
+//#include "Game/Player/Hero Physics/Box.h"
+//#include "Game/Player/Hero Physics/Double.h"
+//#include "Game/Player/Hero Physics/Jetman.h"
+//#include "Game/Player/Hero Physics/Rocketbox.h"
+//#include "Game/Player/Hero Physics/Small.h"
+//#include "Game/Player/Hero Physics/Spaceship.h"
+//#include "Game/Player/Hero Physics/Wheel.h"
+//#include "Game/Tools/Tools.h"
+//#include "Game/Tilesets/TileSetInfo.h"
+
 
 namespace CloudberryKingdom
 {

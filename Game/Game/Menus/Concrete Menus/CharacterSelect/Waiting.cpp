@@ -1,4 +1,15 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Menus/Concrete Menus/CharacterSelect/Waiting.h"
+
+#include "Core/Graphics/Draw/DrawPile.h"
+#include "Core/Input/ButtonCheck.h"
+#include "Game/Menus/CkBaseMenu.h"
+#include "Game/Menus/Concrete Menus/CharacterSelect/CharacterSelect.h"
+#include "Game/Menus/Concrete Menus/CharacterSelect/CharSelectManager.h"
+
+#include "Game/Menus/Concrete Menus/CharacterSelect/Doll.h"
+#include "Game/Menus/Concrete Menus/CharacterSelect/GamerTag.h"
+#include "Game/Menus/Concrete Menus/CharacterSelect/HeroLevel.h"
 
 #include <Core\Tools\Set.h>
 

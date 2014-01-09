@@ -1,4 +1,4 @@
-﻿#ifndef MAKETHING
+#ifndef MAKETHING
 #define MAKETHING
 
 namespace CloudberryKingdom

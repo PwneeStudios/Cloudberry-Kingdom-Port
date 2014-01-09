@@ -1,7 +1,10 @@
-﻿#ifndef EZTEXTURE
+#ifndef EZTEXTURE
 #define EZTEXTURE
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

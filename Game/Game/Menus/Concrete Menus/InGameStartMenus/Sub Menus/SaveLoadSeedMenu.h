@@ -1,7 +1,24 @@
 #ifndef SAVELOADSEEDMENU
 #define SAVELOADSEEDMENU
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+//#include "Game/Localization.h"
+//#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+//#include "Core/Text/EzText.h"
+//#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
+//#include "Game/Menus/CkBaseMenu.h"
+#include "Game/Menus/Concrete Menus/InGameStartMenus/Verify/VerifyBase.h"
+//#include "Game/Games/NormalGame.h"
+//#include "Game/Menus/Menu Components/MenuItem.h"
+//#include "Game/Menus/Concrete Menus/InGameStartMenus/Sub Menus/LoadSeedAs.h"
+//#include "Game/Menus/Concrete Menus/InGameStartMenus/Sub Menus/SaveSeedAs.h"
+//#include "Game/Menus/Concrete Menus/InGameStartMenus/Verify/AlertBase.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/Freeplay/SavedSeedsGUI.h"
+//#include "Game/Player/PlayerData.h"
+//#include "Game/Tools/Tools.h"
+
 
 #include "Hacks/NET/IAsyncResult.h"
 

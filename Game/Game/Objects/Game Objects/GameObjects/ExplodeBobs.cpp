@@ -1,4 +1,16 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Objects/Game Objects/GameObjects/ExplodeBobs.h"
+
+#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
+#include "Game/Player/PlayerManager.h"
+#include "Game/Menus/Concrete Menus/Score Screens/ScoreScreen.h"
+#include "Game/Objects/Bob/Bob.h"
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+#include "Game/Level/Level.h"
+#include "Game/Objects/In Game Objects/Obstacles/CloudberryKingdom.Fireball.h"
+
+#include "Game/Player/PlayerData.h"
+#include "Core/Sound/EzSound.h"
 
 #include "Hacks/List.h"
 #include "Hacks/Compare.h"

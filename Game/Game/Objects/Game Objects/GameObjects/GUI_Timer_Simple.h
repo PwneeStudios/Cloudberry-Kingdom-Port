@@ -1,7 +1,10 @@
 #ifndef GUI_TIMER_SIMPLE
 #define GUI_TIMER_SIMPLE
 
-#include <global_header.h>
+#include <small_header.h>
+
+#include "Game/Objects/Game Objects/GameObjects/GUI_Timer_Base.h"
+
 
 namespace CloudberryKingdom
 {

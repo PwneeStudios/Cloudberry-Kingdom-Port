@@ -1,7 +1,14 @@
-﻿#ifndef BOB_PHSX_RANDOM_H
+#ifndef BOB_PHSX_RANDOM_H
 #define BOB_PHSX_RANDOM_H
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Game/Localization.h"
+#include "Game/Player/Hero Physics/Base.h"
+//#include "Game/Objects/Icon.h"
+//#include "Game/Objects/Bob/Bob.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

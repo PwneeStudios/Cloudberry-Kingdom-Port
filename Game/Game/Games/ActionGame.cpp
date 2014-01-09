@@ -1,4 +1,16 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Games/ActionGame.h"
+
+#include "Game/Tilesets/Backgrounds/Background.h"
+#include "Game/Games/GameType.h"
+#include "Game/Level/Make/LockableBool.h"
+#include "Game/Level/Make/LevelSeedData.h"
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+#include "Game/Level/Level.h"
+#include "Game/Tools/Camera.h"
+#include "Game/Tools/Tools.h"
+
+#include "Game/Level/LevelPiece.h"
 
 #include "Hacks/Queue.h"
 

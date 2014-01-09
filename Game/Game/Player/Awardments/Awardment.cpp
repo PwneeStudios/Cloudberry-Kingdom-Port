@@ -1,4 +1,20 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Player/Awardments/Awardment.h"
+
+#include "Game/Localization.h"
+#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+#include "Game/Objects/Game Objects/GameObject.h"
+#include "Game/Games/GameType.h"
+#include "Game/Player/PlayerManager.h"
+#include "Game/Player/ColorScheme.h"
+#include "Game/Objects/Bob/Bob.h"
+#include "Game/Player/PlayerData.h"
+#include "Game/Player/Awardments/AwardmentMessage.h"
+#include "Game/Tools/Tools.h"
+
+#include "Game/Player/Stats.h"
+#include "Game/Level/Level.h"
+#include "Game/Level/Make/LevelSeedData.h"
 
 #include <Hacks/List.h>
 #include <Hacks/String.h>

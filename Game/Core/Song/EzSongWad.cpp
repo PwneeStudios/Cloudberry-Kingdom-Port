@@ -1,4 +1,13 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Core/Song/EzSongWad.h"
+
+#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+#include "Core/Song/EzSong.h"
+#include "Core/Text/EzText.h"
+#include "Game/Tools/Camera.h"
+#include "Game/Tools/Resources.h"
+#include "Game/Tools/Tools.h"
+
 
 #include "Hacks/List.h"
 #include "Hacks/String.h"
@@ -6,7 +15,8 @@
 #include <Audio/MediaPlayer.h>
 #include <Utility/Log.h>
 
-#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+#include "Game/Games/GameType.h"
+#include "Core/Tools/Random.h"
 
 namespace CloudberryKingdom
 {

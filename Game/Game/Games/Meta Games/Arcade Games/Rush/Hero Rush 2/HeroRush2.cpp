@@ -1,4 +1,24 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Games/Meta Games/Arcade Games/Rush/Hero Rush 2/HeroRush2.h"
+
+#include "Game/Localization.h"
+#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+#include "Game/Objects/ObjectBase.h"
+#include "Game/Games/GameType.h"
+#include "Game/Games/Meta Games/Arcade Games/Rush/Hero Rush/HeroRush.h"
+#include "Game/Games/Meta Games/Arcade Games/Rush/Hero Rush/HeroRush_Tutorial.h"
+#include "Game/Games/Meta Games/Arcade Games/Rush/Hero Rush 2/HeroRush2_Tutorial.h"
+#include "Game/Player/Hero Physics/Base.h"
+#include "Game/Objects/Game Objects/GameObjects/DoorIcon.h"
+#include "Game/Player/Awardments/Awardment.h"
+#include "Game/Player/Hero Physics/Normal.h"
+#include "Game/Tools/Tools.h"
+
+#include "Game/Level/Make/LevelSeedData.h"
+#include "Game/Level/Level.h"
+#include "Game/Objects/Door/Door.h"
+#include "Core/Tools/Random.h"
+#include "Game/Games/Meta Games/StringWorlds/StringWorld_Timed.h"
 
 #include "Hacks/List.h"
 

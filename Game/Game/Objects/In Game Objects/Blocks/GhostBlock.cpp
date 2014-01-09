@@ -1,4 +1,28 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Objects/In Game Objects/Blocks/GhostBlock.h"
+
+#include "Core/Graphics/Draw/Simple/SimpleObject.h"
+#include "Core/Texture/TextureOrAnim.h"
+#include "Core/Tools/CoreMath.h"
+#include "Game/Collision Detection/AABox.h"
+#include "Game/Collision Detection/Phsx.h"
+#include "Game/Objects/ObjectBase.h"
+#include "Game/Tilesets/TileSet.h"
+#include "Game/Objects/In Game Objects/Blocks/Block.h"
+#include "Game/Objects/Bob/Bob.h"
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+#include "Game/Level/Level.h"
+#include "Game/Tilesets/BlockGroup.h"
+#include "Game/Tools/Prototypes.h"
+#include "Game/Tools/Recycler.h"
+#include "Game/Tools/Tools.h"
+#include "Game/Tilesets/TileSetInfo.h"
+
+#include "Core/Texture/EzTextureWad.h"
+#include "Game/Collision Detection/FloatRectangle.h"
+
+#include "Game/Tools/Camera.h"
+#include "Game/Objects/In Game Objects/Blocks/NormalBlockDraw.h"
 
 namespace CloudberryKingdom
 {

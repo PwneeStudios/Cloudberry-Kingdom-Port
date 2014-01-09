@@ -1,4 +1,26 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Menus/Concrete Menus/Title Screen/Arcade/Hero Select/HeroSelectOptions.h"
+
+#include "Core/Graphics/Draw/DrawPile.h"
+#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include "Game/Localization.h"
+#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+#include "Game/Player/LeaderboardView.h"
+#include "Core/Input/ButtonCheck.h"
+#include "Core/Text/EzText.h"
+#include "Game/Menus/Menu.h"
+#include "Game/Menus/Menu Components/MenuItem.h"
+#include "Game/Menus/Concrete Menus/Score Screens/ScoreDatabase.h"
+#include "Game/Menus/Concrete Menus/Score Screens/ScoreEntry.h"
+#include "Game/Menus/Concrete Menus/Title Screen/StartMenu.h"
+#include "Game/Menus/Concrete Menus/Title Screen/Arcade/ArcadeMenu.h"
+#include "Game/Menus/Concrete Menus/Title Screen/Arcade/StartLevelMenu.h"
+#include "Game/Menus/Concrete Menus/Title Screen/Arcade/Hero Select/StartMenu_MW_HeroSelect.h"
+#include "Game/Objects/Game Objects/GameObjects/End/HighScorePanel.h"
+
+#include "Game/Games/Meta Games/Challenges/Challenge_Base.h"
+#include "Game/Menus/Concrete Menus/Score Screens/ScoreList.h"
+#include "Game/Menus/Concrete Menus/Title Screen/Arcade/Hero Select/HeroDoll.h"
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 #include <Game\Player\LeaderboardView.h>

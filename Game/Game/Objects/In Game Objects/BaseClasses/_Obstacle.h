@@ -1,7 +1,12 @@
 #ifndef _OBSTACLE
 #define _OBSTACLE
 
-#include <global_header.h>
+#include <small_header.h>
+
+#include "Game/Objects/ObjectBase.h"
+//#include "Game/Objects/AutoGen.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

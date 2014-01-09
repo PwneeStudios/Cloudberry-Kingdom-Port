@@ -1,7 +1,19 @@
-﻿#ifndef SWARMRECORD
+#ifndef SWARMRECORD
 #define SWARMRECORD
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Animation/SpriteAnim.h"
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+//#include "Core/Texture/EzTexture.h"
+//#include "Game/Level/LevelPiece.h"
+//#include "Game/Level/Replays/Recording.h"
+//#include "Game/Player/PlayerManager.h"
+//#include "Game/Objects/Bob/BobLink.h"
+//#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+//#include "Game/Level/Level.h"
+//#include "Game/Tools/Tools.h"
+
 
 
 namespace CloudberryKingdom

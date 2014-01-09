@@ -1,4 +1,23 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Objects/In Game Objects/Blocks/MovingBlock.h"
+
+#include "Core/Graphics/Draw/Quads/PieceQuad.h"
+#include "Core/Tools/CoreMath.h"
+#include "Game/Collision Detection/AABox.h"
+#include "Game/Objects/ObjectBase.h"
+#include "Game/Tilesets/TileSet.h"
+#include "Game/Objects/In Game Objects/Blocks/Block.h"
+#include "Game/Objects/IBounded.h"
+#include "Game/Objects/In Game Objects/Blocks/NormalBlockDraw.h"
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+#include "Game/Level/Level.h"
+#include "Game/Tilesets/BlockGroup.h"
+#include "Game/Tools/Recycler.h"
+#include "Game/Tools/Tools.h"
+#include "Game/Tilesets/TileSetInfo.h"
+
+#include "Game/Collision Detection/FloatRectangle.h"
+#include "Game/Tools/Camera.h"
 
 namespace CloudberryKingdom
 {

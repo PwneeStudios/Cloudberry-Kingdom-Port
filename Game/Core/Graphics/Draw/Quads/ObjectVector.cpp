@@ -1,4 +1,12 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Core/Graphics/Draw/Quads/ObjectVector.h"
+
+#include "Core/WriteReadTools.h"
+#include "Core/Animation/AnimationData_Vector.h"
+#include "Core/Graphics/Draw/Object/ObjectClass.h"
+#include "Core/Graphics/Draw/Quads/BaseQuad.h"
+#include "Core/Graphics/Draw/Quads/Quad.h"
+
 
 namespace CloudberryKingdom
 {

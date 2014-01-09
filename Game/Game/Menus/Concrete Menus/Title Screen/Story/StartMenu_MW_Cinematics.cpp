@@ -1,4 +1,14 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Menus/Concrete Menus/Title Screen/Story/StartMenu_MW_Cinematics.h"
+
+#include "Game/Localization.h"
+#include "Core/Text/EzText.h"
+#include "Game/Menus/Menu Components/MenuItem.h"
+#include "Game/Menus/Concrete Menus/Title Screen/StartMenu.h"
+#include "Game/Menus/Concrete Menus/Title Screen/StartMenu_MW_Backpanel.h"
+#include "Game/Menus/Concrete Menus/Title Screen/TitleGame_MW.h"
+
+#include "Game/Menus/Menu.h"
 
 #include <Core\Tools\Set.h>
 

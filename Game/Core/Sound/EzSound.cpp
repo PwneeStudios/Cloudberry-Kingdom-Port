@@ -1,5 +1,11 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Core/Sound/EzSound.h"
 
+#include "Core/Sound/EzSoundWad.h"
+#include "Core/Tools/CoreMath.h"
+#include "Game/Tools/Tools.h"
+#include "Game/Tools/WrappedFloat.h"
+#include "Core/Tools/Random.h"
 
 namespace CloudberryKingdom
 {

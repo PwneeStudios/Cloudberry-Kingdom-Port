@@ -1,7 +1,13 @@
 #ifndef _CIRCLEDEATH
 #define _CIRCLEDEATH
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Game/Collision Detection/Circle.h"
+//#include "Game/Objects/ObjectBase.h"
+//#include "Game/Objects/Bob/Bob.h"
+#include "Game/Objects/In Game Objects/BaseClasses/_Death.h"
+
 
 namespace CloudberryKingdom
 {

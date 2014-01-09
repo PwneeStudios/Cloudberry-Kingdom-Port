@@ -1,7 +1,24 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Core/Particle Effects/Specific Effects/CloudberryKingdom.ParticleEffects.h"
+
+#include "Core/PhsxData.h"
+#include "Game/Localization.h"
+#include "Core/Particle Effects/Particle.h"
+#include "Core/Particle Effects/ParticleEmitter.h"
+#include "Core/Sound/EzSound.h"
+#include "Core/Texture/EzTexture.h"
+#include "Core/Tools/CoreMath.h"
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+#include "Game/Level/Level.h"
+#include "Game/Objects/In Game Objects/Obstacles/CloudberryKingdom.Fireball.h"
+#include "Game/Tools/Tools.h"
+
 
 #include <cmath>
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+#include "Core/Texture/EzTextureWad.h"
+#include "Core/Tools/Random.h"
+#include "Core/Sound/EzSoundWad.h"
 
 namespace CloudberryKingdom
 {

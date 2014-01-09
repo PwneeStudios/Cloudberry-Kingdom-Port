@@ -1,4 +1,16 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+
+#include "Game/Objects/In Game Objects/Obstacles/FireSpinner__Auto.h"
+#include "Game/Level/Make/PieceSeedData.h"
+#include "Game/Level/Make/Parameters/Upgrades.h"
+#include "Game/Level/Make/DifficultyHelper.h"
+#include "Game/Level/Level.h"
+#include "Game/Tilesets/TileSetInfo.h"
+#include "Game/Collision Detection/AABox.h"
+#include "Game/Collision Detection/FloatRectangle.h"
+#include "Core/Tools/Random.h"
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+#include "Game/Tools/Recycler.h"
 
 namespace CloudberryKingdom
 {

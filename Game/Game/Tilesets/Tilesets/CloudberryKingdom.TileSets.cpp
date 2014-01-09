@@ -1,4 +1,4 @@
-#include <global_header.h>
+#include <small_header.h>
 
 #include "Hacks/List.h"
 #include "Game/Tilesets/Backgrounds/_Code/CloudberryKingdom.Background.h"
@@ -8,6 +8,16 @@
 #include "Game/Tilesets/Backgrounds/BackgroundFloaterList.h"
 #include "Game/Tilesets/Backgrounds/BackgroundFloater_Stationary.h"
 #include "Game/Tilesets/Tilesets/CloudberryKingdom.TileSets.h"
+
+#include "Game/Tilesets/TileSet.h"
+#include "Game/Tilesets/BlockGroup.h"
+#include "Game/Tilesets/TileSetInfo.h"
+#include "Game/Tilesets/SpriteInfo.h"
+#include "Core/Texture/TextureOrAnim.h"
+#include "Core/Tools/ColorHelper.h"
+#include "Game/Menus/Concrete Menus/Title Screen/Freeplay/CustomLevel_GUI.h"
+
+#include "Core/Texture/EzTextureWad.h"
 
 namespace CloudberryKingdom
 {

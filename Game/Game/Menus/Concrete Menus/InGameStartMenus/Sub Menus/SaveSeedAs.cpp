@@ -1,4 +1,25 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Menus/Concrete Menus/InGameStartMenus/Sub Menus/SaveSeedAs.h"
+
+#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include "Game/Localization.h"
+#include "Core/Input/ButtonCheck.h"
+#include "Core/Text/EzText.h"
+#include "Core/Tools/ColorHelper.h"
+#include "Game/Menus/Concrete Menus/InGameStartMenus/Verify/VerifyBase.h"
+#include "Game/Menus/Menu.h"
+#include "Game/Menus/Concrete Menus/InGameStartMenus/Verify/AlertBase.h"
+#include "Game/Menus/Concrete Menus/Title Screen/StartMenu.h"
+#include "Game/Menus/Concrete Menus/Title Screen/Freeplay/SavedSeedsGUI.h"
+#include "Game/Objects/Game Objects/GameObjects/GUI_TextBox.h"
+#include "Game/Player/PlayerData.h"
+#include "Game/Tools/Tools.h"
+
+#include "Game/Player/PlayerManager.h"
+#include "Game/Player/SavedSeeds.h"
+#include "Game/Level/Make/LevelSeedData.h"
+
+#include "Game/Level/Level.h"
 
 namespace CloudberryKingdom
 {

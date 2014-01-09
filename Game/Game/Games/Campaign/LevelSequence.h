@@ -1,7 +1,18 @@
-﻿#ifndef LEVELSEQUENCE
+#ifndef LEVELSEQUENCE
 #define LEVELSEQUENCE
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Game/Games/GameType.h"
+//#include "Game/Games/ActionGame.h"
+//#include "Game/Games/Meta Games/StringWorlds/StringWorld.h"
+//#include "Game/Level/Make/LockableBool.h"
+//#include "Game/Level/Make/LevelSeedData.h"
+//#include "Game/Menus/Concrete Menus/InGameStartMenus/InGameStartMenu.h"
+//#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+//#include "Game/Level/Level.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

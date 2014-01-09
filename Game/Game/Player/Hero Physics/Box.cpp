@@ -1,9 +1,21 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Player/Hero Physics/Box.h"
+
+#include "Core/Graphics/Draw/Quads/Quad.h"
+#include "Game/Localization.h"
+#include "Game/Player/Hero Physics/Base.h"
+#include "Game/Objects/Icon.h"
+#include "Game/Objects/Bob/Bob.h"
+#include "Game/Player/Hero Physics/Normal.h"
+#include "Game/Tools/Tools.h"
+
 
 #include "Hacks/Queue.h"
 #include <MasterHack.h>
 
 #include <Core\Animation\AnimQueue.h>
+#include "Core/Texture/EzTextureWad.h"
+#include "Core/Sound/EzSoundWad.h"
 
 namespace CloudberryKingdom
 {

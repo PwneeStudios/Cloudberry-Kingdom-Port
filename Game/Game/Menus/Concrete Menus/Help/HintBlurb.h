@@ -1,7 +1,16 @@
 #ifndef HINTBLURB
 #define HINTBLURB
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/DrawPile.h"
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+//#include "Game/Localization.h"
+//#include "Core/Input/ButtonCheck.h"
+//#include "Core/Text/EzText.h"
+//#include "Game/Objects/Game Objects/GameObject.h"
+#include "Game/Menus/CkBaseMenu.h"
+
 
 namespace CloudberryKingdom
 {

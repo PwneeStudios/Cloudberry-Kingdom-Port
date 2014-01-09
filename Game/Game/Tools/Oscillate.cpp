@@ -1,4 +1,8 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Tools/Oscillate.h"
+
+#include "Game/Tools/Tools.h"
+
 
 #include <Game\CloudberryKingdom\CloudberryKingdom.CloudberryKingdomGame.h>
 #include <Hacks\List.h>

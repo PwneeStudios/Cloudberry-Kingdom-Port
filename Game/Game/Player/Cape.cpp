@@ -1,4 +1,16 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Player/Cape.h"
+
+#include "Core/PhsxData.h"
+#include "Core/Effects/EzEffect.h"
+#include "Core/Graphics/VertexFormat.h"
+#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include "Core/Tools/ColorHelper.h"
+#include "Game/Collision Detection/Phsx.h"
+#include "Game/Player/Hero Physics/Base.h"
+#include "Game/Objects/Bob/Bob.h"
+#include "Game/Tools/Tools.h"
+
 
 #include "Graphics/Effect.h"
 #include "Graphics/EffectTechnique.h"
@@ -8,6 +20,11 @@
 #include <Graphics/Types.h>
 #include <Graphics/QuadDrawer.h>
 #include <Utility/Log.h>
+
+#include "Game/Player/ClrTextFx.h"
+#include "Game/Level/Level.h"
+#include "Core/Texture/EzTexture.h"
+#include "Core/Texture/EzTextureWad.h"
 
 namespace CloudberryKingdom
 {

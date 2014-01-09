@@ -1,4 +1,20 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Player/ColorScheme.h"
+
+#include "Core/Chunk.h"
+#include "Core/Graphics/Draw/Quads/BaseQuad.h"
+#include "Game/Localization.h"
+#include "Core/Texture/EzTexture.h"
+#include "Game/Player/Buyable.h"
+#include "Game/Player/ClrTextFx.h"
+#include "Game/Objects/In Game Objects/Obstacles/CloudberryKingdom.Fireball.h"
+#include "Game/Player/ColorSchemeManager.h"
+#include "Game/Player/Awardments/Awardment.h"
+#include "Game/Player/Hero Physics/Normal.h"
+#include "Game/Tools/Prototypes.h"
+#include "Game/Tools/Tools.h"
+
+#include "Game/Objects/Bob/Bob.h"
 
 #include <Hacks/List.h>
 #include <Hacks/String.h>

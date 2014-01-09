@@ -1,7 +1,17 @@
-﻿#ifndef MENULIST
+#ifndef MENULIST
 #define MENULIST
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+//#include "Core/Input/ButtonCheck.h"
+//#include "Core/Tools/CoreMath.h"
+//#include "Game/Menus/Menu.h"
+#include "Game/Menus/Menu Components/MenuItem.h"
+//#include "Game/Menus/Menu Components/MenuListExpand.h"
+//#include "Game/Tools/Camera.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

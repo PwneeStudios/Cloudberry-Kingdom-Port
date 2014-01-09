@@ -1,4 +1,34 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Menus/Concrete Menus/Help/HelpMenu.h"
+
+#include "Core/Graphics/Draw/DrawPile.h"
+#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include "Game/Localization.h"
+#include "Core/Input/ButtonCheck.h"
+#include "Core/Text/EzText.h"
+#include "Game/Objects/Game Objects/GameObject.h"
+#include "Game/Menus/CkBaseMenu.h"
+#include "Game/Games/GameType.h"
+#include "Game/Games/Meta Games/Challenges/Challenge_Base.h"
+#include "Game/Menus/Menu.h"
+#include "Game/Menus/Concrete Menus/Help/HelpBlurb.h"
+#include "Game/Player/PlayerManager.h"
+#include "Game/Menus/Concrete Menus/InGameStartMenus/InGameStartMenu.h"
+#include "Game/Menus/Menu Components/MenuItem.h"
+#include "Game/Menus/Menu Components/MenuToggle.h"
+#include "Game/Objects/Icon.h"
+#include "Game/Objects/Game Objects/GameObjects/Guide.h"
+#include "Game/Objects/Game Objects/GameObjects/Listener.h"
+#include "Game/Objects/Game Objects/GameObjects/SlowMo.h"
+#include "Game/Menus/Concrete Menus/Help/HintGiver.h"
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+#include "Game/Level/Level.h"
+#include "Game/Objects/In Game Objects/Grab/Coin.h"
+#include "Game/Player/Awardments/Awardment.h"
+#include "Game/Tools/Resources.h"
+#include "Game/Tools/Tools.h"
+
+#include "Game/Player/PlayerData.h"
 
 namespace CloudberryKingdom
 {

@@ -1,7 +1,10 @@
-﻿#ifndef EZFONT
+#ifndef EZFONT
 #define EZFONT
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/QuadDrawer.h"
+
 
 #include "Hacks/XNA/SpriteFont.h"
 

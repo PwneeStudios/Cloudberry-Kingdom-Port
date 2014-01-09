@@ -1,4 +1,4 @@
-﻿#ifndef PRESETDIFFICULTIES
+#ifndef PRESETDIFFICULTIES
 #define PRESETDIFFICULTIES
 
 namespace CloudberryKingdom

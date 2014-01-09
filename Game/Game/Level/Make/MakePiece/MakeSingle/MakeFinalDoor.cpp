@@ -1,4 +1,23 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Level/Make/MakePiece/MakeSingle/MakeFinalDoor.h"
+
+#include "Game/Collision Detection/AABox.h"
+#include "Game/Objects/In Game Objects/Blocks/Block.h"
+#include "Game/Games/Meta Games/StringWorlds/StringWorld.h"
+#include "Game/Games/Meta Games/StringWorlds/LevelConnector.h"
+#include "Game/Level/Make/PieceSeedData.h"
+#include "Game/Level/Make/MakePiece/MakeThing.h"
+#include "Game/Objects/Door/Door.h"
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+#include "Game/Level/Level.h"
+#include "Game/Objects/Special/CameraZone.h"
+#include "Game/Tools/Recycler.h"
+#include "Game/Tools/Tools.h"
+
+#include "Game/Tools/Camera.h"
+#include "Game/Level/LevelPiece.h"
+#include "Game/Level/Make/ComputerRecording.h"
+#include "Game/Collision Detection/FloatRectangle.h"
 
 namespace CloudberryKingdom
 {

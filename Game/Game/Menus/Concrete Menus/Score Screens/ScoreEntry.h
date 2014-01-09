@@ -1,7 +1,15 @@
 #ifndef SCOREENTRY
 #define SCOREENTRY
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Chunk.h"
+//#include "Core/Tools/CoreMath.h"
+//#include "Game/Menus/Concrete Menus/CharacterSelect/GamerTag.h"
+//#include "Game/Player/PlayerManager.h"
+//#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+//#include "Game/Level/Level.h"
+
 
 namespace CloudberryKingdom
 {

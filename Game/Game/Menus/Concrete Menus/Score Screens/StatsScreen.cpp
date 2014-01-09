@@ -1,4 +1,24 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Menus/Concrete Menus/Score Screens/StatsScreen.h"
+
+#include "Core/Graphics/Draw/DrawPile.h"
+#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include "Game/Localization.h"
+#include "Core/Text/EzText.h"
+#include "Game/Menus/CkBaseMenu.h"
+#include "Game/Menus/LongMenu.h"
+#include "Game/Player/PlayerManager.h"
+#include "Game/Menus/Menu Components/MenuItem.h"
+#include "Game/Menus/Menu Components/ScrollBar.h"
+#include "Game/Objects/Bob/Bob.h"
+#include "Game/Player/Stats.h"
+#include "Game/Tools/Resources.h"
+#include "Game/Tools/Tools.h"
+
+#include "Game/Player/PlayerData.h"
+#include "Game/Level/Level.h"
+#include "Game/Games/GameType.h"
+
 #include <Utility\ConsoleInformation.h>
 #include <Hacks\Parse.h>
 #include <Hacks\String.h>

@@ -1,7 +1,16 @@
-﻿#ifndef BOUNCY
+#ifndef BOUNCY
 #define BOUNCY
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Game/Localization.h"
+//#include "Core/Sound/EzSound.h"
+//#include "Game/Player/Hero Physics/Base.h"
+//#include "Game/Objects/Icon.h"
+//#include "Game/Objects/Bob/Bob.h"
+#include "Game/Player/Hero Physics/Normal.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

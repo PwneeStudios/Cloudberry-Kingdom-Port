@@ -1,4 +1,18 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Menus/Menu Components/MenuList.h"
+
+#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include "Core/Input/ButtonCheck.h"
+#include "Core/Tools/CoreMath.h"
+#include "Game/Menus/Menu.h"
+#include "Game/Menus/Menu Components/MenuItem.h"
+#include "Game/Menus/Menu Components/MenuListExpand.h"
+#include "Game/Tools/Camera.h"
+#include "Game/Tools/Tools.h"
+
+#include "Game/Games/GameType.h"
+#include "Core/Text/EzText.h"
+#include "Core/Sound/EzSound.h"
 
 #include "Hacks/List.h"
 

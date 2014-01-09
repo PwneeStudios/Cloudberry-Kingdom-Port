@@ -1,4 +1,11 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Games/Meta Games/Arcade Games/HeroFactory_Escalation.h"
+
+#include "Game/Localization.h"
+#include "Game/Games/Meta Games/Arcade Games/Escalate/Escalation.h"
+#include "Game/Player/Hero Physics/Base.h"
+#include "Game/Player/Hero Physics/Normal.h"
+
 
 namespace CloudberryKingdom
 {

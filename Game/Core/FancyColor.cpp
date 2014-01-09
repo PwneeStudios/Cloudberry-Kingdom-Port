@@ -1,4 +1,8 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Core/FancyColor.h"
+
+#include "Core/FancyVector2.h"
+
 
 namespace CloudberryKingdom
 {

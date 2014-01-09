@@ -1,4 +1,20 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Level/Make/Parameters/StyleData/StyleData.h"
+
+#include "Core/PhsxData.h"
+#include "Core/Tools/Random.h"
+#include "Game/Level/Make/Generators.h"
+#include "Game/Level/Make/PieceSeedData.h"
+#include "Game/Level/Make/Parameters/Upgrades.h"
+#include "Game/Objects/AutoGen.h"
+#include "Game/Objects/In Game Objects/Blocks/BouncyBlock__Auto.h"
+#include "Game/Objects/In Game Objects/Blocks/Ceiling__Auto.h"
+#include "Game/Objects/In Game Objects/Blocks/NormalBlock__Auto.h"
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+#include "Game/Level/Level.h"
+#include "Game/Tools/Tools.h"
+
+#include "Game/Player/Hero Physics/Base.h"
 
 #include <Hacks/List.h>
 #include <Hacks/String.h>

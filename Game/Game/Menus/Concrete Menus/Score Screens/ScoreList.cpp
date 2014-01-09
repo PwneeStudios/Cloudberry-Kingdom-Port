@@ -1,4 +1,10 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Menus/Concrete Menus/Score Screens/ScoreList.h"
+
+#include "Game/Localization.h"
+#include "Game/Menus/Concrete Menus/Score Screens/ScoreEntry.h"
+
+#include "stringconverter.h"
 
 #include <Hacks/List.h>
 #include <Hacks/String.h>

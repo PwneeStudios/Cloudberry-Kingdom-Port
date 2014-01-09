@@ -1,7 +1,15 @@
-﻿#ifndef MENUSLIDER
+#ifndef MENUSLIDER
 #define MENUSLIDER
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+//#include "Core/Text/EzText.h"
+//#include "Game/Menus/Menu.h"
+#include "Game/Menus/Menu Components/MenuSliderBase.h"
+//#include "Game/Tools/Camera.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

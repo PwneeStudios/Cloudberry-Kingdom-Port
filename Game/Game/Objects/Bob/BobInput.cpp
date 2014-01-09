@@ -1,4 +1,8 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Objects/Bob/BobInput.h"
+
+#include "Core/WriteReadTools.h"
+
 
 namespace CloudberryKingdom
 {

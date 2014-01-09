@@ -1,7 +1,12 @@
-﻿#ifndef COMPUTERRECORDING
+#ifndef COMPUTERRECORDING
 #define COMPUTERRECORDING
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/WriteReadTools.h"
+#include "Game/Objects/Bob/BobInput.h"
+//#include "Game/Objects/Bob/Bob.h"
+
 
 namespace CloudberryKingdom
 {

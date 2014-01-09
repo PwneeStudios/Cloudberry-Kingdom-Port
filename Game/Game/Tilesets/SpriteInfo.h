@@ -1,4 +1,4 @@
-﻿#ifndef SPRITEINFO
+#ifndef SPRITEINFO
 #define SPRITEINFO
 
 namespace CloudberryKingdom

@@ -1,4 +1,16 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Menus/Menu Components/MenuScrollBar.h"
+
+#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include "Core/Text/EzText.h"
+#include "Core/Texture/EzTexture.h"
+#include "Game/Menus/Menu Components/MenuSlider.h"
+#include "Game/Tools/Camera.h"
+#include "Game/Tools/Resources.h"
+#include "Game/Tools/Tools.h"
+
+#include "Core/Texture/EzTextureWad.h"
+#include "Game/Menus/Menu.h"
 
 namespace CloudberryKingdom
 {

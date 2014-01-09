@@ -1,7 +1,15 @@
-﻿#ifndef WRITEREADTOOLS
+#ifndef WRITEREADTOOLS
 #define WRITEREADTOOLS
 
-#include <global_header.h>
+#include <small_header.h>
+
+#include "Core/PhsxData.h"
+//#include "Core/Animation/AnimationData_Integer.h"
+//#include "Core/Animation/AnimationData_Vector.h"
+//#include "Core/Graphics/VertexFormat.h"
+//#include "Core/Texture/EzTexture.h"
+//#include "Game/Tools/Tools.h"
+
 
 #include "Hacks/NET/BinaryWriter.h"
 #include "Hacks/NET/BinaryReader.h"

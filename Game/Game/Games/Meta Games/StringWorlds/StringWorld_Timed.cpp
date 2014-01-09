@@ -1,4 +1,19 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Games/Meta Games/StringWorlds/StringWorld_Timed.h"
+
+#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
+#include "Game/Games/GameType.h"
+#include "Game/Games/Meta Games/StringWorlds/StringWorld.h"
+#include "Game/Level/Make/LockableBool.h"
+#include "Game/Level/Make/LevelSeedData.h"
+#include "Game/Objects/Game Objects/GameObjects/CoinScoreMultiplierObject.h"
+#include "Game/Objects/Game Objects/GameObjects/GUI_Level.h"
+#include "Game/Objects/Game Objects/GameObjects/GUI_Score.h"
+#include "Game/Objects/Game Objects/GameObjects/GUI_Timer.h"
+#include "Game/Objects/Game Objects/GameObjects/PerfectScoreObject.h"
+#include "Game/Objects/Game Objects/GameObjects/TimerWarning.h"
+
+#include "Game/Level/Level.h"
 
 namespace CloudberryKingdom
 {

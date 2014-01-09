@@ -1,7 +1,12 @@
-﻿#ifndef LAVA_CASTLE
+#ifndef LAVA_CASTLE
 #define LAVA_CASTLE
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Game/Objects/ObjectBase.h"
+#include "Game/Objects/In Game Objects/Blocks/Lava.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

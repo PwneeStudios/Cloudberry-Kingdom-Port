@@ -1,8 +1,9 @@
-#include <global_header.h>
+#include <small_header.h>
 
 #include "CloudberryKingdom.XnaGameClass.h"
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+#include "Game/Tools/WrappedFloat.h"
 
 #include <Core.h>
 

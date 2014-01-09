@@ -1,4 +1,9 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Core/Sound/EzSoundWad.h"
+
+#include "Core/Sound/EzSound.h"
+#include "Game/Tools/Tools.h"
+
 
 #include "Hacks/String.h"
 

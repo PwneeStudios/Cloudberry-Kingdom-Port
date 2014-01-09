@@ -1,4 +1,4 @@
-﻿#ifndef PHSXDATA
+#ifndef PHSXDATA
 #define PHSXDATA
 
 namespace CloudberryKingdom

@@ -1,7 +1,9 @@
-﻿#ifndef COIN__AUTO
+#ifndef COIN__AUTO
 #define COIN__AUTO
 
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Objects/AutoGen.h"
+
 
 namespace CloudberryKingdom
 {

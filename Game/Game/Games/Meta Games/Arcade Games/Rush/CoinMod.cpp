@@ -1,4 +1,14 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Games/Meta Games/Arcade Games/Rush/CoinMod.h"
+
+#include "Core/Tools/CoreMath.h"
+#include "Game/Objects/ObjectBase.h"
+#include "Game/Objects/Game Objects/GameObjects/GUI_Timer.h"
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+#include "Game/Level/Level.h"
+#include "Game/Tools/Recycler.h"
+
+#include "Core/Tools/Random.h"
 
 namespace CloudberryKingdom
 {

@@ -1,7 +1,9 @@
-﻿#ifndef CHUNK
+#ifndef CHUNK
 #define CHUNK
 
-#include <global_header.h>
+#include <small_header.h>
+
+
 
 #include "Hacks/NET/BinaryWriter.h"
 #include "Hacks/NET/BinaryReader.h"

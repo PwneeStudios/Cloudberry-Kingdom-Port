@@ -1,8 +1,26 @@
-﻿#ifndef FIREBALL__AUTO
+#ifndef FIREBALL__AUTO
 #define FIREBALL__AUTO
 
 #define _USE_MATH_DEFINES
-#include <global_header.h>
+#include <small_header.h>
+
+#include "Core/PhsxData.h"
+//#include "Core/Tools/CoreMath.h"
+//#include "Core/Tools/Random.h"
+//#include "Game/Objects/ObjectBase.h"
+//#include "Game/Level/Make/DifficultyHelper.h"
+//#include "Game/Level/Make/PieceSeedData.h"
+//#include "Game/Level/Make/Parameters/LevelGenData.h"
+#include "Game/Level/Make/Parameters/Param.h"
+//#include "Game/Level/Make/Parameters/StyleData/StyleData.h"
+#include "Game/Objects/AutoGen.h"
+//#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+//#include "Game/Level/Level.h"
+//#include "Game/Objects/In Game Objects/Obstacles/CloudberryKingdom.Fireball.h"
+//#include "Game/Player/Hero Physics/Spaceship.h"
+//#include "Game/Tools/Recycler.h"
+//#include "Game/Tools/Unset.h"
+
 
 namespace CloudberryKingdom
 {

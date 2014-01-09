@@ -1,7 +1,16 @@
-﻿#ifndef MENUSCROLLBAR
+#ifndef MENUSCROLLBAR
 #define MENUSCROLLBAR
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+//#include "Core/Text/EzText.h"
+//#include "Core/Texture/EzTexture.h"
+#include "Game/Menus/Menu Components/MenuSlider.h"
+//#include "Game/Tools/Camera.h"
+//#include "Game/Tools/Resources.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

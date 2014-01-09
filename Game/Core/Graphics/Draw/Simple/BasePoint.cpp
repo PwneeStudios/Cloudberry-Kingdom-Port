@@ -1,4 +1,7 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Core/Graphics/Draw/Simple/BasePoint.h"
+
+
 
 namespace CloudberryKingdom
 {

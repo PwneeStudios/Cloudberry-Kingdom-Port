@@ -1,4 +1,20 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Games/Meta Games/Arcade Games/Escalate/Escalation_Tutorial.h"
+
+#include "Game/Objects/Game Objects/GameObject.h"
+#include "Game/Games/TutorialHelper.h"
+#include "Game/Games/Meta Games/Arcade Games/Escalate/Escalation.h"
+#include "Game/Games/Meta Games/Arcade Games/Rush/Hero Rush/HeroRush_Tutorial.h"
+#include "Game/Player/PlayerManager.h"
+#include "Game/Objects/Game Objects/GameObjects/GUI_Text.h"
+#include "Game/Objects/Game Objects/GameObjects/Listener.h"
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+#include "Game/Level/Level.h"
+#include "Game/Tools/CkColorHelper.h"
+#include "Game/Tools/Tools.h"
+#include "Core/Song/EzSongWad.h"
+
+#include "Game/Games/GameType.h"
 
 
 namespace CloudberryKingdom

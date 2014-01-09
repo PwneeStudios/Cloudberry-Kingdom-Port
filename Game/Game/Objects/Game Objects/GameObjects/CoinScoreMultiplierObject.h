@@ -1,7 +1,11 @@
 #ifndef COINSCOREMULTIPLIEROBJECT
 #define COINSCOREMULTIPLIEROBJECT
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Game/Objects/ObjectBase.h"
+#include "Game/Objects/Game Objects/GameObject.h"
+
 
 namespace CloudberryKingdom
 {

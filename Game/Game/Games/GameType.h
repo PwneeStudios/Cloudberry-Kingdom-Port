@@ -1,7 +1,48 @@
-﻿#ifndef GAMETYPE
+#ifndef GAMETYPE
 #define GAMETYPE
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/FancyColor.h"
+#include "Core/PhsxData.h"
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+//#include "Core/Graphics/Draw/Simple/BasePoint.h"
+//#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+//#include "Core/Input/ButtonCheck.h"
+//#include "Core/Particle Effects/Specific Effects/CloudberryKingdom.ParticleEffects.h"
+//#include "Core/Sound/EzSoundWad.h"
+//#include "Core/Tools/Random.h"
+//#include "Game/Objects/ObjectBase.h"
+#include "Game/Objects/Game Objects/GameObject.h"
+//#include "Game/Games/NormalGame.h"
+//#include "Game/Games/ScreenSaver.h"
+//#include "Game/Games/ToDoItem.h"
+//#include "Game/Games/Meta Games/Challenges/Challenge_Base.h"
+//#include "Game/Level/Make/LockableBool.h"
+//#include "Game/Level/Make/LevelSeedData.h"
+//#include "Game/Level/Replays/Recording.h"
+//#include "Game/Menus/Concrete Menus/CharacterSelect/CharSelectManager.h"
+//#include "Game/Tools/EzStorage.h"
+//#include "Game/Player/PlayerManager.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/StartMenu_MW_Black.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/Sub Menus/SoundMenu.h"
+//#include "Game/Player/Hero Physics/Base.h"
+#include "Game/Player/ColorScheme.h"
+//#include "Game/Objects/Bob/Bob.h"
+//#include "Game/Objects/Bob/BobLink.h"
+//#include "Game/Objects/Door/Door.h"
+//#include "Game/Objects/Game Objects/GameObjects/ExplodeBobs.h"
+//#include "Game/Objects/Game Objects/GameObjects/PerfectScoreObject.h"
+//#include "Game/Objects/In Game Objects/Grab/Checkpoint.h"
+//#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+//#include "Game/Level/Level.h"
+//#include "Game/Player/PlayerData.h"
+//#include "Game/Player/Stats.h"
+//#include "Game/Player/Hero Physics/Normal.h"
+//#include "Game/Tools/Camera.h"
+//#include "Game/Tools/Recycler.h"
+//#include "Game/Tools/Tools.h"
+
 
 #include "Game/Localization.h"
 #include "Core/Lambdas/Lambda.h"

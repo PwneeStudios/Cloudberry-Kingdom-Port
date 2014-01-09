@@ -1,7 +1,18 @@
-﻿#ifndef CAPE
+#ifndef CAPE
 #define CAPE
 
-#include <global_header.h>
+#include <small_header.h>
+
+#include "Core/PhsxData.h"
+//#include "Core/Effects/EzEffect.h"
+//#include "Core/Graphics/VertexFormat.h"
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+//#include "Core/Tools/ColorHelper.h"
+//#include "Game/Collision Detection/Phsx.h"
+//#include "Game/Player/Hero Physics/Base.h"
+//#include "Game/Objects/Bob/Bob.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

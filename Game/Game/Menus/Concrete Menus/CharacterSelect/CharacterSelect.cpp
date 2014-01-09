@@ -1,4 +1,26 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Menus/Concrete Menus/CharacterSelect/CharacterSelect.h"
+
+#include "Core/Tools/CoreMath.h"
+#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
+#include "Game/Player/Buyable.h"
+#include "Game/Player/ClrTextFx.h"
+#include "Game/Games/GameType.h"
+#include "Game/Menus/Concrete Menus/CharacterSelect/CharSelectManager.h"
+#include "Game/Menus/Concrete Menus/CharacterSelect/Doll.h"
+#include "Game/Menus/Concrete Menus/CharacterSelect/GamerTag.h"
+#include "Game/Menus/Concrete Menus/CharacterSelect/HeroLevel.h"
+#include "Game/Menus/Concrete Menus/CharacterSelect/JoinText.h"
+#include "Game/Menus/Concrete Menus/CharacterSelect/Waiting.h"
+#include "Game/Player/PlayerManager.h"
+#include "Game/Player/ColorScheme.h"
+#include "Game/Player/ColorSchemeManager.h"
+#include "Game/Player/PlayerData.h"
+#include "Game/Tools/Tools.h"
+#include "Game/Tools/Unset.h"
+
+#include "Game/Objects/Bob/Bob.h"
+#include "Core/Tools/Random.h"
 
 #include "Hacks/List.h"
 #include <Core\Tools\Set.h>

@@ -1,7 +1,11 @@
-﻿#ifndef EZSONG
+#ifndef EZSONG
 #define EZSONG
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

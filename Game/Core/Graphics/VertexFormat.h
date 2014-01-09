@@ -1,4 +1,4 @@
-﻿#ifndef VERTEXFORMAT
+#ifndef VERTEXFORMAT
 #define VERTEXFORMAT
 
 #include <Graphics/Color.h>

@@ -1,7 +1,12 @@
-﻿#ifndef BOBLINK
+#ifndef BOBLINK
 #define BOBLINK
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Game/Objects/Bob/Bob.h"
+//#include "Game/Player/Hero Physics/Spaceship.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

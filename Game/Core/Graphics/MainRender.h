@@ -1,4 +1,4 @@
-﻿#ifndef MAINRENDER
+#ifndef MAINRENDER
 #define MAINRENDER
 
 #include <Hacks/XNA/SpriteBatch.h>

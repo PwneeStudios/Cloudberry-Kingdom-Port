@@ -1,7 +1,19 @@
 #ifndef GUI_PANEL
 #define GUI_PANEL
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/FancyVector2.h"
+//#include "Core/Graphics/Draw/DrawPile.h"
+//#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+//#include "Core/Input/ButtonCheck.h"
+#include "Game/Objects/Game Objects/GameObject.h"
+//#include "Game/Menus/Menu.h"
+//#include "Game/Menus/Menu Components/MenuItem.h"
+//#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+//#include "Game/Level/Level.h"
+//#include "Game/Tools/Tools.h"
+
 
 #include "Core/Lambdas/Lambda.h"
 #include "Core/Lambdas/LambdaFunc_1.h"

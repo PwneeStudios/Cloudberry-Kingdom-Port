@@ -1,7 +1,12 @@
-﻿#ifndef TEXTUREORANIM
+#ifndef TEXTUREORANIM
 #define TEXTUREORANIM
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Animation/AnimationData_Integer.h"
+//#include "Core/Texture/EzTexture.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

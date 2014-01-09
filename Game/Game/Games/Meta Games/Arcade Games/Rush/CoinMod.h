@@ -1,7 +1,15 @@
-﻿#ifndef COINMOD
+#ifndef COINMOD
 #define COINMOD
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Tools/CoreMath.h"
+//#include "Game/Objects/ObjectBase.h"
+//#include "Game/Objects/Game Objects/GameObjects/GUI_Timer.h"
+//#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+//#include "Game/Level/Level.h"
+//#include "Game/Tools/Recycler.h"
+
 
 namespace CloudberryKingdom
 {

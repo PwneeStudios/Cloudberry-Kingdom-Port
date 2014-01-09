@@ -1,4 +1,28 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Menus/CkBaseMenu.h"
+
+#include "Core/FancyVector2.h"
+#include "Core/Graphics/Draw/Quads/PieceQuad.h"
+#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include "Game/Localization.h"
+#include "Core/Input/ButtonCheck.h"
+#include "Core/Sound/EzSound.h"
+#include "Core/Text/EzFont.h"
+#include "Core/Text/EzText.h"
+#include "Core/Tools/ColorHelper.h"
+#include "Core/Tools/CoreMath.h"
+#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
+#include "Game/Games/NormalGame.h"
+#include "Game/Menus/Menu.h"
+#include "Game/Menus/Menu Components/MenuItem.h"
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+#include "Game/Level/Level.h"
+#include "Game/Tools/Resources.h"
+#include "Game/Tools/Tools.h"
+
+#include "Game/Tools/Camera.h"
+#include "Core/Texture/EzTexture.h"
+
 #include <Hacks\List.h>
 
 namespace CloudberryKingdom

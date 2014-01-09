@@ -1,7 +1,15 @@
-﻿#ifndef DRAWPILE
+#ifndef DRAWPILE
 #define DRAWPILE
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/FancyColor.h"
+//#include "Core/FancyVector2.h"
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+//#include "Game/Tools/Oscillate.h"
+//#include "Core/Text/EzText.h"
+//#include "Game/Tools/Tools.h"
+
 
 #include "Core/Lambdas/Lambda.h"
 #include "Game/Tools/Oscillate.h"

@@ -1,4 +1,16 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Video.h"
+
+#include "Game/Localization.h"
+#include "Core/Input/ButtonCheck.h"
+#include "Core/Text/EzText.h"
+#include "Core/Texture/EzTexture.h"
+#include "Core/Tools/ColorHelper.h"
+#include "Core/Tools/CoreMath.h"
+#include "Game/Player/PlayerManager.h"
+#include "Game/Tools/Resources.h"
+#include "Game/Tools/Tools.h"
+
 
 #include "Hacks/NET/Path.h"
 
@@ -6,6 +18,9 @@
 #include <Content/Texture.h>
 #include <Graphics/Texture2D.h>
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
+#include "Game/Tools/WrappedFloat.h"
+#include "Core/Song/EzSongWad.h"
 
 #include "Video.h"
 #include <Core/Tools/Set.h>

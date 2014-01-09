@@ -1,7 +1,15 @@
-﻿#ifndef CONVEYOR
+#ifndef CONVEYOR
 #define CONVEYOR
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+//#include "Game/Collision Detection/AABox.h"
+//#include "Game/Objects/ObjectBase.h"
+#include "Game/Objects/In Game Objects/Blocks/Block.h"
+//#include "Game/Tools/Recycler.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

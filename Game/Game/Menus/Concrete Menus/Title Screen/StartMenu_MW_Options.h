@@ -1,7 +1,10 @@
-﻿#ifndef STARTMENU_MW_OPTIONS
+#ifndef STARTMENU_MW_OPTIONS
 #define STARTMENU_MW_OPTIONS
 
-#include <global_header.h>
+#include <small_header.h>
+
+#include "Game/Menus/Concrete Menus/Title Screen/Sub Menus/SoundMenu.h"
+
 
 namespace CloudberryKingdom
 {

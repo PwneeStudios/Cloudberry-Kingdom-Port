@@ -1,7 +1,20 @@
-﻿#ifndef ICON
+#ifndef ICON
 #define ICON
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/FancyVector2.h"
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include "Game/Localization.h"
+#include "Game/Tools/Oscillate.h"
+//#include "Core/Texture/EzTexture.h"
+//#include "Game/Tilesets/TileSet.h"
+//#include "Game/Objects/AutoGen.h"
+//#include "Game/Tilesets/SpriteInfo.h"
+//#include "Game/Tools/Recycler.h"
+//#include "Game/Tools/Tools.h"
+//#include "Game/Tilesets/TileSetInfo.h"
+
 
 namespace CloudberryKingdom
 {

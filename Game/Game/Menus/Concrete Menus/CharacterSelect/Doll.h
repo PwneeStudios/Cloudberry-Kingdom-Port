@@ -1,7 +1,23 @@
-﻿#ifndef DOLL
+#ifndef DOLL
 #define DOLL
 
-#include <global_header.h>
+#include <small_header.h>
+
+#include "Core/PhsxData.h"
+//#include "Core/Graphics/Draw/DrawPile.h"
+#include "Game/Menus/CkBaseMenu.h"
+//#include "Game/Player/Buyable.h"
+//#include "Game/Player/ClrTextFx.h"
+//#include "Game/Menus/Concrete Menus/CharacterSelect/CharacterSelect.h"
+//#include "Game/Menus/Concrete Menus/CharacterSelect/CharSelectManager.h"
+#include "Game/Player/ColorScheme.h"
+//#include "Game/Objects/Bob/Bob.h"
+//#include "Game/Player/Cape.h"
+//#include "Game/Player/ColorSchemeManager.h"
+//#include "Game/Player/Hero Physics/Normal.h"
+//#include "Game/Player/Hero Physics/BobPhsxCharSelect.h"
+//#include "Game/Tools/Tools.h"
+
 
 #if defined(PC_VERSION)
 #elif defined(XBOX) || defined(XBOX_SIGNIN)

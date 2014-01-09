@@ -1,4 +1,21 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Tilesets/Backgrounds/Background.h"
+
+#include "Core/PhsxData.h"
+#include "Core/Graphics/VertexFormat.h"
+#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include "Game/Tilesets/Backgrounds/BackgroundCollection.h"
+#include "Core/Texture/EzTexture.h"
+#include "Core/Tools/ColorHelper.h"
+#include "Core/Tools/Random.h"
+#include "Game/Collision Detection/FloatRectangle.h"
+#include "Game/Tilesets/TileSet.h"
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+#include "Game/Level/Level.h"
+#include "Game/Tools/Camera.h"
+#include "Game/Tools/Tools.h"
+#include "Game/Tilesets/TileSetInfo.h"
+
 
 #include "Game/Tilesets/Backgrounds/_Code/CloudberryKingdom.Background.h"
 #include "Game/Tilesets/Backgrounds/Background.h"

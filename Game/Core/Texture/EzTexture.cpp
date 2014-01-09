@@ -1,4 +1,8 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Core/Texture/EzTexture.h"
+
+#include "Game/Tools/Tools.h"
+#include "Hacks/XNA/ContentManager.h"
 
 namespace CloudberryKingdom
 {

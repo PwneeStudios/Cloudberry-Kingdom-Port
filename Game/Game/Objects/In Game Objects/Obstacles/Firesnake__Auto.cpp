@@ -1,4 +1,19 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Objects/In Game Objects/Obstacles/Firesnake__Auto.h"
+
+#include "Game/Objects/ObjectBase.h"
+#include "Game/Level/Make/DifficultyHelper.h"
+#include "Game/Level/Make/PieceSeedData.h"
+#include "Game/Level/Make/Parameters/Param.h"
+#include "Game/Objects/AutoGen.h"
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+#include "Game/Level/Level.h"
+#include "Game/Objects/In Game Objects/Obstacles/CloudberryKingdom.Firesnake.h"
+#include "Game/Tools/Recycler.h"
+#include "Game/Tools/Tools.h"
+
+#include "Game/Level/Make/Parameters/Upgrades.h"
+#include "Core/Tools/Random.h"
 
 
 namespace CloudberryKingdom

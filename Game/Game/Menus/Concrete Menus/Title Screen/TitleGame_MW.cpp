@@ -1,4 +1,21 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Menus/Concrete Menus/Title Screen/TitleGame_MW.h"
+
+#include "Game/Games/GameType.h"
+#include "Game/Menus/Concrete Menus/Title Screen/StartMenu_MW_Backpanel.h"
+#include "Game/Menus/Concrete Menus/Title Screen/StartMenu_MW_PressStart.h"
+#include "Game/Menus/Concrete Menus/Title Screen/TitleGameBase.h"
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+#include "Game/Level/Level.h"
+#include "Game/Objects/Special/CameraZone.h"
+#include "Game/Tools/Camera.h"
+#include "Game/Tools/Recycler.h"
+#include "Game/Tools/Tools.h"
+
+#include "Core/Song/EzSongWad.h"
+#include "Game/Level/LevelPiece.h"
+#include "Core/Input/ButtonCheck.h"
+#include "Game/Games/ScreenSaver.h"
 
 #include <MasterHack.h>
 

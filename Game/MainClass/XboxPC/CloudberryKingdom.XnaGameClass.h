@@ -1,9 +1,10 @@
 #ifndef CLOUDBERRYKINGDOM_XNAGAMECLASS
 #define CLOUDBERRYKINGDOM_XNAGAMECLASS
 
-#include <global_header.h>
+#include <small_header.h>
 
 #include "Hacks/XNA/Game.h"
+#include "Hacks/XNA/GameTime.h"
 
 namespace CloudberryKingdom
 {

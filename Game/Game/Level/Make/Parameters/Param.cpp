@@ -1,4 +1,11 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Level/Make/Parameters/Param.h"
+
+#include "Core/Tools/Random.h"
+#include "Game/Level/Make/PieceSeedData.h"
+#include "Game/Level/Make/Parameters/LevelGenData.h"
+#include "Game/Level/Make/Parameters/Upgrades.h"
+
 
 namespace CloudberryKingdom
 {

@@ -1,4 +1,13 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Games/Meta Games/Arcade Games/Rush/Time Crisis/TimeCrisis_Tutorial.h"
+
+#include "Game/Games/Meta Games/Arcade Games/Rush/Hero Rush/HeroRush_Tutorial.h"
+#include "Game/Games/Meta Games/Arcade Games/Rush/Time Crisis/TimeCrisis.h"
+#include "Game/Objects/Game Objects/GameObjects/GUI_Text.h"
+#include "Game/Objects/Game Objects/GameObjects/Listener.h"
+
+#include "Core/Text/EzText.h"
+#include "Game/Games/GameType.h"
 
 namespace CloudberryKingdom
 {

@@ -1,7 +1,10 @@
-﻿#ifndef ANIMATIONDATA_VECTOR
+#ifndef ANIMATIONDATA_VECTOR
 #define ANIMATIONDATA_VECTOR
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/WriteReadTools.h"
+
 
 #include "Hacks/NET/BinaryWriter.h"
 #include "Hacks/NET/BinaryReader.h"

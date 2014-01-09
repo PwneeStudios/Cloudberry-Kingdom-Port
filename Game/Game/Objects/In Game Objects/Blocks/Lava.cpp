@@ -1,4 +1,17 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Objects/In Game Objects/Blocks/Lava.h"
+
+#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include "Game/Collision Detection/AABox.h"
+#include "Game/Objects/ObjectBase.h"
+#include "Game/Objects/In Game Objects/Blocks/Block.h"
+#include "Game/Objects/Bob/Bob.h"
+#include "Game/Tools/Recycler.h"
+
+#include "Game/Collision Detection/FloatRectangle.h"
+
+#include "Game/Level/Level.h"
+#include "Game/Tools/Camera.h"
 
 namespace CloudberryKingdom
 {

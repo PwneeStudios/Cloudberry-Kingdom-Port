@@ -1,7 +1,15 @@
-﻿#ifndef LEVELPIECE
+#ifndef LEVELPIECE
 #define LEVELPIECE
 
-#include <global_header.h>
+#include <small_header.h>
+
+#include "Core/PhsxData.h"
+//#include "Game/Level/Make/ComputerRecording.h"
+//#include "Game/Level/Make/PieceSeedData.h"
+//#include "Game/Objects/Bob/Bob.h"
+//#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+//#include "Game/Level/Level.h"
+
 
 namespace CloudberryKingdom
 {

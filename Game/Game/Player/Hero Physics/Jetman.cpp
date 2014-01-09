@@ -1,6 +1,18 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Player/Hero Physics/Jetman.h"
+
+#include "Core/Graphics/Draw/Object/ObjectClass.h"
+#include "Game/Localization.h"
+#include "Game/Player/Hero Physics/Base.h"
+#include "Game/Objects/Icon.h"
+#include "Game/Player/Cape.h"
+#include "Game/Player/Hero Physics/Normal.h"
+#include "Game/Player/Hero Physics/Wheel.h"
+#include "Game/Tools/Tools.h"
+
 
 #include <MasterHack.h>
+#include "Core/Texture/EzTextureWad.h"
 
 namespace CloudberryKingdom
 {

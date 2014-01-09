@@ -1,9 +1,12 @@
-﻿#ifndef RANDOM
+#ifndef RANDOM
 #define RANDOM
 
 #define _USE_MATH_DEFINES
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Game/Tools/Tools.h"
+
 
 #include "Hacks/NET/Random.h"
 

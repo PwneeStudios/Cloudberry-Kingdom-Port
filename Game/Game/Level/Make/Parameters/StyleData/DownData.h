@@ -1,7 +1,11 @@
-﻿#ifndef DOWNDATA
+#ifndef DOWNDATA
 #define DOWNDATA
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Tools/Random.h"
+#include "Game/Level/Make/Parameters/StyleData/UpData.h"
+
 
 namespace CloudberryKingdom
 {

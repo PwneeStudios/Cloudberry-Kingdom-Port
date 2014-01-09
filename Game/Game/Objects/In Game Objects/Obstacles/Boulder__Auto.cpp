@@ -1,4 +1,25 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Objects/In Game Objects/Obstacles/Boulder__Auto.h"
+
+#include "Core/Tools/CoreMath.h"
+#include "Core/Tools/Random.h"
+#include "Game/Objects/ObjectBase.h"
+#include "Game/Level/Make/DifficultyHelper.h"
+#include "Game/Level/Make/PieceSeedData.h"
+#include "Game/Level/Make/Parameters/Param.h"
+#include "Game/Level/Make/Tools/Tunnel.h"
+#include "Game/Objects/AutoGen.h"
+#include "Game/Objects/Bob/Bob.h"
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+#include "Game/Level/Level.h"
+#include "Game/Objects/In Game Objects/Obstacles/Boulder.h"
+#include "Game/Tools/Recycler.h"
+#include "Game/Tools/Tools.h"
+#include "Game/Tools/Unset.h"
+
+#include "Game/Level/Make/Parameters/Upgrades.h"
+#include "Game/Tools/Camera.h"
+#include "Game/Player/Hero Physics/Base.h"
 
 namespace CloudberryKingdom
 {

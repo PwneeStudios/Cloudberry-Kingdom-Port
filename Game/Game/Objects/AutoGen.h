@@ -1,7 +1,17 @@
-﻿#ifndef AUTOGEN
+#ifndef AUTOGEN
 #define AUTOGEN
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Tools/Random.h"
+//#include "Game/Objects/ObjectBase.h"
+//#include "Game/Level/Make/PieceSeedData.h"
+#include "Game/Level/Make/Parameters/Param.h"
+//#include "Game/Level/Make/Parameters/Upgrades.h"
+//#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+//#include "Game/Level/Level.h"
+//#include "Game/Tools/Unset.h"
+
 
 namespace CloudberryKingdom
 {

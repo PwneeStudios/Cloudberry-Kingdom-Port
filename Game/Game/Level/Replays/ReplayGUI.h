@@ -1,7 +1,22 @@
-﻿#ifndef REPLAYGUI
+#ifndef REPLAYGUI
 #define REPLAYGUI
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/DrawPile.h"
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include "Game/Localization.h"
+//#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+//#include "Core/Input/ButtonCheck.h"
+//#include "Core/Text/EzText.h"
+//#include "Core/Tools/ColorHelper.h"
+//#include "Core/Tools/CoreMath.h"
+#include "Game/Menus/CkBaseMenu.h"
+//#include "Game/Menus/Concrete Menus/InGameStartMenus/InGameStartMenu.h"
+//#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+//#include "Game/Level/Level.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

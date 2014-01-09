@@ -1,7 +1,21 @@
 #ifndef CONTROLSCREEN
 #define CONTROLSCREEN
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/DrawPile.h"
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+//#include "Game/Localization.h"
+//#include "Core/Input/ButtonCheck.h"
+//#include "Core/Text/EzText.h"
+//#include "Core/Tools/ColorHelper.h"
+#include "Game/Menus/CkBaseMenu.h"
+//#include "Game/Games/CampaignHelper.h"
+//#include "Game/Menus/Menu.h"
+//#include "Game/Menus/Concrete Menus/InGameStartMenus/Sub Menus/CustomControls.h"
+//#include "Game/Tools/Resources.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

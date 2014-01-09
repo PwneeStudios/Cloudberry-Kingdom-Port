@@ -1,7 +1,15 @@
-﻿#ifndef MENULISTALL
+#ifndef MENULISTALL
 #define MENULISTALL
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/DrawPile.h"
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+//#include "Core/Input/ButtonCheck.h"
+//#include "Game/Menus/Menu Components/MenuItem.h"
+#include "Game/Menus/Menu Components/MenuList.h"
+//#include "Game/Tools/Camera.h"
+
 
 namespace CloudberryKingdom
 {

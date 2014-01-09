@@ -1,8 +1,11 @@
-﻿#ifndef COREMATH
+#ifndef COREMATH
 #define COREMATH
 
 #define _USE_MATH_DEFINES
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/Simple/BasePoint.h"
+
 
 
 

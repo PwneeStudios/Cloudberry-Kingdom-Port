@@ -1,7 +1,13 @@
 #ifndef FADEIN
 #define FADEIN
 
-#include <global_header.h>
+#include <small_header.h>
+
+#include "Game/Objects/Game Objects/GameObject.h"
+//#include "Game/Games/Meta Games/StringWorlds/LevelConnector.h"
+//#include "Game/Objects/Bob/Bob.h"
+//#include "Game/Objects/Door/Door.h"
+
 
 namespace CloudberryKingdom
 {

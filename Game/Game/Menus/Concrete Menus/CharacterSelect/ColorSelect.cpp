@@ -1,4 +1,20 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Menus/Concrete Menus/CharacterSelect/ColorSelect.h"
+
+#include "Core/Graphics/Draw/DrawPile.h"
+#include "Game/Localization.h"
+#include "Core/Text/EzText.h"
+#include "Game/Menus/CkBaseMenu.h"
+#include "Game/Menus/Menu.h"
+#include "Game/Menus/Concrete Menus/CharacterSelect/CharacterSelect.h"
+#include "Game/Menus/Concrete Menus/CharacterSelect/CharSelectManager.h"
+#include "Game/Menus/Menu Components/MenuItem.h"
+#include "Game/Menus/Menu Components/MenuList.h"
+#include "Game/Tools/Resources.h"
+#include "Game/Tools/Tools.h"
+
+#include "Game/Tools/WrappedFloat.h"
+#include "Game/Player/PlayerData.h"
 
 #include <MasterHack.h>
 

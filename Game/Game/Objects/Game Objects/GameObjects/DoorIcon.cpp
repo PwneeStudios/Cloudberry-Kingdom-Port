@@ -1,4 +1,15 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Objects/Game Objects/GameObjects/DoorIcon.h"
+
+#include "Core/Graphics/Draw/DrawPile.h"
+#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
+#include "Game/Player/Hero Physics/Base.h"
+#include "Game/Objects/AutoGen.h"
+#include "Game/Objects/Icon.h"
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+#include "Game/Level/Level.h"
+
 
 #include "Hacks/Queue.h"
 

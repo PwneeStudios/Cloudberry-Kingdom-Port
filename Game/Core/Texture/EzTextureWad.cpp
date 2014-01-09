@@ -1,4 +1,18 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Core/Texture/EzTextureWad.h"
+
+#include "Core/Animation/AnimationData_Integer.h"
+#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+#include "Game/Tilesets/Backgrounds/Background.h"
+#include "Core/Texture/EzTexture.h"
+#include "Core/Texture/PackedTexture.h"
+#include "Core/Texture/TextureOrAnim.h"
+#include "Game/Tilesets/TileSet.h"
+#include "Game/Tools/Globals.h"
+#include "Game/Tools/Prototypes.h"
+#include "Game/Tools/Tools.h"
+#include "Game/Tilesets/TileSetInfo.h"
+#include "Game/Objects/IBounded.h"
 
 #include <Hacks\String.h>
 #include <Hacks\Dict.h>

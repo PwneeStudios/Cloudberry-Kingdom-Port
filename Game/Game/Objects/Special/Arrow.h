@@ -1,7 +1,14 @@
-﻿#ifndef ARROW
+#ifndef ARROW
 #define ARROW
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/Simple/SimpleObject.h"
+//#include "Core/Tools/CoreMath.h"
+#include "Game/Objects/Game Objects/GameObject.h"
+//#include "Game/Tools/Prototypes.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

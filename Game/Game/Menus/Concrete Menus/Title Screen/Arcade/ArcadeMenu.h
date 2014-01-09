@@ -1,7 +1,52 @@
 #ifndef ARCADEMENU
 #define ARCADEMENU
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/DrawPile.h"
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+//#include "Game/Localization.h"
+//#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+//#include "Game/Player/LeaderboardView.h"
+//#include "Core/Text/EzText.h"
+#include "Game/Menus/CkBaseMenu.h"
+//#include "Game/Games/Meta Games/Challenges/Challenge_Base.h"
+//#include "Game/Games/Campaign/CampaignSequence.h"
+//#include "Game/Games/Meta Games/Arcade Games/Escalate/Escalation.h"
+//#include "Game/Games/Meta Games/Arcade Games/Rush/Hero Rush/HeroRush.h"
+//#include "Game/Games/Meta Games/Arcade Games/Rush/Hero Rush/HeroRush_Tutorial.h"
+//#include "Game/Games/Meta Games/Arcade Games/Rush/Hero Rush 2/HeroRush2.h"
+//#include "Game/Games/Meta Games/Arcade Games/Rush/Time Crisis/TimeCrisis.h"
+//#include "Game/Menus/Menu.h"
+//#include "Game/Menus/LongMenu.h"
+//#include "Game/Tools/EzStorage.h"
+//#include "Game/Player/PlayerManager.h"
+#include "Game/Menus/Menu Components/MenuItem.h"
+//#include "Game/Menus/Concrete Menus/Score Screens/ScoreEntry.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/StartMenu.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/Arcade/StartLevelMenu.h"
+//#include "Game/Player/Hero Physics/Base.h"
+//#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+//#include "Game/Level/Level.h"
+//#include "Game/Player/PlayerData.h"
+//#include "Game/Player/Awardments/Awardment.h"
+//#include "Game/Player/Awardments/AwardmentMessage.h"
+//#include "Game/Player/Hero Physics/Normal.h"
+//#include "Game/Player/Hero Physics/Big.h"
+//#include "Game/Player/Hero Physics/Bouncy.h"
+//#include "Game/Player/Hero Physics/Box.h"
+//#include "Game/Player/Hero Physics/Double.h"
+//#include "Game/Player/Hero Physics/Invert.h"
+//#include "Game/Player/Hero Physics/Jetman.h"
+//#include "Game/Player/Hero Physics/Rocketbox.h"
+//#include "Game/Player/Hero Physics/Scale.h"
+//#include "Game/Player/Hero Physics/Small.h"
+//#include "Game/Player/Hero Physics/Spaceship.h"
+//#include "Game/Player/Hero Physics/Time.h"
+//#include "Game/Player/Hero Physics/Wheel.h"
+//#include "Game/Tools/Resources.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

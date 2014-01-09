@@ -1,7 +1,10 @@
-﻿#ifndef OSCILLATE
+#ifndef OSCILLATE
 #define OSCILLATE
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

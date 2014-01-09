@@ -1,6 +1,6 @@
 #include "MasterHack.h"
 
-#include <global_header.h>
+#include <small_header.h>
 
 #include <Hacks/List.h>
 
@@ -9,6 +9,37 @@
 #include <Core\Animation\AnimQueue.h>
 
 #include "Game/Menus/Concrete Menus/Loading Screen/ILoadingScreen.h"
+#include "Game/Menus/Concrete Menus/Loading Screen/LoadingScreen.h"
+#include "Core/Text/EzText.h"
+#include "Game/Player/Hero Physics/Base.h"
+#include "Game/Menus/Concrete Menus/CharacterSelect/CharacterSelect.h"
+#include "Game/Menus/Concrete Menus/CharacterSelect/Doll.h"
+#include "Game/Menus/Concrete Menus/CharacterSelect/GamerTag.h"
+#include "Game/Menus/Concrete Menus/CharacterSelect/HeroLevel.h"
+#include "Game/Games/GameType.h"
+#include "Game/Player/PlayerManager.h"
+#include "Game/Player/PlayerData.h"
+#include "Game/Menus/Concrete Menus/CharacterSelect/Waiting.h"
+#include "Game/Menus/Concrete Menus/CharacterSelect/JoinText.h"
+#include "Game/Menus/Menu Components/MenuList.h"
+#include "Game/Objects/Bob/Bob.h"
+#include "Game/Player/Awardments/Awardment.h"
+#include "Game/Tools/Recycler.h"
+#include "Game/Games/ActionGame.h"
+#include "Game/Games/NormalGame.h"
+#include "Game/Games/Meta Games/StringWorlds/StringWorld.h"
+#include "Game/Games/ScreenSaver.h"
+#include "Game/Games/Meta Games/StringWorlds/StringWorld_Endurance.h"
+#include "Game/Objects/Game Objects/GameObjects/GUI_Lives.h"
+#include "Game/Objects/Game Objects/GameObjects/GUI_Score.h"
+#include "Game/Objects/Game Objects/GameObjects/GUI_Level.h"
+#include "Game/Games/Meta Games/StringWorlds/StringWorld_Timed.h"
+#include "Game/Objects/Game Objects/GameObjects/TimerWarning.h"
+#include "Game/Objects/Game Objects/GameObjects/GUI_Timer.h"
+#include "Game/Menus/Concrete Menus/Title Screen/TitleGameBase.h"
+#include "Game/Objects/Game Objects/GameObjects/GUI_NextLife.h"
+#include "Game/Objects/Game Objects/GameObjects/CoinScoreMultiplierObject.h"
+#include "Game/Menus/Concrete Menus/Title Screen/TitleGame_MW.h"
 
 namespace CloudberryKingdom
 {

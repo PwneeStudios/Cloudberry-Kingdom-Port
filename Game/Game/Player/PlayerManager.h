@@ -1,7 +1,26 @@
 #ifndef PLAYERMANAGER
 #define PLAYERMANAGER
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Chunk.h"
+//#include "Core/ResolutionGroup.h"
+//#include "Core/Tools/Set.h"
+//#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+//#include "Core/Input/ButtonCheck.h"
+//#include "Game/Player/Buyable.h"
+//#include "Game/Player/ClrTextFx.h"
+//#include "Game/Games/Meta Games/Arcade Games/Rush/Hero Rush/HeroRush_Tutorial.h"
+#include "Game/Tools/EzStorage.h"
+//#include "Game/Menus/Concrete Menus/Score Screens/ScoreEntry.h"
+//#include "Game/Objects/Bob/Bob.h"
+//#include "Game/Menus/Concrete Menus/Help/HintGiver.h"
+//#include "Game/Player/ColorSchemeManager.h"
+//#include "Game/Player/PlayerData.h"
+//#include "Game/Player/Stats.h"
+//#include "Game/Player/Awardments/Awardment.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

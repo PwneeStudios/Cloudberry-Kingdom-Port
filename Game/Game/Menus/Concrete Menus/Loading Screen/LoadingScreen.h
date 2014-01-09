@@ -1,7 +1,22 @@
-﻿#ifndef LOADINGSCREEN
+#ifndef LOADINGSCREEN
 #define LOADINGSCREEN
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/Object/ObjectClass.h"
+//#include "Core/Graphics/Draw/Quads/BaseQuad.h"
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+//#include "Game/Localization.h"
+//#include "Core/Text/EzText.h"
+#include "Game/Menus/Concrete Menus/Loading Screen/ILoadingScreen.h"
+//#include "Game/Player/Hero Physics/Base.h"
+//#include "Game/Player/Hero Physics/Normal.h"
+//#include "Game/Player/Hero Physics/Box.h"
+//#include "Game/Tools/Camera.h"
+//#include "Game/Tools/CkColorHelper.h"
+//#include "Game/Tools/Resources.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

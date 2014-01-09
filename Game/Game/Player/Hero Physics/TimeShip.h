@@ -1,7 +1,9 @@
 #ifndef TIMESHIP
 #define TIMESHIP
 
-#include <global_header.h>
+#include <small_header.h>
+
+#include "Game/Player/Hero Physics/Spaceship.h"
 
 namespace CloudberryKingdom
 {

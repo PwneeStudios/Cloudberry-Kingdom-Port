@@ -1,7 +1,20 @@
-﻿#ifndef STRINGWORLD_ENDURANCE
+#ifndef STRINGWORLD_ENDURANCE
 #define STRINGWORLD_ENDURANCE
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Game/Games/GameType.h"
+#include "Game/Games/Meta Games/StringWorlds/StringWorld.h"
+//#include "Game/Level/Make/LockableBool.h"
+//#include "Game/Level/Make/LevelSeedData.h"
+//#include "Game/Objects/Game Objects/GameObjects/CoinScoreMultiplierObject.h"
+//#include "Game/Objects/Game Objects/GameObjects/GUI_Level.h"
+//#include "Game/Objects/Game Objects/GameObjects/GUI_Lives.h"
+//#include "Game/Objects/Game Objects/GameObjects/GUI_LivesLeft.h"
+//#include "Game/Objects/Game Objects/GameObjects/GUI_NextLife.h"
+//#include "Game/Objects/Game Objects/GameObjects/GUI_Score.h"
+//#include "Game/Objects/Game Objects/GameObjects/PerfectScoreObject.h"
+
 
 namespace CloudberryKingdom
 {

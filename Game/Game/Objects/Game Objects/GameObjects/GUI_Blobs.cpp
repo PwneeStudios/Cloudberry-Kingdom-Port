@@ -1,4 +1,19 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Objects/Game Objects/GameObjects/GUI_Blobs.h"
+
+#include "Core/Graphics/Draw/DrawPile.h"
+#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include "Core/Text/EzText.h"
+#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
+#include "Game/Player/PlayerManager.h"
+#include "Game/Objects/Door/Door.h"
+#include "Game/Tools/Resources.h"
+#include "Game/Tools/Tools.h"
+
+#include "Game/Games/GameType.h"
+#include "Game/Player/PlayerData.h"
+#include "Game/Player/Stats.h"
+#include "Game/Level/Level.h"
 
 namespace CloudberryKingdom
 {

@@ -1,4 +1,4 @@
-﻿#ifndef IBOUNDED
+#ifndef IBOUNDED
 #define IBOUNDED
 
 

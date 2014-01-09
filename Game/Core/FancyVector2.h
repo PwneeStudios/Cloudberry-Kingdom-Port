@@ -1,7 +1,12 @@
-﻿#ifndef FANCYVECTOR2
+#ifndef FANCYVECTOR2
 #define FANCYVECTOR2
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Animation/AnimationData_Vector.h"
+//#include "Game/Objects/ObjectBase.h"
+#include "Game/Tools/Tools.h"
+
 
 #include "Core/Animation/AnimationData_Vector.h"
 #include "Core/Animation/AnimationData_Integer.h"

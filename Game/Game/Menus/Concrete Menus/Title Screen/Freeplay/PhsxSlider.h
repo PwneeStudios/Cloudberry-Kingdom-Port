@@ -1,7 +1,17 @@
-﻿#ifndef PHSXSLIDER
+#ifndef PHSXSLIDER
 #define PHSXSLIDER
 
-#include <global_header.h>
+#include <small_header.h>
+
+#include "Game/Localization.h"
+//#include "Core/Text/EzFont.h"
+//#include "Core/Text/EzText.h"
+//#include "Game/Menus/Menu Components/MenuItem.h"
+#include "Game/Player/Hero Physics/Base.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/Freeplay/CustomHero_GUI.h"
+#include "Game/Menus/Menu Components/MenuSlider.h"
+//#include "Game/Tools/WrappedFloat.h"
+
 
 namespace CloudberryKingdom
 {

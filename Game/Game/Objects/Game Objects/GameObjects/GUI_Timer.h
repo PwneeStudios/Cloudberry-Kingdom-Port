@@ -1,7 +1,15 @@
 #ifndef GUI_TIMER
 #define GUI_TIMER
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Tools/CoreMath.h"
+//#include "Game/Objects/ObjectBase.h"
+//#include "Game/Objects/Game Objects/GameObject.h"
+#include "Game/Objects/Game Objects/GameObjects/GUI_Timer_Base.h"
+//#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+//#include "Game/Level/Level.h"
+
 
 namespace CloudberryKingdom
 {

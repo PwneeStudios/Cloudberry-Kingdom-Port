@@ -1,7 +1,15 @@
-﻿#ifndef HEROLEVEL
+#ifndef HEROLEVEL
 #define HEROLEVEL
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/DrawPile.h"
+//#include "Core/Text/EzText.h"
+#include "Game/Menus/CkBaseMenu.h"
+//#include "Game/Menus/Concrete Menus/CharacterSelect/CharacterSelect.h"
+//#include "Game/Tools/Resources.h"
+//#include "Game/Tools/Tools.h"
+
 
 #if defined(PC_VERSION)
 #elif defined(XBOX) || defined(XBOX_SIGNIN)

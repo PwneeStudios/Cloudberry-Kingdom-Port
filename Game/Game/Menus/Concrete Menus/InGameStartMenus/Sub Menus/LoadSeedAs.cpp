@@ -1,4 +1,17 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Menus/Concrete Menus/InGameStartMenus/Sub Menus/LoadSeedAs.h"
+
+#include "Game/Localization.h"
+#include "Game/Menus/Concrete Menus/InGameStartMenus/Sub Menus/SaveSeedAs.h"
+#include "Game/Menus/Concrete Menus/Title Screen/Freeplay/SavedSeedsGUI.h"
+#include "Game/Player/PlayerData.h"
+#include "Game/Tools/Resources.h"
+#include "Game/Tools/Tools.h"
+
+#include "Game/Objects/Game Objects/GameObjects/GUI_TextBox.h"
+#include "Core/Text/EzText.h"
+#include "Game/Menus/Menu.h"
+#include "Game/Games/GameType.h"
 
 #include "Hacks/Clipboard.h"
 

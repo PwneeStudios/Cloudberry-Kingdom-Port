@@ -1,4 +1,7 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Tools/Globals.h"
+
+
 
 #include "Hacks/List.h"
 

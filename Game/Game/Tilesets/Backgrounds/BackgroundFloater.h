@@ -1,7 +1,17 @@
-﻿#ifndef BACKGROUNDFLOATER
+#ifndef BACKGROUNDFLOATER
 #define BACKGROUNDFLOATER
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/FancyVector2.h"
+#include "Core/PhsxData.h"
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+//#include "Game/Tilesets/Backgrounds/Background.h"
+//#include "Game/Tilesets/Backgrounds/BackgroundFloaterList.h"
+//#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+//#include "Game/Level/Level.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

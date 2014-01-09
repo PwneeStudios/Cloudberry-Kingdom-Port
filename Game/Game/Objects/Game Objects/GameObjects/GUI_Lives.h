@@ -1,7 +1,17 @@
 #ifndef GUI_LIVES
 #define GUI_LIVES
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/DrawPile.h"
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+//#include "Core/Text/EzText.h"
+#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
+//#include "Game/Objects/Bob/Bob.h"
+//#include "Game/Objects/Game Objects/GameObjects/GUI_LivesLeft.h"
+//#include "Game/Tools/Resources.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

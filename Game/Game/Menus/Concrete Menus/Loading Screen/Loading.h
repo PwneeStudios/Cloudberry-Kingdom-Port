@@ -1,7 +1,17 @@
-﻿#ifndef LOADING
+#ifndef LOADING
 #define LOADING
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/DrawPile.h"
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+//#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+//#include "Core/Text/EzText.h"
+//#include "Core/Tools/ColorHelper.h"
+//#include "Core/Tools/CoreMath.h"
+//#include "Game/Tools/Resources.h"
+//#include "Game/Tools/WrappedFloat.h"
+
 
 namespace CloudberryKingdom
 {

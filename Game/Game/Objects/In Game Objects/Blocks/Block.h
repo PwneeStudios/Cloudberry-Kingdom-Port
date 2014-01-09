@@ -1,7 +1,22 @@
-﻿#ifndef BLOCK
+#ifndef BLOCK
 #define BLOCK
 
-#include <global_header.h>
+#include <small_header.h>
+
+#include "Core/Graphics/Draw/Quads/PieceQuad.h"
+//#include "Core/Tools/Random.h"
+//#include "Game/Collision Detection/AABox.h"
+//#include "Game/Collision Detection/Phsx.h"
+#include "Game/Objects/ObjectBase.h"
+//#include "Game/Objects/Bob/Bob.h"
+//#include "Game/Objects/In Game Objects/Blocks/BouncyBlock.h"
+//#include "Game/Objects/In Game Objects/Blocks/NormalBlock.h"
+//#include "Game/Objects/In Game Objects/Blocks/NormalBlockDraw.h"
+//#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+//#include "Game/Level/Level.h"
+//#include "Game/Player/Hero Physics/Meat.h"
+//#include "Game/Tilesets/BlockGroup.h"
+
 
 #include "Core/FancyVector2.h"
 #include "Core/FancyColor.h"

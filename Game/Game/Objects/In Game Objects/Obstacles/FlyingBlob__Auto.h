@@ -1,7 +1,24 @@
-﻿#ifndef FLYINGBLOB__AUTO
+#ifndef FLYINGBLOB__AUTO
 #define FLYINGBLOB__AUTO
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Tools/CoreMath.h"
+//#include "Core/Tools/Random.h"
+//#include "Game/Objects/ObjectBase.h"
+//#include "Game/Level/Make/DifficultyHelper.h"
+//#include "Game/Level/Make/PieceSeedData.h"
+//#include "Game/Level/Make/Parameters/LevelGenData.h"
+#include "Game/Level/Make/Parameters/Param.h"
+//#include "Game/Level/Make/Parameters/StyleData/StyleData.h"
+#include "Game/Objects/AutoGen.h"
+//#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+//#include "Game/Level/Level.h"
+//#include "Game/Objects/In Game Objects/Obstacles/FlyingBlob.h"
+//#include "Game/Player/Hero Physics/Spaceship.h"
+//#include "Game/Tools/Recycler.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

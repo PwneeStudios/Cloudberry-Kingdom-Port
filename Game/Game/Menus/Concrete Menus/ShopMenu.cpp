@@ -1,11 +1,18 @@
-#include <global_header.h>
+#include <small_header.h>
 
 #include <Hacks/List.h>
 #include <Hacks/Compare.h>
 #include <Hacks/String.h>
 
 #include "ShopMenu.h"
+#include "Game/Menus/Menu.h"
+#include "Game/Tools/Resources.h"
+#include "Core/Text/EzText.h"
+#include "Core/Tools/ColorHelper.h"
+#include "Game/Menus/Menu Components/MenuItem.h"
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+#include "Game/Menus/Concrete Menus/Title Screen/StartMenu.h"
+
 
 namespace CloudberryKingdom
 {

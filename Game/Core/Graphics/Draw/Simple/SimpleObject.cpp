@@ -1,4 +1,17 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Core/Graphics/Draw/Simple/SimpleObject.h"
+
+#include "Core/Animation/AnimQueue.h"
+#include "Core/Effects/EzEffect.h"
+#include "Core/Effects/EzEffectWad.h"
+#include "Core/Graphics/QuadDrawer.h"
+#include "Core/Graphics/Draw/Object/ObjectClass.h"
+#include "Core/Graphics/Draw/Quads/Quad.h"
+#include "Core/Graphics/Draw/Simple/BasePoint.h"
+#include "Core/Graphics/Draw/Simple/SimpleBox.h"
+#include "Core/Graphics/Draw/Simple/SimpleQuad.h"
+#include "Game/Tools/Tools.h"
+
 
 #include "Hacks/List.h"
 #include "Hacks/String.h"

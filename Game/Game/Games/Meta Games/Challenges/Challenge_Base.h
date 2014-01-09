@@ -1,7 +1,22 @@
-﻿#ifndef CHALLENGE_BASE
+#ifndef CHALLENGE_BASE
 #define CHALLENGE_BASE
 
-#include <global_header.h>
+#include <small_header.h>
+
+#include "Game/Localization.h"
+//#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+//#include "Game/Objects/ObjectBase.h"
+//#include "Game/Games/GameType.h"
+//#include "Game/Games/Meta Games/StringWorlds/StringWorld.h"
+//#include "Game/Level/Make/LockableBool.h"
+//#include "Game/Level/Make/LevelSeedData.h"
+//#include "Game/Player/PlayerManager.h"
+//#include "Game/Menus/Concrete Menus/Score Screens/ScoreDatabase.h"
+//#include "Game/Player/Hero Physics/Base.h"
+//#include "Game/Menus/Concrete Menus/Help/HelpMenu.h"
+//#include "Game/Objects/Game Objects/GameObjects/End/GameOverPanel.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

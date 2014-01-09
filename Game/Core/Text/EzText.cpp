@@ -1,4 +1,19 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Core/Text/EzText.h"
+
+#include "Core/FancyVector2.h"
+#include "Core/Graphics/QuadDrawer.h"
+#include "Game/Localization.h"
+#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+#include "Core/Input/ButtonCheck.h"
+#include "Core/Text/EzFont.h"
+#include "Core/Texture/EzTexture.h"
+#include "Core/Tools/ColorHelper.h"
+#include "Game/Collision Detection/Line.h"
+#include "Game/Tools/Camera.h"
+#include "Game/Tools/Resources.h"
+#include "Game/Tools/Tools.h"
+#include "Game/Level/Level.h"
 
 #include <Core.h>
 #include <Graphics\Types.h>

@@ -1,4 +1,8 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Objects/Game Objects/GameObjects/GUI_Timer_Simple.h"
+
+#include "Game/Objects/Game Objects/GameObjects/GUI_Timer_Base.h"
+
 
 namespace CloudberryKingdom
 {

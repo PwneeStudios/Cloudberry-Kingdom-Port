@@ -1,4 +1,11 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Core/Animation/AnimationData_Integer.h"
+
+#include "Core/WriteReadTools.h"
+#include "Core/Texture/EzTexture.h"
+#include "Core/Texture/EzTextureWad.h"
+#include "Game/Tools/Tools.h"
+
 
 #include <Hacks\List.h>
 

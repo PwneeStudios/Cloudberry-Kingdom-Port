@@ -1,7 +1,16 @@
-﻿#ifndef BOX
+#ifndef BOX
 #define BOX
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/Quads/Quad.h"
+//#include "Game/Localization.h"
+//#include "Game/Player/Hero Physics/Base.h"
+//#include "Game/Objects/Icon.h"
+//#include "Game/Objects/Bob/Bob.h"
+#include "Game/Player/Hero Physics/Normal.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

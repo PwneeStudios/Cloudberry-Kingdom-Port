@@ -1,7 +1,26 @@
 #ifndef CUSTOMUPGRADES_GUI
 #define CUSTOMUPGRADES_GUI
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/DrawPile.h"
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include "Game/Localization.h"
+//#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+//#include "Core/Input/ButtonCheck.h"
+//#include "Core/Text/EzText.h"
+#include "Game/Menus/CkBaseMenu.h"
+//#include "Game/Level/Make/PieceSeedData.h"
+//#include "Game/Menus/Menu.h"
+//#include "Game/Menus/Menu Components/MenuItem.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/StartMenu.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/Freeplay/CustomLevel_GUI.h"
+//#include "Game/Menus/Menu Components/MenuSlider.h"
+//#include "Game/Objects/AutoGen.h"
+//#include "Game/Objects/Icon.h"
+//#include "Game/Tools/Camera.h"
+//#include "Game/Tools/WrappedFloat.h"
+
 
 namespace CloudberryKingdom
 {

@@ -1,7 +1,13 @@
-﻿#ifndef MINIMENU
+#ifndef MINIMENU
 #define MINIMENU
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Input/ButtonCheck.h"
+//#include "Core/Tools/CoreMath.h"
+#include "Game/Menus/Menu.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

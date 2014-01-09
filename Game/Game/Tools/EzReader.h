@@ -1,7 +1,10 @@
-﻿#ifndef EZREADER
+#ifndef EZREADER
 #define EZREADER
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

@@ -1,7 +1,7 @@
 ﻿#ifndef _CODE_CASTLE
 #define _CODE_CASTLE
 
-#include <global_header.h>
+#include <small_header.h>
 
 namespace CloudberryKingdom
 {

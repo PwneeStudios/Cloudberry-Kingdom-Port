@@ -1,7 +1,12 @@
-﻿#ifndef EZSOUND
+#ifndef EZSOUND
 #define EZSOUND
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Sound/EzSoundWad.h"
+//#include "Core/Tools/CoreMath.h"
+//#include "Game/Tools/Tools.h"
+
 
 #include <Audio/SoundEffect.h>
 

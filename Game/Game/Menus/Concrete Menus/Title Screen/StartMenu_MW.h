@@ -1,7 +1,24 @@
 #ifndef STARTMENU_MW
 #define STARTMENU_MW
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+//#include "Game/Localization.h"
+//#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+//#include "Core/Text/EzText.h"
+//#include "Core/Tools/ColorHelper.h"
+//#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
+//#include "Game/Menus/Menu Components/MenuItem.h"
+#include "Game/Menus/Concrete Menus/Title Screen/StartMenu.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/StartMenu_MW_Backpanel.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/StartMenu_MW_CustomLevel.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/StartMenu_MW_Exit.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/StartMenu_MW_Options.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/TitleGame_MW.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/Arcade/StartMenu_MW_Arcade.h"
+//#include "Game/Menus/Concrete Menus/Title Screen/Story/StartMenu_MW_Campaign.h"
+
 
 namespace CloudberryKingdom
 {

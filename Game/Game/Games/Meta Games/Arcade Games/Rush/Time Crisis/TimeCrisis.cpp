@@ -1,4 +1,19 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Games/Meta Games/Arcade Games/Rush/Time Crisis/TimeCrisis.h"
+
+#include "Game/Localization.h"
+#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+#include "Core/Tools/CoreMath.h"
+#include "Game/Games/Meta Games/Challenges/Challenge_Base.h"
+#include "Game/Games/Meta Games/Arcade Games/Rush/Hero Rush/HeroRush.h"
+#include "Game/Games/Meta Games/Arcade Games/Rush/Hero Rush/HeroRush_Tutorial.h"
+#include "Game/Games/Meta Games/Arcade Games/Rush/Time Crisis/TimeCrisis_Tutorial.h"
+#include "Game/Level/Make/LockableBool.h"
+#include "Game/Level/Make/LevelSeedData.h"
+#include "Game/Player/Hero Physics/Base.h"
+#include "Game/Player/Hero Physics/Rocketbox.h"
+
+#include "Game/Games/Meta Games/StringWorlds/StringWorld_Timed.h"
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 

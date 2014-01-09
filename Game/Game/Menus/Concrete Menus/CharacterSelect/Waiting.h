@@ -1,7 +1,14 @@
-﻿#ifndef WAITING
+#ifndef WAITING
 #define WAITING
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/DrawPile.h"
+//#include "Core/Input/ButtonCheck.h"
+#include "Game/Menus/CkBaseMenu.h"
+//#include "Game/Menus/Concrete Menus/CharacterSelect/CharacterSelect.h"
+//#include "Game/Menus/Concrete Menus/CharacterSelect/CharSelectManager.h"
+
 
 namespace CloudberryKingdom
 {

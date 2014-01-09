@@ -1,7 +1,7 @@
 ﻿#ifndef MULTICASTER_2
 #define MULTICASTER_2
 
-#include <global_header.h>
+#include <small_header.h>
 
 namespace CloudberryKingdom
 {

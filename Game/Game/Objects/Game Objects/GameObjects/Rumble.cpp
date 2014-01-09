@@ -1,4 +1,10 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Objects/Game Objects/GameObjects/Rumble.h"
+
+#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
+#include "Game/Tools/Tools.h"
+
+#include "Game/Tools/Camera.h"
 
 namespace CloudberryKingdom
 {

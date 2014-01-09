@@ -1,8 +1,23 @@
 #ifndef _FORWARD_DECLARATIONS_CK_H_
 #define _FORWARD_DECLARATIONS_CK_H_
 
+class KeyboardState;
+struct Mutex;
+struct BinaryWriter;
+struct BinaryReader;
+struct GraphicsDevice;
+struct SpriteBatch;
+struct SoundEffect;
+struct ContentManager;
+struct StringBuilder;
+struct Texture2D;
+
 namespace CloudberryKingdom
 {
+	struct Buyable;
+	struct ILoadingScreen;
+	struct IBound;
+
 	struct StartMenu_MW_Pre;
 	struct StartMenu_MW_Simple;
 	struct Particle;

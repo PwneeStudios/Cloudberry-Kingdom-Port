@@ -1,4 +1,14 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Menus/Concrete Menus/CharacterSelect/GamerTag.h"
+
+#include "Core/Graphics/Draw/DrawPile.h"
+#include "Core/Text/EzText.h"
+#include "Game/Menus/CkBaseMenu.h"
+#include "Game/Menus/Concrete Menus/CharacterSelect/CharacterSelect.h"
+#include "Game/Tools/Resources.h"
+#include "Game/Tools/Tools.h"
+
+#include "Game/Player/PlayerData.h"
 
 #include <Core\Tools\Set.h>
 

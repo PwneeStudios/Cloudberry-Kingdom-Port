@@ -1,7 +1,23 @@
-﻿#include <Core/Animation/AnimQueue.h>
+#include <Core/Animation/AnimQueue.h>
 
 
-#include <global_header.h>
+#include <small_header.h>
+#include "Core/Graphics/Draw/Object/ObjectClass.h"
+
+#include "Core/Animation/AnimationData_Vector.h"
+#include "Core/Animation/AnimQueue.h"
+#include "Core/Animation/SpriteAnim.h"
+#include "Core/Effects/EzEffect.h"
+#include "Core/Effects/EzEffectWad.h"
+#include "Core/Graphics/QuadDrawer.h"
+#include "Core/Graphics/Draw/Object/ObjectBox.h"
+#include "Core/Graphics/Draw/Quads/BaseQuad.h"
+#include "Core/Graphics/Draw/Quads/Quad.h"
+#include "Core/Texture/EzTextureWad.h"
+#include "Core/Texture/EzTexture.h"
+#include "Game/Tools/EzReader.h"
+#include "Game/Tools/Tools.h"
+
 
 #include "Hacks/Queue.h"
 #include "Hacks/String.h"

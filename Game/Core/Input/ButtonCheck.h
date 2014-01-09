@@ -1,7 +1,14 @@
-﻿#ifndef BUTTONCHECK
+#ifndef BUTTONCHECK
 #define BUTTONCHECK
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/ResolutionGroup.h"
+//#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+//#include "Game/Player/PlayerManager.h"
+//#include "Game/Objects/Bob/Bob.h"
+//#include "Game/Tools/Tools.h"
+
 
 #include <Input/KeyboardState.h>
 

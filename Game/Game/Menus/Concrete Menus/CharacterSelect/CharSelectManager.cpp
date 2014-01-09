@@ -1,8 +1,28 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Menus/Concrete Menus/CharacterSelect/CharSelectManager.h"
+
+#include "Core/FancyVector2.h"
+#include "Core/Tools/Set.h"
+#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+#include "Core/Input/ButtonCheck.h"
+#include "Core/Text/EzText.h"
+#include "Game/Objects/Game Objects/GameObject.h"
+#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
+#include "Game/Games/GameType.h"
+#include "Game/Menus/Concrete Menus/CharacterSelect/Backdrop.h"
+#include "Game/Menus/Concrete Menus/CharacterSelect/CharacterSelect.h"
+#include "Game/Player/ColorScheme.h"
+#include "Game/Player/ColorSchemeManager.h"
+#include "Game/Tools/Camera.h"
+#include "Game/Tools/Tools.h"
+
+#include "Game/Level/Level.h"
 
 #include <Hacks/List.h>
 #include <MasterHack.h>
 #include <Core\Tools\Set.h>
+
+#include "Game/Menus/Concrete Menus/CharacterSelect/Doll.h"
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 

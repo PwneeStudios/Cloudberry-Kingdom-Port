@@ -1,4 +1,4 @@
-﻿#ifndef PARAM
+#ifndef PARAM
 #define PARAM
 
 namespace CloudberryKingdom

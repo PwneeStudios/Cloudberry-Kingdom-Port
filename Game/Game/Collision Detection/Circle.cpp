@@ -1,4 +1,14 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Collision Detection/Circle.h"
+
+#include "Core/WriteReadTools.h"
+#include "Game/Collision Detection/AABox.h"
+#include "Game/Collision Detection/FloatRectangle.h"
+#include "Game/Objects/ObjectBase.h"
+#include "Game/Objects/AutoGen.h"
+#include "Game/Objects/Bob/Bob.h"
+#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

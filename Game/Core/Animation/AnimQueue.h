@@ -1,7 +1,9 @@
-﻿#ifndef ANIMQUEUE
+#ifndef ANIMQUEUE
 #define ANIMQUEUE
 
-#include <global_header.h>
+#include <small_header.h>
+
+
 
 namespace CloudberryKingdom
 {

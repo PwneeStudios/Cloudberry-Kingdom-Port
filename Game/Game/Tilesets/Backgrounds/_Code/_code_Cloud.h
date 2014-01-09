@@ -1,7 +1,7 @@
 ﻿#ifndef _CODE_CLOUD
 #define _CODE_CLOUD
 
-#include <global_header.h>
+#include <small_header.h>
 
 namespace CloudberryKingdom
 {

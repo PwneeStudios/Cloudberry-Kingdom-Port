@@ -1,4 +1,8 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Core/Text/EzFont.h"
+
+#include "Core/Graphics/QuadDrawer.h"
+
 
 namespace CloudberryKingdom
 {

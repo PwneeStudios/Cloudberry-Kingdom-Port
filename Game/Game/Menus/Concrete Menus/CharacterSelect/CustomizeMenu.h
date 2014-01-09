@@ -1,7 +1,26 @@
 #ifndef CUSTOMIZEMENU
 #define CUSTOMIZEMENU
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/DrawPile.h"
+#include "Game/Localization.h"
+//#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+//#include "Core/Text/EzText.h"
+#include "Game/Menus/CkBaseMenu.h"
+//#include "Game/Player/Buyable.h"
+//#include "Game/Player/ClrTextFx.h"
+//#include "Game/Menus/Menu.h"
+//#include "Game/Menus/Concrete Menus/CharacterSelect/CharacterSelect.h"
+//#include "Game/Menus/Concrete Menus/CharacterSelect/CharSelectManager.h"
+//#include "Game/Menus/Concrete Menus/CharacterSelect/ColorSelect.h"
+//#include "Game/Menus/Concrete Menus/CharacterSelect/Waiting.h"
+//#include "Game/Player/PlayerManager.h"
+//#include "Game/Menus/Menu Components/MenuItem.h"
+#include "Game/Player/ColorScheme.h"
+//#include "Game/Player/ColorSchemeManager.h"
+//#include "Game/Tools/Resources.h"
+
 
 namespace CloudberryKingdom
 {

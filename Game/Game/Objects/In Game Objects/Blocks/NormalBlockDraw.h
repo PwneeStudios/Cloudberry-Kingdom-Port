@@ -1,4 +1,4 @@
-﻿#ifndef NORMALBLOCKDRAW
+#ifndef NORMALBLOCKDRAW
 #define NORMALBLOCKDRAW
 
 namespace CloudberryKingdom

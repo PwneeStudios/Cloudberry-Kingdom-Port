@@ -1,7 +1,9 @@
-﻿#ifndef SIGNINCHOICEMENU
+#ifndef SIGNINCHOICEMENU
 #define SIGNINCHOICEMENU
 
-#include <global_header.h>
+#include <small_header.h>
+
+
 
 namespace CloudberryKingdom
 {

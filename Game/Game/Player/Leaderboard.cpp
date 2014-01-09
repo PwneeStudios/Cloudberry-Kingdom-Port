@@ -1,6 +1,11 @@
-#include <global_header.h>
+#include <small_header.h>
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
+#include "Game/Menus/Concrete Menus/Score Screens/ScoreEntry.h"
+#include "Game/Tools/Resources.h"
+#include "Core/Text/EzFont.h"
+#include "Core/Tools/ColorHelper.h"
 
 #include "Leaderboard.h"
 #include <Utility/Log.h>

@@ -1,7 +1,10 @@
-﻿#ifndef SPRITEANIM
+#ifndef SPRITEANIM
 #define SPRITEANIM
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/Graphics/Draw/Object/ObjectClass.h"
+
 
 #include "Core/Lambdas/Lambda_2.h"
 

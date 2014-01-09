@@ -1,7 +1,7 @@
 ﻿#ifndef CLOUDBERRYKINGDOM_TILESETS
 #define CLOUDBERRYKINGDOM_TILESETS
 
-#include <global_header.h>
+#include <small_header.h>
 
 namespace CloudberryKingdom
 {

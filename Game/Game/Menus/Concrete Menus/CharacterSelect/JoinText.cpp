@@ -1,4 +1,22 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Menus/Concrete Menus/CharacterSelect/JoinText.h"
+
+#include "Core/Graphics/Draw/DrawPile.h"
+#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include "Game/Localization.h"
+#include "Core/Input/ButtonCheck.h"
+#include "Core/Text/EzText.h"
+#include "Game/Menus/CkBaseMenu.h"
+#include "Game/Menus/Concrete Menus/CharacterSelect/CharacterSelect.h"
+#include "Game/Menus/Concrete Menus/CharacterSelect/CharSelectManager.h"
+#include "Game/Menus/Concrete Menus/CharacterSelect/GamerTag.h"
+#include "Game/Menus/Concrete Menus/CharacterSelect/SimpleMenu.h"
+#include "Game/Tools/Resources.h"
+#include "Game/Tools/Tools.h"
+
+#include "Game/Player/PlayerData.h"
+#include "Game/Menus/Concrete Menus/CharacterSelect/Doll.h"
+
 #include <Utility\ConsoleInformation.h>
 #include <Core\Tools\Set.h>
 

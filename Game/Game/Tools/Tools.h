@@ -1,7 +1,49 @@
-﻿#ifndef TOOLS
+#ifndef TOOLS
 #define TOOLS
 
-#include <global_header.h>
+#include <small_header.h>
+
+#include "Core/PhsxData.h"
+//#include "Core/ResolutionGroup.h"
+//#include "Core/Effects/EzEffect.h"
+//#include "Core/Effects/EzEffectWad.h"
+//#include "Core/Graphics/MainRender.h"
+//#include "Core/Graphics/QuadDrawer.h"
+//#include "Core/Graphics/VertexFormat.h"
+//#include "Core/Graphics/Draw/DrawPile.h"
+//#include "Core/Graphics/Draw/Object/ObjectClass.h"
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+//#include "Core/Graphics/Draw/Simple/BasePoint.h"
+//#include "Core/Graphics/Draw/Simple/SimpleObject.h"
+//#include "Core/Tools/Set.h"
+//#include "Core/Input/ButtonCheck.h"
+//#include "Core/Song/EzSong.h"
+//#include "Core/Song/EzSongWad.h"
+//#include "Core/Sound/EzSound.h"
+//#include "Core/Sound/EzSoundWad.h"
+//#include "Core/Text/EzFont.h"
+//#include "Core/Text/EzText.h"
+//#include "Core/Texture/EzTextureWad.h"
+//#include "Core/Texture/EzTexture.h"
+//#include "Core/Texture/TextureOrAnim.h"
+//#include "Core/Tools/ColorHelper.h"
+//#include "Core/Tools/CoreMath.h"
+//#include "Core/Tools/Random.h"
+//#include "Game/Objects/ObjectBase.h"
+//#include "Game/Games/GameType.h"
+//#include "Game/Games/Meta Games/Challenges/Challenge_Base.h"
+//#include "Game/Level/Make/Parameters/LevelGenData.h"
+//#include "Game/Player/PlayerManager.h"
+//#include "Game/Menus/Concrete Menus/Loading Screen/ILoadingScreen.h"
+//#include "Game/Menus/Concrete Menus/Loading Screen/LoadingScreen.h"
+//#include "Game/Objects/AutoGen.h"
+//#include "Game/Objects/IBounded.h"
+//#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+//#include "Game/Level/Level.h"
+//#include "Game/Tools/Camera.h"
+//#include "Game/Tools/Globals.h"
+//#include "Game/Tools/WrappedFloat.h"
+
 
 #include "stringconverter.h"
 #include "Core/Chunk.h"
@@ -36,6 +78,10 @@
 #include "Hacks/NET/StreamWriter.h"
 
 #include <MainClass/XboxPC/CloudberryKingdom.XnaGameClass.h>
+
+#include "Core/Lambdas/Lambda_1.h"
+#include "Core/Lambdas/LambdaFunc_1.h"
+#include "Core/Lambdas/LambdaFunc_2.h"
 
 namespace CloudberryKingdom
 {

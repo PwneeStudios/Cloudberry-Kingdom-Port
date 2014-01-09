@@ -1,4 +1,18 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Core/Graphics/Draw/Quads/BaseQuad.h"
+
+#include "Core/Animation/AnimationData_Integer.h"
+#include "Core/Effects/EzEffect.h"
+#include "Core/Effects/EzEffectWad.h"
+#include "Core/Graphics/QuadDrawer.h"
+#include "Core/Graphics/VertexFormat.h"
+#include "Core/Graphics/Draw/Object/ObjectClass.h"
+#include "Core/Graphics/Draw/Quads/ObjectVector.h"
+#include "Core/Graphics/Draw/Quads/Quad.h"
+#include "Core/Texture/EzTextureWad.h"
+#include "Core/Texture/EzTexture.h"
+#include "Core/Tools/ColorHelper.h"
+
 
 #include "Hacks/String.h"
 

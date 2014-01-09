@@ -1,4 +1,16 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Menus/Concrete Menus/Help/HintGiver.h"
+
+#include "Game/Localization.h"
+#include "Core/Input/ButtonCheck.h"
+#include "Core/Text/EzText.h"
+#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
+#include "Game/Player/PlayerManager.h"
+#include "Game/Menus/Concrete Menus/Help/HintBlurb.h"
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+#include "Game/Level/Level.h"
+
+#include "Game/Games/GameType.h"
 
 #include <Hacks/String.h>
 

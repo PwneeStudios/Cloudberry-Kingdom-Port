@@ -1,7 +1,20 @@
-﻿#ifndef STRINGWORLD_TIMED
+#ifndef STRINGWORLD_TIMED
 #define STRINGWORLD_TIMED
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
+//#include "Game/Games/GameType.h"
+#include "Game/Games/Meta Games/StringWorlds/StringWorld.h"
+//#include "Game/Level/Make/LockableBool.h"
+//#include "Game/Level/Make/LevelSeedData.h"
+//#include "Game/Objects/Game Objects/GameObjects/CoinScoreMultiplierObject.h"
+//#include "Game/Objects/Game Objects/GameObjects/GUI_Level.h"
+//#include "Game/Objects/Game Objects/GameObjects/GUI_Score.h"
+//#include "Game/Objects/Game Objects/GameObjects/GUI_Timer.h"
+//#include "Game/Objects/Game Objects/GameObjects/PerfectScoreObject.h"
+//#include "Game/Objects/Game Objects/GameObjects/TimerWarning.h"
+
 
 namespace CloudberryKingdom
 {

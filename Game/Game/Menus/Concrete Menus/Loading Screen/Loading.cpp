@@ -1,4 +1,15 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Menus/Concrete Menus/Loading Screen/Loading.h"
+
+#include "Core/Graphics/Draw/DrawPile.h"
+#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+#include "Core/Text/EzText.h"
+#include "Core/Tools/ColorHelper.h"
+#include "Core/Tools/CoreMath.h"
+#include "Game/Tools/Resources.h"
+#include "Game/Tools/WrappedFloat.h"
+
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 

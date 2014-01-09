@@ -1,7 +1,44 @@
-﻿#ifndef SCREENSAVER
+#ifndef SCREENSAVER
 #define SCREENSAVER
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/FancyVector2.h"
+//#include "Game/Localization.h"
+//#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+//#include "Core/Tools/CoreMath.h"
+//#include "Game/Tilesets/TileSet.h"
+#include "Game/Games/Meta Games/StringWorlds/StringWorld.h"
+//#include "Game/Games/Meta Games/Challenges/_Regular.h"
+//#include "Game/Level/Make/LockableBool.h"
+//#include "Game/Level/Make/LevelSeedData.h"
+//#include "Game/Level/Make/PieceSeedData.h"
+//#include "Game/Level/Make/Parameters/StyleData/StyleData.h"
+//#include "Game/Level/Make/Parameters/StyleData/SingleData.h"
+//#include "Game/Player/PlayerManager.h"
+//#include "Game/Player/Hero Physics/Base.h"
+//#include "Game/Objects/AutoGen.h"
+//#include "Game/Objects/Game Objects/GameObjects/GUI_Text.h"
+//#include "Game/Objects/Game Objects/GameObjects/Listener.h"
+//#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+//#include "Game/Level/Level.h"
+//#include "Game/Objects/In Game Objects/Obstacles/FlyingBlob__Auto.h"
+//#include "Game/Player/Cape.h"
+//#include "Game/Player/ColorSchemeManager.h"
+//#include "Game/Player/Hero Physics/Normal.h"
+//#include "Game/Player/Hero Physics/Big.h"
+//#include "Game/Player/Hero Physics/Bouncy.h"
+//#include "Game/Player/Hero Physics/Invert.h"
+//#include "Game/Player/Hero Physics/Scale.h"
+//#include "Game/Player/Hero Physics/Small.h"
+//#include "Game/Player/Hero Physics/Spaceship.h"
+//#include "Game/Player/Hero Physics/Wheel.h"
+//#include "Game/Tools/Camera.h"
+//#include "Game/Tools/Recycler.h"
+//#include "Game/Tools/Resources.h"
+//#include "Game/Tools/Tools.h"
+//#include "Game/Tilesets/TileSetInfo.h"
+
 
 namespace CloudberryKingdom
 {

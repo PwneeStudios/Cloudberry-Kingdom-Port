@@ -1,7 +1,11 @@
 #ifndef RESOLUTIONGROUP
 #define RESOLUTIONGROUP
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Game/Tools/IntVector2.h"
+//#include "Game/Tools/Tools.h"
+
 
 #include "Game/Tools/IntVector2.h"
 

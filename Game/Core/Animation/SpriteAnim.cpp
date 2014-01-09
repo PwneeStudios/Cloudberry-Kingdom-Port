@@ -1,4 +1,9 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Core/Animation/SpriteAnim.h"
+
+#include "Core/Graphics/Draw/Object/ObjectClass.h"
+#include "Game/Tools/Tools.h"
+#include "Core/Texture/EzTexture.h"
 
 namespace CloudberryKingdom
 {

@@ -1,4 +1,9 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Core/ResolutionGroup.h"
+
+#include "Game/Tools/IntVector2.h"
+#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

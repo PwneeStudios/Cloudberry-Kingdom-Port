@@ -1,7 +1,7 @@
 ﻿#ifndef _CODE_SEA
 #define _CODE_SEA
 
-#include <global_header.h>
+#include <small_header.h>
 
 namespace CloudberryKingdom
 {

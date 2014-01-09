@@ -1,7 +1,15 @@
-﻿#ifndef EZSONGWAD
+#ifndef EZSONGWAD
 #define EZSONGWAD
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+//#include "Core/Song/EzSong.h"
+//#include "Core/Text/EzText.h"
+//#include "Game/Tools/Camera.h"
+//#include "Game/Tools/Resources.h"
+//#include "Game/Tools/Tools.h"
+
 
 namespace CloudberryKingdom
 {

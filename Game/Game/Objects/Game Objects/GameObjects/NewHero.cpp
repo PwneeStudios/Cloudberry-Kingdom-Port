@@ -1,4 +1,18 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Objects/Game Objects/GameObjects/NewHero.h"
+
+#include "Core/Graphics/Draw/DrawPile.h"
+#include "Core/Text/EzText.h"
+#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
+#include "Game/Tools/Resources.h"
+#include "Game/Tools/Tools.h"
+
+#include "Game/Games/GameType.h"
+#include "Game/Tools/Camera.h"
+#include "Core/Sound/EzSound.h"
+#include "Core/Sound/EzSoundWad.h"
+#include "Game/Level/Level.h"
+#include "Game/Level/Make/LevelSeedData.h"
 
 namespace CloudberryKingdom
 {

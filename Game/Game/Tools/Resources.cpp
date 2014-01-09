@@ -1,4 +1,32 @@
-﻿#include <global_header.h>
+#include <small_header.h>
+#include "Game/Tools/Resources.h"
+
+#include "Core/Animation/AnimationData_Integer.h"
+#include "Core/Graphics/QuadDrawer.h"
+#include "Core/Graphics/Draw/Quads/PieceQuad.h"
+#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+#include "Core/Particle Effects/Specific Effects/CloudberryKingdom.ParticleEffects.h"
+#include "Core/Song/EzSongWad.h"
+#include "Core/Sound/EzSound.h"
+#include "Core/Sound/EzSoundWad.h"
+#include "Core/Text/EzFont.h"
+#include "Core/Texture/EzTexture.h"
+#include "Game/Tilesets/TileSet.h"
+#include "Game/Games/ScreenSaver.h"
+#include "Game/Objects/Icon.h"
+#include "Game/Objects/In Game Objects/Obstacles/CloudberryKingdom.Fireball.h"
+#include "Game/Player/Awardments/Awardment.h"
+#include "Game/Tilesets/BlockGroup.h"
+#include "Game/Tools/Globals.h"
+#include "Game/Tools/Prototypes.h"
+#include "Game/Tools/Tools.h"
+#include "Game/Tools/WrappedFloat.h"
+#include "Game/Tilesets/TileSetInfo.h"
+
+#include "Core/Texture/EzTextureWad.h"
+#include "Core/Song/EzSong.h"
+#include <Utility/Mutex.h>
 
 #include <Hacks/List.h>
 #include <Hacks/String.h>

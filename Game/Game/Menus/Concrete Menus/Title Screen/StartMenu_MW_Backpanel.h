@@ -1,7 +1,19 @@
 #ifndef STARTMENU_MW_BACKPANEL
 #define STARTMENU_MW_BACKPANEL
 
-#include <global_header.h>
+#include <small_header.h>
+
+//#include "Core/FancyVector2.h"
+//#include "Core/Graphics/Draw/DrawPile.h"
+//#include "Core/Graphics/Draw/Quads/QuadClass.h"
+//#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+//#include "Core/Input/ButtonCheck.h"
+//#include "Core/Text/EzText.h"
+//#include "Core/Tools/ColorHelper.h"
+//#include "Core/Tools/CoreMath.h"
+#include "Game/Menus/CkBaseMenu.h"
+//#include "Game/Tools/Resources.h"
+
 
 namespace CloudberryKingdom
 {

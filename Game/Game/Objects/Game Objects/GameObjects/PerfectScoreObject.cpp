@@ -1,4 +1,32 @@
-#include <global_header.h>
+#include <small_header.h>
+#include "Game/Objects/Game Objects/GameObjects/PerfectScoreObject.h"
+
+#include "Core/Graphics/Draw/DrawPile.h"
+#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include "Game/Localization.h"
+#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+#include "Core/Particle Effects/Specific Effects/CloudberryKingdom.ParticleEffects.h"
+#include "Core/Text/EzFont.h"
+#include "Core/Text/EzText.h"
+#include "Core/Texture/EzTexture.h"
+#include "Core/Tools/CoreMath.h"
+#include "Game/Objects/ObjectBase.h"
+#include "Game/Objects/Game Objects/GameObject.h"
+#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
+#include "Game/Player/PlayerManager.h"
+#include "Game/Objects/Game Objects/GameObjects/Cheer.h"
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+#include "Game/Level/Level.h"
+#include "Game/Objects/Special/TextFloat.h"
+#include "Game/Player/PlayerData.h"
+#include "Game/Tools/Resources.h"
+#include "Game/Tools/Tools.h"
+
+#include "Game/Games/GameType.h"
+#include "Game/Player/Stats.h"
+#include "Core/Sound/EzSound.h"
+#include "Core/Sound/EzSoundWad.h"
+
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 #include <Hacks/String.h>
 
