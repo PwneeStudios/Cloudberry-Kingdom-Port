@@ -1,4 +1,11 @@
-#include "global_header.h"
+#include "small_header.h"
+
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
+#include "Game/Level/Make/PieceSeedData.h"
+#include "Game/Level/Make/Parameters/StyleData/StyleData.h"
+#include "Core/Tools/Random.h"
+#include "Game/Level/Level.h"
+#include "Game/Level/LevelPiece.h"
 
 #include <MasterHack.h>
 

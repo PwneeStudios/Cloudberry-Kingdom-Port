@@ -1,4 +1,6 @@
-#include "global_header.h"
+#include "small_header.h"
+
+#include "Game/Tilesets/TileSetInfo.h"
 
 namespace CloudberryKingdom
 {

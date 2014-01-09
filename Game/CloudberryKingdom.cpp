@@ -1,4 +1,4 @@
-#include "global_header.h"
+#include "small_header.h"
 
 #include "CloudberryKingdom.h"
 #include "MainClass/XboxPC/CloudberryKingdom.XnaGameClass.h"
