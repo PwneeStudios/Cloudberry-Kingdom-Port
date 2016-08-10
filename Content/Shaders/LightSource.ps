@@ -1,0 +1,26 @@
+/*
+ * Take a color and a texture coordinate.  Spit out the color.
+ */
+varying vec2 v_position;
+varying vec2 v_texcoord;
+varying vec4 v_color;
+
+uniform sampler2D u_texture;
+
+void main()
+{
+
+    float d = (v_texcoord.x - .5) * (v_texcoord.x - .5) + (v_texcoord.y - .5) * (v_texcoord.y - .5);
+    vec4 baseColor = texture( u_texture, v_texcoord );
+    
+    vec4 Output = v_color;
+	
+	Output.a *= clamp( 5*(.25 - d), 0, 1 );
+
+	// Premultiply the alpha
+	Output.rgb *= Output.a;
+	        
+    gl_FragColor = Output;
+	
+}
+

@@ -10,6 +10,10 @@
 
 #ifdef CAFE
 	#include "TextureWiiU.h"
+#elif PS3
+	#include "TexturePS3.h"
+#elif VITA
+	#include "TextureVita.h"
 #else
 	#include "TexturePc.h"
 #endif
@@ -22,7 +26,14 @@ class Texture : public Resource
 
 	/// Platform specific implementation.
 #ifdef CAFE
+	friend struct RenderTarget2D;
 	TextureWiiU impl_;
+#elif PS3
+public:
+	TexturePS3 impl_;
+#elif VITA
+public:
+	TextureVita impl_;
 #else
 	TexturePc impl_;
 #endif
@@ -104,6 +115,13 @@ public:
 	{
 		impl_.Activate( sampler );
 	}
+
+#ifdef PS3
+	void Activate( class EffectParameter &parameter )
+	{
+		impl_.Activate( parameter );
+	}
+#endif
 
 };
 

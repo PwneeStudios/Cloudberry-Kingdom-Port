@@ -23,3 +23,30 @@ Release/
 ipch/
 objs/
 tgt/
+glew-1.9.0/bin
+glew-1.9.0/lib
+glew
+glfw-2.7.6/examples
+glfw-2.7.6/support
+glfw-2.7.6/tests
+Content
+*.bin
+*.wumad
+*.wum
+*_tmp/
+*.dlf
+*.xml
+*.db
+Cloudberry PS3/Cloudberry_Kingdom/Game/
+Cloudberry PS3/Cloudberry_Kingdom/Core/
+Cloudberry PS3/Cloudberry_Kingdom/boost_shared_ptr/
+Cloudberry PS3/Cloudberry_Kingdom/PS3_Debug/
+*.exe
+PS3_Debug
+Content
+ContentPS3
+ContentWiiU
+Cloudberry Vita/Cloudberry_Kingdom/Game/
+Cloudberry Vita/Cloudberry_Kingdom/Core/
+Cloudberry Vita/Cloudberry_Kingdom/boost_shared_ptr/
+Cloudberry Vita/Cloudberry_Kingdom/PS3_Debug/

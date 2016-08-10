@@ -13,9 +13,13 @@ Wad::Wad( const std::string &base ) :
 	defaultTexture_( 0 )
 {
 	Texture *pinkX = new Texture;
+#if DEBUG
 	std::string path = base + "Art/default.png";
+#else
+	std::string path = base + "Transparent.png";
+#endif
 	
-	pinkX->SetPath( path );
+	pinkX->SetPath( path ); 
 	pinkX->Load();
 	pinkX->GpuCreate();
 
@@ -27,11 +31,38 @@ Wad::Wad( const std::string &base ) :
 
 Wad::~Wad()
 {
+	// FIXME: No cleanup!
+	/*resourceHolders_.clear();
+
 	ResourceSet::iterator i;
 	for( i = uniqueResources_.begin(); i != uniqueResources_.end(); ++i )
 		delete *i;
+	uniqueResources_.clear();*/
 
 	delete holderAllocator_;
+}
+
+ResourcePtr< Texture > Wad::ForceLoadTexture( const std::string &name )
+{
+	std::string path = base_ + name;
+
+	HolderMap::iterator i = resourceHolders_.find( path );
+	if( i != resourceHolders_.end() )
+		return i->second;
+
+	ResourceHolder *rh = new ( holderAllocator_->Allocate() ) ResourceHolder( *defaultTexture_ );
+	
+	// Kick off a loader job.
+	Texture *texture = new Texture;
+	texture->SetPath( path );
+	texture->Load();
+	texture->GpuCreate();
+	rh->SetResource( texture );
+
+	resourceHolders_[ path ] = rh;
+	uniqueResources_.insert( texture );
+
+	return rh;
 }
 
 // Private.
@@ -47,7 +78,7 @@ ResourceHolder *Wad::load( const std::string &path )
 	Texture *texture = new Texture;
 	texture->SetPath( path );
 	SCHEDULER->CreateResource( rh, texture );
-
+	
 	resourceHolders_[ path ] = rh;
 	uniqueResources_.insert( texture );
 

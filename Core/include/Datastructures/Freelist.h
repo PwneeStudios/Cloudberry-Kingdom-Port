@@ -6,7 +6,7 @@
 #ifndef _FREELIST_H_
 #define _FREELIST_H_
 
-#include <cassert>
+#include <PwneeAssert.h>
 #include <list>
 #include <vector>
 

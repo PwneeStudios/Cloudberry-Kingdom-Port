@@ -1,13 +1,13 @@
 #include <Content/TextureWiiU.h>
 
+#include <Content/File.h>
+#include <Content/Filesystem.h>
+#include <Content/TextureWiiUInternal.h>
 #include <cafe/demo.h>
+#include <cafe/fs.h>
 #include <cafe/gx2.h>
+#include <cafe/mem.h>
 #include <Utility/Log.h>
-
-struct TextureInternal
-{
-	GX2Texture *Texture;
-};
 
 TextureWiiU::TextureWiiU() :
 	internal_( new TextureInternal )
@@ -19,19 +19,43 @@ TextureWiiU::~TextureWiiU()
 	delete internal_;
 }
 
+static MEMHeapHandle IntermediateTextureHeap;
+
+// Global filesystem interface from FilesystemWiiU.cpp.
+extern FSClient *GLOBAL_FSClient;
+
+// Command block for texture subsystem.
+static FSCmdBlock *CommandBlock = NULL;
+
+static bool HeapAvailable = false;
+
+void InitializeIntermediateTextureHeap()
+{
+	const u32 heapSize = 128 * 1024 * 1024;
+	void *heapBase = MEMAllocFromDefaultHeap( heapSize );
+	IntermediateTextureHeap = MEMCreateExpHeapEx( heapBase, heapSize, MEM_HEAP_OPT_THREAD_SAFE );
+
+	CommandBlock = reinterpret_cast< FSCmdBlock * >( MEMAllocFromDefaultHeap( sizeof( FSCmdBlock ) ) );
+	FSInitCmdBlock( CommandBlock );
+
+	HeapAvailable = true;
+	OSMemoryBarrier();
+}
+
+void FreeIntermediateTextureHeap()
+{
+	HeapAvailable = false;
+	OSMemoryBarrier();
+
+	MEMFreeToDefaultHeap( CommandBlock );
+
+	void *heapBase = MEMDestroyExpHeap( IntermediateTextureHeap );
+	MEMFreeToDefaultHeap( heapBase );
+}
+
 void TextureWiiU::Load()
 {
-}
-
-void TextureWiiU::Unload()
-{
-}
-
-void TextureWiiU::GpuCreate()
-{
-	BOOL ok;
 	u32 len;
-	void *buf;
 
 	std::string path = GetPath();
 
@@ -43,13 +67,76 @@ void TextureWiiU::GpuCreate()
 		path[ path.length() - 1 ] = 'x';
 	}
 
-	buf = DEMOFSSimpleRead( path.c_str(), &len );
-	ok = DEMOGFDReadTexture( &internal_->Texture, 0, buf );
+	std::string localPath = ( path[ 0 ] == '/' ? "/vol/content/0010" : "/vol/content/0010/" ) + path;
+		
+	if( HeapAvailable )
+	{
+		FSFileHandle fh;
+		FSStat stat;
+
+		FSOpenFile( GLOBAL_FSClient, CommandBlock, localPath.c_str(), "r", &fh, FS_RET_NO_ERROR );
+
+		memset( &stat, 0, sizeof( FSStat ) );
+		FSGetStatFile( GLOBAL_FSClient, CommandBlock, fh, &stat, FS_RET_NO_ERROR );
+
+		internal_->Buffer = NULL;
+		while( internal_->Buffer == NULL )
+		{
+			internal_->Buffer = reinterpret_cast< char * >( MEMAllocFromExpHeapEx( IntermediateTextureHeap, stat.size, FS_IO_BUFFER_ALIGN ) );
+			if( internal_->Buffer )
+				break;
+
+			OSYieldThread();
+		}
+
+		FSReadFile( GLOBAL_FSClient, CommandBlock, internal_->Buffer, stat.size, 1, fh, 0, FS_RET_NO_ERROR );
+		FSCloseFile( GLOBAL_FSClient, CommandBlock, fh, FS_RET_NO_ERROR );
+
+		setLoaded( true );
+	}
+	else
+	{
+		LOG_WRITE( "HEAP NOT AVAILABLE FOR: %s\n", localPath.c_str() );
+
+		setLoaded( false );
+	}
+	/*boost::shared_ptr<File> file = FILESYSTEM.Open( path );
+
+	if( file->IsOpen() )
+	{
+		internal_->Buffer = NULL;
+		while( internal_->Buffer == NULL )
+		{
+			internal_->Buffer = reinterpret_cast< char * >( MEMAllocFromExpHeap( IntermediateTextureHeap, file->Size() ) );
+			if( internal_->Buffer )
+				break;
+
+			OSYieldThread();
+		}
+
+		file->Read( internal_->Buffer, file->Size() );
+
+		setLoaded( true );
+	}
+	else
+		setLoaded( false );*/
+}
+
+void TextureWiiU::Unload()
+{
+}
+
+void TextureWiiU::GpuCreate()
+{
+	BOOL ok;
+	
+	ok = DEMOGFDReadTexture( &internal_->Texture, 0, internal_->Buffer );
+
+	MEMFreeToExpHeap( IntermediateTextureHeap, internal_->Buffer );
+	internal_->Buffer = NULL;
 
 	if( ok )
 		setLoaded( true );
-	
-	DEMOFree( buf );
 }
 
 void TextureWiiU::GpuDestroy()

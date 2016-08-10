@@ -1,5 +1,6 @@
 #include <Architecture/SchedulerPc.h>
 
+#include <Architecture/Job.h>
 #include <Architecture/Scheduler.h>
 #include <Content/Resource.h>
 #include <Content/ResourcePtr.h>
@@ -8,21 +9,7 @@
 #include <GL/glfw.h>
 #include <Utility/Log.h>
 
-#define NUM_THREADS 4
-
-/**
- * Base job.
- */
-class Job
-{
-
-public:
-
-	virtual ~Job() { }
-
-	virtual void Do() = 0 ;
-
-};
+#define NUM_THREADS 1
 
 #include <iostream>
 
@@ -59,11 +46,11 @@ public:
 		// If there is an error, stop.
 		if( !resource_->IsLoaded() )
 		{
-			LOG.Write( "Failed: %s\n", resource_->GetPath().c_str() );
+			LOG_WRITE( "Failed: %s\n", resource_->GetPath().c_str() );
 			return;
 		}
 
-		LOG.Write( "Loaded: %s\n", resource_->GetPath().c_str() );
+		LOG_WRITE( "Loaded: %s\n", resource_->GetPath().c_str() );
 
 		// Kick off a creation job.
 		if( gpuCreate_ )
@@ -178,6 +165,26 @@ void SchedulerPc::MainThread()
 		( *i )->Do();
 		delete ( *i );
 	}
+}
+
+void SchedulerPc::RunJob( Job *job )
+{
+	glfwLockMutex( internal_->JobQueueMutex );
+	internal_->JobQueue.push_back( job );
+	glfwUnlockMutex( internal_->JobQueueMutex );
+
+	// Notify worker thread about the new job.
+	glfwSignalCond( internal_->JobQueueCV );
+}
+
+void SchedulerPc::RunJobASAP( Job *job )
+{
+	glfwLockMutex( internal_->JobQueueMutex );
+	internal_->JobQueue.push_front( job );
+	glfwUnlockMutex( internal_->JobQueueMutex );
+
+	// Notify worker thread about the new job.
+	glfwSignalCond( internal_->JobQueueCV );
 }
 
 void SchedulerPc::CreateResource( ResourceHolder *holder, Resource *resource )

@@ -1,11 +1,15 @@
 #include <CorePc.h>
 
 #include <Architecture/Scheduler.h>
+#include <Audio/MediaPlayer.h>
 #include <Content/Wad.h>
 #include <cstdlib>
+#include <Utility/Limits.h>
 #include <GameLoop.h>
 #include <Graphics/QuadDrawer.h>
 #include <Graphics/TextDrawer.h>
+#include <Input/GamePad.h>
+#include <Input/Keyboard.h>
 
 #include <GL/glew.h>
 #include <GL/glfw.h>
@@ -52,15 +56,21 @@ CorePc::CorePc( GameLoop &game ) :
 
 	scheduler_ = new Scheduler;
 
-	qd_ = new QuadDrawer;
-
 	content_ = new Wad( "Content/" );
 
+	qd_ = new QuadDrawer;
+
 	td_ = new TextDrawer;
+
+	GamePad::Initialize();
+	MediaPlayer::Initialize();
 }
 
 CorePc::~CorePc()
 {
+	MediaPlayer::Shutdown();
+	GamePad::Shutdown();
+
 	delete td_;
 
 	delete qd_;
@@ -80,6 +90,9 @@ int CorePc::Run()
 
 	while( running_ )
 	{
+		GamePad::Update();
+		Keyboard::Update();
+
 		glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
 		scheduler_->MainThread();
@@ -90,7 +103,7 @@ int CorePc::Run()
 
 		glfwSwapBuffers();
 
-		if( glfwGetKey( GLFW_KEY_ESC ) || !glfwGetWindowParam( GLFW_OPENED ) )
+		if( /*glfwGetKey( GLFW_KEY_ESC ) ||*/ !glfwGetWindowParam( GLFW_OPENED ) )
 			Exit();
 	}
 
@@ -100,4 +113,8 @@ int CorePc::Run()
 void CorePc::Exit()
 {
 	running_ = false;
+}
+
+void DebugFrame(float,float,float)
+{
 }

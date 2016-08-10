@@ -7,6 +7,10 @@
 // Pick implementation.
 #ifdef CAFE
 	#include "CoreWiiU.h"
+#elif PS3
+	#include "CorePS3.h"
+#elif VITA
+	#include "CoreVita.h"
 #else
 	#include "CorePc.h"
 #endif
@@ -20,6 +24,10 @@ class Core : public Singleton< Core >
 	/// Core implementation.
 #ifdef CAFE
 	CoreWiiU impl_;
+#elif PS3
+	CorePS3 impl_;
+#elif VITA
+	CoreVita impl_;
 #else
 	CorePc impl_;
 #endif

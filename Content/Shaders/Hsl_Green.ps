@@ -1,0 +1,20 @@
+/*
+ * Take a color and a texture coordinate.  Spit out the color.
+ */
+varying vec2 v_position;
+varying vec2 v_texcoord;
+varying vec4 v_color;
+
+uniform sampler2D u_texture;
+uniform mat4 u_colorMatrix;
+
+void main()
+{
+	vec4 texColor = texture( u_texture, v_texcoord );
+	vec4 color = v_color * texColor;
+	if( texColor.g > texColor.r + 0.025 && texColor.g > texColor.b + 0.025 )
+		color = u_colorMatrix * color;
+		
+    gl_FragColor = color;
+}
+

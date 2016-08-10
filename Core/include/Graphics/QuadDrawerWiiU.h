@@ -2,6 +2,7 @@
 #define _QUAD_DRAWER_WIIU_H_
 
 #include <ForwardDeclarations.h>
+#include <boost/shared_ptr.hpp>
 
 /**
  * Drawer of quads.
@@ -24,6 +25,16 @@ public:
 
 	QuadDrawerWiiU();
 	~QuadDrawerWiiU();
+
+	/**
+	 * @see QuadDrawer::SetEffect()
+	 */
+	void SetEffect( const boost::shared_ptr<Effect> &effect );
+
+	/**
+	 * @see QuadDrawer::GetEffect()
+	 */
+	boost::shared_ptr<Effect> GetEffect();
 
 	/**
 	 * @see QuadDrawer::Draw()

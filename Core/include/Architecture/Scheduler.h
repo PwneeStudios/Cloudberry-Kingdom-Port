@@ -10,6 +10,10 @@
 
 #ifdef CAFE
 	#include "SchedulerWiiU.h"
+#elif PS3
+	#include "SchedulerPS3.h"
+#elif VITA
+	#include "SchedulerVita.h"
 #else
 	#include "SchedulerPc.h"
 #endif
@@ -20,6 +24,10 @@ class Scheduler
 	/// Platform specific implementation.
 #ifdef CAFE
 	SchedulerWiiU impl_;
+#elif PS3
+	SchedulerPS3 impl_;
+#elif VITA
+	SchedulerVita impl_;
 #else
 	SchedulerPc impl_;
 #endif
@@ -45,6 +53,24 @@ public:
 	void MainThread()
 	{
 		impl_.MainThread();
+	}
+
+	/// Run a job in the background.
+	/**
+	 * @param job Pointer to job.  Scheduler takes ownership.
+	 */
+	void RunJob( Job *job )
+	{
+		impl_.RunJob( job );
+	}
+
+	/// Run a job as soon as possible.
+	/**
+	 * @param job Pointer to job.  Scheduler takes ownership.
+	 */
+	void RunJobASAP( Job *job )
+	{
+		impl_.RunJobASAP( job );
 	}
 
 	/// Create a resource.

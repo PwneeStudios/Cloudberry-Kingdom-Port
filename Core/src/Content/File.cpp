@@ -2,6 +2,8 @@
 
 #ifdef CAFE
 	#include <cafe/demo.h>
+	#include <Content/File.h>
+	#include <Content/Filesystem.h>
 #else
 	#include <fstream>
 	#include <streambuf>
@@ -16,10 +18,30 @@ bool File::ReadAsString( const std::string &path, std::string &str )
 
 #ifdef CAFE
 	u32 length;
-	char *fileContents = reinterpret_cast< char * >( DEMOFSSimpleRead( path.c_str(), &length ) );
+
+	boost::shared_ptr<File> file = FILESYSTEM.Open( path );
+	length = file->Size();
+	char *buf = new char[ length ];
+	file->Read( buf, length );
+
 	str.reserve( length );
-	str.assign( fileContents, fileContents + length );
-	DEMOFree( fileContents );
+	str.assign( buf, buf + length );
+	
+	delete buf;
+
+	return true;
+#elif VITA
+	std::string localPath = "app0:/" + path;
+	ifstream file( localPath.c_str(), ios::in );
+
+	if( !file )
+		return false;
+
+	file.seekg( 0, ios::end );
+	str.reserve( static_cast< unsigned int >( file.tellg() ) );
+	file.seekg( 0, ios::beg );
+
+	str.assign( ( istreambuf_iterator< char >( file ) ), istreambuf_iterator< char >() );
 	return true;
 #else
 	ifstream file( path.c_str(), ios::in );

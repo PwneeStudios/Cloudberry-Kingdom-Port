@@ -1,6 +1,6 @@
 #include <Content/TexturePc.h>
 
-#include <cassert>
+#include <PwneeAssert.h>
 #include <fstream>
 #include <GL/glew.h>
 #include <Utility/Log.h>
@@ -71,9 +71,11 @@ void TexturePc::GpuCreate()
 		GL_UNSIGNED_BYTE, reinterpret_cast< GLvoid * >( &data_[ 0 ] ) );
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
-	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT );
 	glBindTexture( GL_TEXTURE_2D, 0 );
+	
+	data_ = std::vector<char>();
 }
 
 void TexturePc::GpuDestroy()
@@ -84,6 +86,7 @@ void TexturePc::GpuDestroy()
 
 void TexturePc::Activate( unsigned int sampler )
 {
+	glActiveTexture( GL_TEXTURE0 + sampler );
 	glBindTexture( GL_TEXTURE_2D, internal_->TexturePcId );
 }
 
@@ -204,7 +207,7 @@ void TexturePc::loadPng()
 	}
 	else
 	{
-		LOG.Write( "Unknown PNG format (ColorType = %d, BitDepth = %d) in: %s\n",
+		LOG_WRITE( "Unknown PNG format (ColorType = %d, BitDepth = %d) in: %s\n",
 			ihdr.ColorType, ihdr.BitDepth, path );
 		setLoaded( false );
 		return;
@@ -414,7 +417,7 @@ bool TexturePc::uncompress( const std::vector< char > &compressed, std::vector< 
 	err = inflateInit( &stream );
 	if( err != Z_OK )
 	{
-		LOG.Write( "PNG: Failed to initialize de-compressor\n" );
+		LOG_WRITE( "PNG: Failed to initialize de-compressor\n" );
 		return false;
 	}
 
@@ -426,7 +429,7 @@ bool TexturePc::uncompress( const std::vector< char > &compressed, std::vector< 
 		if( err == Z_NEED_DICT
 			|| ( err == Z_BUF_ERROR && stream.avail_in == 0 ) )
 		{
-			LOG.Write( "PNG: Data inflation error" );
+			LOG_WRITE( "PNG: Data inflation error" );
 			return false;
 		}
 		return false;

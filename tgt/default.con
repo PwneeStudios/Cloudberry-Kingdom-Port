@@ -1,0 +1,47 @@
+target_connection {
+     {
+        title = "Nintendo CAT-DEV with Simulator for PowerPC (simppc)"
+        type = "Simulator for PowerPC (simppc)"
+        short_type = "simppc"
+        args = " -cpu=espresso   "
+        command = "simppc -cpu=espresso   "
+        logfile = "simppc"
+        mode = ""
+        setup_script = ""
+        run_mode_partner = ""
+        run_mode_policy = ""
+        sane = "no"
+        log = "no"
+        timestamp = "0"
+    }
+     {
+        title = "Nintendo CAT-DEV with Green Hills Debug Probe (mpserv)"
+        type = "Green Hills Debug Probe (mpserv)"
+        short_type = "mpserv"
+        args = "   "
+        command = "mpserv   "
+        logfile = "mpserv"
+        mode = ""
+        setup_script = ""
+        run_mode_partner = ""
+        run_mode_policy = ""
+        sane = "no"
+        log = "no"
+        timestamp = "0"
+    }
+     {
+        title = "Nintendo CAT-DEV with Cafe OS (cafeserv)"
+        type = "Cafe OS (cafeserv)"
+        short_type = "cafeserv"
+        args = " -iphost localhost -ipport 6002 -cafe_root C:\\Pwnee\\cafe_sdk"
+        command = "cafeserv -iphost localhost -ipport 6002 -cafe_root C:\\Pwnee\\cafe_sdk"
+        logfile = ""
+        mode = "download"
+        setup_script = ""
+        run_mode_partner = ""
+        run_mode_policy = ""
+        sane = "yes"
+        log = "no"
+        timestamp = "0"
+    }
+}

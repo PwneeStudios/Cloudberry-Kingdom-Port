@@ -54,6 +54,8 @@ public:
 		return ResourcePtr< ResourceType >( load( base_ + name ) );
 	}
 
+	ResourcePtr< Texture > ForceLoadTexture( const std::string &name );
+
 private:
 
 	/// Load a resource.

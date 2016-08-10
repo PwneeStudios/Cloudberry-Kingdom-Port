@@ -27,6 +27,8 @@ class Font : public Resource
 
 public:
 
+	Font();
+
 	/**
 	 * @see Resource::Load()
 	 */

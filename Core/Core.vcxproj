@@ -22,11 +22,27 @@
     <ClInclude Include="..\zlib-1.2.7\zconf.h" />
     <ClInclude Include="..\zlib-1.2.7\zlib.h" />
     <ClInclude Include="..\zlib-1.2.7\zutil.h" />
+    <ClInclude Include="include\Architecture\Job.h" />
     <ClInclude Include="include\Architecture\Scheduler.h" />
     <ClInclude Include="include\Architecture\SchedulerPc.h" />
     <ClInclude Include="include\Architecture\SchedulerWiiU.h" />
     <ClInclude Include="include\Architecture\Singleton.h" />
+    <ClInclude Include="include\Audio\AudioEnums.h" />
+    <ClInclude Include="include\Content\TextureWiiUInternal.h" />
+    <ClInclude Include="include\Graphics\RenderTarget2D.h" />
+    <ClInclude Include="include\Graphics\Texture2D.h" />
+    <ClInclude Include="include\PwneeAssert.h" />
+    <ClInclude Include="include\Utility\ConsoleInformation.h" />
+    <ClInclude Include="include\Utility\Error.h" />
+    <ClInclude Include="include\Utility\Save.h" />
+    <ClInclude Include="src\Audio\CKSounds.h" />
+    <ClInclude Include="include\Audio\MediaPlayer.h" />
+    <ClInclude Include="include\Audio\Song.h" />
+    <ClInclude Include="include\Audio\SoundEffect.h" />
     <ClInclude Include="include\Content\File.h" />
+    <ClInclude Include="include\Content\FilesystemPc.h" />
+    <ClInclude Include="include\Content\Filesystem.h" />
+    <ClInclude Include="include\Content\FilesystemWiiU.h" />
     <ClInclude Include="include\Content\Font.h" />
     <ClInclude Include="include\Content\Resource.h" />
     <ClInclude Include="include\Content\ResourcePtr.h" />
@@ -41,18 +57,57 @@
     <ClInclude Include="include\Datastructures\Freelist.h" />
     <ClInclude Include="include\ForwardDeclarations.h" />
     <ClInclude Include="include\GameLoop.h" />
+    <ClInclude Include="include\Graphics\Color.h" />
+    <ClInclude Include="include\Graphics\Effect.h" />
+    <ClInclude Include="include\Graphics\EffectParameter.h" />
+    <ClInclude Include="include\Graphics\EffectPass.h" />
+    <ClInclude Include="include\Graphics\EffectTechnique.h" />
     <ClInclude Include="include\Graphics\QuadDrawer.h" />
     <ClInclude Include="include\Graphics\QuadDrawerPc.h" />
     <ClInclude Include="include\Graphics\QuadDrawerWiiU.h" />
     <ClInclude Include="include\Graphics\TextDrawer.h" />
     <ClInclude Include="include\Graphics\Types.h" />
+    <ClInclude Include="include\Input\InputEnums.h" />
     <ClInclude Include="include\Input\Input.h" />
     <ClInclude Include="include\Input\InputPc.h" />
     <ClInclude Include="include\Input\InputWiiU.h" />
+    <ClInclude Include="include\Input\Keyboard.h" />
+    <ClInclude Include="include\Input\KeyboardState.h" />
+    <ClInclude Include="include\Input\Mouse.h" />
+    <ClInclude Include="include\Input\MouseState.h" />
     <ClInclude Include="include\Math\Vectors.h" />
+    <ClInclude Include="include\Utility\Limits.h" />
     <ClInclude Include="include\Utility\Log.h" />
+    <ClInclude Include="include\Utility\Mutex.h" />
+    <ClInclude Include="src\Audio\AudioInternalWiiU.h" />
+    <ClInclude Include="src\Audio\SongInternalWiiU.h" />
+    <ClInclude Include="src\Graphics\EffectInternalPc.h" />
+    <ClInclude Include="src\Graphics\EffectInternalWiiU.h" />
+    <ClInclude Include="include\Input\GamePad.h" />
+    <ClInclude Include="include\Input\GamePadButtons.h" />
+    <ClInclude Include="include\Input\GamePadDPad.h" />
+    <ClInclude Include="include\Input\GamePadState.h" />
+    <ClInclude Include="include\Input\GamePadThumbSticks.h" />
+    <ClInclude Include="include\Input\GamePadTriggers.h" />
+    <ClInclude Include="include\Graphics\Video.h" />
+    <ClInclude Include="include\Graphics\VideoPlayer.h" />
+    <ClInclude Include="src\Graphics\RenderTarget2DWiiUInternal.h" />
+    <ClInclude Include="src\Graphics\WiiU\MovieTest.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="src\Graphics\WiiU\mp4dmx_demo.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="src\Graphics\WiiU\videorender.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\boost_shared_ptr\libs\smart_ptr\src\sp_collector.cpp" />
+    <ClCompile Include="..\boost_shared_ptr\libs\smart_ptr\src\sp_debug_hooks.cpp" />
     <ClCompile Include="..\zlib-1.2.7\adler32.c" />
     <ClCompile Include="..\zlib-1.2.7\compress.c" />
     <ClCompile Include="..\zlib-1.2.7\crc32.c" />
@@ -68,12 +123,91 @@
     <ClCompile Include="..\zlib-1.2.7\trees.c" />
     <ClCompile Include="..\zlib-1.2.7\uncompr.c" />
     <ClCompile Include="..\zlib-1.2.7\zutil.c" />
+    <ClCompile Include="src\Audio\MediaPlayerPc.cpp" />
+    <ClCompile Include="src\Audio\MediaPlayerWiiU.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\Audio\SongPc.cpp" />
+    <ClCompile Include="src\Audio\SongWiiU.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\Audio\SoundEffectWiiU.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\Audio\streamlib\AXStreamServer.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\Content\FilesystemWiiU.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\Graphics\EffectParameterWiiU.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\Graphics\EffectPassWiiU.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\Graphics\EffectWiiU.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\Graphics\RenderTarget2DPc.cpp" />
+    <ClCompile Include="src\Graphics\RenderTarget2DWiiU.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\Graphics\Texture2D.cpp" />
+    <ClCompile Include="src\Graphics\VideoPlayerPc.cpp" />
+    <ClCompile Include="src\Graphics\VideoPlayerWiiU.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\Graphics\VideoWiiU.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\Graphics\WiiU\audioplayer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\Graphics\WiiU\mp4dmx_api.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\Graphics\WiiU\mp4dmx_main.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\Graphics\WiiU\videoplayer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\Graphics\WiiU\videorender.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\Input\GamePadPc.cpp" />
+    <ClCompile Include="src\Input\GamePadWiiU.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\Input\Keyboard.cpp" />
+    <ClCompile Include="src\Input\Mouse.cpp" />
+    <ClCompile Include="src\Graphics\Color.cpp" />
     <ClCompile Include="src\Architecture\SchedulerPc.cpp" />
     <ClCompile Include="src\Architecture\SchedulerWiiU.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="src\Content\File.cpp" />
+    <ClCompile Include="src\Content\Filesystem.cpp" />
+    <ClCompile Include="src\Content\FilesystemPc.cpp" />
     <ClCompile Include="src\Content\Font.cpp" />
     <ClCompile Include="src\Content\TexturePc.cpp" />
     <ClCompile Include="src\Content\TextureWiiU.cpp">
@@ -87,6 +221,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="src\Graphics\EffectParameterPc.cpp" />
+    <ClCompile Include="src\Graphics\EffectPass.cpp" />
+    <ClCompile Include="src\Graphics\EffectPc.cpp" />
     <ClCompile Include="src\Graphics\QuadDrawerPc.cpp" />
     <ClCompile Include="src\Graphics\QuadDrawerWiiU.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -99,7 +236,40 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="src\Audio\SoundEffectPc.cpp" />
+    <ClCompile Include="src\PwneeAssert.cpp" />
+    <ClCompile Include="src\Utility\ConsoleInformationPc.cpp" />
+    <ClCompile Include="src\Utility\ConsoleInformationPS3.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\Utility\ConsoleInformationWiiU.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\Utility\ErrorPc.cpp" />
+    <ClCompile Include="src\Utility\ErrorPS3.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\Utility\ErrorWiiU.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="src\Utility\Log.cpp" />
+    <ClCompile Include="src\Utility\MutexPc.cpp" />
+    <ClCompile Include="src\Utility\MutexWiiU.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\Utility\SavePc.cpp" />
+    <ClCompile Include="src\Utility\SaveWiiU.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{EC9842FF-099E-4DFC-917B-98BD9B4486FD}</ProjectGuid>
@@ -129,16 +299,16 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir)include;$(SolutionDir)glfw-2.7.6\include;$(SolutionDir)glew-1.9.0\include;$(SolutionDir)zlib-1.2.7;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)OpenAL\include;$(ProjectDir)include;$(SolutionDir)glfw-2.7.6\include;$(SolutionDir)glew-1.9.0\include;$(SolutionDir)zlib-1.2.7;$(SolutionDir)boost_shared_ptr;$(SolutionDir)Game;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(ProjectDir)include;$(SolutionDir)glfw-2.7.6\include;$(SolutionDir)glew-1.9.0\include;$(SolutionDir)zlib-1.2.7;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)OpenAL\include;$(ProjectDir)include;$(SolutionDir)glfw-2.7.6\include;$(SolutionDir)glew-1.9.0\include;$(SolutionDir)zlib-1.2.7;$(SolutionDir)boost_shared_ptr;$(SolutionDir)Game;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;GLEW_STATIC;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>

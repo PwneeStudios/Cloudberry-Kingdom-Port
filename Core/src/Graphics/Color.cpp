@@ -1,0 +1,34 @@
+#include <Graphics/Color.h>
+
+Color Color::Azure( static_cast<unsigned char>( 240 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
+Color Color::Black( static_cast<unsigned char>( 0 ), static_cast<unsigned char>( 0 ), static_cast<unsigned char>( 0 ), static_cast<unsigned char>( 255 ) );
+Color Color::Bisque( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 228 ), static_cast<unsigned char>( 196 ), static_cast<unsigned char>( 255 ) );
+Color Color::Blue( static_cast<unsigned char>( 0 ), static_cast<unsigned char>( 0 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
+Color Color::BlueViolet( static_cast<unsigned char>( 138 ), static_cast<unsigned char>( 43 ), static_cast<unsigned char>( 226 ), static_cast<unsigned char>( 255 ) );
+Color Color::Brown( static_cast<unsigned char>( 165 ), static_cast<unsigned char>( 42 ), static_cast<unsigned char>( 42 ), static_cast<unsigned char>( 255 ) );
+Color Color::Cyan( static_cast<unsigned char>( 0 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
+Color Color::DarkBlue( static_cast<unsigned char>( 0 ), static_cast<unsigned char>( 0 ), static_cast<unsigned char>( 139 ), static_cast<unsigned char>( 255 ) );
+Color Color::ForestGreen( static_cast<unsigned char>( 34 ), static_cast<unsigned char>( 139 ), static_cast<unsigned char>( 34 ), static_cast<unsigned char>( 255 ) );
+Color Color::Fuchsia( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 0 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
+Color Color::Gainsboro( static_cast<unsigned char>( 220 ), static_cast<unsigned char>( 220 ), static_cast<unsigned char>( 220 ), static_cast<unsigned char>( 255 ) );
+Color Color::Gold( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 215 ), static_cast<unsigned char>( 0 ), static_cast<unsigned char>( 255 ) );
+Color Color::Gray( static_cast<unsigned char>( 128 ), static_cast<unsigned char>( 128 ), static_cast<unsigned char>( 128 ), static_cast<unsigned char>( 255 ) );
+Color Color::Green( static_cast<unsigned char>( 0 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 0 ), static_cast<unsigned char>( 255 ) );
+Color Color::HotPink( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 105 ), static_cast<unsigned char>( 180 ), static_cast<unsigned char>( 255 ) );
+Color Color::Indigo( static_cast<unsigned char>( 75 ), static_cast<unsigned char>( 0 ), static_cast<unsigned char>( 130 ), static_cast<unsigned char>( 255 ) );
+Color Color::LightSeaGreen( static_cast<unsigned char>( 32 ), static_cast<unsigned char>( 178 ), static_cast<unsigned char>( 170 ), static_cast<unsigned char>( 255 ) );
+Color Color::LightSlateGray( static_cast<unsigned char>( 119 ), static_cast<unsigned char>( 136 ), static_cast<unsigned char>( 153 ), static_cast<unsigned char>( 255 ) );
+Color Color::LimeGreen( static_cast<unsigned char>( 50 ), static_cast<unsigned char>( 205 ), static_cast<unsigned char>( 0 ), static_cast<unsigned char>( 255 ) );
+Color Color::Lime( static_cast<unsigned char>( 0 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 0 ), static_cast<unsigned char>( 255 ) );
+Color Color::Olive( static_cast<unsigned char>( 128 ), static_cast<unsigned char>( 128 ), static_cast<unsigned char>( 0 ), static_cast<unsigned char>( 255 ) );
+Color Color::Orange( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 165 ), static_cast<unsigned char>( 0 ), static_cast<unsigned char>( 255 ) );
+Color Color::PowderBlue( static_cast<unsigned char>( 176 ), static_cast<unsigned char>( 224 ), static_cast<unsigned char>( 230 ), static_cast<unsigned char>( 255 ) );
+Color Color::Purple( static_cast<unsigned char>( 128 ), static_cast<unsigned char>( 0 ), static_cast<unsigned char>( 128 ), static_cast<unsigned char>( 255 ) );
+Color Color::Red( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 0 ), static_cast<unsigned char>( 0 ), static_cast<unsigned char>( 255 ) );
+Color Color::Silver( static_cast<unsigned char>( 192 ), static_cast<unsigned char>( 192 ), static_cast<unsigned char>( 192 ), static_cast<unsigned char>( 255 ) );
+Color Color::SkyBlue( static_cast<unsigned char>( 135 ), static_cast<unsigned char>( 206 ), static_cast<unsigned char>( 235 ), static_cast<unsigned char>( 255 ) );
+Color Color::SpringGreen( static_cast<unsigned char>( 0 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 127 ), static_cast<unsigned char>( 255 ) );
+Color Color::Transparent( static_cast<unsigned char>( 0 ), static_cast<unsigned char>( 0 ), static_cast<unsigned char>( 0 ), static_cast<unsigned char>( 0 ) );
+Color Color::White( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
+Color Color::WhiteSmoke( static_cast<unsigned char>( 245 ), static_cast<unsigned char>( 245 ), static_cast<unsigned char>( 245 ), static_cast<unsigned char>( 255 ) );
+Color Color::Yellow( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 0 ), static_cast<unsigned char>( 255 ) );

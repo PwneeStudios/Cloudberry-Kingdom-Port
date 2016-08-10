@@ -28,6 +28,16 @@ public:
 	void MainThread();
 
 	/**
+	 * @see Scheduler::RunJob()
+	 */
+	void RunJob( Job *job );
+
+	/**
+	 * @see Scheduler::RunJobASAP()
+	 */
+	void RunJobASAP( Job *job );
+
+	/**
 	 * @see Scheduler::CreateResource()
 	 */
 	void CreateResource( ResourceHolder *holder, Resource *resource );

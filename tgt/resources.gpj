@@ -1,0 +1,7 @@
+#!gbuild
+#component target_resources
+[Project]
+default.con
+resource_readme.txt
+eppc.Cafe.ld
+cafe_libs.gpj

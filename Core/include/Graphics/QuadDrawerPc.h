@@ -2,6 +2,8 @@
 #define _QUAD_DRAWER_PC_H_
 
 #include <ForwardDeclarations.h>
+#include <memory>
+#include <boost/shared_ptr.hpp>
 
 /**
  * Drawer of quads.
@@ -24,6 +26,16 @@ public:
 
 	QuadDrawerPc();
 	~QuadDrawerPc();
+
+	/**
+	 * @see QuadDrawer::SetEffect()
+	 */
+	void SetEffect( const boost::shared_ptr<Effect> &effect );
+
+	/**
+	 * @see QuadDrawer::GetEffect()
+	 */
+	boost::shared_ptr<Effect> GetEffect();
 
 	/**
 	 * @see QuadDrawer::Draw()

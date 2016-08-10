@@ -1,0 +1,39 @@
+#!gbuild
+[Subproject]
+# This file contains all of the Cafe OS libraries and should
+# be included as a Subproject of every Program built with SDK 2.07
+# This file has been automatically regenerated from
+# C:\Pwnee\cafe_sdk\system\src\build\make\commondefs.cos.gh.mk
+coredyn.a
+nsyshid.a
+nlibcurl.a
+nsysnet.a
+nsysccr.a
+nsysuvd.a
+gx2.a
+avm.a
+tcl.a
+tve.a
+dc.a
+snd_core.a
+snd_user.a
+uvc.a
+uvd.a
+camera.a
+h264.a
+dmae.a
+nn_acp.a
+nn_save.a
+vpad.a
+vpadbase.a
+proc_ui.a
+nn_ac.a
+padscore.a
+pad.a
+gfd.a
+mtx.a
+demo.a
+gx2ut.a
+nn_util.a
+nn_crypto.a
+gx2spark.a

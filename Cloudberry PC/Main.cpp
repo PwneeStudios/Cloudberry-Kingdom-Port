@@ -1,8 +1,10 @@
-#include <CloudberryKingdom.h>
 #include <Core.h>
+#include <CloudberryKingdom.h>
 
 #include <iostream>
 #include <Utility/Log.h>
+
+#include <Content/Filesystem.h>
 
 class StdOutLog : public LogListener
 {
@@ -18,12 +20,14 @@ public:
 
 int main( int argc, char *argv[] )
 {
+	Filesystem filesystem;
+
 	StdOutLog stdLog;
 	Log theLog;
 
 	theLog.AddListener( stdLog );
 
-	CloudberryKingdom game;
+	CloudberryKingdomWrapper game;
 	Core core( game );
 
 	int result = core.Run();

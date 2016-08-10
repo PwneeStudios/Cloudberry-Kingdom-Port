@@ -2,10 +2,16 @@
 #define _QUAD_DRAWER_H_
 
 #include <ForwardDeclarations.h>
+#include <memory>
+#include <boost/shared_ptr.hpp>
 
 // Pick the implementation we want to use.
 #ifdef CAFE
 	#include "QuadDrawerWiiU.h"
+#elif PS3
+	#include "QuadDrawerPS3.h"
+#elif VITA
+	#include "QuadDrawerVita.h"
 #else
 	#include "QuadDrawerPc.h"
 #endif
@@ -19,6 +25,10 @@ class QuadDrawer
 	/// IMPL from the PIMPL.
 #ifdef CAFE
 	QuadDrawerWiiU impl_;
+#elif PS3
+	QuadDrawerPS3 impl_;
+#elif VITA
+	QuadDrawerVita impl_;
 #else
 	QuadDrawerPc impl_;
 #endif
@@ -35,6 +45,24 @@ public:
 
 	QuadDrawer() { }
 	virtual ~QuadDrawer() { }
+
+	/// Set current effect.
+	/**
+	 * @param effect New effect to use.
+	 */
+	void SetEffect( const boost::shared_ptr<Effect> &effect )
+	{
+		impl_.SetEffect( effect );
+	}
+
+	/// Get current effect.
+	/**
+	 * @return Current effect in use by quad drawer.
+	 */
+	boost::shared_ptr<Effect> GetEffect()
+	{
+		return impl_.GetEffect();
+	}
 
 	/// Draw a simple quad.
 	/**
